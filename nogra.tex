@@ -1,0 +1,1223 @@
+\documentclass[numbers=enddot,12pt,final,onecolumn,notitlepage]{scrartcl}%
+\usepackage[headsepline,footsepline,manualmark]{scrlayer-scrpage}
+\usepackage[all,cmtip]{xy}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{framed}
+\usepackage{comment}
+\usepackage{color}
+\usepackage{hyperref}
+\usepackage{datetime}
+\usepackage[sc]{mathpazo}
+\usepackage[T1]{fontenc}
+\usepackage{needspace}
+\usepackage{tabls}
+%TCIDATA{OutputFilter=latex2.dll}
+%TCIDATA{Version=5.50.0.2960}
+%TCIDATA{LastRevised=Tuesday, December 13, 2016 21:43:59}
+%TCIDATA{SuppressPackageManagement}
+%TCIDATA{<META NAME="GraphicsSave" CONTENT="32">}
+%TCIDATA{<META NAME="SaveForMode" CONTENT="1">}
+%TCIDATA{BibliographyScheme=Manual}
+%TCIDATA{Language=American English}
+%BeginMSIPreambleData
+\providecommand{\U}[1]{\protect\rule{.1in}{.1in}}
+%EndMSIPreambleData
+\theoremstyle{definition}
+\newtheorem{theo}{Theorem}[subsection]
+\newenvironment{theorem}[1][]
+{\begin{theo}[#1]\begin{leftbar}}
+{\end{leftbar}\end{theo}}
+\providecommand*\theoremautorefname{Theorem}
+\newtheorem{lem}[theo]{Lemma}
+\newenvironment{lemma}[1][]
+{\begin{lem}[#1]\begin{leftbar}}
+{\end{leftbar}\end{lem}}
+\providecommand*\lemmaautorefname{Lemma}
+\newtheorem{prop}[theo]{Proposition}
+\newenvironment{proposition}[1][]
+{\begin{prop}[#1]\begin{leftbar}}
+{\end{leftbar}\end{prop}}
+\providecommand*\propositionautorefname{Proposition}
+\newtheorem{defi}[theo]{Definition}
+\newenvironment{definition}[1][]
+{\begin{defi}[#1]\begin{leftbar}}
+{\end{leftbar}\end{defi}}
+\providecommand*\definitionautorefname{Definition}
+\newtheorem{remk}[theo]{Remark}
+\newenvironment{remark}[1][]
+{\begin{remk}[#1]\begin{leftbar}}
+{\end{leftbar}\end{remk}}
+\providecommand*\remarkautorefname{Remark}
+\newtheorem{coro}[theo]{Corollary}
+\newenvironment{corollary}[1][]
+{\begin{coro}[#1]\begin{leftbar}}
+{\end{leftbar}\end{coro}}
+\providecommand*\corollaryautorefname{Corollary}
+\newtheorem{conv}[theo]{Convention}
+\newenvironment{condition}[1][]
+{\begin{conv}[#1]\begin{leftbar}}
+{\end{leftbar}\end{conv}}
+\providecommand*\conditionautorefname{Convention}
+\newtheorem{warn}[theo]{Warning}
+\newenvironment{conclusion}[1][]
+{\begin{warn}[#1]\begin{leftbar}}
+{\end{leftbar}\end{warn}}
+\providecommand*\conclusionautorefname{Warning}
+\newtheorem{conj}[theo]{Conjecture}
+\newenvironment{conjecture}[1][]
+{\begin{conj}[#1]\begin{leftbar}}
+{\end{leftbar}\end{conj}}
+\providecommand*\conjectureautorefname{Conjecture}
+\newtheorem{exam}[theo]{Example}
+\newenvironment{example}[1][]
+{\begin{exam}[#1]\begin{leftbar}}
+{\end{leftbar}\end{exam}}
+\providecommand*\exampleautorefname{Example}
+\newtheorem{exmp}[theo]{Exercise}
+\newenvironment{exercise}[1][]
+{\begin{exmp}[#1]\begin{leftbar}}
+{\end{leftbar}\end{exmp}}
+\providecommand*\exerciseautorefname{Exercise}
+\newenvironment{statement}{\begin{quote}}{\end{quote}}
+\newtheorem{quest}[theo]{TODO}
+\newenvironment{todo}[1][]
+{\begin{quest}[#1]\begin{leftbar}}
+{\end{leftbar}\end{quest}}
+\iffalse
+\newenvironment{proof}[1][Proof]{\noindent\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+\fi
+\let\sumnonlimits\sum
+\let\prodnonlimits\prod
+\let\cupnonlimits\bigcup
+\let\capnonlimits\bigcap
+\renewcommand{\sum}{\sumnonlimits\limits}
+\renewcommand{\prod}{\prodnonlimits\limits}
+\renewcommand{\bigcup}{\cupnonlimits\limits}
+\renewcommand{\bigcap}{\capnonlimits\limits}
+\newcommand\arxiv[1]{\href{http://www.arxiv.org/abs/#1}{\texttt{arXiv:#1}}}
+% A command for citing arXiv preprints.
+% Example syntax: \arxiv{1009.4134v2} and \arxiv{math/0602634v4}.
+
+\setlength\tablinesep{3pt}
+\setlength\arraylinesep{3pt}
+\setlength\extrarulesep{3pt}
+\voffset=0cm
+\hoffset=-0.7cm
+\setlength\textheight{22.5cm}
+\setlength\textwidth{15.5cm}
+\newenvironment{verlong}{}{}
+\newenvironment{vershort}{}{}
+\newenvironment{noncompile}{}{}
+\excludecomment{verlong}
+\includecomment{vershort}
+\excludecomment{noncompile}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\powset}[2][]{\ifthenelse{\equal{#2}{}}{\mathcal{P}\left(#1\right)}{\mathcal{P}_{#1}\left(#2\right)}}
+% $\powset[k]{S}$ stands for the set of all $k$-element subsets of
+% $S$. The argument $k$ is optional, and if not provided, the result
+% is the whole powerset of $S$.
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+% $\set{...}$ yields $\left\{ ... \right\}$.
+\newcommand{\abs}[1]{\left| #1 \right|}
+% $\abs{...}$ yields $\left| ... \right|$.
+\newcommand{\tup}[1]{\left( #1 \right)}
+% $\tup{...}$ yields $\left( ... \right)$.
+\newcommand{\ive}[1]{\left[ #1 \right]}
+% $\ive{...}$ yields $\left[ ... \right]$.
+\newcommand{\verts}[1]{\operatorname{V}\left( #1 \right)}
+% $\verts{...}$ yields $\operatorname{V}\left( ... \right)$.
+\newcommand{\edges}[1]{\operatorname{E}\left( #1 \right)}
+% $\edges{...}$ yields $\operatorname{E}\left( ... \right)$.
+\newcommand{\arcs}[1]{\operatorname{A}\left( #1 \right)}
+% $\arcs{...}$ yields $\operatorname{A}\left( ... \right)$.
+\newcommand{\E}{\operatorname{E}}
+\newcommand{\A}{\operatorname{A}}
+\ihead{Notes on graph theory (\today, \currenttime)}
+\ohead{page \thepage}
+\cfoot{}
+\begin{document}
+
+\title{Notes on graph theory}
+\author{Darij Grinberg}
+\date{
+%TCIMACRO{\TeXButton{today}{\today} }%
+%BeginExpansion
+\today\ 
+%EndExpansion
+at \currenttime\ 
+(unfinished draft!)}
+\maketitle
+\tableofcontents
+
+\section{Preface}
+
+These are lecture notes on graph theory -- the part of mathematics
+involved with graphs. They are currently work in
+progress; once finished, they should contain a semester's worth of
+material. I have tried to keep the presentation as self-contained and
+elementary as possible; the reader is nevertheless assumed to possess
+some mathematical maturity (in particular, to know how to read
+combinatorial proofs, filling in simple details)\footnote{I believe
+that the MIT lecture notes \cite{LeLeMe16} are a good source for
+achieving this mathematical maturity. (Actually, there is some
+intersection between \cite[Chapter 12]{LeLeMe16} and our notes, but
+\cite{LeLeMe16} mostly keeps to the basics of graph theory.)
+Another resource to familiarize oneself with proofs is
+\cite{Day-proofs}. Generally, most good books about ``reading and
+writing mathematicals'' or ``introductions to abstract mathematics''
+should convey these skills, although the extent to which they actually
+do so may differ.}
+and know how to work
+with modular arithmetic (i.e., congruences between integers modulo a
+positive integer $n$) and summation signs (such as $\sum_{i=1}^n$ and
+$\sum_{a \in A}$, where $n$ is an integer and $A$ is a finite
+set)\footnote{See \cite[\S 1.3]{detnotes} for a list of important
+properties of summation signs.}.
+In some chapters, familiarity with matrices (and their products),
+permutations (and their signs)\footnote{A summary of the most
+fundamental results about signs of permutations can be found in
+\cite[\S 8.1]{LaNaSc16}. These results appear with proofs in
+\cite[Chapter 6.B]{Day-proofs}. For an even more detailed treatment
+(also including proofs),
+see \cite[\S 4.1--4.3]{detnotes}. Another treatment can be found in
+\cite{Conrad-sign}, but this requires some familiarity with group
+theory.}
+and polynomials will be required.
+I hope that the proofs are readable; feel free to contact me (at
+\texttt{dgrinber@umn.edu}) for any clarifications.
+
+The choice of material surveyed in these notes is idiosyncratic
+(sometimes even purposefully trying to wander some seldom trodden
+paths). Some standard material (Eulerian walks, Hamiltonian paths,
+trees, bipartite matching theory, network flows) is present (at least
+in the eventual final form of these notes), whereas
+other popular topics (planar graphs, random graphs, adjacency matrices
+and spectral graph theory) are missing. Some of these omissions have
+specific reasons (e.g., many of the omitted topics would make it much
+harder to keep the notes self-contained), whereas others are merely
+due to my tastes and lack of time. I am trying to give an elementary
+introduction into the (rather new) theory of sandpiles (also known as
+chip-firing) as well as two applications of combinatorics to linear
+algebra (viz., Gessel's proof of the Vandermonde determinant
+\cite{Gessel-Vand}, and some of the applications of matchings to
+Pfaffians); I also intend to include some properties of Hamiltonian
+paths not commonly exposed in textbooks.
+
+These notes are accompanying
+\href{http://www.math.umn.edu/~dgrinber/5707s17/}{a
+class on graph theory (Math 5707) I am giving at the University of
+Minneapolis in Spring 2017}. They contain both the
+material of the class (although with no promise of timeliness!) and the
+homework exercises (and possibly some additional exercises).
+Sections marked with an asterisk (*) are not part of the Math 5707
+course.
+
+Various other texts on graph theory are \cite{Bollob79},
+\cite{BonMur76}, \cite{Ore62}, \cite{BehCha71}, \cite{BeChZh15},
+\cite{BonMur08}, \cite{Ruohon13}, \cite{Dieste16}, \cite{Ore90},
+\cite{HaHiMo08}, \cite{Berge91}, \cite{ChaLes15}, \cite{Griffi15}.
+(This is a haphazard list; I have barely touched most of these texts.)
+Also, texts on combinatorics and on discrete mathematics (such as
+\cite{BenWil12}, \cite{KelTro15}, \cite{PoTaWo83}) often contain
+sections on graph theory, since graph theory is considered to be part
+of both.
+Material on graph theory can also be found in large quantities on
+mathematical contests for students (such as the International
+Mathematical Olympiad) and, consequently, in collections of problems
+from these contests, such as the AoPS collection of IMO Shortlist
+problems \cite{AoPS-ISL}.
+Finally, some elementary results in graph theory double as puzzles
+(or are related to puzzles), which often has the consequence that they
+appear on puzzle websites such as Cut-the-Knot \cite{cut-the-knot}.
+
+The notes you are reading are under construction, and will remain so for at
+least the whole Spring of 2017. Please let me know of any errors and
+unclarities you encounter (my email address is \texttt{dgrinber@umn.edu}%
+)\footnote{The sourcecode of the notes is also publicly available at
+\url{https://github.com/darijgr/nogra} .}. Thank you!
+
+\subsection{Acknowledgments}
+
+Thanks to Victor Reiner for helpful conversations.
+
+[Your name could be in here!]
+
+\section{\label{chp.intro}Introduction}
+
+In this chapter, we shall define a first notion of graphs (``first''
+because there are several others to follow) and various basic notions
+related to it, and prove some elementary properties thereof. This
+chapter is meant to give a taste of the whole theory, although (not
+unexpectedly) it is not a representative sample.
+
+\subsection{\label{sect.intro.notations}Notations and conventions}
+
+Before we get to anything interesting, let me get some technicalities
+out of the way. Namely, I shall be using the following notations:
+
+\begin{itemize}
+\item In the following, we use the symbol $\NN$ to denote the set
+$\left\{ 0, 1, 2, \ldots \right\}$. (Be warned that some other authors
+use this symbol for $\left\{ 1, 2, 3, \ldots \right\}$ instead.)
+
+\item We let $\QQ$ denote the set of all rational numbers; we let
+$\RR$ be the set of all real numbers.
+
+\item If $X$ and $Y$ are two sets, then we shall use the notation
+``$X\rightarrow Y,\ x\mapsto E$'' (where $x$
+is some symbol which has no specific meaning in the current context,
+and where $E$ is some expression which usually involves $x$) for ``the
+map from $X$ to $Y$ that sends every $x\in X$ to $E$''. For
+example, ``$\NN\rightarrow\NN,\ x\mapsto x^{2}+x+6$'' means the map
+from $\NN$ to $\NN$ that sends every $x\in\NN$ to $x^{2}+x+6$. For
+another example, ``$\NN\rightarrow\QQ,\ x\mapsto\dfrac{x}{1+x}$''
+denotes the map from $\NN$ to $\QQ$ that
+sends every $x\in\NN$ to $\dfrac{x}{1+x}$.\ \ \ \ \footnote{A word of
+warning: Of course, the notation ``$X\rightarrow Y,\ x\mapsto E$''
+does not always make sense; indeed, the map that it
+stands for might sometimes not exist. For instance, the notation
+``$\NN\rightarrow\QQ,\ x\mapsto\dfrac{x}{1-x}$'' does not actually
+define a map, because the map that it
+is supposed to define (i.e., the map from $\NN$ to $\QQ$ that
+sends every $x\in\NN$ to $\dfrac{x}{1-x}$) does not exist (since
+$\dfrac{x}{1-x}$ is not defined for $x=1$). For another example, the
+notation ``$\NN\rightarrow\ZZ,\ x\mapsto\dfrac{x}{1+x}$'' does not
+define a map, because the map that it is
+supposed to define (i.e., the map from $\NN$ to $\ZZ$ that
+sends every $x\in\NN$ to $\dfrac{x}{1+x}$) does not exist (for $x=2$,
+we have $\dfrac{x}{1+x}=\dfrac{2}{1+2}\notin\ZZ$, which shows that a
+map from $\NN$ to $\ZZ$ cannot send this $x$ to this $\dfrac
+{x}{1+x}$). Thus, when defining a map from $X$ to $Y$ (using whatever
+notation), do not forget to check that it is well-defined (i.e., that
+your definition specifies precisely one image for each $x\in X$, and
+that these images all lie in $Y$). In many cases, this is obvious or
+very easy to check (I will usually not even mention this check), but
+in some cases, this is a difficult task.}
+
+\item If $S$ is a set, then the \textit{powerset} of $S$ means the set
+of all subsets of $S$. This powerset will be denoted by
+$\powset{S}$. % This expands to $\mathcal{P} \left( S \right)$.
+For example, the powerset of $\left\{  1,2\right\}  $ is
+$\powset{ \left\{  1,2\right\} }
+=\left\{  \varnothing,\left\{
+1\right\}  ,\left\{  2\right\}  ,\left\{  1,2\right\}  \right\}  $.
+
+Furthermore, if $S$ is a set and $k$ is an integer, then
+$\powset[k]{S}$ % This expands to $\mathcal{P}_k\left(S\right)$.
+shall mean the set of all $k$-element sets of $S$. (This is empty if
+$k < 0$.)
+\end{itemize}
+
+\subsection{\label{sect.intro.simple}Simple graphs}
+
+As already hinted above, there is not one single concept of a
+``graph''. Instead, there are several mutually related (but not
+equivalent) concepts of ``graph'', which are often kept apart by
+adorning them with adjectives (e.g., ``simple graph'', ``directed
+graph'', ``loopless graph'', ``loopless weighted undirected
+graph'', ``infinite graph'', etc.) or prefixes (``digraph'',
+``multigraph'', etc.). Let me first define the simplest one of these:
+
+\begin{definition} \label{def.simple.sg}
+A \textit{simple graph} is a pair $\tup{V, E}$, where $V$ is a
+finite set, and where $E$ is a subset of $\powset[2]{V}$.
+\end{definition}
+
+Let us unpack this definition first. The word ``simple'' in
+``simple graph'' (roughly speaking) has the meaning of ``with no
+bells and whistles''; i.e., it says that the notion of
+``simple graph'' is one of the crudest, most primitive notions of
+a graph known.
+% i.e., no additional structure.
+It does not mean
+that everything that can be said about simple graphs is simple (this
+is far from the case, as we will see below). The condition
+``$E$ is a subset of $\powset[2]{V}$'' in
+Definition~\ref{def.simple.sg} can be rewritten as ``$E$ is a set of
+$2$-element subsets of $V$'' (since $\powset[2]{V}$ is the set of all
+$2$-element subsets of $V$). Thus, a simple graph is a pair consisting
+of a finite set $V$, and a set of $2$-element subsets of $V$.
+For example,
+$\left(\set{1,2,3}, \set{\set{1,3}, \set{3,2}} \right)$ and
+$\left(\set{2,5}, \set{\set{2,5}}\right)$ and
+$\left(\varnothing, \varnothing\right)$ are three simple graphs.
+
+\begin{conclusion}
+\textbf{(a)}
+Our Definition~\ref{def.simple.sg} differs from the definition of a
+``simple graph'' in many sources, in that we are requiring $V$ to be
+finite.
+
+\textbf{(b)}
+Simple graphs are often just called ``graphs''. But then again, some
+other concepts of graphs (such as multigraphs, which we will
+encounter further below) are also often just called ``graphs''. Thus,
+the precise meaning of the word ``graph'' depends on the context in
+which it appears. For example, Bollob\'as (in \cite{Bollob79}) uses
+the word ``graph'' for ``simple graph'', whereas Bondy and Murty
+(in \cite{BonMur08}) use it for ``multidigraph'' (a concept we will
+define further below). When reading literature, always check the
+definitions (and, if these are missing, try to take an educated guess,
+ruling out options that make some of the claims false).
+\end{conclusion}
+
+So far, we have not explained how we should intuitively think of
+simple graphs, and why they are interesting. We will spend a
+significant part of these notes answering the latter question; but let
+us first comment on the former.
+
+Simple graphs can be used to model symmetric relations between
+different objects. For example, if you have $n$ integers
+(for some $n \in \NN$), then you can define a graph
+$\tup{V, E}$ for which $V$ is the set of these $n$ integers,
+and $E$ is the set of all $2$-element subsets
+$\set{u, v} \subseteq V$ for which $\abs{u-v} \leq 3$. (Notice that
+$\set{u, u}$ does not count as a $2$-element subset.)
+\begin{todo}
+For a non-mathematical example, ... {Fill this in.}
+Mention social networks and this being older.
+\end{todo}
+
+The following notations provide a quick way to reference the elements
+of $V$ and $E$ when given a graph $\tup{V, E}$:
+
+\begin{definition} \label{def.simple.VE}
+Let $G = \tup{V, E}$ be a simple graph.
+
+\textbf{(a)} The set $V$ is called the \textit{vertex set} of $G$;
+it is denoted by $\verts{G}$. (Notice that the letter
+``$\operatorname{V}$'' in ``$\verts{G}$'' is upright, as opposed to
+the letter ``$V$'' in ``$\tup{V, E}$'', which is italic.
+These are two different symbols, and have different meanings: The
+letter $V$ stands for the specific set $V$ which is the first
+component of the pair $G$, whereas the letter
+$\operatorname{V}$ is part of the notation $\verts{G}$ for the
+vertex set of any graph. Thus, if $H = \left(W, F\right)$ is another
+graph, then $\verts{H}$ is $W$, not $V$.)
+
+The elements of $V$ are called the \textit{vertices} (or the
+\textit{nodes}) of $G$.
+
+\textbf{(b)} The set $E$ is called the \textit{edge set} of $G$; it
+is denoted by $\edges{G}$. (Again, the letter ``$\operatorname{E}$''
+in ``$\edges{G}$'' is upright, and stands for a different thing than
+the ``$E$''.)
+
+The elements of $E$ are called the \textit{edges} of $G$. When $u$ and
+$v$ are two elements of $V$, we shall often use the notation $uv$ for
+$\set{u, v}$; thus, each edge of $G$ has the form $uv$ for two
+distinct elements $u$ and $v$ of $V$. Of course, we always have
+$uv = vu$.
+
+\textbf{(c)} Two vertices $u$ and $v$ of $G$ are said to be
+\textit{adjacent} (or \textit{connected by an edge}) if $uv \in E$
+(that is, if $uv$ is an edge of $G$).
+
+Two vertices $u$ and $v$ of $G$
+are said to be \textit{non-adjacent} if they are not adjacent (i.e.,
+if $uv \notin E$).
+
+We say that a vertex $u$ of $G$ is \textit{adjacent to} a vertex $v$
+of $G$ if the vertices $u$ and $v$ are adjacent (i.e., if $uv \in E$).
+Similarly, we say that a vertex $u$ of $G$ is \textit{non-adjacent to}
+a vertex $v$ of $G$ if the vertices $u$ and $v$ are non-adjacent
+(i.e., if $uv \notin E$).
+
+\textbf{(d)} Let $v$ be a vertex of $G$ (that is, $v \in V$). Then,
+the \textit{neighbors} of $v$ are the vertices $u$ of $G$ that
+satisfy $vu \in G$. (Of course, these neighbors depend on both $v$ and
+$G$. When $G$ is not clear from the context, we shall call them the
+``neighbors of $v$ in $G$'' instead of just ``neighbors of $v$''.)
+\end{definition}
+
+Of course, the relation of adjacency is symmetric\footnote{This means
+the following: Given two vertices $u$ and $v$ of a simple graph $G$,
+the vertex $u$ is adjacent to $v$ if and only if $v$ is adjacent to
+$u$.}. Same holds for the relation of non-adjacency.
+
+\subsection{\label{sect.intro.draw}Drawing graphs}
+
+There is a common method to represent graphs visually: Namely, a graph
+can be drawn as a set of points in the plane and a set of curves
+connecting some of these points with each other.
+\begin{todo}
+Write this section.
+\end{todo}
+
+\subsection{\label{sect.intro.R33}A first fact: $R\tup{3,3} = 6$}
+
+After these definitions, it might be time for a first result. The
+following classical fact (which is actually the beginning of a deep
+theory -- the so-called \textit{Ramsey theory}) should neatly
+illustrate the concepts introduced above:
+
+\begin{proposition} \label{prop.simple.R33}
+Let $G$ be a simple graph with $\abs{\verts{G}} \geq 6$ (that is,
+$G$ has at least $6$ vertices). Then, at least one of the following
+two statements holds:
+
+\begin{itemize}
+\item \textit{Statement 1:} There exist three distinct vertices $a$,
+$b$ and $c$ of $G$ such that $ab$, $bc$ and $ca$ are edges of $G$.
+
+\item \textit{Statement 2:} There exist three distinct vertices $a$,
+$b$ and $c$ of $G$ such that none of $ab$, $bc$ and $ca$ is an edge of
+$G$.
+\end{itemize}
+\end{proposition}
+
+In other words, Proposition~\ref{prop.simple.R33} says that if a graph
+$G$ has at least $6$ vertices, then we can either find three distinct
+vertices that are mutually adjacent\footnote{by which we mean (of
+course) that any two \textbf{distinct} ones among these three vertices
+are adjacent} or find three distinct vertices that are mutually
+non-adjacent (i.e., no two of them are adjacent), or both.
+
+\begin{todo}
+Rewrite in terms of a party.
+\end{todo}
+
+\begin{todo}
+Examples: Statement 1 holds; Statement 2 holds; both hold; neither
+holds (pentagon, with 5 vertices).
+\end{todo}
+
+\begin{proof}[Proof of Proposition~\ref{prop.simple.R33}.]We need to
+prove that either Statement 1 holds or Statement 2 holds (or both).
+
+Choose any vertex $u \in \verts{G}$. (This is clearly possible,
+since $\abs{\verts{G}} \geq 6 \geq 1$.) Then,
+$\abs{\verts{G} \setminus \set{u}} = \abs{\verts{G}} - 1 \geq 5$
+(since $\abs{\verts{G}} \geq 6$). We are in one of the following two
+cases:
+
+\textit{Case 1:} At least $3$ vertices in
+$\verts{G} \setminus \set{u}$ are adjacent to $u$.
+
+\textit{Case 2:} At most $2$ vertices in
+$\verts{G} \setminus \set{u}$ are adjacent to $u$.
+
+Let us consider Case 1 first. In this case, at least $3$ vertices in
+$\verts{G} \setminus \set{u}$ are adjacent to $u$. Hence, we can find
+three distinct vertices $p$, $q$ and $r$ in
+$\verts{G} \setminus \set{u}$ that are adjacent to $u$. Consider
+these $p$, $q$ and $r$. If none of $pq$, $qr$ and $rp$ is an edge of
+$G$, then Statement 2 holds (in fact, we can just take $a = p$,
+$b = q$ and $c = r$). Thus, if none of $pq$, $qr$ and $rp$ is an edge
+of $G$, then our proof is complete\footnote{because our goal in this
+proof is to show that either Statement 1 holds or Statement 2 holds
+(or both)}. Thus, we WLOG\footnote{The word ``WLOG'' means
+``without loss of generality''. See, e.g., the corresponding Wikipedia
+page \url{https://en.wikipedia.org/wiki/Without_loss_of_generality}
+for its meaning.} assume that at least one $pq$, $qr$ and $rp$ is an
+edge of $G$. In other words, we can pick two distinct elements $g$
+and $h$ of $\set{p, q, r}$ such that $gh$ is an edge of $G$. Consider
+these $g$ and $h$.
+
+The vertex $g$ is one of $p$, $q$ and $r$
+(since $g \in \set{p, q, r}$).
+The vertices $p$, $q$ and $r$ are adjacent to $u$. Hence, the vertex
+$g$ is adjacent to $u$ (since the vertex $g$ is one of $p$, $q$ and
+$r$). In other words, $ug$ is an edge of $G$. Similarly, $uh$ is an
+edge of $G$. In other words, $hu$ is an edge of $G$ (since $hu = uh$).
+
+We have $g \in \set{p, q, r} \subseteq \verts{G} \setminus \set{u}$
+(since $p$, $q$ and $r$ belong to $\verts{G} \setminus \set{u}$).
+Hence, $g \neq u$. In other words, $u \neq g$.
+% Clearly, $ug$ is a $2$-element set (since $ug$ is an edge of $G$, but
+% each edge of $G$ is a $2$-element set). Thus, $u \neq g$.
+Similarly,
+$u \neq h$. Hence, $h \neq u$. Finally, $g \neq h$ (since $g$ and $h$
+are distinct). Now, we know that the three vertices $u$, $g$ and $h$
+are distinct (since $u \neq g$, $g \neq h$ and $h \neq u$), and have
+the property that $ug$, $gh$ and $hu$ are edges of $G$. Therefore,
+Statement 1 holds (in fact, we can just take $a = u$, $b = g$ and
+$c = h$). Hence, the proof is complete in Case 1.
+
+Let us now consider Case 2. In this case, at most $2$ vertices in
+$\verts{G} \setminus \set{u}$ are adjacent to $u$. Thus, at least $3$
+vertices in $\verts{G} \setminus \set{u}$ are non-adjacent to $u$
+\ \ \ \ \footnote{\textit{Proof.} Let $k$ be the number of vertices
+in $\verts{G} \setminus \set{u}$ that are adjacent to $u$. Let $\ell$
+be the number of vertices in $\verts{G} \setminus \set{u}$ that are
+non-adjacent to $u$. Then,
+$k + \ell = \abs{\verts{G} \setminus \set{u}}$ (since each vertex
+in $\verts{G} \setminus \set{u}$ is either adjacent to $u$ or
+non-adjacent to $u$, but not both at the same time). But $k \leq 2$
+(since at most $2$ vertices in $\verts{G} \setminus \set{u}$ are
+adjacent to $u$). Hence, $k + \ell \leq 2 + \ell = \ell + 2$, so that
+$\ell + 2 \geq k + \ell = \abs{\verts{G} \setminus \set{u}} \geq 5$
+and thus $\ell \geq 3$. In other words, at least $3$
+vertices in $\verts{G} \setminus \set{u}$ are non-adjacent to $u$.
+Qed.}. Hence, we can find
+three distinct vertices $p$, $q$ and $r$ in
+$\verts{G} \setminus \set{u}$ that are non-adjacent to $u$. Consider
+these $p$, $q$ and $r$. If all of $pq$, $qr$ and $rp$ are edges of
+$G$, then Statement 1 holds (in fact, we can just take $a = p$,
+$b = q$ and $c = r$). Thus, if all of $pq$, $qr$ and $rp$ are edges
+of $G$, then our proof is complete. Thus, we WLOG
+assume that not all of $pq$, $qr$ and $rp$ are edges of $G$. In other
+words, at least one of $pq$, $qr$ and $rp$ is \textbf{not} an edge of
+$G$. In other words, we can pick two distinct elements $g$ and $h$ of
+$\set{p, q, r}$ such that $gh$ is not an edge of $G$. Consider
+these $g$ and $h$.
+
+The vertex $g$ is one of $p$, $q$ and $r$
+(since $g \in \set{p, q, r}$).
+The vertices $p$, $q$ and $r$ are non-adjacent to $u$. Hence, the
+vertex $g$ is non-adjacent to $u$ (since the vertex $g$ is one of $p$,
+$q$ and $r$). In other words, $ug$ is not an edge of $G$. Similarly,
+$uh$ is not an edge of $G$. In other words, $hu$ is not an edge of $G$
+(since $hu = uh$).
+
+We have $g \in \set{p, q, r} \subseteq \verts{G} \setminus \set{u}$
+(since $p$, $q$ and $r$ belong to $\verts{G} \setminus \set{u}$).
+Thus, $g \neq u$. In other words, $u \neq g$. Similarly, $u \neq h$.
+Finally, $g \neq h$ (since $g$ and $h$
+are distinct). Now, we know that the three vertices $u$, $g$ and $h$
+are distinct (since $u \neq g$, $g \neq h$ and $h \neq u$), and have
+the property that none of $ug$, $gh$ and $hu$ is an edge of $G$ (since
+$ug$ is not an edge of $G$, since $gh$ is not an edge of $G$, and
+since $hu$ is not an edge of $G$). Therefore,
+Statement 2 holds (in fact, we can just take $a = u$, $b = g$ and
+$c = h$). Hence, the proof is complete in Case 2.
+
+We have now proven Proposition~\ref{prop.simple.R33} in each of the
+two Cases 1 and 2. Thus, the proof of
+Proposition~\ref{prop.simple.R33} is complete.
+\end{proof}
+
+\begin{remark}
+I have written the above proof in much detail, since it is the first
+proof in these notes. I could have easily made it much shorter if I
+had relied on the reader to fill in some details (and in fact, I
+\textbf{will} rely on the reader in similar situations further below).
+The proof can further be shortened by noticing that part of the
+argument for Case 2 was a ``mirror version'' of the argument for
+Case 1, with the only difference that ``adjacent'' is replaced by
+``non-adjacent'' (and vice versa), and ``is an edge'' is replaced by
+``is not an edge'' (and vice versa).
+\end{remark}
+
+\begin{todo}
+Remark: how this could be proven by brute force.
+\end{todo}
+
+\begin{todo}
+Ramsey theory in general: binomial coeff bound with ref.
+Cite Wikipedia page and at least \cite{GrRoSp90}.
+Also mention \cite{RaWi-Ramsey} for intuition (Ramsey theory in wider
+meaning of the word: results that say that each pattern of some given
+type can be found in a sufficiently large structure).
+
+Mention also \url{http://www.cut-the-knot.org/Curriculum/Combinatorics/ThreeOrThree.shtml}
+in \cite{cut-the-knot}.
+\end{todo}
+
+\subsection{\label{sect.intro.deg}Degrees}
+
+Next, we introduce the notion of the \textit{degree} of a vertex of a
+graph. This is simply the number of neighbors of the vertex:
+
+\begin{definition} \label{def.intro.deg}
+Let $G = \tup{V, E}$ be a simple graph. Let $v \in V$ be a vertex of
+$G$. Then, the \textit{degree} of $v$ (with respect to $G$) is defined
+as the number of all neighbors of $v$ in $G$. This degree is a
+nonnegative integer, and is denoted by $\deg v$ (or by
+$\deg_G v$, when the graph $G$ is not clear from the context).
+Thus,
+\begin{align*}
+\deg v &= \deg_G v =
+\left(\text{the number of all neighbors of } v\right) \\
+&= \abs{\set{u \in V \ \mid \ u \text{ is a neighbor of } v }} \\
+&= \abs{\set{u \in V \ \mid \ u \text{ is adjacent to } v }} \\
+&= \abs{\set{u \in V \ \mid \ uv \text{ is an edge of } G }} \\
+&= \abs{\set{u \in V \ \mid \ uv \in E }} .
+\end{align*}
+\end{definition}
+
+\begin{todo}
+Examples of degrees.
+\end{todo}
+
+\begin{remark}
+Different sources use different notations for the degree of a
+vertex $v$ of a simple graph $G$. We call it $\deg v$ (and so do
+Ore's \cite{Ore90} and the introductory notes
+\cite{LeLeMe16}); Ore's \cite{Ore62} calls it $\rho\left(v\right)$;
+Bollob\'as's \cite{Bollob79} and Bondy's and Murty's
+\cite{BonMur08} and \cite{BonMur76} call it $d\left(v\right)$.
+% Not sure if anyone uses $\delta\left(v\right)$.
+\end{remark}
+
+At this point, we can state a few simple facts about degrees:
+
+\begin{proposition} \label{prop.intro.deg.in-set}
+Let $G$ be a simple graph. Let $n = \abs{\verts{G}}$. Let $v$ be a
+vertex of $G$. Then, $\deg v \in \set{0, 1, \ldots, n-1}$.
+\end{proposition}
+
+\begin{todo}
+Proof.
+\end{todo}
+
+\begin{proposition} \label{prop.intro.2n}
+Let $G$ be a simple graph.
+The sum of the degrees of all vertices of $G$ equals
+twice the number of edges of $G$. In other words,
+$\sum_{v \in \verts{G}} \deg v = 2 \abs{\edges{G}}$.
+\end{proposition}
+
+\begin{todo}
+Proof.
+\end{todo}
+
+\begin{proposition} \label{prop.intro.even-odd}
+Let $G$ be a simple graph.
+Then, the number of vertices $v$ of $G$ whose degree $\deg v$ is odd
+is even.
+\end{proposition}
+
+\begin{todo}
+Proof.
+\end{todo}
+
+\begin{todo}
+``odd number of friends''.
+\end{todo}
+
+\begin{proposition} \label{prop.intro.pigeonhole}
+Let $G$ be a simple graph with at least two vertices.
+Then, there exist two distinct vertices $v$ and $w$ of $G$ having the
+same degree (that is, having $\deg v = \deg w$).
+\end{proposition}
+
+\begin{todo}
+Proof.
+\end{todo}
+
+Degrees of vertices can be used to prove various facts about graphs.
+For an example, let us show \textit{Mantel's theorem}:
+
+\begin{theorem} \label{thm.intro.mantel}
+Let $G$ be a simple graph. Let $n = \abs{\verts{G}}$ be the number of
+vertices of $G$. Assume that $\abs{\edges{G}} > n^2 / 4$. (In other
+words, assume that $G$ has more than $n^2 / 4$ edges.) Then, there
+exist three distinct vertices $a$,
+$b$ and $c$ of $G$ such that $ab$, $bc$ and $ca$ are edges of $G$.
+\end{theorem}
+
+\begin{todo}
+Example.
+\end{todo}
+
+\begin{todo}
+Proof.
+\end{todo}
+
+\begin{exercise} \label{exe.intro.mantel-co}
+Let $G$ be a simple graph. Let $n = \abs{\verts{G}}$ be the number of
+vertices of $G$. Assume that $\abs{\edges{G}} < n\tup{n-2} / 4$. (In
+other words, assume that $G$ has less than $n\tup{n-2} / 4$ edges.)
+Then, there exist three distinct vertices $a$, $b$ and $c$ of $G$ such
+that none of $ab$, $bc$ and $ca$ are edges of $G$.
+\end{exercise}
+
+\subsection{\label{sect.intro.paths}Examples of graphs}
+
+\begin{todo}
+Define complete graphs; empty graphs; path graphs; cycle graphs; a
+bunch of basic graphs; mod-3 congruence graph (just as an example);
+2-element subsets with common elements.
+\end{todo}
+
+\subsection{\label{sect.intro.walks}Walks and paths}
+
+\begin{definition} \label{def.intro.walks}
+Let $G$ be a simple graph.
+
+\textbf{(a)} A \textit{walk} (in $G$) means a sequence
+$\tup{v_0, v_1, \ldots, v_k}$ of vertices of $G$ (with $k \geq 0$)
+such that all of
+$v_0 v_1, v_1 v_2, \ldots, v_{k-1} v_k$ are edges of $G$. (We allow
+$k$ to be $0$, in which case the condition that
+``$v_0 v_1, v_1 v_2, \ldots, v_{k-1} v_k$ are edges of $G$'' is
+vacuously true.)
+
+\textbf{(b)} If $\mathbf{w} = \tup{v_0, v_1, \ldots, v_k}$ is a walk
+in $G$, then:
+
+\begin{itemize}
+\item The \textit{vertices of $\mathbf{w}$} are defined to be
+the vertices $v_0, v_1, \ldots, v_k$.
+\item The
+\textit{edges of $\mathbf{w}$} are defined to be the edges
+$v_0 v_1, v_1 v_2, \ldots, v_{k-1} v_k$ of $G$;
+\item The nonnegative integer $k$ is called the
+\textit{length} of $\mathbf{w}$. (This integer is the number of all
+edges of $G$, counted with multiplicity. It is $1$ smaller than the
+number of all vertices of $G$, counted with multiplicity.)
+\item The vertex $v_0$ is said to be the \textit{starting point} of
+$\mathbf{w}$.
+\item The vertex $v_k$ is said to be the \textit{ending point} of
+$\mathbf{w}$.
+\end{itemize}
+
+\textbf{(c)} A \textit{path} (in $G$) means a walk (in $G$) whose
+vertices are distinct. (In other words, a \textit{path} in $G$ means
+a walk $\tup{v_0, v_1, \ldots, v_k}$ in $G$ such that
+$v_0, v_1, \ldots, v_k$ are distinct.)
+
+\textbf{(e)} Let $p$ and $q$ be two vertices of $G$. A
+\textit{walk from $p$ to $q$} (in $G$) means a walk (in $G$) whose
+starting point is $p$ and whose ending point is $q$. A
+\textit{path from $p$ to $q$} (in $G$) means a path (in $G$) whose
+starting point is $p$ and whose ending point is $q$.
+\end{definition}
+
+\begin{todo}
+Examples!
+\end{todo}
+
+\begin{exercise} \label{exe.intro.path.edges-dist}
+Let $G$ be a simple graph. Let $\mathbf{w}$ be a path in $G$.
+Prove that the edges of $\mathbf{w}$ are distinct. (This may look
+obvious when you can point to a picture; but we ask you to give a
+rigorous proof!)
+\end{exercise}
+
+\begin{proposition} \label{prop.intro.paths-and-walks}
+Let $G$ be a simple graph. Let $p$ and $q$ be two vertices of $G$.
+The following six statements are equivalent:
+
+\begin{itemize}
+\item \textit{Statement 1:} There exists a walk from $u$ to $v$.
+
+\item \textit{Statement 2:} There exists a walk from $v$ to $u$.
+
+\item \textit{Statement 3:} There exists a walk from one of the two
+vertices $u$ and $v$ to the other.
+
+\item \textit{Statement 4:} There exists a path from $u$ to $v$.
+
+\item \textit{Statement 5:} There exists a path from $v$ to $u$.
+
+\item \textit{Statement 6:} There exists a path from one of the two
+vertices $u$ and $v$ to the other.
+\end{itemize}
+\end{proposition}
+
+\begin{todo}
+Proof.
+\end{todo}
+
+\begin{todo}
+Dijkstra's algorithm?
+\end{todo}
+
+\begin{todo}
+Cycles and circuits.
+\end{todo}
+
+\subsection{\label{sect.intro.teasers}Questions to ask about graphs}
+
+\begin{todo}
+Connectedness.
+\end{todo}
+
+\begin{todo}
+Hamiltonian paths and cycles:
+Do they exist? How to find them? (We will have partial results, mainly sufficient conditions.)
+\end{todo}
+
+\begin{todo}
+Eulerian walks and circuits.
+(Theory is really nice here, with easy necessary-and-sufficient conditions, but we'll wait for a better notion of graph.)
+\end{todo}
+
+\begin{todo}
+Matchings:
+how large, how many, structure? (Nice and large theory, still under research; we will see a lot of it but still barely scratch the surface.)
+\end{todo}
+
+\subsection{\label{sect.intro.dominating}Dominating sets}
+
+I will next digress to discuss the notion of \textit{dominating sets}.
+The reason why I am doing this at this point is not that dominating
+sets are of any particular fundamental importance (they are not; we
+probably will not use them anywhere after this section), but rather
+that they neatly illustrate the concepts we have seen so far and
+provide some experience with graph-theoretical proofs, all that while
+not requiring any complex theory or advanced techniques.
+
+\begin{definition} \label{def.intro.dominating}
+Let $G$ be a simple graph. A subset $U$ of $\verts{G}$ is said to be
+\textit{dominating} (for $G$) if it has the following property: For
+every vertex $v \in \verts{G} \setminus U$, at least one neighbor of
+$v$ belongs to $U$.
+
+A \textit{dominating set} of $G$ means a dominating subset of
+$\verts{G}$.
+\end{definition}
+
+\begin{todo}
+Example and non-example (e.g., on pentagon).
+\end{todo}
+
+Clearly, if $G$ is a simple graph, then its vertex set $\verts{G}$ is
+a dominating set.
+One natural question to ask is how small a dominating set of a graph
+can be. When the graph $G$ is empty, only the vertex set $\verts{G}$
+itself is dominating. On the other hand, when $G$ is a complete graph
+on $n \geq 1$ vertices, every nonempty subset of $\verts{G}$ is
+dominating. Clearly, the more edges a simple graph has, the more
+dominating sets it has (in the sense that if we add a new edge, then
+all sets that are dominating remain dominating, and possibly new
+dominating sets appear). It is furthermore clear that if a vertex of
+a simple graph $G$ has no neighbors, then it must belong to each
+dominating set of $G$ (because otherwise, at least one neighbor of
+this vertex would need to lie in the dominating set; but this is
+impossible, since it has no neighbors). Such vertices are said to be
+\textit{isolated}.
+
+\begin{definition} \label{def.intro.isolated}
+Let $G$ be a simple graph. A vertex $v$ of $G$ is said to be
+\textit{isolated} if it has no neighbors. (In other words, a vertex
+$v$ of $G$ is said to be \textit{isolated} if its degree $\deg v$
+equals $0$.)
+\end{definition}
+
+\begin{proposition} \label{prop.intro.dominating.|V|/2}
+Let $G = \tup{V, E}$ be a simple graph that has no isolated vertices.
+
+\textbf{(a)} There exist two disjoint dominating subsets $A$ and $B$
+of $V$ such that $A \cup B = V$.
+
+\textbf{(b)} There exists a dominating subset of $V$ having size
+$\geq \abs{V}/2$.
+\end{proposition}
+
+We will see a proof of this proposition later, when we have defined
+the notion of the \textit{distance} between two vertices in a graph.
+
+\begin{todo}
+Bound in Proposition~\ref{prop.intro.dominating.|V|/2} \textbf{(b)}
+is unsharp: example.
+\end{todo}
+
+Next, we state a surprising recent result by Brouwer (\cite{Brouwe09},
+from 2009) about the number of dominating sets of a graph:
+
+\begin{theorem} \label{thm.intro.dominating.brouwer}
+Let $G$ be a simple graph. Then, the number of dominating sets of $G$
+is odd.
+\end{theorem}
+
+Brouwer (in \cite{Brouwe09}) gives three proofs of this theorem. We
+are going to give another. Better yet, we shall prove a more
+precise result which is even more recent (a preprint \cite{HeiTit17}
+from 2017), due to Heinrich and Tittmann:
+
+\begin{theorem} \label{thm.intro.dominating.heinrich}
+Let $G = \tup{V, E}$ be a simple graph. Let $n = \abs{V}$. Assume that
+$n \geq 1$.
+
+A \textit{detached pair} shall mean a pair $\tup{A, B}$ of two
+disjoint subsets $A$ and $B$ of $V$ having the property that
+there exists no edge $ab \in E$ satisfying
+$a \in A$ and $b \in B$.
+
+Let $\alpha$ be the number of all detached pairs $\tup{A, B}$ for
+which both numbers $\abs{A}$ and $\abs{B}$ are even and positive.
+
+Let $\beta$ be the number of all detached pairs $\tup{A, B}$ for
+which both numbers $\abs{A}$ and $\abs{B}$ are odd.
+
+Then:
+
+\textbf{(a)} The numbers $\alpha$ and $\beta$ are even.
+
+\textbf{(b)} The number of dominating sets of $G$ is
+$2^n - 1 + \alpha - \beta$.
+\end{theorem}
+
+Theorem~\ref{thm.intro.dominating.heinrich} is a restatement of
+\cite[Theorem 8]{HeiTit17}. The proof we shall give below is much
+shorter than the proof in \cite{HeiTit17}, but does not lead us
+through as many interesting intermediate results.
+
+\begin{todo}
+Derive Theorem~\ref{thm.intro.dominating.brouwer} from
+Theorem~\ref{thm.intro.dominating.heinrich}.
+\end{todo}
+
+Our proof of Theorem~\ref{thm.intro.dominating.heinrich} will rely on
+a few lemmas. But first, we shall introduce a notation:
+
+\begin{definition} \label{def.intro.iverson}
+Let $\mathcal{A}$ be a logical statement. Then, an element
+$\ive{\mathcal{A}} \in \set{0, 1}$ is defined as follows:
+We set $\ive{\mathcal{A}} =
+\begin{cases}
+1, & \text{if }\mathcal{A}\text{ is true};\\
+0, & \text{if }\mathcal{A}\text{ is false}
+\end{cases}$.
+This element $\ive{\mathcal{A}}$ is called the \textit{truth value}
+of $\mathcal{A}$.
+(For example, $\ive{1+1 = 2} = 1$ and $\ive{1+1 = 3} = 0$. For
+another example,
+$\ive{\text{Proposition~\ref{prop.intro.dominating.|V|/2} holds}}
+= 1$, although we have not proven this yet.)
+The notation $\ive{\mathcal{A}}$ for the truth value of $\mathcal{A}$
+is known as the \textit{Iverson bracket notation}.
+\end{definition}
+
+\begin{todo}
+Simple rules for Iverson brackets. Most importantly, equivalence!
+Exercise: prove them. Also, $\abs{\edges{G}}$ and $\deg v$ using
+sums of Iverson brackets.
+\end{todo}
+
+The following lemma is fundamental to much of combinatorics (if not
+to say much of mathematics):
+
+\begin{lemma} \label{lem.intro.dominating.heinrich-lemma1}
+Let $P$ be a finite set. Then,
+\[
+\sum_{\substack{A \subseteq P}} \left(-1\right)^{\abs{A}}
+= \ive{P = \varnothing} .
+\]
+\end{lemma}
+
+\begin{todo}
+Proof.
+\end{todo}
+
+\begin{lemma} \label{lem.intro.dominating.heinrich-lemma2}
+Let $G = \tup{V, E}$ be a simple graph. Let $B$ be a subset of $V$.
+Then,
+\[
+\sum_{\substack{A \subseteq V; \\ \tup{A, B}
+\text{ is a detached pair}}} \left(-1\right)^{\abs{A}}
+= \ive{B \text{ is dominating}}.
+\]
+\end{lemma}
+
+\begin{todo}
+Proof.
+\end{todo}
+
+\begin{todo}
+Proof of the whole thing.
+\end{todo}
+
+%XXX
+
+[...]
+
+[to be continued]
+
+\begin{thebibliography}{9999999999}                                                                                       %
+
+\bibitem[AigZie]{AigZie}Martin Aigner, G\"{u}nter M. Ziegler,
+\textit{Proofs from the Book}, 4th edition, Springer 2010.
+
+\bibitem[AoPS-ISL]{AoPS-ISL}Art of Problem Solving (forum),
+\textit{IMO Shortlist} (collection of threads),
+\newline
+\url{http://www.artofproblemsolving.com/community/c3223_imo_shortlist}
+
+% \bibitem[Artin10]{Artin10}Michael Artin, \textit{Algebra}, 2nd edition,
+% Pearson 2010.
+
+\bibitem[Bahran15]{Bahran15}Cihan Bahran,
+\textit{Solutions to Math 5707 Spring 2015 homework}.
+\newline \url{http://www-users.math.umn.edu/~bahra004/5707.html}
+
+% \bibitem[BarSch73]{BarSch73}Hans Schneider, George Phillip Barker,
+% \textit{Matrices and Linear Algebra}, 2nd edition, Dover 1973.
+
+\bibitem[BehCha71]{BehCha71}Mehdi Behzad, Gary Chartrand,
+\textit{Introduction to the Theory of Graphs},
+Allyn \& Bacon, 1971.
+
+\bibitem[BenWil12]{BenWil12}Edward A. Bender and S. Gill Williamson,
+\textit{Foundations of Combinatorics with Applications}.
+\newline \url{http://cseweb.ucsd.edu/~gill/FoundCombSite/}
+
+\bibitem[BeChZh15]{BeChZh15}Arthur Benjamin, Gary Chartrand,
+Ping Zhang,
+\textit{The fascinating world of graph theory},
+Princeton University Press 2015.
+
+\bibitem[Berge91]{Berge91}Claude Berge,
+\textit{Graphs}, 3rd edition, North-Holland 1991.
+
+\bibitem[Bogomoln]{cut-the-knot}Alexander Bogomolny,
+\textit{Cut the Knot} (website devoted to educational applets on
+various mathematical subjects),
+\url{http://www.cut-the-knot.org/Curriculum/index.shtml#combinatorics} .
+
+\bibitem[Bollob79]{Bollob79}B\'ela Bollob\'as,
+\textit{Graph Theory: An Introductory Course},
+Graduate Texts in Mathematics \#63, 1st edition, Springer 1971.
+
+\bibitem[BonMur76]{BonMur76}
+J. A. Bondy and U. S. R. Murty, \textit{Graph theory with Applications},
+North-Holland 1976.
+\newline \url{https://www.iro.umontreal.ca/~hahn/IFT3545/GTWA.pdf}.
+
+\bibitem[BonMur08]{BonMur08}
+J. A. Bondy and U. S. R. Murty, \textit{Graph theory}, Graduate Texts
+in Mathematics \#244, Springer 2008.
+\newline \url{https://www.classes.cs.uchicago.edu/archive/2016/spring/27500-1/hw3.pdf}
+
+\bibitem[BonTho77]{BonTho77}
+J. A. Bondy, C. Thomassen,
+\textit{A short proof of Meyniel's theorem},
+Discrete Mathematics 19 (1977), pp. 195--197.
+\newline \url{http://www.sciencedirect.com/science/article/pii/0012365X77900346}
+
+\bibitem[Brouwe09]{Brouwe09}
+Andries E. Brouwer,
+\textit{The number of dominating sets of a finite graph is odd},
+\url{http://www.win.tue.nl/~aeb/preprints/domin2.pdf} .
+
+% \bibitem[Camero08]{Camero08}Peter J. Cameron, \textit{Notes on Linear
+% Algebra}, version 5 Sep 2008.\newline\url{http://www.maths.qmul.ac.uk/~pjc/notes/linalg.pdf}
+
+\bibitem[ChaLes15]{ChaLes15}
+Gary Chartrand, Linda Lesniak, Ping Zhang,
+\textit{Graphs \& Digraphs}, 6th edition, CRC Press 2016.
+
+\bibitem[Conrad]{Conrad-sign}Keith Conrad, \textit{Sign of permutations},
+\newline\url{http://www.math.uconn.edu/~kconrad/blurbs/grouptheory/sign.pdf} .
+
+\bibitem[Day16]{Day-proofs}Martin V. Day,
+\textit{An Introduction to Proofs and the Mathematical Vernacular},
+\newline\url{https://www.math.vt.edu/people/day/ProofsBook/IPaMV.pdf} .
+
+% \bibitem[deBoor]{deBoor}Carl de Boor, \textit{An empty exercise}.
+% \url{ftp://ftp.cs.wisc.edu/Approx/empty.pdf} .
+
+\bibitem[Dieste16]{Dieste16}Reinhard Diestel, \textit{Graph Theory},
+Graduate Texts in Mathematics \#173, 5th edition, Springer 2016.
+\newline \url{http://diestel-graph-theory.com/basic.html} .
+
+\bibitem[Gessel79]{Gessel-Vand}Ira Gessel, \textit{Tournaments and
+Vandermonde's Determinant}, Journal of Graph Theory, Vol. 3 (1979), pp. 305--307.
+
+\bibitem[GrRoSp90]{GrRoSp90}Ronald L. Graham, Bruce L. Rothschild,
+Joel H. Spencer, \textit{Ramsey Theory}, 2nd edition,
+Wiley 1990.
+
+\bibitem[Griffi15]{Griffi15}Christopher Griffin,
+\textit{Graph Theory: Penn State Math 485 Lecture Notes},
+version 1.4.2.1 (18 Oct 2015),
+\newline\url{https://sites.google.com/site/cgriffin229/} .
+
+\bibitem[Grinbe16]{detnotes}Darij Grinberg, \textit{Notes on the combinatorial
+fundamentals of algebra}, 29 December 2016.
+\newline\url{http://www.cip.ifi.lmu.de/~grinberg/primes2015/sols.pdf}
+
+\bibitem[HaHiMo08]{HaHiMo08}
+John M. Harris, Jeffry L. Hirst, Michael J. Mossinghoff,
+\textit{Combinatorics and Graph Theory}, Undergraduate Texts in
+Mathematics, Springer 2008.
+
+% \bibitem[Heffer16]{Heffer16}Jim Hefferon, \textit{Linear Algebra},
+% 2016.\newline\url{http://joshua.smcvt.edu/linearalgebra/}
+
+\bibitem[HeiTit17]{HeiTit17}
+Irene Heinrich, Peter Tittmann,
+\textit{Counting Dominating Sets of Graphs},
+\arxiv{1701.03453v1}.
+
+% \bibitem[OlvSha06]{OlvSha06}Peter J. Olver, Chehrzad Shakiban, \textit{Applied
+% Linear Algebra}, Prentice Hall, 2006.\newline See also
+% \url{http://www.math.umn.edu/~olver/ala.html} for corrections.
+
+\bibitem[KelTro15]{KelTro15}Mitchel T. Keller, William T. Trotter,
+\textit{Applied Combinatorics},
+version 26 May 2015.
+\newline \url{https://people.math.gatech.edu/~trotter/book.pdf}
+
+\bibitem[Knuth95]{Knuth95} Donald E. Knuth,
+\textit{Overlapping Pfaffians},
+Electron. J. Combin. 3 (1996), no. 2, \#R5.
+Also available as arXiv preprint \arxiv{math/9503234v1}.
+
+% \bibitem[Kowals16]{Kowals16}Emmanuel Kowalski, \textit{Linear Algebra},
+% version 15 Sep 2016.\newline\url{https://people.math.ethz.ch/~kowalski/script-la.pdf}
+
+\bibitem[LaNaSc16]{LaNaSc16}Isaiah Lankham, Bruno Nachtergaele, Anne
+Schilling, \textit{Linear Algebra As an Introduction to Abstract Mathematics},
+2016.\newline\url{https://www.math.ucdavis.edu/~anne/linear_algebra/mat67_course_notes.pdf}
+
+\bibitem[LeLeMe16]{LeLeMe16}Eric Lehman, F. Thomson Leighton, Albert R. Meyer,
+\textit{Mathematics for Computer Science}, revised Thursday 28th September,
+2016, \newline\url{https://courses.csail.mit.edu/6.042/spring16/mcs.pdf} .
+
+% \bibitem[m.se709196]{m.se709196}Daniela Diaz and others, \textit{Definition of
+% General Associativity for binary operations}, math.stackexchange question
+% \#709196 .\newline\url{http://math.stackexchange.com/q/709196}
+
+\bibitem[Ore62]{Ore62}
+Oystein Ore, \textit{Theory of graphs},
+AMS Colloquium Publications \#XXXVIII,
+4th printing, AMS 1962.
+
+\bibitem[Ore90]{Ore90}
+Oystein Ore, \textit{Graphs and their uses}, revised and updated by
+Robin J. Wilson,
+Anneli Lax New Mathematical Library \#34, MAA 1990.
+
+\bibitem[Overbe74]{Overbe74}Maria Overbeck-Larisch,
+\textit{Hamiltonian paths in oriented graphs},
+Journal of Combinatorial Theory, Series B,
+Volume 21, Issue 1, August 1976, pp. 76--80.
+\newline \url{http://www.sciencedirect.com/science/article/pii/0095895676900307}
+
+\bibitem[Petrov15]{Petrov15}Fedor Petrov,
+\textit{mathoverflow post \#198679 (Flooding a cycle digraph via
+chip-firing: $n^{k-1} + n^{k-2} + \cdots + 1$ bound (a Norway 1998-99
+problem generalized))},
+MathOverflow,
+\newline \url{http://mathoverflow.net/q/198679}
+
+\bibitem[PoTaWo83]{PoTaWo83}George P\'olya, Robert E. Tarjan,
+Donald R. Woods,
+\textit{Notes on Introductory Combinatorics},
+Birkh\"auser 1983.
+\newline See
+\url{http://i.stanford.edu/pub/cstr/reports/cs/tr/79/732/CS-TR-79-732.pdf}
+for a preliminary version.
+
+\bibitem[Pretzel]{Pretzel}Oliver Pretzel, \textit{On reorienting graphs by
+pushing down maximal vertices, }Order, 1986, Volume 3, Issue 2, pp. 135--153.
+
+\bibitem[RaWiRa]{RaWi-Ramsey}RationalWiki,
+\textit{Ramsey theory},
+\url{http://rationalwiki.org/wiki/Ramsey_theory} .
+
+\bibitem[RotSot92]{RotSot92}Alvin E. Roth, Marilda A. Oliveira
+Sotomayor, \textit{Two-sided matching: A study in game-theoretic
+modeling and analysis}, Cambridge University Press 1992.
+
+\bibitem[Ruohon13]{Ruohon13}Keijo Ruohonen, \textit{Graph theory},
+2013.\newline \url{http://math.tut.fi/~ruohonen/GT_English.pdf} .
+
+\bibitem[Stanle12]{Stanley-EC1}Richard P. Stanley, \textit{Enumerative
+Combinatorics, Volume 1}, 2nd edition, CUP 2012.\newline See
+\url{http://math.mit.edu/~rstan/ec/ec1/} for a preliminary version.
+
+\end{thebibliography}
+
+
+\end{document}
