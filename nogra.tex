@@ -324,7 +324,7 @@ graph'', ``loopless graph'', ``loopless weighted undirected
 graph'', ``infinite graph'', etc.) or prefixes (``digraph'',
 ``multigraph'', etc.). Let me first define the simplest one of these:
 
-\begin{definition} \label{def.simple.sg}
+\begin{definition} \label{def.intro.simple.sg}
 A \textit{simple graph} is a pair $\tup{V, E}$, where $V$ is a
 finite set, and where $E$ is a subset of $\powset[2]{V}$.
 \end{definition}
@@ -339,10 +339,11 @@ It does not mean
 that everything that can be said about simple graphs is simple (this
 is far from the case, as we will see below). The condition
 ``$E$ is a subset of $\powset[2]{V}$'' in
-Definition~\ref{def.simple.sg} can be rewritten as ``$E$ is a set of
-$2$-element subsets of $V$'' (since $\powset[2]{V}$ is the set of all
-$2$-element subsets of $V$). Thus, a simple graph is a pair consisting
-of a finite set $V$, and a set of $2$-element subsets of $V$.
+Definition~\ref{def.intro.simple.sg} can be rewritten as ``$E$ is a
+set of $2$-element subsets of $V$'' (since $\powset[2]{V}$ is the set
+of all $2$-element subsets of $V$). Thus, a simple graph is a pair
+consisting of a finite set $V$, and a set of $2$-element subsets of
+$V$.
 For example,
 $\left(\set{1,2,3}, \set{\set{1,3}, \set{3,2}} \right)$ and
 $\left(\set{2,5}, \set{\set{2,5}}\right)$ and
@@ -350,7 +351,7 @@ $\left(\varnothing, \varnothing\right)$ are three simple graphs.
 
 \begin{conclusion}
 \textbf{(a)}
-Our Definition~\ref{def.simple.sg} differs from the definition of a
+Our Definition~\ref{def.intro.simple.sg} differs from the definition of a
 ``simple graph'' in many sources, in that we are requiring $V$ to be
 finite.
 
@@ -387,7 +388,7 @@ Mention social networks and this being older.
 The following notations provide a quick way to reference the elements
 of $V$ and $E$ when given a graph $\tup{V, E}$:
 
-\begin{definition} \label{def.simple.VE}
+\begin{definition} \label{def.intro.simple.VE}
 Let $G = \tup{V, E}$ be a simple graph.
 
 \textbf{(a)} The set $V$ is called the \textit{vertex set} of $G$;
@@ -440,6 +441,52 @@ Of course, the relation of adjacency is symmetric\footnote{This means
 the following: Given two vertices $u$ and $v$ of a simple graph $G$,
 the vertex $u$ is adjacent to $v$ if and only if $v$ is adjacent to
 $u$.}. Same holds for the relation of non-adjacency.
+
+\begin{example} \label{exa.intro.simple.VE}
+Let $U$ be the $5$-element set $\set{1,2,3,4,5}$. Let $E$ be the
+subset $\set{\set{u,v} \in \powset[2]{U} \ \mid \ u + v \geq 5 }$
+of $\powset[2]{U}$. This set $E$ is well-defined, because the sum
+$u + v$ of two integers $u$ and $v$ depends only on the set
+$\set{u,v}$ and not on how this set is written (since
+$u + v = v + u$). (This is important, because if we had used the
+condition $u - v \geq 3$ instead of $u + v \geq 5$, then the set $E$
+would not be well-defined, because it would not be clear whether
+$\set{1, 5}$ should be inside it or not -- indeed, if we write
+$\set{1, 5}$ as $\set{u, v}$ with $u = 5$ and $v = 1$, then
+$u - v \geq 3$ is satisfied, but if we write $\set{1, 5}$ as
+$\set{u, v}$ with $u = 1$ and $v = 5$, then $u - v \geq 3$ is not
+satisfied.)
+
+Let $G$ be the graph $\tup{U, E}$. Then, $\verts{G} = U
+= \set{1,2,3,4,5}$ and
+\begin{align}
+\edges{G} &= E
+= \set{\set{u,v} \in \powset[2]{U} \ \mid \ u + v \geq 5 }
+\nonumber \\
+&= \set{\set{1,4}, \set{1,5},
+        \set{2,3}, \set{2,4}, \set{2,5},
+        \set{3,4}, \set{3,5},
+        \set{4,5}} .
+\label{eq.exa.intro.simple.VE.edgesG=}
+\end{align}
+Thus, $G$ has $\abs{\verts{G}} = \abs{U} = 5$ vertices and
+$\abs{\edges{G}} = \abs{E} = 8$ edges.
+
+Using the shorthand notation
+$uv$ for $\set{u, v}$ (introduced in
+Definition~\ref{def.intro.simple.VE} \textbf{(b)}), the equality
+\eqref{eq.exa.intro.simple.VE.edgesG=} rewrites as
+\[
+\edges{G}
+= \set{14, 15, 23, 24, 25, 34, 35, 45} .
+\]
+
+The vertices $2$ and $4$ of $G$ are adjacent (since $24 \in E$).
+In other words, $4$ is a neighbor of $2$. Equivalently, $2$ is a
+neighbor of $4$. On the other hand, the vertices $1$ and $3$ of $G$
+are not adjacent (since $13 \notin E$); thus, $1$ is not a neighbor
+of $3$. The neighbors of $1$ are $4$ and $5$.
+\end{example}
 
 \subsection{\label{sect.intro.draw}Drawing graphs}
 
