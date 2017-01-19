@@ -351,9 +351,9 @@ $\left(\varnothing, \varnothing\right)$ are three simple graphs.
 
 \begin{conclusion}
 \textbf{(a)}
-Our Definition~\ref{def.intro.simple.sg} differs from the definition of a
-``simple graph'' in many sources, in that we are requiring $V$ to be
-finite.
+Our Definition~\ref{def.intro.simple.sg} differs from the definition
+of a ``simple graph'' in many sources, in that we are requiring $V$ to
+be finite.
 
 \textbf{(b)}
 Simple graphs are often just called ``graphs''. But then again, some
@@ -378,12 +378,24 @@ different objects. For example, if you have $n$ integers
 (for some $n \in \NN$), then you can define a graph
 $\tup{V, E}$ for which $V$ is the set of these $n$ integers,
 and $E$ is the set of all $2$-element subsets
-$\set{u, v} \subseteq V$ for which $\abs{u-v} \leq 3$. (Notice that
+$\set{u, v}$ of $V$ for which $\abs{u-v} \leq 3$. (Notice that
 $\set{u, u}$ does not count as a $2$-element subset.)
-\begin{todo}
-For a non-mathematical example, ... {Fill this in.}
-Mention social networks and this being older.
-\end{todo}
+For a non-mathematical example, consider an (idealized) group $P$ of
+(finitely many) people, each two of which are either mutual friends or
+not\footnote{We assume that if a person $u$ is a friend of a person
+$v$, then $v$ is a friend of $u$. We also assume that no person $u$ is
+a friend of $u$ itself (or, at least, we don't count this as
+friendship).}. Then, you can define a graph $\tup{P, E}$, where $E$
+is the set of all $2$-element subsets $\set{u, v}$ of $P$ for which
+$u$ and $v$ are mutual friends. This graph then models the friendships
+between the people in the group $P$; in a sense, it is a social
+network (similar to the ones widespread on the Internet, but much more
+rudimentary, since it only knows who is a friend of
+whom).\footnote{This kind of ``social graphs'' has been used for many
+years as a language for stating theorems about graphs without saying
+the word ``graph'' (and without using mathematical notation): Just
+speak of people and their mutual friendships. This language was in use
+long before the Internet and actual social networks came about.}
 
 The following notations provide a quick way to reference the elements
 of $V$ and $E$ when given a graph $\tup{V, E}$:
@@ -652,9 +664,39 @@ Case 1, with the only difference that ``adjacent'' is replaced by
 ``is not an edge'' (and vice versa).
 \end{remark}
 
-\begin{todo}
-Remark: how this could be proven by brute force.
-\end{todo}
+\begin{remark}
+Let me observe that Proposition~\ref{prop.simple.R33} could be proven
+by brute force as well (using a computer). Indeed, here is how such a
+proof would proceed: Let $x_1, x_2, x_3, x_4, x_5, x_6$ be six
+distinct vertices of $G$. (Such six vertices exist, since
+$\abs{\verts{G}} \geq 6$.) Let
+$X = \set{x_1, x_2, x_3, x_4, x_5, x_6}$ be the set of these six
+vertics. Notice that the set $X$ has $6$ elements, and thus the set
+$\powset[2]{X}$ has $\dbinom{6}{2} = 15$ elements.
+Let $F$ be the set of all edges $uv$ of $G$ for which both
+$u$ and $v$ belong to $X$. (In other words, $F$ is the set of all
+edges of $G$ having the form $x_i x_j$.)
+Clearly, it suffices to prove Proposition~\ref{prop.simple.R33} for
+the graph $\tup{X, F}$ instead of $G$ (because if we have found, for
+example, three distinct vertices $a$, $b$ and $c$ of $\tup{X, F}$ such
+that $ab$, $bc$ and $ca$ are edges of $\tup{X, F}$, then these $a$,
+$b$ and $c$ are obviously also three vertices of $G$ such that
+$ab$, $bc$ and $ca$ are edges of $G$). However,
+$F$ is a subset of $\powset[2]{X}$. Since there
+are only finitely many subsets of $\powset[2]{X}$ (in fact, there are
+$2^{15}$ such subsets, since $\powset[2]{X}$ has $15$ elements), we
+thus see that there are only finitely many choices for $F$ (when $X$
+is being regarded as fixed). We can
+check, for each of these choices, whether the graph $\tup{X, F}$
+satisfies Proposition~\ref{prop.simple.R33}. (Just try each
+possible choice of three distinct vertices $a$, $b$ and $c$ of this
+graph $\tup{X, F}$, and check that at least one of these choices
+satisfies either Statement 1 or Statement 2.) After a huge but
+finite amount of checking (which you can automate), you will see that
+Proposition~\ref{prop.simple.R33} holds for $\tup{X, F}$. Thus, as we
+have already mentioned, Proposition~\ref{prop.simple.R33} also holds
+for the original graph $G$.
+\end{remark}
 
 \begin{todo}
 Ramsey theory in general: binomial coeff bound with ref.
