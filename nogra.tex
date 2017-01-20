@@ -1101,17 +1101,19 @@ Matchings:
 how large, how many, structure? (Nice and large theory, still under research; we will see a lot of it but still barely scratch the surface.)
 \end{todo}
 
-\subsection{\label{sect.intro.dominating}Dominating sets}
+\section{\label{sect.dominating}Dominating sets}
 
 I will next digress to discuss the notion of \textit{dominating sets}.
 The reason why I am doing this at this point is not that dominating
-sets are of any particular fundamental importance (they are not; we
-probably will not use them anywhere after this section), but rather
+sets are of any particular fundamental importance (there are arguably
+more crucial notions in graph theory left to consider), but rather
 that they neatly illustrate the concepts we have seen so far and
 provide some experience with graph-theoretical proofs, all that while
 not requiring any complex theory or advanced techniques.
 
-\begin{definition} \label{def.intro.dominating}
+\subsection{\label{subsect.dominating.defs}Definition}
+
+\begin{definition} \label{def.dominating}
 Let $G$ be a simple graph. A subset $U$ of $\verts{G}$ is said to be
 \textit{dominating} (for $G$) if it has the following property: For
 every vertex $v \in \verts{G} \setminus U$, at least one neighbor of
@@ -1148,7 +1150,7 @@ $v$ of $G$ is said to be \textit{isolated} if its degree $\deg v$
 equals $0$.)
 \end{definition}
 
-\begin{proposition} \label{prop.intro.dominating.|V|/2}
+\begin{proposition} \label{prop.dominating.|V|/2}
 Let $G = \tup{V, E}$ be a simple graph that has no isolated vertices.
 
 \textbf{(a)} There exist two disjoint dominating subsets $A$ and $B$
@@ -1162,14 +1164,17 @@ We will see a proof of this proposition later, when we have defined
 the notion of the \textit{distance} between two vertices in a graph.
 
 \begin{todo}
-Bound in Proposition~\ref{prop.intro.dominating.|V|/2} \textbf{(b)}
+Bound in Proposition~\ref{prop.dominating.|V|/2} \textbf{(b)}
 is unsharp: example.
 \end{todo}
+
+\subsection{\label{subsect.dominating.odd}Brouwer's theorem and the
+Heinrich-Tittmann formula}
 
 Next, we state a surprising recent result by Brouwer (\cite{Brouwe09},
 from 2009) about the number of dominating sets of a graph:
 
-\begin{theorem} \label{thm.intro.dominating.brouwer}
+\begin{theorem} \label{thm.dominating.brouwer}
 Let $G$ be a simple graph. Then, the number of dominating sets of $G$
 is odd.
 \end{theorem}
@@ -1179,7 +1184,7 @@ are going to give another. Better yet, we shall prove a more
 precise result which is even more recent (a preprint \cite{HeiTit17}
 from 2017), due to Heinrich and Tittmann:
 
-\begin{theorem} \label{thm.intro.dominating.heinrich}
+\begin{theorem} \label{thm.dominating.heinrich}
 Let $G = \tup{V, E}$ be a simple graph. Let $n = \abs{V}$. Assume that
 $n \geq 1$.
 
@@ -1202,18 +1207,22 @@ Then:
 $2^n - 1 + \alpha - \beta$.
 \end{theorem}
 
-Theorem~\ref{thm.intro.dominating.heinrich} is a restatement of
+Theorem~\ref{thm.dominating.heinrich} is a restatement of
 \cite[Theorem 8]{HeiTit17}. The proof we shall give below is much
 shorter than the proof in \cite{HeiTit17}, but does not lead us
 through as many interesting intermediate results.
 
 \begin{todo}
-Derive Theorem~\ref{thm.intro.dominating.brouwer} from
-Theorem~\ref{thm.intro.dominating.heinrich}.
+Derive Theorem~\ref{thm.dominating.brouwer} from
+Theorem~\ref{thm.dominating.heinrich}.
 \end{todo}
 
-Our proof of Theorem~\ref{thm.intro.dominating.heinrich} will rely on
-a few lemmas. But first, we shall introduce a notation:
+\subsection{\label{subsect.dominating.iverson}The Iverson bracket}
+
+Our proof of Theorem~\ref{thm.dominating.heinrich} will rely on
+a few lemmas. But first, let us introduce a very basic notation, which
+has nothing to do with graphs specifically but is useful
+throughout mathematics (particularly combinatorics):
 
 \begin{definition} \label{def.intro.iverson}
 Let $\mathcal{A}$ be a logical statement. Then, an element
@@ -1227,22 +1236,65 @@ This element $\ive{\mathcal{A}}$ is called the \textit{truth value}
 of $\mathcal{A}$.
 (For example, $\ive{1+1 = 2} = 1$ and $\ive{1+1 = 3} = 0$. For
 another example,
-$\ive{\text{Proposition~\ref{prop.intro.dominating.|V|/2} holds}}
+$\ive{\text{Proposition~\ref{prop.dominating.|V|/2} holds}}
 = 1$, although we have not proven this yet.)
 The notation $\ive{\mathcal{A}}$ for the truth value of $\mathcal{A}$
 is known as the \textit{Iverson bracket notation}.
 \end{definition}
 
-\begin{todo}
-Simple rules for Iverson brackets. Most importantly, equivalence!
-Exercise: prove them. Also, $\abs{\edges{G}}$ and $\deg v$ using
-sums of Iverson brackets.
-\end{todo}
+Truth values satisfy certain simple rules:
+
+\begin{proposition} \label{prop.intro.iverson.rules}
+\textbf{(a)} If $\mathcal{A}$ is any logical statement, then
+$\ive{\text{not } \mathcal{A}} = 1 - \ive{\mathcal{A}}$.
+
+\textbf{(b)} If $\mathcal{A}$ and $\mathcal{B}$ are two logical
+statements, then
+$\ive{\mathcal{A} \wedge \mathcal{B}}
+= \ive{\mathcal{A}} \ive{\mathcal{B}}$.
+
+\textbf{(c)} If $\mathcal{A}$ and $\mathcal{B}$ are two logical
+statements, then
+$\ive{\mathcal{A} \vee \mathcal{B}}
+= \ive{\mathcal{A}} + \ive{\mathcal{B}}
+  - \ive{\mathcal{A}} \ive{\mathcal{B}}$.
+\end{proposition}
+
+\begin{proposition} \label{prop.intro.iverson.sums}
+Let $P$ be a finite set. Let $Q$ be a subset of $P$.
+
+\textbf{(a)} Then, $\abs{Q} = \sum_{p \in P} \ive{p \in Q}$.
+
+\textbf{(b)} For each $p \in P$, let $a_p$ be a number (for example,
+a real number). Then, $\sum_{p \in P} \ive{p \in Q} a_p
+= \sum_{p \in Q} a_p$.
+
+\textbf{(c)} For each $p \in P$, let $a_p$ be a number (for example,
+a real number). Let $q \in P$. Then,
+$\sum_{p \in P} \ive{p = q} a_p = a_q$.
+\end{proposition}
+
+\begin{exercise} \label{exe.intro.iverson}
+\textbf{(a)} Prove Proposition~\ref{prop.intro.iverson.rules}.
+
+\textbf{(b)} Prove Proposition~\ref{prop.intro.iverson.sums}.
+
+Now, let $G$ be a graph.
+
+\textbf{(c)} Prove that
+$\deg v = \sum_{u \in \verts{G}} \ive{uv \in \edges{G}}$
+for each vertex $v$ of $G$.
+
+\textbf{(d)} Prove that
+$2 \abs{\edges{G}}
+= \sum_{u \in \verts{G}} \sum_{v \in \verts{G}}
+  \ive{uv \in \edges{G}}$.
+\end{exercise}
 
 The following lemma is fundamental to much of combinatorics (if not
 to say much of mathematics):
 
-\begin{lemma} \label{lem.intro.dominating.heinrich-lemma1}
+\begin{lemma} \label{lem.dominating.heinrich-lemma1}
 Let $P$ be a finite set. Then,
 \[
 \sum_{\substack{A \subseteq P}} \left(-1\right)^{\abs{A}}
@@ -1254,7 +1306,10 @@ Let $P$ be a finite set. Then,
 Proof.
 \end{todo}
 
-\begin{lemma} \label{lem.intro.dominating.heinrich-lemma2}
+\subsection{\label{subsect.dominating.lemmas}Lemmas for the proof of
+the Heinrich-Tittmann formula}
+
+\begin{lemma} \label{lem.dominating.heinrich-lemma2}
 Let $G = \tup{V, E}$ be a simple graph. Let $B$ be a subset of $V$.
 Then,
 \[
@@ -1262,6 +1317,8 @@ Then,
 \text{ is a detached pair}}} \left(-1\right)^{\abs{A}}
 = \ive{B \text{ is dominating}}.
 \]
+(See Theorem~\ref{thm.dominating.heinrich} for the definition
+of a ``detached pair''.)
 \end{lemma}
 
 \begin{todo}
