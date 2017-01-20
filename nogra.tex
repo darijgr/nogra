@@ -1273,15 +1273,19 @@ is known as the \textit{Iverson bracket notation}.
 Truth values satisfy certain simple rules:
 
 \begin{proposition} \label{prop.intro.iverson.rules}
-\textbf{(a)} If $\mathcal{A}$ is any logical statement, then
+\textbf{(a)} If $\mathcal{A}$ and $\mathcal{B}$ are two equivalent
+logical statements, then
+$\ive{\mathcal{A}} = \ive{\mathcal{B}}$.
+
+\textbf{(b)} If $\mathcal{A}$ is any logical statement, then
 $\ive{\text{not } \mathcal{A}} = 1 - \ive{\mathcal{A}}$.
 
-\textbf{(b)} If $\mathcal{A}$ and $\mathcal{B}$ are two logical
+\textbf{(c)} If $\mathcal{A}$ and $\mathcal{B}$ are two logical
 statements, then
 $\ive{\mathcal{A} \wedge \mathcal{B}}
 = \ive{\mathcal{A}} \ive{\mathcal{B}}$.
 
-\textbf{(c)} If $\mathcal{A}$ and $\mathcal{B}$ are two logical
+\textbf{(d)} If $\mathcal{A}$ and $\mathcal{B}$ are two logical
 statements, then
 $\ive{\mathcal{A} \vee \mathcal{B}}
 = \ive{\mathcal{A}} + \ive{\mathcal{B}}
@@ -1325,8 +1329,120 @@ to say much of mathematics):
 \begin{lemma} \label{lem.dominating.heinrich-lemma1}
 Let $P$ be a finite set. Then,
 \[
-\sum_{\substack{A \subseteq P}} \left(-1\right)^{\abs{A}}
+\sum_{\substack{A \subseteq P}} \tup{-1}^{\abs{A}}
 = \ive{P = \varnothing} .
+\]
+(The symbol ``$\sum_{\substack{A \subseteq P}}$'' means ``sum over
+all subsets $A$ of $P$''. In other words, it means
+``$\sum_{\substack{A \in \powset{P}}}$''.)
+\end{lemma}
+
+\begin{proof}[Proof of Lemma~\ref{lem.dominating.heinrich-lemma1}.]
+If $P = \varnothing$, then Lemma~\ref{lem.dominating.heinrich-lemma1}
+holds\footnote{\textit{Proof.} Assume that $P = \varnothing$. Then,
+there exists only one subset of $P$, namely $\varnothing$. Hence,
+the sum $\sum_{\substack{A \subseteq P}} \tup{-1}^{\abs{A}}$
+has only one addend, namely the addend for $A = \varnothing$.
+Therefore, this sum simplifies to
+\[
+\sum_{\substack{A \subseteq P}} \tup{-1}^{\abs{A}}
+= \tup{-1}^{\abs{\varnothing}} = 1
+\]
+(since $\abs{\varnothing} = 0$). Comparing this with
+$\ive{P = \varnothing} = 1$ (which holds, since $P = \varnothing$ is
+true), we obtain
+$\sum_{\substack{A \subseteq P}} \tup{-1}^{\abs{A}}
+= \ive{P = \varnothing}$. Hence, we have shown that
+Lemma~\ref{lem.dominating.heinrich-lemma1} holds if
+$P = \varnothing$.}. Hence, for the rest of this proof, we WLOG
+assume that $P \neq \varnothing$. Thus, there exists at least one
+element $p$ of $P$. Pick such a $p$.
+
+There are two kinds of subsets of $P$: the ones that contain $p$,
+and the ones that do not. Hence, the sum
+$\sum_{\substack{A \subseteq P}} \tup{-1}^{\abs{A}}$ can be
+decomposed as follows:
+\begin{equation}
+\sum_{\substack{A \subseteq P}} \tup{-1}^{\abs{A}}
+= \sum_{\substack{A \subseteq P; \\ p \in A}} \tup{-1}^{\abs{A}}
+  + \sum_{\substack{A \subseteq P; \\ p \notin A}} \tup{-1}^{\abs{A}} .
+\label{pf.lem.dominating.heinrich-lemma1.1}
+\end{equation}
+
+But every subset $A$ of $P$ that contains $p$ has the form
+$B \cup \set{p}$ for a \textbf{unique} subset $B$ of $P$ that does
+not contain $p$ (namely, for $B = A \setminus \set{p}$). Conversely,
+of course, if $B$ is a subset of $P$ that does not contain $p$,
+then $B \cup \set{p}$ will always be a subset of $P$ that contains
+$p$. Hence, there exists a bijection (i.e., a bijective map)
+from the set of all subsets of $P$ that do not contain $p$
+  to the set of all subsets of $P$ that do contain $p$;
+namely, this bijection sends each subset $B$ of $P$ that does not
+contain $p$ to $B \cup \set{p}$. Using this bijection, we can rewrite
+the sum
+$\sum_{\substack{A \subseteq P; \\ p \in A}} \tup{-1}^{\abs{A}}$ as
+follows:
+\begin{align*}
+\sum_{\substack{A \subseteq P; \\ p \in A}} \tup{-1}^{\abs{A}}
+&= \sum_{\substack{B \subseteq P; \\ p \notin B}}
+   \underbrace{\tup{-1}^{\abs{B \cup \set{p}}}}_{\substack{
+     = \tup{-1}^{\abs{B}+1} \\
+     \text{(since } \abs{B \cup \set{p}} = \abs{B} + 1 \\
+     \text{(because } p \notin B \text{))}
+   }}
+= \sum_{\substack{B \subseteq P; \\ p \notin B}}
+  \underbrace{\tup{-1}^{\abs{B}+1}}_{= - \tup{-1}^{\abs{B}}} \\
+&= - \sum_{\substack{B \subseteq P; \\ p \notin B}} \tup{-1}^{\abs{B}}
+= - \sum_{\substack{A \subseteq P; \\ p \notin A}} \tup{-1}^{\abs{A}}
+\end{align*}
+(here, we have renamed the summation index $B$ as $A$).
+Thus, \eqref{pf.lem.dominating.heinrich-lemma1.1} becomes
+\[
+\sum_{\substack{A \subseteq P}} \tup{-1}^{\abs{A}}
+= \underbrace{\sum_{\substack{A \subseteq P; \\ p \in A}}
+       \tup{-1}^{\abs{A}}}_{
+     = - \sum_{\substack{A \subseteq P; \\ p \notin A}}
+         \tup{-1}^{\abs{A}}}
+  + \sum_{\substack{A \subseteq P; \\ p \notin A}} \tup{-1}^{\abs{A}}
+= - \sum_{\substack{A \subseteq P; \\ p \notin A}} \tup{-1}^{\abs{A}}
+  + \sum_{\substack{A \subseteq P; \\ p \notin A}} \tup{-1}^{\abs{A}}
+= 0.
+\]
+Comparing this with $\ive{P = \varnothing} = 0$ (which holds, since
+$P = \varnothing$ is false), we obtain
+$\sum_{\substack{A \subseteq P}} \tup{-1}^{\abs{A}}
+= \ive{P = \varnothing}$. Hence,
+Lemma~\ref{lem.dominating.heinrich-lemma1} is proven.
+\end{proof}
+
+A different proof of Lemma~\ref{lem.dominating.heinrich-lemma1} can
+be obtained using the binomial formula and the combinatorial
+interpretation of binomial coefficients. The main idea of this latter
+proof is to observe that for each $k \in \set{0,1,\ldots,\abs{P}}$,
+exactly $\dbinom{\abs{P}}{k}$ among the subsets of $P$ have size $k$,
+and therefore
+$\sum_{\substack{A \subseteq P}} \tup{-1}^{\abs{A}}$ can be rewritten
+as $\sum_{k=0}^{\abs{P}} \dbinom{\abs{P}}{k} \tup{-1}^k$, which in
+turn can be simplified (using the binomial formula) to
+$\tup{1-1}^{\abs{P}} = 0^{\abs{P}} = \ive{\abs{P} = 0}
+= \ive{P = \varnothing}$. We leave the details of this alternative
+proof to the interested reader.
+
+\subsection{\label{subsect.dominating.lemmas}Lemmas for the proof of
+the Heinrich-Tittmann formula}
+
+In this section, we shall prove some further results that will be used
+in our proof of Theorem~\ref{thm.dominating.heinrich}. Throughout this
+section, we consider a simple graph $G = \tup{V, E}$. The notion of a
+``detached pair'' is to be understood as in
+Theorem~\ref{thm.dominating.heinrich}.
+
+\begin{lemma} \label{lem.dominating.heinrich-lemma2}
+Let $B$ be a subset of $V$. Then,
+\[
+\sum_{\substack{A \subseteq V; \\ \tup{A, B}
+\text{ is a detached pair}}} \tup{-1}^{\abs{A}}
+= \ive{B \text{ is dominating}}.
 \]
 \end{lemma}
 
@@ -1334,19 +1450,9 @@ Let $P$ be a finite set. Then,
 Proof.
 \end{todo}
 
-\subsection{\label{subsect.dominating.lemmas}Lemmas for the proof of
-the Heinrich-Tittmann formula}
-
-\begin{lemma} \label{lem.dominating.heinrich-lemma2}
-Let $G = \tup{V, E}$ be a simple graph. Let $B$ be a subset of $V$.
-Then,
-\[
-\sum_{\substack{A \subseteq V; \\ \tup{A, B}
-\text{ is a detached pair}}} \left(-1\right)^{\abs{A}}
-= \ive{B \text{ is dominating}}.
-\]
-(See Theorem~\ref{thm.dominating.heinrich} for the definition
-of a ``detached pair''.)
+\begin{lemma} \label{lem.dominating.heinrich-lemma3}
+Let $A$ and $B$ be two subsets of $V$. Then, $\tup{A, B}$ is a
+detached pair if and only if $\tup{B, A}$ is a detached pair.
 \end{lemma}
 
 \begin{todo}
