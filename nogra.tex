@@ -1189,11 +1189,31 @@ Let $G = \tup{V, E}$ be a simple graph that has no isolated vertices.
 of $V$ such that $A \cup B = V$.
 
 \textbf{(b)} There exists a dominating subset of $V$ having size
-$\geq \abs{V}/2$.
+$\leq \abs{V}/2$.
 \end{proposition}
 
 We will see a proof of this proposition later, when we have defined
 the notion of the \textit{distance} between two vertices in a graph.
+
+Again, Proposition~\ref{prop.dominating.|V|/2} can be neatly restated
+in terms of people and friendships\footnote{Namely:
+
+\textit{Restatement of
+Proposition~\ref{prop.dominating.|V|/2} \textbf{(a)}:} Given a group
+of people, each of whom has at least one friend (among the others),
+it is always possible to subdivide the group into two teams such that
+each person has a friend in the opposite team.
+
+\textit{Restatement of
+Proposition~\ref{prop.dominating.|V|/2} \textbf{(b)}:} Given a group
+of (finitely many) people each of whom has at least one friend (among
+the others),
+it is always possible to choose at most $\abs{V}/{2}$ people from this
+group such that everyone who is not chosen has at least one of the
+chosen ones among his friends.
+
+(As usual, we assume that the group of people is finite, and that the
+relation of friendship is symmetric.)}
 
 \begin{todo}
 Bound in Proposition~\ref{prop.dominating.|V|/2} \textbf{(b)}
