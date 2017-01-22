@@ -433,6 +433,8 @@ $\set{u, v}$; thus, each edge of $G$ has the form $uv$ for two
 distinct elements $u$ and $v$ of $V$. Of course, we always have
 $uv = vu$.
 
+Notice that each graph $G$ satisfies $G = \tup{\verts{G}, \edges{G}}$.
+
 \textbf{(c)} Two vertices $u$ and $v$ of $G$ are said to be
 \textit{adjacent} (or \textit{connected by an edge}) if $uv \in E$
 (that is, if $uv$ is an edge of $G$). In this case, the edge $uv$ is
@@ -891,14 +893,19 @@ as the number of all neighbors of $v$ in $G$. This degree is a
 nonnegative integer, and is denoted by $\deg v$ (or by
 $\deg_G v$, when the graph $G$ is not clear from the context).
 Thus,
-\begin{align*}
+\begin{align}
 \deg v &= \deg_G v =
-\left(\text{the number of all neighbors of } v\right) \\
-&= \abs{\set{u \in V \ \mid \ u \text{ is a neighbor of } v }} \\
-&= \abs{\set{u \in V \ \mid \ u \text{ is adjacent to } v }} \\
-&= \abs{\set{u \in V \ \mid \ uv \text{ is an edge of } G }} \\
+\left(\text{the number of all neighbors of } v\right)
+\label{eq.def.intro.deg.1} \\
+&= \abs{\set{u \in V \ \mid \ u \text{ is a neighbor of } v }}
+\label{eq.def.intro.deg.2} \\
+&= \abs{\set{u \in V \ \mid \ u \text{ is adjacent to } v }}
+\label{eq.def.intro.deg.3} \\
+&= \abs{\set{u \in V \ \mid \ uv \text{ is an edge of } G }}
+\label{eq.def.intro.deg.4} \\
 &= \abs{\set{u \in V \ \mid \ uv \in E }} .
-\end{align*}
+\label{eq.def.intro.deg.5}
+\end{align}
 \end{definition}
 
 \begin{todo}
@@ -987,6 +994,343 @@ other words, assume that $G$ has less than $n\tup{n-2} / 4$ edges.)
 Then, there exist three distinct vertices $a$, $b$ and $c$ of $G$ such
 that none of $ab$, $bc$ and $ca$ are edges of $G$.
 \end{exercise}
+
+\subsection{\label{sect.intro.iso}Graph isomorphisms}
+
+Two graphs can be distinct and yet ``the same up to the names of their
+vertices''. For instance, the two graphs
+$\tup{\set{1,2,3},\set{\set{1,2}}}$ and
+$\tup{\set{1,2,3},\set{\set{1,3}}}$ are distinct (since $12$ is an
+edge of the former graph but not of the latter), but if we rename the
+vertices $2$ and $3$ of the former graph as $3$ and $2$, respectively,
+then it becomes the latter graph. This kind of relation between two
+graphs is weaker than (literal) equality, but still strong enough to
+ensure that (roughly speaking) the two graphs have the same properties
+(as long as the properties don't refer to specific vertices). Thus,
+it is worth giving this relation a rigorous definition and a name:
+
+\begin{definition} \label{def.intro.iso}
+Let $G$ and $H$ be two simple graphs.
+
+\textbf{(a)} A \textit{graph isomorphism} from $G$ to $H$ means a
+bijection $\phi : \verts{G} \to \verts{H}$ such that for every two
+vertices $u$ and $v$ of $G$, the following logical equivalence holds:
+\begin{equation}
+\left( uv \in \edges{G} \right)
+\Longleftrightarrow
+\left( \phi\tup{u}\phi\tup{v} \in \edges{H} \right) .
+\label{eq.def.intro.iso.a.eq}
+\end{equation}
+(At this point, let me remind you that $uv$ is shorthand for
+$\set{u,v}$, and similarly $\phi\tup{u}\phi\tup{v}$ is shorthand for
+$\set{\phi\tup{u},\phi\tup{v}}$.)
+
+When it is clear what we mean, we shall abbreviate
+``graph isomorphism'' as ``\textit{isomorphism}''. We also often write
+``graph isomorphism $G \to H$'' for ``graph isomorphism from $G$ to
+$H$''.
+
+\textbf{(b)} If there exists a graph isomorphism from $G$ to $H$, then
+we say the graphs $G$ and $H$ are said to be \textit{isomorphic}, and
+we write $G \cong H$. Sometimes, the relation $G \cong H$ itself will
+be called an ``isomorphism'' (although it is not a map).
+\end{definition}
+
+Given this definition, we can now rigorously state our relation
+between the two graphs $\tup{\set{1,2,3},\set{\set{1,2}}}$ and
+$\tup{\set{1,2,3},\set{\set{1,3}}}$ observed above. Namely, if we
+denote these two graphs by $G$ and $H$, respectively, then the map
+$\set{1,2,3} \to \set{1,2,3}$ that sends $1,2,3$ to $1,3,2$
+(respectively) is a graph isomorphism from $G$ to $H$. Thus, these two
+graphs are isomorphic. Note that we did not have to pick two graphs
+with the same vertex set; isomorphisms are often observed between
+graphs with completely different vertex sets and different
+definitions. Also, it sometimes happens that there are several
+isomorphisms between two graphs.
+
+\begin{example} \label{exa.intro.iso.pentagon}
+Consider the graph $G = \tup{V, E}$, where
+\begin{align*}
+V &= \set{1, 2, 3, 4, 5} \qquad \text{and} \\
+E &= \set{\set{1,2}, \set{2,3}, \set{3,4}, \set{4,5}, \set{5,1}} .
+\end{align*}
+(This graph has already been introduced in
+Example~\ref{exa.simple.R33} \textbf{(d)}. It can be drawn to look
+like a pentagon.)
+
+Consider furthermore the graph $H = \tup{V, F}$, where $V$ is as
+before, and where
+\begin{align*}
+F &= \set{\set{1,3}, \set{2,4}, \set{3,5}, \set{4,1}, \set{5,2}} .
+\end{align*}
+(If we draw the vertices $1,2,3,4,5 \in V$ as the five vertices of a
+pentagon, then the graph $H$ is the pentagram formed by the diagonals
+of this pentagon.)
+
+The graphs $G$ and $H$ are distinct, yet isomorphic. One isomorphism
+$G \to H$ is the bijection $V \to V$ sending $1,2,3,4,5$ to
+$1,3,5,2,4$, respectively. Another is the bijection $V \to V$ sending
+$1,2,3,4,5$ to $4,2,5,3,1$, respectively. There are $10$ isomorphisms
+in total.
+\end{example}
+
+Any isomorphism between two graphs is invertible (since, by its
+definition, it is a bijection). Its inverse, too, is an isomorphism:
+
+\begin{proposition} \label{prop.intro.iso.inverse}
+Let $G$ and $H$ be two simple graphs. Let $\phi$ be a graph
+isomorphism from $G$ to $H$. Then, its inverse $\phi^{-1}$ is a graph
+isomorphism from $H$ to $G$.
+\end{proposition}
+
+\begin{proof}[Proof of Proposition~\ref{prop.intro.iso.inverse}.]
+The map $\phi$ is a graph isomorphism from $G$ to $H$. By the
+definition of ``graph isomorphism'', this means that $\phi$ is a
+bijection $\verts{G} \to \verts{H}$ such that for every two
+vertices $u$ and $v$ of $G$, the following logical equivalence holds:
+\begin{equation}
+\left( uv \in \edges{G} \right)
+\Longleftrightarrow
+\left( \phi\tup{u}\phi\tup{v} \in \edges{H} \right) .
+\label{pf.prop.intro.iso.inverse.1}
+\end{equation}
+Now, for every two vertices $u$ and $v$ of $H$, the following
+equivalence holds:
+\begin{equation}
+\left( uv \in \edges{H} \right)
+\Longleftrightarrow
+\left( \phi^{-1}\tup{u}\phi^{-1}\tup{v} \in \edges{G} \right)
+\label{pf.prop.intro.iso.inverse.2}
+\end{equation}
+(because we have the following chain of equivalences:
+\begin{align*}
+\left( \phi^{-1}\tup{u}\phi^{-1}\tup{v} \in \edges{G} \right)
+& \Longleftrightarrow
+\left( \underbrace{\phi{\phi^{-1}\tup{u}}}_{=u}
+   \underbrace{\phi{\phi^{-1}tup{v}}}_{=v} \in \edges{H} \right) \\
+&\qquad
+\left( \text{by \eqref{pf.prop.intro.iso.inverse.1}, applied to }
+\phi^{-1}\tup{u} \text{ and } \phi^{-1}\tup{v} \text{ instead of } u
+\text{ and } v \right) \\
+& \Longleftrightarrow
+\left( uv \in \edges{H} \right)
+\end{align*}
+). Thus, $\phi^{-1}$ is a bijection $\verts{H} \to \verts{G}$ such
+that for every two vertices $u$ and $v$ of $H$, the equivalence
+\eqref{pf.prop.intro.iso.inverse.2} holds. By the definition of
+``graph isomorphism'', this means precisely that $\phi^{-1}$ is a
+graph isomorphism from $H$ to $G$. This proves
+Proposition~\ref{prop.intro.iso.inverse}.
+\end{proof}
+
+The following fact is similarly easy to check:
+
+\begin{proposition} \label{prop.intro.iso.comp}
+Let $G$, $H$ and $I$ be three simple graphs. Let $\phi$ be a graph
+isomorphism from $G$ to $H$. Let $\psi$ be a graph isomorphism from
+$H$ to $I$. Then, the composition $\psi \circ \phi$ is a graph
+isomorphism from $G$ to $I$.
+\end{proposition}
+
+As we have already alluded to, isomorphic graphs are ``equal in all
+but names'', and thus share all properties that do not depend on the
+names of vertices. For example, the following holds:
+
+\begin{proposition} \label{prop.intro.iso.degrees}
+Let $G$ and $H$ be two simple graphs. Let $\phi$ be a graph
+isomorphism from $G$ to $H$.
+
+\textbf{(a)} For every $v \in \verts{G}$, we have
+$\deg_G v = \deg_H \tup{\phi\tup{v}}$.
+
+\textbf{(b)} We have
+$\abs{\edges{H}} = \abs{\edges{G}}$.
+\end{proposition}
+
+\begin{proof}[Proof of Proposition \ref{prop.intro.iso.degrees}.]
+The map $\phi$ is a graph isomorphism from $G$ to $H$. By the
+definition of ``graph isomorphism'', this means that $\phi$ is a
+bijection $\verts{G} \to \verts{H}$ such that for every two
+vertices $u$ and $v$ of $G$, the following logical equivalence holds:
+\begin{equation}
+\left( uv \in \edges{G} \right)
+\Longleftrightarrow
+\left( \phi\tup{u}\phi\tup{v} \in \edges{H} \right) .
+\label{pf.prop.intro.iso.degrees.1}
+\end{equation}
+
+\textbf{(a)} Fix $v \in \verts{G}$. Then, \eqref{eq.def.intro.deg.5}
+(applied to $\verts{G}$ and $\edges{G}$ instead of $V$ and $E$)
+yields
+$\deg_G v = \abs{\set{u \in \verts{G} \ \mid \ uv \in \edges{G}}}$
+(since $G = \tup{\verts{G}, \edges{G}}$).
+Similarly,
+\eqref{eq.def.intro.deg.5} (applied to $H$, $\verts{H}$, $\edges{H}$
+and $\phi\tup{v}$ instead of $G$, $V$, $E$ and $v$) yields
+\begin{align}
+\deg_H \tup{\phi\tup{v}}
+&=
+\abs{\set{u \in \verts{H} \ \mid \ u \phi\tup{v} \in \edges{H}}}
+\nonumber \\
+&=
+\abs{\set{w \in \verts{H} \ \mid \ w \phi\tup{v} \in \edges{H}}}
+\label{pf.prop.intro.iso.degrees.a.1}
+\end{align}
+(here, we have renamed the index $u$ as $w$).
+But recall that $\phi : \verts{G} \to \verts{H}$ is a bijection. Thus,
+each $w \in \verts{H}$ can be written uniquely in the form
+$\phi\tup{u}$ for some $u \in \verts{G}$. Thus, we can substitute
+$\phi\tup{u}$ for $w$ in
+$\set{w \in \verts{H} \ \mid \ w \phi\tup{v} \in \edges{H}}$.
+We thus find
+\[
+\set{w \in \verts{H} \ \mid \ w \phi\tup{v} \in \edges{H}}
+= \set{\phi\tup{u} \ \mid \ u \in \verts{G} \text{ and }
+\phi\tup{u}\phi\tup{v} \in \edges{H}} .
+\]
+Hence,
+\eqref{pf.prop.intro.iso.degrees.a.1} becomes
+\begin{align*}
+\deg_H \tup{\phi\tup{v}}
+&=
+\abs{
+\underbrace{\set{w \in \verts{H} \ \mid \ w \phi\tup{v}
+             \in \edges{H}}}
+            _{= \set{\phi\tup{u} \ \mid \ u \in \verts{G}
+              \text{ and } \phi\tup{u} \phi\tup{v} \in \edges{H}}}}
+\\
+&=
+\abs{\set{\phi\tup{u} \ \mid \ u \in \verts{G}
+          \text{ and } \phi\tup{u} \phi\tup{v} \in \edges{H}}} \\
+&=
+\abs{\set{u \in \verts{G} \ \mid
+          \ \underbrace{\phi\tup{u} \phi\tup{v} \in \edges{H}}
+                 _{\substack{\Longleftrightarrow
+                     \left( uv \in \edges{G} \right) \\
+                     \text{(by \eqref{pf.prop.intro.iso.degrees.1})}}}
+          }}
+\qquad \left(\text{since } \phi \text{ is a bijection}\right) \\
+&= \abs{\set{u \in \verts{G} \ \mid \ uv \in \edges{G}}}
+= \deg_G v .
+\end{align*}
+This proves Proposition~\ref{prop.intro.iso.degrees} \textbf{(a)}.
+
+\textbf{(b)}
+Define a map $\phi' : \edges{G} \to \edges{H}$ as follows:
+Let $e \in \edges{G}$. Write the edge $e$ in the form $uv$ for two
+distinct vertices $u$ and $v$. Then, $uv = e \in \edges{G}$. Thus,
+\eqref{pf.prop.intro.iso.degrees.1} shows that
+$\phi\tup{u}\phi\tup{v} \in \edges{H}$. Moreover, this new edge
+$\phi\tup{u}\phi\tup{v}$ is independent of the choice of $u$ and $v$
+(as long as $e$ is fixed)\footnote{There are two ways of choosing $u$
+and $v$, since the elements of a $2$-element set (like $e$) can be
+listed in two different orders. We are claiming that the edge
+$\phi\tup{u}\phi\tup{v}$ does not depend on the choice of order. The
+slickest way of proving this is to rewrite this edge in a form that
+makes no reference to the choice of $u$ and $v$ to begin with.
+Namely: The edge $\phi\tup{u}\phi\tup{v}$ can be rewritten as
+$\set{\phi\tup{x} \mid x \in e}$ (because
+\begin{align*}
+\set{\phi\tup{x} \mid x \in e}
+&= \set{\phi\tup{x} \mid x \in \set{u,v}}
+\qquad \left(\text{since } e = uv = \set{u,v}\right) \\
+&= \set{\phi\tup{u},\phi\tup{v}} = \phi\tup{u}\phi\tup{v}
+\end{align*}
+), and this is clearly independent of the choice of $u$ and $v$.}.
+Hence, we can set $\phi'\tup{e} = \phi\tup{u}\phi\tup{v}$. Doing so,
+obtain a map $\phi' : \edges{G} \to \edges{H}$. This map $\phi'$ is
+a bijection\footnote{Indeed, the inverse map is constructed in the
+same way as $\phi'$, except that $H$, $G$ and $\phi^{-1}$ take the
+roles of $G$, $H$ and $\phi$.}. Thus, we have found a bijection from
+$\edges{G}$ to $\edges{H}$. Consequently,
+$\abs{\edges{H}} = \abs{\edges{G}}$.
+This proves Proposition~\ref{prop.intro.iso.degrees} \textbf{(b)}.
+\end{proof}
+
+Results similar to Proposition~\ref{prop.intro.iso.degrees} (saying
+that isomorphic graphs share the same properties) can be stated easily
+for any property of graphs you can imagine (as long as the property
+does not depend on the names of the vertices); the proofs are always
+straightforward like the one given above (the only idea being to apply
+bijectivity of $\phi$ and the equivalence
+\eqref{pf.prop.intro.iso.degrees.1} over and over in order to
+``transfer knowledge'' from one graph to the other). I shall not
+state such results explicitly; instead, I shall merely refer to the
+overarching idea that isomorphic graphs share the same properties
+whenever it becomes useful.
+
+One use of graph isomorphisms is to ``relabel vertices'' in a proof:
+Instead of proving some property of a given graph $G$, we can just as
+well prove the same property for a graph isomorphic to $G$ (since
+isomorphic graphs share the same properties), i.e., a graph obtained
+from $G$ by renaming its vertices. The vertices can be renamed as we
+wish; a popular choice is to rename them as $1,2,\ldots,n$ (where
+$n = \abs{\verts{G}}$). Formally speaking, this renaming is possible
+because of the following fact:
+
+\begin{proposition} \label{prop.intro.iso.rename}
+Let $G$ be a simple graph. Let $S$ be a finite set such that
+$\abs{S} = \abs{\verts{G}}$. Then, there exists a simple graph $H$
+that is isomorphic to $G$ and has vertex set $\verts{H} = S$.
+\end{proposition}
+
+\begin{proof}[Proof of Proposition~\ref{prop.intro.iso.rename}.]
+We have $\abs{S} = \abs{\verts{G}}$. Thus, there exists a bijection
+$\phi : \verts{G} \to S$. Fix such a $\phi$. Define a set
+$F$ by
+\[
+F = \set{ \phi\tup{e} \ \mid \ e \in \edges{G} }
+= \set{ \phi\tup{u} \phi\tup{v} \ \mid \ uv \in \edges{G} }
+\]
+(where $\phi\tup{e}$, as usual, denotes the subset
+$\set{\phi{x} \ \mid \ x \in e}$ of $S$). Now, let $H$ be the simple
+graph $\tup{S, F}$. Then, $\verts{H} = S$. Hence, $\phi$ is a
+bijection $\verts{G} \to \verts{H}$. It is straightforward to check
+that $\phi$ is a graph isomorphism from $G$ to $H$
+(indeed, the definition of $F$ was tailored precisely to make the
+equivalence \eqref{eq.def.intro.iso.a.eq} hold). Thus, $H$ is
+isomorphic to $G$. As we have already seen, $H$ has vertex set
+$\verts{H} = S$. The proof of Proposition~\ref{prop.intro.iso.rename}
+is thus complete.
+\end{proof}
+
+There is more to say about graph isomorphisms. For example, we can ask
+how to check whether two given graphs $G$ and $H$ are isomorphic.
+This is a famous problem in computation, known as the
+\textit{graph isomorphism problem}, and has seen recent
+progress\footnote{See
+\url{https://en.wikipedia.org/wiki/Graph_isomorphism_problem} for a
+general overview. On the recent progress, see L\'aszl\`o Babai's
+preprint \arxiv{1512.03547}
+% Add this to list of references once it's finalized; citing a broken
+% proof seems stupid.
+for the work and \cite{Klarre17} for an amusing popularization.
+
+In theory, the problem can be solved by brute force (just check all
+possible bijections $\verts{G} \to \verts{H}$ for being graph
+isomorphisms); but this is highly inefficient (the number of
+such bijections becomes forbiddingly large very quickly). In many
+cases, two non-isomorphic graphs $G$ and $H$ can be ``told apart'' by
+some property that holds for one and not the other (e.g., if their
+numbers of edges differ). But in general, a simple and fast algorithm
+is not known. The problem is in complexity class NP, and Babai's work
+claims to prove a quasipolynomial-time (but very complicated)
+algorithm. In practice, software written for solving the graph
+isomorphism problem makes tradeoffs between simplicity and
+efficiency.}.
+
+A related problem is to count, for a given $n \in \NN$,
+the isomorphism classes of graphs with $n$ vertices. In other words:
+If we pretend that isomorphic graphs are equal, then how many graphs
+are there with $n$ vertices? The number is finite, since each graph
+with $n$ vertices is isomorphic to a graph with vertex set
+$\set{1,2,\ldots, n}$ (this follows from
+Proposition~\ref{prop.intro.iso.rename}, applied to
+$S = \set{1,2,\ldots, n}$), and the number of the latter graphs is
+clearly finite. Yet, computing this number exactly is hard, and there
+does not seem to be a closed-form formula. (There is a whole book
+\cite{HarPal73} written about this. See also
+\url{http://oeis.org/A000088} for references and small values.)
 
 \subsection{\label{sect.intro.paths}Examples of graphs}
 
@@ -1159,6 +1503,11 @@ A $2$-element subset can be either dominating or not.
 (Of course, more complicated graphs exhibit more complex behavior.)
 \end{example}
 
+\begin{exercise}
+Let $n \in \NN$. What is the smallest possible size of a dominating
+set of the cycle graph $C_{3n}$ ?
+\end{exercise}
+
 Clearly, if $G$ is a simple graph, then its vertex set $\verts{G}$ is
 a dominating set.
 One natural question to ask is how small a dominating set of a graph
@@ -1213,7 +1562,7 @@ group such that everyone who is not chosen has at least one of the
 chosen ones among his friends.
 
 (As usual, we assume that the group of people is finite, and that the
-relation of friendship is symmetric.)}
+relation of friendship is symmetric.)}.
 
 \begin{todo}
 Bound in Proposition~\ref{prop.dominating.|V|/2} \textbf{(b)}
@@ -1602,6 +1951,11 @@ version 1.4.2.1 (18 Oct 2015),
 fundamentals of algebra}, 29 December 2016.
 \newline\url{http://www.cip.ifi.lmu.de/~grinberg/primes2015/sols.pdf}
 
+\bibitem[HarPal73]{HarPal73}
+Frank Harary, Edgar M. Palmer,
+\textit{Graphical enumeration},
+Academic Press 1973.
+
 \bibitem[HaHiMo08]{HaHiMo08}
 John M. Harris, Jeffry L. Hirst, Michael J. Mossinghoff,
 \textit{Combinatorics and Graph Theory}, Undergraduate Texts in
@@ -1623,6 +1977,11 @@ Irene Heinrich, Peter Tittmann,
 \textit{Applied Combinatorics},
 version 26 May 2015.
 \newline \url{https://people.math.gatech.edu/~trotter/book.pdf}
+
+\bibitem[Klarre17]{Klarre17}Erica Klarreich,
+\textit{Complexity Theory Problem Strikes Back},
+Quanta Magazine, 5 January 2017.
+\newline \url{https://www.quantamagazine.org/20170105-graph-isomorphism-retraction/}
 
 \bibitem[Knuth95]{Knuth95} Donald E. Knuth,
 \textit{Overlapping Pfaffians},
