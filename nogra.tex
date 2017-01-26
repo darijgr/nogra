@@ -221,6 +221,7 @@ Sections marked with an asterisk (*) are not part of the Math 5707
 course.
 
 Various other texts on graph theory are \cite{Bollob79},
+\cite{Bollob98},
 \cite{BonMur76}, \cite{Ore62}, \cite{BehCha71}, \cite{BeChZh15},
 \cite{BonMur08}, \cite{Ruohon13}, \cite{Dieste16}, \cite{Ore90},
 \cite{HaHiMo08}, \cite{Berge91}, \cite{ChaLes15}, \cite{Griffi15},
@@ -453,7 +454,7 @@ a vertex $v$ of $G$ if the vertices $u$ and $v$ are non-adjacent
 
 \textbf{(d)} Let $v$ be a vertex of $G$ (that is, $v \in V$). Then,
 the \textit{neighbors} of $v$ are the vertices $u$ of $G$ that
-satisfy $vu \in G$. (Of course, these neighbors depend on both $v$ and
+satisfy $vu \in E$. (Of course, these neighbors depend on both $v$ and
 $G$. When $G$ is not clear from the context, we shall call them the
 ``neighbors of $v$ in $G$'' instead of just ``neighbors of $v$''.)
 \end{definition}
@@ -518,7 +519,8 @@ connecting some of these points with each other.
 Write this section.
 \end{todo}
 
-\subsection{\label{sect.intro.R33}A first fact: $R\tup{3,3} = 6$}
+\subsection{\label{sect.intro.R33}A first fact: The Ramsey number
+$R\tup{3,3} = 6$}
 
 After these definitions, it might be time for a first result. The
 following classical fact (which is actually the beginning of a deep
@@ -929,9 +931,35 @@ Let $G$ be a simple graph. Let $n = \abs{\verts{G}}$. Let $v$ be a
 vertex of $G$. Then, $\deg v \in \set{0, 1, \ldots, n-1}$.
 \end{proposition}
 
-\begin{todo}
-Proof.
-\end{todo}
+\begin{proof}[Proof of Proposition~\ref{prop.intro.deg.in-set}.]
+Let $U$ be the set of all neighbors of $v$. Then, $\abs{U}$ is
+the number of all neighbors of $v$, and thus equals $\deg v$ (since
+$\deg v$ was defined as the number of all neighbors of $v$).
+In other words, $\abs{U} = \deg v$.
+
+But $U \subseteq \verts{G} \setminus \set{v}$
+\ \ \ \ \footnote{\textit{Proof.} Let $u \in U$. Thus, $u$ is
+a neighbor of $v$ (by the definition of $U$). In other words, $u$
+is a vertex of $G$ such that $vu \in \edges{G}$ (by the definition
+of ``neighbor''). Thus, $vu \in \edges{G} \subseteq
+\powset[2]{\verts{G}}$ (since each edge of $G$ is a $2$-element
+subset of $\verts{G}$). In particular, $vu$ is a $2$-element set.
+Hence, $u \neq v$. But $u \in \verts{G}$ (since $u$ is a vertex of
+$G$). Combining this with $u \neq v$, we obtain
+$u \in \verts{G} \setminus \set{v}$.
+
+Now, forget that we fixed $u$. We thus have shown that
+$u \in \verts{G} \setminus \set{v}$ for each $u \in U$. In other
+words, $U \subseteq \verts{G} \setminus \set{v}$.}. Hence,
+$\abs{U} \leq \abs{\verts{G} \setminus \set{v}}
+= \abs{\verts{G}} - 1$ (since $v \in \verts{G}$). Since
+$\abs{\verts{G}} = n$, this inequality can be rewritten as
+$\abs{U} \leq n - 1$. Since $\abs{U}$ is a nonnegative integer, we
+thus have $\abs{U} \in \set{0, 1, \ldots, n-1}$. Since
+$\abs{U} = \deg v$, we can rewrite this as
+$\deg v \in \set{0, 1, \ldots, n-1}$. This proves
+Proposition~\ref{prop.intro.deg.in-set}.
+\end{proof}
 
 \begin{proposition} \label{prop.intro.2n}
 Let $G$ be a simple graph.
@@ -954,9 +982,12 @@ is even.
 Proof.
 \end{todo}
 
-\begin{todo}
-``odd number of friends''.
-\end{todo}
+As usual, Proposition~\ref{prop.intro.even-odd} can be restated in
+terms of friendships among people; this restatement takes the
+following form: ``In a group of (finitely many) people, the number of
+people having an odd number of friends is even''. (Once again, this
+assumes that friendship is a symmetric relation, and that nobody
+counts as a friend of his own.)
 
 \begin{proposition} \label{prop.intro.pigeonhole}
 Let $G$ be a simple graph with at least two vertices.
@@ -987,13 +1018,39 @@ Example.
 Proof.
 \end{todo}
 
+\begin{remark}
+Let us contrast Proposition~\ref{prop.simple.R33} with
+Theorem~\ref{thm.intro.mantel}. The former guarantees that a graph
+$G$ with sufficiently many vertices (namely, at least $6$ vertices)
+must have a triangle or an anti-triangle (where we are using the
+terminology from Exercise~\ref{exa.simple.R33.two}).
+Theorem~\ref{thm.intro.mantel} says that any graph $G$ with
+sufficiently many edges (namely, more than $n^2 / 4$ edges, where
+$n = \abs{\verts{G}}$) must have a triangle. These two facts are
+similar and yet different in nature (e.g., the number $6$ in
+Proposition~\ref{prop.simple.R33} is a constant, whereas the $n^2 / 4$
+in Theorem~\ref{thm.intro.mantel} is not). We can also wonder how many
+edges a graph must have in order to be guaranteed an anti-triangle;
+this is answered by Exercise~\ref{exe.intro.mantel-co} below.
+\end{remark}
+
 \begin{exercise} \label{exe.intro.mantel-co}
 Let $G$ be a simple graph. Let $n = \abs{\verts{G}}$ be the number of
 vertices of $G$. Assume that $\abs{\edges{G}} < n\tup{n-2} / 4$. (In
 other words, assume that $G$ has less than $n\tup{n-2} / 4$ edges.)
-Then, there exist three distinct vertices $a$, $b$ and $c$ of $G$ such
-that none of $ab$, $bc$ and $ca$ are edges of $G$.
+Prove that there exist three distinct vertices $a$, $b$ and $c$ of $G$
+such that none of $ab$, $bc$ and $ca$ are edges of $G$.
 \end{exercise}
+
+Just as Proposition~\ref{prop.simple.R33} is merely the tip of a deep
+iceberg called Ramsey theory, Theorem~\ref{thm.intro.mantel} is the
+beginning of a longer story.
+
+\begin{todo}
+Turan's theorem: at least state it, and cite a proof.
+Apparently the WP
+\url{https://en.wikipedia.org/wiki/Tur%C3%A1n's_theorem} again?
+\end{todo}
 
 \subsection{\label{sect.intro.iso}Graph isomorphisms}
 
@@ -1031,14 +1088,14 @@ When it is clear what we mean, we shall abbreviate
 $H$''.
 
 \textbf{(b)} If there exists a graph isomorphism from $G$ to $H$, then
-we say the graphs $G$ and $H$ are said to be \textit{isomorphic}, and
+we say the graphs $G$ and $H$ are \textit{isomorphic}, and
 we write $G \cong H$. Sometimes, the relation $G \cong H$ itself will
 be called an ``isomorphism'' (although it is not a map).
 \end{definition}
 
-Given this definition, we can now rigorously state our relation
+Given this definition, we can now rigorously state the relation
 between the two graphs $\tup{\set{1,2,3},\set{\set{1,2}}}$ and
-$\tup{\set{1,2,3},\set{\set{1,3}}}$ observed above. Namely, if we
+$\tup{\set{1,2,3},\set{\set{1,3}}}$ we observed above. Namely, if we
 denote these two graphs by $G$ and $H$, respectively, then the map
 $\set{1,2,3} \to \set{1,2,3}$ that sends $1,2,3$ to $1,3,2$
 (respectively) is a graph isomorphism from $G$ to $H$. Thus, these two
@@ -1238,7 +1295,7 @@ $\set{\phi\tup{x} \mid x \in e}$ (because
 \end{align*}
 ), and this is clearly independent of the choice of $u$ and $v$.}.
 Hence, we can set $\phi'\tup{e} = \phi\tup{u}\phi\tup{v}$. Doing so,
-obtain a map $\phi' : \edges{G} \to \edges{H}$. This map $\phi'$ is
+we obtain a map $\phi' : \edges{G} \to \edges{H}$. This map $\phi'$ is
 a bijection\footnote{Indeed, the inverse map is constructed in the
 same way as $\phi'$, except that $H$, $G$ and $\phi^{-1}$ take the
 roles of $G$, $H$ and $\phi$.}. Thus, we have found a bijection from
@@ -1283,8 +1340,8 @@ F = \set{ \phi\tup{e} \ \mid \ e \in \edges{G} }
 = \set{ \phi\tup{u} \phi\tup{v} \ \mid \ uv \in \edges{G} }
 \]
 (where $\phi\tup{e}$, as usual, denotes the subset
-$\set{\phi{x} \ \mid \ x \in e}$ of $S$). Now, let $H$ be the simple
-graph $\tup{S, F}$. Then, $\verts{H} = S$. Hence, $\phi$ is a
+$\set{\phi\tup{x} \ \mid \ x \in e}$ of $S$). Now, let $H$ be the
+simple graph $\tup{S, F}$. Then, $\verts{H} = S$. Hence, $\phi$ is a
 bijection $\verts{G} \to \verts{H}$. It is straightforward to check
 that $\phi$ is a graph isomorphism from $G$ to $H$
 (indeed, the definition of $F$ was tailored precisely to make the
@@ -1566,7 +1623,7 @@ relation of friendship is symmetric.)}.
 
 \begin{todo}
 Bound in Proposition~\ref{prop.dominating.|V|/2} \textbf{(b)}
-is unsharp: example.
+may and may not be sharp: examples.
 \end{todo}
 
 \subsection{\label{subsect.dominating.odd}Brouwer's theorem and the
@@ -1587,7 +1644,7 @@ from 2017), due to Heinrich and Tittmann:
 
 \begin{theorem} \label{thm.dominating.heinrich}
 Let $G = \tup{V, E}$ be a simple graph. Let $n = \abs{V}$. Assume that
-$n \geq 1$.
+$n > 0$.
 
 A \textit{detached pair} shall mean a pair $\tup{A, B}$ of two
 disjoint subsets $A$ and $B$ of $V$ having the property that
@@ -1608,15 +1665,55 @@ Then:
 $2^n - 1 + \alpha - \beta$.
 \end{theorem}
 
+At this point, let me stress that the word ``pair'' always means an
+ordered pair throughout these notes. In particular, in
+Theorem~\ref{thm.dominating.heinrich}, a detached pair $\tup{A, B}$
+should be distinguished from $\tup{B, A}$, unless they actually are
+equal (which only happens when both $A$ and $B$ are the empty set).
+
 Theorem~\ref{thm.dominating.heinrich} is a restatement of
-\cite[Theorem 8]{HeiTit17}. The proof we shall give below is much
+\cite[Theorem 8]{HeiTit17}. The proof we shall give below is
 shorter than the proof in \cite{HeiTit17}, but does not lead us
 through as many interesting intermediate results.
 
-\begin{todo}
-Derive Theorem~\ref{thm.dominating.brouwer} from
-Theorem~\ref{thm.dominating.heinrich}.
-\end{todo}
+Let us first see how Theorem~\ref{thm.dominating.brouwer} can be
+derived from Theorem~\ref{thm.dominating.heinrich}:
+
+\begin{proof}[Proof of Theorem~\ref{thm.dominating.brouwer} using
+Theorem~\ref{thm.dominating.heinrich}.]
+
+Write the graph $G$ in the form $G = \tup{V, E}$. If $\abs{V} = 0$,
+then Theorem~\ref{thm.dominating.brouwer}
+holds\footnote{\textit{Proof.} Assume that $\abs{V} = 0$. Hence,
+the set $V$ is empty. Thus, the only subset of $V$ is $\varnothing$.
+This subset $\varnothing$ is dominating (because it is the whole
+set $V$). Thus, there exists exactly $1$ dominating set of $G$
+(namely, $\varnothing$). In other words, the number of dominating
+sets of $G$ is $1$. Therefore, this number is odd. Hence,
+Theorem~\ref{thm.dominating.brouwer} is proven (under the assumption
+that $\abs{V} = 0$.}. Hence, for the rest of this proof, we
+WLOG asssume that $\abs{V} = 0$ does not hold.
+
+Let us use the notations of Theorem~\ref{thm.dominating.heinrich}.
+From Theorem~\ref{thm.dominating.heinrich} \textbf{(a)}, we know
+that $\alpha$ and $\beta$ are even. In other words,
+$\alpha \equiv 0 \mod 2$ and $\beta \equiv 0 \mod 2$.
+Furthermore, $n = \abs{V} \neq 0$ (since $\abs{V} = 0$ does not
+hold), so that $n$ is a positive integer. Thus, $2^n$ is even.
+In other words, $2^n \equiv 0 \mod 2$. Now,
+Theorem~\ref{thm.dominating.heinrich} \textbf{(b)} shows that
+the number of dominating sets of $G$ is
+\[
+\underbrace{2^n}_{\equiv 0 \mod 2} - 1
+  + \underbrace{\alpha}_{\equiv 0 \mod 2}
+  - \underbrace{\beta}_{\equiv 0 \mod 2}
+\equiv 0 - 1 + 0 - 0 = -1 \equiv 1 \mod 2.
+\]
+In other words, the number of dominating sets of $G$ is odd.
+This proves Theorem~\ref{thm.dominating.brouwer}.
+\end{proof}
+
+Thus, it remains to prove Theorem~\ref{thm.dominating.heinrich}.
 
 \subsection{\label{subsect.dominating.iverson}The Iverson bracket}
 
@@ -1626,19 +1723,20 @@ has nothing to do with graphs specifically but is useful
 throughout mathematics (particularly combinatorics):
 
 \begin{definition} \label{def.intro.iverson}
-Let $\mathcal{A}$ be a logical statement. Then, an element
+Let $\mathcal{A}$ be a logical statement. (It is not required to be
+true.) Then, a number
 $\ive{\mathcal{A}} \in \set{0, 1}$ is defined as follows:
 We set $\ive{\mathcal{A}} =
 \begin{cases}
 1, & \text{if }\mathcal{A}\text{ is true};\\
 0, & \text{if }\mathcal{A}\text{ is false}
 \end{cases}$.
-This element $\ive{\mathcal{A}}$ is called the \textit{truth value}
+This number $\ive{\mathcal{A}}$ is called the \textit{truth value}
 of $\mathcal{A}$.
 (For example, $\ive{1+1 = 2} = 1$ and $\ive{1+1 = 3} = 0$. For
 another example,
-$\ive{\text{Proposition~\ref{prop.dominating.|V|/2} holds}}
-= 1$, although we have not proven this yet.)
+$\ive{\text{Proposition~\ref{prop.simple.R33} holds}}
+= 1$, because we have proven Proposition~\ref{prop.simple.R33}.)
 The notation $\ive{\mathcal{A}}$ for the truth value of $\mathcal{A}$
 is known as the \textit{Iverson bracket notation}.
 \end{definition}
@@ -1764,7 +1862,9 @@ follows:
      \text{(because } p \notin B \text{))}
    }}
 = \sum_{\substack{B \subseteq P; \\ p \notin B}}
-  \underbrace{\tup{-1}^{\abs{B}+1}}_{= - \tup{-1}^{\abs{B}}} \\
+  \underbrace{\tup{-1}^{\abs{B}+1}}_{= - \tup{-1}^{\abs{B}}}
+= \sum_{\substack{B \subseteq P; \\ p \notin B}}
+  \tup{- \tup{-1}^{\abs{B}}} \\
 &= - \sum_{\substack{B \subseteq P; \\ p \notin B}} \tup{-1}^{\abs{B}}
 = - \sum_{\substack{A \subseteq P; \\ p \notin A}} \tup{-1}^{\abs{A}}
 \end{align*}
@@ -1782,7 +1882,8 @@ Thus, \eqref{pf.lem.dominating.heinrich-lemma1.1} becomes
 = 0.
 \]
 Comparing this with $\ive{P = \varnothing} = 0$ (which holds, since
-$P = \varnothing$ is false), we obtain
+$P = \varnothing$ is false (because we assumed $P \neq \varnothing$)),
+we obtain
 $\sum_{\substack{A \subseteq P}} \tup{-1}^{\abs{A}}
 = \ive{P = \varnothing}$. Hence,
 Lemma~\ref{lem.dominating.heinrich-lemma1} is proven.
@@ -1801,11 +1902,79 @@ $\tup{1-1}^{\abs{P}} = 0^{\abs{P}} = \ive{\abs{P} = 0}
 = \ive{P = \varnothing}$. We leave the details of this alternative
 proof to the interested reader.
 
-\subsection{\label{subsect.dominating.lemmas}Lemmas for the proof of
+The following exercise demonstrates an application of
+Lemma~\ref{lem.dominating.heinrich-lemma1} to (elementary) number
+theory:
+
+\begin{exercise} \label{exe.dominating.heinrich-lemma-moeb-NT}
+Let $\NN_+$ denote the set $\set{1, 2, 3, \ldots}$. An integer $n$ is
+said to be \textit{squarefree} if it is not divisible by any perfect
+square apart from $1$ (or, equivalently, if it is a product of
+\textbf{distinct} prime numbers). We define a map
+$\mu : \NN_+ \to \set{-1, 0, 1}$ by setting
+\[
+\mu\tup{n}
+= \begin{cases}
+\tup{-1}^{\omega\tup{n}}, & \text{ if } n \text{ is squarefree;} \\
+0,                        & \text{ if not }
+\end{cases}
+\qquad \text{ for each } n \in \NN_+ ,
+\]
+where $\omega\tup{n}$ denotes the number of distinct prime divisors
+of $n$. (For example, $\mu\tup{6} = \tup{-1}^2 = 1$,
+$\mu\tup{30} = \tup{-1}^3 = -1$,
+$\mu\tup{1} = \tup{-1}^0 = 1$, and $\mu\tup{12} = 0$. The map $\mu$
+is called the \textit{(number-theoretical) M\"obius function}.)
+
+Prove that each $n \in \NN_+$ satisfies
+\[
+\sum_{d\mid n} \mu\tup{d} = \ive{n = 1},
+\]
+where the sum on the left hand side should be understood as a sum over
+all positive divisors of $n$.
+
+[\textbf{Hint:} Apply Lemma~\ref{lem.dominating.heinrich-lemma1} with
+$P$ being the set of all prime factors of $n$. Relate the subsets of
+$P$ to the squarefree divisors of $n$.]
+\end{exercise}
+
+\begin{exercise} \label{exe.dominating.heinrich-lemma-sum}
+Let $A$ be a finite set. Let $A_1, A_2, \ldots, A_m$ be some subsets
+of $A$. Prove that
+\begin{align*}
+& \abs{\set{U \subseteq A \ \mid \ U \cap A_i \neq \varnothing
+          \text{ for all } i \in \set{1, 2, \ldots, m}}} \\
+&\equiv
+\abs{\set{J \subseteq \set{1, 2, \ldots, m} \ \mid
+          \ \bigcup_{j \in J} A_j = A }}
+\mod 2.
+\end{align*}
+
+[\textbf{Hint:} Set $I = \set{1, 2, \ldots, m}$. Compute the double
+sum
+\[
+\sum_{U \subseteq A} \sum_{J \subseteq I}
+\tup{-1}^{\abs{J}} \tup{-1}^{\abs{U}}
+\ive{U \subseteq A \setminus \bigcup_{j \in J} A_j}
+\]
+in two different ways (once by interchanging the summations, and once
+again by rewriting
+$\ive{U \subseteq A \setminus \bigcup_{j \in J} A_j}$ as
+$\ive{J \subseteq \set{i \in I \mid U \cap A_i = \varnothing}}$).
+Notice that powers of $-1$ can be discarded when working
+modulo $2$.]
+\end{exercise}
+
+\subsection{\label{subsect.dominating.lemmas}Proving
 the Heinrich-Tittmann formula}
 
-In this section, we shall prove some further results that will be used
-in our proof of Theorem~\ref{thm.dominating.heinrich}. Throughout this
+In this section, we shall finally prove
+Theorem~\ref{thm.dominating.heinrich}. Instead of presenting the
+proof as a monolithic piece of work, I shall distribute most of it
+into a series of easy lemmas (some of which are of independent
+interest).
+
+Throughout this
 section, we consider a simple graph $G = \tup{V, E}$. The notion of a
 ``detached pair'' is to be understood as in
 Theorem~\ref{thm.dominating.heinrich}.
@@ -1819,22 +1988,1129 @@ Let $B$ be a subset of $V$. Then,
 \]
 \end{lemma}
 
-\begin{todo}
-Proof.
-\end{todo}
+\begin{proof}[Proof of Lemma~\ref{lem.dominating.heinrich-lemma2}.]
+Let $B'$ be the set of all vertices $v \in V \setminus B$ such
+that at least one neighbor of $v$ belongs to $B$. Then, for each
+subset $A$ of $V$, the following equivalence holds:
+\begin{equation}
+\left( \tup{A, B} \text{ is a detached pair} \right)
+\Longleftrightarrow
+\left( A \subseteq V \setminus \tup{B \cup B'} \right)
+\label{pf.lem.dominating.heinrich-lemma2.1}
+\end{equation}
+\footnote{\textit{Proof of
+\eqref{pf.lem.dominating.heinrich-lemma2.1}.} We shall prove the
+$\Longrightarrow$ and $\Longleftarrow$ directions of the equivalence
+\eqref{pf.lem.dominating.heinrich-lemma2.1} separately:
+
+$\Longrightarrow$: Assume that $\tup{A, B}$ is a detached pair. We
+must show that $A \subseteq V \setminus \tup{B \cup B'}$.
+
+We know that $\tup{A, B}$ is a detached pair. By the definition of a
+``detached pair'', this means that $A$ and $B$ are two disjoint
+subsets of $V$ having the property that there exists no edge
+$ab \in E$ satisfying $a \in A$ and $b \in B$.
+
+We have $A \subseteq V \setminus B$ (since $A$ and $B$ are
+disjoint).
+
+We claim that $A \cap B' = \varnothing$. Indeed, assume the contrary.
+Thus, the set $A \cap B'$ is nonempty. Hence, there exists some
+$v \in A \cap B'$. Fix such a $v$.
+From $v \in A \cap B' \subseteq B'$, we conclude that $v$ is a vertex
+in $V \setminus B$ such that at least one neighbor of $v$
+belongs to $B$ (by the definition of $B'$). In particular, at least
+one neighbor of $v$ belongs to $B$. Let $w$ be such a neighbor. Then,
+$vw \in E$ (since $w$ is a neighbor of $v$). Notice also that
+$v \in A \cap B' \subseteq A$ and $w \in B$.
+Now, recall that there exists no edge $ab \in E$ satisfying $a \in A$
+and $b \in B$. This contradicts the fact that $vw$ is such an edge
+(since $vw \in E$, $v \in A$ and $w \in B$). This contradiction shows
+that our assumption was wrong. Hence, $A \cap B' = \varnothing$.
+Thus, $A \subseteq V \setminus B'$.
+
+Combining $A \subseteq V \setminus B$ with
+$A \subseteq V \setminus B'$, we find
+\[
+A \subseteq \tup{V \setminus B} \cap \tup{V \setminus B'}
+  = V \setminus \tup{B \cup B'} .
+\]
+Hence, the $\Longrightarrow$ direction of the equivalence
+\eqref{pf.lem.dominating.heinrich-lemma2.1} is proven.
+
+$\Longleftarrow$: Assume that
+$A \subseteq V \setminus \tup{B \cup B'}$. We must then show
+that $\tup{A, B}$ is a detached pair.
+
+First of all, we have
+$A \subseteq V \setminus \tup{B \cup B'}
+\subseteq V \setminus B$ (since $B \cup B' \supseteq B$).
+Thus, the sets $A$ and $B$ are disjoint.
+
+Next, I claim that there exists no edge
+$ab \in E$ satisfying $a \in A$ and $b \in B$. Indeed, assume the
+contrary. Thus, there exists an edge $ab \in E$ satisfying $a \in A$
+and $b \in B$. Consider such an edge. Then, $b$ is a neighbor of $a$
+(since $ab \in E$) and belongs to $B$. Hence, at least one neighbor
+of $a$ belongs to $B$ (namely, the neighbor $b$).
+The element $a$ is a vertex in
+$V \setminus B$ (since $a \in A \subseteq V \setminus B$) such that
+at least one neighbor of $a$ belongs to $B$. In other words, $a$
+belongs to $B'$ (by the definition of $B'$). Thus, $a \in B'
+\subseteq B \cup B'$. But from
+$a \in A \subseteq V \setminus \tup{B \cup B'}$, we obtain
+$a \notin B \cup B'$. This contradicts $a \in B \cup B'$. This
+contradiction shows that our assumption was wrong. Hence, we have
+shown that there exists no edge
+$ab \in E$ satisfying $a \in A$ and $b \in B$. Since the subsets $A$
+and $B$ of $V$ are disjoint, this shows that $\tup{A, B}$ is a
+detached pair (by the definition of a ``detached pair''). This proves
+the $\Longleftarrow$ direction of the equivalence
+\eqref{pf.lem.dominating.heinrich-lemma2.1}.
+
+Hence, both directions of \eqref{pf.lem.dominating.heinrich-lemma2.1}
+are proven.}.
+
+On the other hand, the following equivalence holds:
+\begin{equation}
+\left( V \setminus \tup{B \cup B'} = \varnothing \right)
+\Longleftrightarrow
+\left( B \text{ is dominating} \right)
+\label{pf.lem.dominating.heinrich-lemma2.2}
+\end{equation}
+\footnote{\textit{Proof of
+\eqref{pf.lem.dominating.heinrich-lemma2.2}.}
+% We have the following
+% chain of equivalences:
+% \begin{align*}
+% & \left( V \setminus \tup{B \cup B'} = \varnothing \right) \\
+% \Longleftrightarrow
+% & \left( \tup{V \setminus B} \setminus B' = \varnothing \right)
+% \qquad \left( \text{since } V \setminus \tup{B \cup B'} =
+                % \tup{V \setminus B} \setminus B' \right) \\
+% & \left( V \setminus B \subseteq B' \right) \\
+% & \left( \text{for every vertex } v \in V \setminus B
+            % \text{, we have } \underbrace{v \in B'}_{\substack{
+                % \Longleftrightarrow
+                % \left( v \text{ is a vertex
+                % \right) \\
+% & \left( \text{for every vertex } v \in V \setminus B
+            % \text{, we have } \v \in B' \right) 
+% \end{align*}
+Again, we are going to
+separately prove the $\Longrightarrow$ and $\Longleftarrow$ directions
+of the equivalence:
+
+$\Longrightarrow$: Assume that
+$V \setminus \tup{B \cup B'} = \varnothing$. We must show that $B$
+is dominating.
+
+Let $v \in \verts{G} \setminus B$. Thus, $v \in \verts{G}$ and
+$v \notin B$. We have $v \in \verts{G} = V \subseteq B \cup B'$
+(since $V \setminus \tup{B \cup B'} = \varnothing$). Combined with
+$v \notin B$, we obtain $v \in \tup{B \cup B'} \setminus B \subseteq
+B'$. According to the definition of $B'$, this means that $v$ is a
+vertex in $V \setminus B$ such that at least one neighbor of
+$v$ belongs to $B$. In particular, we thus have shown that at least
+one neighbor of $v$ belongs to $B$.
+
+Now, forget that we fixed $v$. We thus have proven that for
+every vertex $v \in \verts{G} \setminus B$, at least one neighbor of
+$v$ belongs to $B$. In other words, the set $B$ is dominating
+(because this is how we defined ``dominating sets''). This proves
+the $\Longrightarrow$ direction of the equivalence
+\eqref{pf.lem.dominating.heinrich-lemma2.2}.
+
+$\Longleftarrow$: Assume that $B$ is dominating. We must prove that
+$V \setminus \tup{B \cup B'} = \varnothing$.
+
+We know that $B$ is dominating. In other words, for every vertex
+$v \in \verts{G} \setminus B$, at least one neighbor of $v$ belongs to
+$B$ (because this is what ``dominating'' means). In other words, for
+every $v \in V \setminus B$, at least one neighbor of $v$ belongs to
+$B$ (since $\verts{G} = V$).
+
+Now, let $v \in V \setminus B$ be arbitrary. As we have just seen,
+we then know that at least one neighbor of $v$ belongs to $B$.
+
+Let $v \in V \setminus B$. Thus, $v$ is a
+vertex in $V \setminus B$ such that at least one neighbor of
+$v$ belongs to $B$. This means that $v \in B'$ (by the definition of
+$B'$).
+
+Now, forget that we fixed $v$. We thus have shown that $v \in B'$ for
+each $v \in V \setminus B$. In other words,
+$V \setminus B \subseteq B'$. But now,
+$ V \setminus \tup{B \cup B'} = \tup{V \setminus B} \setminus B'
+= \varnothing$
+(since $V \setminus B \subseteq B'$).
+Thus, the $\Longleftarrow$ direction of the equivalence
+\eqref{pf.lem.dominating.heinrich-lemma2.2} is proven.}
+
+Now, we can use the equivalence
+\eqref{pf.lem.dominating.heinrich-lemma2.1} to rewrite the summation
+sign $\sum_{\substack{A \subseteq V; \\ \tup{A, B}
+\text{ is a detached pair}}}$ as
+$\sum_{\substack{A \subseteq V; \\
+A \subseteq V \setminus \tup{B \cup B'}}}$. This latter summation sign
+can be further simplified to
+$\sum_{A \subseteq V \setminus \tup{B \cup B'}}$ (since every subset
+$A$ of $V \setminus \tup{B \cup B'}$ is clearly a subset of $V$ as
+well). Hence, we can replace the summation sign
+$\sum_{\substack{A \subseteq V; \\ \tup{A, B}
+\text{ is a detached pair}}}$ by
+$\sum_{A \subseteq V \setminus \tup{B \cup B'}}$. In particular,
+\begin{align*}
+& \sum_{\substack{A \subseteq V; \\ \tup{A, B}
+\text{ is a detached pair}}} \tup{-1}^{\abs{A}} \\
+&= \sum_{A \subseteq V \setminus \tup{B \cup B'}} \tup{-1}^{\abs{A}}
+\\
+&= \ive{ V \setminus \tup{B \cup B'} = \varnothing }
+\qquad
+\left( \text{by Lemma~\ref{lem.dominating.heinrich-lemma1}, applied
+         to } P = V \setminus \tup{B \cup B'} \right) \\
+&= \ive{B \text{ is dominating}}
+\end{align*}
+(by the equivalence \eqref{pf.lem.dominating.heinrich-lemma2.2}).
+This proves Lemma~\ref{lem.dominating.heinrich-lemma2}.
+\end{proof}
+
+Lemma~\ref{lem.dominating.heinrich-lemma2} has the following
+consequence:
+
+\begin{corollary} \label{cor.dominating.heinrich-lemma2c}
+Let $B$ be a subset of $V$. Then,
+\[
+\sum_{\substack{A \subseteq V; \\ A \neq \varnothing; \\
+\tup{A, B} \text{ is a detached pair}}}
+\tup{-1}^{\abs{A}}
+= \ive{B \text{ is dominating}} - 1.
+\]
+\end{corollary}
+
+\begin{proof}[Proof of Corollary~\ref{cor.dominating.heinrich-lemma2c}.]
+The pair $\tup{\varnothing, B}$ is a detached
+pair\footnote{\textit{Proof.} The sets
+$\varnothing$ and $B$ are two disjoint subsets of $V$
+(disjoint because $\varnothing \cap B = \varnothing$)
+having the property that there exists no edge
+$ab \in E$ satisfying $a \in \varnothing$ and $b \in B$
+(this is vacuously true, since there exists no
+$a \in \varnothing$). In other words, $\tup{\varnothing, B}$ is
+a detached pair (by the definition of a ``detached pair'').}.
+Hence, the sum \newline
+$\sum_{\substack{A \subseteq V; \\ \tup{A, B}
+\text{ is a detached pair}}} \tup{-1}^{\abs{A}}$
+has an addend for $A = \varnothing$. If we split out this addend
+from this sum, we obtain
+\[
+\sum_{\substack{A \subseteq V; \\ \tup{A, B}
+\text{ is a detached pair}}} \tup{-1}^{\abs{A}}
+=
+\tup{-1}^{\abs{\varnothing}}
++
+\sum_{\substack{A \subseteq V; \\ \tup{A, B}
+\text{ is a detached pair}; \\ A \neq \varnothing}}
+\tup{-1}^{\abs{A}} .
+\]
+Hence,
+\begin{align*}
+\sum_{\substack{A \subseteq V; \\ \tup{A, B}
+\text{ is a detached pair}; \\ A \neq \varnothing}}
+\tup{-1}^{\abs{A}}
+&=
+\underbrace{\sum_{\substack{A \subseteq V; \\ \tup{A, B}
+             \text{ is a detached pair}}} \tup{-1}^{\abs{A}}}
+           _{\substack{= \ive{B \text{ is dominating}} \\
+             \text{(by Lemma~\ref{lem.dominating.heinrich-lemma2})}}}
+- \underbrace{\tup{-1}^{\abs{\varnothing}}}_{
+                =\tup{-1}^0=1} \\
+&= \ive{B \text{ is dominating}} - 1.
+\end{align*}
+Thus,
+\begin{align*}
+\sum_{\substack{A \subseteq V; \\ A \neq \varnothing; \\
+\tup{A, B} \text{ is a detached pair}}}
+\tup{-1}^{\abs{A}}
+= \sum_{\substack{A \subseteq V; \\ \tup{A, B}
+\text{ is a detached pair}; \\ A \neq \varnothing}}
+\tup{-1}^{\abs{A}}
+= \ive{B \text{ is dominating}} - 1.
+\end{align*}
+This proves Corollary~\ref{cor.dominating.heinrich-lemma2c}.
+\end{proof}
 
 \begin{lemma} \label{lem.dominating.heinrich-lemma3}
 Let $A$ and $B$ be two subsets of $V$. Then, $\tup{A, B}$ is a
 detached pair if and only if $\tup{B, A}$ is a detached pair.
 \end{lemma}
 
-\begin{todo}
-Proof.
-\end{todo}
+\begin{proof}[Proof of Lemma~\ref{lem.dominating.heinrich-lemma3}.]
+We have the following chain of logical equivalences:
+\begin{align*}
+& \left( \tup{B, A} \text{ is a detached pair} \right) \\
+\Longleftrightarrow \ 
+& \left( B \text{ and } A \text{ are two disjoint subsets of } V
+     \text{ having the property that } \right. \\
+& \qquad \qquad \left. \text{ there exists no edge } ab \in E
+     \text{ satisfying } a \in B \text{ and } b \in A \right) \\
+& \qquad \left( \text{by the definition of ``detached pair''} \right)
+\\
+\Longleftrightarrow \ 
+& \left( B \text{ and } A \text{ are two disjoint subsets of } V
+     \text{ having the property that } \right. \\
+& \qquad \qquad \left. \text{ there exists no edge } ba \in E
+     \text{ satisfying } b \in B \text{ and } a \in A \right) \\
+& \qquad \left( \text{here, we renamed } a \text{ and } b \text{ as }
+            b \text{ and } a\text{, respectively} \right)
+\\
+\Longleftrightarrow \ 
+& \left( A \text{ and } B \text{ are two disjoint subsets of } V
+     \text{ having the property that } \right. \\
+& \qquad \qquad \left. \text{ there exists no edge } ba \in E
+     \text{ satisfying } a \in A \text{ and } b \in B \right) \\
+& \qquad \left( \text{since } B \text{ and } A
+            \text{ are disjoint if and only if }
+            A \text{ and } B \text{ are disjoint} \right)
+\\
+\Longleftrightarrow \ 
+& \left( A \text{ and } B \text{ are two disjoint subsets of } V
+     \text{ having the property that } \right. \\
+& \qquad \qquad \left. \text{ there exists no edge } ab \in E
+     \text{ satisfying } a \in A \text{ and } b \in B \right) \\
+& \qquad \left( \text{since } ba = ab \right)
+\\
+\Longleftrightarrow \ 
+& \left( \tup{A, B} \text{ is a detached pair} \right) \\
+& \qquad \left( \text{by the definition of ``detached pair''} \right)
+.
+\end{align*}
+This proves Lemma~\ref{lem.dominating.heinrich-lemma3}.
+\end{proof}
 
-\begin{todo}
-Proof of the whole thing.
-\end{todo}
+Next comes another general lemma about cardinalities of sets:
+
+\begin{lemma} \label{lem.dominating.heinrich-lemma-inv}
+Let $S$ be a finite set. Let $\sigma : S \to S$ be a map such that
+$\sigma \circ \sigma = \id_S$. (Such a map is called an
+\textit{involution} on $S$.)
+
+Let $F = \set{ i \in S \mid \sigma\tup{i} = i }$. (The elements of $F$
+are known as the \textit{fixed points} of $\sigma$.) Then,
+$\abs{F} \equiv \abs{S} \mod 2$.
+\end{lemma}
+
+\begin{proof}[Proof of Lemma~\ref{lem.dominating.heinrich-lemma-inv}.]
+In a nutshell, the proof of
+Lemma~\ref{lem.dominating.heinrich-lemma-inv} is very simple: We have
+$\sigma \circ \sigma = \id_S$; in other words, we have
+$\sigma\tup{\sigma\tup{i}} = i$ for each $i \in S$. Each
+$i \in S \setminus F$ satisfies $\sigma\tup{i} \neq i$. Thus, we can
+assign to each element $i \in S \setminus F$ the two-element subset
+$\set{i, \sigma\tup{i}} \subseteq S$. This assignment has the property
+that the two-element subset assigned to $\sigma\tup{i}$ is the same
+as the one assigned to $i$ (since
+$\set{\sigma\tup{i}, \underbrace{\sigma\tup{\sigma\tup{i}}}_{= i}}
+= \set{\sigma\tup{i}, i} = \set{i, \sigma\tup{i}}$).
+Thus, each two-element subset
+that gets assigned at all is assigned to exactly two elements of
+$S \setminus F$ (namely, the subset assigned to $i$ is assigned to
+$i$ and $\sigma\tup{i}$, and to no other elements of
+$S \setminus F$).
+As a consequence, the elements of $S \setminus F$ are paired up
+(each pair consisting of two elements to which the same subset is
+assigned). Correspondingly, $\abs{S \setminus F}$ is even. Thus,
+$\abs{S} - \abs{F} = \abs{S \setminus F}$ is even, so that
+$\abs{F} \equiv \abs{S} \mod 2$.
+
+If you found this insufficiently rigorous (or unclear), here is a
+\textit{rigorous version of this proof:}
+For each $i \in S \setminus F$, we have
+$\set{i, \sigma\tup{i}} \in \powset[2]{S}$
+\ \ \ \ \footnote{\textit{Proof.} Let $i \in S \setminus F$. Thus,
+$i \in S$ and $i \notin F$. If we had $\sigma\tup{i} = i$, then we
+would have $i \in F$ (by the definition of $F$), which would
+contradict $i \notin F$. Hence, we do not have
+$\sigma\tup{i} = i$. Thus, we have $\sigma\tup{i} \neq i$. Hence,
+$\set{i, \sigma\tup{i}}$ is a $2$-element set. Since
+$\set{i, \sigma\tup{i}} \subseteq S$ (because both $i$ and
+$\sigma\tup{i}$ are elements of $S$), this shows that
+$\set{i, \sigma\tup{i}}$ is a $2$-element subset of $S$. In other
+words, $\set{i, \sigma\tup{i}} \in \powset[2]{S}$, qed.}. In other
+words, for each $i \in S \setminus F$, there exists a unique
+$K \in \powset[2]{S}$ satisfying $\set{i, \sigma\tup{i}} = K$
+(namely, $K = \set{i, \sigma\tup{i}}$).
+
+But
+\begin{align}
+\abs{S \setminus F}
+&= \tup{ \text{the number of } i \in S \setminus F } \nonumber \\
+&= \sum_{K \in \powset[2]{S}}
+      \tup{ \text{the number of } i \in S \setminus F
+              \text{ satisfying } \set{i, \sigma\tup{i}} = K }
+\label{pf.lem.dominating.heinrich-lemma-inv.1}
+\end{align}
+(because for each $i \in S \setminus F$, there exists a unique
+$K \in \powset[2]{S}$ satisfying $\set{i, \sigma\tup{i}} = K$).
+
+On the other hand, for each $K \in \powset[2]{S}$, we have
+\begin{equation}
+\tup{ \text{the number of } i \in S \setminus F
+      \text{ satisfying } \set{i, \sigma\tup{i}} = K }
+\equiv 0 \mod 2
+\label{pf.lem.dominating.heinrich-lemma-inv.2}
+\end{equation}
+\footnote{\textit{Proof of
+\eqref{pf.lem.dominating.heinrich-lemma-inv.2}.}
+Let $K \in \powset[2]{S}$. If there exists no $i \in S \setminus F$
+satisfying $\set{i, \sigma\tup{i}} = K$, then
+\eqref{pf.lem.dominating.heinrich-lemma-inv.2} is true (because
+in this case, we have
+$\tup{ \text{the number of } i \in S \setminus F
+       \text{ satisfying } \set{i, \sigma\tup{i}} = K }
+= 0 \equiv 0 \mod 2$). Hence, we WLOG assume that there does exist
+some $i \in S \setminus F$ satisfying $\set{i, \sigma\tup{i}} = K$.
+Fix such an $i$, and denote it by $j$. Thus, $j$ is an element of
+$S \setminus F$ and satisfies $\set{j, \sigma\tup{j}} = K$.
+
+Set $k = \sigma\tup{j}$. Thus,
+$\sigma\tup{k} = \sigma\tup{\sigma\tup{j}}
+= \underbrace{\tup{\sigma \circ \sigma}}_{= \id_S} \tup{j}
+= \id_S \tup{j} = j$
+and therefore
+$\set{\underbrace{k}_{=\sigma\tup{j}},
+     \underbrace{\sigma\tup{k}}_{=j}}
+= \set{\sigma\tup{j}, j} = \set{j, \sigma\tup{j}} = K$.
+Furthermore, from $j \in S \setminus F$, we obtain $j \in S$ and
+$j \notin F$. If we had $\sigma\tup{j} = j$, then we
+would have $j \in F$ (by the definition of $F$), which would
+contradict $j \notin F$. Hence, we do not have
+$\sigma\tup{j} = j$. Thus, we have $\sigma\tup{j} \neq j$. Hence,
+$j \neq \sigma\tup{j} = k$. In other words, $j$ and $k$ are distinct.
+
+If $i \in S \setminus F$ satisfies $\set{i, \sigma\tup{i}} = K$, then
+$i$ must be either $j$ or $k$ (because
+$i \in \set{i, \sigma\tup{i}} = K
+= \set{j, \underbrace{\sigma\tup{j}}_{=k}} = \set{j, k}$).
+
+If we had $k \in F$, then we would have $\sigma\tup{k} = k$ (by the
+definition of $F$), which would contradict $\sigma\tup{k} = j \neq k$.
+Hence, we do not have $k \in F$. Thus, $k \notin F$. Combining this
+with $k \in S$, we find $k \in S \setminus F$. Hence, $j$ and $k$ are
+two elements of $S \setminus F$. Furthermore, $j$ and $k$ are two
+$i \in S \setminus F$ satisfying $\set{i, \sigma\tup{i}} = K$ (since
+$j$ is an element of $S \setminus F$ satisfying
+$\set{j, \sigma\tup{j}} = K$, and since $k$ is an element of
+$S \setminus F$ satisfying $\set{k, \sigma\tup{k}} = K$). Furthermore,
+$j$ and $k$ are the \textbf{only} such $i$ (because we have shown that
+if $i \in S \setminus F$ satisfies $\set{i, \sigma\tup{i}} = K$, then
+$i$ must be either $j$ or $k$). Therefore, we conclude that there are
+exactly two $i \in S \setminus F$ that satisfy
+$\set{i, \sigma\tup{i}} = K$ (namely, $j$ and $k$) (because $j$ and
+$k$ are distinct). Hence,
+$\tup{ \text{the number of } i \in S \setminus F
+        \text{ satisfying } \set{i, \sigma\tup{i}} = K }
+= 2 \equiv 0 \mod 2$. This completes the proof of
+\eqref{pf.lem.dominating.heinrich-lemma-inv.2}.}.
+
+Now, \eqref{pf.lem.dominating.heinrich-lemma-inv.1} becomes
+\begin{align*}
+\abs{S \setminus F}
+&= \sum_{K \in \powset[2]{S}}
+      \underbrace{\tup{ \text{the number of } i \in S \setminus F
+                   \text{ satisfying } \set{i, \sigma\tup{i}} = K }}
+                 _{\substack{\equiv 0 \mod 2 \\
+                              \text{(by \eqref{pf.lem.dominating.heinrich-lemma-inv.2})}}}
+\\
+& \equiv \sum_{K \in \powset[2]{S}} 0 = 0 \mod 2 .
+\end{align*}
+Since $\abs{S \setminus F} = \abs{S} - \abs{F}$ (because
+$F \subseteq S$), this rewrites as
+$\abs{S} - \abs{F} \equiv 0 \mod 2$. In other words,
+$\abs{S} \equiv \abs{F} \mod 2$. This proves
+Lemma~\ref{lem.dominating.heinrich-lemma-inv}.
+\end{proof}
+
+Here is a particular case of
+Lemma~\ref{lem.dominating.heinrich-lemma-inv}:
+
+\begin{corollary} \label{cor.dominating.heinrich-lemma-inv0}
+Let $S$ be a finite set. Let $\sigma : S \to S$ be a map such that
+$\sigma \circ \sigma = \id_S$. Assume that each $i \in S$
+satisfies $\sigma\tup{i} \neq i$. Then,
+$\abs{S}$ is even.
+\end{corollary}
+
+\begin{proof}[Proof of Corollary~\ref{cor.dominating.heinrich-lemma-inv0}.]
+Let $F = \set{ i \in S \mid \sigma\tup{i} = i }$.
+Lemma~\ref{lem.dominating.heinrich-lemma-inv} yields
+$\abs{F} \equiv \abs{S} \mod 2$.
+
+But each $i \in S$ satisfies $\sigma\tup{i} \neq i$. In other
+words, no $i \in S$ satisfies $\sigma\tup{i} = i$. In other
+words, $\set{ i \in S \mid \sigma\tup{i} = i } = \varnothing$.
+Thus, $F = \set{ i \in S \mid \sigma\tup{i} = i }
+= \varnothing$. Hence,
+$\abs{F} = \abs{\varnothing} = 0$. But from
+$\abs{F} \equiv \abs{S} \mod 2$, we obtain
+$\abs{S} \equiv \abs{F} = 0 \mod 2$. In other words, $\abs{S}$
+is even. Hence, Corollary~\ref{cor.dominating.heinrich-lemma-inv0}
+is proven.
+\end{proof}
+
+Now, it is time to get rid of part \textbf{(a)} of
+Theorem~\ref{thm.dominating.heinrich}:
+
+\begin{lemma} \label{lem.dominating.heinrich-lemma.a}
+Let $\alpha$ and $\beta$ be defined as in
+Theorem~\ref{thm.dominating.heinrich}. Then, $\alpha$ and $\beta$ are
+even.
+\end{lemma}
+
+\begin{proof}[Proof of Lemma~\ref{lem.dominating.heinrich-lemma.a}.]
+Let us first show that $\beta$ is even.
+
+Indeed, let $S$ be the set of all detached pairs $\tup{A, B}$ for
+which both numbers $\abs{A}$ and $\abs{B}$ are odd.
+Then, the definition of $\beta$ can be rewritten as
+$\beta = \abs{S}$. Clearly, $S$ is a finite set.
+
+For every $\tup{A, B} \in S$, we have
+$\tup{B, A} \in S$\ \ \ \ \footnote{\textit{Proof.} Let
+$\tup{A, B} \in S$. Thus, $\tup{A, B}$ is a detached pair for which
+both numbers $\abs{A}$ and $\abs{B}$ are odd (by the definition of
+$S$). Hence, $A$ and $B$ are two subsets of $V$ (since $\tup{A, B}$ is
+a detached pair).
+But Lemma~\ref{lem.dominating.heinrich-lemma3} shows that $\tup{A, B}$
+is a detached pair if and only if $\tup{B, A}$ is a detached pair.
+Hence, $\tup{B, A}$ is a detached pair (since $\tup{A, B}$ is a
+detached pair). Furthermore, both numbers $\abs{B}$ and $\abs{A}$ are
+odd. Thus, $\tup{B, A}$ is a detached pair for which both numbers
+$\abs{B}$ and $\abs{A}$ are odd. In other words, $\tup{B, A} \in S$
+(by the definition of $S$), qed.}. Hence, we can define a map
+$\sigma : S \to S$ by setting
+\[
+\sigma\tup{A, B} = \tup{B, A}
+\qquad \text{for all } \tup{A, B} \in S .
+\]
+Consider this $\sigma$. It is easy to see that
+$\sigma \circ \sigma = \id_S$\ \ \ \ \footnote{\textit{Proof.}
+For every $\tup{A, B} \in S$, we have
+\begin{align*}
+\tup{\sigma \circ \sigma} \tup{A, B}
+&= \sigma \tup{\underbrace{\sigma \tup{A, B}}_{= \tup{B, A}}}
+= \sigma \tup{B, A} = \tup{A, B}
+\end{align*}
+(by the definition of $\sigma$). In other words, the map
+$\sigma \circ \sigma$ sends each $\tup{A, B} \in S$ to itself. Hence,
+$\sigma \circ \sigma = \id_S$.}.
+
+Each $i \in S$ satisfies
+$\sigma\tup{i} \neq i$\ \ \ \ \footnote{\text{Proof.}
+Let $i \in S$. We must prove that $\sigma\tup{i} \neq i$.
+
+We have $i \in S$.
+In other words, $i$ is a detached pair $\tup{A, B}$ for
+which both numbers $\abs{A}$ and $\abs{B}$ are odd (by the
+definition of $S$). Consider
+this $\tup{A, B}$. The number $\abs{B}$ is odd and is a nonnegative
+integer. Hence, this number $\abs{B}$ is positive (because any odd
+nonnegative integer is positive). Thus, the set
+$B$ is nonempty. In other words, $B \neq \varnothing$.
+
+But $\tup{A, B}$ is a detached pair. In other
+words, $A$ and $B$ are two disjoint subsets of $V$ having the
+property that there exists no edge $ab \in E$ satisfying $a \in A$
+and $b \in B$ (by the definition of a ``detached pair'').
+Now, $A \cap B = \varnothing$ (since $A$ and $B$ are disjoint).
+If we had $A = B$, then we would have
+$\underbrace{A}_{=B} \cap B = B \cap B = B \neq \varnothing$,
+which would contradict $A \cap B = \varnothing$. Hence, we cannot
+have $A = B$. Thus, $A \neq B$.
+
+If we had $\tup{A, B} = \tup{B, A}$, then we would have
+$A = B$, which would contradict $A \neq B$. Hence, we cannot have
+$\tup{A, B} = \tup{B, A}$. Therefore, $\tup{A, B} \neq
+\tup{B, A}$.
+
+But $i = \tup{A, B}$, and thus $\sigma\tup{i} = \sigma\tup{A, B}
+= \tup{B, A}$ (by the definition of $\sigma$).
+Now, $i = \tup{A, B} \neq \tup{B, A} = \sigma\tup{i}$. In other
+words, $\sigma\tup{i} \neq i$, qed.}.
+Hence, Corollary~\ref{cor.dominating.heinrich-lemma-inv0}
+shows that $\abs{S}$ is even. In other words, $\beta$ is even
+(since $\beta = \abs{S}$).
+
+The same argument (with the obvious changes\footnote{For example,
+``odd'' has to be replaced by ``even and positive''.}) shows that
+$\alpha$ is even. This completes the proof of
+Lemma~\ref{lem.dominating.heinrich-lemma.a}.
+\end{proof}
+
+We will spend the rest of this section manipulating sums in various
+artful ways. These manipulations will culminate in a proof
+of Theorem~\ref{thm.dominating.heinrich} \textbf{(b)}; they also
+provide examples of techniques that are useful throughout
+mathematics.
+
+\begin{lemma} \label{lem.dominating.heinrich-lemma-2sum}
+We have
+\[
+\sum_{\substack{\tup{A, B} \text{ is a detached pair}; \\
+                A \neq \varnothing; \  B \neq \varnothing}}
+  \tup{\tup{-1}^{\abs{A}} + \tup{-1}^{\abs{B}}}
+= 2
+\sum_{\substack{\tup{A, B} \text{ is a detached pair}; \\
+                A \neq \varnothing; \  B \neq \varnothing}}
+  \tup{-1}^{\abs{A}} .
+\]
+\end{lemma}
+
+\begin{proof}[Proof of Lemma~\ref{lem.dominating.heinrich-lemma-2sum}.]
+First of all,
+\begin{align}
+& \sum_{\substack{\tup{A, B} \text{ is a detached pair}; \\
+                A \neq \varnothing; \  B \neq \varnothing}}
+  \tup{\tup{-1}^{\abs{A}} + \tup{-1}^{\abs{B}}}
+\nonumber \\
+& =
+\sum_{\substack{\tup{A, B} \text{ is a detached pair}; \\
+                A \neq \varnothing; \  B \neq \varnothing}}
+  \tup{-1}^{\abs{A}}
++
+\sum_{\substack{\tup{A, B} \text{ is a detached pair}; \\
+                A \neq \varnothing; \  B \neq \varnothing}}
+  \tup{-1}^{\abs{B}}
+.
+\label{pf.lem.dominating.heinrich-lemma-2sum.1}
+\end{align}
+Let us now rewrite the second sum on the right hand side of
+this equation:
+\begin{align*}
+& \sum_{\substack{\tup{A, B} \text{ is a detached pair}; \\
+                A \neq \varnothing; \  B \neq \varnothing}}
+  \tup{-1}^{\abs{B}} \\
+& =
+\sum_{\substack{\tup{B, A} \text{ is a detached pair}; \\
+                B \neq \varnothing; \  A \neq \varnothing}}
+  \tup{-1}^{\abs{A}} \\
+& \qquad
+\left( \text{here, we have renamed the summation index }
+         \tup{A, B} \text{ as } \tup{B, A} \right) \\
+& =
+\sum_{\substack{\tup{B, A} \text{ is a detached pair}; \\
+                A \neq \varnothing; \  B \neq \varnothing}}
+  \tup{-1}^{\abs{A}}
+=
+\sum_{\substack{\tup{A, B} \text{ is a detached pair}; \\
+                A \neq \varnothing; \  B \neq \varnothing}}
+  \tup{-1}^{\abs{A}}
+\end{align*}
+(because the condition
+``$\tup{B, A}$ is a detached pair'' under the summation
+sign is equivalent to the condition ``$\tup{A, B}$ is a
+detached pair'' (by Lemma~\ref{lem.dominating.heinrich-lemma3})).
+Hence, \eqref{pf.lem.dominating.heinrich-lemma-2sum.1} becomes
+\begin{align*}
+&
+\sum_{\substack{\tup{A, B} \text{ is a detached pair}; \\
+                A \neq \varnothing; \  B \neq \varnothing}}
+  \tup{\tup{-1}^{\abs{A}} + \tup{-1}^{\abs{B}}} \\
+& =
+\sum_{\substack{\tup{A, B} \text{ is a detached pair}; \\
+                A \neq \varnothing; \  B \neq \varnothing}}
+  \tup{-1}^{\abs{A}}
++
+\underbrace{
+\sum_{\substack{\tup{A, B} \text{ is a detached pair}; \\
+                A \neq \varnothing; \  B \neq \varnothing}}
+  \tup{-1}^{\abs{B}}
+}_{
+=
+\sum_{\substack{\tup{A, B} \text{ is a detached pair}; \\
+                A \neq \varnothing; \  B \neq \varnothing}}
+  \tup{-1}^{\abs{A}}
+} \\
+& =
+\sum_{\substack{\tup{A, B} \text{ is a detached pair}; \\
+                A \neq \varnothing; \  B \neq \varnothing}}
+  \tup{-1}^{\abs{A}}
++
+\sum_{\substack{\tup{A, B} \text{ is a detached pair}; \\
+                A \neq \varnothing; \  B \neq \varnothing}}
+  \tup{-1}^{\abs{A}} \\
+& = 2
+\sum_{\substack{\tup{A, B} \text{ is a detached pair}; \\
+                A \neq \varnothing; \  B \neq \varnothing}}
+  \tup{-1}^{\abs{A}}
+.
+\end{align*}
+This proves
+Lemma~\ref{lem.dominating.heinrich-lemma-2sum}.
+\end{proof}
+
+\begin{lemma} \label{lem.dominating.heinrich-lemma-2sum2}
+Let $n = \abs{V}$. Assume that $n > 0$. Let $\delta$
+be the number of dominating sets of $G$. Then,
+\[
+\sum_{\substack{\tup{A, B} \text{ is a detached pair}; \\
+                A \neq \varnothing; \  B \neq \varnothing}}
+  \tup{-1}^{\abs{A}}
+= \delta - \tup{2^n - 1}.
+\]
+\end{lemma}
+
+\begin{proof}[Proof of
+Lemma~\ref{lem.dominating.heinrich-lemma-2sum2}.]
+We first observe that the set $V$ has $2^{\abs{V}}$ subsets. In other
+words, the set $V$ has $2^n$ subsets (since $\abs{V} = n$). Thus, the
+sum $\sum_{B \subseteq V} 1$ has $2^n$ addends. Since each of these
+addends equals $1$, we conclude that this sum equals $2^n \cdot 1
+= 2^n$. In other words,
+\begin{equation}
+\sum_{B \subseteq V} 1 = 2^n .
+\label{pf.lem.dominating.heinrich-lemma-2sum2.1}
+\end{equation}
+
+On the other hand, each subset $B$ of $V$ is either dominating or not.
+Hence,
+\begin{align*}
+& \sum_{B \subseteq V} \ive{B \text{ is dominating}}  \\
+&=
+\sum_{\substack{B \subseteq V; \\ B \text{ is dominating}}}
+    \underbrace{\ive{B \text{ is dominating}}}_{\substack{
+                 = 1 \\ \text{(since } B \text{ is dominating)}}}
++ \sum_{\substack{B \subseteq V; \\ B \text{ is not dominating}}}
+    \underbrace{\ive{B \text{ is dominating}}}_{\substack{
+                 = 0 \\ \text{(since } B \text{ is not dominating)}}}
+ \\
+&=
+\sum_{\substack{B \subseteq V; \\ B \text{ is dominating}}}
+    1
++ \underbrace{
+  \sum_{\substack{B \subseteq V; \\ B \text{ is not dominating}}}
+    0}_{=0}
+=
+\sum_{\substack{B \subseteq V; \\ B \text{ is dominating}}} 1 .
+\end{align*}
+
+But the number of dominating sets of $G$ is $\delta$. In other words,
+the number of dominating subsets $B \subseteq V$ is $\delta$. Hence,
+the sum
+$\sum_{\substack{B \subseteq V; \\ B \text{ is dominating}}} 1$
+has $\delta$ addends. Since each of these addends equals $1$, we thus
+see that this sum equals $\delta \cdot 1 = \delta$. In other words,
+\[
+\sum_{\substack{B \subseteq V; \\ B \text{ is dominating}}} 1
+= \delta .
+\]
+Hence,
+\begin{equation}
+\sum_{B \subseteq V} \ive{B \text{ is dominating}}
+= \sum_{\substack{B \subseteq V; \\ B \text{ is dominating}}} 1
+= \delta .
+\label{pf.lem.dominating.heinrich-lemma-2sum2.2}
+\end{equation}
+
+The subset $\varnothing$ of $V$ is not
+dominating\footnote{\textit{Proof.} Assume the contrary. Thus, the
+subset $\varnothing$ of $V$ is dominating.
+
+The set $V$ is nonempty (since $\abs{V} = n > 0$). Thus, there exists
+some $q \in V$. Consider this $q$. But the set $\varnothing$ is
+dominating. In other words, for every vertex
+$v \in \verts{G} \setminus \varnothing$, at least one neighbor of
+$v$ belongs to $\varnothing$. Applying this to $v = q$, we conclude
+that at least one neighbor of $q$ belongs to $\varnothing$ (since
+$q \in V = \verts{G} = \verts{G} \setminus \varnothing$). Hence, at
+least some object belongs to $\varnothing$. In other words,
+$\varnothing$ is nonempty. This is absurd. This contradiction shows
+that our assumption is false, qed.}. Hence,
+$\ive{\varnothing \text{ is dominating}} = 0$.
+
+Each detached pair $\tup{A, B}$ consists of two subsets $A$ and $B$
+of $V$ (by the definition of a ``detached pair''). Hence,
+\begin{align}
+& \sum_{\substack{\tup{A, B} \text{ is a detached pair}; \\
+                A \neq \varnothing; \  B \neq \varnothing}}
+  \tup{-1}^{\abs{A}} \nonumber \\
+&=
+\sum_{\substack{B \subseteq V; \\ B \neq \varnothing}}
+\underbrace{
+\sum_{\substack{A \subseteq V; \\ A \neq \varnothing; \\
+                \tup{A, B} \text{ is a detached pair}}}
+\tup{-1}^{\abs{A}}
+}_{\substack{= \ive{B \text{ is dominating}} - 1 \\
+        \text{(by Corollary~\ref{cor.dominating.heinrich-lemma2c})}}}
+ \nonumber \\
+&= \sum_{\substack{B \subseteq V; \\ B \neq \varnothing}}
+\tup{\ive{B \text{ is dominating}} - 1} .
+\label{pf.lem.dominating.heinrich-lemma-2sum2.3}
+\end{align}
+
+But the sum
+$\sum_{B \subseteq V} \tup{\ive{B \text{ is dominating}} - 1}$ has an
+addend for $B = \varnothing$. If we split off this addend, we find
+\begin{align*}
+& \sum_{B \subseteq V} \tup{\ive{B \text{ is dominating}} - 1} \\
+& = \tup{\underbrace{\ive{\varnothing \text{ is dominating}}}_{=0} - 1}
++ \sum_{\substack{B \subseteq V; \\ B \neq \varnothing}}
+\tup{\ive{B \text{ is dominating}} - 1} \\
+&= -1
++ \sum_{\substack{B \subseteq V; \\ B \neq \varnothing}}
+\tup{\ive{B \text{ is dominating}} - 1} .
+\end{align*}
+Thus,
+\begin{align*}
+\sum_{\substack{B \subseteq V; \\ B \neq \varnothing}}
+\tup{\ive{B \text{ is dominating}} - 1}
+&= \underbrace{
+\sum_{B \subseteq V} \tup{\ive{B \text{ is dominating}} - 1}
+}_{= \sum_{B \subseteq V} \ive{B \text{ is dominating}}
+- \sum_{B \subseteq V} 1}
++ 1 \\
+&= \underbrace{\sum_{B \subseteq V} \ive{B \text{ is dominating}}}_{
+        \substack{= \delta \\
+       \text{(by \eqref{pf.lem.dominating.heinrich-lemma-2sum2.2})}}}
+- \underbrace{\sum_{B \subseteq V} 1}_{\substack{= 2^n \\
+       \text{(by \eqref{pf.lem.dominating.heinrich-lemma-2sum2.1})}}}
++ 1
+= \delta - 2^n + 1.
+\end{align*}
+Thus, \eqref{pf.lem.dominating.heinrich-lemma-2sum2.3} becomes
+\begin{align*}
+& \sum_{\substack{\tup{A, B} \text{ is a detached pair}; \\
+                A \neq \varnothing; \  B \neq \varnothing}}
+  \tup{-1}^{\abs{A}} \\
+&= \sum_{\substack{B \subseteq V; \\ B \neq \varnothing}}
+\tup{\ive{B \text{ is dominating}} - 1} = \delta - 2^n + 1
+= \delta - \tup{2^n - 1} .
+\end{align*}
+This proves Lemma~\ref{lem.dominating.heinrich-lemma-2sum2}.
+\end{proof}
+
+Let us now finally step to the proof of
+Theorem~\ref{thm.dominating.heinrich}:
+
+\begin{proof}[Proof of Theorem~\ref{thm.dominating.heinrich}.]
+\textbf{(a)} Theorem~\ref{thm.dominating.heinrich} \textbf{(a)} is
+precisely Lemma~\ref{lem.dominating.heinrich-lemma.a}, which has
+already been proven.
+
+\textbf{(b)} Let $\delta$ be the number of dominating sets of $G$.
+
+We shall compute the sum
+$\sum_{\substack{\tup{A, B} \text{ is a detached pair}; \\
+                A \neq \varnothing; \  B \neq \varnothing}}
+  \tup{\tup{-1}^{\abs{A}} + \tup{-1}^{\abs{B}}}$
+in two different ways, and then compare the results.
+
+The first way relies on
+Lemma~\ref{lem.dominating.heinrich-lemma-2sum} and on
+Lemma~\ref{lem.dominating.heinrich-lemma-2sum2}:
+From Lemma~\ref{lem.dominating.heinrich-lemma-2sum}, we obtain
+\begin{align}
+\sum_{\substack{\tup{A, B} \text{ is a detached pair}; \\
+                A \neq \varnothing; \  B \neq \varnothing}}
+  \tup{\tup{-1}^{\abs{A}} + \tup{-1}^{\abs{B}}}
+&= 2
+\underbrace{
+\sum_{\substack{\tup{A, B} \text{ is a detached pair}; \\
+                A \neq \varnothing; \  B \neq \varnothing}}
+  \tup{-1}^{\abs{A}}
+}_{\substack{= \delta - \tup{2^n - 1} \\
+        \text{(by Lemma~\ref{lem.dominating.heinrich-lemma-2sum2})}}}
+\nonumber \\
+&= 2 \tup{\delta - \tup{2^n - 1}} .
+\label{pf.thm.dominating.heinrich.1}
+\end{align}
+
+Now, let us try another way. We observe that each detached pair
+$\tup{A, B}$ satisfies one and only one of the following four
+conditions:
+\begin{enumerate}
+\item The number $\abs{A}$ is even, and the number $\abs{B}$ is even.
+\item The number $\abs{A}$ is even, and the number $\abs{B}$ is odd.
+\item The number $\abs{A}$ is odd, and the number $\abs{B}$ is even.
+\item The number $\abs{A}$ is odd, and the number $\abs{B}$ is odd.
+\end{enumerate}
+Accordingly, the sum on the left hand side of
+\eqref{pf.thm.dominating.heinrich.1} can be split into four smaller
+sums:
+\begin{align*}
+& \sum_{\substack{\tup{A, B} \text{ is a detached pair}; \\
+                A \neq \varnothing; \  B \neq \varnothing}}
+  \tup{\tup{-1}^{\abs{A}} + \tup{-1}^{\abs{B}}}
+  \\
+&= \sum_{\substack{\tup{A, B} \text{ is a detached pair}; \\
+                A \neq \varnothing; \  B \neq \varnothing ; \\
+                \abs{A} \text{ is even};
+                \ \abs{B} \text{ is even}}}
+  \tup{\underbrace{\tup{-1}^{\abs{A}}}_{\substack{= 1 \\
+               \text{(since } \abs{A} \text{ is even)}}}
+       + \underbrace{\tup{-1}^{\abs{B}}}_{\substack{= 1 \\
+               \text{(since } \abs{B} \text{ is even)}}}} \\
+& \qquad +  \sum_{\substack{\tup{A, B} \text{ is a detached pair}; \\
+                A \neq \varnothing; \  B \neq \varnothing ; \\
+                \abs{A} \text{ is even};
+                \ \abs{B} \text{ is odd}}}
+  \tup{\underbrace{\tup{-1}^{\abs{A}}}_{\substack{= 1 \\
+               \text{(since } \abs{A} \text{ is even)}}}
+       + \underbrace{\tup{-1}^{\abs{B}}}_{\substack{= -1 \\
+               \text{(since } \abs{B} \text{ is odd)}}}} \\
+& \qquad +  \sum_{\substack{\tup{A, B} \text{ is a detached pair}; \\
+                A \neq \varnothing; \  B \neq \varnothing ; \\
+                \abs{A} \text{ is odd};
+                \ \abs{B} \text{ is even}}}
+  \tup{\underbrace{\tup{-1}^{\abs{A}}}_{\substack{= -1 \\
+               \text{(since } \abs{A} \text{ is odd)}}}
+       + \underbrace{\tup{-1}^{\abs{B}}}_{\substack{= 1 \\
+               \text{(since } \abs{B} \text{ is even)}}}} \\
+& \qquad +  \sum_{\substack{\tup{A, B} \text{ is a detached pair}; \\
+                A \neq \varnothing; \  B \neq \varnothing ; \\
+                \abs{A} \text{ is odd};
+                \ \abs{B} \text{ is odd}}}
+  \tup{\underbrace{\tup{-1}^{\abs{A}}}_{\substack{= -1 \\
+               \text{(since } \abs{A} \text{ is odd)}}}
+       + \underbrace{\tup{-1}^{\abs{B}}}_{\substack{= -1 \\
+               \text{(since } \abs{B} \text{ is odd)}}}} \\
+&= \sum_{\substack{\tup{A, B} \text{ is a detached pair}; \\
+                A \neq \varnothing; \  B \neq \varnothing ; \\
+                \abs{A} \text{ is even};
+                \ \abs{B} \text{ is even}}}
+   \underbrace{\tup{1 + 1}}_{= 2}
++ \sum_{\substack{\tup{A, B} \text{ is a detached pair}; \\
+                A \neq \varnothing; \  B \neq \varnothing ; \\
+                \abs{A} \text{ is even};
+                \ \abs{B} \text{ is odd}}}
+   \underbrace{\tup{1 + \tup{-1}}}_{= 0} \\
+&\qquad + \sum_{\substack{\tup{A, B} \text{ is a detached pair}; \\
+                A \neq \varnothing; \  B \neq \varnothing ; \\
+                \abs{A} \text{ is odd};
+                \ \abs{B} \text{ is even}}}
+   \underbrace{\tup{\tup{-1} + 1}}_{= 0}
++ \sum_{\substack{\tup{A, B} \text{ is a detached pair}; \\
+                A \neq \varnothing; \  B \neq \varnothing ; \\
+                \abs{A} \text{ is odd};
+                \ \abs{B} \text{ is odd}}}
+   \underbrace{\tup{\tup{-1} + \tup{-1}}}_{= -2} \\
+&= \sum_{\substack{\tup{A, B} \text{ is a detached pair}; \\
+                A \neq \varnothing; \  B \neq \varnothing ; \\
+                \abs{A} \text{ is even};
+                \ \abs{B} \text{ is even}}}
+   2
++ \underbrace{\sum_{\substack{\tup{A, B} \text{ is a detached pair}; \\
+                A \neq \varnothing; \  B \neq \varnothing ; \\
+                \abs{A} \text{ is even};
+                \ \abs{B} \text{ is odd}}}
+   0}_{= 0} \\
+&\qquad + \underbrace{
+   \sum_{\substack{\tup{A, B} \text{ is a detached pair}; \\
+                A \neq \varnothing; \  B \neq \varnothing ; \\
+                \abs{A} \text{ is odd};
+                \ \abs{B} \text{ is even}}}
+   0}_{= 0}
++ \sum_{\substack{\tup{A, B} \text{ is a detached pair}; \\
+                A \neq \varnothing; \  B \neq \varnothing ; \\
+                \abs{A} \text{ is odd};
+                \ \abs{B} \text{ is odd}}}
+   \tup{-2}
+\end{align*}
+\begin{align}
+&= \sum_{\substack{\tup{A, B} \text{ is a detached pair}; \\
+                A \neq \varnothing; \  B \neq \varnothing ; \\
+                \abs{A} \text{ is even};
+                \ \abs{B} \text{ is even}}}
+   2
++ \sum_{\substack{\tup{A, B} \text{ is a detached pair}; \\
+                A \neq \varnothing; \  B \neq \varnothing ; \\
+                \abs{A} \text{ is odd};
+                \ \abs{B} \text{ is odd}}}
+   \tup{-2} .
+\label{pf.thm.dominating.heinrich.3}
+\end{align}
+
+We shall now analyze the two sums on the right hand side of
+\eqref{pf.thm.dominating.heinrich.3} more closely.
+Let us begin with the first sum. For any subset $A$ of $V$, the
+condition ``$A \neq \varnothing$'' is equivalent to the condition
+``$\abs{A}$ is positive'' (because clearly, the finite set $A$ is
+distinct from $\varnothing$ if and only if its size $\abs{A}$ is
+positive). Likewise, for any subset $B$ of $V$, the condition
+``$B \neq \varnothing$'' is equivalent to the condition
+``$\abs{B}$ is positive''. Combining the preceding two sentences, we
+conclude that the conditions ``$A \neq \varnothing$'' and
+``$B \neq \varnothing$'' under the summation sign
+$\sum_{\substack{\tup{A, B} \text{ is a detached pair}; \\
+                A \neq \varnothing; \  B \neq \varnothing ; \\
+                \abs{A} \text{ is even};
+                \ \abs{B} \text{ is even}}}$
+are equivalent to the conditions ``$\abs{A}$ is positive'' and
+``$\abs{B}$ is positive'', respectively. Hence, we can rewrite this
+summation sign as
+$\sum_{\substack{\tup{A, B} \text{ is a detached pair}; \\
+                \abs{A} \text{ is positive} ; 
+                \ \abs{B} \text{ is positive} ; \\
+                \abs{A} \text{ is even};
+                \ \abs{B} \text{ is even}}}$.
+Thus,
+\begin{align}
+\sum_{\substack{\tup{A, B} \text{ is a detached pair}; \\
+                A \neq \varnothing; \  B \neq \varnothing ; \\
+                \abs{A} \text{ is even};
+                \ \abs{B} \text{ is even}}}
+   2
+&= \sum_{\substack{\tup{A, B} \text{ is a detached pair}; \\
+                \abs{A} \text{ is positive} ; 
+                \ \abs{B} \text{ is positive} ; \\
+                \abs{A} \text{ is even};
+                \ \abs{B} \text{ is even}}} 2
+= \sum_{\substack{\tup{A, B} \text{ is a detached pair}; \\
+                \abs{A} \text{ is even and positive} ; \\ 
+                \abs{B} \text{ is even and positive}}} 2
+\nonumber \\
+&= \sum_{\substack{\tup{A, B} \text{ is a detached pair}; \\
+                \text{both numbers } \abs{A} \text{ and } \abs{B}
+                \text{ are even and positive}}} 2 .
+\label{pf.thm.dominating.heinrich.4a1}
+\end{align}
+But the sum $\sum_{\substack{\tup{A, B} \text{ is a detached pair}; \\
+                \text{both numbers } \abs{A} \text{ and } \abs{B}
+                \text{ are even and positive}}} 2$
+has exactly $\alpha$ terms (since the number of all detached pairs
+$\tup{A, B}$ for which both numbers $\abs{A}$ and $\abs{B}$ are even
+and positive is $\alpha$), and thus equals $\alpha \cdot 2$ (since
+each of its $\alpha$ terms equals $2$). Thus,
+$\sum_{\substack{\tup{A, B} \text{ is a detached pair}; \\
+                \text{both numbers } \abs{A} \text{ and } \abs{B}
+                \text{ are even and positive}}} 2
+= \alpha \cdot 2 = 2 \alpha$. Hence,
+\eqref{pf.thm.dominating.heinrich.4a1} becomes
+\begin{align}
+\sum_{\substack{\tup{A, B} \text{ is a detached pair}; \\
+                A \neq \varnothing; \  B \neq \varnothing ; \\
+                \abs{A} \text{ is even};
+                \ \abs{B} \text{ is even}}}
+   2
+&= \sum_{\substack{\tup{A, B} \text{ is a detached pair}; \\
+                \text{both numbers } \abs{A} \text{ and } \abs{B}
+                \text{ are even and positive}}} 2
+= 2 \alpha .
+\label{pf.thm.dominating.heinrich.4a12}
+\end{align}
+
+Let us now attack the second sum. We have
+\begin{align}
+\sum_{\substack{\tup{A, B} \text{ is a detached pair}; \\
+                A \neq \varnothing; \  B \neq \varnothing ; \\
+                \abs{A} \text{ is odd};
+                \ \abs{B} \text{ is odd}}}
+   \tup{-2}
+&= \sum_{\substack{\tup{A, B} \text{ is a detached pair}; \\
+                \text{both numbers } \abs{A} \text{ and } \abs{B}
+                \text{ are odd and positive}}} \tup{-2} .
+\label{pf.thm.dominating.heinrich.4b1}
+\end{align}
+(Indeed, this can be proven in the same way as we proved
+\eqref{pf.thm.dominating.heinrich.4a1}, except that we must replace
+every word ``even'' by ``odd'', and every appearance of $2$ by $-2$.)
+
+But if $\tup{A, B}$ is a detached pair, then the condition
+``both numbers $\abs{A}$ and $\abs{B}$ are odd and positive'' is
+equivalent to the simpler condition
+``both numbers $\abs{A}$ and $\abs{B}$ are
+odd''\footnote{\textit{Proof.} Let $\tup{A, B}$ be a detached pair.
+Thus, $A$ and $B$ are two subsets of $V$ (by the definition of
+``detached pair''), and thus are two finite sets. Hence, $\abs{A}$ and
+$\abs{B}$ are nonnegative integers. Therefore, if $\abs{A}$ and
+$\abs{B}$ are odd, then $\abs{A}$ and $\abs{B}$ are automatically
+positive (because if a nonnegative integer is odd, then it is
+automatically positive). Therefore, the condition
+``both numbers $\abs{A}$ and $\abs{B}$ are odd and positive'' is
+equivalent to the simpler condition
+``both numbers $\abs{A}$ and $\abs{B}$ are odd''. Qed.}. Hence, the
+summation sign
+$\sum_{\substack{\tup{A, B} \text{ is a detached pair}; \\
+                \text{both numbers } \abs{A} \text{ and } \abs{B}
+                \text{ are odd and positive}}} \tup{-2}$
+can be rewritten as
+$\sum_{\substack{\tup{A, B} \text{ is a detached pair}; \\
+                \text{both numbers } \abs{A} \text{ and } \abs{B}
+                \text{ are odd}}} \tup{-2}$.
+Thus,
+\[
+\sum_{\substack{\tup{A, B} \text{ is a detached pair}; \\
+                \text{both numbers } \abs{A} \text{ and } \abs{B}
+                \text{ are odd and positive}}} \tup{-2}
+= \sum_{\substack{\tup{A, B} \text{ is a detached pair}; \\
+                \text{both numbers } \abs{A} \text{ and } \abs{B}
+                \text{ are odd}}} \tup{-2} .
+\]
+But the sum $\sum_{\substack{\tup{A, B} \text{ is a detached pair}; \\
+                \text{both numbers } \abs{A} \text{ and } \abs{B}
+                \text{ are odd}}} \tup{-2}$
+has exactly $\beta$ terms (since the number of all detached pairs
+$\tup{A, B}$ for which both numbers $\abs{A}$ and $\abs{B}$ are odd
+is $\beta$), and thus equals $\beta \cdot \tup{-2}$ (since
+each of its $\beta$ terms equals $-2$). Thus, \newline
+$\sum_{\substack{\tup{A, B} \text{ is a detached pair}; \\
+                \text{both numbers } \abs{A} \text{ and } \abs{B}
+                \text{ are odd}}} \tup{-2}
+= \beta \cdot \tup{-2} = -2 \beta$. Hence,
+\eqref{pf.thm.dominating.heinrich.4b1} becomes
+\begin{align}
+\sum_{\substack{\tup{A, B} \text{ is a detached pair}; \\
+                A \neq \varnothing; \  B \neq \varnothing ; \\
+                \abs{A} \text{ is odd};
+                \ \abs{B} \text{ is odd}}}
+   \tup{-2}
+&= \sum_{\substack{\tup{A, B} \text{ is a detached pair}; \\
+                \text{both numbers } \abs{A} \text{ and } \abs{B}
+                \text{ are odd and positive}}} \tup{-2} \nonumber \\
+&= \sum_{\substack{\tup{A, B} \text{ is a detached pair}; \\
+                \text{both numbers } \abs{A} \text{ and } \abs{B}
+                \text{ are odd}}} \tup{-2}
+= -2 \beta .
+\label{pf.thm.dominating.heinrich.4b12}
+\end{align}
+
+Now, \eqref{pf.thm.dominating.heinrich.3} becomes
+
+\begin{align*}
+& \sum_{\substack{\tup{A, B} \text{ is a detached pair}; \\
+                A \neq \varnothing; \  B \neq \varnothing}}
+  \tup{\tup{-1}^{\abs{A}} + \tup{-1}^{\abs{B}}}
+  \\
+&= \underbrace{\sum_{\substack{\tup{A, B} \text{ is a detached pair}; \\
+                A \neq \varnothing; \  B \neq \varnothing ; \\
+                \abs{A} \text{ is even};
+                \ \abs{B} \text{ is even}}}
+   2}_{\substack{ = 2 \alpha \\
+        \text{(by \eqref{pf.thm.dominating.heinrich.4a12})}}}
++ \underbrace{\sum_{\substack{\tup{A, B} \text{ is a detached pair}; \\
+                A \neq \varnothing; \  B \neq \varnothing ; \\
+                \abs{A} \text{ is odd};
+                \ \abs{B} \text{ is odd}}}
+   \tup{-2}}_{\substack{ = - 2 \beta \\
+        \text{(by \eqref{pf.thm.dominating.heinrich.4b12})}}} \\
+&= 2 \alpha + \tup{-2 \beta} = 2 \tup{\alpha - \beta} .
+\end{align*}
+
+Comparing this with \eqref{pf.thm.dominating.heinrich.1}, we find
+\[
+2 \tup{\delta - \tup{2^n - 1}} = 2 \tup{\alpha - \beta} .
+\]
+Cancelling $2$ from this equality, we obtain
+$\delta - \tup{2^n - 1} = \alpha - \beta$. Solving this equation for
+$\delta$, we find $\delta = 2^n - 1 + \alpha - \beta$.
+
+Now, recall that $\delta$ is the number of dominating sets of $G$.
+Hence, the number of dominating sets of $G$ is
+$\delta = 2^n - 1 + \alpha - \beta$. This proves
+Theorem~\ref{thm.dominating.heinrich} \textbf{(b)}.
+\end{proof}
+
+\section{\label{sect.hamilton}Hamiltonian paths}
 
 %XXX
 
@@ -1886,6 +3162,10 @@ various mathematical subjects),
 \bibitem[Bollob79]{Bollob79}B\'ela Bollob\'as,
 \textit{Graph Theory: An Introductory Course},
 Graduate Texts in Mathematics \#63, 1st edition, Springer 1971.
+
+\bibitem[Bollob98]{Bollob98}B\'ela Bollob\'as,
+\textit{Modern Graph Theory},
+Graduate Texts in Mathematics \#184, 1st edition, Springer 1998.
 
 \bibitem[Bona11]{Bona11}
 Mikl\'os B\'ona,
