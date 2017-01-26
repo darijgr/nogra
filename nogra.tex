@@ -1014,6 +1014,10 @@ $b$ and $c$ of $G$ such that $ab$, $bc$ and $ca$ are edges of $G$.
 Example.
 \end{todo}
 
+For proofs of Theorem~\ref{thm.intro.mantel}, see (for example) the
+rather well-explained \cite{Choo16} (note that the fourth proof is
+incomplete, as the existence of the maximum $S^*$ needs to be proven).
+
 \begin{todo}
 Proof.
 \end{todo}
@@ -1044,7 +1048,30 @@ such that none of $ab$, $bc$ and $ca$ are edges of $G$.
 
 Just as Proposition~\ref{prop.simple.R33} is merely the tip of a deep
 iceberg called Ramsey theory, Theorem~\ref{thm.intro.mantel} is the
-beginning of a longer story.
+beginning of a longer story. The most famous piece of this story is
+the following fact, known as \textit{Tur\'an's theorem}:
+
+\begin{theorem} \label{thm.intro.turan}
+Let $r$ be a positive integer.
+Let $G$ be a simple graph. Let $n = \abs{\verts{G}}$ be the number of
+vertices of $G$. Assume that
+$\abs{\edges{G}} > \dfrac{r-1}{r} \cdot \dfrac{n^2}{2}$. Then, there
+exist $r + 1$ distinct vertices
+of $G$ that are mutually adjacent (i.e., each two distinct ones among
+these $r + 1$ vertices are adjacent).
+\end{theorem}
+
+Theorem~\ref{thm.intro.mantel} is the particular case of
+Theorem~\ref{thm.intro.turan} for $r = 2$. See
+\cite[Chapter 4, Theorem 4.8]{Jukna11} for a proof of
+Theorem~\ref{thm.intro.turan}.
+
+Results like Theorem~\ref{thm.intro.mantel} (and sometimes also like
+Proposition~\ref{prop.simple.Rrs}) are commonly regarded as part of
+a subject called \textit{extremal graph theory}. (The word
+``extremal'' refers to the appearance of bounds, such as the
+$\dfrac{r-1}{r} \cdot \dfrac{n^2}{2}$.) There are textbooks on this
+subject, such as \cite{Jukna11}.
 
 \begin{todo}
 Turan's theorem: at least state it, and cite a proof.
@@ -3201,6 +3228,10 @@ Andries E. Brouwer,
 Gary Chartrand, Linda Lesniak, Ping Zhang,
 \textit{Graphs \& Digraphs}, 6th edition, CRC Press 2016.
 
+\bibitem[Choo16]{Choo16}David Choo,
+\textit{4 proofs to Mantel's Theorem},
+\url{http://davinchoo.com/2016/06/13/4-proofs-to-mantels-theorem/} .
+
 \bibitem[Conrad]{Conrad-sign}Keith Conrad, \textit{Sign of permutations},
 \newline\url{http://www.math.uconn.edu/~kconrad/blurbs/grouptheory/sign.pdf} .
 
@@ -3248,6 +3279,11 @@ Mathematics, Springer 2008.
 Irene Heinrich, Peter Tittmann,
 \textit{Counting Dominating Sets of Graphs},
 \arxiv{1701.03453v1}.
+
+\bibitem[Jukna11]{Jukna11}Stasys Jukna,
+\textit{Extremal Combinatorics}, 2nd edition, Springer 2011.
+An early draft is available at
+\url{http://www.thi.informatik.uni-frankfurt.de/~jukna/EC_Book_2nd/} .
 
 % \bibitem[OlvSha06]{OlvSha06}Peter J. Olver, Chehrzad Shakiban, \textit{Applied
 % Linear Algebra}, Prentice Hall, 2006.\newline See also
