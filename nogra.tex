@@ -986,7 +986,8 @@ of $U$ satisfying $\alpha\tup{u_1} = \alpha\tup{u_2}$. We shall show
 that $u_1 = u_2$.
 
 The definition of $\alpha$ yields $\alpha\tup{u_1} = vu_1
-= \set{v, u_1}$. Hence, $\set{v, u_1} = \alpha\tup{u_1} \subseteq E
+= \set{v, u_1}$. Hence, $\set{v, u_1} = \alpha\tup{u_1} \in E_v
+\subseteq E
 \subseteq \powset[2]{V}$. Therefore, $\set{v, u_1}$ is a two-element
 set. Hence, $v \neq u_1$. Therefore, $\set{v, u_1} \setminus \set{v}
 = \set{u_1}$. Hence,
@@ -1212,7 +1213,7 @@ two different expressions for one and the same value (which, in
 itself, is not of much interest), and then obtaining an equality by
 comparing these two different expressions. In the above proof,
 the value was $N$, and the two expressions were
-\eqref{pf.prop.intro.2n.1} with \eqref{pf.prop.intro.2n.2}.
+\eqref{pf.prop.intro.2n.1} and \eqref{pf.prop.intro.2n.2}.
 \end{remark}
 
 \begin{proposition} \label{prop.intro.even-odd}
@@ -2198,7 +2199,7 @@ $\sum_{p \in P} \ive{p = q} a_p = a_q$.
 
 \textbf{(b)} Prove Proposition~\ref{prop.intro.iverson.sums}.
 
-Now, let $G$ be a graph.
+Now, let $G$ be a simple graph.
 
 \textbf{(c)} Prove that
 $\deg v = \sum_{u \in \verts{G}} \ive{uv \in \edges{G}}$
