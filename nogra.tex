@@ -136,8 +136,11 @@
 % $\edges{...}$ yields $\operatorname{E}\left( ... \right)$.
 \newcommand{\arcs}[1]{\operatorname{A}\left( #1 \right)}
 % $\arcs{...}$ yields $\operatorname{A}\left( ... \right)$.
-\newcommand{\E}{\operatorname{E}}
-\newcommand{\A}{\operatorname{A}}
+\newcommand{\underbrack}[2]{\underbrace{#1}_{\substack{#2}}}
+% $\underbrack{...1}{...2}$ yields
+% $\underbrace{...1}_{\substack{...2}}$. This is useful for doing
+% local rewriting transformations on mathematical expressions with
+% justifications.
 \ihead{Notes on graph theory (\today, \currenttime)}
 \ohead{page \thepage}
 \cfoot{}
@@ -229,6 +232,7 @@ Various other texts on graph theory are \cite{Bollob79},
 (This is a haphazard list; I have barely touched most of these texts.)
 Also, texts on combinatorics and on discrete mathematics (such as
 \cite{BenWil12}, \cite{KelTro15}, \cite{PoTaWo83}, \cite{Bona11},
+\cite{Guicha16},
 or the introductory \cite{LoPeVe03}) often contain
 sections on graph theory, since graph theory is considered to be part
 of both.
@@ -886,18 +890,54 @@ triangle-or-anti-triangles.
 \subsection{\label{sect.intro.deg}Degrees}
 
 Next, we introduce the notion of the \textit{degree} of a vertex of a
-graph. This is simply the number of neighbors of the vertex:
+graph. This is simply the number of edges containing this vertex:
 
 \begin{definition} \label{def.intro.deg}
 Let $G = \tup{V, E}$ be a simple graph. Let $v \in V$ be a vertex of
 $G$. Then, the \textit{degree} of $v$ (with respect to $G$) is defined
-as the number of all neighbors of $v$ in $G$. This degree is a
-nonnegative integer, and is denoted by $\deg v$ (or by
-$\deg_G v$, when the graph $G$ is not clear from the context).
+as the number of all edges of $G$ that contain $v$.
+This degree is a nonnegative integer, and is denoted by $\deg v$. It
+is also denoted by $\deg_G v$, when the graph $G$ is not clear from
+the context.
+
 Thus,
 \begin{align}
 \deg v &= \deg_G v =
-\left(\text{the number of all neighbors of } v\right)
+\left(\text{the number of all edges of } G \text{ that contain } v
+\right)
+\label{eq.def.intro.deg.0a} \\
+&=
+\left(\text{the number of all } e \in E \text{ that contain } v
+\right)
+\label{eq.def.intro.deg.0b} \\
+& \qquad
+\left(\text{since the edges of } G \text{ are precisely the } e \in E
+\right) \nonumber \\
+&= \abs{\set{e \in E \ \mid \ v \in e }} .
+\label{eq.def.intro.deg.0c}
+\end{align}
+\end{definition}
+
+\begin{example} \label{exa.intro.deg}
+Define the sets $U$ and $E$ as in Example~\ref{exa.intro.simple.VE}.
+Let $G$ be the graph $\tup{U, E}$. Then, $\deg 1$ is the number of all
+edges of $G$ that contain $1$. These edges are $14$ and $15$; hence,
+their number is $2$. Thus, $\deg 1 = 2$. Similarly, $\deg 4 = 4$
+(since $\deg 4$ is the number of all edges of $G$ that contain $4$,
+but these edges are $14$, $24$, $34$ and $45$). Similarly,
+$\deg 2 = 3$, $\deg 3 = 3$ and $\deg 5 = 4$.
+\end{example}
+
+Here are some different characterizations of degrees in a simple
+graph:
+
+\begin{proposition} \label{prop.intro.deg.def2}
+Let $G = \tup{V, E}$ be a simple graph. Let $v \in V$ be a vertex of
+$G$. Then,
+\begin{align}
+\deg v &= \deg_G v
+\label{eq.def.intro.deg.G} \\
+&= \left(\text{the number of all neighbors of } v\right)
 \label{eq.def.intro.deg.1} \\
 &= \abs{\set{u \in V \ \mid \ u \text{ is a neighbor of } v }}
 \label{eq.def.intro.deg.2} \\
@@ -908,11 +948,130 @@ Thus,
 &= \abs{\set{u \in V \ \mid \ uv \in E }} .
 \label{eq.def.intro.deg.5}
 \end{align}
-\end{definition}
+\end{proposition}
 
-\begin{todo}
-Examples of degrees.
-\end{todo}
+Proposition~\ref{prop.intro.deg.def2} is essentially obvious: It
+follows from observing that each edge of $E$ that contains $v$
+contains exactly one neighbor of $v$, and that different such edges
+contain different neighbors of $v$. For the mere sake of completeness,
+let me include a formal proof.
+
+\begin{proof}[Proof of Proposition~\ref{prop.intro.deg.def2}.]Both
+$\deg v$ and $\deg_G v$ denote the degree of $v$. Thus,
+$\deg v = \deg_G v$. Hence, \eqref{eq.def.intro.deg.G} is proven.
+
+Let $U$ be the set of all neighbors of $v$. Then,
+\[
+\abs{U}
+= \left(\text{the number of all neighbors of } v\right) .
+\]
+
+Let $E_v$ be the subset $\set{e \in E \ \mid \ v \in e }$ of $E$. This
+is the set of all edges $e \in E$ that contain $v$.
+
+For each $u \in U$, we have
+$vu \in E_v$\ \ \ \ \footnote{\textit{Proof.} Let $u \in U$. Thus, $u$
+is a neighbor of $v$ (by the definition of $U$). In other words,
+$vu \in E$ (by the definition of a ``neighbor''). Furthermore,
+$v \in \set{v, u} = vu$. Hence, $vu$ is an element $e \in E$
+satisfying $v \in e$ (since $vu \in E$ and $v \in vu$). In other
+words, $vu \in \set{e \in E \ \mid \ v \in e } = E_v$. Qed.}.
+Hence, we can define a map $\alpha : U \to E_v$ by setting
+\[
+\alpha\tup{u} = vu \qquad \text{for each } u \in U .
+\]
+Consider this map $\alpha$. This map $\alpha$ is
+injective\footnote{\textit{Proof.} Let $u_1$ and $u_2$ be two elements
+of $U$ satisfying $\alpha\tup{u_1} = \alpha\tup{u_2}$. We shall show
+that $u_1 = u_2$.
+
+The definition of $\alpha$ yields $\alpha\tup{u_1} = vu_1
+= \set{v, u_1}$. Hence, $\set{v, u_1} = \alpha\tup{u_1} \subseteq E
+\subseteq \powset[2]{V}$. Therefore, $\set{v, u_1}$ is a two-element
+set. Hence, $v \neq u_1$. Therefore, $\set{v, u_1} \setminus \set{v}
+= \set{u_1}$. Hence,
+$\set{u_1}
+= \underbrace{\set{v, u_1}}_{= \alpha\tup{u_1}} \setminus \set{v}
+= \alpha\tup{u_1} \setminus \set{v}$.
+The same argument (but applied to $u_2$ instead of $u_1$) shows that
+$\set{u_2} = \alpha\tup{u_2} \setminus \set{v}$.
+Now,
+\[
+\set{u_1}
+= \underbrace{\alpha\tup{u_1}}_{= \alpha\tup{u_2}} \setminus \set{v}
+= \alpha\tup{u_2} \setminus \set{v} = \set{u_2} ,
+\]
+so that
+$u_1 \in \set{u_1} = \set{u_2}$ and therefore $u_1 = u_2$.
+
+Now, forget that we fixed $u_1$ and $u_2$. We thus have proven that
+if $u_1$ and $u_2$ are two elements of $U$ satisfying
+$\alpha\tup{u_1} = \alpha\tup{u_2}$, then $u_1 = u_2$. In other words,
+the map $\alpha$ is injective.} and
+surjective\footnote{\textit{Proof.} Let $f \in E_v$. Thus,
+$f \in E_v = \set{e \in E \ \mid \ v \in e }$. In other words, $f$
+is an element of $E$ satisfying $v \in f$.
+
+We have $f \in E \subseteq \powset[2]{V}$. Thus, $f$ is a $2$-element
+subset of $V$. Thus, $\abs{f} = 2$. Since $v \in f$, we have
+$\abs{f \setminus \set{v}} = \abs{f} - 1 = 1$ (since $\abs{f} = 2$).
+Hence, $f \setminus \set{v}$ is a $1$-element set. Therefore,
+$f \setminus \set{v} = \set{u}$ for some $u$. Clearly,
+$u \in \set{u} = f \setminus \set{v} \subseteq f \subseteq V$; thus,
+$u$ is a vertex of $G$. Moreover, $v \in f$ and thus
+$f = \underbrace{\tup{f \setminus \set{v}}}_{= \set{u}} \cup \set{v}
+= \set{u} \cup \set{v} = \set{u, v} = \set{v, u} = vu$. Hence,
+$vu = f \in E$. In other words, $u$ is a neighbor of $v$ (by the
+definition of ``neighbor''). In other words, $u \in U$ (since $U$ is
+the set of all neighbors of $v$). The definition of $\alpha$ now
+yields $\alpha\tup{u} = vu = f$. Hence, $f = \alpha\tup{u} \in
+\alpha\tup{U}$.
+
+Now, forget that we fixed $f$. We thus have shown that
+$f \in \alpha\tup{U}$ for each $f \in E_v$. In other words, $E_v
+\subseteq \alpha\tup{U}$. In other words, the map $\alpha$ is
+surjective.}. Hence, the map $\alpha$ is bijective. Thus, we have
+found a bijective map $\alpha$ from $U$ to $E_v$. Therefore,
+$\abs{E_v} = \abs{U}$.
+
+But $E_v = \set{e \in E \ \mid \ v \in e }$ and thus
+$\abs{E_v} = \abs{\set{e \in E \ \mid \ v \in e }} = \deg v$
+(by \eqref{eq.def.intro.deg.0c}). Hence,
+$\deg v = \abs{E_v} = \abs{U}
+= \left(\text{the number of all neighbors of } v\right)$. This proves
+\eqref{eq.def.intro.deg.1}.
+
+Now,
+\begin{align*}
+\deg v &= \left(\text{the number of all neighbors of } v\right) \\
+&= \abs{\underbrace{\text{the set of all neighbors of } v }_{
+         = \set{u \in V \ \mid \ u \text{ is a neighbor of } v }}} \\
+&= \abs{\set{u \in V \ \mid \ u \text{ is a neighbor of } v }} \\
+&= \abs{\set{u \in V \ \mid \ u \text{ is adjacent to } v }}
+\end{align*}
+(because for any vertex $u \in V$, the condition
+``$u$ is a neighbor of $v$'' is equivalent to the condition
+``$u$ is adjacent to $v$''). Thus, \eqref{eq.def.intro.deg.2} and
+\eqref{eq.def.intro.deg.3} are proven.
+
+Furthermore,
+\begin{align*}
+\deg v &= \abs{\set{u \in V \ \mid \ u \text{ is a neighbor of } v }} \\
+&= \abs{\set{u \in V \ \mid \ vu \in E }}
+\end{align*}
+(because for any vertex $u \in V$, the condition ``$u$ is a neighbor
+of $v$'' is equivalent to the condition ``$vu \in E$''). Hence,
+\begin{align*}
+\deg v &= \abs{\set{u \in V \ \mid \ \underbrace{vu}_{=uv} \in E }}
+= \abs{\set{u \in V \ \mid \ uv \in E }} \\
+&= \abs{\set{u \in V \ \mid \ uv \text{ is an edge of } G }}
+\end{align*}
+(because for any vertex $u \in V$, the condition ``$uv \in E$'' is
+equivalent to the condition ``$uv$ is an edge of $G$''). Thus, we
+have proven \eqref{eq.def.intro.deg.5} and
+\eqref{eq.def.intro.deg.4}. The proof of
+Proposition~\ref{prop.intro.deg.def2} is thus complete.
+\end{proof}
 
 \begin{remark}
 Different sources use different notations for the degree of a
@@ -932,10 +1091,13 @@ vertex of $G$. Then, $\deg v \in \set{0, 1, \ldots, n-1}$.
 \end{proposition}
 
 \begin{proof}[Proof of Proposition~\ref{prop.intro.deg.in-set}.]
-Let $U$ be the set of all neighbors of $v$. Then, $\abs{U}$ is
-the number of all neighbors of $v$, and thus equals $\deg v$ (since
-$\deg v$ was defined as the number of all neighbors of $v$).
-In other words, $\abs{U} = \deg v$.
+Let $U$ be the set of all neighbors of $v$. Then,
+\[
+\abs{U}
+= \left(\text{the number of all neighbors of } v\right) .
+\]
+Comparing
+this with \eqref{eq.def.intro.deg.1}, we obtain $\abs{U} = \deg v$.
 
 But $U \subseteq \verts{G} \setminus \set{v}$
 \ \ \ \ \footnote{\textit{Proof.} Let $u \in U$. Thus, $u$ is
@@ -965,12 +1127,93 @@ Proposition~\ref{prop.intro.deg.in-set}.
 Let $G$ be a simple graph.
 The sum of the degrees of all vertices of $G$ equals
 twice the number of edges of $G$. In other words,
-$\sum_{v \in \verts{G}} \deg v = 2 \abs{\edges{G}}$.
+\begin{equation}
+\sum_{v \in \verts{G}} \deg v = 2 \abs{\edges{G}} .
+\label{eq.prop.intro.2n.main}
+\end{equation}
 \end{proposition}
 
-\begin{todo}
-Proof.
-\end{todo}
+\begin{proof}[Proof of Proposition~\ref{prop.intro.2n}.]
+Write the simple graph $G$ in the form $G = \tup{V, E}$. Thus,
+$\verts{G} = V$ and $\edges{G} = E$.
+
+Now, let $N$ be the number of all pairs $\tup{v, e} \in V \times E$
+such that $v \in e$. Then, we can express $N$ in the following two
+ways:
+
+\begin{itemize}
+\item We can obtain $N$ by computing, for each $v \in V$, the number
+of all $e \in E$ satisfying $v \in e$, and then adding up these
+numbers over all $v \in V$. Thus, we obtain
+\begin{equation}
+N
+= \sum_{v \in V}
+  \underbrace{\left(\text{the number of all } e \in E
+                \text{ satisfying } v \in e\right)}_{
+              \substack{= \left(\text{the number of all } e \in E
+                \text{ that contain } v \right) = \deg v \\
+                \text{(by \eqref{eq.def.intro.deg.0b}})}}
+= \sum_{v \in V} \deg v .
+\label{pf.prop.intro.2n.1}
+\end{equation}
+
+\item We can also obtain $N$ by computing, for each $e \in E$, the
+number of all $v \in V$ satisfying $v \in e$, and then adding up these
+numbers over all $e \in E$. Thus, we obtain
+\begin{equation}
+N
+= \sum_{e \in E}
+   \left(\text{the number of all } v \in V
+          \text{ satisfying } v \in e\right) .
+\label{pf.prop.intro.2n.2a}
+\end{equation}
+But for each $e \in E$, we have
+\[
+\left(\text{the number of all } v \in V
+          \text{ satisfying } v \in e\right) = 2
+\]
+\footnote{\textit{Proof.} Let $e \in E$. Then,
+$e \in E \subseteq \powset[2]{V}$. In other words, $e$ is a
+$2$-element subset of $V$. Hence, $\abs{e} = 2$ (since $e$ is a
+$2$-element set).
+
+But the $v \in V$ satisfying $v \in e$ are precisely the $v \in e$
+(because $e$ is a subset of $V$). Hence,
+\[
+\left(\text{the number of all } v \in V
+          \text{ satisfying } v \in e\right)
+= \left(\text{the number of all } v \in e \right)
+= \abs{e} = 2 ,
+\]
+qed.}. Hence, \eqref{pf.prop.intro.2n.2a} becomes
+\begin{align}
+N
+&= \sum_{e \in E}
+   \underbrace{\left(\text{the number of all } v \in V
+                 \text{ satisfying } v \in e\right)}_{= 2}
+= \sum_{e \in E} 2 = \abs{E} \cdot 2
+\label{pf.prop.intro.2n.2}
+\end{align}
+(because the sum $\sum_{e \in E} 2$ consists of $\abs{E}$ addends,
+each of which equals $2$).
+\end{itemize}
+
+Comparing \eqref{pf.prop.intro.2n.1} with \eqref{pf.prop.intro.2n.2},
+we obtain $\sum_{v \in V} \deg v = \abs{E} \cdot 2 = 2 \abs{E}$.
+Since $\verts{G} = V$ and $\edges{G} = E$, we can rewrite this as
+$\sum_{v \in \verts{G}} \deg v = 2 \abs{\edges{G}}$.
+Thus, Proposition~\ref{prop.intro.2n} is proven.
+\end{proof}
+
+\begin{remark}
+The above proof of Proposition~\ref{prop.intro.2n} is a classical
+example of the technique of \textit{double-counting}: i.e., finding
+two different expressions for one and the same value (which, in
+itself, is not of much interest), and then obtaining an equality by
+comparing these two different expressions. In the above proof,
+the value was $N$, and the two expressions were
+\eqref{pf.prop.intro.2n.1} with \eqref{pf.prop.intro.2n.2}.
+\end{remark}
 
 \begin{proposition} \label{prop.intro.even-odd}
 Let $G$ be a simple graph.
@@ -978,9 +1221,39 @@ Then, the number of vertices $v$ of $G$ whose degree $\deg v$ is odd
 is even.
 \end{proposition}
 
-\begin{todo}
-Proof.
-\end{todo}
+\begin{proof}[Proof of Proposition~\ref{prop.intro.even-odd}.]
+From \eqref{eq.prop.intro.2n.main}, we obtain
+\[
+\sum_{v \in \verts{G}} \deg v = 2 \abs{\edges{G}} \equiv 0 \mod 2.
+\]
+Hence,
+\begin{align*}
+0 &\equiv \sum_{v \in \verts{G}} \deg v
+=
+\sum_{\substack{v \in \verts{G}; \\ \deg v \text{ is even}}}
+  \underbrack{\deg v}{\equiv 0 \mod 2 \\
+                      \text{(since } \deg v \text{ is even)}}
++
+\sum_{\substack{v \in \verts{G}; \\ \deg v \text{ is odd}}}
+  \underbrack{\deg v}{\equiv 1 \mod 2 \\
+                      \text{(since } \deg v \text{ is odd)}} \\
+&\equiv
+\underbrace{\sum_{\substack{v \in \verts{G}; \\ \deg v
+            \text{ is even}}} 0}_{= 0}
++
+\sum_{\substack{v \in \verts{G}; \\ \deg v \text{ is odd}}} 1 \\
+&= \sum_{\substack{v \in \verts{G}; \\ \deg v \text{ is odd}}} 1
+= \abs{\set{v \in \verts{G} \ \mid \ \deg v \text{ is odd}}} \cdot 1
+\\
+&= \abs{\set{v \in \verts{G} \ \mid \ \deg v \text{ is odd}}} \\
+&= \left(\text{the number of vertices } v \text{ of } G
+            \text{ whose degree } \deg v \text{ is odd}\right)
+\mod 2 .
+\end{align*}
+In other words, the number of vertices $v$ of $G$ whose degree
+$\deg v$ is odd is even. This proves
+Proposition~\ref{prop.intro.even-odd}.
+\end{proof}
 
 As usual, Proposition~\ref{prop.intro.even-odd} can be restated in
 terms of friendships among people; this restatement takes the
@@ -995,9 +1268,123 @@ Then, there exist two distinct vertices $v$ and $w$ of $G$ having the
 same degree (that is, having $\deg v = \deg w$).
 \end{proposition}
 
-\begin{todo}
-Proof.
-\end{todo}
+\begin{proof}[Proof of Proposition~\ref{prop.intro.pigeonhole}.]
+Assume the contrary. Then, there exist \textbf{no} two distinct
+vertices $v$ and $w$ of $G$ having the same degree. Hence, the degrees
+of all vertices of $G$ are distinct. In other words, any two distinct
+vertices $v$ and $w$ of $G$ satisfy
+\begin{equation}
+\deg v \neq \deg w .
+\label{pf.prop.intro.pigeonhole.neq}
+\end{equation}
+
+Let $n = \abs{\verts{G}}$. Proposition~\ref{prop.intro.deg.in-set}
+shows that $\deg v \in \set{0, 1, \ldots, n-1}$ for each
+$v \in \verts{G}$. Hence, we can define a map
+$d : \verts{G} \to \set{0, 1, \ldots, n-1}$ by
+\[
+d\tup{v} = \deg v \qquad \text{for each } v \in \verts{G} .
+\]
+Consider this map $d$. The map $d$ is
+injective\footnote{\textit{Proof.} Let $v$ and $w$ be two distinct
+elements of $\verts{G}$. Then, $\deg v = \deg w$
+(by \eqref{pf.prop.intro.pigeonhole.neq}). But
+the definition of $d$ yields
+$d\tup{v} = \deg v$ and $d\tup{w} = \deg w$. Now,
+$d\tup{v} = \deg v \neq \deg w = d\tup{w}$.
+
+Now, forget that we fixed $v$ and $w$. We thus have shown that if $v$
+and $w$ are two distinct elements of $\verts{G}$, then
+$d\tup{v} \neq d\tup{w}$. In other words, the map $d$ is injective.}.
+
+Recall the following elementary fact: If $X$ and $Y$ are two finite
+sets satisfying $\abs{X} = \abs{Y}$, then each injective map from $X$
+to $Y$ is bijective\footnote{Here is a quick \textit{proof} of this
+fact: Let $X$ and $Y$ be two finite sets satisfying $\abs{X} =
+\abs{Y}$. Let $f$ be an injective map from $X$ to $Y$. We must show
+that $f$ is bijective.
+
+The set $Y$ is finite. Hence, the only subset of $Y$ that has as
+many elements as $Y$ is $Y$ itself.
+
+The set $f\tup{X}$ consists of the images of the elements of $X$ under
+the map $f$. These images are pairwise distinct (since $f$ is
+injective), and there are precisely $\abs{X}$ many of them.
+Hence, $\abs{f\tup{X}} = \abs{X}$. Now, $f\tup{X}$ is a subset of $Y$
+that has as many elements as $Y$ (since $\abs{f\tup{X}} = \abs{X}
+= \abs{Y}$). Therefore, $f\tup{X}$ must be $Y$ itself (since the only
+subset of $Y$ that has as many elements as $Y$ is $Y$ itself). In
+other words, $Y = f\tup{X}$. Hence, the map $f$ is surjective. Thus,
+$f$ is bijective (since $f$ is injective and surjective). This proves
+the fact that we wanted to prove.}. Applying this to $X = \verts{G}$,
+$Y = \set{0, 1, \ldots, n-1}$ and $f = d$, we conclude that
+the map $d$ is bijective (since $\verts{G}$ and
+$\set{0, 1, \ldots, n-1}$ are finite sets satisfying
+$\abs{\verts{G}} = n = \abs{\set{0, 1, \ldots, n-1}}$, and since
+$d : \verts{G} \to \set{0, 1, \ldots, n-1}$ is an injective map).
+In particular, $d$ is surjective.
+
+Now, $n = \abs{\verts{G}} \geq 2$ (since $G$ has at least two
+vertices). Hence, $0 \in \set{0, 1, \ldots, n-1}$. Since $d$ is
+surjective, this shows that there exists some vertex $a \in \verts{G}$
+such that $d\tup{a} = 0$. Consider this $a$. The definition of $d$
+yields $d\tup{a} = \deg a$, so that $\deg a = d\tup{a} = 0$.
+
+Also, $n-1 \in \set{0, 1, \ldots, n-1}$ (since $n \geq 2$). Since $d$
+is surjective, this shows that there exists some vertex
+$b \in \verts{G}$
+such that $d\tup{b} = n-1$. Consider this $b$. The definition of $d$
+yields $d\tup{b} = \deg b$, so that $\deg b = d\tup{b} = n-1$.
+
+From $n \geq 2$, we obtain $n-1 \geq 1 > 0$, so that $n-1 \neq 0$,
+and thus $\deg a = 0 \neq n-1 = \deg b$. Hence, $a \neq b$.
+
+Now, let $B$ be the set of all neighbors of $b$. Then,
+\[
+\abs{B} = \left(\text{the number of all neighbors of } b\right) .
+\]
+Comparing this with
+\[
+\deg b = \left(\text{the number of all neighbors of } b\right)
+\qquad \left(\text{by \eqref{eq.def.intro.deg.1}, applied to } v = b
+\right) ,
+\]
+we obtain $\abs{B} = \deg b = n-1$.
+
+But $B \subseteq
+\verts{G} \setminus \set{a, b}$\ \ \ \ \footnote{\textit{Proof.}
+Let $v \in B$. Then, $v$ is a neighbor of $b$ (since $B$ is the set of
+all neighbors of $b$). In other words, $bv \in E$ (by the definition
+of ``neighbor''). Hence, $bv \in E \subseteq \powset[2]{V}$.
+Therefore, $bv$ is a $2$-element set. Hence, $v \neq b$.
+
+Also, $vb = bv \in E$. Thus, $b$ is a neighbor of $v$. Hence, the
+vertex $v$ has at least one neighbor (namely, $b$).
+Now, \eqref{eq.def.intro.deg.1} yields
+\[
+\deg v = \left(\text{the number of all neighbors of } v\right)
+\geq 1
+\]
+(since the vertex $v$ has at least one neighbor), so that
+$\deg v \geq 1 > 0 = \deg a$ and thus $\deg v \neq \deg a$ and
+therefore $v \neq a$. Combining this with $v \neq b$, we find
+$v \notin \set{a, b}$. Hence, $v \in \verts{G} \setminus \set{a, b}$.
+
+Now, forget that we fixed $v$. We thus have proven that each $v \in B$
+satisfies $v \in \verts{G} \setminus \set{a, b}$. In other words,
+$B \subseteq \verts{G} \setminus \set{a, b}$.}. Hence,
+\begin{align*}
+\abs{B} &\leq \abs{\verts{G} \setminus \set{a, b}}
+= \underbrace{\abs{\verts{G}}}_{= n}
+- \underbrack{\abs{\set{a, b}}}{
+                = 2 \\ \text{(since } a \neq b \text{)}}
+\qquad \left(\text{since } \set{a, b} \subseteq V \right) \\
+&= n - 2 < n - 1 .
+\end{align*}
+This contradicts $\abs{B} = n - 1$. This contradiction shows that our
+assumption was wrong. Proposition~\ref{prop.intro.pigeonhole} is
+proven.
+\end{proof}
 
 Degrees of vertices can be used to prove various facts about graphs.
 For an example, let us show \textit{Mantel's theorem}:
@@ -1611,6 +1998,8 @@ impossible, since it has no neighbors). Such vertices are said to be
 \begin{definition} \label{def.intro.isolated}
 Let $G$ be a simple graph. A vertex $v$ of $G$ is said to be
 \textit{isolated} if it has no neighbors. (In other words, a vertex
+$v$ of $G$ is said to be \textit{isolated} if it belongs to no edge
+of $G$. In other words, a vertex
 $v$ of $G$ is said to be \textit{isolated} if its degree $\deg v$
 equals $0$.)
 \end{definition}
@@ -3261,6 +3650,10 @@ version 1.4.2.1 (18 Oct 2015),
 \bibitem[Grinbe16]{detnotes}Darij Grinberg, \textit{Notes on the combinatorial
 fundamentals of algebra}, 29 December 2016.
 \newline\url{http://www.cip.ifi.lmu.de/~grinberg/primes2015/sols.pdf}
+
+\bibitem[Guicha16]{Guicha16}David Guichard,
+\textit{An Introduction to Combinatorics and Graph Theory},
+\newline\url{https://www.whitman.edu/mathematics/cgt_online/cgt.pdf}.
 
 \bibitem[HarPal73]{HarPal73}
 Frank Harary, Edgar M. Palmer,
