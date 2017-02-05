@@ -1817,7 +1817,7 @@ bunch of basic graphs; mod-3 congruence graph (just as an example);
 \begin{definition} \label{def.intro.walks}
 Let $G$ be a simple graph.
 
-\textbf{(a)} A \textit{walk} (in $G$) means a sequence
+\textbf{(a)} A \textit{walk} (in $G$) means a finite sequence
 $\tup{v_0, v_1, \ldots, v_k}$ of vertices of $G$ (with $k \geq 0$)
 such that all of
 $v_0 v_1, v_1 v_2, \ldots, v_{k-1} v_k$ are edges of $G$. (We allow
@@ -1856,8 +1856,44 @@ starting point is $p$ and whose ending point is $q$. A
 starting point is $p$ and whose ending point is $q$.
 \end{definition}
 
+\begin{example} \label{exa.intro.walks}
+Let $V$ and $E$ be as in Example~\ref{exa.simple.R33} \textbf{(c)}.
+Let $G$ be the graph $\tup{V, E}$. Then:
+
+\begin{itemize}
+\item The sequence $\tup{1, 3, 4, 5, 6, 1, 3, 2}$ of vertices of $G$
+is a walk (in $G$), since all of $13$, $34$, $45$, $56$, $61$, $13$,
+and $32$ are edges of $G$. This walk is a walk from $1$ to $2$ (since
+its starting point is $1$, and its ending point is $2$). It is not a
+path (since $1$, $3$, $4$, $5$, $6$, $1$, $3$ and $2$ are not
+distinct). The length of this walk is $7$.
+% It is not a circuit, and thus not a cycle.
+
+\item The sequence $\tup{1, 2, 4, 3}$ of vertices of $G$ is not a walk
+(in fact, $12$ and $43$ are edges of $G$, but $24$ is not). Hence, it
+is not a path either.
+
+\item The sequence $\tup{1, 3, 2}$ of vertices of $G$ is a walk, but
+also a path (from $1$ to $2$). The length of this path is $2$.
+
+\item The sequence $\tup{1, 3, 2, 1}$ of vertices of $G$ is a walk
+(from $1$ to $1$), but not a path (since $1$, $3$, $2$ and $1$ are
+not distinct). The length of this walk is $3$.
+% a circuit (since $1 = 1$), and a cycle
+
+\item The sequence $\tup{1, 2, 1}$ of vertices of $G$ is a walk
+(from $1$ to $1$). It is not a path. The length of this walk is $2$.
+
+\item The sequence $\tup{5}$ of vertices of $G$ is a walk (from $5$
+to $5$) and a path as well. The length of this path is $0$.
+
+\item The sequence $\tup{5, 4}$ of vertices of $G$ is a walk (from $5$
+to $4$) and a path as well. The length of this path is $1$.
+\end{itemize}
+\end{example}
+
 \begin{todo}
-Examples!
+Pictures for this example.
 \end{todo}
 
 \begin{exercise} \label{exe.intro.path.edges-dist}
