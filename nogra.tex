@@ -174,7 +174,7 @@ intersection between \cite[Chapter 12]{LeLeMe16} and our notes, but
 \cite{LeLeMe16} mostly keeps to the basics of graph theory.)
 Another resource to familiarize oneself with proofs is
 \cite{Day-proofs}. Generally, most good books about ``reading and
-writing mathematicals'' or ``introductions to abstract mathematics''
+writing mathematics'' or ``introductions to abstract mathematics''
 should convey these skills, although the extent to which they actually
 do so may differ.}
 and know how to work
@@ -759,7 +759,7 @@ proof would proceed: Let $x_1, x_2, x_3, x_4, x_5, x_6$ be six
 distinct vertices of $G$. (Such six vertices exist, since
 $\abs{\verts{G}} \geq 6$.) Let
 $X = \set{x_1, x_2, x_3, x_4, x_5, x_6}$ be the set of these six
-vertics. Notice that the set $X$ has $6$ elements, and thus the set
+vertices. Notice that the set $X$ has $6$ elements, and thus the set
 $\powset[2]{X}$ has $\dbinom{6}{2} = 15$ elements.
 Let $F$ be the set of all edges $uv$ of $G$ for which both
 $u$ and $v$ belong to $X$. (In other words, $F$ is the set of all
@@ -1580,7 +1580,7 @@ equivalence holds:
 \left( \phi^{-1}\tup{u}\phi^{-1}\tup{v} \in \edges{G} \right)
 & \Longleftrightarrow
 \left( \underbrace{\phi{\phi^{-1}\tup{u}}}_{=u}
-   \underbrace{\phi{\phi^{-1}tup{v}}}_{=v} \in \edges{H} \right) \\
+   \underbrace{\phi{\phi^{-1}\tup{v}}}_{=v} \in \edges{H} \right) \\
 &\qquad
 \left( \text{by \eqref{pf.prop.intro.iso.inverse.1}, applied to }
 \phi^{-1}\tup{u} \text{ and } \phi^{-1}\tup{v} \text{ instead of } u
@@ -2293,7 +2293,9 @@ Let $G$ be a simple graph. Let $u$ and $v$ be two vertices of $G$.
 The following seven statements are equivalent:
 
 \begin{itemize}
-\item \textit{Statement 0:} We have $u \simeq_G v$.
+\item \textit{Statement 0:} We have $u \simeq_G v$. (Here, $\simeq_G$
+is the binary relation on $V$, written infix, defined as follows:
+$u \simeq_G v$ if and only if there exists a walk from $u$ to $v$.)
 
 \item \textit{Statement 1:} There exists a walk from $u$ to $v$.
 
@@ -2532,7 +2534,7 @@ set $V$). Thus, there exists exactly $1$ dominating set of $G$
 sets of $G$ is $1$. Therefore, this number is odd. Hence,
 Theorem~\ref{thm.dominating.brouwer} is proven (under the assumption
 that $\abs{V} = 0$.}. Hence, for the rest of this proof, we
-WLOG asssume that $\abs{V} = 0$ does not hold.
+WLOG assume that $\abs{V} = 0$ does not hold.
 
 Let us use the notations of Theorem~\ref{thm.dominating.heinrich}.
 From Theorem~\ref{thm.dominating.heinrich} \textbf{(a)}, we know
@@ -2985,7 +2987,7 @@ $ V \setminus \tup{B \cup B'} = \tup{V \setminus B} \setminus B'
 = \varnothing$
 (since $V \setminus B \subseteq B'$).
 Thus, the $\Longleftarrow$ direction of the equivalence
-\eqref{pf.lem.dominating.heinrich-lemma2.2} is proven.}
+\eqref{pf.lem.dominating.heinrich-lemma2.2} is proven.}.
 
 Now, we can use the equivalence
 \eqref{pf.lem.dominating.heinrich-lemma2.1} to rewrite the summation
