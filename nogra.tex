@@ -114,6 +114,7 @@
 \includecomment{vershort}
 \excludecomment{noncompile}
 \newcommand{\id}{\operatorname{id}}
+\newcommand{\rev}{\operatorname{rev}}
 \newcommand{\NN}{\mathbb{N}}
 \newcommand{\ZZ}{\mathbb{Z}}
 \newcommand{\QQ}{\mathbb{Q}}
@@ -1903,11 +1904,397 @@ obvious when you can point to a picture; but we ask you to give a
 rigorous proof!)
 \end{exercise}
 
-\begin{proposition} \label{prop.intro.paths-and-walks}
-Let $G$ be a simple graph. Let $p$ and $q$ be two vertices of $G$.
-The following six statements are equivalent:
+Let us discuss a few basic properties of paths. First of all, if $v$
+is an vertex of a simple graph $G$, then the one-element list
+$\tup{v}$ is a path (in $G$) from $v$ to $v$. This path has length
+$0$. Hence, there exists a path (of length $0$) from each vertex to
+itself. Furthermore, if $\tup{v_0, v_1, \ldots, v_k}$ is a walk in a
+simple graph $G$, and if $p$ and $q$ are two elements of
+$\set{0, 1, \ldots, k}$ satisfying $p \leq k$, then
+$\tup{v_p, v_{p+1}, \ldots, v_q}$ also is a walk in $G$. The same
+statement holds if the word ``walk'' is replaced by ``path'' both
+times. Simple facts like this will be used without further mention.
+Let us now pass to a few facts which are less obvious (although
+intuitively clear):
+
+\begin{proposition} \label{prop.walks.concat}
+Let $G$ be a simple graph. Let $u$, $v$ and $w$ be three vertices of
+$G$.
+Let $\mathbf{a} = \tup{a_0, a_1, \ldots, a_k}$ be a walk from $u$ to
+$v$. 
+Let $\mathbf{b} = \tup{b_0, b_1, \ldots, b_\ell}$ be a walk from $v$
+to $w$.
+Then,
+\begin{align*}
+\tup{a_0, a_1, \ldots, a_k, b_1, b_2, \ldots, b_\ell}
+&= \tup{a_0, a_1, \ldots, a_{k-1}, b_0, b_1, \ldots, b_\ell} \\
+&= \tup{a_0, a_1, \ldots, a_{k-1}, v, b_1, b_2, \ldots, b_\ell}
+\end{align*}
+is a walk from $u$ to $w$.
+
+This walk shall be denoted by $\mathbf{a} * \mathbf{b}$.
+\end{proposition}
+
+\begin{proof}[Proof of Proposition~\ref{prop.walks.concat}.]
+The list $\tup{a_0, a_1, \ldots, a_k}$ is a walk from $u$ to $v$.
+Hence, all of $a_0 a_1, a_1 a_2, \ldots, a_{k-1} a_k$ are edges of
+$G$, and we have $a_0 = u$ and $a_k = v$.
+
+The list $\tup{b_0, b_1, \ldots, b_\ell}$ is a walk from $v$ to $w$.
+Hence, all of $b_0 b_1, b_1 b_2, \ldots, b_{\ell-1} b_\ell$ are edges
+of $G$, and we have $b_0 = v$ and $b_\ell = w$.
+
+We need to prove three claims:
+\begin{itemize}
+\item \textit{Claim 1:} We have
+$\tup{a_0, a_1, \ldots, a_k, b_1, b_2, \ldots, b_\ell}
+= \tup{a_0, a_1, \ldots, a_{k-1}, b_0, b_1, \ldots, b_\ell}$.
+\item \textit{Claim 2:} We have
+$\tup{a_0, a_1, \ldots, a_{k-1}, b_0, b_1, \ldots, b_\ell}
+= \tup{a_0, a_1, \ldots, a_{k-1}, v, b_1, b_2, \ldots, b_\ell}$.
+\item \textit{Claim 3:} The list
+$\tup{a_0, a_1, \ldots, a_k, b_1, b_2, \ldots, b_\ell}$ is a walk
+from $u$ to $w$.
+\end{itemize}
+
+\textit{Proof of Claim 1.} The two lists
+$\tup{a_0, a_1, \ldots, a_k, b_1, b_2, \ldots, b_\ell}$
+and \newline
+$\tup{a_0, a_1, \ldots, a_{k-1}, b_0, b_1, \ldots, b_\ell}$
+differ only in their $\tup{k+1}$-st entry, which is $a_k$ for the
+first list and is $b_0$ for the second list. But since their
+$\tup{k+1}$-st entries are also equal (because $a_k = v = b_0$),
+this shows that these two lists are identical. In other words,
+$\tup{a_0, a_1, \ldots, a_k, b_1, b_2, \ldots, b_\ell}
+= \tup{a_0, a_1, \ldots, a_{k-1}, b_0, b_1, \ldots, b_\ell}$.
+Claim 1 is proven.
+
+\textit{Proof of Claim 2.} The two lists
+$\tup{a_0, a_1, \ldots, a_{k-1}, b_0, b_1, \ldots, b_\ell}$
+and \newline
+$\tup{a_0, a_1, \ldots, a_{k-1}, v, b_1, b_2, \ldots, b_\ell}$
+differ only in their $\tup{k+1}$-st entry, which is $b_0$ for the
+first list and is $v$ for the second list. But since their
+$\tup{k+1}$-st entries are also equal (because $b_0 = v$),
+this shows that these two lists are identical. In other words,
+$\tup{a_0, a_1, \ldots, a_{k-1}, b_0, b_1, \ldots, b_\ell}
+= \tup{a_0, a_1, \ldots, a_{k-1}, v, b_1, b_2, \ldots, b_\ell}$.
+Claim 2 is proven.
+
+\textit{Proof of Claim 3.} Recall that all of
+$b_0 b_1, b_1 b_2, \ldots, b_{\ell-1} b_\ell$ are edges of $G$.
+since $b_0 = v = a_k$, this rewrites as follows: All of
+$a_k b_1, b_1 b_2, \ldots, b_{\ell-1} b_\ell$ are edges of $G$.
+Combining this with the fact that all of
+all of $a_0 a_1, a_1 a_2, \ldots, a_{k-1} a_k$ are edges of $G$,
+we obtain the following: All of
+$a_0 a_1, a_1, a_2, \ldots, a_{k-1} a_k,
+a_k b_1, b_1 b_2, \ldots, b_{\ell-1} b_\ell$ are edges of $G$. Hence,
+the list
+$\tup{a_0, a_1, \ldots, a_k, b_1, b_2, \ldots, b_\ell}$ is a walk
+(by the definition of ``walk''). Furthermore, this list is actually
+a walk from $u$ to $w$ (since $a_0 = u$ and $b_\ell = w$). This
+proves Claim 3.
+
+Thus, all three Claims are proven. Together, they yield 
+Proposition~\ref{prop.walks.concat}.
+\end{proof}
+
+\begin{proposition} \label{prop.walks.rev}
+Let $G$ be a simple graph. Let $u$ and $v$ be two vertices of $G$.
+Let $\mathbf{a} = \tup{a_0, a_1, \ldots, a_k}$ be a walk from $u$ to
+$v$.
+
+\textbf{(a)} The list $\tup{a_k, a_{k-1}, \ldots, a_0}$ is a walk
+from $v$ to $u$.
+
+This list shall be denoted by $\rev \mathbf{a}$, and called the
+\textit{reversal} of $\mathbf{a}$.
+
+\textbf{(b)} If the list $\mathbf{a}$ is a path, then
+$\rev \mathbf{a}$ is a path as well.
+\end{proposition}
+
+\begin{proof}[Proof of Proposition~\ref{prop.walks.rev}.]
+The list $\tup{a_0, a_1, \ldots, a_k}$ is a walk from $u$ to $v$.
+Hence, all of $a_0 a_1, a_1 a_2, \ldots, a_{k-1} a_k$ are edges of
+$G$, and we have $a_0 = u$ and $a_k = v$.
+
+\textbf{(a)} All of $a_0 a_1, a_1 a_2, \ldots, a_{k-1} a_k$ are edges
+of $G$. In other words,
+\begin{equation}
+a_i a_{i+1} \text{ is an edge of } G
+\qquad \text{ for each } i \in \set{0, 1, \ldots, k-1} .
+\label{pf.prop.walks.rev.1}
+\end{equation}
+
+Now, $a_{k-j} a_{k-\tup{j+1}}$ is an edge of $G$ for each
+$j \in \set{0, 1, \ldots, k-1}$\ \ \ \ \footnote{\textit{Proof.} Let
+$j \in \set{0, 1, \ldots, k-1}$. Then,
+$k-1-j \in \set{0, 1, \ldots, k-1}$. Hence,
+\eqref{pf.prop.walks.rev.1} (applied to $i=k-1-j$) shows that
+$a_{k-1-j} a_{\tup{k-1-j}+1}$ is an edge of $G$. Since
+$\underbrace{a_{k-1-j}}_{= a_{k-\tup{j+1}}}
+\underbrace{a_{\tup{k-1-j}+1}}_{= a_{k-j}}
+= a_{k-\tup{j+1}} a_{k-j} = a_{k-j} a_{k-\tup{j+1}}$,
+this rewrites as follows: $a_{k-j} a_{k-\tup{j+1}}$ is an edge of $G$.
+This completes the proof.}. In other words, all of
+$a_k a_{k-1}, a_{k-1} a_{k-2}, \ldots, a_1 a_0$ are edges of $G$.
+In other words, the list $\tup{a_k, a_{k-1}, \ldots, a_0}$ is a walk.
+This list is furthermore a walk from $v$ to $u$ (since $a_k = v$ and
+$a_0 = v$). This proves Proposition~\ref{prop.walks.rev} \textbf{(a)}.
+
+\textbf{(b)} The vertices of the walk $\mathbf{a}$ are
+$a_0, a_1, \ldots, a_k$
+(since $\mathbf{a} = \tup{a_0, a_1, \ldots, a_k}$),
+whereas the vertices of the walk $\rev \mathbf{a}$ are
+$a_k, a_{k-1}, \ldots, a_0$
+(since $\rev \mathbf{a} = \tup{a_k, a_{k-1}, \ldots, a_0}$). Hence,
+the vertices of the walk $\rev \mathbf{a}$ are the same as the
+vertices of the walk $\mathbf{a}$, listed in a different order.
+
+Now, assume that $\mathbf{a}$ is a path. Thus, the vertices of the
+walk $\mathbf{a}$ are distinct (by the definition of ``path''). In
+other words, the vertices of the walk $\rev \mathbf{a}$ are distinct
+(since the vertices of the walk $\rev \mathbf{a}$ are the same as the
+vertices of the walk $\mathbf{a}$, listed in a different order).
+Hence, this walk $\rev \mathbf{a}$ is a path (by the definition of
+``path''). This proves Proposition~\ref{prop.walks.rev} \textbf{(b)}.
+\end{proof}
+
+The next result is simple but crucial:
+
+\begin{proposition} \label{prop.walk.decrease}
+Let $G$ be a simple graph. Let $u$ and $v$ be two vertices of $G$.
+Let $\mathbf{a} = \tup{a_0, a_1, \ldots, a_k}$ be a walk from $u$ to
+$v$.
+Assume that $\mathbf{a}$ is not a path. Then, there exists a walk
+from $u$ to $v$ whose length is smaller than $k$.
+\end{proposition}
+
+\begin{example} \label{exa.walk.decrease}
+Let $G$ be the graph $\tup{V, E}$, where
+\begin{align*}
+V &= \set{1, 2, 3, 4, 5, 6} \qquad \text{and} \\
+E &= \set{\set{1,2}, \set{2,3}, \set{3,4}, \set{4,5}, \set{5,6},
+          \set{6,1}, \set{1,3}, \set{3,5}, \set{5,1}} .
+\end{align*}
+(This graph can be drawn in such a way as to look like a hexagon with
+three extra diagonals forming a triangle.)
+The sequence $\tup{4, 3, 2, 1, 3, 6}$ of vertices of $G$ is a walk
+from $4$ to $6$. But it is not a path, since it passes through
+the vertex $3$ twice (i.e., the vertex $3$ appears twice among its
+vertices). Thus, Proposition~\ref{prop.walk.decrease} predicts that
+there exists a walk from $4$ to $6$ whose length is smaller than $5$.
+And indeed, such a walk can easily be obtained from our walk
+$\tup{4, 3, 2, 1, 3, 6}$, just by removing the part between the two
+appearances of the vertex $3$ (including one of these two
+appearances). The result is the walk $\tup{4, 3, 6}$, whose length
+$2$ is indeed smaller than $5$.
+
+The same idea (removing a ``digression'' between two appearances of
+the same vertex) can be used to prove
+Proposition~\ref{prop.walk.decrease} in full generality. This is what
+we shall do in the proof below.
+\end{example}
+
+\begin{proof}[Proof of Proposition~\ref{prop.walk.decrease}.]
+Recall that $\tup{a_0, a_1, \ldots, a_k} = \mathbf{a}$ is a walk
+from $u$ to $v$. Hence, $a_0 = u$ and $a_k = v$.
+
+If the vertices of $\mathbf{a}$ were distinct, then the walk
+$\mathbf{a}$ would be a path (by the definition of ``path''). Thus,
+the vertices of $\mathbf{a}$ are not distinct (since $\mathbf{a}$ is
+not a path. In other words, $a_0, a_1, \ldots, a_k$ are not
+pairwise distinct (since the vertices of $\mathbf{a}$ are
+$a_0, a_1, \ldots, a_k$). In other words, there exist two elements
+$p$ and $q$ of $\set{0, 1, \ldots, k}$ such that $p < q$ and
+$a_p = a_q$. Fix such $p$ and $q$. Define a vertex $x$ of $G$ by
+$x = a_p = a_q$. (This is possible since $a_p = a_q$.)
+
+Recall that $\tup{a_0, a_1, \ldots, a_k}$ is a walk. Hence, the list
+$\tup{a_0, a_1, \ldots, a_p}$ is a walk as well. Moreover, this list
+$\tup{a_0, a_1, \ldots, a_p}$ is a walk from $u$ to $x$ (since
+$a_0 = u$ and $a_p = x$). Denote this walk by $\mathbf{p}$.
+
+Again, recall that $\tup{a_0, a_1, \ldots, a_k}$ is a walk. Hence, the
+list $\tup{a_q, a_{q+1}, \ldots, a_k}$ is a walk as well. Moreover,
+this list $\tup{a_q, a_{q+1}, \ldots, a_k}$ is a walk from $x$ to $v$
+(since $a_q = x$ and $a_k = v$). Denote this walk by $\mathbf{q}$.
+
+Altogether, we know that $u$, $x$ and $v$ are three vertices of $G$;
+we know that $\mathbf{p} = \tup{a_0, a_1, \ldots, a_p}$ is a walk from
+$u$ to $x$; and we know that
+$\mathbf{q} = \tup{a_q, a_{q+1}, \ldots, a_k}$ is a walk from $x$ to
+$v$.
+Hence, we can apply Proposition~\ref{prop.walks.concat} to
+$x$, $v$, $\mathbf{p}$, $p$, $a_i$, $\mathbf{q}$, $k-q$ and $a_{q+j}$
+instead of $v$, $w$, $\mathbf{a}$, $k$, $a_i$, $\mathbf{b}$, $\ell$
+and $b_j$. We thus conclude that
+\begin{align*}
+\tup{a_0, a_1, \ldots, a_p, a_{q+1}, a_{q+2}, \ldots, a_k}
+&= \tup{a_0, a_1, \ldots, a_{p-1}, a_q, a_{q+1}, \ldots, a_k} \\
+&= \tup{a_0, a_1, \ldots, a_{p-1}, x, a_{q+1}, a_{q+2}, \ldots, a_k}
+\end{align*}
+is a walk from $u$ to $v$. This walk has length smaller than $k$
+(in fact, its length is
+$\tup{p-1} + 2 + \tup{k-q-1} = \underbrace{p}_{< q} + k - q
+< q + k - q = k$). Hence, there exists a walk from $u$ to $v$ whose
+length is smaller than $k$ (namely, the walk we have just
+constructed).
+This proves Proposition~\ref{prop.walk.decrease}.
+\end{proof}
+
+From Proposition~\ref{prop.walk.decrease}, we obtain the following
+corollary:
+
+\begin{corollary} \label{cor.walk.path}
+Let $G$ be a simple graph. Let $u$ and $v$ be two vertices of $G$.
+Let $k \in \NN$.
+Assume that there exists a walk from $u$ to $v$ of length $k$.
+Then, there exists a path from $u$ to $v$ of length $\leq k$.
+\end{corollary}
+
+\begin{example} \label{exa.walk.path}
+Let $V$, $E$ and $G$ be as in Example~\ref{exa.intro.walks}. Consider
+the walk $\mathbf{a} = \tup{4, 3, 2, 1, 3, 4, 3, 1, 5}$ from $4$ to
+$5$, having length $8$. Corollary~\ref{cor.walk.path} predicts that
+there exists a path from $4$ to $5$ of length $\leq 8$. This is, of
+course, obvious (the path $\tup{4, 5}$ works), but let us try to
+construct such a path from $\mathbf{a}$ by removing ``digressions''
+as we did in Exercise~\ref{exa.walk.decrease}:
 
 \begin{itemize}
+\item One way to start is by noticing that the vertex $3$ appears
+  three times in our walk, and removing the ``digression'' that the
+  walk makes between the first and the second appearance of $3$. The
+  result is the walk $\tup{4, 3, 4, 3, 1, 5}$. This latter walk is
+  still not a path, since the vertex $4$ appears in it twice. Again,
+  remove the ``digression'' to obtain the shorter walk
+  $\tup{4, 3, 1, 5}$. This new walk is a path and has length
+  $3 \leq 8$. So we have found a path from $4$ to $5$ of length
+  $\leq 8$.
+\item An alternative way to start is by noticing that the vertex $1$
+  appears twice in our walk, and removing the ``digression'' that the
+  walk makes between its two appearances. The result of this removal
+  is the walk $\tup{4, 3, 2, 1, 5}$, which is already a path and has
+  length $4 \leq 8$. So we have found a path from $4$ to $5$ of length
+  $\leq 8$.
+\item Yet another way to start is by noticing (again) that the vertex
+  $3$ appears three times in our walk, and removing the ``digression''
+  between its first and third appearances. The result is the path
+  $\tup{4, 3, 1, 5}$.
+\item There are two other possible ways to start; do you see them?
+\end{itemize}
+
+Note that the different ways to remove ``digression'' don't always
+lead to the same path in the end.
+
+Corollary~\ref{cor.walk.path} can be proved in full generality using
+this method. Our proof below will do exactly that.
+\end{example}
+
+\begin{proof}[Proof of Corollary~\ref{cor.walk.path}.]
+The idea behind this proof is the following:
+Proposition~\ref{prop.walk.decrease} shows that, whenever we have a
+walk from $u$ to $v$ that is not a path, we can ``shorten it'' (i.e.,
+find a shorter walk from $u$ to $v$).
+Thus, we can start with any walk from $u$ to $v$ of length $k$ (its
+existence is guaranteed by the hypothesis), and keep ``shortening it''
+until it becomes a path (which has to happen eventually, because we
+cannot keep shortening it indefinitely). The result will be a path
+from $u$ to $v$ of length $\leq k$.
+
+This idea can be formalized to give a rigorous proof. The way to
+formalize it is fairly standard and straightforward, so I am only
+going to show it now, but leave it to the reader in similar situations
+that may appear further below.
+
+Our rigorous proof of Corollary~\ref{cor.walk.path} shall proceed by
+strong induction over $k$. So we fix an integer $\ell \in \NN$, and
+we assume that Corollary~\ref{cor.walk.path} holds whenever
+$k < \ell$. We then must prove that Corollary~\ref{cor.walk.path}
+holds when $k = \ell$. (This is the induction step. Note that a strong
+induction needs no induction base, because the induction step includes
+the case $\ell = 0$ already.)
+
+We have assumed that Corollary~\ref{cor.walk.path} holds whenever
+$k < \ell$. In other words, the following claim holds:
+
+\begin{statement}
+\textit{Claim 1:} Let $G$ be a simple graph. Let $u$ and $v$ be two
+vertices of $G$.
+Let $k \in \NN$ be such that $k < \ell$.
+Assume that there exists a walk from $u$ to $v$ of length $k$.
+Then, there exists a path from $u$ to $v$ of length $\leq k$.
+\end{statement}
+
+Our goal is to prove that Corollary~\ref{cor.walk.path}
+holds when $k = \ell$. In other words, our goal is to prove the
+following claim:
+
+\begin{statement}
+\textit{Claim 2:} Let $G$ be a simple graph. Let $u$ and $v$ be two
+vertices of $G$.
+Let $k \in \NN$ be such that $k = \ell$.
+Assume that there exists a walk from $u$ to $v$ of length $k$.
+Then, there exists a path from $u$ to $v$ of length $\leq k$.
+\end{statement}
+
+\textit{Proof of Claim 2:} We have assumed that there exists a walk
+from $u$ to $v$ of length $k$. Fix such a walk, and denote it by
+$\mathbf{a}$. Write this walk $\mathbf{a}$ in the form
+$\mathbf{a} = \tup{a_0, a_1, \ldots, a_k}$. (This is possible, since
+$\mathbf{a}$ has length $k$.) We are in one of the following two
+cases:
+
+\begin{itemize}
+\item \textit{Case 1:} The walk $\mathbf{a}$ is a path.
+\item \textit{Case 2:} The walk $\mathbf{a}$ is not a path.
+\end{itemize}
+
+Let us consider Case 1 first. In this case, the walk $\mathbf{a}$ is a
+path. Thus, $\mathbf{a}$ is a path from $u$ to $v$ (since $\mathbf{a}$
+is a walk from $u$ to $v$), and has length $\leq k$ (since
+$\mathbf{a}$ has length $k$). Hence, there exists a path from $u$ to
+$v$ of length $\leq k$ (namely, $\mathbf{a}$). Thus, Claim 2 is proven
+in Case 1.
+
+Let us now consider Case 2. In this case, the walk $\mathbf{a}$ is not
+a path. Hence, Proposition~\ref{prop.walk.decrease} shows that there
+exists a walk from $u$ to $v$ whose length is smaller than $k$.
+Fix such a walk, and denote it by $\mathbf{b}$. Thus, $\mathbf{b}$ is
+a walk from $u$ to $v$ whose length is smaller than $k$.
+
+Let $r$ be the length of $\mathbf{b}$. Then, $r < k$ (since the length
+of $\mathbf{b}$ is smaller than $k$). Hence, $r < k = \ell$. Thus,
+there exists a walk from $u$ to $v$ of length $r$ (namely,
+$\mathbf{b}$). Hence, Claim 1 (applied to $r$ instead of $k$) shows
+that there exists a path from $u$ to $v$ of length $\leq r$.
+This path has length $\leq r < k$; hence, it has length $\leq k$.
+Therefore, there exists a path from $u$ to $v$ of length $\leq k$
+(namely, the path that we have just constructed). Hence, Claim 2 is
+proven in Case 2.
+
+Now, we have proven Claim 2 in both possible cases. Therefore, the
+proof of Claim 2 is complete. In other words,
+Corollary~\ref{cor.walk.path} holds when $k = \ell$. This completes
+the (inductive) proof of Corollary~\ref{cor.walk.path}.
+\end{proof}
+
+We can use the concept of paths (and the results proven above) to
+define a certain equivalence relation on the vertex set of a graph
+$G$.
+
+[... to be continued]
+
+\begin{proposition} \label{prop.intro.paths-and-walks}
+Let $G$ be a simple graph. Let $u$ and $v$ be two vertices of $G$.
+The following seven statements are equivalent:
+
+\begin{itemize}
+\item \textit{Statement 0:} We have $u \simeq_G v$.
+
 \item \textit{Statement 1:} There exists a walk from $u$ to $v$.
 
 \item \textit{Statement 2:} There exists a walk from $v$ to $u$.
