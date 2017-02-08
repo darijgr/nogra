@@ -1817,6 +1817,12 @@ bunch of basic graphs; mod-3 congruence graph (just as an example);
 
 \subsection{\label{sect.intro.walks}Walks and paths}
 
+Walks and paths are among the most fundamental notions that can be
+defined for a graph; a large part of graph theory is concerned with
+these notions. Let us now introduce them.
+
+\subsubsection{Definitions and examples}
+
 \begin{definition} \label{def.intro.walks}
 Let $G$ be a simple graph.
 
@@ -1906,6 +1912,8 @@ obvious when you can point to a picture; but we ask you to give a
 rigorous proof!)
 \end{exercise}
 
+\subsubsection{Composing and reverting walks}
+
 Let us discuss a few basic properties of paths. First of all, if $v$
 is an vertex of a simple graph $G$, then the one-element list
 $\tup{v}$ is a path (in $G$) from $v$ to $v$. This path has length
@@ -1985,10 +1993,10 @@ Claim 2 is proven.
 
 \textit{Proof of Claim 3.} Recall that all of
 $b_0 b_1, b_1 b_2, \ldots, b_{\ell-1} b_\ell$ are edges of $G$.
-since $b_0 = v = a_k$, this rewrites as follows: All of
+Since $b_0 = v = a_k$, this rewrites as follows: All of
 $a_k b_1, b_1 b_2, \ldots, b_{\ell-1} b_\ell$ are edges of $G$.
 Combining this with the fact that all of
-all of $a_0 a_1, a_1 a_2, \ldots, a_{k-1} a_k$ are edges of $G$,
+$a_0 a_1, a_1 a_2, \ldots, a_{k-1} a_k$ are edges of $G$,
 we obtain the following: All of
 $a_0 a_1, a_1, a_2, \ldots, a_{k-1} a_k,
 a_k b_1, b_1 b_2, \ldots, b_{\ell-1} b_\ell$ are edges of $G$. Hence,
@@ -2063,6 +2071,8 @@ vertices of the walk $\mathbf{a}$, listed in a different order).
 Hence, this walk $\rev \mathbf{a}$ is a path (by the definition of
 ``path''). This proves Proposition~\ref{prop.walks.rev} \textbf{(b)}.
 \end{proof}
+
+\subsubsection{Reducing a walk to a path}
 
 The next result is simple but crucial:
 
@@ -2284,44 +2294,331 @@ Corollary~\ref{cor.walk.path} holds when $k = \ell$. This completes
 the (inductive) proof of Corollary~\ref{cor.walk.path}.
 \end{proof}
 
+\subsubsection{The equivalence relation $\simeq_G$}
+
 We can use the concept of paths (and the results proven above) to
 define a certain equivalence relation on the vertex set of a graph
-$G$.
+$G$. First, let us recall what relations and equivalence relations
+are:
 
-[... to be continued]
+\begin{definition} \label{def.intro.relation}
+Let $X$ be a set. A \textit{binary relation} on $X$ shall mean a
+subset of the Cartesian product $X \times X$. (In other words, it
+shall mean a set of pairs of elements of $X$.)
+
+If $R$ is a binary relation on $X$, and if $a$ and $b$ are two
+elements of $X$, then we shall often use the notation $a R b$ as a
+synonym for $\tup{a, b} \in R$. This notation is called
+\textit{infix notation}. For some relations $R$, it is usual to always
+use this notation (i.e., one never writes $\tup{a, b} \in R$, but
+always writes $a R b$ instead); in this case, we say that the relation
+$R$ is \textit{written infix}.
+\end{definition}
+
+Examples of binary relations on the set $\ZZ$ are $=$, $\leq$, $<$,
+$\geq$, $>$ and $\neq$. (These are all written infix: For example, we
+write $2 < 4$, but we don't write $\tup{2, 4} \in <$.)
+
+Now, what is an equivalence relation?
+
+\begin{definition} \label{def.intro.equiv-rel}
+Let $R$ be a binary relation on a set $X$. This relation $R$ shall be
+written infix throughout this definition.
+
+\textbf{(a)} We say that $R$ is \textit{reflexive} if it has the
+following property: For each $x \in X$, we have $x R x$.
+
+\textbf{(b)} We say that $R$ is \textit{symmetric} if it has the
+following property: For each $x \in X$ and $y \in X$ satisfying
+$x R y$, we have $y R x$.
+
+\textbf{(c)} We say that $R$ is \textit{transitive} if it has the
+following property: For each $x \in X$, $y \in X$ and $z \in X$
+satisfying $x R y$ and $y R z$, we have $x R z$.
+
+\textbf{(d)} We say that $R$ is an \textit{equivalence relation} if it
+is reflexive, symmetric and transitive.
+\end{definition}
+
+We refer to \cite[\S 10.10]{LeLeMe16} or \cite[Chapter 9]{Oggier14}
+or \cite[\S 3.E]{Day-proofs}
+% and other sources?
+for more about equivalence relations. Let us here just briefly
+mention a few examples:
+\begin{itemize}
+\item Among the six relations $=$, $\leq$, $<$, $\geq$, $>$ and $\neq$
+on the set $\ZZ$, only the first one ($=$) is an equivalence relation.
+However, $\leq$ and $\geq$ are reflexive and transitive (but not
+symmetric), and $<$ and $>$ are transitive. Furthermore, $\neq$ is
+symmetric.
+\item For each positive integer $m$, we can define a binary relation
+$\overset{m}{\equiv}$ on $\ZZ$ (written infix) by setting
+\[
+a \overset{m}{\equiv} b
+\qquad \text{ if and only if } \qquad
+a \equiv b \mod m .
+\]
+This is an equivalence relation (for each $m$).
+\end{itemize}
+
+Each simple graph $G$ gives rise to an equivalence relation; here is
+how it is defined:
+
+\begin{definition} \label{def.intro.equivalence-from-graph}
+Let $G$ be a simple graph. We define a binary relation $\simeq_G$ on
+the set $\verts{G}$ (written infix) as follows:
+
+If $u$ and $v$ are two elements of $\verts{G}$, then we set
+$u \simeq_G v$ if and only if there exists a walk from $u$ to $v$ in
+$G$.
+\end{definition}
+
+The binary relation $\simeq_G$ we just defined is of fundamental
+importance, although many authors do not define a specific symbol for
+it. As promised, it is an equivalence relation:
+
+\begin{proposition} \label{prop.intro.equivalence-from-graph.equiv}
+Let $G$ be a simple graph. Then, the binary relation $\simeq_G$
+(defined in Definition~\ref{def.intro.equivalence-from-graph}) is an
+equivalence relation.
+\end{proposition}
+
+\begin{proof}[Proof of
+Proposition~\ref{prop.intro.equivalence-from-graph.equiv}.]
+
+We are going to show that the relation $\simeq_G$ is reflexive,
+symmetric and transitive.
+
+\begin{statement}
+\textit{Claim 1:} The relation $\simeq_G$ is reflexive.
+\end{statement}
+
+\textit{Proof of Claim 1:} Let
+$x \in \verts{G}$. Then, $\tup{x}$ is a walk from $x$ to $x$ in $G$.
+Hence, there exists a walk from $x$ to $x$ in $G$ (namely,
+$\tup{x}$). In other words, $x \simeq_G x$ (because the definition of
+$\simeq_G$ reveals that $x \simeq_G x$ holds if and only if there
+exists a walk from $x$ to $x$ in $G$).
+
+Now, forget that we fixed $x$. We thus have shown that for each
+$x \in \verts{G}$, we have $x \simeq_G x$. In other words, the
+relation $\simeq_G$ is reflexive (by the definition of ``reflexive'').
+This proves Claim 1.
+
+\begin{statement}
+\textit{Claim 2:} The relation $\simeq_G$ is symmetric.
+\end{statement}
+
+\textit{Proof of Claim 2:} Let $x \in \verts{G}$ and $y \in \verts{G}$
+be such that $x \simeq_G y$.
+
+We have $x \simeq_G y$. In other words, there exists a walk from $x$
+to $y$ in $G$ (by the definition of $\simeq_G$). Fix such a walk, and
+denote it by $\mathbf{a} = \tup{a_0, a_1, \ldots, a_k}$.
+
+Thus, $\mathbf{a} = \tup{a_0, a_1, \ldots, a_k}$ is a walk from $x$
+to $y$ in $G$. Hence, Proposition~\ref{prop.walks.rev} (applied to
+$u = x$ and $v = y$) shows that the list
+$\tup{a_k, a_{k-1}, \ldots, a_0}$ is a walk from $y$ to $x$. Thus,
+there exists a walk from $y$ to $x$ in $G$ (namely, this list). In
+other words, $y \simeq_G x$ (by the definition of $\simeq_G$).
+
+Now, forget that we fixed $x$ and $y$. We thus have shown that for
+each $x \in \verts{G}$ and $y \in \verts{G}$ satisfying
+$x \simeq_G y$, we have $y \simeq_G x$. In other words, the
+relation $\simeq_G$ is symmetric (by the definition of ``symmetric'').
+This proves Claim 2.
+
+\begin{statement}
+\textit{Claim 3:} The relation $\simeq_G$ is transitive.
+\end{statement}
+
+\textit{Proof of Claim 3:} Let $x \in \verts{G}$, $y \in \verts{G}$
+and $z \in \verts{G}$ be such that $x \simeq_G y$ and
+$y \simeq_G z$.
+
+We have $x \simeq_G y$. In other words, there exists a walk from $x$
+to $y$ in $G$ (by the definition of $\simeq_G$). Fix such a walk, and
+denote it by $\mathbf{a} = \tup{a_0, a_1, \ldots, a_k}$.
+
+We have $y \simeq_G z$. In other words, there exists a walk from $y$
+to $z$ in $G$ (by the definition of $\simeq_G$). Fix such a walk, and
+denote it by $\mathbf{b} = \tup{b_0, b_1, \ldots, b_\ell}$.
+
+We know that $\mathbf{a} = \tup{a_0, a_1, \ldots, a_k}$ is a walk from
+$x$ to $y$ in $G$, and we also know that
+$\mathbf{b} = \tup{b_0, b_1, \ldots, b_\ell}$ is a walk from $y$ to
+$z$ in $G$. Hence, Proposition~\ref{prop.walks.concat} (applied to
+$u = x$, $v = y$ and $w = z$) shows that
+\begin{align*}
+\tup{a_0, a_1, \ldots, a_k, b_1, b_2, \ldots, b_\ell}
+&= \tup{a_0, a_1, \ldots, a_{k-1}, b_0, b_1, \ldots, b_\ell} \\
+&= \tup{a_0, a_1, \ldots, a_{k-1}, v, b_1, b_2, \ldots, b_\ell}
+\end{align*}
+is a walk from $x$ to $z$. Thus, there exists a walk from $x$ to $z$
+in $G$ (namely, the walk we have just constructed). In other words,
+$x \simeq_G z$ (by the definition of $\simeq_G$).
+
+Now, forget that we fixed $x$, $y$ and $z$. We thus have shown that
+for each $x \in \verts{G}$, $y \in \verts{G}$ and $z \in \verts{G}$
+satisfying $x \simeq_G y$ and $y \simeq_G z$, we have $x \simeq_G z$.
+In other words, the relation $\simeq_G$ is transitive (by the
+definition of ``transitive''). This proves Claim 3.
+
+Altogether, we now have shown that the relation $\simeq_G$ is
+reflexive, symmetric and transitive. In other words, this relation
+$\simeq_G$ is an equivalence relation (by the definition of an
+``equivalence relation'').
+This proves Proposition~\ref{prop.intro.equivalence-from-graph.equiv}.
+\end{proof}
+
+The following proposition gives a few equivalent characterizations for
+the relation $\simeq_G$ introduced in
+Definition~\ref{def.intro.equivalence-from-graph}:
 
 \begin{proposition} \label{prop.intro.paths-and-walks}
 Let $G$ be a simple graph. Let $u$ and $v$ be two vertices of $G$.
 The following seven statements are equivalent:
 
 \begin{itemize}
-\item \textit{Statement 0:} We have $u \simeq_G v$. (Here, $\simeq_G$
-is the binary relation on $V$, written infix, defined as follows:
-$u \simeq_G v$ if and only if there exists a walk from $u$ to $v$.)
+\item \textit{Statement $\mathcal{S}_0$:} We have $u \simeq_G v$.
 
-\item \textit{Statement 1:} There exists a walk from $u$ to $v$.
+\item \textit{Statement $\mathcal{S}_1$:}
+There exists a walk from $u$ to $v$.
 
-\item \textit{Statement 2:} There exists a walk from $v$ to $u$.
+\item \textit{Statement $\mathcal{S}_2$:}
+There exists a walk from $v$ to $u$.
 
-\item \textit{Statement 3:} There exists a walk from one of the two
-vertices $u$ and $v$ to the other.
+\item \textit{Statement $\mathcal{S}_3$:}
+There exists a walk from one of the two vertices $u$ and $v$ to the
+other.
 
-\item \textit{Statement 4:} There exists a path from $u$ to $v$.
+\item \textit{Statement $\mathcal{S}_4$:}
+There exists a path from $u$ to $v$.
 
-\item \textit{Statement 5:} There exists a path from $v$ to $u$.
+\item \textit{Statement $\mathcal{S}_5$:}
+There exists a path from $v$ to $u$.
 
-\item \textit{Statement 6:} There exists a path from one of the two
+\item \textit{Statement $\mathcal{S}_6$:}
+There exists a path from one of the two
 vertices $u$ and $v$ to the other.
 \end{itemize}
 \end{proposition}
+
+\begin{proof}[Proof of Proposition~\ref{prop.intro.paths-and-walks}.]
+The definition of the relation $\simeq_G$ shows that $u \simeq_G v$
+holds if and only if there exists a walk from $u$ to $v$ in $G$. In
+other words, Statement $\mathcal{S}_0$ holds if and only if
+Statement $\mathcal{S}_1$ holds. This proves the equivalence
+$\mathcal{S}_0 \Longleftrightarrow \mathcal{S}_1$.
+
+The implication $\mathcal{S}_1 \Longrightarrow \mathcal{S}_2$ is
+easy to prove\footnote{\textit{Proof.} Assume that $\mathcal{S}_1$
+holds. We must show that $\mathcal{S}_2$ holds.
+
+There exists a walk from $u$ to $v$ (since $\mathcal{S}_1$ holds).
+Fix such a walk, and denote it by
+$\mathbf{a} = \tup{a_0, a_1, \ldots, a_k}$.
+
+Thus, $\mathbf{a} = \tup{a_0, a_1, \ldots, a_k}$ is a walk from $u$
+to $v$ in $G$. Hence, Proposition~\ref{prop.walks.rev} shows that the
+list $\tup{a_k, a_{k-1}, \ldots, a_0}$ is a walk from $v$ to $u$.
+Thus, there exists a walk from $v$ to $u$ (namely, this list). In
+other words, $\mathcal{S}_2$ holds. This proves the implication
+$\mathcal{S}_1 \Longrightarrow \mathcal{S}_2$.}. The same argument,
+but with the roles of $u$ and $v$ interchanged, proves the implication
+$\mathcal{S}_2 \Longrightarrow \mathcal{S}_1$. Combining the two
+implications $\mathcal{S}_1 \Longrightarrow \mathcal{S}_2$ and
+$\mathcal{S}_2 \Longrightarrow \mathcal{S}_1$, we obtain the
+equivalence
+$\mathcal{S}_1 \Longleftrightarrow \mathcal{S}_2$.
+
+The statement $\mathcal{S}_3$ is the disjunction of the two statements
+$\mathcal{S}_1$ and $\mathcal{S}_2$. In other words,
+$\mathcal{S}_3 \Longleftrightarrow
+\tup{\mathcal{S}_1 \vee \mathcal{S}_2}$. But from
+$\mathcal{S}_1 \Longleftrightarrow \mathcal{S}_2$, we obtain
+$\tup{\mathcal{S}_1 \vee \mathcal{S}_2}
+\Longleftrightarrow \tup{\mathcal{S}_2 \vee \mathcal{S}_2}
+\Longleftrightarrow \mathcal{S}_2$. Hence,
+$\mathcal{S}_3 \Longleftrightarrow
+\tup{\mathcal{S}_1 \vee \mathcal{S}_2}
+\Longleftrightarrow \mathcal{S}_2$.
+
+Combining the three equivalences
+$\mathcal{S}_0 \Longleftrightarrow \mathcal{S}_1$,
+$\mathcal{S}_1 \Longleftrightarrow \mathcal{S}_2$ and
+$\mathcal{S}_3 \Longleftrightarrow \mathcal{S}_2$, we obtain the
+chain of equivalences
+\begin{equation}
+\mathcal{S}_0 \Longleftrightarrow \mathcal{S}_1 \Longleftrightarrow
+\mathcal{S}_2 \Longleftrightarrow \mathcal{S}_3 .
+\label{pf.prop.intro.paths-and-walks.chain1}
+\end{equation}
+
+The implication $\mathcal{S}_4 \Longrightarrow \mathcal{S}_1$ holds
+for obvious reasons (namely, because every path is a walk). But
+the implication $\mathcal{S}_1 \Longrightarrow \mathcal{S}_4$ also
+holds\footnote{\textit{Proof.} Assume that $\mathcal{S}_1$
+holds. We must show that $\mathcal{S}_4$ holds.
+
+There exists a walk from $u$ to $v$ (since $\mathcal{S}_1$ holds).
+Fix such a walk, and denote it by $\mathbf{a}$. Let $k$ be the length
+of this walk $\mathbf{a}$. Then, exists a walk from $u$ to $v$ of
+length $k$ (namely, $\mathbf{a}$). Corollary~\ref{cor.walk.path}
+therefore shows that there exists a path from $u$ to $v$ of length
+$\leq k$. In particular, there exists a path from $u$ to $v$. In other
+words, $\mathcal{S}_4$ holds. This proves the implication
+$\mathcal{S}_1 \Longrightarrow \mathcal{S}_4$.}. Combining the two
+implications $\mathcal{S}_1 \Longrightarrow \mathcal{S}_4$ and
+$\mathcal{S}_4 \Longrightarrow \mathcal{S}_1$, we obtain the
+equivalence
+$\mathcal{S}_1 \Longleftrightarrow \mathcal{S}_4$. The same argument
+(but with the roles of $u$ and $v$ interchanged) proves the
+equivalence
+$\mathcal{S}_2 \Longleftrightarrow \mathcal{S}_5$. Thus,
+$\mathcal{S}_1 \Longleftrightarrow \mathcal{S}_2
+\Longleftrightarrow \mathcal{S}_5$.
+
+The statement $\mathcal{S}_6$ is the disjunction of the two statements
+$\mathcal{S}_4$ and $\mathcal{S}_5$. In other words,
+$\mathcal{S}_6 \Longleftrightarrow
+\tup{\mathcal{S}_4 \vee \mathcal{S}_5}$. But from
+$\mathcal{S}_4 \Longleftrightarrow \mathcal{S}_1$ and
+$\mathcal{S}_5 \Longleftrightarrow \mathcal{S}_1$, we obtain
+$\tup{\mathcal{S}_4 \vee \mathcal{S}_5}
+\Longleftrightarrow \tup{\mathcal{S}_1 \vee \mathcal{S}_1}
+\Longleftrightarrow \mathcal{S}_1$. Hence,
+$\mathcal{S}_6 \Longleftrightarrow
+\tup{\mathcal{S}_4 \vee \mathcal{S}_5}
+\Longleftrightarrow \mathcal{S}_1$.
+
+Because of the three equivalences
+$\mathcal{S}_1 \Longleftrightarrow \mathcal{S}_4$,
+$\mathcal{S}_1 \Longleftrightarrow \mathcal{S}_5$ and
+$\mathcal{S}_1 \Longleftrightarrow \mathcal{S}_6$, we can extend the
+chain of equivalences \eqref{pf.prop.intro.paths-and-walks.chain1}
+to
+\[
+\mathcal{S}_0 \Longleftrightarrow \mathcal{S}_1 \Longleftrightarrow
+\mathcal{S}_2 \Longleftrightarrow \mathcal{S}_3 \Longleftrightarrow
+\mathcal{S}_4 \Longleftrightarrow \mathcal{S}_5 \Longleftrightarrow
+\mathcal{S}_6 .
+\]
+Thus, Proposition~\ref{prop.intro.paths-and-walks} is proven.
+\end{proof}
 
 \begin{todo}
 Proof.
 \end{todo}
 
+\subsubsection{Dijkstra's algorithm}
+
 \begin{todo}
 Dijkstra's algorithm?
 \end{todo}
+
+\subsubsection{Circuits and cycles}
 
 \begin{todo}
 Cycles and circuits.
@@ -4054,6 +4351,7 @@ Gary Chartrand, Linda Lesniak, Ping Zhang,
 
 \bibitem[Day16]{Day-proofs}Martin V. Day,
 \textit{An Introduction to Proofs and the Mathematical Vernacular},
+7 December 2016.
 \newline\url{https://www.math.vt.edu/people/day/ProofsBook/IPaMV.pdf} .
 
 % \bibitem[deBoor]{deBoor}Carl de Boor, \textit{An empty exercise}.
@@ -4156,6 +4454,12 @@ Springer 2003.
 % \bibitem[m.se709196]{m.se709196}Daniela Diaz and others, \textit{Definition of
 % General Associativity for binary operations}, math.stackexchange question
 % \#709196 .\newline\url{http://math.stackexchange.com/q/709196}
+
+\bibitem[Oggier14]{Oggier14}
+Fr\'ed\'rique Oggier,
+\textit{Discrete Mathematics},
+21 November 2014.
+\newline\url{http://www1.spms.ntu.edu.sg/~frederique/DiscreteMathws.pdf}
 
 \bibitem[Ore62]{Ore62}
 Oystein Ore, \textit{Theory of graphs},
