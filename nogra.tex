@@ -1356,6 +1356,7 @@ we obtain $\abs{B} = \deg b = n-1$.
 
 But $B \subseteq
 \verts{G} \setminus \set{a, b}$\ \ \ \ \footnote{\textit{Proof.}
+Write the graph $G$ in the form $G = \tup{V, E}$.
 Let $v \in B$. Then, $v$ is a neighbor of $b$ (since $B$ is the set of
 all neighbors of $b$). In other words, $bv \in E$ (by the definition
 of ``neighbor''). Hence, $bv \in E \subseteq \powset[2]{V}$.
@@ -1381,7 +1382,7 @@ $B \subseteq \verts{G} \setminus \set{a, b}$.}. Hence,
 = \underbrace{\abs{\verts{G}}}_{= n}
 - \underbrack{\abs{\set{a, b}}}{
                 = 2 \\ \text{(since } a \neq b \text{)}}
-\qquad \left(\text{since } \set{a, b} \subseteq V \right) \\
+\qquad \left(\text{since } \set{a, b} \subseteq \verts{G} \right) \\
 &= n - 2 < n - 1 .
 \end{align*}
 This contradicts $\abs{B} = n - 1$. This contradiction shows that our
