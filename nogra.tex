@@ -853,7 +853,7 @@ of this generalization with proof, as well as a table of known Ramsey
 numbers $R\tup{r,s}$ and a self-contained (if somewhat terse) proof of
 Proposition~\ref{prop.simple.Rrs}. Ramsey's theorem can be generalized
 further, and many variations of it can be defined, which are usually
-subsumed under the label ``Ramsey theory''\footnote{See
+subsumed under the label ``Ramsey theory''.\footnote{See
 \cite{RaWi-Ramsey} for a popular view on the philosophy of Ramsey
 theory (in the wide sense of this word). It should probably be said
 that mathematicians usually define the word ``Ramsey theory'' somewhat
@@ -1019,7 +1019,7 @@ We have $f \in E \subseteq \powset[2]{V}$. Thus, $f$ is a $2$-element
 subset of $V$. Thus, $\abs{f} = 2$. Since $v \in f$, we have
 $\abs{f \setminus \set{v}} = \abs{f} - 1 = 1$ (since $\abs{f} = 2$).
 Hence, $f \setminus \set{v}$ is a $1$-element set. Therefore,
-$f \setminus \set{v} = \set{u}$ for some $u$. Clearly,
+$f \setminus \set{v} = \set{u}$ for some $u$. Consider this $u$. Now,
 $u \in \set{u} = f \setminus \set{v} \subseteq f \subseteq V$; thus,
 $u$ is a vertex of $G$. Moreover, $v \in f$ and thus
 $f = \underbrace{\tup{f \setminus \set{v}}}_{= \set{u}} \cup \set{v}
@@ -1579,10 +1579,11 @@ equivalence holds:
 \end{equation}
 (because we have the following chain of equivalences:
 \begin{align*}
-\left( \phi^{-1}\tup{u}\phi^{-1}\tup{v} \in \edges{G} \right)
+& \left( \phi^{-1}\tup{u}\phi^{-1}\tup{v} \in \edges{G} \right)
+\\
 & \Longleftrightarrow
-\left( \underbrace{\phi{\phi^{-1}\tup{u}}}_{=u}
-   \underbrace{\phi{\phi^{-1}\tup{v}}}_{=v} \in \edges{H} \right) \\
+\left( \underbrace{\phi\tup{\phi^{-1}\tup{u}}}_{=u}
+   \underbrace{\phi\tup{\phi^{-1}\tup{v}}}_{=v} \in \edges{H} \right) \\
 &\qquad
 \left( \text{by \eqref{pf.prop.intro.iso.inverse.1}, applied to }
 \phi^{-1}\tup{u} \text{ and } \phi^{-1}\tup{v} \text{ instead of } u
@@ -1807,12 +1808,110 @@ does not seem to be a closed-form formula. (There is a whole book
 \cite{HarPal73} written about this. See also
 \url{http://oeis.org/A000088} for references and small values.)
 
-\subsection{\label{sect.intro.paths}Examples of graphs}
+\subsection{\label{sect.intro.paths}Examples of graphs, and basic
+operations}
 
 \begin{todo}
-Define complete graphs; empty graphs; path graphs; cycle graphs; a
+Define:
+\begin{itemize}
+\item \textbf{complete graphs}: The \textit{complete graph} on a
+finite set $V$ is the simple graph $\tup{V, \powset[2]{V}}$. It is the
+simple graph with vertex set $V$ in which each two distinct vertices
+are adjacent. For each $n \in \NN$, we denote the complete graph on
+$\set{1,2,\ldots,n}$ by $K_n$. Often, any graph that is isomorphic to
+$K_n$ is called ``a $K_n$'' (with the indefinite article!). Note that
+a simple graph $G = \tup{V, E}$ is a $K_n$ (i.e., is isomorphic to
+$K_n)$ if and only if it is the complete graph on $V$.
+
+\item \textbf{empty graphs}: The \textit{empty graph} on a finite set
+$V$ is the simple graph $\tup{V, \varnothing}$. It has no edges.
+
+\item \textbf{path graphs}: For each $n \in \NN$, we define the
+\textit{$n$-th path graph} to be the simple graph
+\begin{align*}
+& \tup{\set{1,2,\ldots,n},
+       \set{\set{i, i+1} \ \mid \  i \in \set{1,2,\ldots,n-1}}
+      } \\
+&=
+  \tup{\set{1,2,\ldots,n},
+       \set{\set{1,2}, \set{2,3}, \ldots, \set{n-1,n}}
+      } .
+\end{align*}
+This graph is denoted by $P_n$. It has $n$ vertices and $n-1$ edges
+(unless $n=0$, in which case it has $0$ edges). Again, we say that a
+simple graph is ``a $P_n$'' if it is isomorphic to $P_n$.
+
+Note that the map
+\[
+\set{1,2,\ldots,n} \to \set{1,2,\ldots,n},
+\ i \mapsto n+1-i
+\]
+is an isomorphism $P_n \to P_n$. This isomorphism is called the
+\textit{reflection} on the path $P_n$.
+
+\item \textbf{cycle graphs}: For each integer $n > 1$, we define the
+\textit{$n$-th cycle graph} to be the simple graph
+\begin{align*}
+& \tup{\set{1,2,\ldots,n},
+       \set{\set{i, i+1} \ \mid \  i \in \set{1,2,\ldots,n-1}}
+              \cup \set{n, 1}
+      } \\
+&=
+  \tup{\set{1,2,\ldots,n},
+       \set{\set{1,2}, \set{2,3}, \ldots, \set{n-1,n}, \set{n,1}}
+      } .
+\end{align*}
+This graph is denoted by $C_n$. It has $n$ vertices and $n$ edges.
+Again, we say that a simple graph is ``a $C_n$'' if it is isomorphic
+to $C_n$.
+
+We need one more piece of notation: For each integer $x$, we define
+$x \%_1 n$ to be the unique element $p \in \set{1,2,\ldots,n}$
+that satisfies $p \equiv x \mod n$.
+For each $k \in \ZZ$, the map
+\[
+\set{1,2,\ldots,n} \to \set{1,2,\ldots,n},
+\ i \mapsto \tup{i+k} \%_1 n
+\]
+is an isomorphism $C_n \to C_n$. This isomorphism is called the
+\textit{$k$-rotation} on the cycle $C_n$. Note that this $k$-rotation
+depdends only on the remainder of $k$ modulo $n$, not on the integer
+$k$ itself; in total, we thus have $n$ of these $k$-rotations.
+Furthermore, there is a reflection on the cycle $C_n$, defined exactly
+as the reflection on the path $C_n$.
+\end{itemize}
 bunch of basic graphs; mod-3 congruence graph (just as an example);
 2-element subsets with common elements.
+\end{todo}
+
+\begin{todo}
+Pictures of the above. Explain how reflections and rotations act
+visually.
+\end{todo}
+
+\begin{definition} \label{def.intro.subgraph}
+Let $G = \tup{V, E}$ be a simple graph.
+
+\textbf{(a)} A \textit{subgraph} of $G$ means a simple graph of the
+form $H = \tup{W, F}$ with $W \subseteq V$ and $F \subseteq E$. In
+other words, a \textit{subgraph} of $G$ means a simple graph whose
+vertices are vertices of $G$ and whose edges are edges of $G$.
+
+\textbf{(b)} Let $S$ be a subset of $V$. The \textit{induced subgraph
+of $V$ on the set $S$} denotes the subgraph
+$\tup{S, E \cap \powset[2]{S}}$ of $G$. In other words, it denotes
+the subgraph of $G$ whose vertices are the elements of $S$, and whose
+edges are precisely those edges of $G$ that connect two vertices in
+$S$.
+\end{definition}
+
+\begin{todo}
+Examples (particularly of the difference between subgraph and
+induced subgraph).
+\end{todo}
+
+\begin{todo}
+Disjoint union of several graphs.
 \end{todo}
 
 \subsection{\label{sect.intro.walks}Walks and paths}
@@ -2608,14 +2707,14 @@ to
 Thus, Proposition~\ref{prop.intro.paths-and-walks} is proven.
 \end{proof}
 
-\begin{todo}
-Proof.
-\end{todo}
-
 \subsubsection{Dijkstra's algorithm}
 
 \begin{todo}
-Dijkstra's algorithm?
+Dijkstra's algorithm. Use tables of paths to formalize it.
+\end{todo}
+
+\begin{todo}
+Proof.
 \end{todo}
 
 \subsubsection{Circuits and cycles}
