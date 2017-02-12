@@ -60,6 +60,11 @@
 {\begin{conv}[#1]\begin{leftbar}}
 {\end{leftbar}\end{conv}}
 \providecommand*\conditionautorefname{Convention}
+\newtheorem{alg}[theo]{Algorithm}
+\newenvironment{algorithm}[1][]
+{\begin{alg}[#1]\begin{leftbar}}
+{\end{leftbar}\end{alg}}
+\providecommand*\algorithmautorefname{Algorithm}
 \newtheorem{warn}[theo]{Warning}
 \newenvironment{conclusion}[1][]
 {\begin{warn}[#1]\begin{leftbar}}
@@ -446,7 +451,9 @@ Notice that each graph $G$ satisfies $G = \tup{\verts{G}, \edges{G}}$.
 \textit{adjacent} (or \textit{connected by an edge}) if $uv \in E$
 (that is, if $uv$ is an edge of $G$). In this case, the edge $uv$ is
 said to \textit{connect} $u$ and $v$; the vertices $u$ and $v$ are
-called the \textit{endpoints} of this edge.
+called the \textit{endpoints} of this edge. When the graph $G$ is not
+obvious from the context, we shall often say ``adjacent in $G$''
+instead of just ``adjacent''.
 
 Two vertices $u$ and $v$ of $G$
 are said to be \textit{non-adjacent} if they are not adjacent (i.e.,
@@ -1876,7 +1883,7 @@ For each $k \in \ZZ$, the map
 \]
 is an isomorphism $C_n \to C_n$. This isomorphism is called the
 \textit{$k$-rotation} on the cycle $C_n$. Note that this $k$-rotation
-depdends only on the remainder of $k$ modulo $n$, not on the integer
+depends only on the remainder of $k$ modulo $n$, not on the integer
 $k$ itself; in total, we thus have $n$ of these $k$-rotations.
 Furthermore, there is a reflection on the cycle $C_n$, defined exactly
 as the reflection on the path $C_n$.
@@ -2379,7 +2386,7 @@ Fix such a walk, and denote it by $\mathbf{b}$. Thus, $\mathbf{b}$ is
 a walk from $u$ to $v$ whose length is smaller than $k$.
 
 Let $r$ be the length of $\mathbf{b}$. Then, $r < k$ (since the length
-of $\mathbf{b}$ is smaller than $k$). Hence, $r < k = \ell$. Thus,
+of $\mathbf{b}$ is smaller than $k$). Hence, $r < k = \ell$. Now,
 there exists a walk from $u$ to $v$ of length $r$ (namely,
 $\mathbf{b}$). Hence, Claim 1 (applied to $r$ instead of $k$) shows
 that there exists a path from $u$ to $v$ of length $\leq r$.
@@ -2459,6 +2466,21 @@ a \overset{m}{\equiv} b
 a \equiv b \mod m .
 \]
 This is an equivalence relation (for each $m$).
+\item Here is a fairly general example: If $X$ and $Y$ are two sets,
+and if $f : X \to Y$ is any map, then we can define a binary relation
+$\overset{f}{\equiv}$ on $X$ (written infix) by setting
+\[
+a \overset{f}{\equiv} b
+\qquad \text{ if and only if } \qquad
+f \tup{a} = f \tup{b} .
+\]
+This is an equivalence relation (for each $f$). The equivalence
+relation $\overset{m}{\equiv}$ on $\ZZ$ defined in the previous
+example is actually a particular case of this $\overset{f}{\equiv}$:
+Namely, if we define $f : \ZZ \to \set{0, 1, \ldots, m-1}$ to be the
+map that sends each $n \in \ZZ$ to the remainder obtained when $n$ is
+divided by $m$, then the relation $\overset{f}{\equiv}$ becomes
+identical with $\overset{m}{\equiv}$.
 \end{itemize}
 
 Each simple graph $G$ gives rise to an equivalence relation; here is
@@ -2724,6 +2746,35 @@ Proof.
 Cycles and circuits.
 \end{todo}
 
+\subsubsection{Connectedness}
+
+\begin{definition}
+Let $G = \tup{V, E}$ be a simple graph. We say that $G$ is
+\textit{connected} if $G$ satisfies the following two properties:
+\begin{itemize}
+\item Its vertex set $V$ is nonempty.
+\item Each two vertices $u \in V$ and $v \in V$ satisfy
+$u \simeq_G v$.
+\end{itemize}
+\end{definition}
+
+\begin{todo}
+Examples.
+\end{todo}
+
+\begin{todo}
+Restate using paths and walks.
+\end{todo}
+
+\begin{todo}
+Connected components.
+\end{todo}
+
+\begin{todo}
+A graph is isomorphic to the disjoint union of its connected
+components.
+\end{todo}
+
 \subsection{\label{sect.intro.teasers}Questions to ask about graphs}
 
 \begin{todo}
@@ -2767,7 +2818,7 @@ A \textit{dominating set} of $G$ means a dominating subset of
 $\verts{G}$.
 \end{definition}
 
-\begin{example}
+\begin{example} \label{exa.dominating.pentagon}
 For this example, let us consider the graph $G = \tup{V, E}$, where
 \begin{align*}
 V &= \set{1, 2, 3, 4, 5} \qquad \text{and} \\
@@ -2839,8 +2890,10 @@ of $V$ such that $A \cup B = V$.
 $\leq \abs{V}/2$.
 \end{proposition}
 
-We will see a proof of this proposition later, when we have defined
-the notion of the \textit{distance} between two vertices in a graph.
+We will see two proofs of this proposition later, in Subsections
+\ref{subsect.dominating.part1} and \ref{subsect.dominating.part2}.
+% when we have defined
+% the notion of the \textit{distance} between two vertices in a graph.
 
 Again, Proposition~\ref{prop.dominating.|V|/2} can be neatly restated
 in terms of people and friendships\footnote{Namely:
@@ -2862,10 +2915,32 @@ chosen ones among his friends.
 (As usual, we assume that the group of people is finite, and that the
 relation of friendship is symmetric.)}.
 
-\begin{todo}
-Bound in Proposition~\ref{prop.dominating.|V|/2} \textbf{(b)}
-may and may not be sharp: examples.
-\end{todo}
+\begin{example}
+\textbf{(a)} Let $V$, $E$ and $G$ be as in
+Example~\ref{exa.dominating.pentagon}.
+Then, Proposition~\ref{prop.dominating.|V|/2} \textbf{(b)} predicts
+that there exists a dominating subset of $V$ having size
+$\leq \abs{V}/2 = 5/2$. Since the size of a finite set is an integer,
+this shows that there exists a dominating subset of $V$ having size
+$\leq 2$ (because any integer that is $\leq 5/2$ must automatically be
+$\leq 2$). And indeed, such a dominating subset exists
+(for example, $\set{5, 3}$).
+
+\textbf{(b)} Now, let us instead consider the graph $G = \tup{V, E}$,
+where
+\begin{align*}
+V &= \set{1, 2, 3, 4, 5} \qquad \text{and} \\
+E &= \powset[2]{V} .
+\end{align*}
+(This is the complete graph $K_5$.)
+Again, Proposition~\ref{prop.dominating.|V|/2} \textbf{(b)} predicts
+that there exists a dominating subset of $V$ having size
+$\leq \abs{V}/2 = 5/2$. Again, this entails that
+there exists a dominating subset of $V$ having size $\leq 2$ (since
+the size of a finite set is an integer). This is indeed true, but for
+this particular graph we can even find a dominating subset of $V$
+having size $1$: for example, the subset $\set{1}$.
+\end{example}
 
 \subsection{\label{subsect.dominating.odd}Brouwer's theorem and the
 Heinrich-Tittmann formula}
@@ -4349,6 +4424,591 @@ Now, recall that $\delta$ is the number of dominating sets of $G$.
 Hence, the number of dominating sets of $G$ is
 $\delta = 2^n - 1 + \alpha - \beta$. This proves
 Theorem~\ref{thm.dominating.heinrich} \textbf{(b)}.
+\end{proof}
+
+\subsection{\label{subsect.dominating.part1} Distances in graphs;
+first proof of Proposition~\ref{prop.dominating.|V|/2}}
+
+\begin{todo}
+ Write this proof up. Note that it has several steps: First,
+ splitting into connected components, and then (WLOG assuming $G$
+ to be connected) the actual argument using distances.
+\end{todo}
+
+\subsection{\label{subsect.dominating.part2} Independent sets;
+second proof of Proposition~\ref{prop.dominating.|V|/2}}
+
+Now, let us prove Proposition~\ref{prop.dominating.|V|/2} using the
+concept of \textit{independent sets}. This concept (which is
+actually more fundamental than that of dominating sets) is easily
+defined:
+
+\begin{definition} \label{def.dominating.indset}
+Let $G = \tup{V, E}$ be a simple graph. A subset $S$ of $V$ is
+said to be \textit{independent} (with respect to $G$) if and only
+if no two distinct elements of $S$ are adjacent.
+
+An \textit{independent set} of $G$ means a subset of $V$ that
+is independent (with respect to $G$).
+\end{definition}
+
+Independent sets are often called \textit{stable sets}.
+
+If $G = \tup{V, E}$ is a simple graph, then each subset $S$ of
+$V$ that has size $\abs{S} \leq 1$ is automatically independent
+(since it has no two distinct elements). A subset $S$ of $V$ that
+has size $\abs{S} = 2$ is independent if and only if its two
+elements are non-adjacent. A subset $S$ of $V$ that has size $3$
+is the same as an anti-triangle of $G$, as defined in
+Exercise~\ref{exa.simple.R33.two} above.
+Here is a concrete example:
+
+\begin{example}
+Let $V$, $E$ and $G$ be as in Example~\ref{exa.simple.R33}
+\textbf{(c)}. Then, the subset $\set{2, 4, 6}$ of $V$ is
+independent (since no two distinct elements of this subset are
+adjacent), whereas the subset $\set{1, 3, 5}$ is not
+independent (since the two distinct elements $1$ and $3$ of
+this subset are adjacent).
+\end{example}
+
+\begin{todo}
+explain that independent sets are induced subgraphs isomorphic
+to the empty graph.
+\end{todo}
+
+The following property of independent set is almost trivial:
+
+\begin{lemma} \label{lem.dominating.indset.addv}
+Let $G = \tup{V, E}$ be a simple graph. Let $S$ be an independent set
+of $G$. Let $v \in V$. Assume that no neighbor of $v$ belongs to $S$.
+Then, $S \cup \set{v}$ also is an independent set of $G$.
+\end{lemma}
+
+\begin{proof}[Proof of Lemma~\ref{lem.dominating.indset.addv}.]
+We have $\verts{G} = V$ (since $G = \tup{V, E}$). Furthermore, recall
+that $S$ is an independent set of $G$. In other words,
+the subset $S$ of $V$ is independent. In other words, no two
+distinct elements of $S$ are adjacent (by the definition of
+``independent'').
+
+Clearly, $S \cup \set{v}$ is a subset of $V$ (since $S \subseteq V$
+and $v \in V$).
+
+Assume (for the sake of contradiction) that some two distinct elements
+of $S \cup \set{v}$ are adjacent. Fix two such elements, and denote
+them by $p$ and $q$. Hence, $p$ and $q$ are two distinct elements of
+$S \cup \set{v}$, and are adjacent.
+We have $p \neq q$ (since $p$ and $q$ are distinct). Hence,
+at least one of the elements $p$ and $q$ must be distinct from $v$
+(because otherwise, both $p$ and $q$ would be equal to $v$, which
+would yield that $p = q$, but this would contradict $p \neq q$). In
+other words, $p$ is distinct from $v$, or $q$ is distinct from $v$
+(or both). Hence, we WLOG assume that $p$ is distinct from $v$ (since
+otherwise, we can simply switch $p$ with $q$). Then, $p \neq v$.
+Combining this with $p \in S \cup \set{v}$, we obtain
+$p \in \tup{S \cup \set{v}} \setminus \set{v} \subseteq S$. Hence,
+$q = v$ \ \ \ \ \footnote{\textit{Proof.} Assume the contrary. Thus,
+$q \neq v$. Combining this with $q \in S \cup \set{v}$, we obtain
+$q \in \tup{S \cup \set{v}} \setminus \set{v} \subseteq S$. Now, $p$
+and $q$ are two distinct elements of $S$ (since $p \in S$, $q \in S$
+and $p \neq q$), and are adjacent. Hence, there are two distinct
+elements of $S$ that are adjacent (namely, $p$ and $q$). This
+contradicts the fact that no two distinct elements of $S$ are
+adjacent. This contradiction proves that our assumption was wrong,
+qed.}. Now, $p$ is a neighbor of $q$ (since $p$ and $q$ are adjacent).
+In other words, $p$ is a neighbor of $v$ (since $q = v$). Hence,
+at least one neighbor of $v$ belongs to $S$ (namely, the neighbor
+$p$). This contradicts the fact that no neighbor of $v$ belongs to
+$S$.
+
+This contradiction proves that our assumption (that some two distinct
+elements of $S \cup \set{v}$ are adjacent) was false. Hence, no two
+distinct elements of $S \cup \set{v}$ are adjacent. In other words,
+the subset $S \cup \set{v}$ of $V$ is independent (by the definition
+of ``independent''). In other words, $S \cup \set{v}$ is an
+independent set of $G$. This proves
+Lemma~\ref{lem.dominating.indset.addv}.
+\end{proof}
+
+We shall now consider two specific classes of independent sets:
+the \textit{maximum} and the \textit{maximal} ones.
+These are not the same, and the contrast between them is rather
+important to understand. Let us define the two classes:
+
+\begin{definition} \label{def.dominating.indset.max}
+Let $G = \tup{V, E}$ be a simple graph.
+
+\textbf{(a)} A \textit{maximum independent set} of $G$ means
+a subset of $V$ that is independent and has the highest possible
+size among all independent sets. In other words, a
+\textit{maximum independent set} of $G$ means a subset $S$ of
+$V$ that is independent and that has the property that every
+independent subset $T$ of $V$ satisfies $\abs{T} \leq \abs{S}$.
+
+\textbf{(b)} A \textit{maximal independent set} of $G$ means
+a subset of $V$ that is independent and that cannot be written
+as a proper subset of any independent subset of $V$. In other
+words, a \textit{maximal independent set} of $G$ means a subset
+of $V$ that is independent and that has the property that no
+independent subset $T$ of $V$ satisfies $S \subsetneq T$.
+\end{definition}
+
+Thus, roughly speaking, a maximum independent set is an
+independent set having maximum size (among the independent sets),
+whereas a maximal independent set is an independent set that
+cannot be extended to a larger independent set by adding new
+elements.
+
+Notice that a simple graph often will have several
+maximum independent sets (after all, the requirement to have
+maximum size does not uniquely determine the set; it merely
+uniquely determines the size), and also several maximal
+independent sets.
+
+It is easy to see that each maximum independent set of a
+simple graph $G$ is automatically a maximal independent set
+of $G$ as well. However, the opposite is not true, as the
+following example shows:
+
+\begin{example}
+Let $V$, $E$ and $G$ be as in Example~\ref{exa.simple.R33}
+\textbf{(c)}. Then, the subset $\set{2, 4, 6}$ of $V$ is
+independent, and is a maximum independent set of $G$
+(indeed, it is easy to check that each independent set of $G$
+has size $\leq 3$). the subset $\set{1, 5}$ is also
+independent, and is a \textbf{maximal} independent set of $G$
+(indeed, it is easy to check that no independent subset $T$
+of $V$ satisfies $\set{1, 5} \subsetneq T$, because each of
+the remaining vertices $2, 3, 4, 6$ of $G$ is connected to
+at least one of $1$ and $5$ and therefore cannot be in an
+independent set together with $1$ and $5$), but not a
+\textbf{maximum} independent set of $G$ (since the independent
+set $\set{2, 4, 6}$ has greater size).
+\end{example}
+
+You might wonder how to compute a maximum independent set
+or a maximal independent set of a simple graph $G = \tup{V, E}$.
+Obviously, one way to do so is to catalogue all subsets of $V$,
+then check which of them are independent, and then check which
+of them are maximum independent sets and which are maximal
+independent sets. This algorithm, while theoretically doable,
+is massively inefficient, since the number of subsets of $V$
+grows massively with $\abs{V}$. Are there fast algorithms?
+This is a more interesting question, and the answers for
+\textbf{maximum} and for \textbf{maximal} independent sets
+are completely different:
+\begin{itemize}
+ \item There are, most likely, no quick algorithms to find
+       a \textbf{maximum} independent set of a simple graph
+       $G = \tup{V, E}$. Indeed, this problem is NP-hard. There
+       are better algorithms than checking all subsets of $V$,
+       but no algorithm of polynomial time in $\abs{V}$ is
+       possible (unless $P = NP$).
+ \item Finding a \textbf{maximal} independent set of a simple
+       graph $G = \tup{V, E}$ is easy: Start with the empty
+       set (which is clearly independent), and keep adding new
+       elements to it while keeping the subset
+       independent\footnote{It is easy to check whether
+       adding a given new vertex
+       $v$ to a given independent set $S$ keeps the set
+       independent (in fact, we just need to check that $v$
+       is not adjacent to any of the elements of $S$).},
+       until it is no longer possible.
+       Once it is no longer possible, your independent subset
+       is a maximal independent set. This is a polynomial-time
+       algorithm. We shall formalize this algorithm (and prove its
+       correctness) further below (in
+       Proposition~\ref{prop.dominating.indset.alg-correct}).
+\end{itemize}
+
+Now, let us show a simple yet crucial fact about maximal independent
+sets:
+
+\begin{lemma} \label{lem.dominating.indset.max}
+Let $G = \tup{V, E}$ be a simple graph. Let $S$ be an independent
+subset of $V$. Then, $S$ is a maximal independent set of $G$ if and
+only if $S$ is dominating.
+\end{lemma}
+
+\begin{proof}[Proof of Lemma~\ref{lem.dominating.indset.max}.]
+We have $\verts{G} = V$ (since $G = \tup{V, E}$). Furthermore, recall
+that the subset $S$ of $V$ is independent. In other words, no two
+distinct elements of $S$ are adjacent (by the definition of
+``independent'').
+
+Now, let us make the following two claims:
+
+\begin{statement}
+\textit{Claim 1:} If $S$ is a maximal independent set of $G$, then
+$S$ is dominating.
+
+\textit{Claim 2:} If $S$ is dominating, then $S$ is a maximal
+independent set of $G$.
+\end{statement}
+
+\textit{Proof of Claim 1:} Assume that $S$ is a maximal independent
+set of $G$. We must prove that $S$ is dominating.
+
+We know that $S$ is a maximal independent set of $G$. In other words,
+$S$ is a subset of $V$ that is independent and that cannot be written
+as a proper subset of any independent subset of $V$.
+
+Let $v \in \verts{G} \setminus S$ be a vertex. Thus, $v \in \verts{G}$
+and $v \notin S$. Then, the subset $S \cup \set{v}$ of $V$ is not
+independent\footnote{\textit{Proof.} Assume the contrary. Thus, the
+subset $S \cup \set{v}$ of $V$ is independent. But $S$ is a proper
+subset of $S \cup \set{v}$ (since $v \notin S$). Hence, $S$ can be
+written as a proper subset of some independent subset of $V$
+(namely, of the independent subset $S \cup \set{v}$). This contradicts
+the fact that $S$ cannot be written as a proper subset of any
+independent subset of $V$. This contradiction proves that our
+assumption was wrong, qed.}. Hence, at least one neighbor of $v$
+belongs to $S$\ \ \ \ \footnote{\textit{Proof.} Assume the contrary.
+Thus, no neighbor of $v$ belongs to $S$. Hence,
+Lemma~\ref{lem.dominating.indset.addv} shows that $S \cup \set{v}$
+also is an independent set of $G$ (since $v \in \verts{G} = V$). In
+other words, the subset $S \cup \set{v}$ of $V$ is independent.
+This contradicts the fact that the subset $S \cup \set{v}$ of $V$ is
+not independent. This contradiction proves that our assumption was
+wrong, qed.}.
+
+Now, forget that we have fixed $v$. We thus have shown that for
+every vertex $v \in \verts{G} \setminus S$, at least one neighbor of
+$v$ belongs to $S$. In other words, the subset $S$ of $V$ is
+dominating (by the definition of ``dominating''). This proves Claim 1.
+
+\textit{Proof of Claim 2:} Assume that $S$ is dominating. We must
+prove that $S$ is a maximal independent set of $G$.
+
+Assume (for the sake of contradiction) that $S$ can be written as a
+proper subset of some independent subset of $V$. Let $I$ be this
+independent subset. Thus, $S$ is a proper subset of $I$. In
+particular, $S \subseteq I$. But $I \setminus S \neq \varnothing$
+(since $S$ is a \textbf{proper} subset of $I$). Hence, there exists
+some $i \in I \setminus S$. Consider such an $i$. Combining
+$i \in I \setminus S \subseteq I \subseteq V = \verts{G}$ with
+$i \notin S$ (since $i \in I \setminus S$), we obtain
+$i \in \verts{G} \setminus S$.
+
+The subset $I$ of $V$ is independent. In other words, no two distinct
+elements of $I$ are adjacent (by the definition of ``independent'').
+
+But the subset $S$ of $V$ is dominating. In other words, for
+every vertex $v \in \verts{G} \setminus S$, at least one neighbor of
+$v$ belongs to $S$ (by the definition of ``dominating''). Applying
+this to $v = i$, we find that at least one neighbor of $i$ belongs to
+$S$ (since $i \in \verts{G} \setminus S$). Let $j$ be this neighbor.
+Thus, $j \in S$. Also, the vertices $i$ and $j$ are adjacent (since
+$j$ is a neighbor of $i$). Hence, the vertices $i$ and $j$ are
+distinct. Also, $i$ and $j$ are elements of $I$ (since $i \in I$ and
+$j \in S \subseteq I$). Thus, there exist two distinct elements of $I$
+that are adjacent (namely, $i$ and $j$). This contradicts the fact
+that no two distinct elements of $I$ are adjacent. This contradiction
+proves that our assumption (that $S$ can be written as a proper subset
+of some independent subset of $V$) is wrong. Hence, $S$ cannot be
+written as a proper subset of any independent subset of $V$. Thus,
+$S$ is a subset of $V$ that is independent and that cannot be written
+as a proper subset of any independent subset of $V$.
+In other words, $S$ is a maximal independent set of $G$ (by the
+definition of maximal independent sets). This proves Claim 2.
+
+Combining Claim 1 and Claim 2, we conclude that $S$ is a maximal
+independent set of $G$ if and only if $S$ is dominating. This proves
+Lemma~\ref{lem.dominating.indset.max}.
+\end{proof}
+
+Let us now rigorously state the algorithm for finding a maximal
+independent set:
+
+\begin{algorithm} \label{alg.dominating.indset}
+\textbf{Input:} a simple graph $G = \tup{V, E}$.
+
+\textbf{Output:} a maximal independent set $S$ of $G$.
+
+\begin{enumerate}
+\item Define a subset $S$ of $V$ by $S = \varnothing$.
+\item \textbf{While} there exists some $v \in V \setminus S$ such that
+      no neighbor of $v$ belongs to $S$,
+      \textbf{do} the following:
+      \begin{itemize}
+      \item Choose one such $v$, and add this $v$ to $S$. (Clearly,
+      the new $S$ is still a subset of $V$.)
+      \end{itemize}
+\item Output the subset $S$ of $V$.
+\end{enumerate}
+\end{algorithm}
+
+(Note that in each iteration of the while-loop in Step 2 of
+Algorithm~\ref{alg.dominating.indset}, we only add one $v$ to $S$,
+even if there exist several candidates. Then, we go back to the
+beginning of the while-loop, and we check again whether there exists
+some $v \in V \setminus S$ such that no neighbor of $v$ belongs to
+$S$.)
+
+\begin{proposition} \label{prop.dominating.indset.alg-correct}
+Algorithm~\ref{alg.dominating.indset} always terminates, and the
+subset $S$ that it outputs is indeed a maximal independent set of $G$.
+\end{proposition}
+
+We shall show the proof of
+Proposition~\ref{prop.dominating.indset.alg-correct} in all detail
+due to it being a neat introductory example of reasoning about
+algorithms; nevertheless, the proof is almost evident.
+
+\begin{proof}[Proof of
+Proposition~\ref{prop.dominating.indset.alg-correct}.]
+We will prove the following claims:
+
+\begin{statement}
+\textit{Claim 1:} During each iteration of the while-loop in
+Algorithm~\ref{alg.dominating.indset}, the size $\abs{S}$ increases
+by $1$.
+
+\textit{Claim 2:} Algorithm~\ref{alg.dominating.indset} always
+terminates.
+
+\textit{Claim 3:} Consider one single iteration of the while-loop
+in Algorithm~\ref{alg.dominating.indset}. If the subset $S$ is
+independent before this iteration, then $S$ is also independent after
+the iteration.
+
+\textit{Claim 4:} The subset $S$ stays independent throughout
+the execution of Algorithm~\ref{alg.dominating.indset}.
+
+\textit{Claim 5:} The subset $S$ that is outputted by
+Algorithm~\ref{alg.dominating.indset}
+is a maximal independent set of $G$.
+\end{statement}
+
+Clearly, Claim 2 and Claim 5 combined will yield
+Proposition~\ref{prop.dominating.indset.alg-correct} (once they are
+proven). The other three claims are merely auxiliary results.
+
+Let us now prove the five claims:
+
+\textit{Proof of Claim 1.} Consider one
+single iteration of the while-loop in
+Algorithm~\ref{alg.dominating.indset}. Let $S_{\operatorname{old}}$ be
+the value of $S$ at the beginning of this iteration, and let
+$S_{\operatorname{new}}$ be the value of $S$ at the end of this
+iteration. Thus, $S_{\operatorname{new}}$ is obtained from
+$S_{\operatorname{old}}$ by adding the element $v$ that was chosen
+during this particular iteration of the while-loop (because what
+happens to $S$ during an iteration of the while-loop is that the
+element $v$ is being added to $S$). In other words, we have
+$S_{\operatorname{new}} = S_{\operatorname{old}} \cup \set{v}$.
+But remember how the element $v$ was chosen at the beginning of the
+iteration: It was chosen to be an element of $V \setminus S$ such that
+no neighbor of $v$ belongs to $S$. Thus, $v$ is an element of
+$V \setminus S_{\operatorname{old}}$ such that no neighbor of $v$
+belongs to $S_{\operatorname{old}}$. In particular, $v$ is an element
+of $V \setminus S_{\operatorname{old}}$. Hence,
+$v \notin S_{\operatorname{old}}$. But from
+$S_{\operatorname{new}} = S_{\operatorname{old}} \cup \set{v}$, we
+obtain
+$\abs{S_{\operatorname{new}}}
+= \abs{S_{\operatorname{old}} \cup \set{v}}
+= \abs{S_{\operatorname{old}}} + 1$ (since
+$v \notin S_{\operatorname{old}}$). In other words, the size $\abs{S}$
+has increased by $1$ during our iteration.
+
+We thus have shown that during each iteration of the while-loop in
+Algorithm~\ref{alg.dominating.indset}, the size $\abs{S}$ increases
+by $1$. This proves Claim 1.
+
+\textit{Proof of Claim 2.} Let us show that the while-loop
+in Algorithm~\ref{alg.dominating.indset} (more precisely, in its
+Step 2) cannot go on forever.
+
+Throughout the execution of the algorithm, $S$ remains a subset of
+$V$. Hence, $\abs{S}$ remains a nonnegative integer smaller or equal
+to $\abs{V}$ throughout the execution of the algorithm. Therefore,
+$\abs{S}$ cannot keep increasing by $1$ forever (since it would
+eventually surpass $\abs{V}$ this way). But Claim 1 shows that
+$\abs{S}$ increases by $1$ during each iteration of the while-loop in
+Algorithm~\ref{alg.dominating.indset}. Therefore, the while-loop in
+Algorithm~\ref{alg.dominating.indset} cannot go on forever (since
+$\abs{S}$ cannot keep increasing by $1$ forever). Hence,
+Algorithm~\ref{alg.dominating.indset} must eventually terminate (since
+the only part of Algorithm~\ref{alg.dominating.indset} that could
+possibly go on forever is the while-loop). This proves Claim 2.
+
+\textit{Proof of Claim 3.} Let $\mathcal{I}$ be a single iteration of
+the while-loop in Algorithm~\ref{alg.dominating.indset}. We must show
+that if the subset $S$ is independent before the iteration
+$\mathcal{I}$, then $S$ is also independent after the iteration
+$\mathcal{I}$.
+
+Let
+$S_{\operatorname{old}}$ be the value of $S$ at the beginning of this
+iteration $\mathcal{I}$, and let $S_{\operatorname{new}}$ be the value
+of $S$ at the end of this iteration $\mathcal{I}$.
+
+Assume that the subset $S_{\operatorname{old}}$ of $V$ is independent.
+In other words, $S_{\operatorname{old}}$ is an independent set of $G$.
+Now, $S_{\operatorname{new}}$ is obtained from
+$S_{\operatorname{old}}$ by adding the element $v$ that was chosen
+during this particular iteration of the while-loop (because what
+happens to $S$ during an iteration of the while-loop is that the
+element $v$ is being added to $S$). In other words, we have
+$S_{\operatorname{new}} = S_{\operatorname{old}} \cup \set{v}$.
+
+The element $v$ was chosen to be an element of $V \setminus S$ such
+that no neighbor of $v$ belongs to $S$ at the beginning of the
+iteration $\mathcal{I}$. Hence, $v$ is an element of
+$V \setminus S_{\operatorname{old}}$ such that no neighbor of $v$
+belongs to $S_{\operatorname{old}}$. Thus, we have
+$v \in V \setminus S_{\operatorname{old}} \subseteq V$, and no
+neighbor of $v$ belongs to $S_{\operatorname{old}}$. Hence,
+Lemma~\ref{lem.dominating.indset.addv} (applied to
+$S_{\operatorname{old}}$ instead of $S$) shows that
+$S_{\operatorname{old}} \cup \set{v}$ also is an independent set of
+$G$. In other words, $S_{\operatorname{new}}$ is an independent set of
+$G$ (since
+$S_{\operatorname{new}} = S_{\operatorname{old}} \cup \set{v}$).
+In other words, the subset $S_{\operatorname{new}}$ of $V$ is
+independent.
+
+Now, forget our assumption that the subset $S_{\operatorname{old}}$ of
+$V$ is independent. We thus have shown that if
+the subset $S_{\operatorname{old}}$ of $V$ is independent, then
+the subset $S_{\operatorname{new}}$ of $V$ is independent. In other
+words, if the subset $S$ is independent before the iteration
+$\mathcal{I}$, then $S$ is also independent after the iteration
+$\mathcal{I}$. This proves Claim 3.
+
+\textit{Proof of Claim 4.} The empty set $\varnothing$ is clearly
+independent. Hence, the subset $S$ of $V$ is independent when it is
+first defined in Algorithm~\ref{alg.dominating.indset} (because it is
+first defined to be the empty set $\varnothing$). Then, throughout the
+while-loop in Algorithm~\ref{alg.dominating.indset}, it remains
+independent (because of Claim 3). Therefore, $S$ stays independent
+throughout Algorithm~\ref{alg.dominating.indset}. This proves Claim 4.
+
+\textit{Proof of Claim 5.} Consider the subset $S$ that is outputted
+by Algorithm~\ref{alg.dominating.indset}. This subset $S$ is
+independent (by Claim 4), i.e., is an independent set of $G$.
+
+Notice that $G = \tup{V, E}$, hence $\verts{G} = V$. We have
+$S \subseteq V = \verts{G}$.
+
+Furthermore, looking back at Algorithm~\ref{alg.dominating.indset}, we
+see that the subset $S$ gets outputted immediately after the
+while-loop is escaped. Thus, the condition of the while-loop cannot be
+satisfied for this subset $S$ (because otherwise, the while-loop would
+not be escaped at this point). In other words, there exists
+\textbf{no} $v \in V \setminus S$ such that no neighbor of $v$ belongs
+to $S$. In other words, for every $v \in V \setminus S$, at least one
+neighbor of $v$ belongs to $S$. In other words, for every
+$v \in \verts{G} \setminus S$, at least one neighbor of $v$ belongs to
+$S$ (because $V = \verts{G}$). In other words, the subset $S$ of
+$\verts{G}$ is dominating (by the definition of ``dominating'').
+But Lemma~\ref{lem.dominating.indset.max} shows that $S$ is a maximal
+independent set of $G$ if and only if $S$ is dominating. Thus, $S$ is
+a maximal independent set of $G$ (since $S$ is dominating). This proves
+Claim 5.
+
+Now, all five claims are proven.
+Proposition~\ref{prop.dominating.indset.alg-correct} follows from
+Claim 2 and Claim 5.
+\end{proof}
+
+\begin{lemma} \label{lem.dominating.indset.max.compl}
+Let $G = \tup{V, E}$ be a simple graph that has no isolated vertices.
+Let $S$ be an independent set of $G$.
+Then, the subset $V \setminus S$ of $V$ is dominating.
+\end{lemma}
+
+\begin{proof}[Proof of Lemma~\ref{lem.dominating.indset.max.compl}.]
+We have $G = \tup{V, E}$, thus $\verts{G} = V$.
+But $S$ is an independent set of $G$, hence an independent subset of
+$V$. In other words, no two distinct elements of $S$ are adjacent
+(by the definition of ``independent'').
+
+Let $v \in \verts{G} \setminus \tup{V \setminus S}$ be a vertex.
+Thus,
+$v \in \underbrace{\verts{G}}_{= V} \setminus \tup{V \setminus S}
+= V \setminus \tup{V \setminus S} = S$ (since $S \subseteq V$).
+Furthermore, the vertex $v$ of $G$ has a
+neighbor\footnote{\textit{Proof.} Assume the contrary. Thus, the
+vertex $v$ has no neighbors. Hence, the vertex $v$ of $G$ is
+isolated (because the vertex $v$ of $G$ is isolated if and only if
+$v$ has no neighbors). Therefore, the graph $G$ has at least one
+isolated vertex. This contradicts the fact that $G$ has no isolated
+vertices. This contradiction proves that our assumption was false,
+qed.}. Fix such a neighbor, and denote it by $u$. Thus, $u$ and $v$
+are adjacent (since $u$ is a neighbor of $v$).
+We have $u \notin S$\ \ \ \ \footnote{\textit{Proof.} Assume the
+contrary. Thus, $u \in S$. Now, $u$ and $v$ are two elements
+of $S$ (since $u \in S$ and $v \in S$) and are distinct (since $u$ and
+$v$ are adjacent). Hence, some two distinct elements of $S$ are
+adjacent (namely, $u$ and $v$). This contradicts the fact that no two
+distinct elements of $S$ are adjacent. This contradiction proves that
+our assumption was false, qed.}. Hence, $u \in V \setminus S$ (since
+$u \in V$ and $u \notin S$). Recall also that $u$ is a neighbor of
+$v$. Thus, at least one neighbor of $v$ belongs to $V \setminus S$
+(namely, the neighbor $u$).
+
+Now, forget that we fixed $v$. We thus have shown that for every
+vertex $v \in \verts{G} \setminus \tup{V \setminus S}$, at least one
+neighbor of $v$ belongs to $V \setminus S$. In other words, the subset
+$V \setminus S$ of $V$ is dominating (by the definition of
+``dominating''). This proves
+Lemma~\ref{lem.dominating.indset.max.compl}.
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{prop.dominating.|V|/2}.]
+\textbf{(a)} There exists a maximal independent set of
+$G$\ \ \ \ \footnote{\textit{First proof.} Such a set can be obtained
+by Algorithm~\ref{alg.dominating.indset} (because
+Proposition~\ref{prop.dominating.indset.alg-correct} shows that this
+algorithm outputs a maximal independent set of $G$).
+
+\textit{Second proof.} We have the following two observations:
+\begin{itemize}
+\item There exists at least one independent set of $G$.
+(In fact, the subset $\varnothing$ of $V$ is clearly independent.)
+\item There are only finitely many independent sets of $G$. (In fact,
+each independent set of $G$ is a subset of $V$, and there are only
+finitely many subsets of $V$.)
+\end{itemize}
+From these two observations, we can conclude that there exists an
+independent set of $G$ having maximum size. In other words, there
+exists a maximum independent set of $G$. But since each maximum
+independent set of $G$ is a maximal independent set of $G$ (this is
+easy to show), we can thus conclude that there exists a maximal
+independent set of $G$.}. Consider such a set, and denote it by $S$.
+Lemma~\ref{lem.dominating.indset.max} shows that $S$ is a maximal
+independent set of $G$ if and only if $S$ is dominating. Thus,
+$S$ is dominating (since $S$ is a maximal
+independent set of $G$).
+But Lemma~\ref{lem.dominating.indset.max.compl} shows that
+the subset $V \setminus S$ of $V$ is dominating. Clearly, the sets
+$S$ and $V \setminus S$ are disjoint subsets of $V$. Furthermore,
+$S \cup \tup{V \setminus S} = V$ (since $S \subseteq V$). Hence,
+there exist two disjoint dominating subsets $A$ and $B$
+of $V$ such that $A \cup B = V$ (namely, $A = S$ and
+$B = V \setminus S$). This proves
+Proposition~\ref{prop.dominating.|V|/2} \textbf{(a)}.
+
+\textbf{(b)} Proposition~\ref{prop.dominating.|V|/2} \textbf{(a)}
+shows that there exist two disjoint dominating subsets $A$ and $B$
+of $V$ such that $A \cup B = V$. Consider such $A$ and $B$.
+We WLOG assume that $\abs{A} \geq \abs{B}$ (since otherwise, we can
+simply switch $A$ with $B$). But since the sets $A$ and $B$ are
+disjoint, we have $\abs{A \cup B} = \abs{A} + \abs{B}$. Now,
+from $V = A \cup B$, we obtain
+\[
+\abs{V} = \abs{A \cup B}
+= \underbrace{\abs{A}}_{\geq \abs{B}} + \abs{B}
+\geq \abs{B} + \abs{B}
+= 2 \abs{B} ,
+\]
+so that $\abs{B} \leq \abs{V} / 2$. In other words, the subset $B$ of
+$V$ has size $\leq \abs{V} / 2$. Hence, there exists a dominating
+subset of $V$ having size $\leq \abs{V}/2$ (namely, the subset $B$).
+This proves Proposition~\ref{prop.dominating.|V|/2} \textbf{(b)}.
 \end{proof}
 
 \section{\label{sect.hamilton}Hamiltonian paths}
