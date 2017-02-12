@@ -2743,8 +2743,46 @@ Proof.
 
 \subsubsection{Circuits and cycles}
 
+\begin{definition} \label{def.intro.circuits}
+Let $G$ be a simple graph.
+
+\textbf{(a)} A \textit{circuit} (in $G$) means a walk
+$\tup{v_0, v_1, \ldots, v_k}$ in $G$ satisfying $v_k = v_0$.
+
+\textbf{(b)} A \textit{cycle} (in $G$) means a circuit
+$\tup{v_0, v_1, \ldots, v_k}$ in $G$ such that $k \geq 3$, and such
+that the vertices $v_0, v_1, \ldots, v_{k-1}$ are distinct.
+\end{definition}
+
 \begin{todo}
-Cycles and circuits.
+Examples.
+\end{todo}
+
+\begin{todo}
+Explain that $\tup{u,v,w}$ and $\tup{v,w,u}$ count as distinct cycles
+(for us!).
+
+Explain that various books define circuits differently, e.g. Diestel.
+\end{todo}
+
+\begin{todo}
+Facts about cycles and circuits:
+
+- Rotating a circuit yields a circuit.
+
+- Rotating a cycle yields a cycle.
+
+- Reversal of a circuit is a circuit.
+
+- Reversal of a cycle is a cycle.
+
+- Edges of a cycle are distinct.
+
+- Each walk with no two identical adjacent edges contains a cycle,
+  unless it is a path.
+
+- If there are two different paths from $u$ to $v$, then there is a
+  cycle.
 \end{todo}
 
 \subsubsection{Connectedness}
