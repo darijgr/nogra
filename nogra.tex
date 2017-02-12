@@ -8,7 +8,8 @@
 \usepackage{comment}
 \usepackage{color}
 \usepackage{hyperref}
-\usepackage{datetime}
+\usepackage{ifthen}
+\usepackage{datetime2}
 \usepackage[sc]{mathpazo}
 \usepackage[T1]{fontenc}
 \usepackage{needspace}
@@ -147,7 +148,7 @@
 % $\underbrace{...1}_{\substack{...2}}$. This is useful for doing
 % local rewriting transformations on mathematical expressions with
 % justifications.
-\ihead{Notes on graph theory (\today, \currenttime)}
+\ihead{Notes on graph theory (\today, \DTMcurrenttime)}
 \ohead{page \thepage}
 \cfoot{}
 \begin{document}
@@ -159,7 +160,7 @@
 %BeginExpansion
 \today\ 
 %EndExpansion
-at \currenttime\ 
+at \DTMcurrenttime\ 
 (unfinished draft!)}
 \maketitle
 \tableofcontents
