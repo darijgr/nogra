@@ -122,6 +122,7 @@
 \excludecomment{noncompile}
 \newcommand{\id}{\operatorname{id}}
 \newcommand{\rev}{\operatorname{rev}}
+\newcommand{\conncomp}{\operatorname{conncomp}}
 \newcommand{\NN}{\mathbb{N}}
 \newcommand{\ZZ}{\mathbb{Z}}
 \newcommand{\QQ}{\mathbb{Q}}
@@ -1413,8 +1414,52 @@ exist three distinct vertices $a$,
 $b$ and $c$ of $G$ such that $ab$, $bc$ and $ca$ are edges of $G$.
 \end{theorem}
 
+\begin{example}
+Let $G$ be the graph $\tup{V, E}$, where
+\begin{align*}
+V &= \set{1, 2, 3, 4, 5, 6} \qquad \text{and} \\
+E &= \set{\set{1,2}, \set{2,3}, \set{3,4}, \set{4,5}, \set{5,6},
+          \set{6,1}, \set{1,4}, \set{2,5}, \set{3,6}} .
+\end{align*}
+(This graph can be drawn in such a way as to look like a regular
+hexagon with its three longest diagonals.)
+
+This $G$ does not satisfy the conditions of
+Theorem~\ref{thm.intro.mantel}, because its number of edges is
+$\abs{\edges{G}} = \abs{E} = 9 = 6^2 / 4$ (whereas
+Theorem~\ref{thm.intro.mantel} requires it to be $> 6^2 / 4$).
+Therefore, it should come as no surprise that there exist no three
+distinct vertices $a$, $b$ and $c$ of $G$ such that $ab$, $bc$ and
+$ca$ are edges of $G$. (There is a particularly quick way to convince
+yourself of this: Observe that if $u$ and $v$ are two adjacent
+vertices of $G$, then the integer $u+v$ is odd. Therefore, if there
+were three distinct vertices $a$, $b$ and $c$ of $G$ such that $ab$,
+$bc$ and $ca$ are edges of $G$, then the integers $a+b$, $b+c$ and
+$c+a$ would all be odd, and therefore their sum
+$\tup{a+b} + \tup{b+c} + \tup{c+a}$ would be odd as well. But this
+is impossible, since this sum is even (in fact, it equals
+$2\tup{a+b+c}$). Hence, no such three vertices $a$, $b$ and $c$
+exist.)
+
+However, if we add any new edge to $G$, then the resulting graph $G'$
+satisfies $\abs{\edges{G'}} = 9 + 1 > 6^2 / 4$, and therefore
+Theorem~\ref{thm.intro.mantel} can be applied to $G'$ instead of $G$.
+Hence, there exist three distinct vertices $a$,
+$b$ and $c$ of $G'$ such that $ab$, $bc$ and $ca$ are edges of $G'$.
+Which three vertices they will be depends on which edge we have
+added. For example, if we have added the edge $15$, then (for example)
+the three vertices $a = 1$, $b = 5$ and $c = 6$ work.
+
+Of course, the converse of Theorem~\ref{thm.intro.mantel} does not
+hold. There are many simple graphs $G$ which do not satisfy the
+assumption of Theorem~\ref{thm.intro.mantel}, but nevertheless have
+three distinct vertices $a$, $b$ and $c$
+such that $ab$, $bc$ and $ca$ are edges of $G$. The reader can easily
+construct such a graph.
+\end{example}
+
 \begin{todo}
-Example.
+Drawings for this example.
 \end{todo}
 
 For proofs of Theorem~\ref{thm.intro.mantel}, see (for example) the
@@ -1960,9 +2005,11 @@ $v_0 v_1, v_1 v_2, \ldots, v_{k-1} v_k$ of $G$;
 edges of $G$, counted with multiplicity. It is $1$ smaller than the
 number of all vertices of $G$, counted with multiplicity.)
 \item The vertex $v_0$ is said to be the \textit{starting point} of
-$\mathbf{w}$.
+$\mathbf{w}$. We say that the walk $\mathbf{w}$ \textit{starts} at
+$v_0$ (or, equivalently, \textit{begins} at $v_0$).
 \item The vertex $v_k$ is said to be the \textit{ending point} of
-$\mathbf{w}$.
+$\mathbf{w}$. We say that the walk $\mathbf{w}$ \textit{ends} at
+$v_k$.
 \end{itemize}
 
 \textbf{(c)} A \textit{path} (in $G$) means a walk (in $G$) whose
@@ -2863,12 +2910,53 @@ $u \simeq_G v$.
 Examples.
 \end{todo}
 
+\begin{definition}
+Let $G = \tup{V, E}$ be a simple graph. Let $v \in V$. The
+\textit{connected component of $v$} (in $G$) denotes the subset
+$\set{ u \in V \ \mid \  u \simeq_G v }$ of $V$.
+We shall denote this connected component of $v$ by
+$\conncomp v$ (or by $\conncomp_G v$, when $G$ is not clear from the
+context).
+
+A \textit{connected component of $G$} means a subset of $V$ that is
+the connected component of some $v \in V$. (Note that the $v$ is
+usually not uniquely determined -- in fact, several different vertices
+$v \in V$ often have the same connected component.)
+\end{definition}
+
+Roughly speaking, if $v$ is a vertex of a simple graph $G$, then
+the connected component of $v$ is the set of all vertices that are
+reachable from $v$ by walks (i.e., that are ending points of walks
+that start at $v$).
+
 \begin{todo}
-Restate using paths and walks.
+Examples.
 \end{todo}
 
 \begin{todo}
-Connected components.
+Restate using paths and walks. Equivalence of:
+
+- $u \simeq_G v$.
+
+- There is a path from $u$ to $v$.
+
+- There is a walk from $u$ to $v$.
+
+- $\conncomp u = \conncomp v$.
+
+- $u \in \conncomp v$.
+
+- $v \in \conncomp u$.
+
+- $\conncomp u \cap \conncomp v \neq \varnothing$.
+\end{todo}
+
+\begin{todo}
+Each $v \in V$ lies in exactly one connected component.
+\end{todo}
+
+\begin{todo}
+Connected components are connected.
 \end{todo}
 
 \begin{todo}
