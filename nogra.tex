@@ -150,6 +150,9 @@
 % $\underbrace{...1}_{\substack{...2}}$. This is useful for doing
 % local rewriting transformations on mathematical expressions with
 % justifications.
+\newcommand{\are}{\ar@{-}}
+% In an xymatrix environment, $\are$ gives an arrow without
+% arrowhead. I use this to represent edges in graphs.
 \ihead{Notes on graph theory (\today, \DTMcurrenttime)}
 \ohead{page \thepage}
 \cfoot{}
@@ -503,7 +506,7 @@ $u - v \geq 3$ is satisfied, but if we write $\set{1, 5}$ as
 $\set{u, v}$ with $u = 1$ and $v = 5$, then $u - v \geq 3$ is not
 satisfied.)
 
-Let $G$ be the graph $\tup{U, E}$. Then, $\verts{G} = U
+Let $G$ be the simple graph $\tup{U, E}$. Then, $\verts{G} = U
 = \set{1,2,3,4,5}$ and
 \begin{align}
 \edges{G} &= E
@@ -539,9 +542,219 @@ of $3$. The neighbors of $1$ are $4$ and $5$.
 There is a common method to represent graphs visually: Namely, a graph
 can be drawn as a set of points in the plane and a set of curves
 connecting some of these points with each other.
-\begin{todo}
-Write this section.
-\end{todo}
+
+More precisely:
+
+\begin{definition} \label{def.intro.draw}
+A simple graph $G$ can be visually represented by
+\textit{drawing} it on the plane (or on some other surface).
+To do so, we represent each vertex of $G$ by a point (at which we
+put the name of the vertex),
+and then, for each edge $uv$ of $G$, we draw a
+curve that connects the point representing $u$ with the point
+representing $v$. The positions of the points and the shapes of the
+curves can be chosen freely, as long as they allow the reader to
+unambigously reconstruct the graph $G$ from the picture.
+(Thus, for example:
+\begin{itemize}
+\item the points should be distinct and spaced
+reasonably far apart;
+\item the curves should not pass through points other than the ones
+they connect;
+\item the curves should not be too jagged (and they should certainly
+be contiguous);
+\item the curves should intersect in such a way that one can easily
+see which strand is the continuation of which one.
+\end{itemize}
+Various examples of graphs being drawn are given below.)
+\end{definition}
+
+\begin{example} \label{exa.intro.draw}
+Let us draw some simple graphs.
+
+\textbf{(a)} The simple graph $\tup{\set{1,2,3}, \set{12, 23}}$ (where
+we are again using the shorthand notation $uv$ for $\set{u,v}$) can be
+drawn as follows:
+\[
+\xymatrix{ 1 \are[r] & 2 \are[r] & 3 }.
+\]
+This is (in a sense) the simplest way to draw this graph: The edges
+are represented by straight lines (rather than tortuous curves).
+
+There are other options as well. For example, we can draw the same
+graph as follows:
+\begin{align*}
+\xymatrix{ 1 \are@/_2pc/[rr] & 3 \are[r] & 2 }. \\
+\phantom{a} %empty space to keep the graph from bleeding into the text
+\end{align*}
+Here, we have placed the points representing the vertices $1,2,3$
+differently. As a consequence, we were not able to draw the edge $12$
+as a straight line, because it would then have overlapped with the
+vertex $3$, which would make the structure of the graph ambiguous
+(the edge $12$ could be mistaken for two edges $13$ and $32$).
+
+We can just as well draw both edges as curves:
+\begin{align*}
+\xymatrix{ 1 \are@/_2pc/[rr] & 3 \are@/^1pc/[r] & 2 }. \\
+\phantom{a} %empty space to keep the graph from bleeding into the text
+\end{align*}
+This drawing still represents the same graph
+$\tup{\set{1,2,3}, \set{12, 23}}$.
+
+We do not have to place the three vertices all along the same line.
+We can just as well draw the graph $\tup{\set{1,2,3}, \set{12, 23}}$
+as follows:
+\[
+\xymatrix{
+& 2 \are[dl] \are[dr] \\
+1 & & 3
+} .
+\]
+
+So far we have drawn our edges in such a way that they did not
+intersect. But this is not a requirement. We could just as well have
+represented our graph $\tup{\set{1,2,3}, \set{12, 23}}$
+as follows:
+\[
+\xymatrix{
+& 2 \are@/^2pc/[dl] \are@/_2pc/[dr] \\
+1 & & 3
+} .
+\]
+This last drawing is, of course, needlessly complicated for such a
+graph, but it is perfectly legitimate.
+
+\textbf{(b)} Let $U$, $E$ and $G$ be as in
+Example~\ref{exa.intro.simple.VE}. Here is one way to draw the graph
+$G$:
+\begin{align*}
+\xymatrix{
+& 2 \are[rr] \are[rrrd] \are[rdd] & & 3 \are[rd] \are[ldd] \\
+1 \are[rrrr] \are[rrd] & & & & 4 \are[lld] \\
+& & 5
+}
+\end{align*}
+Here is another way to draw the same graph $G$, with fewer
+intersections between edges:
+\begin{align*}
+\xymatrix{
+& 2 \are[rr] \are@/^4pc/[rrrd] \are@/_6pc/[rdd] & & 3 \are[rd] \are[ldd] \\
+& 1 \are[rrr] \are[rd] & & & 4 \are[lld] \\
+& & 5
+} .
+\end{align*}
+By appropriately repositioning the points corresponding to the five
+vertices of $G$, we can actually get rid of all intersections; namely,
+we can draw the graph $G$ as follows:
+\begin{align*}
+\xymatrix{
+& 2 \are[rr] \are@/^4pc/[rrrd] \are[rdd] & & 3 \are[rd] \are[ldd] \\
+& & & & 4 \are[lld] \\
+& & 5 \are[r] & 1 \are[ru]
+} .
+\end{align*}
+If we reposition the vertices further, we can even achieve a drawing
+without intersecting curves that uses only straight lines as curves:
+\begin{align*}
+\xymatrix{
+& 2 \are[rd] \are[rrrd] \are[rdd] \\
+& & 3 \are[d] \are[rr] & & 4 \are[lld] \\
+& & 5 \are[r] & 1 \are[ru]
+} .
+\end{align*}
+All of these drawings are equally legitimate; some are more convenient
+for certain purposes while others are less so.
+
+Let us now show a \textbf{bad} drawing of the graph $G$ (that is, a
+drawing that fails the ``allow the reader to
+unambigously reconstruct the graph $G$ from the picture'' criterion):
+\begin{align*}
+\xymatrix{
+2 \are[rr] \are@/^3pc/[dd] & & 3 \are@/_3pc/[dd] \are[lldd] \\
+& \\
+5 \are[rr] \are[rd] & & 4 \are[ld] \\
+& 1
+} .
+\end{align*}
+This drawing is bad because of the muddle that happens in the center
+of the rectangle formed by the vertices $2$, $3$, $4$ and $5$. Two
+curves are touching each other at that center, making the reader
+wonder whether they are two curves representing the edges $24$ and
+$35$ ``passing through each other'', or two curves representing the
+edges $25$ and $34$ ``bouncing off each other'', or both, or maybe
+even three curves. (The answer is ``both'': they represent all four
+edges $24$, $35$, $25$ and $34$. But this is not clear from the
+drawing.)
+
+\textbf{(c)} Let us draw one further graph: the simple graph
+$\tup{\set{1, 2, 3, 4, 5}, \powset[2]{\set{1, 2, 3, 4, 5}}}$. This is
+the simple graph whose vertices are $1, 2, 3, 4, 5$, and whose edges
+are all possible two-element sets consisting of its vertices (i.e.,
+each pair of two distinct vertices is adjacent). We shall later (in
+Definition~\ref{def.intro.complete-graph}) refer to this graph as
+the ``complete graph $K_5$''. Here is a simple way to draw this graph:
+\begin{align*}
+\xymatrix{
+& 2 \are[ld] \are[rr] \are[rrrd] \are[rdd] & & 3 \are[rd] \are[ldd] \are[llld] \\
+1 \are[rrrr] \are[rrd] & & & & 4 \are[lld] \\
+& & 5
+}
+\end{align*}
+This drawing is useful for many purposes; for example, it makes the
+abstract symmetry of this graph (i.e., the fact that, roughly
+speaking, its vertices $1,2,3,4,5$ are ``equal in rights'') obvious.
+But sometimes, you might want to draw it differently, to minimize the
+number of intersecting curves. Here is a drawing with fewer
+intersections:
+\begin{align*}
+\xymatrix{
+& 2 \are[rr] \are@/^4pc/[rrrd] \are@/_6pc/[rrdd] \are[dd] & & 3 \are[rd] \are[lldd] \are[dd] \\
+& & & & 4 \are[llld] \\
+& 5 \are[rr] & & 1 \are[ru]
+} . \\
+\phantom{a} %empty space to keep the graph from bleeding into the text
+\end{align*}
+In this drawing, we have only one intersection between two curves
+left. Can we get rid of all intersections?
+
+This is a non-combinatorial question, since it really is about curves
+in the plane rather than about finite sets and graphs. The answer is
+``no''. (That is, no matter how you draw this graph in the plane, you
+will always have at least one pair of curves intersect.) This is a
+classical result (one of the first theorems in the theory of
+\textit{planar graphs}), and proofs of it can be found in various
+textbooks on graph theory (e.g., \cite[Corollary 11.1(d)]{Harary69} or
+\cite[Theorem 10.2]{BonMur08}). These proofs, however, are usually not
+self-contained; they rely on some basic facts from the topology of the
+real plane (mostly, the Jordan curve theorem). We shall not study
+geometrical questions like this in these notes, but instead refer the
+reader to texts such as \cite{FriFri98} for careful and complete
+treatments of the topological technicalities.
+(If you are willing to take certain intuitively obvious
+topological facts about curves for granted, you can also read the
+chapters about planar graphs appearing in most books on graph theory.)
+\end{example}
+
+\begin{remark}
+When drawing a simple graph $G$, we have so far labelled the points
+by the names of the vertices that they represent. However, often, the
+names of the vertices will be unimportant. In such cases, we can just
+as well label the points by little circles. For example, the simple
+graph $G$ from Example~\ref{exa.intro.simple.VE} can thus be drawn
+as follows:
+\begin{align*}
+\xymatrix{
+& \circ \are[rr] \are[rrrd] \are[rdd] & & \circ \are[rd] \are[ldd] \\
+\circ \are[rrrr] \are[rrd] & & & & \circ \are[lld] \\
+& & \circ
+} .
+\end{align*}
+Of course, from such a drawing, we \textbf{cannot} unambiguously
+reconstruct the graph, since we do not know which edge connects which
+vertices. But often, all we want to know about the graph is visible on
+such a drawing, and the names of the vertices would only be
+distracting.
+\end{remark}
 
 \subsection{\label{sect.intro.R33}A first fact: The Ramsey number
 $R\tup{3,3} = 6$}
@@ -598,7 +811,15 @@ V &= \set{1, 2, 3, 4, 5, 6} \qquad \text{and} \\
 E &= \set{\set{1,2}, \set{2,3}, \set{3,4}, \set{4,5}, \set{5,6},
           \set{6,1}} .
 \end{align*}
-(This graph can be drawn in such a way as to look like a hexagon.)
+(This graph can be drawn in such a way as to look like a hexagon:
+\begin{align*}
+\xymatrix{
+& 1 \are[r] & 2 \are[rd] \\
+6 \are[ru] & & & 3 \are[ld] \\
+& 5 \are[lu] & 4 \are[l]
+} .
+\end{align*}
+)
 This graph satisfies Statement 2 of Proposition~\ref{prop.simple.R33}
 for $a=1$, $b=3$ and $c=5$,
 because its three vertices $1$, $3$ and $5$ are mutually
@@ -611,11 +832,19 @@ Proposition~\ref{prop.simple.R33} says: There are at least
 1 and 2 valid (and these two choices are not the same up to order).
 See Exercise~\ref{exa.simple.R33.two} \textbf{(a)} below.
 
-\item[\textbf{(b)}] Let $G$ be the graph $\tup{V, E}$, where
+\item[\textbf{(b)}] Let $G$ be the simple graph $\tup{V, E}$, where
 \begin{align*}
 V &= \set{-2, -1, 0, 1, 2, 3} \qquad \text{and} \\
 E &= \set{\set{u,v} \in \powset[2]{V} \mid u \not\equiv v \mod 3} .
 \end{align*}
+(This graph can be drawn as follows:
+\begin{align*}
+\xymatrix{
+0 \are[d] \are[dr] & -1 \are[dl] \are[dr] & -2 \are[dl] \are[d] \\
+1 & 2 & 3
+} .
+\end{align*}
+)
 This graph satisfies Statement 1 of Proposition~\ref{prop.simple.R33}
 for $a=1$, $b=2$ and $c=3$. (Again, other choices of $a$, $b$ and $c$
 are also possible.)
@@ -627,7 +856,15 @@ E &= \set{\set{1,2}, \set{2,3}, \set{3,4}, \set{4,5}, \set{5,6},
           \set{6,1}, \set{1,3}} .
 \end{align*}
 (This graph can be drawn in such a way as to look like a hexagon with
-one extra diagonal.)
+one extra diagonal:
+\begin{align*}
+\xymatrix{
+& 1 \are[r] \are[rrd] & 2 \are[rd] \\
+6 \are[ru] & & & 3 \are[ld] \\
+& 5 \are[lu] & 4 \are[l]
+} .
+\end{align*}
+)
 This graph satisfies Statement 1 of Proposition~\ref{prop.simple.R33}
 for $a=1$, $b=2$ and $c=3$. It also satisfies Statement 2 of
 Proposition~\ref{prop.simple.R33} for $a=2$, $b=4$ and $c=6$.
@@ -637,7 +874,15 @@ Proposition~\ref{prop.simple.R33} for $a=2$, $b=4$ and $c=6$.
 V &= \set{1, 2, 3, 4, 5} \qquad \text{and} \\
 E &= \set{\set{1,2}, \set{2,3}, \set{3,4}, \set{4,5}, \set{5,1}} .
 \end{align*}
-(This graph can be drawn to look like a pentagon.)
+(This graph can be drawn to look like a pentagon:
+\begin{align*}
+\xymatrix{
+& 2 \are[rr] & & 3 \are[rd] \\
+1 \are[ru] \are[rrd] & & & & 4 \are[lld] \\
+& & 5
+}
+\end{align*}
+)
 Proposition~\ref{prop.simple.R33} says nothing about this graph,
 since this graph does not satisfy the assumption of
 Proposition~\ref{prop.simple.R33} (in fact, its number of vertices
@@ -649,10 +894,6 @@ graph: Neither Statement 1 nor Statement 2 hold.
 \end{enumerate}
 
 \end{example}
-
-\begin{todo}
-Drawings for these examples!
-\end{todo}
 
 \begin{proof}[Proof of Proposition~\ref{prop.simple.R33}.]We need to
 prove that either Statement 1 holds or Statement 2 holds (or both).
@@ -1427,8 +1668,16 @@ V &= \set{1, 2, 3, 4, 5, 6} \qquad \text{and} \\
 E &= \set{\set{1,2}, \set{2,3}, \set{3,4}, \set{4,5}, \set{5,6},
           \set{6,1}, \set{1,4}, \set{2,5}, \set{3,6}} .
 \end{align*}
-(This graph can be drawn in such a way as to look like a regular
-hexagon with its three longest diagonals.)
+(This graph can be drawn in such a way as to look like a hexagon with
+its three longest diagonals:
+\begin{align*}
+\xymatrix{
+& 1 \are[r] \are[rdd] & 2 \are[rd] \are[ldd] \\
+6 \are[ru] \are[rrr] & & & 3 \are[ld] \\
+& 5 \are[lu] & 4 \are[l]
+} .
+\end{align*}
+)
 
 This $G$ does not satisfy the conditions of
 Theorem~\ref{thm.intro.mantel}, because its number of edges is
@@ -1454,7 +1703,15 @@ Hence, there exist three distinct vertices $a$,
 $b$ and $c$ of $G'$ such that $ab$, $bc$ and $ca$ are edges of $G'$.
 Which three vertices they will be depends on which edge we have
 added. For example, if we have added the edge $15$, then (for example)
-the three vertices $a = 1$, $b = 5$ and $c = 6$ work.
+the three vertices $a = 1$, $b = 5$ and $c = 6$ work. Here is a
+drawing of this $G'$:
+\begin{align*}
+\xymatrix{
+& 1 \are[r] \are[rdd] \are[dd] & 2 \are[rd] \are[ldd] \\
+6 \are[ru] \are[rrr] & & & 3 \are[ld] \\
+& 5 \are[lu] & 4 \are[l]
+} .
+\end{align*}
 
 Of course, the converse of Theorem~\ref{thm.intro.mantel} does not
 hold. There are many simple graphs $G$ which do not satisfy the
@@ -1463,10 +1720,6 @@ three distinct vertices $a$, $b$ and $c$
 such that $ab$, $bc$ and $ca$ are edges of $G$. The reader can easily
 construct such a graph.
 \end{example}
-
-\begin{todo}
-Drawings for this example.
-\end{todo}
 
 For proofs of Theorem~\ref{thm.intro.mantel}, see (for example) the
 rather well-explained \cite{Choo16} (note that the fourth proof is
@@ -1603,13 +1856,61 @@ F &= \set{\set{1,3}, \set{2,4}, \set{3,5}, \set{4,1}, \set{5,2}} .
 \end{align*}
 (If we draw the vertices $1,2,3,4,5 \in V$ as the five vertices of a
 pentagon, then the graph $H$ is the pentagram formed by the diagonals
-of this pentagon.)
+of this pentagon:
+\begin{align*}
+\xymatrix{
+& 2 \are[rrrd] \are[rdd] & & 3 \are[llld] \are[ldd] \\
+1 \are[rrrr] & & & & 4 \\
+& & 5
+}
+\end{align*}
+.)
 
 The graphs $G$ and $H$ are distinct, yet isomorphic. One isomorphism
 $G \to H$ is the bijection $V \to V$ sending $1,2,3,4,5$ to
 $1,3,5,2,4$, respectively. Another is the bijection $V \to V$ sending
 $1,2,3,4,5$ to $4,2,5,3,1$, respectively. There are $10$ isomorphisms
 in total.
+\end{example}
+
+One way to quickly (visually) observe that two graphs are isomorphic
+is to draw them in such a way that the drawings look exactly the same
+but for the names of the vertices. Given such drawings, one can simply
+``overlay them'' to obtain a graph isomorphism.
+For example, we could have spotted the isomorphism $G \to H$ in
+Example~\ref{exa.intro.iso.pentagon} by drawing the graph $H$ as
+follows:
+\begin{align*}
+\xymatrix{
+& 2 \are[rr] & & 5 \are[rd] \\
+4 \are[ru] \are[rrd] & & & & 3 \are[lld] \\
+& & 1
+}
+\end{align*}
+and overlaying this with the drawing of $G$ made in
+Example~\ref{exa.simple.R33} \textbf{(d)}.
+(Of course, such drawings are not always easy to find: For example,
+our first drawing of $H$ in Example~\ref{exa.intro.iso.pentagon}
+looked completely different from our drawing of $G$.)
+
+\begin{example}
+The graph $G$ constructed in Example~\ref{exa.simple.R33} \textbf{(a)}
+is isomorphic to the graph $G$
+constructed in Example~\ref{exa.simple.R33} \textbf{(b)}, even though
+this might not be obvious from their definitions. Probably the easiest
+way to see this is to draw the latter graph $G$ as follows:
+\begin{align*}
+\xymatrix{
+& 0 \are[r] & 2 \are[rd] \\
+1 \are[ru] & & & -2 \are[ld] \\
+& -1 \are[lu] & 3 \are[l]
+} .
+\end{align*}
+This drawing makes it clear that it is isomorphic to the former graph
+(after all, the picture is exactly the same; it's just that the
+vertices are different numbers now). Formally speaking, the map
+sending $1, 2, 3, 4, 5, 6$ to $0, 2, -2, 3, -1, 1$ (respectively) is
+a graph isomorphism from the former graph to the latter graph.
 \end{example}
 
 Any isomorphism between two graphs is invertible (since, by its
@@ -1895,6 +2196,26 @@ that it isn't necessarily the exact graph $K_n$, but can be any graph
 isomorphic to it).
 \end{definition}
 
+\begin{example}
+\textbf{(a)}
+Here is a drawing of the complete graph on the finite set
+$\set{0, 3, 6}$:
+\begin{align*}
+\xymatrix{
+& 0 \are[ld] \are[rd] \\
+3 \are[rr] & & 6
+} .
+\end{align*}
+Of course, many other drawings are possible.
+
+\textbf{(b)}
+The complete graph on the set $\set{1, 2, 3, 4, 5}$ is the graph
+$\tup{\set{1, 2, 3, 4, 5}, \powset[2]{\set{1, 2, 3, 4, 5}}}$, which
+we have drawn in Example~\ref{exa.intro.draw} \textbf{(c)}.
+We are calling this graph $K_5$
+now, according to Definition~\ref{def.intro.complete-graph}.
+\end{example}
+
 Note that a simple graph $G = \tup{V, E}$ is a $K_n$ (i.e., is
 isomorphic to $K_n$) if and only if it is the complete graph on $V$
 and satisfies $\abs{V} = n$.
@@ -1914,9 +2235,17 @@ The empty graphs are, in a sense, the opposite to the complete graphs:
 In a complete graph, each two distinct vertices are adjacent, whereas
 in an empty graph, no two vertices are adjacent.
 
-\begin{todo}
-Pictures for both.
-\end{todo}
+\begin{example}
+Here is a drawing of the empty graph on the finite set
+$\set{0, 3, 6}$:
+\begin{align*}
+\xymatrix{
+& 0 \\
+3 & & 6
+} .
+\end{align*}
+\end{example}
+
 
 \begin{remark}
 Let $V$ be a finite set. Let $G$ be the complete graph on this set
@@ -5456,6 +5785,11 @@ Gary Chartrand, Linda Lesniak, Ping Zhang,
 \bibitem[Dieste16]{Dieste16}Reinhard Diestel, \textit{Graph Theory},
 Graduate Texts in Mathematics \#173, 5th edition, Springer 2016.
 \newline \url{http://diestel-graph-theory.com/basic.html} .
+
+\bibitem[FriFri98]{FriFri98}
+Rudolf Fritsch, Gerda Fritsch,
+\textit{The Four-Color Theorem},
+Springer 1998.
 
 \bibitem[Gessel79]{Gessel-Vand}Ira Gessel, \textit{Tournaments and
 Vandermonde's Determinant}, Journal of Graph Theory, Vol. 3 (1979), pp. 305--307.
