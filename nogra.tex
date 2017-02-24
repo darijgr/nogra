@@ -199,7 +199,11 @@ fundamental results about signs of permutations can be found in
 \cite[\S 8.1]{LaNaSc16}. These results appear with proofs in
 \cite[Chapter 6.B]{Day-proofs}. For an even more detailed treatment
 (also including proofs),
-see \cite[\S 4.1--4.3]{detnotes}. Another treatment can be found in
+see \cite[\S 4.1--4.3]{detnotes}. Some of the most important
+properties of signs of permutations are also proven in
+\cite[Appendix B]{Strick13}, which also gives one of the best
+introductions to determinants I have seen in the literature.
+Another treatment can be found in
 \cite{Conrad-sign}, but this requires some familiarity with group
 theory.}
 and polynomials will be required.
@@ -236,7 +240,7 @@ course.
 
 Various other texts on graph theory are \cite{Bollob79},
 \cite{Bollob98}, \cite{Harary69}, \cite{Harju14}, \cite{Balakr97},
-\cite{Jungni13}, \cite{Martin16},
+\cite{Jungni13}, \cite{Martin16}, \cite{ThuSwa92},
 \cite{BonMur76}, \cite{Ore62}, \cite{BehCha71}, \cite{BeChZh15},
 \cite{BonMur08}, \cite{Ruohon13}, \cite{Dieste16}, \cite{Ore90},
 \cite{HaHiMo08}, \cite{Berge91}, \cite{ChaLes15}, \cite{Griffi15},
@@ -1870,22 +1874,63 @@ does not seem to be a closed-form formula. (There is a whole book
 \subsection{\label{sect.intro.paths}Examples of graphs, and basic
 operations}
 
-\begin{todo}
-Define:
-\begin{itemize}
-\item \textbf{complete graphs}: The \textit{complete graph} on a
-finite set $V$ is the simple graph $\tup{V, \powset[2]{V}}$. It is the
+\subsubsection{Complete and empty graphs}
+
+Let us next define certain classes of graphs, as well as some specific
+graphs. These will serve as examples in the first place, but some of
+them will also reveal themselves to be useful later.
+
+The simplest kinds of simple graphs are the \textit{complete graphs}
+and the \textit{simple graphs}:
+
+\begin{definition} \label{def.intro.complete-graph}
+The \textit{complete graph} on a finite set $V$ means
+the simple graph $\tup{V, \powset[2]{V}}$. It is the
 simple graph with vertex set $V$ in which each two distinct vertices
-are adjacent. For each $n \in \NN$, we denote the complete graph on
+are adjacent.
+For each $n \in \NN$, we denote the complete graph on
 $\set{1,2,\ldots,n}$ by $K_n$. Often, any graph that is isomorphic to
-$K_n$ is called ``a $K_n$'' (with the indefinite article!). Note that
-a simple graph $G = \tup{V, E}$ is a $K_n$ (i.e., is isomorphic to
-$K_n)$ if and only if it is the complete graph on $V$.
+$K_n$ is called ``a $K_n$'' (with the indefinite article, to signify
+that it isn't necessarily the exact graph $K_n$, but can be any graph
+isomorphic to it).
+\end{definition}
 
-\item \textbf{empty graphs}: The \textit{empty graph} on a finite set
-$V$ is the simple graph $\tup{V, \varnothing}$. It has no edges.
+Note that a simple graph $G = \tup{V, E}$ is a $K_n$ (i.e., is
+isomorphic to $K_n$) if and only if it is the complete graph on $V$
+and satisfies $\abs{V} = n$.
 
-\item \textbf{path graphs}: For each $n \in \NN$, we define the
+If $V$ is a finite set, then each vertex $v$ of the complete graph on
+$V$ has degree $\deg v = \abs{V}-1$, because it is connected to the
+$\abs{V}-1$ remaining vertices of the complete graph.
+
+\begin{definition} \label{def.intro.empty-graph}
+The \textit{empty graph} on a finite set $V$ means
+the simple graph $\tup{V, \varnothing}$. It has no edges; thus, it is
+the simple graph with vertex set $V$ in which no two vertices are
+adjacent.
+\end{definition}
+
+The empty graphs are, in a sense, the opposite to the complete graphs:
+In a complete graph, each two distinct vertices are adjacent, whereas
+in an empty graph, no two vertices are adjacent.
+
+\begin{todo}
+Pictures for both.
+\end{todo}
+
+\begin{remark}
+Let $V$ be a finite set. Let $G$ be the complete graph on this set
+$V$. Then, each permutation of $V$ is a graph isomorphism $G \to G$.
+(This is straightforward to check.) The same holds if $G$ is the
+empty graph on $V$ instead of being the complete graph on $V$.
+\end{remark}
+
+\subsubsection{Path and cycle graphs}
+
+Next, we define some slightly more interesting graphs:
+
+\begin{definition} \label{def.intro.path-graph}
+For each $n \in \NN$, we define the
 \textit{$n$-th path graph} to be the simple graph
 \begin{align*}
 & \tup{\set{1,2,\ldots,n},
@@ -1899,16 +1944,30 @@ $V$ is the simple graph $\tup{V, \varnothing}$. It has no edges.
 This graph is denoted by $P_n$. It has $n$ vertices and $n-1$ edges
 (unless $n=0$, in which case it has $0$ edges). Again, we say that a
 simple graph is ``a $P_n$'' if it is isomorphic to $P_n$.
+\end{definition}
 
-Note that the map
+Path graphs provide a first mildly interesting example of a graph
+isomorphism:
+
+\begin{remark}
+Let $n \in \NN$.
+The map
 \[
 \set{1,2,\ldots,n} \to \set{1,2,\ldots,n},
 \ i \mapsto n+1-i
 \]
+(this is the permutation of $\set{1,2,\ldots,n}$ that sends the
+numbers $1,2,\ldots,n$ to $n,n-1,\ldots,1$, respectively)
 is an isomorphism $P_n \to P_n$. This isomorphism is called the
 \textit{reflection} on the path $P_n$.
+\end{remark}
 
-\item \textbf{cycle graphs}: For each integer $n > 1$, we define the
+\begin{todo}
+Picture of a path graph, maybe with the isomorphism.
+\end{todo}
+
+\begin{definition} \label{def.intro.cycle-graph}
+For each integer $n > 1$, we define the
 \textit{$n$-th cycle graph} to be the simple graph
 \begin{align*}
 & \tup{\set{1,2,\ldots,n},
@@ -1920,11 +1979,19 @@ is an isomorphism $P_n \to P_n$. This isomorphism is called the
        \set{\set{1,2}, \set{2,3}, \ldots, \set{n-1,n}, \set{n,1}}
       } .
 \end{align*}
-This graph is denoted by $C_n$. It has $n$ vertices and $n$ edges.
+This graph is denoted by $C_n$. It has $n$ vertices and
+$\begin{cases} n, & \text{ if } n \geq 3; \\
+               1, & \text{ if } n = 2
+ \end{cases}$
+edges.
 Again, we say that a simple graph is ``a $C_n$'' if it is isomorphic
 to $C_n$.
+\end{definition}
 
-We need one more piece of notation: For each integer $x$, we define
+Again, cycle graphs have nontrivial isomorphisms to themselves:
+
+\begin{remark}
+Let $n > 1$ be an integer. For each integer $x$, we define
 $x \%_1 n$ to be the unique element $p \in \set{1,2,\ldots,n}$
 that satisfies $p \equiv x \mod n$.
 For each $k \in \ZZ$, the map
@@ -1932,22 +1999,47 @@ For each $k \in \ZZ$, the map
 \set{1,2,\ldots,n} \to \set{1,2,\ldots,n},
 \ i \mapsto \tup{i+k} \%_1 n
 \]
+(this is the permutation of $\set{1,2,\ldots,n}$ that sends the
+numbers $1,2,\ldots,n$ to $k+1,k+2,\ldots,n,1,2,\ldots,k$,
+respectively)
 is an isomorphism $C_n \to C_n$. This isomorphism is called the
 \textit{$k$-rotation} on the cycle $C_n$. Note that this $k$-rotation
 depends only on the remainder of $k$ modulo $n$, not on the integer
 $k$ itself; in total, we thus have $n$ of these $k$-rotations.
 Furthermore, there is a reflection on the cycle $C_n$, defined exactly
-as the reflection on the path $P_n$.
-\end{itemize}
-Also:
-mod-3 congruence graph (just as an example);
-2-element subsets with common elements.
-\end{todo}
+as the reflection on the path $P_n$. This reflection is also a graph
+isomorphism $C_n \to C_n$. Hence, any composition of this
+reflection with a $k$-rotation is also a graph isomorphism
+$C_n \to C_n$ (because of Proposition~\ref{prop.intro.iso.comp}).
+\end{remark}
 
 \begin{todo}
-Pictures of the above. Explain how reflections and rotations act
-visually.
+Picture of a cycle graph, and visual explanation of reflection and
+rotations.
 \end{todo}
+
+\subsubsection{A few more examples}
+
+Here are some further examples of simple graphs, mostly to illustrate
+certain ideas.
+
+\begin{example}
+Let $n \in \NN$. Let $G$ be the graph $\tup{V, E}$, where
+$V = \set{1, 2, \ldots, 3n}$ and
+$E = \set{ \set{i, j} \in \powset[2]{V} \ \mid
+           \  i \equiv j \mod 3 }$.
+Then, [...]
+\end{example}
+
+\begin{todo}
+Picture. Properties.
+
+Also:
+2-element subsets with common elements.
+$|i-j| \leq 2$
+\end{todo}
+
+\subsubsection{Subgraphs}
 
 \begin{definition} \label{def.intro.subgraph}
 Let $G = \tup{V, E}$ be a simple graph.
@@ -1958,17 +2050,62 @@ other words, a \textit{subgraph} of $G$ means a simple graph whose
 vertices are vertices of $G$ and whose edges are edges of $G$.
 
 \textbf{(b)} Let $S$ be a subset of $V$. The \textit{induced subgraph
-of $V$ on the set $S$} denotes the subgraph
+of $G$ on the set $S$} denotes the subgraph
 $\tup{S, E \cap \powset[2]{S}}$ of $G$. In other words, it denotes
 the subgraph of $G$ whose vertices are the elements of $S$, and whose
 edges are precisely those edges of $G$ that connect two vertices in
 $S$.
+
+\textbf{(c)} An \textit{induced subgraph} of $G$ means a subgraph of
+$G$ that is the induced subgraph of $G$ on $S$ for some subset $S$ of
+$V$.
 \end{definition}
 
+The definition of an induced subgraph readily leads to the following
+criterion:
+
+\begin{proposition} \label{prop.intro.subgraph.induced-crit}
+Let $H$ be a subgraph of a simple graph $G$. Then, $G$ is an induced
+subgraph of $G$ if and only if every edge $uv$ of $G$ whose endpoints
+$u$ and $v$ both are vertices of $H$ is an edge of $H$.
+\end{proposition}
+
+\begin{proof}[Proof sketch for
+Proposition~\ref{prop.intro.subgraph.induced-crit}.]
+The ``only if'' part follows immediately from the definition of an
+``induced subgraph''. The ``if'' part is almost as obvious (show that
+$H$ is the induced subgraph of $G$ on $\verts{H}$). The details are
+left to the reader.
+\end{proof}
+
+\begin{example} \label{exa.intro.subgraph}
+Let $n > 1$ be an integer.
+
+\textbf{(a)} The path graph $P_n$ (defined in
+Definition~\ref{def.intro.path-graph}) is a subgraph of the cycle
+graph $C_n$ (defined in Definition~\ref{def.intro.cycle-graph}),
+since all vertices of $P_n$ are vertices of $C_n$ and since all edges
+of $P_n$ are edges of $C_n$. But if $n > 2$, then
+$P_n$ is not an \textbf{induced} subgraph of $C_n$,
+because not every edge $uv$ of $C_n$ whose
+endpoints $u$ and $v$ both are vertices of $P_n$ is an edge of $P_n$.
+(In fact, the edge $n1$ of $C_n$ is not an edge of $P_n$, although
+both its endpoints $n$ and $1$ are vertices of $P_n$.)
+
+\textbf{(b)} The path graph $P_{n-1}$ is an induced subgraph of $P_n$
+(namely, the induced subgraph of $P_n$ on the set
+$\set{1, 2, \ldots, n-1}$).
+
+\textbf{(c)} Assume that $n > 3$. Then, $C_{n-1}$ is not a subgraph of
+$C_n$. Indeed, the edge $\tup{n-1}1$ of $C_{n-1}$ is not an edge of
+$C_n$.
+\end{example}
+
 \begin{todo}
-Examples (particularly of the difference between subgraph and
-induced subgraph).
+Pictures for these examples.
 \end{todo}
+
+\subsubsection{Disjoint unions}
 
 \begin{todo}
 Disjoint union of several graphs.
@@ -4769,7 +4906,7 @@ Let $V$, $E$ and $G$ be as in Example~\ref{exa.simple.R33}
 \textbf{(c)}. Then, the subset $\set{2, 4, 6}$ of $V$ is
 independent, and is a maximum independent set of $G$
 (indeed, it is easy to check that each independent set of $G$
-has size $\leq 3$). the subset $\set{1, 5}$ is also
+has size $\leq 3$). The subset $\set{1, 5}$ is also
 independent, and is a \textbf{maximal} independent set of $G$
 (indeed, it is easy to check that no independent subset $T$
 of $V$ satisfies $\set{1, 5} \subsetneq T$, because each of
@@ -4787,7 +4924,7 @@ then check which of them are independent, and then check which
 of them are maximum independent sets and which are maximal
 independent sets. This algorithm, while theoretically doable,
 is massively inefficient, since the number of subsets of $V$
-grows massively with $\abs{V}$. Are there fast algorithms?
+grows exponentially with $\abs{V}$. Are there fast algorithms?
 This is a more interesting question, and the answers for
 \textbf{maximum} and for \textbf{maximal} independent sets
 are completely different:
@@ -4848,7 +4985,9 @@ $S$ is a subset of $V$ that is independent and that cannot be written
 as a proper subset of any independent subset of $V$.
 
 Let $v \in \verts{G} \setminus S$ be a vertex. Thus, $v \in \verts{G}$
-and $v \notin S$. Then, the subset $S \cup \set{v}$ of $V$ is not
+and $v \notin S$. From $S \subseteq V$ and $v \in \verts{G} = V$, we
+conclude that $S \cup \set{v}$ is a subset of $V$.
+This subset $S \cup \set{v}$ of $V$ is not
 independent\footnote{\textit{Proof.} Assume the contrary. Thus, the
 subset $S \cup \set{v}$ of $V$ is independent. But $S$ is a proper
 subset of $S \cup \set{v}$ (since $v \notin S$). Hence, $S$ can be
@@ -5398,6 +5537,12 @@ version 26 May 2015.
 Quanta Magazine, 5 January 2017.
 \newline \url{https://www.quantamagazine.org/20170105-graph-isomorphism-retraction/}
 
+\bibitem[Knuth97]{Knuth-TAoCP1}
+Donald E. Knuth,
+\textit{The Art of Computer Programming, Volume 1: Fundamental
+Algorithms},
+3rd edition, Addison-Wesley 1997.
+
 \bibitem[Knuth95]{Knuth95} Donald E. Knuth,
 \textit{Overlapping Pfaffians},
 Electron. J. Combin. 3 (1996), no. 2, \#R5.
@@ -5413,7 +5558,7 @@ Schilling, \textit{Linear Algebra As an Introduction to Abstract Mathematics},
 \bibitem[LeLeMe16]{LeLeMe16}
 Eric Lehman, F. Thomson Leighton, Albert R. Meyer,
 \textit{Mathematics for Computer Science},
-revised Friday 14th February, 2017,
+revised Monday 20th February, 2017,
 \newline\url{https://courses.csail.mit.edu/6.042/spring17/mcs.pdf} .
 
 \bibitem[LoPeVe03]{LoPeVe03}L\'aszl\'o Lov\'asz, J\'ozsef Pelik\'an,
@@ -5485,6 +5630,24 @@ modeling and analysis}, Cambridge University Press 1992.
 \bibitem[Stanle12]{Stanley-EC1}Richard P. Stanley, \textit{Enumerative
 Combinatorics, Volume 1}, 2nd edition, CUP 2012.\newline See
 \url{http://math.mit.edu/~rstan/ec/ec1/} for a preliminary version.
+
+\bibitem[Stanle13]{Stanley13}
+Richard P. Stanley,
+\textit{Algebraic Combinatorics:
+Walks, Trees, Tableaux, and More},
+Springer 2013.
+\newline See \url{http://www-math.mit.edu/~rstan/algcomb/} for errata
+and a downloadable draft of the book.
+
+\bibitem[Strick13]{Strick13}
+Neil P. Strickland,
+\textit{MAS201 Linear Mathematics for Applications}.
+\newline \url{https://neil-strickland.staff.shef.ac.uk/courses/MAS201/}
+
+\bibitem[ThuSwa92]{ThuSwa92}
+K. Thulasiraman, M. N. S. Swamy,
+\textit{Graphs: Theory and Algorithms},
+Wiley 1992.
 
 \bibitem[West01]{West01}Douglas B. West,
 \textit{Introduction to Graph Theory}, 2nd edition, Pearson 2001.
