@@ -2273,6 +2273,18 @@ For each $n \in \NN$, we define the
 This graph is denoted by $P_n$. It has $n$ vertices and $n-1$ edges
 (unless $n=0$, in which case it has $0$ edges). Again, we say that a
 simple graph is ``a $P_n$'' if it is isomorphic to $P_n$.
+
+Here is a drawing of $P_4$:
+\begin{align}
+\xymatrix{
+1 \are[r] & 2 \are[r] & 3 \are[r] & 4
+} .
+\label{draw.def.intro.path-graph.P4}
+\end{align}
+Similarly, for each $n \in \NN$, we can draw $P_n$ by placing $n$
+equally spaced points $1,2,\ldots,n$ on a straight line (in this order)
+and connecting each point $i \in \set{1,2,\ldots,n-1}$ to the next
+point $i+1$.
 \end{definition}
 
 Path graphs provide a first mildly interesting example of a graph
@@ -2291,9 +2303,9 @@ is an isomorphism $P_n \to P_n$. This isomorphism is called the
 \textit{reflection} on the path $P_n$.
 \end{remark}
 
-\begin{todo}
-Picture of a path graph, maybe with the isomorphism.
-\end{todo}
+A look at the drawing \eqref{draw.def.intro.path-graph.P4} of $P_4$
+should explain why the name ``reflection'' was chosen for the
+reflection on the path $P_n$.
 
 \begin{definition} \label{def.intro.cycle-graph}
 For each integer $n > 1$, we define the
@@ -2315,6 +2327,21 @@ $\begin{cases} n, & \text{ if } n \geq 3; \\
 edges.
 Again, we say that a simple graph is ``a $C_n$'' if it is isomorphic
 to $C_n$.
+
+Here is a drawing of $C_6$:
+\begin{align}
+\xymatrix{
+& 1 \are[r] & 2 \are[rd] \\
+6 \are[ru] & & & 3 \are[ld] \\
+& 5 \are[lu] & 4 \are[l]
+} .
+\label{draw.def.intro.cycle-graph.C6}
+\end{align}
+Similarly, we can draw $C_n$ for each $n > 2$ by drawing an
+$n$-gon and labelling its vertices by $1,2,\ldots,n$.
+(Some authors like to use a regular $n$-gon for this purpose,
+but this is of course irrelevant for the purpose of illustrating
+the graph.)
 \end{definition}
 
 Again, cycle graphs have nontrivial isomorphisms to themselves:
@@ -2342,31 +2369,116 @@ reflection with a $k$-rotation is also a graph isomorphism
 $C_n \to C_n$ (because of Proposition~\ref{prop.intro.iso.comp}).
 \end{remark}
 
-\begin{todo}
-Picture of a cycle graph, and visual explanation of reflection and
-rotations.
-\end{todo}
+Again, the names ``rotation'' and ``reflection'' reflect the
+fact that if the cycle graph $C_n$ is drawn as a regular $n$-gon,
+then the $k$-rotation actually corresponds to rotating the $n$-gon
+by an angle of $\dfrac{2\pi k}{n}$ around its center, whereas the
+reflection corresponds to reflecting the $n$-gon through a certain
+line.
 
 \subsubsection{A few more examples}
 
 Here are some further examples of simple graphs, mostly to illustrate
 certain ideas.
 
-\begin{example}
+\begin{example} \label{exa.intro.discon-graph}
 Let $n \in \NN$. Let $G$ be the graph $\tup{V, E}$, where
-$V = \set{1, 2, \ldots, 3n}$ and
+$V = \set{1, 2, \ldots, n}$ and
 $E = \set{ \set{i, j} \in \powset[2]{V} \ \mid
            \  i \equiv j \mod 3 }$.
-Then, [...]
+For example, if $n = 8$, then $G$ can be drawn as follows:
+\begin{align*}
+\xymatrix{
+1 \are[r] & 4 \are[r] & 7 \\
+2 \are[r] & 5 \are[r] & 6 \\
+3 \are[r] & 8
+} .
+\end{align*}
+If $n = 9$, then $G$ can be drawn as follows:
+\begin{align*}
+\xymatrix{
+1 \are[r] & 4 \are[r] & 7 \\
+2 \are[r] & 5 \are[r] & 6 \\
+3 \are[r] & 8 \are[r] & 9
+} .
+\end{align*}
+In both cases, we notice that the graph is ``disconnected'': It
+really consists of three smaller graphs, with no edges connecting one
+to another. We shall make this more rigorous later (in fact, we will
+formalize the concept of ``disconnected'' in
+Subsection~\ref{subsect.intro.connected}, and we will formalize the
+concept of ``consisting of three smaller graphs'' in
+Subsection~\ref{subsect.intro.djun}).
 \end{example}
 
-\begin{todo}
-Picture. Properties.
+\begin{example} \label{exa.intro.kneser-graph}
+If $S$ is a finite set, and if $k \in \NN$, then we let
+$KG_{S, k}$ be the simple graph
+\[
+\tup{\powset[k]{S},
+     \set{ \set{I, J} \in \powset[2]{\powset[k]{S}} \ \mid
+           \  I \cap J = \varnothing }} .
+\]
+The vertices of this graph are the $k$-element subsets of $S$, and
+two such vertices are connected if they (regarded as subsets of $S$)
+are disjoint. The graph $KG_{S, k}$ is called the
+\textit{$k$-th
+\href{https://en.wikipedia.org/wiki/Kneser_graph}{Kneser graph}
+of the set $S$}.
 
-Also:
-2-element subsets with common elements.
-$|i-j| \leq 2$
-\end{todo}
+The graph $KG_{\set{1,2,3,4,5}, 2}$ is known as the
+\textit{\href{https://en.wikipedia.org/wiki/Petersen_graph}{Petersen graph}}.
+Here is one way to draw it:
+\begin{align*}
+\xymatrix@C=4pc{
+& & & \set{2, 5} \are[lld] \are[d] \are[rrd] \\
+& \set{1, 4} \are[rd] \are[ddd] & & \set{3, 4} \are[ldd] \are[rdd] & & \set{1, 3} \are[ld] \are[ddd] \\
+& & \set{2, 3} \are[rr] \are[rrd] & & \set{4, 5} \are[lld] \\
+& & \set{1, 2} \are[ld] & & \set{5, 1} \are[rd] \\
+& \set{3, 5} \are[rrrr] & & & & \set{2, 4}
+}
+.
+\end{align*}
+% (It is usual to draw both the outside pentagon and the inside
+% pentagram on this picture as regular, but we have not done so for
+% technical reasons.)
+
+For $n \in \NN$ and $k \in \NN$, it is common to denote the Kneser
+graph $KG_{\set{1, 2, \ldots, n}, k}$ by $KG_{n, k}$. Thus, the
+Petersen graph is $KG_{5, 2}$.
+\end{example}
+
+\begin{example} \label{exa.intro.interval-graph-easy}
+Let $n \in \NN$ and $k \in \NN$. Define a graph $P_{n, k}$ by
+\[
+P_{n, k}
+= \tup{\set{1, 2, \ldots, n},
+       \set{ \set{i, j} \in \powset[2]{\set{1, 2, \ldots, n}} \ \mid
+             \  \abs{i-j} \leq k }} .
+\]
+Thus, the vertices of this graph are $1, 2, \ldots, n$, and two
+distinct vertices $i$ and $j$ are adjacent if and only if they
+satisfy $\abs{i-j} \leq k$. Hence:
+\begin{itemize}
+\item The graph $P_{n, 0}$ is the empty graph on the finite set
+      $\set{1, 2, \ldots, n}$. (It is empty because no two distinct
+      vertices $i$ and $j$ satisfy $\abs{i-j} \leq 0$, and thus no
+      two distinct vertices $i$ and $j$ are adjacent.)
+\item The graph $P_{n, 1}$ is the path graph $P_n$ (because two
+      distinct vertices $i$ and $j$ satisfy $\abs{i-j} \leq 1$ if and
+      only if $i$ and $j$ are consecutive integers in some order).
+\item Whenever $k \geq n-1$, the graph $P_{n, k}$ is the complete
+      graph $K_n$. This is because whenever $k \geq n-1$,
+      \textbf{any} pair of distinct vertices $i$ and $j$ of
+      $P_{n, k}$ satisfies $\abs{i-j} \leq k$.
+\item Here is how $P_{5, 2}$ can be drawn:
+      \begin{align*}
+      \xymatrix{ 1 \are[r] \are@/_2pc/[rr] & 2 \are[r] \are@/_2pc/[rr] & 3 \are[r] \are@/_2pc/[rr] & 4 \are[r] & 5 } . \\
+      \phantom{a} %empty space to keep the graph from bleeding into the text
+      \end{align*}
+\end{itemize}
+
+\end{example}
 
 \subsubsection{Subgraphs}
 
@@ -2434,11 +2546,17 @@ $C_n$.
 Pictures for these examples.
 \end{todo}
 
-\subsubsection{Disjoint unions}
+\subsubsection{\label{subsect.intro.djun}Disjoint unions}
 
 \begin{todo}
 Disjoint union of several graphs.
 \end{todo}
+
+\begin{todo}
+Example of being isomorphic to such a disjoint union:
+re-use Example~\ref{exa.intro.discon-graph}.
+\end{todo}
+
 
 \subsection{\label{sect.intro.walks}Walks and paths}
 
@@ -3363,7 +3481,7 @@ Facts about cycles and circuits:
   cycle.
 \end{todo}
 
-\subsubsection{Connectedness}
+\subsubsection{\label{subsect.intro.connected}Connectedness}
 
 \begin{definition}
 Let $G = \tup{V, E}$ be a simple graph. We say that $G$ is
@@ -3376,7 +3494,7 @@ $u \simeq_G v$.
 \end{definition}
 
 \begin{todo}
-Examples.
+Examples. Reuse Example~\ref{exa.intro.discon-graph}.
 \end{todo}
 
 \begin{definition}
