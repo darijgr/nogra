@@ -2389,19 +2389,21 @@ $E = \set{ \set{i, j} \in \powset[2]{V} \ \mid
 For example, if $n = 8$, then $G$ can be drawn as follows:
 \begin{align*}
 \xymatrix{
-1 \are[r] & 4 \are[r] & 7 \\
-2 \are[r] & 5 \are[r] & 6 \\
-3 \are[r] & 8
+1 \are@/_2pc/[rr] \are[r] & 4 \are[r] & 7 \\
+2 \are@/_2pc/[rr] \are[r] & 5 \are[r] & 8 \\
+3 \are[r] & 6
 } .
 \end{align*}
 If $n = 9$, then $G$ can be drawn as follows:
 \begin{align*}
 \xymatrix{
-1 \are[r] & 4 \are[r] & 7 \\
-2 \are[r] & 5 \are[r] & 6 \\
-3 \are[r] & 8 \are[r] & 9
+1 \are@/_2pc/[rr] \are[r] & 4 \are[r] & 7 \\
+2 \are@/_2pc/[rr] \are[r] & 5 \are[r] & 8 \\
+3 \are@/_2pc/[rr] \are[r] & 6 \are[r] & 9
 } .
 \end{align*}
+\vspace{0.6pc}
+\par
 In both cases, we notice that the graph is ``disconnected'': It
 really consists of three smaller graphs, with no edges connecting one
 to another. We shall make this more rigorous later (in fact, we will
@@ -2420,7 +2422,7 @@ $KG_{S, k}$ be the simple graph
            \  I \cap J = \varnothing }} .
 \]
 The vertices of this graph are the $k$-element subsets of $S$, and
-two such vertices are connected if they (regarded as subsets of $S$)
+two such vertices are adjacent if they (regarded as subsets of $S$)
 are disjoint. The graph $KG_{S, k}$ is called the
 \textit{$k$-th
 \href{https://en.wikipedia.org/wiki/Kneser_graph}{Kneser graph}
@@ -3085,7 +3087,7 @@ satisfying $x R y$ and $y R z$, we have $x R z$.
 is reflexive, symmetric and transitive.
 \end{definition}
 
-We refer to \cite[\S 10.10]{LeLeMe16}, or \cite[Chapter 11]{Hammac16}
+We refer to \cite[\S 10.10]{LeLeMe16}, or \cite[Chapter 11]{Hammac15}
 (for a particularly detailed treatment),
 or \cite[Chapter 9]{Oggier14}, or \cite[\S 3.E]{Day-proofs}
 % and other sources?
