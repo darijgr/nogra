@@ -1,0 +1,316 @@
+\documentclass[numbers=enddot,12pt,final,onecolumn,notitlepage]{scrartcl}%
+\usepackage[headsepline,footsepline,manualmark]{scrlayer-scrpage}
+\usepackage[all,cmtip]{xy}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{framed}
+\usepackage{comment}
+\usepackage{color}
+\usepackage{hyperref}
+\usepackage[sc]{mathpazo}
+\usepackage[T1]{fontenc}
+\usepackage{needspace}
+\usepackage{tabls}
+%TCIDATA{OutputFilter=latex2.dll}
+%TCIDATA{Version=5.50.0.2960}
+%TCIDATA{LastRevised=Friday, September 16, 2016 20:39:00}
+%TCIDATA{SuppressPackageManagement}
+%TCIDATA{<META NAME="GraphicsSave" CONTENT="32">}
+%TCIDATA{<META NAME="SaveForMode" CONTENT="1">}
+%TCIDATA{BibliographyScheme=Manual}
+%TCIDATA{Language=American English}
+%BeginMSIPreambleData
+\providecommand{\U}[1]{\protect\rule{.1in}{.1in}}
+%EndMSIPreambleData
+\newcounter{exer}
+\theoremstyle{definition}
+\newtheorem{theo}{Theorem}[section]
+\newenvironment{theorem}[1][]
+{\begin{theo}[#1]\begin{leftbar}}
+{\end{leftbar}\end{theo}}
+\newtheorem{lem}[theo]{Lemma}
+\newenvironment{lemma}[1][]
+{\begin{lem}[#1]\begin{leftbar}}
+{\end{leftbar}\end{lem}}
+\newtheorem{prop}[theo]{Proposition}
+\newenvironment{proposition}[1][]
+{\begin{prop}[#1]\begin{leftbar}}
+{\end{leftbar}\end{prop}}
+\newtheorem{defi}[theo]{Definition}
+\newenvironment{definition}[1][]
+{\begin{defi}[#1]\begin{leftbar}}
+{\end{leftbar}\end{defi}}
+\newtheorem{remk}[theo]{Remark}
+\newenvironment{remark}[1][]
+{\begin{remk}[#1]\begin{leftbar}}
+{\end{leftbar}\end{remk}}
+\newtheorem{coro}[theo]{Corollary}
+\newenvironment{corollary}[1][]
+{\begin{coro}[#1]\begin{leftbar}}
+{\end{leftbar}\end{coro}}
+\newtheorem{conv}[theo]{Convention}
+\newenvironment{condition}[1][]
+{\begin{conv}[#1]\begin{leftbar}}
+{\end{leftbar}\end{conv}}
+\newtheorem{quest}[theo]{Question}
+\newenvironment{algorithm}[1][]
+{\begin{quest}[#1]\begin{leftbar}}
+{\end{leftbar}\end{quest}}
+\newtheorem{warn}[theo]{Warning}
+\newenvironment{conclusion}[1][]
+{\begin{warn}[#1]\begin{leftbar}}
+{\end{leftbar}\end{warn}}
+\newtheorem{conj}[theo]{Conjecture}
+\newenvironment{conjecture}[1][]
+{\begin{conj}[#1]\begin{leftbar}}
+{\end{leftbar}\end{conj}}
+\newtheorem{exam}[theo]{Example}
+\newenvironment{example}[1][]
+{\begin{exam}[#1]\begin{leftbar}}
+{\end{leftbar}\end{exam}}
+\newtheorem{exmp}[exer]{Exercise}
+\newenvironment{exercise}[1][]
+{\begin{exmp}[#1]\begin{leftbar}}
+{\end{leftbar}\end{exmp}}
+\newenvironment{statement}{\begin{quote}}{\end{quote}}
+\iffalse
+\newenvironment{proof}[1][Proof]{\noindent\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+\fi
+\let\sumnonlimits\sum
+\let\prodnonlimits\prod
+\let\cupnonlimits\bigcup
+\let\capnonlimits\bigcap
+\renewcommand{\sum}{\sumnonlimits\limits}
+\renewcommand{\prod}{\prodnonlimits\limits}
+\renewcommand{\bigcup}{\cupnonlimits\limits}
+\renewcommand{\bigcap}{\capnonlimits\limits}
+\setlength\tablinesep{3pt}
+\setlength\arraylinesep{3pt}
+\setlength\extrarulesep{3pt}
+\voffset=0cm
+\hoffset=-0.7cm
+\setlength\textheight{22.5cm}
+\setlength\textwidth{15.5cm}
+\newenvironment{verlong}{}{}
+\newenvironment{vershort}{}{}
+\newenvironment{noncompile}{}{}
+\excludecomment{verlong}
+\includecomment{vershort}
+\excludecomment{noncompile}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\powset}[2][]{\ifthenelse{\equal{#2}{}}{\mathcal{P}\left(#1\right)}{\mathcal{P}_{#1}\left(#2\right)}}
+% $\powset[k]{S}$ stands for the set of all $k$-element subsets of
+% $S$. The argument $k$ is optional, and if not provided, the result
+% is the whole powerset of $S$.
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+% $\set{...}$ yields $\left\{ ... \right\}$.
+\newcommand{\abs}[1]{\left| #1 \right|}
+% $\abs{...}$ yields $\left| ... \right|$.
+\newcommand{\tup}[1]{\left( #1 \right)}
+% $\tup{...}$ yields $\left( ... \right)$.
+\newcommand{\ive}[1]{\left[ #1 \right]}
+% $\ive{...}$ yields $\left[ ... \right]$.
+\newcommand{\verts}[1]{\operatorname{V}\left( #1 \right)}
+% $\verts{...}$ yields $\operatorname{V}\left( ... \right)$.
+\newcommand{\edges}[1]{\operatorname{E}\left( #1 \right)}
+% $\edges{...}$ yields $\operatorname{E}\left( ... \right)$.
+\newcommand{\arcs}[1]{\operatorname{A}\left( #1 \right)}
+% $\arcs{...}$ yields $\operatorname{A}\left( ... \right)$.
+\newcommand{\E}{\operatorname{E}}
+\newcommand{\A}{\operatorname{A}}
+\ihead{Math 5707 Spring 2017 (Darij Grinberg): homework set 1}
+\ohead{page \thepage}
+\cfoot{}
+\begin{document}
+
+\begin{center}
+\textbf{Math 5707 Spring 2017 (Darij Grinberg): homework set 1}
+
+\textbf{due: Wed, 1 Feb 2017, in class} or by email
+(\texttt{dgrinber@umn.edu}) before class
+\end{center}
+
+See the \href{http://www-users.math.umn.edu/~dgrinber/5707s17/nogra.pdf}{lecture notes} for relevant material.
+If you reference results from the lecture notes, please \textbf{mention the date and time} of the version of the notes you are using (as the numbering changes during updates).
+
+Proofs need to be provided unless explicitly not required. An answer without proof is usually worth at most a little part of the score. Proofs should be written with the amount of rigor typical for advanced mathematics; it is OK to use metaphor and visualization, but the actual logical argument behind it should always be clear. Details can be omitted when they are easy to fill in, not when they are hard to properly explain. (In case of doubt, err on the side of more details and more rigors. See various books referenced in the notes, e.g., \href{https://www.classes.cs.uchicago.edu/archive/2016/spring/27500-1/hw3.pdf}{the Bondy/Murty book from 2008}, or \href{https://courses.csail.mit.edu/6.042/spring16/mcs.pdf}{the Lehman/Leighton/Meyer notes}, for examples of written-up proofs in graph theory.)
+
+See the \href{http://www-users.math.umn.edu/~dgrinber/5707s17/syll.pdf}{syllabus} for the rules. In a nutshell: Collaborating and consulting literature is okay, but you must write up the solutions alone and in your own words.
+
+\begin{exercise} \label{exa.simple.R33.two}
+Let $G$ be a simple graph. A \textit{triangle} in $G$ means a set
+$\set{a, b, c}$ of three distinct vertices $a$, $b$ and $c$ of $G$
+such that $ab$, $bc$ and $ca$ are edges of $G$. An
+\textit{anti-triangle} in $G$ means a set $\set{a, b, c}$ of three
+distinct vertices $a$, $b$ and $c$ of $G$ such that none of $ab$, $bc$
+and $ca$ is an edge of $G$. A \textit{triangle-or-anti-triangle} in
+$G$ is a set that is either a triangle or an anti-triangle.
+(Of the three words I have just introduced, only ``triangle'' is
+standard.) 
+
+\textbf{(a)} Assume that $\abs{\verts{G}}\geq 6$.
+Prove that $G$ has at least two
+triangle-or-anti-triangles. (For comparison:
+We proved in our first lecture that $G$ has at least one
+triangle-or-anti-triangle.)
+
+\textbf{(b)} Assume that $\abs{\verts{G}} = m+6$ for some
+$m \in \NN$. Prove that $G$ has at least $m+1$
+triangle-or-anti-triangles.
+\end{exercise}
+
+\begin{exercise} \label{exe.intro.mantel-co}
+Let $G$ be a simple graph. Let $n = \abs{\verts{G}}$ be the number of
+vertices of $G$. Assume that $\abs{\edges{G}} < n\tup{n-2} / 4$. (In
+other words, assume that $G$ has less than $n\tup{n-2} / 4$ edges.)
+Prove that there exist three distinct vertices $a$, $b$ and $c$ of $G$ such
+that none of $ab$, $bc$ and $ca$ are edges of $G$.
+\end{exercise}
+
+\begin{exercise} \label{exe.intro.path.edges-dist}
+Let $G$ be a simple graph. Let $\mathbf{w}$ be a path in $G$.
+Prove that the edges of $\mathbf{w}$ are distinct. (This may look
+obvious when you can point to a picture; but we ask you to give a
+rigorous proof!)
+\end{exercise}
+
+\begin{exercise}
+Let $n \in \NN$. What is the smallest possible size of a dominating
+set of the cycle graph $C_{3n}$ ?
+\end{exercise}
+
+\begin{definition} \label{def.intro.iverson}
+Let $\mathcal{A}$ be a logical statement. Then, an element
+$\ive{\mathcal{A}} \in \set{0, 1}$ is defined as follows:
+We set $\ive{\mathcal{A}} =
+\begin{cases}
+1, & \text{if }\mathcal{A}\text{ is true};\\
+0, & \text{if }\mathcal{A}\text{ is false}
+\end{cases}$.
+This element $\ive{\mathcal{A}}$ is called the \textit{truth value}
+of $\mathcal{A}$.
+(For example, $\ive{1+1 = 2} = 1$ and $\ive{1+1 = 3} = 0$.)
+The notation $\ive{\mathcal{A}}$ for the truth value of $\mathcal{A}$
+is known as the \textit{Iverson bracket notation}.
+\end{definition}
+
+Truth values satisfy certain simple rules:
+
+\begin{proposition} \label{prop.intro.iverson.rules}
+\textbf{(a)} If $\mathcal{A}$ and $\mathcal{B}$ are two equivalent
+logical statements, then
+$\ive{\mathcal{A}} = \ive{\mathcal{B}}$.
+
+\textbf{(b)} If $\mathcal{A}$ is any logical statement, then
+$\ive{\text{not } \mathcal{A}} = 1 - \ive{\mathcal{A}}$.
+
+\textbf{(c)} If $\mathcal{A}$ and $\mathcal{B}$ are two logical
+statements, then
+$\ive{\mathcal{A} \wedge \mathcal{B}}
+= \ive{\mathcal{A}} \ive{\mathcal{B}}$.
+
+\textbf{(d)} If $\mathcal{A}$ and $\mathcal{B}$ are two logical
+statements, then
+$\ive{\mathcal{A} \vee \mathcal{B}}
+= \ive{\mathcal{A}} + \ive{\mathcal{B}}
+  - \ive{\mathcal{A}} \ive{\mathcal{B}}$.
+\end{proposition}
+
+\begin{proposition} \label{prop.intro.iverson.sums}
+Let $P$ be a finite set. Let $Q$ be a subset of $P$.
+
+\textbf{(a)} Then, $\abs{Q} = \sum_{p \in P} \ive{p \in Q}$.
+
+\textbf{(b)} For each $p \in P$, let $a_p$ be a number (for example,
+a real number). Then, $\sum_{p \in P} \ive{p \in Q} a_p
+= \sum_{p \in Q} a_p$.
+
+\textbf{(c)} For each $p \in P$, let $a_p$ be a number (for example,
+a real number). Let $q \in P$. Then,
+$\sum_{p \in P} \ive{p = q} a_p = a_q$.
+\end{proposition}
+
+\begin{exercise} \label{exe.intro.iverson}
+\textbf{(a)} Prove Proposition~\ref{prop.intro.iverson.rules}. (It is
+okay to be brief here, just saying that the proof is straightforward
+in each of the possible cases; but you should correctly identify the
+cases.)
+
+\textbf{(b)} Prove Proposition~\ref{prop.intro.iverson.sums}.
+
+Now, let $G$ be a simple graph.
+
+\textbf{(c)} Prove that
+$\deg v = \sum_{u \in \verts{G}} \ive{uv \in \edges{G}}$
+for each vertex $v$ of $G$.
+
+\textbf{(d)} Prove that
+$2 \abs{\edges{G}}
+= \sum_{u \in \verts{G}} \sum_{v \in \verts{G}}
+  \ive{uv \in \edges{G}}$.
+\end{exercise}
+
+% NEW STUFF STARTS HERE
+
+\begin{exercise}
+Let $k$ be a positive integer. Let $G$ be a graph. A subset $U$ of
+$\verts{G}$ will be called \textit{$k$-path-dominating} if for every
+$v \in \verts{G}$, there exists a path of length $\leq k$ from $v$ to
+some element of $U$.
+
+Prove that the number of all $k$-path-dominating subsets of
+$\verts{G}$ is odd.
+\end{exercise}
+
+\begin{exercise} \label{exe.paths.connectivity-by-split}
+Let $G$ be a simple graph with $\verts{G} \neq \varnothing$.
+Show that the following two statements are equivalent:
+
+\begin{itemize}
+\item \textit{Statement 1:} The graph $G$ is connected.
+
+\item \textit{Statement 2:} For every two nonempty subsets $A$ and $B$
+of $\verts{G}$ satisfying $A \cap B = \varnothing$ and
+$A \cup B = \verts{G}$, there exist $a \in A$ and $b \in B$ such that
+$ab \in \edges{G}$. (In other words: Whenever we subdivide the vertex
+set $\verts{G}$ of $G$ into two nonempty subsets, there will be at
+least one edge of $G$ connecting a vertex in one subset to a vertex
+in another.)
+\end{itemize}
+\end{exercise}
+
+\begin{exercise} \label{exe.paths.connectivity-GH}
+Let $V$ be a nonempty finite set. Let $G$ and $H$ be two simple graphs
+such
+that $\verts{G} = \verts{H} = V$. Assume that for each $u \in V$ and
+$v \in V$, there exists a path from $u$ to $v$ in $G$ or a path from
+$u$ to $v$ in $H$. Prove that at least one of the graphs $G$ and $H$
+is connected.
+\end{exercise}
+% From West, http://www.math.illinois.edu/~dwest/igt/newprob.html
+
+\begin{exercise} \label{exe.paths.qedmo4c1}
+Let $G = \tup{V, E}$ be a simple graph. The \textit{complement graph}
+$\overline{G}$ of $G$ is defined to be the simple graph
+$\tup{V, \mathcal{P}_2\tup{V} \setminus E}$. (Thus, two distinct
+vertices $u$ and $v$ in $V$ are adjacent in $\overline{G}$ if and
+only if they are not adjacent in $G$.)
+
+Prove that at least one of the following two statements holds:
+
+\begin{itemize}
+\item \textit{Statement 1:} For each $u \in V$ and $v \in V$, there
+exists a path from $u$ to $v$ in $G$ of length $\leq 3$.
+
+\item \textit{Statement 2:} For each $u \in V$ and $v \in V$, there
+exists a path from $u$ to $v$ in $\overline{G}$ of length $\leq 2$.
+\end{itemize}
+\end{exercise}
+% Frank Harary, Robert W. Robinson: The Diameter of a Graph and its Complement, The American Mathematical Monthly, Vol. 92, No. 3. (Mar., 1985), S. 211-212.
+
+\end{document}

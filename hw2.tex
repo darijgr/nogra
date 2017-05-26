@@ -1,0 +1,353 @@
+\documentclass[numbers=enddot,12pt,final,onecolumn,notitlepage]{scrartcl}%
+\usepackage[headsepline,footsepline,manualmark]{scrlayer-scrpage}
+\usepackage[all,cmtip]{xy}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{framed}
+\usepackage{comment}
+\usepackage{color}
+\usepackage{hyperref}
+\usepackage{ifthen}
+\usepackage[sc]{mathpazo}
+\usepackage[T1]{fontenc}
+\usepackage{needspace}
+\usepackage{tabls}
+%TCIDATA{OutputFilter=latex2.dll}
+%TCIDATA{Version=5.50.0.2960}
+%TCIDATA{LastRevised=Friday, September 16, 2016 20:39:00}
+%TCIDATA{SuppressPackageManagement}
+%TCIDATA{<META NAME="GraphicsSave" CONTENT="32">}
+%TCIDATA{<META NAME="SaveForMode" CONTENT="1">}
+%TCIDATA{BibliographyScheme=Manual}
+%TCIDATA{Language=American English}
+%BeginMSIPreambleData
+\providecommand{\U}[1]{\protect\rule{.1in}{.1in}}
+%EndMSIPreambleData
+\newcounter{exer}
+\theoremstyle{definition}
+\newtheorem{theo}{Theorem}[section]
+\newenvironment{theorem}[1][]
+{\begin{theo}[#1]\begin{leftbar}}
+{\end{leftbar}\end{theo}}
+\newtheorem{lem}[theo]{Lemma}
+\newenvironment{lemma}[1][]
+{\begin{lem}[#1]\begin{leftbar}}
+{\end{leftbar}\end{lem}}
+\newtheorem{prop}[theo]{Proposition}
+\newenvironment{proposition}[1][]
+{\begin{prop}[#1]\begin{leftbar}}
+{\end{leftbar}\end{prop}}
+\newtheorem{defi}[theo]{Definition}
+\newenvironment{definition}[1][]
+{\begin{defi}[#1]\begin{leftbar}}
+{\end{leftbar}\end{defi}}
+\newtheorem{remk}[theo]{Remark}
+\newenvironment{remark}[1][]
+{\begin{remk}[#1]\begin{leftbar}}
+{\end{leftbar}\end{remk}}
+\newtheorem{coro}[theo]{Corollary}
+\newenvironment{corollary}[1][]
+{\begin{coro}[#1]\begin{leftbar}}
+{\end{leftbar}\end{coro}}
+\newtheorem{conv}[theo]{Convention}
+\newenvironment{condition}[1][]
+{\begin{conv}[#1]\begin{leftbar}}
+{\end{leftbar}\end{conv}}
+\newtheorem{quest}[theo]{Question}
+\newenvironment{algorithm}[1][]
+{\begin{quest}[#1]\begin{leftbar}}
+{\end{leftbar}\end{quest}}
+\newtheorem{warn}[theo]{Warning}
+\newenvironment{conclusion}[1][]
+{\begin{warn}[#1]\begin{leftbar}}
+{\end{leftbar}\end{warn}}
+\newtheorem{conj}[theo]{Conjecture}
+\newenvironment{conjecture}[1][]
+{\begin{conj}[#1]\begin{leftbar}}
+{\end{leftbar}\end{conj}}
+\newtheorem{exam}[theo]{Example}
+\newenvironment{example}[1][]
+{\begin{exam}[#1]\begin{leftbar}}
+{\end{leftbar}\end{exam}}
+\newtheorem{exmp}[exer]{Exercise}
+\newenvironment{exercise}[1][]
+{\begin{exmp}[#1]\begin{leftbar}}
+{\end{leftbar}\end{exmp}}
+\newenvironment{statement}{\begin{quote}}{\end{quote}}
+\iffalse
+\newenvironment{proof}[1][Proof]{\noindent\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+\fi
+\let\sumnonlimits\sum
+\let\prodnonlimits\prod
+\let\cupnonlimits\bigcup
+\let\capnonlimits\bigcap
+\renewcommand{\sum}{\sumnonlimits\limits}
+\renewcommand{\prod}{\prodnonlimits\limits}
+\renewcommand{\bigcup}{\cupnonlimits\limits}
+\renewcommand{\bigcap}{\capnonlimits\limits}
+\setlength\tablinesep{3pt}
+\setlength\arraylinesep{3pt}
+\setlength\extrarulesep{3pt}
+\voffset=0cm
+\hoffset=-0.7cm
+\setlength\textheight{22.5cm}
+\setlength\textwidth{15.5cm}
+\newenvironment{verlong}{}{}
+\newenvironment{vershort}{}{}
+\newenvironment{noncompile}{}{}
+\excludecomment{verlong}
+\includecomment{vershort}
+\excludecomment{noncompile}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\rev}{\operatorname{rev}}
+\newcommand{\conncomp}{\operatorname{conncomp}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\powset}[2][]{\ifthenelse{\equal{#2}{}}{\mathcal{P}\left(#1\right)}{\mathcal{P}_{#1}\left(#2\right)}}
+% $\powset[k]{S}$ stands for the set of all $k$-element subsets of
+% $S$. The argument $k$ is optional, and if not provided, the result
+% is the whole powerset of $S$.
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+% $\set{...}$ yields $\left\{ ... \right\}$.
+\newcommand{\abs}[1]{\left| #1 \right|}
+% $\abs{...}$ yields $\left| ... \right|$.
+\newcommand{\tup}[1]{\left( #1 \right)}
+% $\tup{...}$ yields $\left( ... \right)$.
+\newcommand{\ive}[1]{\left[ #1 \right]}
+% $\ive{...}$ yields $\left[ ... \right]$.
+\newcommand{\verts}[1]{\operatorname{V}\left( #1 \right)}
+% $\verts{...}$ yields $\operatorname{V}\left( ... \right)$.
+\newcommand{\edges}[1]{\operatorname{E}\left( #1 \right)}
+% $\edges{...}$ yields $\operatorname{E}\left( ... \right)$.
+\newcommand{\arcs}[1]{\operatorname{A}\left( #1 \right)}
+% $\arcs{...}$ yields $\operatorname{A}\left( ... \right)$.
+\newcommand{\underbrack}[2]{\underbrace{#1}_{\substack{#2}}}
+% $\underbrack{...1}{...2}$ yields
+% $\underbrace{...1}_{\substack{...2}}$. This is useful for doing
+% local rewriting transformations on mathematical expressions with
+% justifications.
+\ihead{Math 5707 Spring 2017 (Darij Grinberg): homework set 2}
+\ohead{page \thepage}
+\cfoot{}
+\begin{document}
+
+\begin{center}
+\textbf{Math 5707 Spring 2017 (Darij Grinberg): homework set 2}
+
+\textbf{due: Wed, 15 Feb 2017, in class} or by email
+(\texttt{dgrinber@umn.edu}) before class
+
+\textbf{Please hand in solutions to FIVE of the seven problems.}
+{\color{red}
+(If you hand in more, the grader will choose five to grade.)}
+\end{center}
+
+See the \href{http://www-users.math.umn.edu/~dgrinber/5707s17/nogra.pdf}{lecture notes} for relevant material.
+If you reference results from the lecture notes, please \textbf{mention the date and time} of the version of the notes you are using (as the numbering changes during updates).
+
+\begin{exercise}
+Let $G$ and $H$ be two simple graphs. The \textit{Cartesian product} of $G$
+and $H$ is a new simple graph, denoted $G \times H$, which is defined as
+follows:
+\begin{itemize}
+\item The vertex set $\verts{G \times H}$ of $G \times H$ is the
+Cartesian product $\verts{G} \times \verts{H}$.
+
+\item A vertex $\tup{g, h}$ of $G \times H$ is adjacent to a vertex
+$\tup{g', h'}$ of $G \times H$ if and only if we have
+\begin{itemize}
+\item \textbf{either} $g = g'$ and $hh' \in \edges{H}$,
+\item \textbf{or} $h = h'$ and $gg' \in \edges{G}$.
+\end{itemize}
+(In particular, exactly one of the two equalities $g = g'$ and $h = h'$
+has to hold when $\tup{g, h}$ is adjacent to $\tup{g', h'}$.)
+\end{itemize}
+
+\textbf{(a)} Recall the $n$-dimensional cube graph $Q_n$ defined for
+each $n \in \NN$. (Its vertices are $n$-tuples $\tup{a_1, a_2, \ldots,
+a_n} \in \set{0, 1}^n$, and two such vertices are adjacent if and only
+if they differ in exactly one entry.) Prove that $Q_n \cong
+Q_{n-1} \times Q_1$ for each positive integer $n$. (Thus, $Q_n$ can
+be obtained from $Q_1$ by repeatedly forming Cartesian products; i.e.,
+it is a ``Cartesian power'' of $Q_1$.)
+
+\textbf{(b)} Assume that each of the graphs $G$ and $H$ has a
+Hamiltonian path. Prove that $G \times H$ has a Hamiltonian path.
+
+\textbf{(c)} Assume that both numbers $\abs{\verts{G}}$ and
+$\abs{\verts{H}}$ are $> 1$, and that at least one of them is even.
+Assume again that each of the graphs $G$ and $H$ has a Hamiltonian
+path. Prove that $G \times H$ has a Hamiltonian cycle.
+
+\end{exercise}
+
+\begin{exercise} \label{exe.eulertrails.Kn}
+Let $n$ be a positive integer. Recall that $K_n$ denotes the complete
+graph on $n$ vertices. This is the graph with vertex set $V =
+\set{1, 2, \ldots, n}$ and edge set $\mathcal{P}_2\tup{V}$ (so each two
+distinct vertices are connected).
+
+Find Eulerian circuits for the graphs $K_3$, $K_5$, and $K_7$.
+\end{exercise}
+
+\begin{exercise} \label{exe.debruijn.1}
+Let $n$ be a positive integer, and $K$ be a nonempty finite set.
+Let $k = \abs{K}$.
+A \textit{de Bruijn sequence} of order $n$ on $K$ means a list
+$\tup{c_0, c_1, \ldots, c_{k^n-1}}$ of $k^n$ elements of $K$
+such that
+
+\begin{enumerate}
+\item[(1)] for each
+$n$-tuple $\tup{a_1, a_2, \ldots, a_n} \in K^n$ of elements of $K$,
+there exists a \textbf{unique} $r \in \set{0, 1, \ldots, k^n-1}$ such
+that
+$\tup{a_1, a_2, \ldots, a_n} = \tup{c_r, c_{r+1}, \ldots, c_{r+n-1}}$.
+\end{enumerate}
+
+Here, the indices are understood to be cyclic modulo $k^n$; that is,
+$c_q$ (for $q \geq k^n$) is defined to be $c_{q \% k^n}$, where
+$q \% k^n$ denotes the remainder of $q$ modulo $k^n$.
+
+(Note that the condition (1) can be restated as follows: If we
+write the elements $c_0, c_1, \ldots, c_{k^n-1}$ on a circular
+necklace (in this order), so that the last element $c_{k^n-1}$ is
+followed by the first one, then each $n$-tuple of elements of $K$
+appears as a string of $n$ consecutive elements on the necklace, and
+the position at which it appears on the necklace is unique.)
+
+For example, $\tup{c_0, c_1, c_2, c_3, c_4, c_5, c_6, c_7, c_8}
+= \tup{1, 1, 2, 2, 3, 3, 1, 3, 2}$ is a de Bruijn sequence
+of order $2$ on the set $\set{1, 2, 3}$, because for each $2$-tuple
+$\tup{a_1, a_2} \in \set{1, 2, 3}^2$, there exists a unique $r \in \set{0, 1,
+\ldots, 8}$ such that $\tup{a_1, a_2} = \tup{c_r, c_{r+1}}$. Namely:
+\begin{align*}
+\tup{1, 1} = \tup{c_0, c_1}; \qquad
+\tup{1, 2} = \tup{c_1, c_2}; \qquad
+\tup{1, 3} = \tup{c_6, c_7}; \\
+\tup{2, 1} = \tup{c_8, c_9}; \qquad
+\tup{2, 2} = \tup{c_2, c_3}; \qquad
+\tup{2, 3} = \tup{c_3, c_4}; \\
+\tup{3, 1} = \tup{c_5, c_6}; \qquad
+\tup{3, 2} = \tup{c_7, c_8}; \qquad
+\tup{3, 3} = \tup{c_4, c_5}.
+\end{align*}
+
+Prove that there exists a de Bruijn sequence of order $n$ on $K$
+(no matter what $n$ and $K$ are).
+
+\textbf{Hint:} Let $D$ be the digraph with vertex set $K^{n-1}$ and
+an arc from $\tup{a_1, a_2, \ldots, a_{n-1}}$ to
+$\tup{a_2, a_3, \ldots, a_n}$ for each
+$\tup{a_1, a_2, \ldots, a_n} \in K^n$ (and no other arcs). Prove that
+$D$ has an Eulerian circuit.
+\end{exercise}
+
+\begin{verlong}
+\begin{exercise}
+Let $d$ and $m$ be two positive integers such that $d \mid m$ and
+$d > 1$. Prove
+that there exists a permutation
+$\tup{x_1, x_2, \ldots, x_m}$ of the list $\tup{0, 1, \ldots, m-1}$
+with the following property:
+For each $i \in \set{1, 2, \ldots, m}$, we have
+$x_{i+1} \equiv d x_i + r_i \mod m$ for some
+$r_i \in \set{0, 1, \ldots, d-1}$. (Here, $x_{m+1}$ should be
+understood as $x_1$.)
+
+\textbf{Hint:} If $m = d^n$ is a power of $d$, then we can identify
+the integers $0, 1, \ldots, m-1$ with $n$-tuples of elements of
+$\set{0, 1, \ldots, d-1}$ (by representing them in base $d$, including
+just enough leading zeroes to ensure that they all have $n$ digits).
+Thus, the exercise reduces to Exercise~\ref{exe.debruijn.1} in this
+case. Try to extend the solution of the latter to the general case.
+\end{exercise}
+\end{verlong}
+
+Recall that the \textit{indegree} of a vertex $v$ of a digraph
+$D = \tup{V, A}$ is defined to be the number of all arcs $a \in A$
+whose target is $v$. This indegree is denoted by
+$\deg^-\tup{v}$ or by $\deg^-_D\tup{v}$ (whenever the graph $D$ is not
+clear from the context).
+
+Likewise, the \textit{outdegree} of a vertex $v$ of a digraph
+$D = \tup{V, A}$ is defined to be the number of all arcs $a \in A$
+whose source is $v$. This outdegree is denoted by
+$\deg^+\tup{v}$ or by $\deg^+_D\tup{v}$ (whenever the graph $D$ is not
+clear from the context).
+
+\begin{exercise}
+Let $D$ be a digraph. Show that
+$\sum_{v \in \verts{D}} \deg^-\tup{v}
+= \sum_{v \in \verts{D}} \deg^+\tup{v}$.
+\end{exercise}
+
+The next few exercises are about \textit{tournaments}. A
+\textit{tournament} is a loopless\footnote{A digraph $\tup{V, A}$ is
+said to be \textit{loopless} if it has no loops. (A \textit{loop}
+means an arc of the form $\tup{v, v}$ for some $v \in V$.)} digraph
+$D = \tup{V, A}$ with the following
+property: For any two distinct vertices $u \in V$ and $v \in V$,
+\textbf{precisely} one of the two pairs $\tup{u, v}$ and $\tup{v, u}$
+belongs to $A$. (In other words, any two distinct vertices are
+connected by an arc in one direction, but not in both.)
+
+A \textit{$3$-cycle} in a tournament $D = \tup{V, A}$ means a
+triple $\tup{u, v, w}$ of vertices in $V$ such that all three pairs
+$\tup{u, v}$, $\tup{v, w}$ and $\tup{w, u}$ belong to $A$.
+
+\begin{exercise}
+Let $D = \tup{V, A}$ be a tournament.
+Set $n = \abs{V}$ and $m = \sum_{v \in V} \dbinom{\deg^-\tup{v}}{2}$.
+
+\textbf{(a)} Show that $m = \sum_{v \in V} \dbinom{\deg^+\tup{v}}{2}$.
+
+\textbf{(b)} Show that the number of $3$-cycles in $D$ is
+$3\tup{\dbinom{n}{3} - m}$.
+\end{exercise}
+
+\begin{exercise}
+If a tournament $D$ has a $3$-cycle $\tup{u, v, w}$, then
+we can define a new tournament $D'_{u, v, w}$ as follows: The vertices
+of $D'_{u, v, w}$ shall be the same as those of $D$. The arcs of
+$D'_{u, v, w}$ shall be the same as those of $D$, except that the
+three arcs $\tup{u, v}$, $\tup{v, w}$ and $\tup{w, u}$ are replaced
+by the three new arcs $\tup{v, u}$, $\tup{w, v}$ and $\tup{u, w}$.
+(Visually speaking, $D'_{u, v, w}$ is obtained from $D$ by turning the
+arrows on the arcs $\tup{u, v}$, $\tup{v, w}$ and $\tup{w, u}$
+around.) We say that the new tournament $D'_{u, v, w}$ is obtained
+from the old tournament $D$ by a \textit{$3$-cycle reversal operation}.
+
+Now, let $V$ be a finite set, and let $E$ and $F$ be two tournaments
+with vertex set $V$. Prove that $F$ can be obtained from $E$ by a
+sequence of $3$-cycle reversal operations if and only if each
+$v \in V$ satisfies $\deg^-_E \tup{v} = \deg^-_F \tup{v}$.
+% (Here, $\deg^-_D \tup{v}$
+% denotes the indegree of $v$ with respect to a given digraph $D$.
+(Note that a sequence may be empty, which allows handling the case
+$E = F$ even if $E$ has no $3$-cycles to reverse.)
+\end{exercise}
+
+A tournament $D = \tup{V, A}$ is called \textit{transitive} if it
+has no $3$-cycles.
+
+\begin{exercise}
+If a tournament $D = \tup{V, A}$ has three distinct vertices
+$u$, $v$ and $w$ satisfying $\tup{u, v} \in A$ and $\tup{v, w} \in A$,
+then we can define a new tournament $D''_{u, v, w}$ as follows:
+The vertices of $D''_{u, v, w}$ shall be the same as those of $D$. The
+arcs of $D''_{u, v, w}$ shall be the same as those of $D$, except that
+the two arcs $\tup{u, v}$ and $\tup{v, w}$ are replaced
+by the two new arcs $\tup{v, u}$ and $\tup{w, v}$.
+We say that the new tournament $D''_{u, v, w}$ is obtained
+from the old tournament $D$ by a \textit{$2$-path reversal operation}.
+
+Let $D$ be any tournament. Prove that there is a sequence of
+$2$-path reversal operations that transforms $D$ into a transitive
+tournament.
+\end{exercise}
+
+\end{document}

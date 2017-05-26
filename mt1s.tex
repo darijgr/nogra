@@ -1,0 +1,2124 @@
+\documentclass[numbers=enddot,12pt,final,onecolumn,notitlepage]{scrartcl}%
+\usepackage[headsepline,footsepline,manualmark]{scrlayer-scrpage}
+\usepackage[all,cmtip]{xy}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{framed}
+\usepackage{comment}
+\usepackage{color}
+\usepackage{hyperref}
+\usepackage{ifthen}
+\usepackage[sc]{mathpazo}
+\usepackage[T1]{fontenc}
+\usepackage{needspace}
+\usepackage{tabls}
+%TCIDATA{OutputFilter=latex2.dll}
+%TCIDATA{Version=5.50.0.2960}
+%TCIDATA{LastRevised=Friday, September 16, 2016 20:39:00}
+%TCIDATA{SuppressPackageManagement}
+%TCIDATA{<META NAME="GraphicsSave" CONTENT="32">}
+%TCIDATA{<META NAME="SaveForMode" CONTENT="1">}
+%TCIDATA{BibliographyScheme=Manual}
+%TCIDATA{Language=American English}
+%BeginMSIPreambleData
+\providecommand{\U}[1]{\protect\rule{.1in}{.1in}}
+%EndMSIPreambleData
+\newcounter{exer}
+\theoremstyle{definition}
+\newtheorem{theo}{Theorem}[section]
+\newenvironment{theorem}[1][]
+{\begin{theo}[#1]\begin{leftbar}}
+{\end{leftbar}\end{theo}}
+\newtheorem{lem}[theo]{Lemma}
+\newenvironment{lemma}[1][]
+{\begin{lem}[#1]\begin{leftbar}}
+{\end{leftbar}\end{lem}}
+\newtheorem{prop}[theo]{Proposition}
+\newenvironment{proposition}[1][]
+{\begin{prop}[#1]\begin{leftbar}}
+{\end{leftbar}\end{prop}}
+\newtheorem{defi}[theo]{Definition}
+\newenvironment{definition}[1][]
+{\begin{defi}[#1]\begin{leftbar}}
+{\end{leftbar}\end{defi}}
+\newtheorem{remk}[theo]{Remark}
+\newenvironment{remark}[1][]
+{\begin{remk}[#1]\begin{leftbar}}
+{\end{leftbar}\end{remk}}
+\newtheorem{coro}[theo]{Corollary}
+\newenvironment{corollary}[1][]
+{\begin{coro}[#1]\begin{leftbar}}
+{\end{leftbar}\end{coro}}
+\newtheorem{conv}[theo]{Convention}
+\newenvironment{condition}[1][]
+{\begin{conv}[#1]\begin{leftbar}}
+{\end{leftbar}\end{conv}}
+\newtheorem{quest}[theo]{Question}
+\newenvironment{algorithm}[1][]
+{\begin{quest}[#1]\begin{leftbar}}
+{\end{leftbar}\end{quest}}
+\newtheorem{warn}[theo]{Warning}
+\newenvironment{conclusion}[1][]
+{\begin{warn}[#1]\begin{leftbar}}
+{\end{leftbar}\end{warn}}
+\newtheorem{conj}[theo]{Conjecture}
+\newenvironment{conjecture}[1][]
+{\begin{conj}[#1]\begin{leftbar}}
+{\end{leftbar}\end{conj}}
+\newtheorem{exam}[theo]{Example}
+\newenvironment{example}[1][]
+{\begin{exam}[#1]\begin{leftbar}}
+{\end{leftbar}\end{exam}}
+\newtheorem{exmp}[exer]{Exercise}
+\newenvironment{exercise}[1][]
+{\begin{exmp}[#1]\begin{leftbar}}
+{\end{leftbar}\end{exmp}}
+\newenvironment{statement}{\begin{quote}}{\end{quote}}
+\iffalse
+\newenvironment{proof}[1][Proof]{\noindent\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+\fi
+\let\sumnonlimits\sum
+\let\prodnonlimits\prod
+\let\cupnonlimits\bigcup
+\let\capnonlimits\bigcap
+\renewcommand{\sum}{\sumnonlimits\limits}
+\renewcommand{\prod}{\prodnonlimits\limits}
+\renewcommand{\bigcup}{\cupnonlimits\limits}
+\renewcommand{\bigcap}{\capnonlimits\limits}
+\setlength\tablinesep{3pt}
+\setlength\arraylinesep{3pt}
+\setlength\extrarulesep{3pt}
+\voffset=0cm
+\hoffset=-0.7cm
+\setlength\textheight{22.5cm}
+\setlength\textwidth{15.5cm}
+\newenvironment{verlong}{}{}
+\newenvironment{vershort}{}{}
+\newenvironment{noncompile}{}{}
+\excludecomment{verlong}
+\includecomment{vershort}
+\excludecomment{noncompile}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\rev}{\operatorname{rev}}
+\newcommand{\conncomp}{\operatorname{conncomp}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\powset}[2][]{\ifthenelse{\equal{#2}{}}{\mathcal{P}\left(#1\right)}{\mathcal{P}_{#1}\left(#2\right)}}
+% $\powset[k]{S}$ stands for the set of all $k$-element subsets of
+% $S$. The argument $k$ is optional, and if not provided, the result
+% is the whole powerset of $S$.
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+% $\set{...}$ yields $\left\{ ... \right\}$.
+\newcommand{\abs}[1]{\left| #1 \right|}
+% $\abs{...}$ yields $\left| ... \right|$.
+\newcommand{\tup}[1]{\left( #1 \right)}
+% $\tup{...}$ yields $\left( ... \right)$.
+\newcommand{\ive}[1]{\left[ #1 \right]}
+% $\ive{...}$ yields $\left[ ... \right]$.
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+% $\floor{...}$ yields $\left\lfloor ... \right\rfloor$.
+\newcommand{\verts}[1]{\operatorname{V}\left( #1 \right)}
+% $\verts{...}$ yields $\operatorname{V}\left( ... \right)$.
+\newcommand{\edges}[1]{\operatorname{E}\left( #1 \right)}
+% $\edges{...}$ yields $\operatorname{E}\left( ... \right)$.
+\newcommand{\arcs}[1]{\operatorname{A}\left( #1 \right)}
+% $\arcs{...}$ yields $\operatorname{A}\left( ... \right)$.
+\newcommand{\underbrack}[2]{\underbrace{#1}_{\substack{#2}}}
+% $\underbrack{...1}{...2}$ yields
+% $\underbrace{...1}_{\substack{...2}}$. This is useful for doing
+% local rewriting transformations on mathematical expressions with
+% justifications.
+\ihead{Math 5707 Spring 2017 (Darij Grinberg): midterm 1}
+\ohead{page \thepage}
+\cfoot{}
+\begin{document}
+
+\begin{center}
+\textbf{Math 5707 Spring 2017 (Darij Grinberg): midterm 1}
+
+\textbf{Solution sketches (DRAFT).}
+\end{center}
+
+\tableofcontents
+
+\subsection{Reminders}
+
+See the
+\href{http://www-users.math.umn.edu/~dgrinber/5707s17/nogra.pdf}{lecture notes}
+and also the
+\href{http://www-users.math.umn.edu/~dgrinber/5707s17/}{handwritten notes}
+for relevant material.
+See also
+\href{http://www-users.math.umn.edu/~dgrinber/5707s17/hw2s.pdf}{the solutions to homework set 2}
+for various conventions and notations that are in use here.
+
+\subsection{Exercise \ref{exe.mt1.from-dom}: a from-dominating set
+from a Hamiltonian path}
+
+\begin{exercise} \label{exe.mt1.from-dom}
+Let $D = \tup{V, A}$ be a digraph. A \textit{from-dominating set} of
+$D$ shall mean a subset $S$ of $V$ such that for each vertex $v \in
+V \setminus S$, there exists at least one arc $uv \in A$ with
+$u \in S$.
+
+Assume that $D$ has a Hamiltonian path. Prove that $D$ has a
+from-dominating set of size $\leq \dfrac{\abs{V}+1}{2}$.
+\end{exercise}
+
+\begin{proof}[Solution sketch to Exercise~\ref{exe.mt1.from-dom}.]
+We have assumed that $D$ has a Hamiltonian path. Fix such a path, and
+denote it by $\tup{v_1, v_2, \ldots, v_n}$.
+
+Each vertex of $D$ appears exactly once in the path
+$\tup{v_1, v_2, \ldots, v_n}$ (since $\tup{v_1, v_2, \ldots, v_n}$ is
+a Hamiltonian path). In other words, each element of $V$ appears
+exactly once in the path $\tup{v_1, v_2, \ldots, v_n}$. Hence,
+$\abs{V} = n$ and $V = \set{v_1, v_2, \ldots, v_n}$.
+
+Define a subset $S$ of $V$ by
+\[
+S = \set{v_i \ \mid \  i \in \set{1,2,\ldots,n} \text{ is odd}}
+  = \set{v_1, v_3, v_5, \ldots}.
+\]
+Then,\footnote{Here, we are using the following notation: If $x$ is a
+real number, then $\floor{x}$ denotes the largest integer that is
+smaller or equal to $x$. For example, $\floor{2.8} = 2$ and
+$\floor{3} = 3$ and $\floor{-1.6} = -2$.}
+$\abs{S} = \floor{\dfrac{n+1}{2}} \leq \dfrac{n+1}{2}
+= \dfrac{\abs{V}+1}{2}$ (since $n = \abs{V}$). Hence, the set $S$ has
+size $\leq \dfrac{\abs{V}+1}{2}$. It thus merely remains to prove that
+$S$ is from-dominating.
+
+According to the definition of ``from-dominating'', this means proving
+that for each vertex $v \in V \setminus S$, there exists at least one
+arc $uv \in A$ with $u \in S$. So let us prove this now.
+
+Let $v \in V \setminus S$. Thus,
+\begin{align*}
+v &\in V \setminus S
+= \set{v_1, v_2, \ldots, v_n} \setminus
+     \set{v_1, v_3, v_5, \ldots} \\
+&\qquad
+\left( \text{since } V = \set{v_1, v_2, \ldots, v_n} \text{ and }
+        S = \set{v_1, v_3, v_5, \ldots} \right) \\
+&= \set{v_2, v_4, v_6, \ldots}
+= \set{v_i \ \mid \  i \in \set{1,2,\ldots,n} \text{ is even}} .
+\end{align*}
+In other words, $v = v_i$ for some even $i \in \set{1,2,\ldots,n}$.
+Consider this $i$. The integer $i$ is even and positive; hence, the
+integer $i-1$ is odd and positive. Hence,
+$i-1 \in \set{1,2,\ldots,n-1}$ (since $i-1 < i \leq n$), so that
+$i-1 \in \set{1, 2, \ldots, n}$.
+Thus, $v_{i-1} \in \set{v_1, v_3, v_5, \ldots}$ (since $i-1$ is odd).
+Hence, $v_{i-1} \in \set{v_1, v_3, v_5, \ldots} = S$.
+
+Furthermore, recall that $\tup{v_1, v_2, \ldots, v_n}$ is a path in
+$D$. Thus, $v_j v_{j+1}$ is an arc of $D$ for each
+$j \in \set{1,2,\ldots,n-1}$. Applying this to $j=i-1$, we conclude
+that $v_{i-1} v_i$ is an arc of $D$. In other words,
+$v_{i-1} v_i \in A$. Since $v_i = v$, this rewrites as
+$v_{i-1} v \in A$. Hence, there exists at least one arc $uv \in A$
+with $u \in S$ (namely, the arc $v_{i-1} v$ with $u = v_{i-1}$).
+This is exactly what we wanted to prove. Hence, we have shown that $S$
+is from-dominating.
+\end{proof}
+
+\subsection{Exercise \ref{exe.mt1.L-hamil}: Hamiltonian paths of a
+line graph}
+
+\begin{exercise} \label{exe.mt1.L-hamil}
+Let $G = \tup{V, E}$ be a simple graph. The \textit{line graph}
+$L \tup{G}$ is defined as the simple graph $\tup{E, F}$, where
+\[
+F = \set{ \set{e_1, e_2} \in \powset[2]{E}
+            \ \mid \ e_1 \cap e_2 \neq \varnothing } .
+\]
+(In other words, $L \tup{G}$ is the graph whose \textbf{vertices}
+are the \textbf{edges} of $G$, and in which two vertices $e_1$ and
+$e_2$ are adjacent if and only if the edges $e_1$ and $e_2$ of $G$
+share a common vertex.)
+
+Assume that $\abs{V} > 1$.
+
+\textbf{(a)} If $G$ has a Hamiltonian path, then prove that
+$L \tup{G}$ has a Hamiltonian path.
+
+\textbf{(b)} If $G$ has a Eulerian walk, then prove that $L \tup{G}$
+has a Hamiltonian path.
+\end{exercise}
+
+\begin{proof}[Hints to Exercise~\ref{exe.mt1.L-hamil}.]
+\textbf{(a)} Let $\tup{v_0, v_1, \ldots, v_n}$ be a Hamiltonian path
+in $G$.
+Let $e_1, e_2, \ldots, e_n$ be the edges of this path (so that
+$e_i = v_{i-1} v_i$ for each $i$). Then,
+$\mathbf{p} = \tup{e_1, e_2, \ldots, e_n}$ is a path in $L \tup{G}$.
+This path is
+not necessarily a Hamiltonian path; but we can turn it into a
+Hamiltonian path by the following procedure:
+\begin{itemize}
+\item Insert all edges of $G$ that contain $v_0$ and are not already
+in the path $\mathbf{p}$ into $\mathbf{p}$, placing them
+at the beginning of $\mathbf{p}$ (just before $e_1$).
+\item Insert all edges of $G$ that contain $v_1$ and are not already
+in the path $\mathbf{p}$ into $\mathbf{p}$, placing them
+between $e_1$ and $e_2$.
+\item Insert all edges of $G$ that contain $v_2$ and are not already
+in the path $\mathbf{p}$ into $\mathbf{p}$, placing them
+between $e_2$ and $e_3$.
+\item And so on, until all edges of $G$ have been inserted.
+\end{itemize}
+It is easy to check that the result is a Hamiltonian path in
+$L \tup{G}$.
+
+\textbf{(b)} Let $e_1, e_2, \ldots, e_m$ be the edges of an Eulerian
+walk in $G$. Then, $\tup{e_1, e_2, \ldots, e_m}$ is a Hamiltonian
+path in $L \tup{G}$.
+
+[\textit{Remark:} It is also true that if $G$ has an Eulerian circuit,
+then $L \tup{G}$ has an Eulerian circuit. To prove this, show that
+$L \tup{G}$ is connected and that each vertex of $L \tup{G}$ has even
+degree.]
+\end{proof}
+
+\subsection{Exercise \ref{exe.mt1.deg-cycle-dir}: a condition for a
+digraph to have a cycle}
+
+\begin{exercise} \label{exe.mt1.deg-cycle-dir}
+Let $D = \tup{V, A}$ be a digraph with $\abs{V} > 0$. Assume
+that each vertex $v \in V$ satisfies $\deg^- v > 0$. Prove that
+$D$ has at least one cycle.
+
+(Keep in mind that a length-1 circuit $\tup{v, v}$ counts as a cycle
+when $A$ contains the loop $\tup{v, v}$.)
+\end{exercise}
+
+\begin{proof}[Hints to Exercise~\ref{exe.mt1.deg-cycle-dir}.]
+Fix a longest path $\tup{v_0, v_1, \ldots, v_k}$ in $D$.
+There is at least one arc with target
+$v_0$ (since $\deg^- \tup{v_0} > 0$). Let $v_{-1}$ be the source of
+this arc. Then, $\tup{v_{-1}, v_0, v_1, \ldots, v_k}$ is a walk, but
+not a path (since $\tup{v_0, v_1, \ldots, v_k}$ is a longest path).
+Hence, $v_{-1} = v_i$ for some $i \in \set{0, 1, \ldots, k}$.
+Fix the \textbf{smallest} such $i$.
+Then, $\tup{v_{-1}, v_0, \ldots, v_i}$ is a cycle.
+
+[\textit{Remark:} This is very similar to Lemma 0.2 in
+\href{http://www-users.math.umn.edu/~dgrinber/5707s17/hw2s.pdf}{the solutions to homework set 2}.]
+\end{proof}
+
+\subsection{Exercise \ref{exe.mt1.deg-cycle-2}: a condition for a
+multigraph to have a cycle}
+
+Recall that the degree $\deg v$ of a vertex $v$ of a multigraph $G$
+is defined as the number of all edges of $G$ containing $v$.
+
+\begin{exercise} \label{exe.mt1.deg-cycle-2}
+Let $G$ be a multigraph with at least one edge.
+Assume that each vertex of $G$ has even degree.
+Prove that $G$ has a cycle.
+\end{exercise}
+
+\begin{proof}[Hints to Exercise~\ref{exe.mt1.deg-cycle-2}.]
+Fix a longest path
+$\tup{v_0, e_1, v_1, e_2, v_2, \ldots, e_k, v_k}$ in $G$.
+There is at least one edge containing $v_0$ (namely, $e_1$).
+Thus, the number $\deg \tup{v_0}$ is positive.
+This number $\deg \tup{v_0}$ is furthermore even (since each
+vertex of $G$ has even degree).
+Hence, this number $\deg \tup{v_0}$ is $\geq 2$
+(because it is even and positive).
+In other words, there are at least two edges containing $v_0$.
+Thus, there is at least one edge containing $v_0$ that is distinct
+from $e_1$.
+Denote this edge by $e_0$, and let $v_{-1}$ be its other endpoint.
+Then, $\tup{v_{-1}, e_0, v_0, e_1, v_1, e_2, v_2, \ldots, e_k, v_k}$
+is a walk, but not a path (since
+$\tup{v_0, e_1, v_1, e_2, v_2, \ldots, e_k, v_k}$ is a longest path).
+Hence, $v_{-1} = v_i$ for some $i \in \set{0, 1, \ldots, k}$.
+Fix the \textbf{smallest} such $i$.
+Then,
+$\tup{v_{-1}, e_0, v_0, e_1, v_1, \ldots, e_i, v_i}$ is a cycle.
+
+[\textit{Remark:} This is (so to speak) the undirected version of
+Lemma 0.2 in
+\href{http://www-users.math.umn.edu/~dgrinber/5707s17/hw2s.pdf}{the solutions to homework set 2}.]
+\end{proof}
+
+\subsection{Exercise \ref{exe.mt1.enmity}: a coloring where neighbors
+shun equal colors}
+
+\begin{exercise} \label{exe.mt1.enmity}
+Let $k \in \NN$. Let $p_1, p_2, \ldots, p_k$ be $k$ nonnegative
+real numbers such that $p_1 + p_2 + \cdots + p_k \geq 1$.
+
+Let $G = \tup{V, E}$ be a simple graph. A \textit{$k$-coloring} of $G$
+shall mean a map $f : V \to \set{1, 2, \ldots, k}$.
+
+Prove that there exists a
+$k$-coloring $f$ of $G$ with the following property: For each vertex
+$v \in V$, at most $p_{f\tup{v}} \deg v$ neighbors of $v$ have the
+same color
+as $v$. Here, the \textit{color} of a vertex $w \in V$ (under the
+$k$-coloring $f$) means the value $f\tup{w}$.
+\end{exercise}
+
+\begin{proof}[Hints to Exercise~\ref{exe.mt1.enmity}.]
+This is a generalization of Exercise 1 on
+\href{http://www-users.math.umn.edu/~dgrinber/5707s17/hw0s.pdf}{homework set 0}.
+Indeed, you obtain the latter exercise if you set $k = 2$, $p_1 = 1/2$
+and $p_2 = 1/2$.
+
+To solve Exercise~\ref{exe.mt1.enmity}, we can generalize the solution
+of Exercise 1 on
+\href{http://www-users.math.umn.edu/~dgrinber/5707s17/hw0s.pdf}{homework set 0}.
+Four changes need to be made:
+
+\begin{enumerate}
+\item We need to deal with the cases $k \leq 1$ separately.
+\item In the algorithm, we need to explain how precisely to ``flip''
+      the color $f\tup{v}$ of the vertex $v$. (Indeed, for $k > 2$,
+      there is more than one possibility.)
+\item We need to change the definition of ``enmity''.
+\item We need to prove that the enmity cannot keep decreasing forever.
+\end{enumerate}
+
+I leave change 1 to the reader (the cases $k \leq 1$ are essentially
+trivial).
+
+As for change 2: We have some $v \in V$ such that more than
+$p_{f\tup{v}} \deg v$ among the neighbors of $v$ have the same color
+of $v$. Then, there exists \textbf{some} $i \in \set{1, 2, \ldots, k}$
+such that \textbf{at most} $p_i \deg v$ among the neighbors of $v$
+have the color $i$ (because otherwise, by summing over all $i$, we
+conclude that $v$ has more than
+$\sum_{i=1}^k p_i \deg v
+= \underbrace{\tup{p_1+p_2+\ldots+p_k}}_{\geq 1} \deg v
+\geq \deg v$ neighbors in total; but this is absurd)\footnote{You can
+even find an $i$ such that \textbf{more than} $p_i \deg v$ among the
+neighbors of $v$ have the color $i$. But that's not necessary for
+us.}. Fix such an $i$,
+and replace the color $f \tup{v}$ of $v$ by this $i$.
+
+What about change 3? We formerly defined the enmity of a coloring $f$
+to be the number of $f$-monochromatic edges. This definition no longer
+works. However, what works is the following subtler definition: For
+each $i \in \set{1, 2, \ldots, k}$, an edge $e$ of $G$ is said to be
+\textit{$\tup{f, i}$-chromatic} if the two endpoints of $e$ both have
+color $i$ in the $k$-coloring $f$. The \textit{enmity} of a
+$k$-coloring $f$ is now defined as the sum
+\[
+\sum_{i=1}^k \dfrac{1}{p_i} \tup{ \text{the number of all }
+                                  \tup{f, i}\text{-chromatic edges} }.
+\]
+This definition requires a minor technical fix: It only works if all
+$p_i$ are positive (i.e., nonzero). Fortunately, we can WLOG assume
+that all $p_i$ are positive (indeed, if some $p_i$ is zero, then
+we can discard this $p_i$, and correspondingly agree to never use the
+color $i$ in our coloring). Proving that the enmity decreases
+throughout the algorithm is rather easy (a straightforward
+modification of the original argument).
+
+Change 4 is simple but subtle; it is really easy to miss its
+importance. In the solution of Exercise 1 on
+\href{http://www-users.math.umn.edu/~dgrinber/5707s17/hw0s.pdf}{homework set 0},
+we just argued that the enmity of a $2$-coloring cannot keep
+decreasing forever because it is a nonnegative integer. However, in
+our more general setting, the enmity no longer is a nonnegative
+integer, and thus one could imagine it decreasing indefinitely
+(e.g., from $1$ to
+$1/2$, then on to $1/3$, then on to $1/4$, etc.). So we need a new
+argument. Fortunately, there is an easy one: There are only finitely
+many $k$-colorings of $G$ (namely, $k^{\abs{V}}$ many). Hence, there
+are only finitely many values that the enmity of a $k$-coloring of $G$
+can take. Hence, the enmity cannot keep decreasing forever (because
+that would force it to take infinitely many different values along
+the way). So we are done.
+\end{proof}
+
+\begin{noncompile}
+A \textit{forest} means a simple graph that has no cycles.
+
+\begin{exercise} \label{exe.mt1.forests-matroid}
+Let $G = \tup{V, E}$ be a forest. Let $H = \tup{V, F}$ be a forest
+with the same vertex set as $G$ but satisfying $\abs{F} > \abs{E}$.
+Prove that there exists some $f \in F \setminus E$ such that
+$\tup{V, E \cup \set{f}}$ is still a forest. (In other words, prove
+that we can add some edge from $H$ to the graph $G$ such that the
+resulting graph is still a forest, but this edge was not contained in
+$G$ to begin with.)
+\end{exercise}
+\end{noncompile}
+
+\subsection{Exercise \ref{exe.mt1.euler-add}: adding edges to get an
+Eulerian circuit}
+
+\begin{exercise} \label{exe.mt1.euler-add}
+Let $G$ be a connected multigraph. Let $m$ be the number of vertices
+of $G$ that have odd degree. Prove that we can add $m/2$ new edges to
+$G$ in such a way that the resulting multigraph will have an Eulerian
+circuit. (It is allowed to add an edge even if there is already an
+edge between the same two vertices.)
+\end{exercise}
+
+\begin{proof}[Hints to Exercise~\ref{exe.mt1.euler-add}.]
+Proposition 2.5.8 in the
+\href{http://www-users.math.umn.edu/~dgrinber/5707s17/nogra.pdf}{lecture notes}
+says that the number of vertices of $G$ having odd degree is
+even\footnote{To be fully precise, Proposition 2.5.8 in the
+\href{http://www-users.math.umn.edu/~dgrinber/5707s17/nogra.pdf}{lecture notes}
+only states this fact for simple graphs, not for multigraphs. But the
+proof for multigraphs is almost the same. (The only difference is that
+``$v \in e$'' must be replaced by ``$v \in \phi\tup{e}$''.)}.
+In other words, $m$ is even. Let $v_1, v_2, \ldots, v_m$ be the $m$
+vertices of $G$ that have odd degree.
+
+Now, let us add $m/2$ new edges
+$e_1, e_2, \ldots, e_{m/2}$ to $G$, where each $e_i$ has
+$\phi\tup{e_i} = \set{v_{2i-1}, v_{2i}}$.
+(This is well-defined, since $m$ is even.) The resulting multigraph is
+clearly connected (since $G$ was connected), and has the property that
+each of its vertices has even degree\footnote{\textit{Proof.}
+Let us see how the degrees of the vertices of our multigraph have been
+affected by adding the $m/2$ new edges $e_1, e_2, \ldots, e_{m/2}$:
+\begin{itemize}
+\item The degrees of the vertices $v_1, v_2, \ldots, v_m$ have been
+      incremented by $1$ when we added our $m/2$ new edges. This
+      caused these degrees to become even (because back in the
+      original multigraph $G$, they were odd).
+\item The degrees of all other vertices have not changed when we added
+      our $m/2$ new edges (because none of these new edges contains
+      any of the other vertices). Hence, these degrees have remained
+      even (because they were even in the original multigraph $G$).
+\end{itemize}
+Thus, in the resulting multigraph, the degrees of \textbf{all}
+vertices have become even.}.
+Hence, by the Euler-Hierholzer theorem, this new graph has an Eulerian
+circuit.
+\end{proof}
+
+\subsection{Exercise \ref{exe.mt1.d+d+d}: how large can the perimeter
+of a triangle on a graph be?}
+
+\subsubsection{Distances in a graph}
+
+If $u$ and $v$ are two vertices of a simple graph $G$, then
+$d \tup{u, v}$ denotes the \textit{distance} between $u$ and $v$. This
+is defined to be the minimum length of a path from $u$ to $v$ if
+such a path exists; otherwise it is defined to be the symbol $\infty$.
+
+We observe the following simple facts:
+
+\begin{lemma} \label{lem.mt1.d-leq-V}
+Let $u$ and $v$ be two vertices of a connected simple graph
+$G = \tup{V, E}$.
+Then, $d \tup{u, v} \leq \abs{V} - 1$.
+\end{lemma}
+
+\begin{proof}[Proof of Lemma~\ref{lem.mt1.d-leq-V}.]
+The simple graph $G$ is connected. Hence, there exists a walk from $u$
+to $v$ in $G$. Let $k$ be the length of this walk. Therefore, there
+exists a walk from $u$ to $v$ in $G$ having length $\leq k$ (namely,
+the walk we have just constructed).
+Hence, Corollary 2.8.9 in the
+\href{http://www-users.math.umn.edu/~dgrinber/5707s17/nogra.pdf}{lecture notes}
+shows that there exists a path from $u$ to $v$ having length
+$\leq k$. Let $\tup{u_0, u_1, \ldots, u_g}$ be this path. Then, the
+vertices $u_0, u_1, \ldots, u_g$ are pairwise distinct (since
+$\tup{u_0, u_1, \ldots, u_g}$ is a path). Hence,
+$\abs{\set{u_0, u_1, \ldots, u_g}} = g+1$. But from
+$\set{u_0, u_1, \ldots, u_g} \subseteq V$, we obtain
+$\abs{\set{u_0, u_1, \ldots, u_g}} \leq \abs{V}$. Thus,
+$g + 1 = \abs{\set{u_0, u_1, \ldots, u_g}} \leq \abs{V}$.
+Hence, $g \leq \abs{V} - 1$.
+
+Now, there exists a path from $u$ to $v$ having length $g$ (namely,
+the path $\tup{u_0, u_1, \ldots, u_g}$). Hence, the minimum length of
+a path from $u$ to $v$ is $\leq g$. But this minimum length is
+$d \tup{u, v}$ (by the definition of $d \tup{u, v}$). Hence, we obtain
+$d \tup{u, v} \leq g \leq \abs{V} - 1$. This proves
+Lemma~\ref{lem.mt1.d-leq-V}.
+\end{proof}
+
+Lemma~\ref{lem.mt1.d-leq-V} shows that if $u$ and $v$ are two
+vertices of a connected simple graph $G$, then $d \tup{u, v}$ is an
+actual integer (as opposed to $\infty$).
+
+\begin{lemma} \label{lem.mt1.walk-to-distance}
+Let $u$ and $v$ be two vertices of a simple graph $G$. Let
+$k \in \NN$. If there exists a walk from $u$ to $v$ in $G$ having
+length $k$, then $d \tup{u, v} \leq k$.
+\end{lemma}
+
+\begin{proof}[Proof of Lemma~\ref{lem.mt1.walk-to-distance}.]
+We assumed that there exists a walk from $u$ to $v$ in $G$ having
+length $k$. Therefore, Corollary 2.8.9 in the
+\href{http://www-users.math.umn.edu/~dgrinber/5707s17/nogra.pdf}{lecture notes}
+shows that there exists a path from $u$ to $v$ having length
+$\leq k$. Therefore, the minimum length of a path from $u$ to $v$
+is $\leq k$. But this minimum length is $d \tup{u, v}$ (by the
+definition of $d \tup{u, v}$). Hence, we obtain
+$d \tup{u, v} \leq k$. This proves
+Lemma~\ref{lem.mt1.walk-to-distance}.
+\end{proof}
+
+\begin{lemma} \label{lem.mt1.distances-metric}
+Let $G = \tup{V, E}$ be a simple graph.
+
+\textbf{(a)} Each $u \in V$ satisfies $d \tup{u, u} = 0$.
+
+\textbf{(b)} Each $u \in V$ and $v \in V$ satisfy
+$d \tup{u, v} = d \tup{v, u}$.
+
+\textbf{(c)} Each $u \in V$, $v \in V$ and $w \in V$ satisfy
+$d \tup{u, v} + d \tup{v, w} \geq d \tup{u, w}$.
+(This inequality has to be interpreted appropriately when one of the
+distances is infinite: For example, we understand $\infty$ to be
+greater than any integer, and we understand $\infty + m$ to be
+$\infty$ whenever $m \in \ZZ$.)
+
+\textbf{(d)} If $u \in V$ and $v \in V$ satisfy $d \tup{u, v} = 0$,
+then $u = v$.
+\end{lemma}
+
+\begin{proof}[Proof of Lemma~\ref{lem.mt1.distances-metric}
+(sketched).]
+Parts \textbf{(a)}, \textbf{(b)} and \textbf{(d)} of
+Lemma~\ref{lem.mt1.distances-metric} are easy to check, and thus left
+to the reader.
+
+\textbf{(c)} We WLOG assume that none of the two distances
+$d \tup{u, v}$ and $d \tup{v, w}$ is $\infty$ (since otherwise,
+Lemma~\ref{lem.mt1.distances-metric} \textbf{(c)} holds for obvious
+reasons).
+
+If there was no path from $u$ to $v$, then $d \tup{u, v}$ would be
+$\infty$ (by the definition of $d \tup{u, v}$), which would contradict
+the fact that none of the two distances
+$d \tup{u, v}$ and $d \tup{v, w}$ is $\infty$. Hence, there must exist
+at least one path from $u$ to $v$. Thus,
+$d \tup{u, v}$ is the minimum length of a path from $u$ to $v$ (by the
+definition of $d \tup{u, v}$). Hence, there exists a path from $u$ to
+$v$ having length $d \tup{u, v}$. Fix such a path, and denote it by
+$\mathbf{p} = \tup{p_0, p_1, \ldots, p_g}$. Hence,
+$\tup{\text{the length of the path } \mathbf{p}} = g$. Therefore,
+$g = \tup{\text{the length of the path } \mathbf{p}} = d \tup{u, v}$
+(since $\mathbf{p}$ has length $d \tup{u, v}$).
+
+We have shown that there exists a path from $u$ to
+$v$ having length $d \tup{u, v}$. Similarly, we can show that there
+exists a path from $v$ to $w$ having length $d \tup{v, w}$. Fix such
+a path, and denote it by
+$\mathbf{q} = \tup{q_0, q_1, \ldots, q_h}$. Hence,
+$\tup{\text{the length of the path } \mathbf{q}} = h$. Therefore,
+$h = \tup{\text{the length of the path } \mathbf{q}} = d \tup{v, w}$
+(since $\mathbf{h}$ has length $d \tup{v, w}$).
+
+Now, $\tup{p_0, p_1, \ldots, p_g}$ is a path from $u$ to $v$. Hence,
+$p_0 = u$ and $p_g = v$.
+Also, $\tup{q_0, q_1, \ldots, q_h}$ is a path from $v$ to $w$. Hence,
+$q_0 = v$ and $q_h = w$.
+
+The lists $\tup{p_0, p_1, \ldots, p_g}$ and
+$\tup{q_0, q_1, \ldots, q_h}$ are paths, and therefore walks. The
+ending point $p_g$ of the first of these two walks is the starting
+point $q_0$ of the second (because $p_g = v = q_0$).
+Hence, we can combine these two walks to a walk
+$\tup{p_0, p_1, \ldots, p_g, q_1, q_2, \ldots, q_h}
+= \tup{p_0, p_1, \ldots, p_{g-1}, q_0, q_1, \ldots, q_h}$. This latter
+walk has length $g + h$, and is a walk from $u$ to $w$ (since
+$p_0 = u$ and $q_h = w$). Thus, there exists a walk from $u$ to $w$
+having length $g + h$ (namely, the walk that we have just
+constructed). Hence,
+Lemma~\ref{lem.mt1.walk-to-distance} (applied to $w$ and $g + h$
+instead of $v$ and $k$) shows that $d \tup{u, w} \leq g + h
+= d \tup{u, v} + d \tup{v, w}$ (since $g = d \tup{u, v}$ and
+$h = d \tup{v, w}$). In other words,
+$d \tup{u, v} + d \tup{v, w} \geq d \tup{u, w}$.
+This proves Lemma~\ref{lem.mt1.distances-metric} \textbf{(c)}.
+\end{proof}
+
+Lemma~\ref{lem.mt1.distances-metric} \textbf{(c)} is known as the
+\textit{triangle inequality} for distances on a graph.
+Of course, this is due to its similarity to the well-known triangle
+inequality in Euclidean geometry. In fact, this similarity goes
+deeper:
+Lemma~\ref{lem.mt1.d-leq-V} shows that if $G = \tup{V, E}$ is a
+connected simple graph, then the definition of the distance
+$d \tup{u, v}$ for each pair $\tup{u, v} \in V \times V$ gives rise
+to a well-defined map $d : V \times V \to \NN$.
+Lemma~\ref{lem.mt1.distances-metric} shows that this map $d$ is a
+\href{https://en.wikipedia.org/wiki/Metric_(mathematics)}{metric}.
+We shall not use this in the following, but it is a useful fact to
+keep in one's mind.
+
+\subsubsection{Statement of the exercise}
+
+\begin{exercise} \label{exe.mt1.d+d+d}
+Let $a$, $b$ and $c$ be three vertices of a connected simple graph
+$G = \tup{V, E}$.
+Prove that
+$d \tup{b, c} + d \tup{c, a} + d \tup{a, b} \leq 2 \abs{V} - 2$.
+\end{exercise}
+
+\subsubsection{First solution}
+
+\begin{proof}[Solution sketch to Exercise~\ref{exe.mt1.d+d+d}.]
+The following solution was found by Jiali Huang and
+Nicholas Rancourt.
+
+Fix some path $\mathbf{z} = \tup{z_0, z_1, \ldots, z_g}$ from
+$a$ to $b$ having minimum length. Then, the length of $\mathbf{z}$ is
+$d \tup{a, b}$ (since $d \tup{a, b}$ is defined as the minimum
+length of a path from $a$ to $b$). Hence,
+\begin{equation}
+d \tup{a, b}
+= \tup{\text{the length of the path } \mathbf{z}}
+= g
+\label{pf.exe.mt1.d+d+d.walk0}
+\end{equation}
+(since $\mathbf{z} = \tup{z_0, z_1, \ldots, z_g}$).
+
+Since $\tup{z_0, z_1, \ldots, z_g}$ is a path from $a$ to $b$,
+we have $z_0 = a$ and $z_g = b$.
+
+Since $\tup{z_0, z_1, \ldots, z_g}$ is a path, the $g+1$
+vertices $z_0, z_1, \ldots, z_g$ are distinct. Hence,
+$\abs{\set{z_0, z_1, \ldots, z_g}} = g+1$.
+
+Now, pick an element $i \in \set{0, 1, \ldots, g}$ for which the
+number $d \tup{c, z_i}$ is minimum. Hence,
+\begin{equation}
+d \tup{c, z_i} \leq d \tup{c, z_j}
+\qquad \text{for each } j \in \set{0, 1, \ldots, g} .
+\label{sol.mt1.d+d+d.zi-minimum}
+\end{equation}
+
+Fix some path $\mathbf{t} = \tup{t_0, t_1, \ldots, t_h}$ from
+$c$ to $z_i$ having minimum length. Then, the length of $\mathbf{t}$
+is $d \tup{c, z_i}$ (since $d \tup{c, z_i}$ is defined as the
+minimum length of a path from $c$ to $z_i$). Hence,
+\[
+d \tup{c, z_i}
+= \tup{\text{the length of the path } \mathbf{t}}
+= h
+\]
+(since $\mathbf{t} = \tup{t_0, t_1, \ldots, t_h}$).
+
+Since $\tup{t_0, t_1, \ldots, t_h}$ is a path from $c$ to $z_i$,
+we have $t_0 = c$ and $t_h = z_i$.
+
+Since $\tup{t_0, t_1, \ldots, t_h}$ is a path, the $h+1$
+vertices $t_0, t_1, \ldots, t_h$ are distinct. In particular,
+the $h$ vertices $t_0, t_1, \ldots, t_{h-1}$ are distinct. Hence,
+$\abs{\set{t_0, t_1, \ldots, t_{h-1}}} = h$.
+
+Now, there is a walk from $c$ to $a$ in $G$ having length
+$h + i$\ \ \ \ \footnote{\textit{Proof.} We know that
+$\tup{z_0, z_1, \ldots, z_g}$ is a path, thus a walk. Hence,
+$\tup{z_0, z_1, \ldots, z_i}$ is a walk as well. Therefore,
+$\tup{z_i, z_{i-1}, \ldots, z_0}$ is a walk (being the reversal
+of the walk $\tup{z_0, z_1, \ldots, z_i}$). On the other hand,
+$\tup{t_0, t_1, \ldots, t_h}$ is a walk.
+Since the ending point of the walk $\tup{t_0, t_1, \ldots, t_h}$
+is the starting point of the walk
+$\tup{z_i, z_{i-1}, \ldots, z_0}$ (because $t_h = z_i$), we can
+combine these two walks, obtaining a new walk
+$\tup{t_0, t_1, \ldots, t_{h-1}, z_i, z_{i-1}, \ldots, z_0}$.
+This new walk is a walk from $c$ to $a$ (since $t_0 = c$ and
+$z_0 = a$) and has length $h + i$. Hence, there is a
+walk from $c$ to $a$ in $G$ having length $h + i$ (namely, the
+walk that we have just constructed).}. Hence,
+Lemma~\ref{lem.mt1.walk-to-distance} (applied to $u = c$, $v = a$
+and $k = h + i$) shows that
+\begin{equation}
+d \tup{c, a} \leq h + i .
+\label{pf.exe.mt1.d+d+d.walk1}
+\end{equation}
+
+On the other hand, there is a walk from $b$ to $c$ in $G$ having
+length $\tup{g-i} + h$\ \ \ \ \footnote{\textit{Proof.} We know that
+$\tup{z_0, z_1, \ldots, z_g}$ is a path, thus a walk. Hence,
+$\tup{z_i, z_{i+1}, \ldots, z_g}$ is a walk as well. Therefore,
+$\tup{z_g, z_{g-1}, \ldots, z_i}$ is a walk (being the reversal
+of the walk $\tup{z_i, z_{i+1}, \ldots, z_g}$). On the other hand,
+$\tup{t_0, t_1, \ldots, t_h}$ is a walk. Hence,
+$\tup{t_h, t_{h-1}, \ldots, t_0}$ is a walk as well
+(being the reversal of the walk $\tup{t_0, t_1, \ldots, t_h}$).
+Since the ending point of the walk $\tup{z_g, z_{g-1}, \ldots, z_i}$
+is the starting point of the walk
+$\tup{t_h, t_{h-1}, \ldots, t_0}$ (because $z_i = t_h$), we can
+combine these two walks, obtaining a new walk
+$\tup{z_g, z_{g-1}, \ldots, z_i, t_{h-1}, t_{h-2}, \ldots, t_0}$.
+This new walk is a walk from $b$ to $c$ (since $z_g = b$ and
+$t_0 = c$) and has length $\tup{g-i} + h$. Hence, there is a
+walk from $b$ to $c$ in $G$ having length $\tup{g-i} + h$ (namely,
+the walk that we have just constructed).}. Hence,
+Lemma~\ref{lem.mt1.walk-to-distance} (applied to $u = b$, $v = c$
+and $k = \tup{g-i} + h$) shows that
+\begin{equation}
+d \tup{b, c} \leq \tup{g-i} + h .
+\label{pf.exe.mt1.d+d+d.walk2}
+\end{equation}
+
+It is easy to see that the sets
+$\set{t_0, t_1, \ldots, t_{h-1}}$ and
+$\set{z_0, z_1, \ldots, z_g}$ are disjoint\footnote{\textit{Proof.}
+Let $v \in
+\set{t_0, t_1, \ldots, t_{h-1}} \cap \set{z_0, z_1, \ldots, z_g}$.
+We shall derive a contradiction.
+
+We have
+$v \in
+\set{t_0, t_1, \ldots, t_{h-1}} \cap \set{z_0, z_1, \ldots, z_g}
+\subseteq \set{t_0, t_1, \ldots, t_{h-1}}$. Hence,
+$v = t_p$ for some $p \in \set{0, 1, \ldots, h-1}$. Consider this
+$p$.
+
+We have $v \in
+\set{t_0, t_1, \ldots, t_{h-1}} \cap \set{z_0, z_1, \ldots, z_g}
+\subseteq \set{z_0, z_1, \ldots, z_g}$. Hence,
+$v = z_j$ for some $j \in \set{0, 1, \ldots, g}$. Consider this
+$j$. 
+
+Recall that $\tup{t_0, t_1, \ldots, t_h}$ is a walk. Hence,
+$\tup{t_0, t_1, \ldots, t_p}$ is a walk as well. This walk
+$\tup{t_0, t_1, \ldots, t_p}$ is a walk from $c$ to $v$ (since
+$t_0 = c$ and $t_p = v$) and has length $p$.
+Hence, there is a walk from $c$ to $v$ in $G$ having length
+$p$ (namely, the walk $\tup{t_0, t_1, \ldots, t_p}$).
+Consequently, Lemma~\ref{lem.mt1.walk-to-distance}
+(applied to $u = c$ and $k = p$) shows that
+$d \tup{c, v} \leq p \leq h-1$
+(since $p \in \set{0, 1, \ldots, h-1}$).
+
+But \eqref{sol.mt1.d+d+d.zi-minimum} yields
+$d \tup{c, z_i} \leq d \tup{c, z_j} = d \tup{c, v}$
+(since $z_j = v$). Thus, $d \tup{c, v} \geq d \tup{c, z_i}
+= h > h-1$. This contradicts $d \tup{c, v} \leq h-1$.
+
+Now, forget that we fixed $v$. Thus, we have obtained a
+contradiction for each
+$v \in
+\set{t_0, t_1, \ldots, t_{h-1}} \cap \set{z_0, z_1, \ldots, z_g}$.
+Hence, there exists no
+$v \in
+\set{t_0, t_1, \ldots, t_{h-1}} \cap \set{z_0, z_1, \ldots, z_g}$.
+Thus,
+$\set{t_0, t_1, \ldots, t_{h-1}} \cap \set{z_0, z_1, \ldots, z_g}
+= \varnothing$. In other words, the sets
+$\set{t_0, t_1, \ldots, t_{h-1}}$ and
+$\set{z_0, z_1, \ldots, z_g}$ are disjoint.}. Hence, the sum of
+the sizes of these sets equals the size of their union. In other
+words,
+\begin{align*}
+\abs{\set{t_0, t_1, \ldots, t_{h-1}}}
++ \abs{\set{z_0, z_1, \ldots, z_g}}
+&=
+\abs{\underbrace{\set{t_0, t_1, \ldots, t_{h-1}} \cup
+                   \set{z_0, z_1, \ldots, z_g}}_{\subseteq V}}
+\leq \abs{V} .
+\end{align*}
+Since $\abs{\set{z_0, z_1, \ldots, z_g}} = g+1$
+and $\abs{\set{t_0, t_1, \ldots, t_{h-1}}} = h$, this rewrites as
+$h + \tup{g+1} \leq \abs{V}$. Hence,
+$\tup{g+h} + 1 = h + \tup{g+1} \leq \abs{V}$, so that
+$g+h \leq \abs{V} - 1$.
+
+Adding together the two inequalities \eqref{pf.exe.mt1.d+d+d.walk2}
+and \eqref{pf.exe.mt1.d+d+d.walk1} and the equation
+\eqref{pf.exe.mt1.d+d+d.walk0}, we obtain
+\begin{align*}
+d \tup{b, c} + d \tup{c, a} + d \tup{a, b}
+&\leq \tup{\tup{g-i} + h} + \tup{h + i} + g
+= 2 \tup{\underbrace{g+h}_{\leq \abs{V} - 1}} \\
+&\leq 2 \tup{\abs{V} - 1} = 2 \abs{V} - 2 .
+\end{align*}
+This solves the exercise.
+\end{proof}
+
+\subsubsection{Second solution}
+
+\begin{proof}[Hints to a second solution of Exercise~\ref{exe.mt1.d+d+d}.]
+The following solution is how I originally solved the exercise.
+
+Let $\ell\tup{\mathbf{w}}$ denote the length of a walk $\mathbf{w}$.
+
+Fix
+\begin{itemize}
+\item a shortest path $\mathbf{x}$ from $b$ to $c$;
+\item a shortest path $\mathbf{y}$ from $c$ to $a$.
+\item a shortest path $\mathbf{z}$ from $a$ to $b$.
+\end{itemize}
+Let $X$ be the set of all vertices of $\mathbf{x}$. Similarly define
+$Y$ and $Z$. Thus,
+\begin{align}
+d \tup{b, c} &= \ell\tup{\mathbf{x}} = \abs{X} - 1 \qquad \text{and}
+\label{pf.exe.mt1.d+d+d.hint.d1} \\
+d \tup{c, a} &= \ell\tup{\mathbf{y}} = \abs{Y} - 1 \qquad \text{and}
+\label{pf.exe.mt1.d+d+d.hint.d2} \\
+d \tup{a, b} &= \ell\tup{\mathbf{z}} = \abs{Z} - 1.
+\label{pf.exe.mt1.d+d+d.hint.d3}
+\end{align}
+
+Now, we claim that $\abs{X \cap Y \cap Z} \leq 1$. Indeed, assume the
+contrary. Then, $\abs{X \cap Y \cap Z} \geq 2$. Hence, there exist two
+distinct vertices $p$ and $q$ in $X \cap Y \cap Z$. Consider these $p$
+and $q$.
+
+Both vertices $p$ and $q$ belong to $X \cap Y \cap Z \subseteq X$,
+thus appear on the path $\mathbf{x}$.
+We WLOG assume that $p$ appears before $q$ on this path (i.e., the
+path $\mathbf{x}$ has the form
+$\tup{\ldots, p, \ldots, q, \ldots}$, where some of the $\ldots$ may
+be empty). (This WLOG assumption is legitimate, since we can switch
+$p$ with $q$.)
+
+But the vertices $p$ and $q$ also appear on the path $\mathbf{y}$
+(since they belong to $X \cap Y \cap Z \subseteq Y$). The vertex $p$
+must appear after $q$ on this path\footnote{\textit{Proof.} Assume
+the contrary. Thus, $p$ appears before $q$ on the path $\mathbf{y}$.
+
+Now, let us split the path $\mathbf{x}$ into three parts: Namely,
+\begin{itemize}
+\item let $\mathbf{x}_1$ be the part between $b$ and $p$;
+\item let $\mathbf{x}_2$ be the part between $p$ and $q$;
+\item let $\mathbf{x}_3$ be the part between $q$ and $c$.
+\end{itemize}
+(This is possible because $p$ appears before $q$ in $\mathbf{x}$.)
+Then, $\ell\tup{\mathbf{x}} = \ell\tup{\mathbf{x}_1}
++ \ell\tup{\mathbf{x}_2} + \ell\tup{\mathbf{x}_3}$.
+
+Next, let us split the path $\mathbf{y}$ into three parts: Namely,
+\begin{itemize}
+\item let $\mathbf{y}_1$ be the part between $c$ and $p$;
+\item let $\mathbf{y}_2$ be the part between $p$ and $q$;
+\item let $\mathbf{y}_3$ be the part between $q$ and $a$.
+\end{itemize}
+(This is possible because $p$ appears before $q$ in $\mathbf{y}$.)
+Then, $\ell\tup{\mathbf{y}} = \ell\tup{\mathbf{y}_1}
++ \ell\tup{\mathbf{y}_2} + \ell\tup{\mathbf{y}_3}$.
+
+The path $\mathbf{x}_2$ connects $p$ and $q$, and thus has length $>0$
+(since $p$ and $q$ are distinct). Hence, $\ell\tup{\mathbf{x}_2} > 0$.
+Thus,
+\[
+\ell\tup{\mathbf{x}}
+= \ell\tup{\mathbf{x}_1}
+   + \underbrace{\ell\tup{\mathbf{x}_2}}_{> 0}
+   + \ell\tup{\mathbf{x}_3}
+> \ell\tup{\mathbf{x}_1} + \ell\tup{\mathbf{x}_3} ,
+\]
+so that
+\begin{align}
+\ell\tup{\mathbf{x}_1} + \ell\tup{\mathbf{x}_3}
+< \ell\tup{\mathbf{x}} = d \tup{b, c} .
+\label{pf.exe.mt1.d+d+d.hint.fn1.more1}
+\end{align}
+Similarly,
+\begin{align}
+\ell\tup{\mathbf{y}_1} + \ell\tup{\mathbf{y}_3}
+< d \tup{c, a} .
+\label{pf.exe.mt1.d+d+d.hint.fn1.more2}
+\end{align}
+
+Combining the reversal of the walk $\mathbf{x}_3$ with the walk
+$\mathbf{y}_3$, we obtain a walk from $c$ to $a$ (via $q$). This walk
+has length $\ell\tup{\mathbf{x}_3} + \ell\tup{\mathbf{y}_3}$. Hence,
+there exists a walk from $c$ to $a$ having length
+$\ell\tup{\mathbf{x}_3} + \ell\tup{\mathbf{y}_3}$. Consequently,
+Lemma~\ref{lem.mt1.walk-to-distance} (applied to $u = c$, $v = a$
+and $k = \ell\tup{\mathbf{x}_3} + \ell\tup{\mathbf{y}_3}$) shows that
+\begin{equation}
+d \tup{c, a} \leq \ell\tup{\mathbf{x}_3} + \ell\tup{\mathbf{y}_3} .
+\label{pf.exe.mt1.d+d+d.hint.fn1.1}
+\end{equation}
+
+Combining the walk $\mathbf{x}_1$ with the reversal of the walk
+$\mathbf{y}_1$, we obtain a walk from $b$ to $c$ (via $p$). This walk
+has length $\ell\tup{\mathbf{x}_1} + \ell\tup{\mathbf{y}_1}$. Hence,
+there exists a walk from $b$ to $c$ having length
+$\ell\tup{\mathbf{x}_1} + \ell\tup{\mathbf{y}_1}$. Consequently,
+Lemma~\ref{lem.mt1.walk-to-distance} (applied to $u = b$, $v = c$
+and $k = \ell\tup{\mathbf{x}_1} + \ell\tup{\mathbf{y}_1}$) shows that
+\begin{equation}
+d \tup{b, c} \leq \ell\tup{\mathbf{x}_1} + \ell\tup{\mathbf{y}_1} .
+\label{pf.exe.mt1.d+d+d.hint.fn1.2}
+\end{equation}
+
+Adding together the inequalities \eqref{pf.exe.mt1.d+d+d.hint.fn1.1}
+and \eqref{pf.exe.mt1.d+d+d.hint.fn1.2}, we obtain
+\begin{align*}
+d \tup{c, a} + d \tup{b, c}
+&\leq \tup{\ell\tup{\mathbf{x}_3} + \ell\tup{\mathbf{y}_3}}
+      + \tup{\ell\tup{\mathbf{x}_1} + \ell\tup{\mathbf{y}_1}} \\
+&=
+  \underbrace{ \ell\tup{\mathbf{y}_1}
+               + \ell\tup{\mathbf{y}_3} }
+             _{\substack{< d\tup{c, a} \\
+                 \text{(by \eqref{pf.exe.mt1.d+d+d.hint.fn1.more2})}}}
++ \underbrace{ \ell\tup{\mathbf{x}_1}
+               + \ell\tup{\mathbf{x}_3} }
+             _{\substack{< d\tup{b, c} \\
+                 \text{(by \eqref{pf.exe.mt1.d+d+d.hint.fn1.more1})}}}
+< d \tup{c, a} + d \tup{b, c}.
+\end{align*}
+This is absurd. Hence, we have found a contradiction, qed.}.
+In other words, the vertex $q$ appears before $p$ on the path
+$\mathbf{y}$.
+
+The same reasoning (but applied to $b$, $c$, $a$, $\mathbf{y}$,
+$\mathbf{z}$, $\mathbf{x}$, $q$ and $p$ instead of $a$, $b$, $c$,
+$\mathbf{x}$, $\mathbf{y}$, $\mathbf{z}$, $p$ and $q$) now shows that
+the vertex $p$ appears before $q$ on the path $\mathbf{z}$ (because
+the vertex $q$ appears before $p$ on the path $\mathbf{y}$). The same
+reasoning (but applied to $b$, $c$, $a$, $\mathbf{y}$,
+$\mathbf{z}$ and $\mathbf{x}$ instead of $a$, $b$, $c$,
+$\mathbf{x}$, $\mathbf{y}$ and $\mathbf{z}$) therefore shows
+that the vertex $p$ appears before $q$ on the path $\mathbf{y}$. But
+this contradicts the fact that the vertex $q$ appears before $p$ on
+the path $\mathbf{y}$.
+
+This contradiction shows that our assumption was wrong. Hence,
+$\abs{X \cap Y \cap Z} \leq 1$ is proven. From this, we can easily
+obtain $\abs{X} + \abs{Y} + \abs{Z} \leq 2 \abs{X \cup Y \cup Z} + 1$
+\ \ \ \ \footnote{\textit{Proof.} The sum
+$\abs{X} + \abs{Y} + \abs{Z}$ counts the elements of
+$X \cup Y \cup Z$, but it counts some of them twice and some thrice:
+Namely, an element is counted thrice if it belongs to
+$X \cap Y \cap Z$; otherwise, it is counted at most twice. Since
+$\abs{X \cap Y \cap Z} \leq 1$, we know that at most one element is
+counted thrice. All other elements are counted at most twice. Hence,
+the total sum $\abs{X} + \abs{Y} + \abs{Z}$ is at most
+$3 + 2 \tup{\abs{X \cup Y \cup Z} - 1} = 2 \abs{X \cup Y \cup Z} + 1$.
+Qed.}. Now, adding the equalities
+\eqref{pf.exe.mt1.d+d+d.hint.d1}, \eqref{pf.exe.mt1.d+d+d.hint.d2}
+and \eqref{pf.exe.mt1.d+d+d.hint.d3} together, we obtain
+\begin{align*}
+d \tup{b, c} + d \tup{c, a} + d \tup{a, b}
+&= \tup{\abs{X} - 1} + \tup{\abs{Y} - 1} + \tup{\abs{Z} - 1}
+= \underbrace{\abs{X} + \abs{Y} + \abs{Z}}
+             _{\leq 2 \abs{X \cup Y \cup Z} + 1}
+  - 3 \\
+&\leq 2 \abs{\underbrace{X \cup Y \cup Z}_{\subseteq V}} + 1
+\leq 2 \abs{V} + 1 - 3 = 2 \abs{V} - 2.
+\end{align*}
+\end{proof}
+
+\subsubsection{Third solution}
+
+Let me finally sketch a third solution of the exercise. The idea of
+the below solution is due to Sasha Pevzner, although I am restating it
+in slightly different terms. First, let me generalize the problem as
+follows:
+
+\Needspace{4cm}
+\begin{theorem} \label{thm.mt1.d+d+d.gene}
+Let $k \in \NN$ be odd. Let $a_1, a_2, \ldots, a_k$ be $k$ vertices of
+a connected simple graph $G$. Let us set $a_{k+1} = a_1$.
+Then,
+\[
+\sum_{i=1}^k d \tup{a_i, a_{i+1}}
+\leq \tup{k-1} \tup{\abs{\verts{G}}-1} .
+\]
+\end{theorem}
+
+Before we start proving this, let us notice that
+Theorem~\ref{thm.mt1.d+d+d.gene} does not hold for $k$ even, and the
+whole question of maximizing $\sum_{i=1}^k d \tup{a_i, a_{i+1}}$ for
+$k$ even is rather trivial\footnote{To wit, it is obvious that
+  $\sum_{i=1}^k d \tup{a_i, a_{i+1}} \leq k \tup{\abs{\verts{G}}-1}$
+  (since Lemma~\ref{lem.mt1.d-leq-V} shows that each
+  of the $k$ numbers $d \tup{a_i, a_{i+1}}$ is
+  $\leq \abs{\verts{G}}-1$).
+  When $k$ is even, this bound cannot be improved,
+  because it is attained whenever $G$ is the path graph $P_n$, the
+  vertices $a_1, a_3, a_5, \ldots$ all equal to one endpoint of this
+  path, and the vertices $a_2, a_4, a_6, \ldots$ all equal to the
+  other endpoint.}.
+This makes Theorem~\ref{thm.mt1.d+d+d.gene} (which answers the
+question of maximizing $\sum_{i=1}^k d \tup{a_i, a_{i+1}}$ for
+$k$ odd\footnote{Indeed, it is not hard to see that equality
+  can be obtained in the inequality in
+  Theorem~\ref{thm.mt1.d+d+d.gene}; hence, it really maximizes
+  $\sum_{i=1}^k d \tup{a_i, a_{i+1}}$.})
+all the more interesting.
+
+Exercise~\ref{exe.mt1.d+d+d} is the particular case of
+Theorem~\ref{thm.mt1.d+d+d.gene} for $k = 3$.
+
+For the proof of Theorem~\ref{thm.mt1.d+d+d.gene}, we shall need a
+slightly more advanced notation for the distance between two vertices
+in a graph: Namely, if $u$ and $v$ are two vertices of a simple graph
+$G$, then the distance $d \tup{u, v}$ will often be denoted by
+$d_G \tup{u, v}$ (in order to stress the dependence on $G$). This
+allows us to unambiguously speak of distances between $u$ and $v$ even
+when there are several different graphs containing $u$ and $v$
+as vertices.
+
+Sasha's argument begins by reducing the problem to the situation in
+which the graph is a tree. Thus, we will need to prove the following
+lemma, which of course is a particular case of
+Theorem~\ref{thm.mt1.d+d+d.gene}:
+
+\begin{lemma} \label{lem.mt1.d+d+d.tree}
+Let $k \in \NN$ be odd. Let $a_1, a_2, \ldots, a_k$ be $k$ vertices of
+a tree $G$. Let us set $a_{k+1} = a_1$. Then,
+\[
+\sum_{i=1}^k d \tup{a_i, a_{i+1}}
+\leq \tup{k-1} \tup{\abs{\verts{G}}-1} .
+\]
+(Here, we regard a tree as a simple graph.)
+\end{lemma}
+
+Let us first see why proving this lemma is sufficient:
+
+\begin{proof}[Proof of Theorem~\ref{thm.mt1.d+d+d.gene} using
+Lemma~\ref{lem.mt1.d+d+d.tree} (sketched).]
+Assume that Lemma~\ref{lem.mt1.d+d+d.tree} is already proven.
+
+The graph $G$ is connected, and thus has a spanning tree $T$. Fix such
+a $T$. Clearly, $\verts{T} = \verts{G}$.
+Being a tree, $T$ is of course still connected.
+
+But $T$ is a tree. Therefore, Lemma~\ref{lem.mt1.d+d+d.tree} (applied
+to $T$ instead of $G$) shows that
+$\sum_{i=1}^k d_T \tup{a_i, a_{i+1}} \leq \tup{k-1}
+\tup{\abs{\verts{T}}-1} = \tup{k-1} \tup{\abs{\verts{G}} - 1}$
+(since $\verts{T} = \verts{G}$).
+
+Since $T$ is a subgraph of $G$, each walk in $T$ is a walk in
+$G$. Hence, $d_G \tup{u, v} \leq d_T \tup{u, v}$ for any two vertices
+$u$ and $v$ of $G$. Thus,
+\[
+\sum_{i=1}^k \underbrack{d_G \tup{a_i, a_{i+1}}}
+                        {\leq d_T \tup{a_i, a_{i+1}}}
+\leq
+\sum_{i=1}^k d_T \tup{a_i, a_{i+1}} \leq \tup{k-1}
+\tup{\abs{\verts{G}}-1} .
+\]
+Hence, Theorem~\ref{thm.mt1.d+d+d.gene} is proven.
+\end{proof}
+
+It thus remains to prove Lemma~\ref{lem.mt1.d+d+d.tree}.
+
+\begin{proof}[Proof of Lemma~\ref{lem.mt1.d+d+d.tree} (sketched).]
+We proceed by induction on $\abs{\verts{G}}$.
+
+The \textit{induction base} is the case when $\abs{\verts{G}} = 1$.
+This case is easy (indeed, $G$ has only one vertex in this case, so
+that all $k$ vertices $a_1, a_2, \ldots, a_k$ must be identical,
+and therefore their distances $d \tup{a_i, a_{i+1}}$ are all $0$).
+
+Now, to the \textit{induction step}: Fix an integer $N > 1$.
+Assume (as the induction hypothesis)
+that Lemma~\ref{lem.mt1.d+d+d.tree} is proven in the case when
+$\abs{\verts{G}} = N-1$.
+We must now prove Lemma~\ref{lem.mt1.d+d+d.tree} in the case when
+$\abs{\verts{G}} = N$.
+
+Thus, let us consider the situation of
+Lemma~\ref{lem.mt1.d+d+d.tree} under the assumption that
+$\abs{\verts{G}} = N$.
+We need to prove that
+\begin{equation}
+\sum_{i=1}^k d_G \tup{a_i, a_{i+1}}
+\leq \tup{k-1} \tup{\abs{\verts{G}}-1} .
+\label{pf.lem.mt1.d+d+d.tree.goal}
+\end{equation}
+
+The graph $G$ is a tree with more than $1$ vertex (since
+$\abs{\verts{G}} = N > 1$).
+Hence, $G$ has at least one leaf.
+Pick such a leaf, and denote it by $v$.
+Let $v'$ be the only neighbor of $v$ in $G$.
+
+Let $G'$ be the subgraph of $G$ obtained from $G$ by removing the
+vertex $v$ and the unique edge with endpoint $v$ (that is, the edge
+$vv'$).
+Thus, $G'$ is a tree with $\abs{\verts{G} \setminus \set{v}} = N - 1$
+vertices. Hence, $\abs{\verts{G'}} = N - 1$.
+
+For each vertex $u$ of $G$, we define a vertex $\overline{u}$ of $G'$
+as follows:
+\[
+\overline{u}
+= \begin{cases}
+    u   , & \text{ if } u \neq v; \\
+    v'  , & \text{ if } u = v
+  \end{cases}
+.
+\]
+Then, all of $\overline{a_1}, \overline{a_2}, \ldots, \overline{a_k}$
+are vertices of $G'$. Hence, (by the induction hypothesis) we can
+apply Lemma~\ref{lem.mt1.d+d+d.tree} to $G'$ and $\overline{a_i}$
+instead of $G$ and $a_i$. We thus obtain
+\begin{equation}
+\sum_{i=1}^k d_{G'} \tup{\overline{a_i}, \overline{a_{i+1}}}
+\leq \tup{k-1} \tup{\abs{\verts{G'}}-1} .
+\label{pf.lem.mt1.d+d+d.tree.4}
+\end{equation}
+
+Recall that $v$ is a leaf of the tree $G$. Hence, any path in $G$ that
+neither starts nor ends at $v$ must be a path in $G'$ as well (because
+otherwise, it would have to traverse $v$, but this would entail that
+$v$ is contained in at least two edges, which would contradict the
+fact that $v$ is a leaf). Thus,
+\begin{equation}
+d_G \tup{x, y}
+= d_{G'} \tup{x, y}
+\label{pf.lem.mt1.d+d+d.tree.5}
+\end{equation}
+for any two vertices $x$ and $y$ of $G'$.
+
+Let us, however, notice that
+\begin{equation}
+d_G \tup{x, y}
+= d_{G'} \tup{\overline{x}, \overline{y}}
+  + \ive{\text{exactly one of } x \text{ and } y
+         \text{ equals } v }
+\label{pf.lem.mt1.d+d+d.tree.6}
+\end{equation}
+for any two vertices $x$ and $y$ of $G$, where we are using the
+Iverson bracket notation\footnote{\textit{Proof
+of \eqref{pf.lem.mt1.d+d+d.tree.6}.} Let $x$ and $y$ be two vertices
+of $G$.
+We must prove \eqref{pf.lem.mt1.d+d+d.tree.6}.
+If none of $x$ and $y$ equals $v$, then
+\eqref{pf.lem.mt1.d+d+d.tree.6} follows from
+\eqref{pf.lem.mt1.d+d+d.tree.5} (because in this case, we have
+$\overline{x} = x$ and $\overline{y} = y$).
+If both $x$ and $y$ equal $v$, then \eqref{pf.lem.mt1.d+d+d.tree.6}
+holds as well (since in this case, we have $x = y$).
+Hence, it remains to prove \eqref{pf.lem.mt1.d+d+d.tree.6} in the case
+when exactly one of $x$ and $y$ equals $v$.
+Thus, consider this case.
+WLOG assume that $x = v$ and $y \neq v$ (since otherwise, we can
+switch $x$ with $y$). Thus,
+$\ive{\text{exactly one of } x \text{ and } y
+         \text{ equals } v } = 1$.
+From $x = v$, we obtain $\overline{x} = v'$
+(by the definition of $\overline{x}$).
+From $y \neq v$, we obtain $\overline{y} = y$
+(by the definition of $\overline{y}$).
+Recall that $v'$ is the only neighbor of $v$.
+Hence, $vv'$ is the only edge that contains $v$.
+In other words, $vv'$ is the only edge that contains $x$ (since
+$x = v$).
+Recall that $G$ is a tree. Hence, there is only one path from $x$ to
+$y$. The length of this path must therefore be $d_G \tup{x, y}$. This
+path has length $> 0$ (since $y \neq v = x$) and therefore begins with
+an edge that contains $x$. Hence, it begins with the edge $vv'$
+(because the only edge that contains $x$ is $vv'$). After traversing
+this edge, the path must proceed from $v'$ to $y$, which requires
+$d_G \tup{v', y}$ edges (again because $G$ is a tree, and thus there
+is exactly one path from $v'$ to $y$). Hence, the length of this path
+is $1 + d_G \tup{v', y}$. Since we already know that the length of
+this path is $d_G \tup{x, y}$, we thus obtain
+\begin{align*}
+d_G \tup{x, y}
+&= 1 + \underbrack{d_G \tup{v', y}}
+                  {= d_{G'} \tup{v', y} \\
+                   \text{(by \eqref{pf.lem.mt1.d+d+d.tree.5}, applied }
+                   \text{to } v' \text{ instead of } x
+                   \text{ (since } v' \text{ and } y \text{ are }
+                   \text{vertices of } G' \text{))}}
+ = 1 + d_{G'} \tup{v', y} \\
+&= d_{G'} \tup{\underbrack{v'}{= \overline{x}},
+               \underbrack{y}{= \overline{y}}} + 1
+ = d_{G'} \tup{\overline{x}, \overline{y}} + 1
+ = d_{G'} \tup{\overline{x}, \overline{y}}
+  + \ive{\text{exactly one of } x \text{ and } y
+         \text{ equals } v }
+\end{align*}
+(since $1 = \ive{\text{exactly one of } x \text{ and } y
+         \text{ equals } v }$).
+This proves \eqref{pf.lem.mt1.d+d+d.tree.6}.}.
+
+Hence,
+\begin{align}
+& \sum_{i=1}^k
+  \underbrack{d_G \tup{a_i, a_{i+1}}}
+             {= d_{G'} \tup{\overline{a_i}, \overline{a_{i+1}}}
+              + \ive{\text{exactly one of } a_i \text{ and } a_{i+1}
+                     \text{ equals } v } \\
+              \text{(by \eqref{pf.lem.mt1.d+d+d.tree.6}, applied to }
+              x = a_i \text{ and } y = a_{i+1} \text{)}}
+\nonumber \\
+&= \sum_{i=1}^k
+   \tup{d_{G'} \tup{\overline{a_i}, \overline{a_{i+1}}}
+          + \ive{\text{exactly one of } a_i \text{ and } a_{i+1}
+              \text{ equals } v }}
+\nonumber \\
+&= \underbrack{\sum_{i=1}^k
+                d_{G'} \tup{\overline{a_i}, \overline{a_{i+1}}}}
+              {\leq \tup{k-1} \tup{\abs{\verts{G'}}-1} \\
+                \text{(by \eqref{pf.lem.mt1.d+d+d.tree.4})}}
+ + \sum_{i=1}^k
+      \underbrack{\ive{\text{exactly one of } a_i \text{ and } a_{i+1}
+                    \text{ equals } v }}
+                 {\leq 1}
+\nonumber \\
+&\leq \tup{k-1} \tup{\abs{\verts{G'}}-1}
+    + \underbrack{\sum_{i=1}^k 1}{= k}
+= \tup{k-1} \tup{\underbrack{\abs{\verts{G'}}}{= N-1}
+                 -1} + k
+\nonumber \\
+&= \tup{k-1} \tup{\tup{N-1} - 1} + k
+= \tup{k-1} \tup{N-1} + 1 .
+\label{pf.lem.mt1.d+d+d.tree.antigoal}
+\end{align}
+
+But recall that our goal is to prove
+\eqref{pf.lem.mt1.d+d+d.tree.goal}. We assume the contrary (for the
+sake of contradiction). Hence, we have
+\[
+\sum_{i=1}^k d_G \tup{a_i, a_{i+1}}
+> \tup{k-1} \tup{\underbrack{\abs{\verts{G}}}{= N} -1}
+= \tup{k-1} \tup{N-1} .
+\]
+Since both sides of this
+inequality are integers, we thus obtain
+\[
+\sum_{i=1}^k d_G \tup{a_i, a_{i+1}}
+\geq \tup{k-1} \tup{N-1} + 1.
+\]
+Combining this with \eqref{pf.lem.mt1.d+d+d.tree.antigoal}, we see
+that the inequality \eqref{pf.lem.mt1.d+d+d.tree.antigoal} must be an
+equality. Hence, each inequality that was used in the derivation of
+\eqref{pf.lem.mt1.d+d+d.tree.antigoal} must also be an
+equality\footnote{This is not to be taken fully literally. For
+example, we can derive the inequality $2\cdot 0 \leq 0$ by multiplying
+the two inequalities $2 \leq 0$ and $0 \leq 0$, and it is not true
+that each of the latter two inequalities must be an equality, even
+though the former inequality is an equality.
+However, the derivation of the inequality
+\eqref{pf.lem.mt1.d+d+d.tree.antigoal} involved only
+\textbf{addition} (not multiplication) of other inequalities; and
+therefore, equality in \eqref{pf.lem.mt1.d+d+d.tree.antigoal} forces
+equality in each of the inequalities that were added.}.
+In particular, the inequality
+\[
+\ive{\text{exactly one of } a_i \text{ and } a_{i+1}
+                     \text{ equals } v } \leq 1
+\]
+must be an equality for each $i \in \set{1, 2, \ldots, k}$ (because
+all of these inequalities were used in the derivation of
+\eqref{pf.lem.mt1.d+d+d.tree.antigoal}). In other words, the following
+claim holds:
+\begin{statement}
+\textit{Claim 1:} For each $i \in \set{1, 2, \ldots, k}$, exactly one
+of $a_i$ and $a_{i+1}$ equals $v$.
+\end{statement}
+
+Now, let us assume that $a_1 = v$. Then, Claim 1 (applied to $i=1$)
+shows that exactly one of $a_1$ and $a_2$ equals $v$. Hence, $a_2 \neq
+v$ (since $a_1 = v$). But Claim 2 (applied to $i=2$) shows that
+exactly one of $a_2$ and $a_3$ equals $v$. Hence, $a_3 = v$ (since
+$a_2 \neq v$). We can continue this line of reasoning, thus showing
+that $a_i = v$ for each odd $i \in \set{1, 2, \ldots, k+1}$ and that
+$a_i \neq v$ for each even $i \in \set{1, 2, \ldots, k+1}$.
+In particular, this shows that $a_{k+1} \neq v$ (since $k+1$ is even
+(since $k$ is odd)).
+But this contradicts $a_{k+1} = a_1 = v$.
+
+Thus, we have obtained a contradiction under the assumption that
+$a_1 = v$. But we could similarly have obtained a contradiction under
+the assumption that $a_1 \neq v$ (indeed, the very same argument would
+have worked, except that the roles of ``being equal to $v$'' and
+``being not equal to $v$'' would be interchanged). Thus, we always
+have a contradiction. This completes the proof of
+Lemma~\ref{lem.mt1.d+d+d.tree}.
+\end{proof}
+
+\subsubsection{The generalization derived from the problem}
+
+As already mentioned, Exercise~\ref{exe.mt1.d+d+d} can be obtained
+as a particular case of Theorem~\ref{thm.mt1.d+d+d.gene} for $k = 3$.
+Conversely, we can also prove Theorem~\ref{thm.mt1.d+d+d.gene} using
+a fairly simple induction argument that relies on
+Exercise~\ref{exe.mt1.d+d+d} and Lemma~\ref{lem.mt1.distances-metric}.
+Unlike Sasha Pevzner's proof above, this does not give a new solution
+to Exercise~\ref{exe.mt1.d+d+d}, but might still be of interest.
+
+\begin{proof}[Proof of Theorem~\ref{thm.mt1.d+d+d.gene} using
+Exercise~\ref{exe.mt1.d+d+d} and
+Lemma~\ref{lem.mt1.distances-metric}.]
+Write the graph $G$ in the form $G = \tup{V, E}$.
+Thus, $\verts{G} = V$ and $\edges{G} = E$.
+Set $n = \abs{V}$.
+Also, set $n' = n-1$.
+
+We shall first show that for each $j \in \NN$ satisfying $2j \leq k$,
+we have
+\begin{equation}
+\sum_{i=1}^{2j} d \tup{a_i, a_{i+1}}
+\leq 2j n' - d \tup{a_{2j+1}, a_1} .
+\label{pf.thm.mt1.d+d+d.gene.indproof.1}
+\end{equation}
+
+\begin{proof}[Proof of \eqref{pf.thm.mt1.d+d+d.gene.indproof.1}:]
+We shall prove \eqref{pf.thm.mt1.d+d+d.gene.indproof.1} by induction
+over $j$.
+
+\textit{Induction base:} The equality
+\eqref{pf.thm.mt1.d+d+d.gene.indproof.1} holds for
+$j = 0$\ \ \ \ \footnote{\textit{Proof.} We have
+$d \tup{\underbrace{a_{2\cdot 0+1}}_{= a_1}, a_1}
+= d \tup{a_1, a_1} = 0$
+(by Lemma~\ref{lem.mt1.distances-metric} \textbf{(a)}), so that
+$\underbrace{2 \cdot 0 n'}_{= 0}
+- \underbrace{d \tup{a_1, a_{2\cdot 0+1}}}_{= 0}
+= 0 - 0 = 0$. Now,
+$\sum_{i=1}^{2\cdot 0} d \tup{a_i, a_{i+1}}
+= \tup{\text{empty sum}} = 0
+\leq 0 = 2 \cdot 0 n' - d \tup{a_{2\cdot 0+1}, a_1}$.
+In other words, the equality
+\eqref{pf.thm.mt1.d+d+d.gene.indproof.1} holds for $n = 0$.}.
+Hence, the induction base is complete.
+
+\textit{Induction step:} Fix a positive $J \in \NN$ satisfying
+$2J \leq k$.
+Assume that \eqref{pf.thm.mt1.d+d+d.gene.indproof.1} holds for
+$j = J-1$.
+We must then show that \eqref{pf.thm.mt1.d+d+d.gene.indproof.1} holds
+for $j = J$.
+
+Since $J$ is a positive integer, we have $J-1 \in \NN$. Moreover,
+$2 \tup{J-1} \leq 2J \leq k$. Hence,
+\eqref{pf.thm.mt1.d+d+d.gene.indproof.1} is applicable to $j = J-1$.
+Since we have assumed that \eqref{pf.thm.mt1.d+d+d.gene.indproof.1}
+holds for $j = J-1$, we thus obtain
+\begin{align}
+\sum_{i=1}^{2 \tup{J-1}} d \tup{a_i, a_{i+1}}
+&\leq 2\tup{J-1} n' - d \tup{a_{2\tup{J-1}+1}, a_1} \nonumber \\
+&= 2\tup{J-1} n' - d \tup{a_{2J-1}, a_1}
+\label{pf.thm.mt1.d+d+d.gene.indproof.1.pf.1}
+\end{align}
+(since $2\tup{J-1}+1 = 2J-1$).
+
+Lemma~\ref{lem.mt1.distances-metric} \textbf{(c)} (applied to
+$u = a_{2J-1}$, $v = a_1$ and $w = a_{2J}$) yields
+$d \tup{a_{2J-1}, a_1} + d \tup{a_1, a_{2J}}
+\geq d \tup{a_{2J-1}, a_{2J}}$.
+Hence,
+\[
+d \tup{a_{2J-1}, a_{2J}}
+\leq d \tup{a_{2J-1}, a_1} + d \tup{a_1, a_{2J}} .
+\]
+
+But Exercise~\ref{exe.mt1.d+d+d} (applied to $a = a_{2J}$,
+$b = a_{2J+1}$ and $c = a_1$) yields
+\[
+d \tup{a_{2J+1}, a_1} + d \tup{a_1, a_{2J}} + d \tup{a_{2J}, a_{2J+1}}
+\leq 2 \underbrace{\abs{V}}_{= n} - 2 = 2 n - 2
+= 2 \underbrace{\tup{n-1}}_{= n'} = 2 n' .
+\]
+Subtracting $d \tup{a_{2J+1}, a_1}$ from both sides of this
+inequality, we obtain
+\[
+d \tup{a_1, a_{2J}} + d \tup{a_{2J}, a_{2J+1}}
+\leq 2 n' - d \tup{a_{2J+1}, a_1} .
+\]
+
+Now,
+\begin{align*}
+\sum_{i=1}^{2J} d \tup{a_i, a_{i+1}}
+&= \sum_{i=1}^{2J-2} d \tup{a_i, a_{i+1}}
+        + d \tup{a_{2J-1}, a_{2J}} + d \tup{a_{2J}, a_{2J+1}} \\
+&= \underbrack{\sum_{i=1}^{2 \tup{J-1}} d \tup{a_i, a_{i+1}}}
+              {\leq 2\tup{J-1} n' - d \tup{a_{2J-1}, a_1} \\
+               \text{(by \eqref{pf.thm.mt1.d+d+d.gene.indproof.1.pf.1})}}
+        + \underbrack{d \tup{a_{2J-1}, a_{2J}}}
+                     {\leq d \tup{a_{2J-1}, a_1} + d \tup{a_1, a_{2J}}}
+        + d \tup{a_{2J}, a_{2J+1}} \\
+&\qquad \left(\text{since } 2J-2 = 2 \tup{J-1} \right) \\
+&\leq 2\tup{J-1} n' - d \tup{a_1, a_{2J-1}}
+        + d \tup{a_1, a_{2J-1}} + d \tup{a_1, a_{2J}}
+        + d \tup{a_{2J}, a_{2J+1}} \\
+&\leq 2\tup{J-1} n'
+        + \underbrack{d \tup{a_1, a_{2J}} + d \tup{a_{2J}, a_{2J+1}}}
+                     {\leq 2 n' - d \tup{a_{2J+1}, a_1} } \\
+&\leq \underbrace{2\tup{J-1} n' + 2n'}_{= 2J n'}
+      - d \tup{a_{2J+1}, a_1}
+ = 2J n' - d \tup{a_{2J+1}, a_1} .
+\end{align*}
+In other words, \eqref{pf.thm.mt1.d+d+d.gene.indproof.1} holds
+for $j = J$.
+This completes the induction step.
+Thus, \eqref{pf.thm.mt1.d+d+d.gene.indproof.1} is proven by induction.
+\end{proof}
+
+We know that $k$ is an odd nonnegative integer.
+Hence, there exists some $j \in \NN$ satisfying $k = 2j+1$.
+Consider this $j$.
+From $2j+1 = k$, we obtain $a_{\tup{2j+1}+1} = a_{k+1} = a_1$.
+Also, $2j = k-1$ (since $k = 2j+1$) and
+$n' = \underbrace{n}_{= \abs{V}} - 1
+= \abs{\underbrace{V}_{= \verts{G}}} - 1
+= \abs{\verts{G}} - 1$.
+
+From $k = 2j+1$, we obtain
+\begin{align*}
+\sum_{i=1}^k d \tup{a_i, a_{i+1}}
+&= \sum_{i=1}^{2j+1} d \tup{a_i, a_{i+1}}
+ = \underbrack{\sum_{i=1}^{2j} d \tup{a_i, a_{i+1}}}
+              {\leq 2j n' - d \tup{a_{2j+1}, a_1} \\
+               \text{(by \eqref{pf.thm.mt1.d+d+d.gene.indproof.1})}}
+         + d \tup{a_{2j+1}, \underbrace{a_{\tup{2j+1}+1}}_{= a_1}} \\
+&\leq 2j n' - d \tup{a_{2j+1}, a_1} + d \tup{a_{2j+1}, a_1}
+ = \underbrace{2j}_{= k-1} \underbrace{n'}_{= \abs{\verts{G}} - 1} \\
+&= \tup{k-1} \tup{\abs{\verts{G}} - 1} .
+\end{align*}
+This proves Theorem~\ref{thm.mt1.d+d+d.gene}.
+\end{proof}
+
+\subsection{Exercise \ref{exe.mt1.cyctree}: two steps away from a
+forest}
+
+We prepare for Exercise~\ref{exe.mt1.cyctree} by showing several
+lemmas.
+
+\begin{lemma} \label{lem.mt1.cyctree.H-has-cycle}
+Let $H$ be a multigraph such that
+$\abs{\edges{H}} \geq \abs{\verts{H}}$.
+Assume that $H$ has at least one vertex.
+Then, $H$ contains a cycle.
+\end{lemma}
+
+\begin{proof}[Proof of Lemma~\ref{lem.mt1.cyctree.H-has-cycle}
+(sketched).]
+Assume the contrary. Hence, $H$
+contains no cycle, i.e., is a forest. Therefore, Corollary 20 from
+\href{http://www-users.math.umn.edu/~dgrinber/5707s17/5707lec9.pdf}{lecture 9}
+shows that\footnote{Recall that $b_0 \tup{H}$ denotes the number of
+connected components of $H$. Since $H$ has at least one connected
+component (because $H$ has at least one vertex), we have
+$b_0 \tup{H} > 0$.}
+$\abs{\edges{H}} = \abs{\verts{H}} - b_0 \tup{H} < \abs{\verts{H}}$
+(since $b_0 \tup{H} > 0$), which contradicts
+$\abs{\edges{H}} \geq \abs{\verts{H}}$.
+Hence, our assumption was false, qed.
+\end{proof}
+
+In the following, we shall use the Iverson bracket notation.
+In other words, for any logical statement $\mathcal{A}$, we set
+$\ive{\mathcal{A}} =
+\begin{cases}
+1, & \text{if }\mathcal{A}\text{ is true};\\
+0, & \text{if }\mathcal{A}\text{ is false}
+\end{cases}$.
+
+\begin{verlong}
+\begin{lemma} \label{lem.mt1.cyctree.iverson}
+Let $G = \tup{V, E, \phi}$ be a multigraph. Then,
+$\deg v = \sum_{e \in E} \ive{v \in \phi\tup{e}}$.
+\end{lemma}
+
+\begin{proof}[Proof of Lemma~\ref{lem.mt1.cyctree.iverson}.]
+Recall that $\deg v$ is the number of all edges of $G$ containing $v$.
+In other words,
+$\deg v = \tup{\text{the number of all } e \in E \text{ such that }
+                v \in \phi\tup{e}}$.
+But
+\begin{align*}
+\sum_{e \in E} \ive{v \in \phi\tup{e}}
+&= \sum_{\substack{e \in E; \\ v \in \phi\tup{e}}}
+            \underbrack{\ive{v \in \phi\tup{e}}}
+                       {= 1 \\ \text{(since } v \in \phi\tup{e}
+                            \text{)}}
+ + \sum_{\substack{e \in E; \\ \text{not } v \in \phi\tup{e}}}
+            \underbrack{\ive{v \in \phi\tup{e}}}
+                       {= 0 \\ \text{(since we do not have }
+                            v \in \phi\tup{e} \text{)}} \\
+&\qquad \left(\text{since each } e \in E \text{ either satisfies }
+                v \in \phi\tup{e} \text{ or not } \right) \\
+&= \sum_{\substack{e \in E; \\ v \in \phi\tup{e}}} 1
+ + \underbrack{\sum_{\substack{e \in E; \\ \text{not }
+                            v \in \phi\tup{e}}} 0}
+              {= 0}
+=  \sum_{\substack{e \in E; \\ v \in \phi\tup{e}}} 1 \\
+&= \tup{\text{the number of all } e \in E \text{ such that }
+                v \in \phi\tup{e}} \cdot 1 \\
+&= \tup{\text{the number of all } e \in E \text{ such that }
+                v \in \phi\tup{e}}
+= \deg v.
+\end{align*}
+This proves Lemma~\ref{lem.mt1.cyctree.iverson}.
+\end{proof}
+\end{verlong}
+
+Let us introduce one more notation:
+
+\begin{itemize}
+\item If $A$ and $B$ are two sets, then $A \bigtriangleup B$ shall
+denote the
+\href{https://en.wikipedia.org/wiki/Symmetric_difference}{\textit{symmetric difference}}
+of $A$ and $B$; this is defined as the
+set $\tup{A \cup B} \setminus \tup{A \cap B}
+= \tup{A \setminus B} \cup \tup{B \setminus A}$. In other words,
+$A \bigtriangleup B$ is the set of all elements that belong to
+\textbf{exactly one} of $A$ and $B$. (This is the operation on sets
+that corresponds to
+\href{https://en.wikipedia.org/wiki/Exclusive_or}{the logical operation XOR}.)
+\end{itemize}
+
+\begin{lemma} \label{lem.mt1.cyctree.AsymB}
+Let $G = \tup{V, E, \phi}$ be a multigraph. Let $A$ and $B$ be two
+subsets of $E$. Let $v \in V$. Then,
+\[
+\deg_{\tup{V, A \bigtriangleup B, \phi\mid_{A \bigtriangleup B}}} v
+= \deg_{\tup{V, A, \phi\mid_A}} v
+  + \deg_{\tup{V, B, \phi\mid_B}} v
+  - 2 \deg_{\tup{V, A \cap B, \phi\mid_{A \cap B}}} v.
+\]
+\end{lemma}
+
+\begin{proof}[Proof of Lemma~\ref{lem.mt1.cyctree.AsymB}.]
+Each edge $e \in E$ satisfies
+\begin{equation}
+\ive{e \in A \bigtriangleup B}
+= \ive{e \in A} + \ive{e \in B} - 2 \ive{e \in A \cap B}
+\label{pf.lem.mt1.cyctree.AsymB.1}
+\end{equation}
+\footnote{\textit{Proof of \eqref{pf.lem.mt1.cyctree.AsymB.1}.}
+Let $e \in E$. We must prove the equality
+\eqref{pf.lem.mt1.cyctree.AsymB.1}.
+We are in one of the following four cases:
+\begin{itemize}
+\item \textit{Case 1:} We have $e \in A$ and $e \in B$.
+\item \textit{Case 2:} We have $e \in A$ but not $e \in B$.
+\item \textit{Case 3:} We have $e \in B$ but not $e \in A$.
+\item \textit{Case 4:} We have neither $e \in A$ nor $e \in B$.
+\end{itemize}
+Let us prove \eqref{pf.lem.mt1.cyctree.AsymB.1} in Case 1. In this
+case, we have $e \in A$ and $e \in B$. Thus, $e \in A \cap B$, so
+that $e \notin \tup{A \cup B} \setminus \tup{A \cap B}
+= A \bigtriangleup B$. Thus, $\ive{e \in A \bigtriangleup B} = 0$.
+Also, $\ive{e \in A \cap B} = 1$ (since $e \in A \cap B$) and
+$\ive{e \in A} = 1$ (since $e \in A$) and $\ive{e \in B} = 1$ (since
+$e \in B$). Thus,
+\[
+\underbrace{\ive{e \in A}}_{= 1}
+ + \underbrace{\ive{e \in B}}_{= 1}
+ - 2 \underbrace{\ive{e \in A \cap B}}_{= 1}
+= 1 + 1 - 2 \cdot 1 = 0 = \ive{e \in A \bigtriangleup B} .
+\]
+Hence, \eqref{pf.lem.mt1.cyctree.AsymB.1} is proven in Case 1.
+Similarly, \eqref{pf.lem.mt1.cyctree.AsymB.1} can be proven in Case 2,
+in Case 3, and in Case 4. Therefore,
+\eqref{pf.lem.mt1.cyctree.AsymB.1} always holds. This completes the
+proof of \eqref{pf.lem.mt1.cyctree.AsymB.1}.}.
+
+But for each subset $F$ of $E$, we have
+\begin{equation}
+\deg_{\tup{V, F, \phi\mid_F}} v
+= \sum_{\substack{e \in E;\ v \in \phi\tup{e}}} \ive{e \in F}
+\label{pf.lem.mt1.cyctree.AsymB.2}
+\end{equation}
+\footnote{\textit{Proof of \eqref{pf.lem.mt1.cyctree.AsymB.2}.}
+Let $F$ be a subset of $E$.
+The definition of $\deg_{\tup{V, F, \phi\mid_F}} v$ shows that
+$\deg_{\tup{V, F, \phi\mid_F}} v$ is the number of edges of the
+multigraph $\tup{V, F, \phi\mid_F}$ that contain $v$. Since the edges
+of the multigraph $\tup{V, F, \phi\mid_F}$ are the elements of $F$,
+this rewrites as follows:
+$\deg_{\tup{V, F, \phi\mid_F}} v$ is the number of elements of $F$
+that contain $v$. In other words,
+$\deg_{\tup{V, F, \phi\mid_F}} v$ is the number of all $e \in F$ that
+satisfy $v \in \tup{\phi\mid_F}\tup{e}$.
+In other words,
+$\deg_{\tup{V, F, \phi\mid_F}} v$ is the number of all $e \in F$ that
+satisfy $v \in \phi\tup{e}$ (because obviously, we have
+$\tup{\phi\mid_F}\tup{e} = \phi\tup{e}$ for each $e \in F$).
+In other words,
+\begin{equation}
+\deg_{\tup{V, F, \phi\mid_F}} v
+= \tup{\text{the number of all } e \in F \text{ that satisfy }
+          v \in \phi\tup{e}} .
+\label{pf.lem.mt1.cyctree.AsymB.2.pf.1}
+\end{equation}
+But
+\begin{align*}
+\sum_{\substack{e \in E;\ v \in \phi\tup{e}}} \ive{e \in F}
+&= \sum_{\substack{e \in E;\ v \in \phi\tup{e}; \  e \in F}}
+            \underbrack{\ive{e \in F}}
+                       {= 1 \\ \text{(since } e \in F \text{)}}
+ + \sum_{\substack{e \in E;\ v \in \phi\tup{e};
+                \ \text{not } e \in F}}
+            \underbrack{\ive{e \in F}}
+                       {= 0 \\ \text{(since we do not have }
+                                e \in F \text{)}} \\\
+&\qquad \left(\text{since each } e \in E \text{ either satisfies }
+                    e \in F \text{ or does not}\right) \\
+&= \sum_{\substack{e \in E;\ v \in \phi\tup{e}; \  e \in F}} 1
+ + \underbrack{\sum_{\substack{e \in E;\ v \in \phi\tup{e};
+                        \ \text{not } e \in F}} 0}
+              {= 0}
+\\
+&= \sum_{\substack{e \in E;\ v \in \phi\tup{e}; \  e \in F}} 1 \\
+&= \tup{\text{the number of all } e \in E \text{ that satisfy }
+          v \in \phi\tup{e} \text{ and } e \in F} \cdot 1 \\
+&= \tup{\text{the number of all } e \in E \text{ that satisfy }
+          v \in \phi\tup{e} \text{ and } e \in F} \\
+&= \tup{\text{the number of all } e \in F \text{ that satisfy }
+          v \in \phi\tup{e}}
+\end{align*}
+(because the $e \in E$ that satisfy $e \in F$ are precisely the
+$e \in F$). Comparing this with
+\eqref{pf.lem.mt1.cyctree.AsymB.2.pf.1}, we obtain
+\[
+\deg_{\tup{V, F, \phi\mid_F}} v
+= \sum_{\substack{e \in E;\ v \in \phi\tup{e}}} \ive{e \in F} .
+\]
+This proves \eqref{pf.lem.mt1.cyctree.AsymB.2}.}.
+Applying this to $F = A \bigtriangleup B$, we obtain
+\begin{align*}
+\deg_{\tup{V, A \bigtriangleup B, \phi\mid_{A \bigtriangleup B}}} v
+&= \sum_{\substack{e \in E;\ v \in \phi\tup{e}}}
+         \underbrack{\ive{e \in A \bigtriangleup B}}
+                    {= \ive{e \in A} + \ive{e \in B}
+                         - 2 \ive{e \in A \cap B} \\
+                     \text{(by \eqref{pf.lem.mt1.cyctree.AsymB.1})}}
+         \\
+&= \sum_{\substack{e \in E;\ v \in \phi\tup{e}}}
+         \tup{\ive{e \in A} + \ive{e \in B} - 2 \ive{e \in A \cap B}}
+         \\
+&= \sum_{\substack{e \in E;\ v \in \phi\tup{e}}} \ive{e \in A}
+   + \sum_{\substack{e \in E;\ v \in \phi\tup{e}}} \ive{e \in B}
+   - 2 \sum_{\substack{e \in E;\ v \in \phi\tup{e}}}
+                \ive{e \in A \cap B} .
+\end{align*}
+Comparing this with
+\begin{align*}
+&
+\underbrack{\deg_{\tup{V, A, \phi\mid_A}} v}
+           {= \sum_{\substack{e \in E;\ v \in \phi\tup{e}}}
+                    \ive{e \in A} \\
+            \text{(by \eqref{pf.lem.mt1.cyctree.AsymB.2}, applied to }
+            F = A \text{)}}
++
+\underbrack{\deg_{\tup{V, B, \phi\mid_B}} v}
+           {= \sum_{\substack{e \in E;\ v \in \phi\tup{e}}}
+                    \ive{e \in B} \\
+            \text{(by \eqref{pf.lem.mt1.cyctree.AsymB.2}, applied to }
+            F = B \text{)}}
+-
+2 \underbrack{\deg_{\tup{V, A \cap B, \phi\mid_{A \cap B}}} v}
+             {= \sum_{\substack{e \in E;\ v \in \phi\tup{e}}}
+                      \ive{e \in A \cap B} \\
+              \text{(by \eqref{pf.lem.mt1.cyctree.AsymB.2}, applied to }
+              F = A \cap B \text{)}} \\
+&= \sum_{\substack{e \in E;\ v \in \phi\tup{e}}} \ive{e \in A}
+   + \sum_{\substack{e \in E;\ v \in \phi\tup{e}}} \ive{e \in B}
+   - 2 \sum_{\substack{e \in E;\ v \in \phi\tup{e}}}
+                \ive{e \in A \cap B} ,
+\end{align*}
+we obtain
+\[
+\deg_{\tup{V, A \bigtriangleup B, \phi\mid_{A \bigtriangleup B}}} v
+= \deg_{\tup{V, A, \phi\mid_A}} v
+  + \deg_{\tup{V, B, \phi\mid_B}} v
+  - 2 \deg_{\tup{V, A \cap B, \phi\mid_{A \cap B}}} v.
+\]
+This proves Lemma~\ref{lem.mt1.cyctree.AsymB}.
+\end{proof}
+
+\begin{lemma} \label{lem.mt1.cyctree.two-cycles}
+Let $G = \tup{V, E, \phi}$ be a multigraph. Let $\mathbf{a}$ and
+$\mathbf{b}$ be two cycles of $G$. Let $A$ be the set of the edges
+of $\mathbf{a}$. Let $B$ be the set of the edges of $\mathbf{b}$.
+
+\textbf{(a)} For each vertex $v \in V$, the number
+$\deg_{\tup{V, A \bigtriangleup B, \phi\mid_{A \bigtriangleup B}}} v$
+is even.
+
+\textbf{(b)} If $A \neq B$, then the multigraph
+$\tup{V, A \bigtriangleup B, \phi\mid_{A \bigtriangleup B}}$ has a
+cycle.
+
+\textbf{(c)} Let $\mathbf{c}$ be a cycle of the multigraph
+$\tup{V, A \bigtriangleup B, \phi\mid_{A \bigtriangleup B}}$. Then,
+at least one of the cycles $\mathbf{a}$, $\mathbf{b}$ and
+$\mathbf{c}$ has length $\leq \dfrac{2 \abs{E}}{3}$.
+\end{lemma}
+
+\begin{proof}[Proof of Lemma~\ref{lem.mt1.cyctree.two-cycles}.]
+\textbf{(a)} Let $v \in V$. Then,
+$\deg_{\tup{V, A, \phi\mid_A}} v \equiv 0 \mod 2$
+\ \ \ \ \footnote{\textit{Proof.} We are in one of the following two
+cases:
+
+\begin{itemize}
+\item \textit{Case 1:} The vertex $v$ does not lie on the cycle
+        $\mathbf{a}$.
+\item \textit{Case 2:} The vertex $v$ lies on the cycle $\mathbf{a}$.
+\end{itemize}
+
+Let us consider Case 1 first. In this case, the vertex $v$ does not
+lie on the cycle $\mathbf{a}$. Hence, no edge of $\mathbf{a}$ contains
+$v$. In other words, no edge in $A$ contains $v$ (since the edges in
+$A$ are precisely the edges of $\mathbf{a}$). In other words,
+$\deg_{\tup{V, A, \phi\mid_A}} v = 0$. Hence,
+$\deg_{\tup{V, A, \phi\mid_A}} v = 0 \equiv 0 \mod 2$. Thus,
+$\deg_{\tup{V, A, \phi\mid_A}} v \equiv 0 \mod 2$ is proven in Case 1.
+
+Let us next consider Case 2. In this case, the vertex $v$ lies on the
+cycle $\mathbf{a}$. Hence, exactly two edges of $\mathbf{a}$ contain
+$v$ (because a vertex on a cycle is entered exactly once by the cycle,
+and exited exactly once by the cycle). These two edges are distinct
+(since the edges of a cycle are always distinct). Thus, exactly two
+distinct edges of $\mathbf{a}$ contain $v$. In other words, exactly
+two edges in $A$ contain $v$ (since the edges in $A$ are precisely
+the edges of $\mathbf{a}$). In other words,
+$\deg_{\tup{V, A, \phi\mid_A}} v = 2$. Hence,
+$\deg_{\tup{V, A, \phi\mid_A}} v = 2 \equiv 0 \mod 2$. Thus,
+$\deg_{\tup{V, A, \phi\mid_A}} v \equiv 0 \mod 2$ is proven in Case 2.
+
+We have now proven
+$\deg_{\tup{V, A, \phi\mid_A}} v \equiv 0 \mod 2$ in each of the two
+Cases 1 and 2. Hence,
+$\deg_{\tup{V, A, \phi\mid_A}} v \equiv 0 \mod 2$ always holds.}.
+Similarly,
+$\deg_{\tup{V, B, \phi\mid_B}} v \equiv 0 \mod 2$.
+Now, Lemma~\ref{lem.mt1.cyctree.AsymB} yields
+\begin{align*}
+\deg_{\tup{V, A \bigtriangleup B, \phi\mid_{A \bigtriangleup B}}} v
+&= \underbrace{\deg_{\tup{V, A, \phi\mid_A}} v}_{\equiv 0 \mod 2}
+   + \underbrace{\deg_{\tup{V, B, \phi\mid_B}} v}_{\equiv 0 \mod 2}
+   - \underbrace{2}_{\equiv 0 \mod 2}
+        \deg_{\tup{V, A \cap B, \phi\mid_{A \cap B}}} v \\
+&\equiv 0 + 0 - 0 = 0 \mod 2 .
+\end{align*}
+In other words, the number
+$\deg_{\tup{V, A \bigtriangleup B, \phi\mid_{A \bigtriangleup B}}} v$
+is even.
+This proves Lemma~\ref{lem.mt1.cyctree.two-cycles} \textbf{(a)}.
+
+\textbf{(b)} It is well-known that if $X$ and $Y$ are two sets
+satisfying $X \neq Y$, then $X \bigtriangleup Y \neq \varnothing$.
+Applying this to $X = A$ and $Y = B$, we obtain
+$A \bigtriangleup B \neq \varnothing$. Hence, the multigraph
+$\tup{V, A \bigtriangleup B, \phi\mid_{A \bigtriangleup B}}$ has at
+least one edge. Furthermore, each vertex of this multigraph has even
+degree (because of
+Lemma~\ref{lem.mt1.cyctree.two-cycles} \textbf{(a)}). Thus,
+Exercise~\ref{exe.mt1.deg-cycle-2} (applied to
+$\tup{V, A \bigtriangleup B, \phi\mid_{A \bigtriangleup B}}$ instead
+of $G$) shows that this multigraph
+$\tup{V, A \bigtriangleup B, \phi\mid_{A \bigtriangleup B}}$ has a
+cycle.
+This proves Lemma~\ref{lem.mt1.cyctree.two-cycles} \textbf{(b)}.
+
+\textbf{(c)} Assume the contrary.
+Thus, none of the cycles $\mathbf{a}$, $\mathbf{b}$ and
+$\mathbf{c}$ has length $\leq \dfrac{2 \abs{E}}{3}$. In other words, each
+of the cycles $\mathbf{a}$, $\mathbf{b}$ and
+$\mathbf{c}$ has length $> \dfrac{2 \abs{E}}{3}$.
+
+Let $C$ be the set of edges of $\mathbf{c}$. Then,
+$C \subseteq A \bigtriangleup B$ (since $\mathbf{c}$ is a cycle
+of the multigraph
+$\tup{V, A \bigtriangleup B, \phi\mid_{A \bigtriangleup B}}$). Hence,
+\begin{align*}
+\abs{C}
+&\leq \abs{\underbrack{A \bigtriangleup B}
+                      {= \tup{A \cup B} \setminus \tup{A \cap B}}}
+= \abs{\tup{A \cup B} \setminus \tup{A \cap B}} \\
+&= \abs{A \cup B} - \underbrack{\abs{A \cap B}}
+                              {= \abs{A} + \abs{B} - \abs{A \cup B}}
+\qquad
+\left(\text{since } A \cap B \subseteq A \subseteq A \cup B \right) \\
+&= \abs{A \cup B} - \tup{\abs{A} + \abs{B} - \abs{A \cup B}}
+= 2 \abs{\underbrace{A \cup B}_{\subseteq E}} - \abs{A} - \abs{B}
+\leq 2 \abs{E} - \abs{A} - \abs{B} .
+\end{align*}
+Adding $\abs{A} + \abs{B}$ to both sides of this inequality, we obtain
+$\abs{A} + \abs{B} + \abs{C} \leq 2 \abs{E}$.
+
+But
+\begin{align*}
+\abs{A}
+&=
+\tup{\text{the number of all elements of } A }
+=
+\tup{\text{the number of all edges of } \mathbf{a}} \\
+& \qquad
+\left(\text{since the elements of } A \text{ are the edges of }
+        \mathbf{a}\text{, and since these edges are all distinct}
+\right) \\
+&= \tup{\text{the length of } \mathbf{a}}
+> \dfrac{2 \abs{E}}{3}
+\end{align*}
+(since the cycle $\mathbf{a}$ has length $> \dfrac{2 \abs{E}}{3}$).
+Similarly, $\abs{B} > \dfrac{2 \abs{E}}{3}$ and
+$\abs{C} > \dfrac{2 \abs{E}}{3}$. Adding these three inequalities
+together, we obtain
+\[
+\abs{A} + \abs{B} + \abs{C}
+> \dfrac{2 \abs{E}}{3} + \dfrac{2 \abs{E}}{3}
+        + \dfrac{2 \abs{E}}{3}
+= 2 \abs{E} .
+\]
+This contradicts $\abs{A} + \abs{B} + \abs{C} \leq 2 \abs{E}$.
+This contradiction shows that our assumption was wrong. Hence,
+Lemma~\ref{lem.mt1.cyctree.two-cycles} \textbf{(c)} is proven.
+\end{proof}
+
+\begin{lemma} \label{lem.mt1.cyctree.for-multigraphs}
+Let $G = \tup{V, E, \phi}$ be a multigraph such that
+$\abs{E} > \abs{V}$. Let $n = \abs{V}$. Then,
+$G$ has a cycle of length $\leq \dfrac{2n+2}{3}$.
+\end{lemma}
+
+\begin{proof}[Proof of Lemma~\ref{lem.mt1.cyctree.for-multigraphs}
+(sketched).]
+Recall that $\abs{E} > \abs{V}$. Thus,
+$\abs{E} \geq \abs{V} + 1$. Hence, we can WLOG assume that
+$\abs{E} = \abs{V} + 1$ (since otherwise, we can keep deleting edges
+from $G$ until $\abs{E} = \abs{V} + 1$ holds; if we can find a cycle
+of length $\leq \dfrac{2n+2}{3}$ after that, then we clearly also get
+such a cycle in the original graph).
+
+Thus, $\abs{E} = \underbrack{\abs{V}}{= n} + 1 = n+1$.
+
+The multigraph $G$ has at least one edge (since $\abs{E} > \abs{V}
+\geq 0$), and therefore has at least one vertex. Also,
+$\abs{\edges{G}} = \abs{E} \geq \abs{V} = \abs{\verts{G}}$.
+Hence, Lemma~\ref{lem.mt1.cyctree.H-has-cycle}
+(applied to $H = G$) yields that $G$ contains a
+cycle. Fix such a cycle, and denote it by $\mathbf{a}$.
+Fix an edge $a$ of $\mathbf{a}$.
+
+Removing the edge $a$ from $G$ yields a new multigraph $G'$, which
+has one fewer edge than $G$. Thus, this new graph $G'$ satisfies
+$\abs{\edges{G'}} = \abs{E} - 1 \geq \abs{V}$ (since $\abs{E} >
+\abs{V}$). This rewrites as
+$\abs{\edges{G'}} \geq \abs{\verts{G'}}$
+(since $V = \verts{G'}$).
+Consequently, Lemma~\ref{lem.mt1.cyctree.H-has-cycle}
+(applied to $H = G'$) yields that $G'$
+contains a cycle. Fix such a cycle, and denote it by $\mathbf{b}$.
+Of course, $\mathbf{b}$ is a cycle of $G$ as well (since $G'$ is a
+subgraph of $G$).
+
+Let $A$ be the set of the edges of $\mathbf{a}$, and let $B$ be the
+set of edges of $\mathbf{b}$. Then, $A \neq B$ (since
+$a \in A$ but $a \notin B$). Hence,
+Lemma~\ref{lem.mt1.cyctree.two-cycles} \textbf{(b)} shows that the
+multigraph
+$\tup{V, A \bigtriangleup B, \phi\mid_{A \bigtriangleup B}}$
+has a cycle. Fix such a
+cycle, and denote it by $\mathbf{c}$. Clearly, $\mathbf{c}$ is a cycle
+of $G$ (since
+$\tup{V, A \bigtriangleup B, \phi\mid_{A \bigtriangleup B}}$ is a
+subgraph of $G$).
+Lemma~\ref{lem.mt1.cyctree.two-cycles} \textbf{(c)} shows that
+at least one of the cycles $\mathbf{a}$, $\mathbf{b}$ and
+$\mathbf{c}$ has length $\leq \dfrac{2 \abs{E}}{3}$.
+Since $2 \underbrack{\abs{E}}{= n+1} = 2 \tup{n+1} = 2n+2$, this
+rewrites as follows: At least
+one of the cycles $\mathbf{a}$, $\mathbf{b}$ and
+$\mathbf{c}$ has length $\leq \dfrac{2n + 2}{3}$. Hence, $G$ has a
+cycle of length $\leq \dfrac{2n + 2}{3}$ (since all of
+$\mathbf{a}$, $\mathbf{b}$ and $\mathbf{c}$ are cycles of $G$).
+This proves Lemma~\ref{lem.mt1.cyctree.for-multigraphs}.
+\end{proof}
+
+\begin{exercise} \label{exe.mt1.cyctree}
+Let $G = \tup{V, E}$ be a simple graph such that $\abs{E} > \abs{V}$.
+Prove that $G$ has a cycle of length $\leq \dfrac{2n+2}{3}$,
+where $n = \abs{V}$.
+\end{exercise}
+
+\begin{proof}[Solution sketch to Exercise~\ref{exe.mt1.cyctree}.]
+Recall that each simple graph can be viewed as a multigraph in an
+obvious way. Thus, we can view $G$ as a multigraph this way.
+Hence, Exercise~\ref{exe.mt1.cyctree} follows immediately from
+Lemma~\ref{lem.mt1.cyctree.for-multigraphs}.
+\end{proof}
+
+\begin{noncompile}
+OLD version of the solution:
+
+\begin{proof}[Hints to Exercise~\ref{exe.mt1.cyctree}.]
+Recall the following fact:
+\begin{statement}
+\textit{Fact 1:} If $H$ is a multigraph with
+$\abs{\edges{H}} \geq \abs{\verts{H}}$ and having at least one vertex,
+then $H$ contains a cycle.
+\end{statement}
+(One way to prove Fact 1 is to assume the contrary. Hence, $H$
+contains no cycle, i.e., is a forest. But then, Corollary 20 from
+\href{http://www-users.math.umn.edu/~dgrinber/5707s17/5707lec9.pdf}{lecture 9}
+shows that
+$\abs{\edges{H}} = \abs{\verts{H}} - b_0 \tup{H} < \abs{\verts{H}}$
+(since $b_0 \tup{H} > 0$), which contradicts
+$\abs{\edges{H}} \geq \abs{\verts{H}}$.)
+
+Recall that $\abs{E} > \abs{V}$. Thus,
+$\abs{E} \geq \abs{V} + 1$. Hence, we can WLOG assume that
+$\abs{E} = \abs{V} + 1$ (since otherwise, we can keep deleting edges
+from $G$ until $\abs{E} = \abs{V} + 1$ holds; if we can find a cycle
+of length $\leq \dfrac{2n+2}{3}$ after that, then we clearly also get
+such a cycle in the original graph).
+
+Now, $G$ clearly has at least one vertex (since $\abs{E} > \abs{V}
+\geq 0$) and satisfies
+$\abs{\edges{G}} = \abs{E} \geq \abs{V} = \abs{\verts{G}}$.
+Hence, Fact 1 (applied to $H = G$) yields that $G$ contains a
+cycle. Fix such a cycle, and denote it by $\mathbf{a}$.
+Fix an edge $a$ of $\mathbf{a}$.
+
+Removing the edge $a$ from $G$ yields a new simple graph $G'$, which
+has one fewer edge than $G$. Thus, this new graph $G'$ satisfies
+$\abs{\edges{G'}} = \abs{E} - 1 \geq \abs{V}$ (since $\abs{E} >
+\abs{V}$). This rewrites as
+$\abs{\edges{G'}} \geq \abs{\verts{G'}}$.
+Consequently, Fact 1 (applied to $H = G'$) yields that $G'$
+contains a cycle. Fix such a cycle, and denote it by $\mathbf{b}$.
+Of course, $\mathbf{b}$ is a cycle of $G$ as well (since $G'$ is a
+subgraph of $G$).
+
+If $X$ and $Y$ are two sets, then $X \bigtriangleup Y$ denotes the
+\href{https://en.wikipedia.org/wiki/Symmetric_difference}{\textit{symmetric difference}}
+of $X$ and $Y$; this is defined as the
+set $\tup{X \cup Y} \setminus \tup{X \cap Y}
+= \tup{X \setminus Y} \cup \tup{Y \setminus X}$. In other words,
+$X \bigtriangleup Y$ is the set of all elements that belong to
+\textbf{exactly one} of $X$ and $Y$. (This is the operation on sets
+that corresponds to
+\href{https://en.wikipedia.org/wiki/Exclusive_or}{the logical operation XOR}.)
+
+Let $A$ be the set of the edges of $\mathbf{a}$, and let $B$ be the
+set of edges of $\mathbf{b}$. Then, $a \in A \bigtriangleup B$ (since
+$a \in A$ but $a \notin B$). Hence, the graph
+$\tup{V, A \bigtriangleup B}$ has at least one edge (namely, $a$).
+
+Moreover, each vertex of this graph
+$\tup{V, A \bigtriangleup B}$ has even degree. (In fact, the degree
+of a vertex $v$ of this graph can be computed as follows: Start with
+$0$. Then, add $2$ if $v$ lies on the cycle $\mathbf{a}$. Then, add
+$2$ if $v$ lies on the cycle $\mathbf{b}$. Then, subtract $2$ times
+the number of edges that contain $v$ that belong to both cycles
+$\mathbf{a}$ and $\mathbf{b}$. Clearly, the result is an even
+integer.)
+
+Hence, Exercise~\ref{exe.mt1.deg-cycle-2} (applied to
+$\tup{V, A \bigtriangleup B}$ instead of $G$) shows that the graph
+$\tup{V, A \bigtriangleup B}$ has a cycle. Fix such a cycle, and
+denote it by $\mathbf{c}$. Clearly, $\mathbf{c}$ is a cycle of $G$
+(since $\tup{V, A \bigtriangleup B}$ is a subgraph of $G$). Let $C$
+be the set of edges of $\mathbf{c}$.
+
+We have $C \subseteq A \bigtriangleup B$. Hence, no edge can belong
+to all three sets $A$, $B$ and $C$ at the same time (because if it
+belonged to $A$ and $B$, then it would not belong to
+$A \bigtriangleup B$, and therefore would not belong to $C$ either,
+since $C \subseteq A \bigtriangleup B$).
+
+Hence,
+$\abs{A} + \abs{B} + \abs{C} \leq 2 \abs{A \cup B \cup C}$
+\ \ \ \ \footnote{\textit{Proof.} The sum
+$\abs{A} + \abs{B} + \abs{C}$ counts the edges lying in
+$A \cup B \cup C$, but it counts some of them twice and some thrice:
+Namely, an edge is counted thrice if it belongs to all three sets
+$A$, $B$ and $C$ at the same time;
+otherwise, it is counted at most twice. Since no edge can belong to
+all three sets $A$, $B$ and $C$ at the same time, we realize that no
+edge is counted thrice. Hence, each edge is counted at most twice.
+Thus, the total sum $\abs{A} + \abs{B} + \abs{C}$ is at most
+$2 \abs{A \cup B \cup C}$. Qed.}. Therefore,
+\[
+\abs{A} + \abs{B} + \abs{C}
+\leq 2 \abs{\underbrace{A \cup B \cup C}_{\subseteq E}}
+\leq 2 \underbrace{\abs{E}}_{= \abs{V} + 1}
+= 2 \tup{\underbrace{\abs{V}}_{= n} + 1}
+= 2 \tup{n+1} = 2n+2.
+\]
+
+Now, let us assume (for the sake of contradiction) that
+$G$ has no cycle of length $\leq \dfrac{2n+2}{3}$. Hence, each cycle
+of $G$ has length $> \dfrac{2n+2}{3}$. In particular, $\mathbf{a}$
+has length $> \dfrac{2n+2}{3}$.
+
+But $A$ is the set of the edges of the cycle $\mathbf{a}$. Hence, the
+length of $\mathbf{a}$ is $\abs{A}$. Thus, $\abs{A} > \dfrac{2n+2}{3}$
+(since $\mathbf{a}$ has length $> \dfrac{2n+2}{3}$). Similarly,
+$\abs{B} > \dfrac{2n+2}{3}$ and $\abs{C} > \dfrac{2n+2}{3}$. Adding
+these three inequalities together, we obtain
+\[
+\abs{A} + \abs{B} + \abs{C}
+> \dfrac{2n+2}{3} + \dfrac{2n+2}{3} + \dfrac{2n+2}{3}
+= 2n+2 .
+\]
+This contradicts $\abs{A} + \abs{B} + \abs{C} \leq 2n+2$.
+This contradiction proves that our assumption was false, qed.
+\end{noncompile}
+
+[\textit{Remarks:}
+
+\begin{itemize}
+\item A statement fairly close to
+      Exercise~\ref{exe.mt1.cyctree} appears in
+      \cite[Lemma 6]{BoCaDu13}.
+
+\item The bound $\dfrac{2n+2}{3}$ cannot be improved.
+      For a graph $G$ which achieves this bound, see
+      Exercise 2 \textbf{(c)} on
+      \href{http://www-users.math.umn.edu/~dgrinber/5707s17/hw3.pdf}{homework set 3}.
+      A slight modification of this construction allows us to
+      find a graph $G$ with $n$ vertices achieving the bound
+      $\floor{\dfrac{2n+2}{3}}$ for each $n > 3$.
+
+\item We have generalized Exercise~\ref{exe.mt1.cyctree} to
+      Lemma~\ref{lem.mt1.cyctree.for-multigraphs} by replacing
+      the simple graph $G$ by a multigraph. However, this
+      generalization does not add any significant new power to
+      the statement, because each multigraph with no two
+      parallel edges (= two distinct edges $e_1$ and $e_2$
+      satisfying $\phi\tup{e_1} = \phi\tup{e_2}$) can be
+      regarded as a simple graph (as long as we are willing to
+      forget the names of the edges, which in our case is
+      harmless), whereas Lemma~\ref{lem.mt1.cyctree.for-multigraphs}
+      holds obviously for a multigraph with two parallel edges
+      (in fact, two parallel edges form a cycle of length $2$).
+      Nevertheless, I find the generalization worth stating,
+      since it appears to me that the setting of multigraphs
+      is more natural for this exercise.
+
+\item Given two integers $k \geq 0$ and $n > 1$, we can
+      define $\rho\tup{n, k}$ to be the smallest integer such
+      that each multigraph $G$ satisfying
+      $\abs{\edges{G}} \geq \abs{\verts{G}} + k$ and
+      $\abs{\verts{G}} = n$ must have a cycle of length
+      $\leq \rho\tup{n, k}$. Can we compute this
+      $\rho\tup{n, k}$, or at least find a good upper bound on
+      it? From Lemma~\ref{lem.mt1.cyctree.H-has-cycle} (and the
+      example of the cycle graph $C_n$), we can easily obtain
+      $\rho\tup{n, 0} = n$. From
+      Lemma~\ref{lem.mt1.cyctree.for-multigraphs} (and an
+      example of a graph $G$ achieving the bound), we obtain
+      $\rho\tup{n, 1} = \floor{\dfrac{2n+2}{3}}$ for each
+      $n > 3$. What can we say about $\rho\tup{n, 2}$ ?
+      The notion of
+      \href{http://www.win.tue.nl/~aeb/drg/graphs/cages/cages.html}{cages}
+      seems relevant (even though not directly applicable).
+\end{itemize}
+]
+
+\begin{thebibliography}{999999}
+\bibitem[BoCaDu13]{BoCaDu13}
+Prosenjit Bose, Paz Carmi, Stephane Durocher,
+\textit{Bounding the locality of distributed routing
+algorithms},
+Distrib. Comput. (2013) 26, pp. 39--58.
+\newline A preprint can be found at
+\url{https://pdfs.semanticscholar.org/424b/649b86c848cde7072c4a3500ecb40119e442.pdf}
+\end{thebibliography}
+
+
+\end{document}

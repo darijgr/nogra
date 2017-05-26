@@ -1,0 +1,495 @@
+\documentclass[numbers=enddot,12pt,final,onecolumn,notitlepage]{scrartcl}%
+\usepackage[headsepline,footsepline,manualmark]{scrlayer-scrpage}
+\usepackage[all,cmtip]{xy}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{framed}
+\usepackage{comment}
+\usepackage{color}
+\usepackage{hyperref}
+\usepackage{ifthen}
+\usepackage[sc]{mathpazo}
+\usepackage[T1]{fontenc}
+\usepackage{needspace}
+\usepackage{tabls}
+%TCIDATA{OutputFilter=latex2.dll}
+%TCIDATA{Version=5.50.0.2960}
+%TCIDATA{LastRevised=Friday, September 16, 2016 20:39:00}
+%TCIDATA{SuppressPackageManagement}
+%TCIDATA{<META NAME="GraphicsSave" CONTENT="32">}
+%TCIDATA{<META NAME="SaveForMode" CONTENT="1">}
+%TCIDATA{BibliographyScheme=Manual}
+%TCIDATA{Language=American English}
+%BeginMSIPreambleData
+\providecommand{\U}[1]{\protect\rule{.1in}{.1in}}
+%EndMSIPreambleData
+\newcounter{exer}
+\theoremstyle{definition}
+\newtheorem{theo}{Theorem}[section]
+\newenvironment{theorem}[1][]
+{\begin{theo}[#1]\begin{leftbar}}
+{\end{leftbar}\end{theo}}
+\newtheorem{lem}[theo]{Lemma}
+\newenvironment{lemma}[1][]
+{\begin{lem}[#1]\begin{leftbar}}
+{\end{leftbar}\end{lem}}
+\newtheorem{prop}[theo]{Proposition}
+\newenvironment{proposition}[1][]
+{\begin{prop}[#1]\begin{leftbar}}
+{\end{leftbar}\end{prop}}
+\newtheorem{defi}[theo]{Definition}
+\newenvironment{definition}[1][]
+{\begin{defi}[#1]\begin{leftbar}}
+{\end{leftbar}\end{defi}}
+\newtheorem{remk}[theo]{Remark}
+\newenvironment{remark}[1][]
+{\begin{remk}[#1]\begin{leftbar}}
+{\end{leftbar}\end{remk}}
+\newtheorem{coro}[theo]{Corollary}
+\newenvironment{corollary}[1][]
+{\begin{coro}[#1]\begin{leftbar}}
+{\end{leftbar}\end{coro}}
+\newtheorem{conv}[theo]{Convention}
+\newenvironment{condition}[1][]
+{\begin{conv}[#1]\begin{leftbar}}
+{\end{leftbar}\end{conv}}
+\newtheorem{quest}[theo]{Question}
+\newenvironment{algorithm}[1][]
+{\begin{quest}[#1]\begin{leftbar}}
+{\end{leftbar}\end{quest}}
+\newtheorem{warn}[theo]{Warning}
+\newenvironment{conclusion}[1][]
+{\begin{warn}[#1]\begin{leftbar}}
+{\end{leftbar}\end{warn}}
+\newtheorem{conj}[theo]{Conjecture}
+\newenvironment{conjecture}[1][]
+{\begin{conj}[#1]\begin{leftbar}}
+{\end{leftbar}\end{conj}}
+\newtheorem{exam}[theo]{Example}
+\newenvironment{example}[1][]
+{\begin{exam}[#1]\begin{leftbar}}
+{\end{leftbar}\end{exam}}
+\newtheorem{exmp}[exer]{Exercise}
+\newenvironment{exercise}[1][]
+{\begin{exmp}[#1]\begin{leftbar}}
+{\end{leftbar}\end{exmp}}
+\newenvironment{statement}{\begin{quote}}{\end{quote}}
+\iffalse
+\newenvironment{proof}[1][Proof]{\noindent\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+\fi
+\let\sumnonlimits\sum
+\let\prodnonlimits\prod
+\let\cupnonlimits\bigcup
+\let\capnonlimits\bigcap
+\renewcommand{\sum}{\sumnonlimits\limits}
+\renewcommand{\prod}{\prodnonlimits\limits}
+\renewcommand{\bigcup}{\cupnonlimits\limits}
+\renewcommand{\bigcap}{\capnonlimits\limits}
+\setlength\tablinesep{3pt}
+\setlength\arraylinesep{3pt}
+\setlength\extrarulesep{3pt}
+\voffset=0cm
+\hoffset=-0.7cm
+\setlength\textheight{22.5cm}
+\setlength\textwidth{15.5cm}
+\newenvironment{verlong}{}{}
+\newenvironment{vershort}{}{}
+\newenvironment{noncompile}{}{}
+\excludecomment{verlong}
+\includecomment{vershort}
+\excludecomment{noncompile}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\rev}{\operatorname{rev}}
+\newcommand{\conncomp}{\operatorname{conncomp}}
+\newcommand{\conn}{\operatorname{conn}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\powset}[2][]{\ifthenelse{\equal{#2}{}}{\mathcal{P}\left(#1\right)}{\mathcal{P}_{#1}\left(#2\right)}}
+% $\powset[k]{S}$ stands for the set of all $k$-element subsets of
+% $S$. The argument $k$ is optional, and if not provided, the result
+% is the whole powerset of $S$.
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+% $\set{...}$ yields $\left\{ ... \right\}$.
+\newcommand{\abs}[1]{\left| #1 \right|}
+% $\abs{...}$ yields $\left| ... \right|$.
+\newcommand{\tup}[1]{\left( #1 \right)}
+% $\tup{...}$ yields $\left( ... \right)$.
+\newcommand{\ive}[1]{\left[ #1 \right]}
+% $\ive{...}$ yields $\left[ ... \right]$.
+\newcommand{\verts}[1]{\operatorname{V}\left( #1 \right)}
+% $\verts{...}$ yields $\operatorname{V}\left( ... \right)$.
+\newcommand{\edges}[1]{\operatorname{E}\left( #1 \right)}
+% $\edges{...}$ yields $\operatorname{E}\left( ... \right)$.
+\newcommand{\arcs}[1]{\operatorname{A}\left( #1 \right)}
+% $\arcs{...}$ yields $\operatorname{A}\left( ... \right)$.
+\newcommand{\underbrack}[2]{\underbrace{#1}_{\substack{#2}}}
+% $\underbrack{...1}{...2}$ yields
+% $\underbrace{...1}_{\substack{...2}}$. This is useful for doing
+% local rewriting transformations on mathematical expressions with
+% justifications.
+\ihead{Math 5707 Spring 2017 (Darij Grinberg): homework set 4}
+\ohead{page \thepage}
+\cfoot{}
+\begin{document}
+
+\begin{center}
+\textbf{Math 5707 Spring 2017 (Darij Grinberg): homework set 4}
+
+\textbf{due: Wed, 29 Mar 2017, in class} or by email
+(\texttt{dgrinber@umn.edu}) before class
+
+\textbf{Please hand in solutions to FIVE of the 7 problems.}
+\end{center}
+
+%\tableofcontents
+
+\subsection{Reminders}
+
+See the
+\href{http://www-users.math.umn.edu/~dgrinber/5707s17/nogra.pdf}{lecture notes}
+and also the
+\href{http://www-users.math.umn.edu/~dgrinber/5707s17/}{handwritten notes}
+for relevant material.
+See also
+\href{http://www-users.math.umn.edu/~dgrinber/5707s17/hw2s.pdf}{the solutions to homework set 2}
+for various conventions and notations that are in use here.
+
+\subsection{Exercise \ref{exe.hw4.menger.DA}: Directed arc-disjoint
+version of Menger's theorem}
+
+In class, you have seen the following two theorems:
+
+\begin{theorem}[Menger's theorem, DVE (directed vertex-disjoint
+version)] \label{thm.menger.DVE}
+Let $D = \tup{V, A}$ be a digraph.
+Let $S$ and $T$ be two subsets of $V$.
+
+An \textit{$S$-$T$-path} in $D$ means a path in $D$ whose starting
+point belongs to $S$ and whose ending point belongs to $T$.
+
+Several paths are said to be \textit{vertex-disjoint} if no two
+have a vertex in common.
+
+A subset $C$ of $V$ is said to be \textit{$S$-$T$-disconnecting} if
+each $S$-$T$-path contains at least one vertex in $C$.
+
+The maximum number of vertex-disjoint $S$-$T$-paths equals the
+minimum size of an $S$-$T$-disconnecting subset of $V$.
+\end{theorem}
+
+\begin{theorem}[Menger's theorem, DVI (directed internally
+vertex-disjoint version)] \label{thm.menger.DVI}
+Let $D = \tup{V, A}$ be a digraph.
+Let $s$ and $t$ be two vertices of $D$ such that
+$\tup{s, t} \notin A$.
+
+An \textit{$s$-$t$-path} in $D$ means a path from $s$ to $t$ in $D$.
+
+Several $s$-$t$-paths are said to be
+\textit{internally vertex-disjoint} if no two have a vertex in common
+except for the vertices $s$ and $t$.
+
+A subset $C$ of $V$ is said to be an \textit{$s$-$t$-vertex-cut} if it
+contains neither $s$ nor $t$, and if
+each $s$-$t$-path contains at least one vertex in $C$.
+
+The maximum number of internally vertex-disjoint $s$-$t$-paths equals
+the minimum size of an $s$-$t$-vertex-cut.
+\end{theorem}
+
+Here are two other versions of Menger's theorem:
+
+\begin{theorem}[Menger's theorem, DA (directed arc-disjoint
+version)] \label{thm.menger.DA}
+Let $D = \tup{V, A, \phi}$ be a multidigraph.
+Let $s$ and $t$ be two distinct vertices of $D$.
+
+An \textit{$s$-$t$-path} in $D$ means a path from $s$ to $t$ in $D$.
+
+Several paths in $D$ are said to be
+\textit{arc-disjoint} if no two have an arc in common.
+
+A subset $C$ of $A$ is said to be an \textit{$s$-$t$-cut} if it has
+the form
+\[
+C = \set{ a \in A \mid \text{the source of } a \text{ belongs to } U
+                        \text{, but the target of } a \text{ does not}
+        }
+\]
+for some subset $U$ of $V$ satisfying $s \in U$ and $t \notin U$.
+
+The maximum number of arc-disjoint $s$-$t$-paths equals
+the minimum size of an $s$-$t$-cut.
+\end{theorem}
+
+\begin{remark}
+The assumption in Theorem~\ref{thm.menger.DA} that $s$ and $t$ be
+distinct is not really necessary -- you can omit it if you are willing
+to put up with the idea that the maximum number of arc-disjoint
+$s$-$t$-paths is $\infty$ (because you can count the trivial
+path $\tup{s}$ infinitely often, thanks to it being arc-disjoint from
+itself), and that the minimum size of an $s$-$t$-cut is $\infty$ as
+well (since there exists no $s$-$t$-cut, and thus you are taking the
+minimum of an empty set of integers, which according to one possible
+convention is $\infty$).
+Feel free to ignore these kinds of hairsplitting.
+\end{remark}
+
+\begin{theorem}[Menger's theorem, DAS (directed arc-disjoint set
+version)] \label{thm.menger.DAS}
+Let $D = \tup{V, A, \phi}$ be a multidigraph.
+Let $S$ and $T$ be two disjoint subsets of $V$.
+
+An \textit{$S$-$T$-path} in $D$ means a path in $D$ whose starting
+point belongs to $S$ and whose ending point belongs to $T$.
+
+Several paths in $D$ are said to be
+\textit{arc-disjoint} if no two have an arc in common.
+
+A subset $C$ of $A$ is said to be an \textit{$S$-$T$-cut} if it has
+the form
+\[
+C = \set{ a \in A \mid \text{the source of } a \text{ belongs to } U
+                        \text{, but the target of } a \text{ does not}
+        }
+\]
+for some subset $U$ of $V$ satisfying $S \subseteq U$ and
+$T \cap U = \varnothing$.
+
+The maximum number of arc-disjoint $S$-$T$-paths equals
+the minimum size of an $S$-$T$-cut.
+\end{theorem}
+
+\begin{exercise} \label{exe.hw4.menger.DA}
+Prove Theorem~\ref{thm.menger.DA} and
+Theorem~\ref{thm.menger.DAS}.
+(You are allowed to use Theorem~\ref{thm.menger.DVE} and
+Theorem~\ref{thm.menger.DVI}.)
+\end{exercise}
+
+\subsection{Exercise \ref{exe.hw4.menger.undir}: Undirected Menger's
+theorems}
+
+\begin{exercise} \label{exe.hw4.menger.undir}
+State and prove analogues of Theorem~\ref{thm.menger.DVE},
+Theorem~\ref{thm.menger.DVI}, Theorem~\ref{thm.menger.DA} and
+Theorem~\ref{thm.menger.DAS} for undirected graphs (simple graphs in
+the case of the first two theorems; multigraphs for the last two).
+(You can use the directed-graph versions in the proofs.)
+\end{exercise}
+
+\subsection{Exercise \ref{exe.hw4.matching-product}: matchings in a
+Cartesian product}
+
+Recall that each simple graph $G = \tup{V, E}$ can be viewed as a
+multigraph in a natural way (namely, as the multigraph
+$\tup{V, E, \iota}$, where $\iota$ is the map from $E$ to
+$\powset[2]{V}$ sending each edge $e$ to $e$).
+Thus, everything we say about multigraphs can be applied to simple
+graphs.
+
+Let me recall a definition from class in slightly greater generality:
+
+\begin{definition}
+Let $G = \tup{V, E, \phi}$ be a multigraph.
+A \textit{matching} in $G$ means a subset $M$ of $E$ such that no two
+distinct edges in $M$ have a vertex in common.
+\end{definition}
+
+In class, we have been discussing matchings in simple graphs; of
+course, this is a particular case of matchings in multigraphs.
+The difference between simple graphs and multigraphs does not really
+matter for the purpose of the existence or nonexistence of matchings
+(after all, a matching cannot use more than one edge through each
+vertex, so it cannot include two parallel edges);
+but it matters if you want to, e.g., count matchings.
+
+\begin{definition}
+A \textit{bipartite graph} is a triple $\tup{G, X, Y}$,
+% (this is just a
+% slightly suggestive notation for $\tup{G, X, Y}$, where the semicolon
+% is supposed to separate the multigraph $G$ from the two sets $X$ and
+% $Y$),
+where $G$ is a multigraph, and
+where $X$ and $Y$ are two subsets of $\verts{G}$
+satisfying the following conditions:
+
+\begin{itemize}
+\item We have $X \cap Y = \varnothing$ and
+      $X \cup Y = \verts{G}$.
+      (In other words, each vertex of $G$ lies in exactly one of the
+      two sets $X$ and $Y$.)
+\item Each edge of $G$ has exactly one endpoint in $X$ and exactly one
+      endpoint in $Y$.
+\end{itemize}
+
+We shall usually write $\tup{G; X, Y}$ instead of $\tup{G, X, Y}$ for
+a bipartite graph, putting a semicolon between the $G$ and the $X$ in
+order to stress the different roles that $G$ plays and that $X$ and
+$Y$ play.
+\end{definition}
+
+In class, we used simple graphs instead of multigraphs in the above
+definition (if I remember correctly).
+Again, the difference is not important, as far as the things done in
+class are concerned (i.e., comparing the sizes of
+matchings and vertex covers).
+Again, the difference starts creeping up when you start counting
+(matchings, cycles, paths, etc.), but this is not a class about
+counting.
+
+\begin{definition}
+Let $M$ be a matching in a multigraph $G$.
+
+\textbf{(a)} A vertex $v$ of $G$ is said to be \textit{matched in $M$}
+if there exists an edge $e \in M$ such that $v$ is an endpoint of $e$.
+In this case, this edge is unique (since $M$ is a matching), and the
+other endpoint of this edge (i.e., the one distinct from $v$) is
+called the \textit{$M$-partner} of $v$.
+
+\textbf{(b)} Let $S$ be a subset of $\verts{G}$.
+The matching $M$ is said to be \textit{$S$-complete} if each vertex
+$v \in S$ is matched in $M$.
+\end{definition}
+
+\begin{exercise} \label{exe.hw4.matching-product}
+Let $\tup{G; X, Y}$ and $\tup{H; U, V}$ be bipartite graphs.
+
+Assume that $G$ is a simple graph and has an $X$-complete matching.
+
+Assume that $H$ is a simple graph and has a $U$-complete matching.
+
+Consider the Cartesian product $G \times H$ of $G$ and $H$
+defined in Exercise 1 of
+\href{http://www-users.math.umn.edu/~dgrinber/5707s17/hw2s.pdf}{homework set 2}.
+
+\textbf{(a)} Show that
+$\tup{G \times H; \tup{X \times V} \cup \tup{Y \times U},
+                  \tup{X \times U} \cup \tup{Y \times V}}$
+is a bipartite graph.
+
+\textbf{(b)} Prove that the graph $G \times H$ has an
+$\tup{X \times V} \cup \tup{Y \times U}$-complete matching.
+\end{exercise}
+
+(We required that $G$ and $H$ be simple graphs just in order to not
+have to define $G \times H$ for multigraphs.)
+
+\subsection{Exercise \ref{exe.hw4.subsets}: extending subsets}
+
+\begin{exercise} \label{exe.hw4.subsets}
+Let $S$ be a finite set.
+Let $k \in \NN$ be such that $\abs{S} \geq 2k+1$.
+Prove that there exists an injective map
+$f : \powset[k]{S} \to \powset[k+1]{S}$ such that
+each $X \in \powset[k]{S}$ satisfies
+$f \tup{X} \supseteq X$.
+
+(In other words, prove that we can add to each $k$-element subset
+$X$ of $S$ an additional element from $S \setminus X$ such that the
+resulting $\tup{k+1}$-element subsets are distinct.)
+
+[\textbf{Hint:} First, reduce the problem to the case when
+$\abs{S} = 2k+1$.
+Then, in that case, restate it as a claim about matchings in a
+certain bipartite graph.]
+\end{exercise}
+
+\subsection{Exercise \ref{exe.hw4.parabolic-derangements}:
+the self-grading problem}
+
+\begin{exercise} \label{exe.hw4.parabolic-derangements}
+Let $S$ be a finite set, and let $k \in \NN$.
+Let $A_1, A_2, \ldots, A_k$ be $k$ subsets of $S$
+such that each element of $S$ lies in exactly one of these $k$
+subsets.
+Prove that the following statements are equivalent:
+
+\begin{itemize}
+\item \textit{Statement 1:} There exists a bijection
+      $\sigma : S \to S$ such that each $i \in \set{1, 2, \ldots, k}$
+      satisfies $\sigma \tup{A_i} \cap A_i = \varnothing$.
+\item \textit{Statement 2:} Each $i \in \set{1, 2, \ldots, k}$
+      satisfies $\abs{A_i} \leq \abs{S} / 2$.
+\end{itemize}
+\end{exercise}
+
+(A restatement of Exercise~\ref{exe.hw4.parabolic-derangements}:
+Let $S$ be a finite set of students who have submitted homework.
+The students have been collaborating on the homework, forming $k$
+disjoint collaboration groups.
+A lazy professor wants the students to grade each other's homework,
+but he wants to avoid having a student grading the homework of a
+student from the same collaboration group.
+Prove that he can organize this (i.e., find a grader for each student)
+if and only if each collaboration group has size $\leq \abs{S}/2$.)
+
+\subsection{Exercise \ref{exe.hw4.lattice}: unions and intersections
+of neighbor-critical sets}
+
+\begin{definition}
+Let $G$ be a multigraph.
+If $S$ is a subset of $\verts{G}$, then
+$N\tup{S}$ (or, to be more precise, $N_G\tup{S}$) shall denote the
+subset
+$\set{ u \in \verts{G} \mid \text{at least one neighbor of } u
+                            \text{ belongs to } S }$
+of $\verts{G}$.
+\end{definition}
+
+\begin{exercise} \label{exe.hw4.lattice}
+Let $\tup{G; X, Y}$ be a bipartite graph.
+Assume that each $S \subseteq X$ satisfies
+$\abs{N\tup{S}} \geq \abs{S}$.
+(Thus, Hall's theorem shows that $G$ has an $X$-complete matching.)
+
+A subset $S$ of $X$ will be called \textit{neighbor-critical} if
+$\abs{N\tup{S}} = \abs{S}$.
+
+Let $A$ and $B$ be two neighbor-critical subsets of $X$.
+Prove that the subsets $A \cup B$ and $A \cap B$ are also
+neighbor-critical.
+\end{exercise}
+
+\subsection{Exercise \ref{exe.hw4.syscom}: systems of common
+representatives}
+
+\begin{exercise} \label{exe.hw4.syscom}
+Let $S$ be a finite set. Let $k \in \NN$.
+
+Let $A_1, A_2, \ldots, A_k$ be $k$ subsets of $S$.
+
+Let $B_1, B_2, \ldots, B_k$ be $k$ subsets of $S$.
+
+A \textit{system of common representatives} shall mean a
+choice of $k$ distinct elements $t_1, t_2, \ldots, t_k$ of
+$S$ as well as two bijections
+$f : \set{1, 2, \ldots, k} \to \set{1, 2, \ldots, k}$
+and
+$g : \set{1, 2, \ldots, k} \to \set{1, 2, \ldots, k}$
+such that each $i \in \set{1, 2, \ldots, k}$ satisfies
+\[
+ t_i \in A_{f\tup{i}}
+ \qquad \text{ and } \qquad
+ t_i \in B_{g\tup{i}} .
+\]
+
+Prove that a system of common representatives exists if and only
+if each two subsets $I$ and $J$ of $\set{1, 2, \ldots, k}$
+satisfy
+\[
+ \abs{\tup{\bigcup_{i \in I} A_i} \cap \tup{\bigcup_{j \in J} B_j}}
+ \geq \abs{I} + \abs{J} - k .
+\]
+
+[You are free to use any of
+Theorem~\ref{thm.menger.DVE},
+Theorem~\ref{thm.menger.DVI}, Theorem~\ref{thm.menger.DA} and
+Theorem~\ref{thm.menger.DAS} here.]
+\end{exercise}
+
+
+\end{document}

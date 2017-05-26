@@ -1,0 +1,322 @@
+\documentclass[numbers=enddot,12pt,final,onecolumn,notitlepage]{scrartcl}%
+\usepackage[headsepline,footsepline,manualmark]{scrlayer-scrpage}
+\usepackage[all,cmtip]{xy}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{framed}
+\usepackage{comment}
+\usepackage{color}
+\usepackage{hyperref}
+\usepackage{ifthen}
+\usepackage[sc]{mathpazo}
+\usepackage[T1]{fontenc}
+\usepackage{needspace}
+\usepackage{tabls}
+%TCIDATA{OutputFilter=latex2.dll}
+%TCIDATA{Version=5.50.0.2960}
+%TCIDATA{LastRevised=Friday, September 16, 2016 20:39:00}
+%TCIDATA{SuppressPackageManagement}
+%TCIDATA{<META NAME="GraphicsSave" CONTENT="32">}
+%TCIDATA{<META NAME="SaveForMode" CONTENT="1">}
+%TCIDATA{BibliographyScheme=Manual}
+%TCIDATA{Language=American English}
+%BeginMSIPreambleData
+\providecommand{\U}[1]{\protect\rule{.1in}{.1in}}
+%EndMSIPreambleData
+\newcounter{exer}
+\theoremstyle{definition}
+\newtheorem{theo}{Theorem}[section]
+\newenvironment{theorem}[1][]
+{\begin{theo}[#1]\begin{leftbar}}
+{\end{leftbar}\end{theo}}
+\newtheorem{lem}[theo]{Lemma}
+\newenvironment{lemma}[1][]
+{\begin{lem}[#1]\begin{leftbar}}
+{\end{leftbar}\end{lem}}
+\newtheorem{prop}[theo]{Proposition}
+\newenvironment{proposition}[1][]
+{\begin{prop}[#1]\begin{leftbar}}
+{\end{leftbar}\end{prop}}
+\newtheorem{defi}[theo]{Definition}
+\newenvironment{definition}[1][]
+{\begin{defi}[#1]\begin{leftbar}}
+{\end{leftbar}\end{defi}}
+\newtheorem{remk}[theo]{Remark}
+\newenvironment{remark}[1][]
+{\begin{remk}[#1]\begin{leftbar}}
+{\end{leftbar}\end{remk}}
+\newtheorem{coro}[theo]{Corollary}
+\newenvironment{corollary}[1][]
+{\begin{coro}[#1]\begin{leftbar}}
+{\end{leftbar}\end{coro}}
+\newtheorem{conv}[theo]{Convention}
+\newenvironment{condition}[1][]
+{\begin{conv}[#1]\begin{leftbar}}
+{\end{leftbar}\end{conv}}
+\newtheorem{quest}[theo]{Question}
+\newenvironment{algorithm}[1][]
+{\begin{quest}[#1]\begin{leftbar}}
+{\end{leftbar}\end{quest}}
+\newtheorem{warn}[theo]{Warning}
+\newenvironment{conclusion}[1][]
+{\begin{warn}[#1]\begin{leftbar}}
+{\end{leftbar}\end{warn}}
+\newtheorem{conj}[theo]{Conjecture}
+\newenvironment{conjecture}[1][]
+{\begin{conj}[#1]\begin{leftbar}}
+{\end{leftbar}\end{conj}}
+\newtheorem{exam}[theo]{Example}
+\newenvironment{example}[1][]
+{\begin{exam}[#1]\begin{leftbar}}
+{\end{leftbar}\end{exam}}
+\newtheorem{exmp}[exer]{Exercise}
+\newenvironment{exercise}[1][]
+{\begin{exmp}[#1]\begin{leftbar}}
+{\end{leftbar}\end{exmp}}
+\newenvironment{statement}{\begin{quote}}{\end{quote}}
+\iffalse
+\newenvironment{proof}[1][Proof]{\noindent\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+\fi
+\let\sumnonlimits\sum
+\let\prodnonlimits\prod
+\let\cupnonlimits\bigcup
+\let\capnonlimits\bigcap
+\renewcommand{\sum}{\sumnonlimits\limits}
+\renewcommand{\prod}{\prodnonlimits\limits}
+\renewcommand{\bigcup}{\cupnonlimits\limits}
+\renewcommand{\bigcap}{\capnonlimits\limits}
+\setlength\tablinesep{3pt}
+\setlength\arraylinesep{3pt}
+\setlength\extrarulesep{3pt}
+\voffset=0cm
+\hoffset=-0.7cm
+\setlength\textheight{22.5cm}
+\setlength\textwidth{15.5cm}
+\newenvironment{verlong}{}{}
+\newenvironment{vershort}{}{}
+\newenvironment{noncompile}{}{}
+\excludecomment{verlong}
+\includecomment{vershort}
+\excludecomment{noncompile}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\conn}{\operatorname{conn}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\powset}[2][]{\ifthenelse{\equal{#2}{}}{\mathcal{P}\left(#1\right)}{\mathcal{P}_{#1}\left(#2\right)}}
+% $\powset[k]{S}$ stands for the set of all $k$-element subsets of
+% $S$. The argument $k$ is optional, and if not provided, the result
+% is the whole powerset of $S$.
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+% $\set{...}$ yields $\left\{ ... \right\}$.
+\newcommand{\abs}[1]{\left| #1 \right|}
+% $\abs{...}$ yields $\left| ... \right|$.
+\newcommand{\tup}[1]{\left( #1 \right)}
+% $\tup{...}$ yields $\left( ... \right)$.
+\newcommand{\ive}[1]{\left[ #1 \right]}
+% $\ive{...}$ yields $\left[ ... \right]$.
+\newcommand{\verts}[1]{\operatorname{V}\left( #1 \right)}
+% $\verts{...}$ yields $\operatorname{V}\left( ... \right)$.
+\newcommand{\edges}[1]{\operatorname{E}\left( #1 \right)}
+% $\edges{...}$ yields $\operatorname{E}\left( ... \right)$.
+\newcommand{\arcs}[1]{\operatorname{A}\left( #1 \right)}
+% $\arcs{...}$ yields $\operatorname{A}\left( ... \right)$.
+\ihead{Math 5707 Spring 2017 (Darij Grinberg): midterm 2}
+\ohead{page \thepage}
+\cfoot{}
+\begin{document}
+
+\begin{center}
+\textbf{Math 5707 Spring 2017 (Darij Grinberg): midterm 2}
+
+\textbf{due: Mon, 5 Apr 2017, in class} or by email
+(\texttt{dgrinber@umn.edu}) before class
+\end{center}
+
+See the \href{http://www-users.math.umn.edu/~dgrinber/5707s17}{website} for relevant material.
+
+{\small Results proven in the notes, or in the handwritten notes, or in class, or in previous homework sets can be used without proof; but they should be referenced clearly (e.g., not ``by a theorem done in class'' but ``by the theorem that states that a strongly connected digraph has a Eulerian circuit if and only if each vertex has indegree equal to its outdegree'').
+If you reference results from the lecture notes, please \textbf{mention the date and time} of the version of the notes you are using (as the numbering changes during updates).
+
+As always, proofs need to be provided, and they have to be clear and rigorous. Obvious details can be omitted, but they actually have to be obvious.
+
+% Proofs need to be provided unless explicitly not required. An answer without proof is usually worth at most a little part of the score. Proofs should be written with the amount of rigor typical for advanced mathematics; it is OK to use metaphor and visualization, but the actual logical argument behind it should always be clear. Details can be omitted when they are easy to fill in, not when they are hard to properly explain. (In case of doubt, err on the side of more details and more rigor. See various books referenced in the notes, e.g., \href{https://www.classes.cs.uchicago.edu/archive/2016/spring/27500-1/hw3.pdf}{the Bondy/Murty book from 2008}, or \href{https://courses.csail.mit.edu/6.042/spring16/mcs.pdf}{the Lehman/Leighton/Meyer notes}, for examples of written-up proofs in graph theory.)
+
+% See the \href{http://www-users.math.umn.edu/~dgrinber/5707s17/syll.pdf}{syllabus} for the rules. Note that 
+
+\textbf{This is a midterm}, so you are \textbf{not allowed to collaborate or contact others} (apart from me) for help with the problems. (Feel free to ask me for clarifications, but I will not give hints towards solving the problems.) Reading up (in books or on the internet) is allowed, but asking for help is not. If you get your solution from a book (or paper, or website), do cite the source\footnote{You won't be penalized for this.}, and do explain the solution in your own words. }
+
+\subsection{Exercise~\ref{exe.mt2.verts-to-edges-nonincident}:
+assigning to each vertex an edge avoiding it}
+
+\begin{exercise} \label{exe.mt2.verts-to-edges-nonincident}
+Let $G = \tup{V, E}$ be a simple graph such that
+$\abs{E} \geq \abs{V}$.
+Show that there exists an injective map $f : V \to E$ such that each
+$v \in V$ satisfies $v \notin f\tup{v}$.
+
+(In other words, show that we can assign to each vertex $v$ of $G$
+an edge that does not contain $v$, in such a way that edges assigned
+to distinct vertices are distinct.)
+\end{exercise}
+
+\subsection{Exercise~\ref{exe.mt2.verts-to-edges-incident}:
+assigning to each vertex an edge containing it}
+
+\begin{exercise} \label{exe.mt2.verts-to-edges-incident}
+Let $G = \tup{V, E}$ be a \textbf{connected} simple graph such that
+$\abs{E} \geq \abs{V}$.
+Show that there exists an injective map $f : V \to E$ such that each
+$v \in V$ satisfies $v \in f\tup{v}$.
+
+(In other words, show that we can assign to each vertex $v$ of $G$
+an edge that contains $v$, in such a way that edges assigned
+to distinct vertices are distinct.)
+\end{exercise}
+
+\subsection{Exercise~\ref{exe.mt2.menger-postnikov}:
+a ``transitivity'' property for arc-disjoint paths}
+
+\begin{exercise} \label{exe.mt2.menger-postnikov}
+Let $D = \tup{V, A}$ be a digraph.
+Let $k \in \NN$.
+Let $u$, $v$ and $w$ be three vertices of $D$.
+Assume that there exist $k$ arc-disjoint paths from $u$ to $v$.
+Assume furthermore that there exist $k$ arc-disjoint paths from $v$
+to $w$.
+
+Prove that there exist $k$ arc-disjoint paths from $u$ to $w$.
+
+[\textbf{Note:} If $u = w$, then the trivial path $\tup{u}$ counts as
+being arc-disjoint from itself (so in this case, there exist
+arbitrarily many arc-disjoint paths from $u$ to $w$).]
+\end{exercise}
+
+\subsection{Exercise~\ref{exe.mt2.chrompoly}:
+the chromatic polynomial}
+
+\begin{exercise} \label{exe.mt2.chrompoly}
+Let $G = \tup{V, E}$ be a simple graph.
+Define a polynomial $\chi_G$ in a single indeterminate $x$ (with
+integer coefficients) by
+\[
+\chi_G = \sum_{F \subseteq E} \tup{-1}^{\abs{F}} x^{\conn\tup{V, F}} .
+\]
+(Here, as usual, $\conn H$ denotes the number of connected components
+of any graph $H$.)
+This polynomial $\chi_G$ is called the \textit{chromatic polynomial}
+of $G$.
+
+Fix $k \in \NN$.
+Recall that a \textit{$k$-coloring} of $G$ means a map
+$f : V \to \set{1, 2, \ldots, k}$.
+(The image $f \tup{v}$ of a vertex $v \in V$ under this map is called
+the \textit{color} of $v$ under this $k$-coloring $f$.)
+A $k$-coloring $f$ of $G$ is said to be \textit{proper} if
+each edge $\set{u, v}$ of $G$ satisfies $f \tup{u} \neq f \tup{v}$.
+(In other words, a $k$-coloring $f$ of $G$ is proper if and only if
+no two adjacent vertices share the same color.)
+
+Prove that the number of proper $k$-colorings of $G$ is
+$\chi_G \tup{k}$.
+
+[\textbf{Hint:} Show that $k^{\conn\tup{V, F}}$ also counts certain
+$k$-colorings (I like to call them ``$F$-improper colorings''
+-- what could that mean?).
+Then, analyze how often (and with what signs) a given $k$-coloring of
+$G$ appears in the sum
+$\sum_{F \subseteq E} \tup{-1}^{\abs{F}} k^{\conn\tup{V, F}}$. ]
+\end{exercise}
+
+Note that most graph-theoretical literature defines the chromatic
+polynomial differently than I do in Exercise~\ref{exe.mt2.chrompoly}.
+Use the literature at your own peril!
+{\small Most authors define $\chi_G$ as the polynomial whose value at
+each $k \in \NN$ is the number of proper $k$-colorings.
+This may be more intuitive, but it leaves a question unanswered:
+Why is there such a polynomial in the first place?
+Exercise~\ref{exe.mt2.chrompoly} answers this question.}
+
+\subsection{Exercise~\ref{exe.mt2.chrompoly-examples}:
+some concrete chromatic polynomials}
+
+\begin{exercise} \label{exe.mt2.chrompoly-examples}
+In Exercise~\ref{exe.mt2.chrompoly}, we have defined the chromatic
+polynomial $\chi_G$ of a simple graph $G$.
+In this exercise, we shall compute it on some examples.
+
+\textbf{(a)} For each $n \in \NN$, prove that the complete graph $K_n$
+has chromatic polynomial
+$\chi_{K_n} = x \tup{x-1} \cdots \tup{x-n+1}$.
+
+\textbf{(b)} Let $T$ be a tree (regarded as a simple graph).
+Let $n = \abs{\verts{T}}$.
+Prove that $\chi_T = x \tup{x-1}^{n-1}$.
+
+\textbf{(c)} Find the chromatic polynomial $\chi_{P_3}$ of the path
+graph $P_3$.
+
+[You are allowed to use both the definition of $\chi_G$ and the claim
+of Exercise~\ref{exe.mt2.chrompoly} even if you have not solved that
+exercise.
+You are also allowed to use the following fact without proof:
+If a polynomial $p$ with integer coefficients satisfies
+$p \tup{k} = 0$ for all $k \in \NN$, then $p = 0$.]
+\end{exercise}
+
+\subsection{Exercise~\ref{exe.mt2.tropigrass}:
+the distances between four points on a tree}
+
+\begin{exercise} \label{exe.mt2.tropigrass}
+Let $G$ be a tree.
+Let $x$, $y$, $z$ and $w$ be four vertices of $G$.
+
+Show that the two larger ones among the three numbers
+$d \tup{x, y} + d \tup{z, w}$,
+$d \tup{x, z} + d \tup{y, w}$ and
+$d \tup{x, w} + d \tup{y, z}$
+are equal.
+\end{exercise}
+
+\subsection{Exercise~\ref{exe.mt2.eclectic-cycle}:
+on triple intersections}
+
+\begin{exercise} \label{exe.mt2.eclectic-cycle}
+Let $G = \tup{V, E, \phi}$ be a multigraph.
+
+For any subset $U$ of $V$, we let $G \ive{U}$ denote the
+sub-multigraph $\tup{U, E_U, \phi\mid_{E_U}}$ of $G$, where
+$E_U$ is the subset $\set{e \in E \mid \phi \tup{e} \subseteq U}$ of
+$E$.
+(Thus, $G \ive{U}$ is the sub-multigraph obtained from $G$ by removing
+all vertices that don't belong to $U$, and subsequently removing all
+edges that don't have both their endpoints in $U$.)
+This sub-multigraph $G \ive{U}$ is called the \textit{induced
+sub-multigraph of $G$ on the subset $U$}.
+
+Let $A$, $B$ and $C$ be three subsets of $V$ such that the
+sub-multigraphs $G \ive{A}$, $G \ive{B}$ and $G \ive{C}$ are
+connected.
+
+A cycle of $G$ will be called \textit{eclectic} if it contains at
+least one edge of $G \ive{A}$, at least one edge of $G \ive{B}$ and
+at least one edge of $G \ive{C}$ (although these three edges are not
+required to be distinct).
+
+\textbf{(a)} If the sets $B \cap C$, $C \cap A$ and $A \cap B$ are
+nonempty, but $A \cap B \cap C$ is empty, then prove that $G$ has an
+eclectic cycle.
+
+\textbf{(b)} If the subgraphs $G \ive{B \cap C}$, $G \ive{C \cap A}$
+and $G \ive{A \cap B}$ are connected, but the subgraph
+$G \ive{A \cap B \cap C}$ is not connected, then prove that $G$ has
+an eclectic cycle.
+
+[\textbf{Note:} Keep in mind that the multigraph with $0$ vertices
+does not count as connected.]
+\end{exercise}
+
+
+\end{document}

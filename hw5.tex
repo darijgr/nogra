@@ -1,0 +1,1144 @@
+\documentclass[numbers=enddot,12pt,final,onecolumn,notitlepage]{scrartcl}%
+\usepackage[headsepline,footsepline,manualmark]{scrlayer-scrpage}
+\usepackage[all,cmtip]{xy}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{framed}
+\usepackage{comment}
+\usepackage{color}
+\usepackage{hyperref}
+\usepackage{ifthen}
+\usepackage[sc]{mathpazo}
+\usepackage[T1]{fontenc}
+\usepackage{needspace}
+\usepackage{tabls}
+\newcounter{exer}
+\theoremstyle{definition}
+\newtheorem{theo}{Theorem}[section]
+\newenvironment{theorem}[1][]
+{\begin{theo}[#1]\begin{leftbar}}
+{\end{leftbar}\end{theo}}
+\newtheorem{lem}[theo]{Lemma}
+\newenvironment{lemma}[1][]
+{\begin{lem}[#1]\begin{leftbar}}
+{\end{leftbar}\end{lem}}
+\newtheorem{prop}[theo]{Proposition}
+\newenvironment{proposition}[1][]
+{\begin{prop}[#1]\begin{leftbar}}
+{\end{leftbar}\end{prop}}
+\newtheorem{defi}[theo]{Definition}
+\newenvironment{definition}[1][]
+{\begin{defi}[#1]\begin{leftbar}}
+{\end{leftbar}\end{defi}}
+\newtheorem{remk}[theo]{Remark}
+\newenvironment{remark}[1][]
+{\begin{remk}[#1]\begin{leftbar}}
+{\end{leftbar}\end{remk}}
+\newtheorem{coro}[theo]{Corollary}
+\newenvironment{corollary}[1][]
+{\begin{coro}[#1]\begin{leftbar}}
+{\end{leftbar}\end{coro}}
+\newtheorem{conv}[theo]{Convention}
+\newenvironment{condition}[1][]
+{\begin{conv}[#1]\begin{leftbar}}
+{\end{leftbar}\end{conv}}
+\newtheorem{quest}[theo]{Question}
+\newenvironment{algorithm}[1][]
+{\begin{quest}[#1]\begin{leftbar}}
+{\end{leftbar}\end{quest}}
+\newtheorem{warn}[theo]{Warning}
+\newenvironment{conclusion}[1][]
+{\begin{warn}[#1]\begin{leftbar}}
+{\end{leftbar}\end{warn}}
+\newtheorem{conj}[theo]{Conjecture}
+\newenvironment{conjecture}[1][]
+{\begin{conj}[#1]\begin{leftbar}}
+{\end{leftbar}\end{conj}}
+\newtheorem{exam}[theo]{Example}
+\newenvironment{example}[1][]
+{\begin{exam}[#1]\begin{leftbar}}
+{\end{leftbar}\end{exam}}
+\newtheorem{exmp}[exer]{Exercise}
+\newenvironment{exercise}[1][]
+{\begin{exmp}[#1]\begin{leftbar}}
+{\end{leftbar}\end{exmp}}
+\newenvironment{statement}{\begin{quote}}{\end{quote}}
+\iffalse
+\newenvironment{proof}[1][Proof]{\noindent\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+\fi
+\let\sumnonlimits\sum
+\let\prodnonlimits\prod
+\let\cupnonlimits\bigcup
+\let\capnonlimits\bigcap
+\renewcommand{\sum}{\sumnonlimits\limits}
+\renewcommand{\prod}{\prodnonlimits\limits}
+\renewcommand{\bigcup}{\cupnonlimits\limits}
+\renewcommand{\bigcap}{\capnonlimits\limits}
+\setlength\tablinesep{3pt}
+\setlength\arraylinesep{3pt}
+\setlength\extrarulesep{3pt}
+\voffset=0cm
+\hoffset=-0.7cm
+\setlength\textheight{22.5cm}
+\setlength\textwidth{15.5cm}
+\newenvironment{verlong}{}{}
+\newenvironment{vershort}{}{}
+\newenvironment{noncompile}{}{}
+\excludecomment{verlong}
+\includecomment{vershort}
+\excludecomment{noncompile}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\rev}{\operatorname{rev}}
+\newcommand{\conncomp}{\operatorname{conncomp}}
+\newcommand{\conn}{\operatorname{conn}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\powset}[2][]{\ifthenelse{\equal{#2}{}}{\mathcal{P}\left(#1\right)}{\mathcal{P}_{#1}\left(#2\right)}}
+% $\powset[k]{S}$ stands for the set of all $k$-element subsets of
+% $S$. The argument $k$ is optional, and if not provided, the result
+% is the whole powerset of $S$.
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+% $\set{...}$ yields $\left\{ ... \right\}$.
+\newcommand{\abs}[1]{\left| #1 \right|}
+% $\abs{...}$ yields $\left| ... \right|$.
+\newcommand{\tup}[1]{\left( #1 \right)}
+% $\tup{...}$ yields $\left( ... \right)$.
+\newcommand{\ive}[1]{\left[ #1 \right]}
+% $\ive{...}$ yields $\left[ ... \right]$.
+\newcommand{\verts}[1]{\operatorname{V}\left( #1 \right)}
+% $\verts{...}$ yields $\operatorname{V}\left( ... \right)$.
+\newcommand{\edges}[1]{\operatorname{E}\left( #1 \right)}
+% $\edges{...}$ yields $\operatorname{E}\left( ... \right)$.
+\newcommand{\arcs}[1]{\operatorname{A}\left( #1 \right)}
+% $\arcs{...}$ yields $\operatorname{A}\left( ... \right)$.
+\newcommand{\underbrack}[2]{\underbrace{#1}_{\substack{#2}}}
+% $\underbrack{...1}{...2}$ yields
+% $\underbrace{...1}_{\substack{...2}}$. This is useful for doing
+% local rewriting transformations on mathematical expressions with
+% justifications.
+\newcommand{\are}{\ar@{-}}
+% In an xymatrix environment, $\are$ gives an arrow without
+% arrowhead. I use this to represent edges in graphs.
+\newcommand{\arebi}[1][]{\ar@{<-}@/_/[#1] \ar@/^/[#1]}
+% In an xymatrix environment, $\arebi$ gives two arrows with
+% opposite direction. I use this to represent edges in
+% bidirected digraphs.
+\ihead{Math 5707 Spring 2017 (Darij Grinberg): homework set 5}
+\ohead{page \thepage}
+\cfoot{}
+\begin{document}
+
+\begin{center}
+\textbf{Math 5707 Spring 2017 (Darij Grinberg): homework set 5}
+
+\textbf{due: Wed, 26 Apr 2017, in class} or by email
+(\texttt{dgrinber@umn.edu}) before class
+
+\textbf{Please hand in solutions to FOUR of the 7 problems.}
+\end{center}
+
+%\tableofcontents
+
+\subsection{Reminders}
+
+See the
+\href{http://www-users.math.umn.edu/~dgrinber/5707s17/nogra.pdf}{lecture notes}
+and also the
+\href{http://www-users.math.umn.edu/~dgrinber/5707s17/}{handwritten notes}
+for relevant material.
+See also
+\href{http://www-users.math.umn.edu/~dgrinber/5707s17/hw2s.pdf}{the solutions to homework set 2}
+for various conventions and notations that are in use here.
+
+\subsection{Sandpiles: recapitulating definitions and results}
+
+Let me recall the definitions of the basic concepts on chipfiring
+done in class.
+Various sources on this material are
+\cite{BjoLov92} (and, less directly, \cite{BjLoSh91}),
+\cite{HLMPPW13}, \cite[Lectures 29--31]{Musike09} and \cite{CorPet16}.
+(None of these is as readable as I would like to have it, but the
+whole subject is about 30 years old, with most activity very
+recent...
+Also, be aware of incompatible notations, as well as of the fact that
+some of the sources only consider undirected graphs.)
+The particular case of the ``integer lattice'' graph has attracted
+particular attention due to the mysterious pictures it generates;
+see \url{http://www.math.cmu.edu/~wes/sand.html#next-page} for some
+of these pictures, as well as
+\url{http://www.math.cornell.edu/~levine/apollonian-slides.pdf} for a
+talk with various illustrations.
+
+Let me give a brief (proof-less) survey of what we did in class (and
+a bit of what we should have done).
+
+Fix a loopless multidigraph $D = \tup{V, A, \phi}$.
+
+\begin{definition}
+A \textit{configuration} (on $D$) means a map $f : V \to \NN$.
+(Recall that $\NN = \set{0, 1, 2, \ldots}$.)
+
+A configuration is also called a \textit{chip configuration} or
+\textit{sandpile}.
+
+We like to think of a configuration as a way to place
+a finite number of game chips on the vertices of $D$:
+Namely, the configuration $f$ corresponds to placing
+$f \tup{v}$ chips on the vertex $v$ for each $v \in V$.
+The chips are understood to be undistinguishable, so the
+only thing that matters is how many of them are placed on
+each given vertex.
+Sometimes, we speak of grains of sand instead of chips.
+\end{definition}
+
+\begin{definition}
+A \textit{$\ZZ$-configuration} (on $D$) means a map
+$f : V \to \ZZ$.
+We shall regard each configuration as a $\ZZ$-configuration
+(since $\NN \subseteq \ZZ$).
+\end{definition}
+
+\begin{definition}
+Let $f : V \to \ZZ$ be a $\ZZ$-configuration.
+
+\textbf{(a)} A vertex $v \in V$ is said to be
+\textit{active} in $f$ if and only if
+$f\tup{v} \geq \deg^+ v$.
+(Recall that $\deg^+ v$ is the outdegree of $v$.)
+
+\textbf{(b)} The $\ZZ$-configuration $f$ is said to be
+\textit{stable} if no vertex $v \in V$ is active in $f$.
+\end{definition}
+
+Notice that there are only finitely many stable configuration
+(because if $f$ is a stable configuration, then, for each
+$v \in V$, the stability of $f$ implies $f \tup{v} \leq \deg^+ v$,
+whereas the fact that $f$ is a configuration implies
+$f \tup{v} \geq 0$; but these two inequalities combined
+leave only finitely many possible values for $f \tup{v}$).
+
+\begin{definition} \label{def.chip.add-configs}
+The set $\ZZ^V$ of all $\ZZ$-configuration can be equipped with
+operations of addition and subtraction, defined as follows:
+
+\begin{itemize}
+ \item For any two $\ZZ$-configurations $f : V \to \ZZ$ and
+       $g : V \to \ZZ$, we define a $\ZZ$-configuration
+       $f + g : V \to \ZZ$ by setting
+       \[
+        \tup{f + g} \tup{v}
+        = f \tup{v} + g \tup{v}
+        \qquad \text{ for each } v \in V .
+       \]
+
+ \item For any two $\ZZ$-configurations $f : V \to \ZZ$ and
+       $g : V \to \ZZ$, we define a $\ZZ$-configuration
+       $f - g : V \to \ZZ$ by setting
+       \[
+        \tup{f - g} \tup{v}
+        = f \tup{v} - g \tup{v}
+        \qquad \text{ for each } v \in V .
+       \]
+\end{itemize}
+
+These operations of addition and subtraction satisfy the
+standard rules (e.g., we always have
+$\tup{f+g} + h = f + \tup{g+h}$ and
+$\tup{f-g} - h = f - \tup{g+h}$).
+Hence, we can write terms like $f + g + h$ or $f - g - h$
+without having to explicitly place parentheses.
+
+Also, we can define a ``zero configuration'' $0 : V \to \ZZ$,
+which is the configuration that sends each $v \in V$ to the
+number $0$.
+(Hopefully, the dual use of the symbol $0$ for both the number
+$0$ and this zero configuration is not too confusing.)
+
+Also, for each $\ZZ$-configuration $f : V \to \ZZ$ and each
+integer $N$, we define a $\ZZ$-configuration $Nf : V \to \ZZ$
+by
+\[
+\tup{Nf} \tup{v} = N f \tup{v}
+\qquad \text{ for each } v \in V .
+\]
+\end{definition}
+
+\begin{definition}
+Let $f : V \to \ZZ$ be any $\ZZ$-configuration.
+Then, $\sum f$ shall denote the integer
+$\sum_{v \in V} f \tup{v}$.
+
+This integer $\sum f$ is called the \textit{degree} of $f$.
+\end{definition}
+
+If $f$ is a configuration, then $\sum f$ is the total
+number of chips in $f$.
+
+\begin{definition}
+Let $v \in V$ be a vertex.
+Then, a $\ZZ$-configuration $\Delta v$ is defined by setting
+\[
+ \tup{\Delta v} \tup{w}
+ = \begin{cases}
+    \deg^+ v , & \text{if } w = v ; \\
+    - a_{v, w}, & \text{if } w \neq v
+   \end{cases}
+  \qquad \text{ for all } w \in V ,
+\]
+where $a_{v, w}$ denotes the number of all arcs of $D$ having
+source $v$ and target $w$.
+(Note that $a_{v, w}$ might be $> 1$, since $D$ is a multidigraph.)
+\end{definition}
+
+\begin{definition}
+Let $v \in V$ be a vertex.
+Then, \textit{firing $v$} is the operation on
+$\ZZ$-configurations (i.e., formally speaking, the mapping from
+$\ZZ^V$ to $\ZZ^V$) that sends each $\ZZ$-configuration
+$f : V \to \ZZ$ to $f - \Delta v$.
+
+We sometimes say ``toppling $v$'' instead of ``firing $v$''.
+\end{definition}
+
+If $f : V \to \NN$ is a configuration, then the
+$\ZZ$-configuration $f - \Delta v$ obtained by firing $v$ can be
+described as follows:
+The vertex $v$ ``donates'' $\deg^+ v$ of its chips to its
+neighbors, by sending one chip along each of its outgoing arcs
+(i.e., for each arc having source $v$, the vertex $v$ sends one
+chip along this arc to the target of this arc).
+Thus, the number of chips on $v$ (weakly) decreases, while the
+number of chips on each other vertex (weakly) increases.
+Of course, the resulting $\ZZ$-configuration $f - \Delta v$ is
+not necessarily a configuration.
+(In fact, it is a configuration if and only if the vertex $v$ is
+active in $f$.)
+
+Notice that $\sum \tup{\Delta v} = 0$ for each vertex $v$.
+Thus,
+$\sum \tup{f - \Delta v}
+= \sum f - \underbrace{\sum \tup{\Delta v}}_{= 0}
+= \sum f$
+for each $\ZZ$-configuration $f : V \to \ZZ$ and each vertex $v$.
+In other words, firing a vertex $v$ does not change the degree of
+a $\ZZ$-configuration.
+
+\begin{definition}
+Let $f : V \to \NN$ be a configuration.
+
+Let $\tup{v_1, v_2, \ldots, v_k}$ be a sequence of vertices of
+$D$.
+
+\textbf{(a)} The sequence $\tup{v_1, v_2, \ldots, v_k}$ is said
+to be \textit{legal} for $f$ if for each
+$i \in \set{1, 2, \ldots, k}$, the vertex $v_i$ is active in
+the $\ZZ$-configuration
+$f - \Delta v_1 - \Delta v_2 - \cdots - \Delta v_{i-1}$.
+
+\textbf{(b)} The sequence $\tup{v_1, v_2, \ldots, v_k}$ is said
+to be \textit{stabilizing} for $f$ if the $\ZZ$-configuration
+$f - \Delta v_1 - \Delta v_2 - \cdots - \Delta v_k$ is stable.
+\end{definition}
+
+What is the rationale behind the notions of ``legal'' and
+``stabilizing''?
+A sequence of vertices provides a way to modify a
+configuration by first firing the first vertex in the sequence,
+then firing the second, and so on.
+The sequence is said to be \textit{legal} (for $f$) if the
+configuration remains a configuration throughout this ordeal
+(i.e., at no point does a vertex have a negative number of
+chips).
+The sequence is said to be \textit{stabilizing} (for $f$) if
+the $\ZZ$-configuration resulting from it at the very end is
+stable.
+
+We notice some obvious consequences of the definitions:
+
+\begin{itemize}
+ \item If a sequence $\tup{v_1, v_2, \ldots, v_k}$ is legal
+       for a configuration $f$, then all of the
+       $\ZZ$-configurations
+       $f - \Delta v_1 - \Delta v_2 - \cdots - \Delta v_i$
+       for $i \in \set{0, 1, \ldots, k}$ are actually
+       configurations.
+ \item If a sequence $\tup{v_1, v_2, \ldots, v_k}$ is legal
+       for a configuration $f$, then each prefix of this
+       sequence (i.e., each sequence of the form
+       $\tup{v_1, v_2, \ldots, v_i}$ for some
+       $i \in \set{0, 1, \ldots, k}$) is legal for $f$ as
+       well.
+ \item If a sequence $\tup{v_1, v_2, \ldots, v_k}$ is
+       stabilizing for a configuration $f$, then each
+       permutation of this sequence (i.e., each sequence of
+       the form
+       $\tup{v_{\sigma\tup{1}}, v_{\sigma\tup{2}}, \ldots,
+             v_{\sigma\tup{k}}}$ for a permutation
+       $\sigma$ of $\set{1, 2, \ldots, k}$) is stabilizing
+       as well.
+ \item If $\tup{v_1, v_2, \ldots, v_k}$ is a legal sequence
+       for a configuration $f$, then
+       $\tup{v_1, v_2, \ldots, v_k}$ is stabilizing if and
+       only if there exist no $v \in V$ such that the
+       sequence $\tup{v_1, v_2, \ldots, v_k, v}$ is legal.
+\end{itemize}
+
+
+An important property of chipfiring is the following result
+(sometimes called the ``least action principle''):
+
+\begin{theorem} \label{thm.chip.lap}
+Let $f : V \to \NN$ be any configuration.
+Let $\ell$ and $s$ be two sequences of vertices of $D$ such
+that $\ell$ is legal for $f$ while $s$ is stabilizing for $f$.
+Then, $\ell$ is a subpermutation of $s$.
+\end{theorem}
+
+Here, we are using the following notation:
+
+\begin{definition}
+Let $\tup{p_1, p_2, \ldots, p_u}$ and
+$\tup{q_1, q_2, \ldots, q_v}$ be two finite sequences.
+Then, we say that $\tup{p_1, p_2, \ldots, p_u}$ is
+a \textit{subpermutation} of $\tup{q_1, q_2, \ldots, q_v}$
+if and only if, for each object $t$, the following holds:
+The number of $i \in \set{1, 2, \ldots, u}$ satisfying
+$p_i = t$ is less or equal to the number of
+$j \in \set{1, 2, \ldots, v}$ satisfying $q_j = t$.
+
+Equivalently, the sequence $\tup{p_1, p_2, \ldots, p_u}$ is
+a subpermutation of the sequence $\tup{q_1, q_2, \ldots, q_v}$
+if and only if you can obtain the former from the latter by
+removing some entries and permuting the remaining entries.
+(``Some'' allows for the possibility of ``zero''.)
+\end{definition}
+
+\begin{corollary} \label{cor.chip.lap-cor}
+Let $f : V \to \NN$ be any configuration.
+Let $\ell$ and $\ell'$ be two sequences of vertices of $D$
+that are both legal and stabilizing for $f$.
+Then:
+
+\textbf{(a)} The sequence $\ell'$ is a permutation of $\ell$.
+
+In particular:
+
+\textbf{(b)} The sequences $\ell$ and $\ell'$ have the
+same length.
+
+\textbf{(c)} For each $t \in V$, the number of times $t$
+appears in $\ell'$ equals the number of times $t$ appears in
+$\ell$.
+
+\textbf{(d)} The configuration obtained from $f$ by firing
+all vertices in $\ell$ (one after the other) equals the
+configuration obtained from $f$ by firing
+all vertices in $\ell'$ (one after the other).
+\end{corollary}
+
+Next we state some facts about legal sequences:
+
+\begin{lemma} \label{lem.chip.leg-bound1}
+Let $f : V \to \NN$ be a configuration.
+Let $h = \sum f$.
+Let $\ell$ be a legal sequence for $f$.
+
+Let $a$ be an arc of $D$.
+Let $u$ be the source of $a$, and let $v$ be the target of $a$.
+
+\textbf{(a)}
+If $u$ appears more than $h$ times in the sequence $\ell$,
+then $v$ must appear at least once in the sequence $\ell$.
+
+\textbf{(b)}
+Fix $k \in \NN$.
+If $u$ appears more than $kh$ times in the sequence $\ell$,
+then $v$ must appear at least $k$ times in the sequence $\ell$.
+\end{lemma}
+
+\begin{lemma} \label{lem.chip.leg-bound1b}
+Let $f : V \to \NN$ be a configuration.
+Let $h = \sum f$.
+Let $\ell$ be a legal sequence for $f$.
+
+Let $u$ and $v$ be two vertices of $D$ such that there exists
+a path of length $d$ from $u$ to $v$.
+
+If $u$ appears at least $\dfrac{h^{d+1}-1}{h-1}$
+times in the sequence $\ell$,
+then $v$ must appear at least once in the sequence $\ell$.
+\end{lemma}
+
+\begin{proposition} \label{prop.chip.leg-everyone-fires}
+Let $f : V \to \NN$ be a configuration.
+Let $h = \sum f$.
+Let $\ell$ be a legal sequence for $f$.
+Let $n = \abs{V}$.
+
+Let $q$ be a vertex of $D$ such that for each vertex
+$u \in V$, there exists a path from $u$ to $q$.
+
+If the length of $\ell$ is
+$> \tup{n-1} \tup{ \dfrac{h^n-1}{h-1} - 1 }$,
+then $q$ must appear at least once in the sequence $\ell$.
+\end{proposition}
+
+\begin{proposition} \label{prop.chip.leg-period}
+Let $f : V \to \NN$ be a configuration.
+Let $h = \sum f$.
+Let $\ell = \tup{\ell_1, \ell_2, \ldots, \ell_k}$ be a
+legal sequence for $f$.
+Let
+$g = f - \Delta \ell_1 - \Delta \ell_2 - \cdots - \Delta \ell_k$
+be the configuration obtained from $f$ by firing the vertices in
+$\ell$ (one after the other).
+
+\textbf{(a)} We have $g \in \set{0, 1, \ldots, h}^V$.
+(In other words, $g \tup{v} \in \set{0, 1, \ldots, h}$
+for each $v \in V$.)
+
+\textbf{(b)} Let $n = \abs{V}$.
+If the sequence $\ell$ has length
+$\geq \tup{h+1}^n$, then there exist legal sequences (for $f$)
+of arbitrary length.
+\end{proposition}
+
+\begin{definition}
+Let $f : V \to \NN$ be a configuration.
+
+We say that $f$ is \textit{finitary} if there
+exists a sequence of vertices that is stabilizing for $f$.
+Otherwise, we say that $f$ is \textit{infinitary}.
+\end{definition}
+
+\begin{theorem} \label{thm.chip.dichotomy}
+Let $f : V \to \NN$ be a configuration.
+Then, exactly one of the following two statements holds:
+
+\begin{itemize}
+\item \textit{Statement 1:}
+      The configuration $f$ is finitary. \par
+      There exists a sequence $s$ of vertices that is both
+      legal and stabilizing for $f$. \par
+      All such sequences are permutations of $s$.
+      \par
+      All legal sequences (for $f$) are subpermutations
+      of $s$, and in particular are at most as long as $s$.
+
+\item \textit{Statement 2:}
+      The configuration $f$ is infinitary. \par
+      There exists no stabilizing sequence for $f$. \par
+      There exist legal sequences for $f$ of arbitrary length.
+      More precisely, each legal sequence for $f$ can be
+      extended to a longer legal sequence.
+\end{itemize}
+\end{theorem}
+
+\begin{definition} \label{def.chip.stabilization}
+Let $f : V \to \NN$ be a finitary configuration.
+Then, Statement 1 in Theorem~\ref{thm.chip.dichotomy} must
+hold.
+Therefore, there exists a sequence $s$ of vertices that is both
+legal and stabilizing for $f$.
+The \textit{stabilization} of $f$ means
+the configuration obtained from $f$ by firing
+all vertices in $s$ (one after the other).
+(This does not depend on the choice of $s$, because of
+Corollary~\ref{cor.chip.lap-cor} \textbf{(d)}.)
+
+The stabilization of $f$ is denoted by $f^\circ$.
+\end{definition}
+
+Something similar holds if we forbid firing a specific
+vertex:
+
+\begin{definition}
+Let $q \in V$.
+
+Let $f : V \to \NN$ be a configuration.
+
+Let $\tup{v_1, v_2, \ldots, v_k}$ be a sequence of vertices of
+$D$.
+
+\textbf{(a)} The sequence $\tup{v_1, v_2, \ldots, v_k}$ is said
+to be \textit{$q$-legal} for $f$ if it is legal and does not
+contain the vertex $q$.
+
+\textbf{(b)} The sequence $\tup{v_1, v_2, \ldots, v_k}$ is said
+to be \textit{$q$-stabilizing} for $f$ if the $\ZZ$-configuration
+$f - \Delta v_1 - \Delta v_2 - \cdots - \Delta v_k$ has no
+active vertices except (possibly) $q$.
+\end{definition}
+
+We can now define ``$q$-finitary'' and ``$q$-infinitary''
+and obtain an analogue of Theorem~\ref{thm.chip.dichotomy}.
+But the most commonly considered case is that when $q$ is
+a ``global sink'' (a vertex with no outgoing arcs, and which
+is reachable from any vertex),
+and in this case \textbf{every} configuration is
+$q$-finitary.
+Let us state this as its own result:
+
+\begin{theorem} \label{thm.chip.dichotomy-q}
+Let $f : V \to \NN$ be a configuration.
+Let $q \in V$.
+Assume that for each vertex $u \in V$, there exists a path
+$u \to q$.
+Then, there exists a sequence $s$ of vertices that is both
+$q$-legal and $q$-stabilizing for $f$.
+All such sequences are permutations of $s$.
+All $q$-legal sequences (for $f$) are subpermutations
+of $s$, and in particular are at most as long as $s$.
+\end{theorem}
+
+\begin{definition}
+Let $f : V \to \NN$ be a configuration.
+Let $q \in V$.
+Assume that for each vertex $u \in V$, there exists a path
+$u \to q$.
+Then, Theorem~\ref{thm.chip.dichotomy-q} shows that
+there exists a sequence $s$ of vertices that is both
+$q$-legal and $q$-stabilizing for $f$.
+The \textit{$q$-stabilization} of $f$ means
+the configuration obtained from $f$ by firing
+all vertices in $s$ (one after the other).
+(This does not depend on the choice of $s$, because of
+the analogue of
+Corollary~\ref{cor.chip.lap-cor} \textbf{(d)}
+for $q$-legal and $q$-stabilizing sequences.)
+\end{definition}
+
+
+\subsection{Exercise \ref{exe.chip.better-bounds}: better
+bounds for legal sequences}
+
+The following exercise improves on the bound given in
+Proposition~\ref{prop.chip.leg-period} \textbf{(b)} and
+also on the one given in
+Proposition~\ref{prop.chip.leg-everyone-fires}\footnote{To
+  see that Exercise~\ref{exe.chip.better-bounds} \textbf{(b)}
+  improves on the bound given in
+  Proposition~\ref{prop.chip.leg-everyone-fires},
+  we need to check that
+  $\tup{n-1} \tup{ \dfrac{h^n-1}{h-1} - 1} + 1
+  \geq \dbinom{n+h-1}{n-1}$.
+  This is easy for $n \leq 1$ (in fact, the case
+  $n = 0$ is impossible due to the existence of a
+  $q \in V$, and the case $n = 1$ is an equality
+  case).
+  In the remaining case $n \geq 2$,
+  the stronger inequality
+  $\dfrac{h^n-1}{h-1} - 1 + 1
+  \geq \dbinom{n+h-1}{n-1}$
+  can be proven by a simple induction
+  over $n$.}.
+I don't know whether the improved bounds can be further
+improved.
+
+\begin{exercise} \label{exe.chip.better-bounds}
+Fix a loopless multidigraph $D = \tup{V, A, \phi}$.
+Let $f : V \to \NN$ be a configuration.
+Let $h = \sum f$.
+Let $n = \abs{V}$.
+Assume that $n > 0$.
+
+Let $\ell = \tup{\ell_1, \ell_2, \ldots, \ell_k}$ be a
+legal sequence for $f$ having length
+$k \geq \dbinom{n+h-1}{n-1}$.
+
+Prove the following:
+
+\textbf{(a)} There exist legal sequences (for $f$) of
+arbitrary length.
+
+\textbf{(b)} Let $q$ be a vertex of $D$ such that for each vertex
+$u \in V$, there exists a path from $u$ to $q$.
+Then, $q$ must appear at least once in the sequence $\ell$.
+
+[\textbf{Hint:}
+For \textbf{(a)}, apply the same pigeonhole-principle argument
+as for Proposition~\ref{prop.chip.leg-period} \textbf{(b)}.]
+\end{exercise}
+
+In the above exercise,
+you are allowed to use the fact\footnote{See, for example,
+  \url{https://math.stackexchange.com/questions/36250/number-of-monomials-of-certain-degree}
+  for a proof of this fact (in the language of monomials).
+  Or see \cite[\S 1.2]{Stanle11} (search for
+  ``weak composition'' and read the first paragraph that
+  comes up).}
+that the number of
+$n$-tuples $\tup{a_1, a_2, \ldots, a_n}$ of nonnegative
+integers satisfying $a_1 + a_2 + \cdots + a_n = h$
+is $\dbinom{n+h-1}{n-1}$.
+
+\subsection{Exercise \ref{exe.chip.examples}: examples of chip-firing}
+
+\Needspace{15cm}
+\begin{exercise} \label{exe.chip.examples}
+\textbf{(a)} Let $D$ be the following digraph:
+\[
+\xymatrix{
+ u \ar[r] & v \ar[r] & q
+}
+\]
+(i.e., the digraph $D$ with three vertices
+$u, v, q$ and two arcs $uv, vq$.)
+
+Let $k$ be a positive integer.
+Consider the configuration $g_k$ on $D$ which has $k$ chips at $u$
+and $0$ chips at each other vertex.
+
+Find the $q$-stabilization of $g_k$.
+
+\textbf{(b)} Let $D$ be the following digraph:
+\[
+\xymatrix{
+ u \are[r] & v \ar[r] & q
+}
+\]
+where a curve without an arrow stands for one arc in each
+direction.
+(Thus, formally speaking, the digraph $D$ has three vertices
+$u, v, q$ and three arcs $uv, vu, vq$.)
+
+Let $k$ be a positive integer.
+Consider the configuration $g_k$ on $D$ which has $k$ chips at $u$
+and $0$ chips at each other vertex.
+
+Find the $q$-stabilization of $g_k$.
+
+\textbf{(c)} Let $D$ be the following digraph:
+\[
+\xymatrix{
+ & v \are[dl] \are[dr] \ar[dd] \\
+ u \are[rr] \ar[dr] & & w \ar[dl] \\
+ & q
+}
+\]
+where a curve without an arrow stands for one arc in each
+direction.
+(Thus, formally speaking, the digraph $D$ has four vertices
+$u, v, w, q$ and nine arcs
+$uv, vu, vw, wv, wu, uw, uq, vq, wq$.)
+
+Let $k \geq 2$ be an integer.
+Consider the configuration $f_k$ on $D$ which has $k$ chips at each
+vertex (i.e., which has $f_k \tup{v} = k$ for each
+$v \in \set{u, v, w, q}$).
+
+Find the $q$-stabilization of $f_k$.
+\end{exercise}
+
+\subsection{Exercise \ref{exe.chip.adj-cycles}: a lower bound
+on the degree of an infinitary configuration}
+
+We shall use the notation
+$\operatorname{s}\tup{a}$ for the source of an arc
+$a \in A$.
+We shall also the notation
+$\operatorname{t}\tup{a}$ for the target of an arc
+$a \in A$.
+
+\begin{exercise} \label{exe.chip.adj-cycles}
+Assume that the multidigraph $D$ is strongly connected
+and satisfies $\abs{V} > 1$.
+Let $f : V \to \NN$ be an infinitary configuration.
+
+\textbf{(a)} Prove that $D$ cannot have more than
+$\sum f$ vertex-disjoint cycles.
+(A set of cycles is said to be \textit{vertex-disjoint}
+if no two distinct cycles in the set have a vertex in
+common.)
+
+\textbf{(b)} Prove that $D$ cannot have more than
+$\sum f$ arc-disjoint cycles.
+(A set of cycles is said to be \textit{arc-disjoint}
+if no two distinct cycles in the set have an arc in
+common.)
+\end{exercise}
+
+Exercise~\ref{exe.chip.adj-cycles} \textbf{(b)} is
+\cite[Theorem 2.2]{BjoLov92}, but the proof given there
+is vague and unrigorous.
+
+\subsection{Exercise \ref{exe.chip.assoc}: an associativity
+law for stabilizations}
+
+Recall Definition~\ref{def.chip.stabilization}.
+
+\begin{exercise} \label{exe.chip.assoc}
+Let $f : V \to \NN$, $g : V \to \NN$ and $h : V \to \NN$
+be three configurations such that both configurations
+$f$ and $g + h$ are finitary, and such that the
+configuration $f + \tup{g + h}^\circ$ is also finitary.
+
+Prove the following:
+
+\textbf{(a)} The configurations $f + g$ and $h$ are also
+finitary.
+
+\textbf{(b)} The configurations $f + g + h$ and
+$\tup{f + g}^\circ + h$ are also finitary, and
+satisfy
+\[
+\tup{f + g + h}^\circ
+= \tup{f + \tup{g + h}^\circ}^\circ
+= \tup{\tup{f + g}^\circ + h}^\circ .
+\]
+
+[\textbf{Hint:} The following piece of notation is
+useful:
+If $k$ and $k'$ are two configurations, then
+$k \to k'$ shall mean that there exists a legal
+sequence $\ell$ for $k$ such that firing all vertices
+in $\ell$ (one after the other) transforms $k$ into
+$k'$.
+This relation $\to$ is reflexive and transitive.
+Show that if $c$, $k$ and $k'$ are three configurations
+satisfying $k \to k'$, then $c + k \to c + k'$.]
+\end{exercise}
+
+\subsection{Exercise \ref{exe.chip.Z2}: chip-firing on
+the integer lattice}
+
+Now, we shall briefly discuss chip-firing on the
+integer lattice $\ZZ^2$; this is one of the most famous
+cases of chip-firing, leading to some of the pretty
+pictures.
+For examples and illustrations, check out
+\cite{Ellenb15} as well as some of the links above.
+
+We have not defined infinite graphs in class; the
+theory of infinite graphs involves some subtleties that
+would take us too far.
+However, for this particular exercise, we need only a
+specific infinite graph, which is fairly simple.
+
+\begin{definition}
+\textbf{(a)} A \textit{locally finite multigraph} means
+a triple $\tup{V, E, \phi}$, where $V$ and $E$ are sets
+and $\phi : E \to \powset[2]{V}$ is a map having the
+following property:
+\begin{enumerate}
+\item[(*)] For each $v \in V$, there exist only finitely
+many $e \in E$ satisfying $v \in \phi \tup{e}$.
+\end{enumerate}
+
+Most of the concepts defined for (usual) multigraphs still
+make sense for locally finite multigraphs.
+In particular, the elements of $V$ are called the
+vertices, and the elements of $E$ are called the
+edges.
+The property (*) says that each vertex is contained in
+only finitely many edges; this allows us to define
+the degree of a vertex.
+
+\textbf{(b)} The \textit{integer lattice} shall mean
+the locally finite multigraph defined as follows:
+\begin{itemize}
+\item The vertices of the integer lattice are the
+      pairs $\tup{i, j}$ of two integers $i$ and $j$.
+      In other words, the vertex set of the integer
+      lattice is
+        $\ZZ^2 = \set{ \tup{i, j} \ \mid \ i \in \ZZ
+                        \text{ and } j \in \ZZ }$.
+      We view these vertices as points in the
+      plane, and draw the multigraph accordingly.
+\item Two vertices of the integer lattice are
+      adjacent if and only if they have distance $1$
+      (as points in the plane).
+      In other words, a vertex $\tup{i, j}$ is
+      adjacent to the four vertices
+      $\tup{i+1, j}, \tup{i, j+1}, \tup{i-1, j},
+      \tup{i, j-1}$ and no others.
+\end{itemize}
+
+\textbf{(c)} You can guess how locally finite
+multidigraphs are defined.
+Each locally finite multigraph can be regarded as a
+locally finite multidigraph by replacing each edge
+by a pair of two arcs (directed in both possible
+directions).
+\end{definition}
+
+Let us show a piece of the integer lattice, viewed as
+a locally finite multigraph:
+\[
+\xymatrix{
+& \are[d] & \are[d] & \are[d] & \\
+\are[r] & \tup{-1, 1} \are[d] \are[r] & \tup{0, 1} \are[d] \are[r] & \tup{1, 1} \are[d] \are[r] & \\
+\are[r] & \tup{-1, 0} \are[d] \are[r] & \tup{0, 0} \are[d] \are[r] & \tup{1, 0} \are[d] \are[r] & \\
+\are[r] & \tup{-1, -1} \are[d] \are[r] & \tup{0, -1} \are[d] \are[r] & \tup{1, -1} \are[d] \are[r] & \\
+& & & &
+}
+\]
+And here is it again, viewed as a locally finite
+multidigraph:
+\[
+\xymatrix{
+& \arebi[d] & \arebi[d] & \arebi[d] & \\
+\arebi[r] & \tup{-1, 1} \arebi[d] \arebi[r] & \tup{0, 1} \arebi[d] \arebi[r] & \tup{1, 1} \arebi[d] \arebi[r] & \\
+\arebi[r] & \tup{-1, 0} \arebi[d] \arebi[r] & \tup{0, 0} \arebi[d] \arebi[r] & \tup{1, 0} \arebi[d] \arebi[r] & \\
+\arebi[r] & \tup{-1, -1} \arebi[d] \arebi[r] & \tup{0, -1} \arebi[d] \arebi[r] & \tup{1, -1} \arebi[d] \arebi[r] & \\
+& & & &
+}
+\]
+
+\begin{exercise} \label{exe.chip.Z2}
+Let $f$ be a configuration on the integer lattice
+(where we view the integer lattice as a locally
+finite multidigraph).
+(The notion of a configuration and related notions
+are defined in the same way as for usual, finite
+multidigraphs.)
+
+Assume that only finitely many vertices $v \in \ZZ^2$
+satisfy $f \tup{v} \neq 0$.
+(Thus, the total number of chips $\sum f$ is finite.)
+
+An edge $e$ of the integer lattice is
+said to be \textit{non-void} in $f$ if and only if
+at least one of the endpoints of $e$ has at least one
+chip in $f$.
+
+Prove the following:
+
+\textbf{(a)} If an edge of the integer lattice is
+non-void in $f$, then this edge remains non-void after
+firing any legal sequence of vertices.
+(``Firing a sequence'' means firing all the vertices
+in the sequence, one after the other.)
+
+\textbf{(b)} The total number of configurations that
+can be obtained from $f$ by firing a legal sequence
+of vertices is finite.
+
+\textbf{(c)} If we fire any active vertex, then the
+sum $\sum_{\tup{i, j} \in \ZZ^2} f \tup{\tup{i, j}}
+\cdot \tup{i + j}^2$ increases.
+
+\textbf{(d)} The configuration $f$ is finitary (so its
+stabilization is well-defined).
+\end{exercise}
+
+This exercise gives the reason why pictures such as the
+ones in \cite{Ellenb15} exist (although it does not
+explain their shapes and patterns).
+
+\subsection{Exercise \ref{exe.aco.score-vector}: acyclic
+orientations are determined by their score vectors}
+
+Now, we leave the chip-firing setting.
+
+Roughly speaking, an \textit{orientation} of
+a multigraph $G$ is a way to assign to each edge of $G$
+a direction (thus making it an arc).
+If the resulting \textbf{digraph} has no cycles, then
+this orientation will be called \textit{acyclic}.
+A rigorous way to state this definition is the
+following:
+
+\begin{definition} \label{def.aco.aco}
+Let $G = \tup{V, E, \psi}$ be a multigraph.
+
+\textbf{(a)} An \textit{orientation} of $G$ is a map
+$\phi : E \to V \times V$ such that each $e \in E$
+has the following property:
+If we write $\phi \tup{e}$ in the form
+$\phi \tup{e} = \tup{u, v}$, then
+$\psi \tup{e} = \set{u, v}$.
+
+\textbf{(b)} An orientation $\phi$ of $G$ is said to
+be \textit{acyclic} if and only if the multidigraph
+$\tup{V, E, \phi}$ has no cycles.
+\end{definition}
+
+\begin{example}
+Let $G = \tup{V, E, \psi}$ be the following multigraph:
+\[
+\xymatrix{
+& 2 \are[dl]^a \are@/_2pc/[dl]_b \are[dr]^c \\
+1 \are[rr]_d & & 3
+}
+\]
+Then, the following four maps $\phi$ are orientations of $G$:
+\begin{itemize}
+\item the map sending $a$ to $\tup{1, 2}$, sending $b$ to
+      $\tup{1, 2}$, sending $c$ to $\tup{3, 2}$, and
+      sending $d$ to $\tup{1, 3}$;
+\item the map sending $a$ to $\tup{2, 1}$, sending $b$ to
+      $\tup{1, 2}$, sending $c$ to $\tup{3, 2}$, and
+      sending $d$ to $\tup{3, 1}$;
+\item the map sending $a$ to $\tup{1, 2}$, sending $b$ to
+      $\tup{1, 2}$, sending $c$ to $\tup{2, 3}$, and
+      sending $d$ to $\tup{1, 3}$;
+\item the map sending $a$ to $\tup{1, 2}$, sending $b$ to
+      $\tup{1, 2}$, sending $c$ to $\tup{2, 3}$, and
+      sending $d$ to $\tup{3, 1}$.
+\end{itemize}
+Here are the multidigraphs $\tup{V, E, \phi}$ corresponding to
+these four maps (in the order mentioned):
+\[
+\begin{tabular}{|c|c|c|c|}
+\xymatrix{
+& 2 \ar@{<-}[dl]^a \ar@{<-}@/_2pc/[dl]_b \ar@{<-}[dr]^c \\
+1 \ar[rr]_d & & 3
+} &
+\xymatrix{
+& 2 \ar[dl]^a \ar@{<-}@/_2pc/[dl]_b \ar@{<-}[dr]^c \\
+1 \ar@{<-}[rr]_d & & 3
+} &
+\xymatrix{
+& 2 \ar@{<-}[dl]^a \ar@{<-}@/_2pc/[dl]_b \ar[dr]^c \\
+1 \ar[rr]_d & & 3
+} &
+\xymatrix{
+& 2 \ar@{<-}[dl]^a \ar@{<-}@/_2pc/[dl]_b \ar[dr]^c \\
+1 \ar@{<-}[rr]_d & & 3
+}
+\end{tabular}
+\]
+Only the first and the third of these orientations
+$\phi$ are acyclic (since only the first and the third
+of these multidigraphs have no cycles).
+\end{example}
+
+\begin{exercise} \label{exe.aco.score-vector}
+Let $G = \tup{V, E, \psi}$ be a multigraph.
+
+Prove the following:
+
+\textbf{(a)} If $\phi$ is any acyclic orientation of $G$,
+and if $V \neq \varnothing$,
+then there exists a $v \in V$ such that no arc of the
+multidigraph $\tup{V, E, \phi}$ has target $v$.
+
+\textbf{(b)} If $\phi_1$ and $\phi_2$ are two acyclic orientations
+of $G$ such that each $v \in V$ satisfies
+\[
+\deg^+_{\tup{V, E, \phi_1}} v = \deg^+_{\tup{V, E, \phi_2}} v ,
+\]
+then $\phi_1 = \phi_2$.
+\end{exercise}
+
+\subsection{Exercise \ref{exe.flows-cuts.cut-lattice}: the
+lattice structure on minimum cuts}
+
+Let us recall some terminology from
+\href{http://www-users.math.umn.edu/~dgrinber/5707s17/5707lec16.pdf}{lecture 16}:
+
+\begin{itemize}
+\item A \textit{network} consists of:
+      \begin{itemize}
+      \item a digraph $\tup{V, A}$;
+      \item two distinct vertices $s \in V$ and $t \in V$,
+            called the \textit{source} and the \textit{sink},
+            respectively (although we do not require $s$ to
+            have indegree $0$ or $t$ to have outdegree $1$);
+      \item a function $c : A \to \QQ_+$, called the
+            \textit{capacity function}.
+            (Here, $\QQ_+$ means the set
+            $\set{ x \in \QQ \mid x \geq 0 }$.)
+      \end{itemize}
+
+\item Given a network consisting of a digraph
+      $\tup{V, A}$, a source $s \in V$ and a sink $t \in V$,
+      and a capacity function $c : A \to \QQ_+$, we define
+      the following notations:
+      \begin{itemize}
+      \item For any subset $S$ of $V$, we let $\overline{S}$
+            denote the subset $V \setminus S$ of $V$.
+      \item If $P$ and $Q$ are two subsets of $V$, then
+            $\ive{P, Q}$ shall mean the set of all arcs
+            $a \in A$ whose source belongs to $P$ and whose
+            target belongs to $Q$.
+            (In other words,
+            $\ive{P, Q} = A \cap \tup{P \times Q}$.)
+      \item If $P$ and $Q$ are two subsets of $V$, then the
+            number $c \tup{P, Q} \in \QQ_+$ is defined by
+            \[
+            c \tup{P, Q} = \sum_{a \in \ive{P, Q}} c \tup{a} .
+            \]
+      \end{itemize}
+\end{itemize}
+
+We also refer to lecture 16 for the definition of a flow
+(which is not necessary for the following problem, but may
+be helpful).
+
+\begin{exercise} \label{exe.flows-cuts.cut-lattice}
+Consider a network consisting of a digraph
+$\tup{V, A}$, a source $s \in V$ and a sink $t \in V$,
+and a capacity function $c : A \to \QQ_+$
+such that $s \neq t$.
+
+An \textit{$s$-$t$-cutting subset} shall mean a subset
+$S$ of $V$ satisfying $s \in S$ and $t \notin S$.
+
+Let $m$ denote the minimum possible value of
+$c \tup{S, \overline{S}}$ where $S$ ranges over the
+$s$-$t$-cutting subsets.
+(Recall that this is the maximum value of an
+$s$-$t$-flow, according to the
+maximum-flow-minimum-cut theorem.)
+
+An $s$-$t$-cutting subset $S$ is said to be
+\textit{cut-minimal} if it satisfies
+$c \tup{S, \overline{S}} = m$.
+
+Let $X$ and $Y$ be two cut-minimal $s$-$t$-cutting subsets.
+Prove that $X \cap Y$ and $X \cup Y$ also are
+cut-minimal $s$-$t$-cutting subsets.
+\end{exercise}
+
+\begin{thebibliography}{99999999}
+
+\bibitem[BjoLov92]{BjoLov92}
+Anders Bj\"orner, L\'aszl\'o Lov\'asz,
+\textit{Chip-firing games on directed graphs},
+J. Algebraic Combinatorics 1 (1991), pp. 305--328,
+revised version, July 1992.
+\newline\url{http://www.cs.elte.hu/~lovasz/morepapers/abacus.pdf}
+
+\bibitem[BjLoSh91]{BjLoSh91}
+Anders Bj\"orner, L\'aszl\'o Lov\'asz, P. W. Shor,
+\textit{Chip-firing games on graphs},
+Europ. J. Comb. 12 (1991), pp. 283--291.
+\newline\url{http://www.cs.elte.hu/~lovasz/morepapers/chips.pdf}
+
+\bibitem[CorPet16]{CorPet16}
+Scott Corry, David Perkinson,
+\textit{Divisors and Sandpiles},
+draft of 20 November 2016.
+\newline\url{http://people.reed.edu/~davidp/divisors_and_sandpiles/}
+
+\bibitem[Ellenb15]{Ellenb15}
+Jordan Ellenberg,
+\textit{The Amazing, Autotuning Sandpile},
+Nautilus, 2 April 2015.
+\newline\url{http://nautil.us/issue/23/dominoes/the-amazing-autotuning-sandpile}
+
+\bibitem[HLMPPW13]{HLMPPW13}
+Alexander E. Holroyd, Lionel Levine, Karola M\'esz\'aros,
+Yuval Peres, James Propp, David B. Wilson,
+\textit{Chip-Firing and Rotor-Routing on Directed Graphs},
+arXiv:0801.3306v4.
+\newline\url{https://arxiv.org/abs/0801.3306v4}
+
+\bibitem[Musike09]{Musike09}
+Gregg Musiker,
+\textit{18.312: Algebraic Combinatorics, Spring 2009},
+MIT OpenCourseWare.
+\newline\url{https://ocw.mit.edu/courses/mathematics/18-312-algebraic-combinatorics-spring-2009/readings-and-lecture-notes/}
+
+\bibitem[Stanle11]{Stanle11}Richard P. Stanley, \textit{Enumerative
+Combinatorics, volume 1}, Cambridge University Press, 2011. \newline%
+\url{http://math.mit.edu/~rstan/ec/ec1/}
+
+\end{thebibliography}
+
+\end{document}

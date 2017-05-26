@@ -1,0 +1,387 @@
+% LaTeX solution template for Math 5707 (Owen Levin, Darij Grinberg)
+% ------------------------------------------------------------------
+
+% Like most advanced LaTeX files, this one begins with a lot of
+% boilerplate. You don't need to understand (or even read) most of it.
+% All you need to do is fill in your name, UMN ID, email address,
+% and the number of the pset. (Search for "METADATA" to find the place
+% for this.) Then, you can go straight to the "EXERCISE 1"
+% section and start writing your solutions.
+% The "VARIOUS USEFUL COMMANDS" section is probably worth taking a
+% look at at some point.
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+\documentclass[paper=a4, fontsize=12pt]{scrartcl} % A4 paper and 12pt font size
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm,amssymb} % Math packages
+\usepackage{mathrsfs}    % More math packages
+\usepackage{sectsty}  % Allows customizing section commands
+\allsectionsfont{\centering \normalfont\scshape} % Make all section titles centered, the default font and small caps %remove this to left align section tites
+\usepackage{hyperref} % Turns cross-references into hyperlinks,
+                      % and defines \url and \href commands.
+\usepackage{graphicx} % For embedding graphics files.
+\usepackage{framed}   % For the "leftbar" environment used below.
+\usepackage{ifthen}   % Used for the \powset command below.
+\usepackage{lastpage} % for counting the number of pages
+\usepackage[headsepline,footsepline,manualmark]{scrlayer-scrpage}
+\usepackage[height=10in,a4paper,hmargin={1in,0.8in}]{geometry}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{tikz}     % This is a powerful tool to draw vector
+                      % graphics inside LaTeX. In particular, you can
+                      % use it to draw graphs.
+\usepackage{verbatim} % For the "verbatim" environment, in which
+                      % special symbols can be used freely without
+                      % confusing the compiler. (And it's typeset in
+                      % a constant-width font.)
+                      % Useful, e.g., for quoting code (or ASCII art).
+
+%\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\setlength\parindent{20pt} % Makes indentation for paragraphs longer.
+                           % This makes paragraphs stand out more.
+
+%----------------------------------------------------------------------------------------
+%	VARIOUS USEFUL COMMANDS
+%----------------------------------------------------------------------------------------
+% The commands below might be convenient. For example, you probably
+% prefer to write $\powset[2]{V}$ for the set of $2$-element subsets
+% of $V$, rather than writing $\mathcal{P}_2(V)$.
+% Notice that you can easily define your own commands like this.
+% Caveat: Some of these commands need to be properly "guarded" when
+% they occur in subscripts or superscripts. So you should not write
+% $K_\CC$, but rather $K_{\CC}$.
+\newcommand{\CC}{\mathbb{C}} % complex numbers
+\newcommand{\RR}{\mathbb{R}} % real numbers
+\newcommand{\QQ}{\mathbb{Q}} % rational numbers
+\newcommand{\NN}{\mathbb{N}} % nonnegative integers
+\newcommand{\Z}[1]{\mathbb{Z}/#1\mathbb{Z}} % integers modulo k
+                                            % (syntax: "\Z{k}")
+\newcommand{\ZZ}{\mathbb{Z}} % integers
+\newcommand{\id}{\operatorname{id}} % identity map
+\newcommand{\lcm}{\operatorname{lcm}}
+% Lowest common multiple. For historical reasons, LaTeX has a \gcd
+% command built in, but not an \lcm command. The preceding line
+% rectifies that.
+\newcommand{\rev}{\operatorname{rev}} % reversal of a walk
+\newcommand{\powset}[2][]{\ifthenelse{\equal{#2}{}}{\mathcal{P}\left(#1\right)}{\mathcal{P}_{#1}\left(#2\right)}}
+% $\powset[k]{S}$ stands for the set of all $k$-element subsets of
+% $S$. The argument $k$ is optional, and if not provided, the result
+% is the whole powerset of $S$.
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+% $\set{...}$ compiles to {...} (set-brackets).
+\newcommand{\abs}[1]{\left| #1 \right|}
+% $\abs{...}$ compiles to |...| (absolute value, or size of a set).
+\newcommand{\tup}[1]{\left( #1 \right)}
+% $\tup{...}$ compiles to (...) (parentheses, or tuple-brackets).
+\newcommand{\ive}[1]{\left[ #1 \right]}
+% $\ive{...}$ compiles to [...] (Iverson bracket, aka truth value).
+\newcommand{\verts}[1]{\operatorname{V}\left( #1 \right)}
+% $\verts{...}$ compiles to V(...) (vertex set of a graph/digraph).
+\newcommand{\edges}[1]{\operatorname{E}\left( #1 \right)}
+% $\edges{...}$ compiles to E(...) (edge set of a graph).
+\newcommand{\arcs}[1]{\operatorname{A}\left( #1 \right)}
+% $\arcs{...}$ compiles to A(...) (arc set of a digraph).
+\newcommand{\underbrack}[2]{\underbrace{#1}_{\substack{#2}}}
+% $\underbrack{...1}{...2}$ yields
+% $\underbrace{...1}_{\substack{...2}}$. This is useful for doing
+% local rewriting transformations on mathematical expressions with
+% justifications. For example, try this out:
+% $ \underbrack{(a+b)^2}{= a^2 + 2ab + b^2 \\ \text{(by the binomial formula)}} $
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+%----------------------------------------------------------------------------------------
+%	MAKING SUMMATION SIGNS ALWAYS PUT THEIR BOUNDS ABOVE AND BELOW
+%	THE SIGN
+%----------------------------------------------------------------------------------------
+% The following are hacks to ensure that sums (such as
+% $\sum_{k=1}^n k$) always put their bounds (i.e., the $k=1$ and the
+% $n$) underneath and above the sign, as opposed to on its right.
+% Same for products (\prod), set unions (\bigcup) and set
+% intersections (\bigcap). Remove the 8 lines below if you do not want
+% this behavior.
+\let\sumnonlimits\sum
+\let\prodnonlimits\prod
+\let\cupnonlimits\bigcup
+\let\capnonlimits\bigcap
+\renewcommand{\sum}{\sumnonlimits\limits}
+\renewcommand{\prod}{\prodnonlimits\limits}
+\renewcommand{\bigcup}{\cupnonlimits\limits}
+\renewcommand{\bigcap}{\capnonlimits\limits}
+
+%----------------------------------------------------------------------------------------
+%	ENVIRONMENTS
+%----------------------------------------------------------------------------------------
+% The incantations below define how theorem environments
+% (\begin{theorem} ... \end{theorem}) and their likes will look like.
+\newtheoremstyle{plainsl}% <name>
+  {8pt plus 2pt minus 4pt}% <Space above>
+  {8pt plus 2pt minus 4pt}% <Space below>
+  {\slshape}% <Body font>
+  {0pt}% <Indent amount>
+  {\bfseries}% <Theorem head font>
+  {.}% <Punctuation after theorem head>
+  {5pt plus 1pt minus 1pt}% <Space after theorem headi>
+  {}% <Theorem head spec (can be left empty, meaning `normal')>
+
+% Environments which make the text inside them slanted:
+\theoremstyle{plainsl}
+  \newtheorem{theorem}{Theorem}[section]
+  \newtheorem{proposition}[theorem]{Proposition}
+  \newtheorem{lemma}[theorem]{Lemma}
+  \newtheorem{corollary}[theorem]{Corollary}
+  \newtheorem{conjecture}[theorem]{Conjecture}
+% Environments that don't:
+\theoremstyle{definition}
+  \newtheorem{definition}[theorem]{Definition}
+  \newtheorem{example}[theorem]{Example}
+  \newtheorem{exercise}[theorem]{Exercise}
+  \newtheorem{examples}[theorem]{Examples}
+  \newtheorem{algorithm}[theorem]{Algorithm}
+  \newtheorem{question}[theorem]{Question}
+ \theoremstyle{remark}
+  \newtheorem{remark}[theorem]{Remark}
+\newenvironment{statement}{\begin{quote}}{\end{quote}}
+
+%----------------------------------------------------------------------------------------
+%	METADATA
+%----------------------------------------------------------------------------------------
+\newcommand{\myname}{Darij Grinberg} % ENTER YOUR NAME HERE
+\newcommand{\myid}{00000000} % ENTER YOUR UMN ID HERE
+\newcommand{\mymail}{dgrinber@umn.edu} % ENTER YOUR EMAIL HERE
+\newcommand{\psetnumber}{0} % ENTER THE NUMBER OF THIS PSET HERE
+
+%----------------------------------------------------------------------------------------
+%	HEADER AND FOOTER
+%----------------------------------------------------------------------------------------
+\ihead{Solutions to homework set \#\psetnumber} % Page header left
+\ohead{page \thepage\ of \pageref{LastPage}} % Page header right
+\ifoot{\myname, \myid} % left footer
+\ofoot{\mymail} % right footer
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+\title{	
+\normalfont \normalsize 
+\textsc{University of Minnesota, School of Mathematics} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge Math 5707: Graph Theory, Spring 2017\\
+Homework \psetnumber\\% The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+\author{\myname}
+
+\begin{document}
+
+\maketitle % Print the title
+
+%----------------------------------------------------------------------------------------
+%	EXERCISE 1
+%----------------------------------------------------------------------------------------
+\horrule{0.3pt} \\[0.4cm]
+
+\section{Exercise 1}
+
+\subsection{Problem}
+
+Let $G = \tup{V, E}$ be a simple graph.
+% The \tup{...} command puts the ... in parentheses.
+If $k \in \NN$,
+% \NN is an abbreviation for \mathbb{N}, and stands for the
+% nonnegative integers.
+then a \textit{$k$-coloring} of $G$ means a map
+$f : V \to \set{1, 2, \ldots, k}$.
+% \ldots is the neatest way to get a "..." in LaTeX. But no one will
+% mind if you just write "...".
+If $f$ is a $k$-coloring of $G$ for some $k \in \NN$, then the value
+$f \tup{v}$ of $f$ at a vertex $v \in V$ is called the
+\textit{color} of $v$ in the $k$-coloring $f$.
+(It is customary to visualize a $k$-coloring by pretending that the
+numbers $1, 2, \ldots, k$ are colors, and so a $k$-coloring assigns to
+each vertex a color; i.e., it ``colors'' the vertices.)
+
+Prove that there exists a $2$-coloring of $G$ having the following
+property: For each vertex $v \in V$, at most $\dfrac{1}{2} \deg v$
+among the neighbors of $v$ have the same color as $v$.
+
+\begin{remark} \label{rmk.exe1.r}
+This problem is often restated as follows: You are given a (finite)
+set of politicians; some politicians are mutual enemies. (No one is
+their own enemy. If $u$ is an enemy of $v$, then $v$ is an enemy of
+$u$. An enemy of an enemy is not necessarily a friend. So this is just
+a simple graph.) Prove that it is possible to subdivide this set into
+two (disjoint) parties such that no politician has more than half of
+his enemies in his own party.
+\end{remark}
+
+\subsection{Solution}
+% The solution below is written in more detail than necessary, to
+% illustrate both the use of LaTeX and the concept of an algorithmic
+% proof.
+The idea of the solution is fairly simple, particularly using the
+convenient language of Remark \ref{rmk.exe1.r}:
+% The \ref command provides a cross-reference to a theorem,
+% remark, definition, section or whatever. Of course, you need to
+% specify which theorem etc. you want to reference; this is achieved
+% by defining a label (in our case, "rmk.exe1.r"), which is done using
+% the \label command.
+% Note that you need to compile a LaTeX file *twice* in order for the
+% cross-references to appear! During the first compilation, LaTeX
+% collects all the labels and stores them in an .aux file; during the
+% second compilation, it then actually writes the cross-references.
+% Hence, you also need to recompile a LaTeX file twice if you have
+% added new theorems/definitions/whatever (or removed some), because
+% during the first compilation the .aux file is still unaware of the
+% new theorems and so the numbers will be out-of-sync. 
+We subdivide our set of
+politicians into two parties in some arbitrary way (e.g., by throwing
+them all into one party and keeping the other party empty), and then
+we improve the situation step by step by picking a politician who has
+more than half his enemies in his own party, and moving him to the
+opposite party. However, will this procedure necessarily terminate, or
+will it result in an eternal process of politicians being kicked
+around back and forth between the two parties? Fortunately, it will
+terminate, but this needs to be proven.
+
+Let us first make this procedure rigorous:
+
+\begin{algorithm} \label{alg.exe1.1}
+\begin{leftbar}
+% The "leftbar" environment places a vertical bar on the left of
+% whatever is inside it. I find it quite convenient here to clarify
+% where this algorithm ends. But handle with care: For example,
+% footnotes don't work if you are in a leftbar environment...
+
+\textbf{Input:} a simple graph $G = \tup{V, E}$.
+
+\textbf{Output:} a $2$-coloring of $G$ having the following
+property: For each vertex $v \in V$, at most $\dfrac{1}{2} \deg v$
+among the neighbors of $v$ have the same color as $v$.
+
+\begin{enumerate}
+% The "enumerate" environment creates a numbered list. If you want
+% custom numbers (as opposed to just 1, 2, 3, ...), you can use
+% \item[X] instead of plain \item.
+\item Define a $2$-coloring $f : V \to \set{1, 2}$ arbitrarily (for
+      example, by setting $f \tup{v} = 1$ for all $v \in V$).
+\item \textbf{While} there exists some $v \in V$ such that
+      more than $\dfrac{1}{2} \deg v$ among the neighbors of $v$ have
+      the same color as $v$, \textbf{do} the following:
+      \begin{itemize}
+      % The "itemize" environment creates a bullet-point (unnumbered)
+      % list. You can nest such environments inside them.
+      \item Flip the color $f \tup{v}$ of this $v$ (that is, change
+            this color to $2$ if it is $1$, and change it to $1$ if it
+            is $2$).
+      \end{itemize}
+\item Output the $2$-coloring $f$.
+\end{enumerate}
+\end{leftbar}
+\end{algorithm}
+
+It is clear that if step 3 of this algorithm is ever reached, then the
+$2$-coloring $f$ outputted by the algorithm
+does have the property that for each vertex
+$v \in V$, at most $\dfrac{1}{2} \deg v$ among the neighbors of $v$
+have the same color as $v$. (Indeed, this property is saying
+precisely that we have fallen out of the while-loop in step 2.) But
+we need to show that step 3 will eventually be reached. This is not
+obvious, since step 2 contains a while-loop, and a while-loop may go
+on indefinitely. We need to prove that this while-loop must eventually
+come to an end.
+
+The most common way to prove such a claim is by exhibiting a
+\textit{loop monovariant}. In our situation, this means a nonnegative
+integer defined for each $2$-coloring $f$ and which has the property
+that in every iteration of the while-loop, this integer decreases
+(strictly). If we can define such an integer, then we can immediately
+conclude that the while-loop must eventually come to an end (because
+a nonnegative integer cannot keep decreasing indefinitely while
+remaining a nonnegative integer).
+
+The role of this nonnegative integer (the loop monovariant) will be
+played by what I call the ``enmity'' of a $2$-coloring $f$:
+
+If $f$ is a $2$-coloring of $G$, then I define the \textit{enmity} of
+$f$ to be the number of $f$-monochromatic edges of $G$. Here, an edge
+$e$ of $G$ is said to be \textit{$f$-monochromatic} if the two
+endpoints of $e$ have the same color in the $2$-coloring $f$.
+
+For each $2$-coloring $f$ of $G$, the enmity of $f$ is clearly a
+nonnegative integer. Now, I claim the following:
+\begin{statement}
+\textit{Claim 1:} Let $f$ be a $2$-coloring of $G$. Let $v \in V$ be
+a vertex such that more than $\dfrac{1}{2} \deg v$ among the neighbors
+of $v$ have the same color as $v$. If we flip the color $f \tup{v}$ of
+$v$, then the enmity of $f$ \textbf{decreases}.
+\end{statement}
+
+\begin{proof}[Proof of Claim 1.]
+% The "proof" environment automatically puts a square at the end of
+% the proof.
+Let $a$ be the number of neighbors of $v$ that have the same color as
+$v$. Then, $a > \dfrac{1}{2} \deg v$ (since more than
+$\dfrac{1}{2} \deg v$ among the neighbors of $v$ have the same color
+as $v$). Hence, $2a > \deg v$, so that $a > \deg v - a$.
+
+Clearly, an edge $e$ containing $v$ is monochromatic\footnote{We
+abbreviate the word ``$f$-monochromatic'' as ``monochromatic''.}
+if and only if the neighbor of $v$ contained in $e$ has the same color
+as $v$.
+Thus, the monochromatic edges containing $v$ are in one-to-one
+correspondence with the neighbors of $v$ that have the same color as
+$v$. Since the number of the latter neighbors is $a$, we thus conclude
+that the number of the former edges is also $a$. In other words, among
+the $\deg v$ edges containing $v$, exactly $a$ are monochromatic.
+If we flip the color $f \tup{v}$ of $v$, then these $a$ monochromatic
+edges become no longer monochromatic (because they now connect
+vertices of different color), whereas the remaining $\deg v - a$ edges
+containing $v$ become monochromatic. As for the edges that do not
+contain $v$, their status does not change (i.e., if they are
+monochromatic before the flipping, then they remain so, and
+if they are not monochromatic before the flipping, then they do not
+become monochromatic), because none of their vertices changes its
+color.
+Hence, by flipping the color $f \tup{v}$ of $v$, we lose $a$
+monochromatic edges but, at the same time, gain $\deg v - a$ new
+monochromatic edges. Since $a > \deg v - a$, we thus lose
+more monochromatic edges than we gain. Therefore, the number of
+monochromatic edges of $G$ decreases. In other words, the enmity
+of $f$ decreases (since the enmity of $f$ is defined as the number
+of monochromatic edges of $G$). This proves Claim 1.
+\end{proof}
+
+Claim 1 shows that the enmity of $f$ decreases in each iteration of
+the while-loop in Algorithm \ref{alg.exe1.1}. Hence, this while-loop
+cannot go on indefinitely (since the enmity of $f$ is a nonnegative
+integer, and thus cannot keep decreasing forever). Thus,
+Algorithm \ref{alg.exe1.1} must eventually terminate (since the
+while-loop in step 2 is the only part in which the algorithm might
+get stuck). As we already
+know, the $2$-coloring $f$ outputted by the algorithm
+does have the property that for each vertex
+$v \in V$, at most $\dfrac{1}{2} \deg v$ among the neighbors of $v$
+have the same color as $v$. As a consequence, such a $2$-coloring
+exists. This solves the exercise.
+
+\subsection{Postscriptum}
+
+\begin{remark}
+In
+\href{http://www-users.math.umn.edu/~dgrinber/5707s17/nogra.pdf}{the lecture notes},
+% This is an example of a hyperlink created by the \href command.
+% The general syntax is \href{URL}{text}. If you want just the URL
+% itself to appear, you can also use \url{URL}.
+I have stated the fact that
+if $G = \tup{V, E}$ is a simple graph that has no isolated vertices,
+then there exist two disjoint dominating subsets $A$ and $B$
+of $V$ such that $A \cup B = V$. Do you see why this follows from
+the above exercise?
+\end{remark}
+
+%Copy or imitate the above for each exercise you solve.
+
+\end{document}

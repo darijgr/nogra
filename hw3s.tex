@@ -1,0 +1,4269 @@
+\documentclass[numbers=enddot,12pt,final,onecolumn,notitlepage]{scrartcl}%
+\usepackage[headsepline,footsepline,manualmark]{scrlayer-scrpage}
+\usepackage[all,cmtip]{xy}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{framed}
+\usepackage{comment}
+\usepackage{color}
+\usepackage{hyperref}
+\usepackage{ifthen}
+\usepackage[sc]{mathpazo}
+\usepackage[T1]{fontenc}
+\usepackage{needspace}
+\usepackage{tabls}
+%TCIDATA{OutputFilter=latex2.dll}
+%TCIDATA{Version=5.50.0.2960}
+%TCIDATA{LastRevised=Friday, September 16, 2016 20:39:00}
+%TCIDATA{SuppressPackageManagement}
+%TCIDATA{<META NAME="GraphicsSave" CONTENT="32">}
+%TCIDATA{<META NAME="SaveForMode" CONTENT="1">}
+%TCIDATA{BibliographyScheme=Manual}
+%TCIDATA{Language=American English}
+%BeginMSIPreambleData
+\providecommand{\U}[1]{\protect\rule{.1in}{.1in}}
+%EndMSIPreambleData
+\newcounter{exer}
+\theoremstyle{definition}
+\newtheorem{theo}{Theorem}[section]
+\newenvironment{theorem}[1][]
+{\begin{theo}[#1]\begin{leftbar}}
+{\end{leftbar}\end{theo}}
+\newtheorem{lem}[theo]{Lemma}
+\newenvironment{lemma}[1][]
+{\begin{lem}[#1]\begin{leftbar}}
+{\end{leftbar}\end{lem}}
+\newtheorem{prop}[theo]{Proposition}
+\newenvironment{proposition}[1][]
+{\begin{prop}[#1]\begin{leftbar}}
+{\end{leftbar}\end{prop}}
+\newtheorem{defi}[theo]{Definition}
+\newenvironment{definition}[1][]
+{\begin{defi}[#1]\begin{leftbar}}
+{\end{leftbar}\end{defi}}
+\newtheorem{remk}[theo]{Remark}
+\newenvironment{remark}[1][]
+{\begin{remk}[#1]\begin{leftbar}}
+{\end{leftbar}\end{remk}}
+\newtheorem{coro}[theo]{Corollary}
+\newenvironment{corollary}[1][]
+{\begin{coro}[#1]\begin{leftbar}}
+{\end{leftbar}\end{coro}}
+\newtheorem{conv}[theo]{Convention}
+\newenvironment{condition}[1][]
+{\begin{conv}[#1]\begin{leftbar}}
+{\end{leftbar}\end{conv}}
+\newtheorem{quest}[theo]{Question}
+\newenvironment{algorithm}[1][]
+{\begin{quest}[#1]\begin{leftbar}}
+{\end{leftbar}\end{quest}}
+\newtheorem{warn}[theo]{Warning}
+\newenvironment{conclusion}[1][]
+{\begin{warn}[#1]\begin{leftbar}}
+{\end{leftbar}\end{warn}}
+\newtheorem{conj}[theo]{Conjecture}
+\newenvironment{conjecture}[1][]
+{\begin{conj}[#1]\begin{leftbar}}
+{\end{leftbar}\end{conj}}
+\newtheorem{exam}[theo]{Example}
+\newenvironment{example}[1][]
+{\begin{exam}[#1]\begin{leftbar}}
+{\end{leftbar}\end{exam}}
+\newtheorem{exmp}[exer]{Exercise}
+\newenvironment{exercise}[1][]
+{\begin{exmp}[#1]\begin{leftbar}}
+{\end{leftbar}\end{exmp}}
+\newenvironment{statement}{\begin{quote}}{\end{quote}}
+\iffalse
+\newenvironment{proof}[1][Proof]{\noindent\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+\fi
+\let\sumnonlimits\sum
+\let\prodnonlimits\prod
+\let\cupnonlimits\bigcup
+\let\capnonlimits\bigcap
+\renewcommand{\sum}{\sumnonlimits\limits}
+\renewcommand{\prod}{\prodnonlimits\limits}
+\renewcommand{\bigcup}{\cupnonlimits\limits}
+\renewcommand{\bigcap}{\capnonlimits\limits}
+\setlength\tablinesep{3pt}
+\setlength\arraylinesep{3pt}
+\setlength\extrarulesep{3pt}
+\voffset=0cm
+\hoffset=-0.7cm
+\setlength\textheight{22.5cm}
+\setlength\textwidth{15.5cm}
+\newenvironment{verlong}{}{}
+\newenvironment{vershort}{}{}
+\newenvironment{noncompile}{}{}
+\excludecomment{verlong}
+\includecomment{vershort}
+\excludecomment{noncompile}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\rev}{\operatorname{rev}}
+\newcommand{\conncomp}{\operatorname{conncomp}}
+\newcommand{\conn}{\operatorname{conn}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\powset}[2][]{\ifthenelse{\equal{#2}{}}{\mathcal{P}\left(#1\right)}{\mathcal{P}_{#1}\left(#2\right)}}
+% $\powset[k]{S}$ stands for the set of all $k$-element subsets of
+% $S$. The argument $k$ is optional, and if not provided, the result
+% is the whole powerset of $S$.
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+% $\set{...}$ yields $\left\{ ... \right\}$.
+\newcommand{\abs}[1]{\left| #1 \right|}
+% $\abs{...}$ yields $\left| ... \right|$.
+\newcommand{\tup}[1]{\left( #1 \right)}
+% $\tup{...}$ yields $\left( ... \right)$.
+\newcommand{\ive}[1]{\left[ #1 \right]}
+% $\ive{...}$ yields $\left[ ... \right]$.
+\newcommand{\verts}[1]{\operatorname{V}\left( #1 \right)}
+% $\verts{...}$ yields $\operatorname{V}\left( ... \right)$.
+\newcommand{\edges}[1]{\operatorname{E}\left( #1 \right)}
+% $\edges{...}$ yields $\operatorname{E}\left( ... \right)$.
+\newcommand{\arcs}[1]{\operatorname{A}\left( #1 \right)}
+% $\arcs{...}$ yields $\operatorname{A}\left( ... \right)$.
+\newcommand{\leaves}[1]{\operatorname{Leaves}\left( #1 \right)}
+% $\leaves{...}$ yields $\operatorname{Leaves}\left( ... \right)$.
+\newcommand{\underbrack}[2]{\underbrace{#1}_{\substack{#2}}}
+% $\underbrack{...1}{...2}$ yields
+% $\underbrace{...1}_{\substack{...2}}$. This is useful for doing
+% local rewriting transformations on mathematical expressions with
+% justifications.
+\newcommand{\are}{\ar@{-}}
+% In an xymatrix environment, $\are$ gives an arrow without
+% arrowhead. I use this to represent edges in graphs.
+\newcommand{\spann}[1]{\operatorname{span}\left( #1 \right)}
+% \spann{...}$ yields $\operatorname{span}\left( ... \right)$.
+\ihead{Math 5707 Spring 2017 (Darij Grinberg): homework set 3}
+\ohead{page \thepage}
+\cfoot{}
+\begin{document}
+
+\begin{center}
+\textbf{Math 5707 Spring 2017 (Darij Grinberg): homework set 3}
+
+\textbf{Solution sketches (DRAFT).}
+\end{center}
+
+\tableofcontents
+
+\subsection{Reminders}
+
+See the
+\href{http://www-users.math.umn.edu/~dgrinber/5707s17/nogra.pdf}{lecture notes}
+and also the
+\href{http://www-users.math.umn.edu/~dgrinber/5707s17/}{handwritten notes}
+for relevant material.
+See also
+\href{http://www-users.math.umn.edu/~dgrinber/5707s17/hw2s.pdf}{the solutions to homework set 2}
+for various conventions and notations that are in use here.
+
+If $G = \tup{V, E, \phi}$ is a multigraph, and if $v \in V$ and
+$e \in E$, then the edge $e$ is said to be \textit{incident} to
+the vertex $v$ (in the multigraph $G$) if and only if
+$v \in \phi\tup{e}$ (in other words, if and only if $v$ is an
+endpoint of $e$).
+
+\subsection{Exercise \ref{exe.hw3.centerlp}: Centers of trees lie on
+longest paths}
+
+If $v$ is a vertex of a simple graph $G = \tup{V, E}$, then the
+\textit{eccentricity} of $v$ is defined to be
+$\max \set{ d\tup{v, u} \mid u \in V }$ (where $d\tup{v, u}$ is the
+distance between $v$ and $u$, as usual). A \textit{center} of a simple
+graph $G$ means a vertex whose eccentricity is minimum (among the
+eccentricities of all vertices).
+
+\begin{exercise} \label{exe.hw3.centerlp}
+Let $T$ be a tree. Let $\tup{v_0, v_1, \ldots, v_k}$ be a longest path
+of $T$. Prove that each center of $T$ belongs to this path (i.e., is
+one of the vertices $v_0, v_1, \ldots, v_k$).
+\end{exercise}
+
+In preparation for the solution of this exercise, we cite a result
+from
+\href{http://www-users.math.umn.edu/~dgrinber/5707s17/5707lec10.pdf}{lecture 10}:
+
+\begin{proposition} \label{prop.hw3.centerlp.center-ind}
+Let $T$ be a tree with $\geq 3$ vertices.
+Let $L$ be the set of all leaves of $T$.
+Let $T \setminus L$ be the multigraph obtained from $T$ by removing
+the vertices in $L$ and all edges incident to them.
+
+The eccentricity of a vertex $v$ of a graph $G$ will be denoted by
+$\operatorname{ecc}_G v$.
+
+\textbf{(a)} The graph $T \setminus L$ is a tree.
+
+\textbf{(b)} Each vertex $v$ of $T \setminus L$ satisfies
+$\operatorname{ecc}_T v = \operatorname{ecc}_{T \setminus L} v + 1$.
+
+\textbf{(c)} Each $v \in L$ satisfies
+$\operatorname{ecc}_T v = \operatorname{ecc}_T w + 1$,
+where $w$ is the unique neighbor of $v$ in $T$.
+
+\textbf{(d)} The centers of $T$ are precisely the centers of
+$T \setminus L$.
+\end{proposition}
+
+We contrast this with the following simple fact:
+
+\begin{proposition} \label{prop.hw3.centerlp.lopa-ind}
+Let $T$ be a tree with $\geq 3$ vertices.
+Let $L$ be the set of all leaves of $T$.
+Let $T \setminus L$ be the multigraph obtained from $T$ by removing
+the vertices in $L$ and all edges incident to them.
+
+Let $\tup{v_0, v_1, \ldots, v_k}$ be a longest path of $T$.
+Then, $\tup{v_1, v_2, \ldots, v_{k-1}}$ is a longest path of
+$T \setminus L$.
+\end{proposition}
+
+\begin{proof}[Proof of Proposition~\ref{prop.hw3.centerlp.lopa-ind}
+(sketched).]
+For each $i \in \set{1, 2, \ldots, k-1}$, the vertex $v_i$ is a vertex
+of $T \setminus L$ \ \ \ \ \footnote{\textit{Proof.}
+  Let
+  $i \in \set{1, 2, \ldots, k-1}$.
+  Then, $v_{i-1} v_i$ and $v_i v_{i+1}$ are two distinct edges
+  of $T$ (since $\tup{v_0, v_1, \ldots, v_k}$ is a path of $T$).
+  Hence, the vertex $v_i$ of $T$
+  belongs to at least two distinct edges (namely, $v_{i-1} v_i$ and
+  $v_i v_{i+1}$), and thus is not a leaf of $T$.
+  In other words, $v_i$ is not an element of $L$.
+  Hence, $v_i$ is a vertex of $T \setminus L$.}.
+Hence, $\tup{v_1, v_2, \ldots, v_{k-1}}$ is a path of
+$T \setminus L$.
+It remains to prove that it is a \textbf{longest} path.
+
+Indeed, assume the contrary.
+Hence, there exists a longest path
+$\tup{w_1, w_2, \ldots, w_m}$ of $T \setminus L$ whose length $m-1$
+is greater than the length $k-2$ of the path
+$\tup{v_1, v_2, \ldots, v_{k-1}}$.
+Consider such a path.
+From $m-1 > k-2$, we obtain $m > k-1$. Hence, $m \geq k$.
+
+The vertex $w_1$ must be a leaf of $T \setminus L$ (since otherwise,
+it would have a neighbor distinct from $w_2$, which would then allow
+us to extend the path $\tup{w_1, w_2, \ldots, w_m}$ by attaching
+this neighbor to its front; but this would contradict the fact that
+this path $\tup{w_1, w_2, \ldots, w_m}$ is a longest path of
+$T \setminus L$).
+But the vertex $w_1$ cannot be a leaf of $T$ (since in this case,
+it would belong to $L$, and hence could not be a vertex
+of $T \setminus L$).
+Hence, the vertex $w_1$ has at least one more neighbor in $T$ than
+it has in $T \setminus L$ (because it is a leaf of $T \setminus L$
+but not of $T$).
+Therefore, the vertex $w_1$ has at least one neighbor in $T$ that is
+not a vertex of $T \setminus L$.
+Fix such a neighbor, and denote it by $w_0$.
+This neighbor $w_0$ must lie in $L$ (since it is not a vertex of
+$T \setminus L$).
+
+Similarly, the vertex $w_m$ has at least one neighbor in $T$ that is
+not a vertex of $T \setminus L$.
+Fix such a neighbor, and denote it by $w_{m+1}$.
+This neighbor $w_{m+1}$ must lie in $L$ (since it is not a vertex of
+$T \setminus L$).
+
+Now, $\tup{w_0, w_1, \ldots, w_{m+1}}$ is a walk in $T$.
+Furthermore, all the $m+2$ vertices of this walk are
+distinct\footnote{\textit{Proof.}
+  First, we notice that the $m$
+  vertices $w_1, w_2, \ldots, w_m$ are distinct (since
+  $\tup{w_1, w_2, \ldots, w_m}$ is a path of $T \setminus L$).
+  Second, we observe that the two vertices $w_0$ and $w_{m+1}$ are
+  distinct from the $m$ vertices $w_1, w_2, \ldots, w_m$ (since the
+  former lie in $L$, whereas the latter are vertices of
+  $T \setminus L$).
+  Thus, it only remains to prove that the vertices $w_0$ and $w_{m+1}$
+  are distinct.
+  But this is easy:
+  If they were not, then the walk $\tup{w_0, w_1, \ldots, w_{m+1}}$
+  would be a cycle; but this would contradict the fact that $T$ has no
+  cycles (since $T$ is a tree).
+  Thus, we have shown that all the $m+2$ vertices of the walk
+  $\tup{w_0, w_1, \ldots, w_{m+1}}$ are distinct.}.
+Hence, this walk is a path.
+This path has length $m+1 > m \geq k$, and thus is longer than the
+path $\tup{v_0, v_1, \ldots, v_k}$.
+But this is absurd, since the latter path is a longest path of $T$.
+Hence, we have found a contradiction, which is precisely what we
+wanted to find.
+The proof is thus complete.
+\end{proof}
+
+\begin{proof}[Hints to Exercise~\ref{exe.hw3.centerlp}.]
+Proceed by strong induction on $\abs{\verts{T}}$.
+Thus, fix $N \in \NN$, and assume (as the induction hypothesis) that
+Exercise~\ref{exe.hw3.centerlp} has already been solved for all
+trees $T$ satisfying $\abs{\verts{T}} < N$.
+Now, fix a tree $T$ satisfying $\abs{\verts{T}} = N$.
+We must prove that Exercise~\ref{exe.hw3.centerlp} holds for this
+particular tree $T$.
+
+If $\abs{\verts{T}} < 3$, then this is obvious (because in this case,
+each vertex of $T$ lies on the longest path
+$\tup{v_0, v_1, \ldots, v_k}$).
+Thus, we WLOG assume that $\abs{\verts{T}} \geq 3$.
+
+Let $L$ be the set of all leaves of $T$. Thus, $\abs{L} \geq 2$
+(since $T$ has at least two leaves (since $T$ is a tree with at least
+$2$ vertices)).
+
+Let $T \setminus L$ be the multigraph obtained from $T$ by removing
+the vertices in $L$ and all edges incident to them.
+
+Proposition~\ref{prop.hw3.centerlp.center-ind} \textbf{(a)} shows that
+the graph $T \setminus L$ is a tree.
+Proposition~\ref{prop.hw3.centerlp.center-ind} \textbf{(d)} shows that
+the centers of $T$ are precisely the centers of $T \setminus L$.
+
+Let $\tup{v_0, v_1, \ldots, v_k}$ be a longest path of $T$.
+Proposition~\ref{prop.hw3.centerlp.lopa-ind} shows that 
+$\tup{v_1, v_2, \ldots, v_{k-1}}$ is a longest path of
+$T \setminus L$.
+
+Clearly, $\verts{T \setminus L} = \verts{T} \setminus L$, so that
+$\abs{\verts{T \setminus L}} = \abs{\verts{T} \setminus L}
+= \underbrace{\abs{\verts{T}}}_{= N}
+    - \underbrace{\abs{L}}_{\geq 2 > 0}
+< N$.
+Hence, the induction hypothesis shows that
+Exercise~\ref{exe.hw3.centerlp} holds for $T \setminus L$ instead of
+$T$.
+Thus, we can apply Exercise~\ref{exe.hw3.centerlp} to
+$T \setminus L$ and $\tup{v_1, v_2, \ldots, v_{k-1}}$ instead of
+$T$ and $\tup{v_0, v_1, \ldots, v_k}$.
+We thus conclude that each center of $T \setminus L$ belongs to the
+path $\tup{v_1, v_2, \ldots, v_{k-1}}$.
+Since the centers of $T$ are precisely the centers of $T \setminus L$,
+we can rewrite this as follows:
+Each center of $T$ belongs to the path
+$\tup{v_1, v_2, \ldots, v_{k-1}}$.
+Thus, each center of $T$ belongs to the path
+$\tup{v_0, v_1, \ldots, v_k}$ as well (since the latter path contains
+the former path).
+In other words, Exercise~\ref{exe.hw3.centerlp} holds for our
+particular tree $T$.
+This completes the induction; thus, Exercise~\ref{exe.hw3.centerlp} is
+solved.
+\end{proof}
+
+% \begin{proof}[Hints to Exercise~\ref{exe.hw3.centerlp}.]
+% Let $c$ be a center of $T$. We must prove that $c$ belongs to the
+% path $\tup{v_0, v_1, \ldots, v_k}$. In other words, we must prove that
+% $c \in \set{v_0, v_1, \ldots, v_k}$.
+% 
+% The eccentricity of any vertex $v$ of $G$ shall be denoted by
+% $\operatorname{ecc} v$. Then, it is easy to see that each
+% $i \in \set{0, 1, \ldots, k}$ satisfies
+% \begin{equation}
+% \operatorname{ecc} \tup{v_i}
+% = \max \set{i, k-i}
+% \label{sol.hw3.centerlp.1}
+% \end{equation}
+% \footnote{In order to prove \eqref{sol.hw3.centerlp.1}, fix
+% $i \in \set{0, 1, \ldots, k}$.
+% Combining
+% $\operatorname{ecc} \tup{v_i} \geq d \tup{v_i, v_0} = i$ with
+% $\operatorname{ecc} \tup{v_i} \geq d \tup{v_i, v_k} = k-i$, we obtain
+% $\operatorname{ecc} \tup{v_i} \geq \max \set{i, k-i}$.
+% It thus remains to check that
+% $\operatorname{ecc} \tup{v_i} \leq \max \set{i, k-i}$.
+% To do so, we assume the contrary.
+% Thus, $\operatorname{ecc} \tup{v_i} > \max \set{i, k-i}$.
+% Now, there exists some vertex $u$ such that
+% $d \tup{v_i, u} = \operatorname{ecc} \tup{v_i}$ (by the definition of
+% $\operatorname{ecc} \tup{v_i}$).
+% Consider such a $u$.
+% We have
+% $d \tup{v_i, u} = \operatorname{ecc} \tup{v_i}  > \max \set{i, k-i}$.
+% Hence, $d \tup{v_i, u} > i$ and $d \tup{v_i, u} > k-i$.
+% Now, the path from $v_i$ to $u$ either has no vertex (besides $v_i$)
+% in common with
+% the path from $v_0$ to $v_i$, or has no vertex in common with the
+% path from $v_k$ to $v_i$, or both (because if it simultaneously had a
+% vertex in common with the path from $v_0$ to $v_i$ and a vertex in
+% common with the path from $v_k$ to $v_i$,
+% such 
+% The vertex $v_i$ has distance $i$ from
+% $v_0$ and distance $k-i$ from $v_k$; therefore, it has distance
+% $\max \set{i, k-i}$ from one (etc.)
+% (This would be nice, but doesn't work!)
+% \end{proof}
+
+\newpage
+
+\subsection{Exercise \ref{exe.hw3.countST}: Counting spanning trees in
+some cases}
+
+\begin{exercise} \label{exe.hw3.countST}
+\textbf{(a)} Consider the cycle graph $C_n$ for some $n \geq 2$. Its
+vertices are $1, 2, \ldots, n$, and its edges are $12, 23, \ldots,
+\tup{n-1}n, n1$. (Here is how it looks for $n = 5$:
+\[
+\xymatrix{
+& & 1 \ar@{-}[rrd] \\
+5 \ar@{-}[rru] \ar@{-}[rd] & & & & 2 \ar@{-}[ld] \\
+& 4 \ar@{-}[rr] & & 3
+}
+\]
+)
+Find the number of spanning trees of $C_n$.
+
+\textbf{(b)} Consider the directed cycle graph $\overrightarrow{C}_n$
+for some $n \geq 2$. It is a digraph; its vertices are
+$1, 2, \ldots, n$, and its arcs are $12, 23, \ldots, \tup{n-1}n, n1$.
+(Here is how it looks for $n = 5$:
+\[
+\xymatrix{
+& & 1 \ar[rrd] \\
+5 \ar[rru] & & & & 2 \ar[ld] \\
+& 4 \ar[lu] & & 3 \ar[ll]
+}
+\]
+)
+Find the number of oriented spanning trees of $\overrightarrow{C}_n$
+with root $1$.
+
+\textbf{(c)} Fix $m \geq 1$. Let $G$ be the simple graph with $3m+2$
+vertices
+\[
+a, b, x_1, x_2, \ldots, x_m, y_1, y_2, \ldots, y_m, z_1, z_2, \ldots,
+z_m
+\]
+and the following $3m+3$ edges:
+\begin{align*}
+& ax_1, ay_1, az_1, \\
+& x_i x_{i+1}, y_i y_{i+1}, z_i z_{i+1} \qquad \text{ for all }
+                i \in \set{1, 2, \ldots, m-1}, \\
+& x_m b, y_m b, z_m b .
+\end{align*}
+(Thus, the graph consists of two vertices $a$ and $b$ connected by
+three paths, each of length $m+1$, with no overlaps between the paths
+except for their starting and ending points. Here is a picture for
+$m = 3$:
+\[
+\xymatrix{
+& x_1 \ar@{-}[r] & x_2 \ar@{-}[r] & x_3 \ar@{-}[dr] \\
+a \ar@{-}[r] \ar@{-}[ru] \ar@{-}[rd] & y_1 \ar@{-}[r] & y_2 \ar@{-}[r] & y_3 \ar@{-}[r] & b \\
+& z_1 \ar@{-}[r] & z_2 \ar@{-}[r] & z_3 \ar@{-}[ru]
+}
+\]
+)
+Compute the number of spanning trees of $G$.
+
+[To argue why your number is correct, a sketch of the argument in 1-2
+sentences should be enough; a fully rigorous proof is not required.]
+\end{exercise}
+
+\begin{proof}[Hints to Exercise~\ref{exe.hw3.countST}.]
+\textbf{(a)} The number is $n$.
+Indeed, any graph obtained from $C_n$ by removing a single edge is a
+spanning tree of $C_n$.
+
+[\textit{Proof:} Recall that a tree
+with $n$ vertices must have exactly $n-1$ edges.
+Thus, a subgraph of $C_n$ can be a tree only if it has $n-1$ edges,
+i.e., only if it is obtained from $C_n$ by removing a single edge.
+It only remains to check that any subgraph obtained from $C_n$ by
+removing a single edge is indeed a spanning tree.
+But this is easy, since all such subgraphs are isomorphic to the path
+graph $P_n$.]
+
+\textbf{(b)} The number is $1$.
+Indeed, the only oriented spanning tree of $\overrightarrow{C}_n$ with
+root $1$ is the subdigraph of $\overrightarrow{C}_n$ obtained by
+removing the arc $12$.
+
+[\textit{Proof:} How can an oriented spanning tree of
+$\overrightarrow{C}_n$ with root $1$ look like?
+It must have no arc with source $1$ (since $1$ is its root), so it
+must not contain the arc $12$.
+
+But it must contain a walk from $i$ to $1$ for each vertex
+$i \in \set{2, 3, \ldots, n}$.
+Thus, it must contain at least one arc with source $i$ for each
+$i \in \set{2, 3, \ldots, n}$ (because otherwise, we would have no way
+to get out of $i$, and this would render a walk from $i$ to $1$
+impossible).
+This arc clearly must be $i \tup{i+1}$, where we set $n+1 = 1$
+(because the only arc with source $i$ in $\overrightarrow{C}_n$ is the
+arc $i \tup{i+1}$).
+
+Hence, our oriented spanning tree must not contain the arc $12$, but
+it must contain the arc $i \tup{i+1}$ for each
+$i \in \set{2, 3, \ldots, n}$.
+This uniquely defines this oriented spanning tree.
+Conversely, it is trivial that the subdigraph of
+$\overrightarrow{C}_n$ obtained by removing the arc $12$ is indeed an
+oriented spanning tree.]
+
+\textbf{(c)} The number is $3 \tup{m+1}^2$.
+Indeed, let $\mathbf{x}$, $\mathbf{y}$ and $\mathbf{z}$ be the three
+paths $\tup{a, x_1, x_2, \ldots, x_m, b}$,
+$\tup{a, y_1, y_2, \ldots, y_m, b}$ and
+$\tup{a, z_1, z_2, \ldots, z_m, b}$.
+Then, the spanning trees of $G$ are the subgraphs of $G$ obtained
+\begin{itemize}
+\item either by removing an edge from $\mathbf{x}$ and an edge from
+      $\mathbf{y}$ (there are $\tup{m+1}^2$ ways to do that);
+\item or by removing an edge from $\mathbf{x}$ and an edge from
+      $\mathbf{z}$ (there are $\tup{m+1}^2$ ways to do that);
+\item or by removing an edge from $\mathbf{y}$ and an edge from
+      $\mathbf{z}$ (there are $\tup{m+1}^2$ ways to do that).
+\end{itemize}
+
+[\textit{Proof:} The graph $G$ has $3m+2$ vertices.
+Hence, any spanning tree of $G$ must have $\tup{3m+2}-1 = 3m+1$ edges.
+This means that any spanning tree of $G$ can be obtained from $G$ by
+removing two edges (since $G$ has $3m+3$ edges).
+But not each pair of edges yields a spanning tree when removed.
+Which ones do, and which ones do not?
+\begin{itemize}
+\item If we remove two edges from $\mathbf{x}$, then the subgraph is
+      not connected (indeed, at least one vertex on the path
+      $\mathbf{x}$ lies between these two edges, and this vertex is
+      disconnected from $a$ in this subgraph), and thus not a tree.
+      The same problem happens if we remove two edges from
+      $\mathbf{y}$ or two edges from $\mathbf{z}$.
+\item If we remove an edge from $\mathbf{x}$ and an edge from
+      $\mathbf{y}$, then the subgraph is connected (because any
+      vertex is still connected to at least one of $a$ and $b$, but
+      $a$ and $b$ are also still connected to each other via the
+      undamaged path $\mathbf{z}$), and thus is a spanning tree of $G$
+      (since it is connected and has the ``right'' number of edges).
+      The same happens if we remove an
+      edge from $\mathbf{x}$ and an edge from $\mathbf{z}$, or if we
+      remove an edge from $\mathbf{y}$ and an edge from $\mathbf{z}$.
+\end{itemize}
+There are no other cases.
+Thus, tallying these possibilities, we obtain the characterization of
+spanning trees given above, and thus there are
+$\tup{m+1}^2 + \tup{m+1}^2 + \tup{m+1}^2 = 3 \tup{m+1}^2$ spanning
+trees.]
+\end{proof}
+
+[\textit{Remark:} I guess that parts \textbf{(a)} and \textbf{(c)} of
+Exercise~\ref{exe.hw3.countST} can also be solved using the
+Matrix-Tree Theorem. But the solutions given above are definitely
+easier!]
+
+\subsection{Exercise \ref{exe.hw3.conn}: The number of connected
+components is supermodular}
+
+\subsubsection{Statement of the problem}
+
+We first recall how the connected components of a multigraph were
+defined:
+
+\begin{definition}
+Let $G = \tup{V, E, \phi}$ be a multigraph.
+
+\textbf{(a)} We define a binary relation $\simeq_G$ on the set $V$
+as follows:
+For two vertices $u$ and $v$ in $V$, we set $u \simeq_G v$ if and
+only if there exists a walk from $u$ to $v$ in $G$.
+
+\textbf{(b)} The binary relation $\simeq_G$ is an equivalence
+relation on $V$.
+Its equivalence classes are called the \textit{connected components}
+of $G$.
+\end{definition}
+
+\begin{definition} \label{def.hw3.conn}
+If $G$ is a multigraph, then $\conn G$ shall denote the
+number of connected components of $G$.
+(We have previously called this number $b_0 \tup{G}$ in lecture notes.
+Note that it equals $0$ when $G$
+has no vertices, and $1$ if $G$ is connected.)
+\end{definition}
+
+\begin{exercise} \label{exe.hw3.conn}
+Let $\tup{V, H, \phi}$ be a multigraph. Let $E$ and $F$ be two
+subsets of $H$.
+
+\textbf{(a)} Prove that
+\begin{align}
+& \conn \tup{V, E, \phi\mid_E}
++ \conn \tup{V, F, \phi\mid_F} \nonumber \\
+& \leq
+\conn \tup{V, E \cup F, \phi\mid_{E \cup F}}
++ \conn \tup{V, E \cap F, \phi\mid_{E \cap F}} .
+\label{eq.exe.hw3.conn.ineq}
+\end{align}
+
+\textbf{(b)} Give an example where the inequality
+\eqref{eq.exe.hw3.conn.ineq} does \textbf{not} become an equality.
+\end{exercise}
+
+\subsubsection{Hints}
+
+\begin{remark}
+The following two hints are helpful for
+solving Exercise~\ref{exe.hw3.conn} \textbf{(a)}:
+
+\begin{itemize}
+\item
+Feel free to restrict yourself to the case of a simple graph; in this
+case, $E$ and $F$ are two subsets of $\powset[2]{V}$, and you have to
+show that
+\[
+\conn \tup{V, E} + \conn \tup{V, F}
+\leq \conn \tup{V, E \cup F}
++ \conn \tup{V, E \cap F} .
+\]
+This isn't any easier than the general case, but saves you the hassle
+of carrying the map $\phi$ around.
+
+\item
+Also, feel free to take inspiration from the
+\href{http://math.stackexchange.com/questions/500511/dimension-of-the-sum-of-two-vector-subspaces}{proof
+of the classical fact that
+$\dim X + \dim Y = \dim \tup{X + Y} + \dim \tup{X \cap Y}$ when $X$
+and $Y$ are two subspaces of a finite-dimensional vector space $U$}.
+That proof relies on choosing a basis of $X \cap Y$ and extending it
+to bases of $X$ and $Y$, then merging the extended bases to a basis of
+$X + Y$. A ``basis'' of a multigraph $G$ is a spanning forest: a
+spanning subgraph that is a forest and has the same number of
+connected components as $G$. More precisely, it is the set of the
+edges of a spanning forest.
+
+Actually, the second solution to Exercise~\ref{exe.hw3.conn}
+sketched below follows this idea (of imitating the proof of
+$\dim X + \dim Y = \dim \tup{X + Y} + \dim \tup{X \cap Y}$),
+whereas the third solution uses the identity
+$\dim X + \dim Y = \dim \tup{X + Y} + \dim \tup{X \cap Y}$
+itself.
+\end{itemize}
+\end{remark}
+
+\subsubsection{First solution}
+The following solution to Exercise~\ref{exe.hw3.conn} is probably
+the most conventional one.
+It is rather long due to the fact that certain properties of
+connected components, while being obvious to the eye and easy to
+explain with some handwaving, are painstakingly difficult to
+rigorously formulate.
+Despite its length, a few details are left to the reader (but they
+should be easy to fill in).
+
+We prepare for the solution of Exercise~\ref{exe.hw3.conn} with a
+definition and two simple lemmas:
+
+\begin{definition} \label{def.hw3.conn.G-e}
+Let $G = \tup{V, E, \phi}$ be a multigraph.
+Let $e$ be an edge of $G$.
+Then, $G - e$ will denote the multigraph obained from $G$ by
+removing the edge $e$.
+(Formally speaking, $G - e$ is the multigraph
+$\tup{V, E \setminus \set{e}, \phi\mid_{E \setminus \set{e}}}$.)
+\end{definition}
+
+Similar notations are used for simple graphs, for digraphs,
+and for multidigraphs.
+
+\begin{lemma} \label{lem.hw3.conn.uG-ev}
+Let $G = \tup{V, E, \phi}$ be a multigraph.
+Let $e$ be an edge of $G$.
+Let $u \in V$ and $v \in V$ be such that
+$u \simeq_G v$.
+Assume that we do not have $u \simeq_{G - e} v$.
+Then, there exist $x \in V$ and $y \in V$ such that
+$\phi\tup{e} = \set{x, y}$ and $u \simeq_{G - e} x$ and
+$v \simeq_{G - e} y$.
+\end{lemma}
+
+\begin{proof}[Proof of Lemma~\ref{lem.hw3.conn.uG-ev}.]
+We do not have $u \simeq_{G - e} v$.
+In other words, there exists no walk from $u$ to $v$ in
+$G - e$.
+
+But $u \simeq_G v$.
+Thus, there exists a walk from $u$ to $v$ in $G$.
+Hence, there exists a path from $u$ to $v$ in $G$.
+Fix such a path.
+Write this path in the form
+$\tup{p_0, e_1, p_1, e_2, p_2, \ldots, e_k, p_k}$ with
+$p_0 = u$ and $p_k = v$.
+This path must contain the edge $e$ (since otherwise, it would
+be a path in $G - e$, thus also a walk in $G - e$; but this
+would contradict the fact that
+there exists no walk from $u$ to $v$ in $G - e$).
+In other words, $e_i = e$ for some
+$i \in \set{1, 2, \ldots, k}$.
+Consider this $i$.
+
+The edges $e_1, e_2, \ldots, e_k$ are the edges of the path
+$\tup{p_0, e_1, p_1, e_2, p_2, \ldots, e_k, p_k}$, and thus are
+distinct (since the edges of a path are always distinct).
+Hence, none of the edges
+$e_1, e_2, \ldots, e_{i-1}, e_{i+1}, e_{i+2}, \ldots, e_k$
+equals $e_i$.
+Since $e_i = e$, this rewrites as follows:
+None of the edges
+$e_1, e_2, \ldots, e_{i-1}, e_{i+1}, e_{i+2}, \ldots, e_k$
+equals $e$.
+Thus, all of the edges
+$e_1, e_2, \ldots, e_{i-1}, e_{i+1}, e_{i+2}, \ldots, e_k$
+are edges of the multigraph $G - e$.
+Hence, the two
+subwalks\footnote{Here, a \textit{subwalk} of a walk
+  $\tup{w_0, f_1, w_1, f_2, w_2, \ldots, f_m, w_m}$ means a
+  list of the form
+  $\tup{w_I, f_{I+1}, w_{I+1}, f_{I+2}, w_{I+2}, \ldots, f_J, w_J}$
+  for two elements $I$ and $J$ of $\set{0, 1, \ldots, m}$
+  satisfying $I \leq J$.
+  Such a list is always a walk.}
+$\tup{p_0, e_1, p_1, e_2, p_2, \ldots, e_{i-1}, p_{i-1}}$
+and
+$\tup{p_i, e_{i+1}, p_{i+1}, e_{i+2}, p_{i+2}, \ldots, e_k, p_k}$
+of the path
+$\tup{p_0, e_1, p_1, e_2, p_2, \ldots, e_k, p_k}$
+are walks in $G - e$.
+
+Now, there exists a walk from $p_0$ to $p_{i-1}$ in $G - e$
+(namely, the walk \newline
+$\tup{p_0, e_1, p_1, e_2, p_2, \ldots, e_{i-1}, p_{i-1}}$).
+In other words, $p_0 \simeq_{G - e} p_{i-1}$.
+Since $p_0 = u$, this rewrites as $u \simeq_{G - e} p_{i-1}$.
+
+Also, there exists a walk from $p_i$ to $p_k$ in $G - e$
+(namely, the walk \newline
+$\tup{p_i, e_{i+1}, p_{i+1}, e_{i+2}, p_{i+2}, \ldots, e_k, p_k}$).
+In other words, $p_i \simeq_{G - e} p_k$.
+Since $\simeq_{G - e}$ is an equivalence relation, this shows
+that $p_k \simeq_{G - e} p_i$.
+Since $p_k = v$, this rewrites as $v \simeq_{G - e} p_i$.
+
+We have $\phi\tup{e_i} = \set{p_{i-1}, p_i}$ (since
+$\tup{p_0, e_1, p_1, e_2, p_2, \ldots, e_k, p_k}$ is a path).
+Therefore, $\set{p_{i-1}, p_i} = \phi\tup{e_i} = \phi\tup{e}$
+(since $e_i = e$). Hence,
+$\phi\tup{e} = \set{p_{i-1}, p_i}$.
+Thus, there exist $x \in V$ and $y \in V$ such that
+$\phi\tup{e} = \set{x, y}$ and $u \simeq_{G - e} x$ and
+$v \simeq_{G - e} y$ (namely, $x = p_{i-1}$ and $y = p_i$).
+This proves Lemma~\ref{lem.hw3.conn.uG-ev}.
+\end{proof}
+
+\begin{lemma} \label{lem.hw3.conn.oneless}
+Let $G = \tup{V, E, \phi}$ be a multigraph.
+Let $e$ be an edge of $G$.
+Let us use the Iverson bracket notation.
+
+Then,
+\[
+\conn \tup{G - e}
+= \conn G
+    + \ive{e \text{ belongs to no cycle of } G} .
+\]
+\end{lemma}
+
+\begin{proof}[Proof of Lemma~\ref{lem.hw3.conn.oneless} (sketched).]
+Consider the two relations $\simeq_G$ and $\simeq_{G - e}$.
+(Recall that two vertices $u$ and $v$ of $G$ satisfy $u \simeq_G v$
+if and only if there exists a walk from $u$ to $v$ in $G$.
+The relation $\simeq_{G - e}$ is defined similarly, but using $G - e$
+instead of $G$.)
+
+The connected components of $G$ are the equivalence classes of the
+relation $\simeq_G$.
+The connected components of $G - e$ are the equivalence classes of the
+relation $\simeq_{G - e}$.
+
+Every two vertices $u \in V$ and $v \in V$
+satisfying $u \simeq_{G - e} v$ satisfy $u \simeq_G v$
+\ \ \ \ \footnote{\textit{Proof.} Let $u \in V$ and $v \in V$
+        be two vertices satisfying $u \simeq_{G - e} v$.
+        We must show that $u \simeq_G v$. \par
+        We know that $u \simeq_{G - e} v$.
+        In other words, there exists a walk from $u$ to $v$ in
+        $G - e$.
+        This walk is clearly also a walk from $u$ to $v$ in $G$
+        (since $G - e$ is a submultigraph of $G$).
+        Hence, there exists a walk from $u$ to $v$ in $G$.
+        In other words, $u \simeq_G v$.}.
+
+We shall use the notation $\conncomp_H w$ for the connected component
+of a multigraph $H$ containing a given vertex $w$.
+Thus, for each vertex $v \in V$, we have a connected component
+$\conncomp_{G - e} v$ and a connected component
+$\conncomp_G v$.
+These two connected components satisfy
+\[
+\conncomp_{G - e} v \subseteq \conncomp_G v
+\]
+(because all vertices $u \in \conncomp_{G - e} v$ satisfy
+$u \simeq_{G - e} v$, thus $u \simeq_G v$, thus
+$u \in \conncomp_G v$); but the reverse inclusion might not hold.
+Hence, each connected component of $G$ is a union
+of a nonzero number (possibly just one, but possibly more) of
+connected components of $G - e$.
+
+Write the set $\phi\tup{e} \in \powset[2]{V}$ in the form
+$\phi\tup{e} = \set{a, b}$.
+
+We are in one of the following two cases:
+
+\textit{Case 1:} The edge $e$ belongs to no cycle of $G$.
+
+\textit{Case 2:} The edge $e$ belongs to at least one cycle of $G$.
+
+We shall treat these two cases separately:
+
+\begin{itemize}
+
+\item Let us first consider Case 1.
+      In this case, the edge $e$ belongs to no cycle of $G$.
+      Then, we do not have $a \simeq_{G - e} b$
+      \ \ \ \ \footnote{\textit{Proof.} Assume the contrary. Thus,
+        we have $a \simeq_{G - e} b$.
+        In other words, there exists a walk from $a$ to $b$ in
+        $G - e$.
+        Hence, there exists a path from $a$ to $b$ in $G - e$.
+        Combining this path with the edge $e$, we obtain a cycle of
+        $G$ that contains the edge $e$.
+        Thus, the edge $e$ belongs to at least one cycle of $G$
+        (namely, to the cycle we have just constructed).
+        This contradicts the fact that the edge $e$ belongs to no
+        cycle of $G$.}.
+      Hence, $\conncomp_{G - e} a \neq \conncomp_{G - e} b$.
+      But we do have $a \simeq_G b$ (because the edge
+      $e$ provides a walk $\tup{a, e, b}$ from $a$ to $b$ in $G$).
+      % and thus $\conncomp_G a = \conncomp_G b$.
+%       Furthermore, if two vertices $u \in V$ and $v \in V$ satisfy
+%       $u \simeq_G v$ but not $u \simeq_{G - e} v$,
+%       then
+%       \begin{equation}
+%        u \text{ and } v \text{ both belong to the set }
+%        \tup{\conncomp_{G - e} a} \cup \tup{\conncomp_{G - e} b} 
+%        \label{pf.lem.hw3.conn.oneless.c1.1}
+%       \end{equation}
+%       \footnote{\textit{Proof.} Let $u \in V$ and $v \in V$
+%         be two vertices that satisfy
+%         $u \simeq_G v$ but not $u \simeq_{G - e} v$.
+%         We must show that $u$ and $v$ both belong to the set
+%         $\tup{\conncomp_{G - e} a} \cup \tup{\conncomp_{G - e} b}$.
+%         \par Lemma~\ref{lem.hw3.conn.uG-ev} shows that
+%         there exist $x \in V$ and $y \in V$ such that
+%         $\phi\tup{e} = \set{x, y}$ and $u \simeq_{G - e} x$ and
+%         $v \simeq_{G - e} y$. Consider these $x$ and $y$.
+%         From $\set{x, y} = \phi\tup{e} = \set{a, b}$, so that
+%         $x \in \set{x, y} = \set{a, b}$ and
+%         $y \in \set{x, y} = \set{a, b}$.
+%         \par From $u \simeq_{G - e} x$, we conclude that
+%         $u \in \conncomp_{G - e} x \subseteq
+%         \tup{\conncomp_{G - e} a} \cup \tup{\conncomp_{G - e} b}$
+%         (since $x \in \set{a, b}$).
+%         From $v \simeq_{G - e} y$, we conclude that
+%         $v \in \conncomp_{G - e} y \subseteq
+%         \tup{\conncomp_{G - e} a} \cup \tup{\conncomp_{G - e} b}$
+%         (since $y \in \set{a, b}$).
+%         Hence, both $u$ and $v$ belong to the set
+%         $\tup{\conncomp_{G - e} a} \cup \tup{\conncomp_{G - e} b}$.
+%         This proves \eqref{pf.lem.hw3.conn.oneless.c1.1}.}.
+      \par
+      Now, recall that each connected component of $G$ is a union
+      of a nonzero number (possibly just one, but possibly more) of
+      connected components of $G - e$.
+      In other words, the connected components of $G$ are obtained
+      by merging \textbf{some} of the connected components of
+      $G - e$.
+      Which connected components get merged?
+      On the one hand, we know that the two connected components
+      $\conncomp_{G - e} a$ and $\conncomp_{G - e} b$ of $G - e$
+      get merged in $G$ (since $a \simeq_G b$); and these two
+      components were indeed distinct in $G - e$ (since
+      $\conncomp_{G - e} a \neq \conncomp_{G - e} b$).
+      On the other hand, we know that these are the \textbf{only}
+      two connected components that get
+      merged\footnote{\textit{Proof.} Let $P$ and $Q$ be two
+        distinct connected components of $G - e$ that get merged in
+        $G$ (possibly together with other connected components).
+        We must show that $P$ and $Q$ are the two connected components
+        $\conncomp_{G - e} a$ and $\conncomp_{G - e} b$ (in some
+        order).
+        \par We know that $P$ and $Q$ are two connected components
+        of $G - e$.
+        Hence, $P = \conncomp_{G - e} u$ and
+        $Q = \conncomp_{G - e} v$ for some $u \in V$ and $v \in V$.
+        Consider these $u$ and $v$.
+        Clearly, $u \in \conncomp_{G - e} u = P$ and
+        $v \in \conncomp_{G - e} v = Q$. \par
+        Since $P$ and $Q$ are distinct, we have $P \neq Q$, so that
+        $\conncomp_{G - e} u = P \neq Q = \conncomp_{G - e} v$.
+        In other words, we do not have $u \simeq_{G - e} v$.
+        But the connected components $P$ and $Q$ get merged in $G$
+        (possibly together with other connected components). The
+        resulting connected component of $G$ contains both $P$ and
+        $Q$ as subsets, and therefore contains both $u$ and $v$ as
+        elements (because $u \in P$ and $v \in Q$).
+        Hence, $u$ and $v$ lie in the same connected component of $G$
+        (namely, in the connected component we have just mentioned).
+        In other words, $u \simeq_G v$.
+        Hence, Lemma~\ref{lem.hw3.conn.uG-ev} shows that
+        there exist $x \in V$ and $y \in V$ such that
+        $\phi\tup{e} = \set{x, y}$ and $u \simeq_{G - e} x$ and
+        $v \simeq_{G - e} y$.
+        Consider these $x$ and $y$.
+        We have
+        $P = \conncomp_{G - e} u = \conncomp_{G - e} x$ (since
+        $u \simeq_{G - e} x$) and
+        $Q = \conncomp_{G - e} v = \conncomp_{G - e} y$ (since
+        $v \simeq_{G - e} y$).
+        Hence,
+        $\conncomp_{G - e} x = P \neq Q = \conncomp_{G - e} y$.
+        Therefore, $x \neq y$.
+        But $\set{x, y} = \phi\tup{e} = \set{a, b}$.
+        Hence, $x \in \set{x, y} = \set{a, b}$ and
+        $y \in \set{x, y} = \set{a, b}$.
+        Thus, $x$ and $y$ are two elements of $\set{a, b}$.
+        Since $x \neq y$, we can hence conclude that $x$ and $y$
+        are two \textbf{distinct} elements of $\set{a, b}$.
+        Thus, we have either $\tup{x = a \text{ and } y = b}$
+        or $\tup{x = b \text{ and } y = a}$.
+        But each of these two options quickly leads us to our
+        desired conclusion (namely, to the conclusion that
+        $P$ and $Q$ are the two connected components
+        $\conncomp_{G - e} a$ and $\conncomp_{G - e} b$ (in
+        some order)):
+        \begin{itemize}
+        \item If $\tup{x = a \text{ and } y = b}$, then we have
+              $P = \conncomp_{G - e} x = \conncomp_{G - e} a$
+              (since $x = a$) and
+              $Q = \conncomp_{G - e} y = \conncomp_{G - e} b$
+              (since $y = b$), and therefore we conclude that
+              $P$ and $Q$ are the two connected components
+              $\conncomp_{G - e} a$ and $\conncomp_{G - e} b$ (in
+              some order).
+        \item If $\tup{x = b \text{ and } y = a}$, then we have
+              $P = \conncomp_{G - e} x = \conncomp_{G - e} b$
+              (since $x = b$) and
+              $Q = \conncomp_{G - e} y = \conncomp_{G - e} a$
+              (since $y = a$), and therefore we conclude that
+              $P$ and $Q$ are the two connected components
+              $\conncomp_{G - e} a$ and $\conncomp_{G - e} b$ (in
+              some order).
+        \end{itemize}
+        Thus, we have shown that $P$ and $Q$ are the two
+        connected components
+        $\conncomp_{G - e} a$ and $\conncomp_{G - e} b$ (in
+        some order).
+%         Hence, \eqref{pf.lem.hw3.conn.oneless.c1.1} shows that
+%         $u$ and $v$ both belong to the set
+%         $\tup{\conncomp_{G - e} a} \cup \tup{\conncomp_{G - e} b}$.
+%         \par
+%         Now, it is easy to see that $\conncomp_{G - e} a$ is one of
+%         the two sets $P$ and $Q$.
+%         [\textit{Proof:} We know that $u$ belongs to the set
+%         $\tup{\conncomp_{G - e} a} \cup \tup{\conncomp_{G - e} b}$.
+%         In other words, we have either
+%         $u \in \conncomp_{G - e} a$ or $u \in \conncomp_{G - e} b$
+%         (or both). We WLOG assume that $u \in \conncomp_{G - e} a$
+%         (since the case when $u \in \conncomp_{G - e} b$ is
+%         analogous). Thus, $u \simeq_{G - e} a$, so that
+%         $\conncomp_{G - e} u = \conncomp_{G - e} a$. Hence,
+%         $\conncomp_{G - e} a = \conncomp_{G - e} u = P$. Hence,
+%         $\conncomp_{G - e} a$ is one of the two sets $P$ and $Q$
+%         (namely, the set $P$). This completes the proof.]
+%         A similar argument shows that $\conncomp_{G - e} b$ is one
+%         of the two sets $P$ and $Q$.
+%         Hence, each of the two sets $\conncomp_{G - e} a$ and
+%         $\conncomp_{G - e} b$ is one of the two sets $P$ and $Q$.
+%         Since these sets $\conncomp_{G - e} a$ and
+%         $\conncomp_{G - e} b$ are distinct (because
+%         $\conncomp_{G - e} a \neq \conncomp_{G - e} b$), this shows
+%         that $\conncomp_{G - e} a$ is one of the two sets $P$ and
+%         $Q$ and $\conncomp_{G - e} b$ is the other.
+%         In other words,
+%         the two sets $\conncomp_{G - e} a$ and $\conncomp_{G - e} b$
+%         are the two sets $P$ and $Q$ (in some order). In other words,
+%         the two sets $P$ and $Q$ are the two sets
+%         $\conncomp_{G - e} a$ and $\conncomp_{G - e} b$ (in some
+%         order).
+        This is what we wanted to prove.}.
+      Altogether, we thus see that only two connected components
+      are merged when passing from $G - e$ to $G$ (namely,
+      the two connected components
+      $\conncomp_{G - e} a$ and $\conncomp_{G - e} b$).
+      Hence, the number of connected components of $G$ equals the
+      number of connected components of $G - e$ minus $1$.
+      In other words,
+      $\conn G = \conn \tup{G - e} - 1$.
+      But recall that $e$ belongs to no cycle of $G$.
+      Hence, $\ive{e \text{ belongs to no cycle of } G} = 1$.
+      Thus,
+      \begin{align*}
+      \underbrace{\conn G}_{= \conn \tup{G - e} - 1}
+         + \underbrack{\ive{e \text{ belongs to no cycle of } G}}
+                      {= 1}
+      &= \tup{\conn \tup{G - e} - 1} + 1 \\
+      & = \conn \tup{G - e} .
+      \end{align*}
+      Hence, Lemma~\ref{lem.hw3.conn.oneless} is proven in Case 1.
+
+\item Let us now consider Case 2.
+      In this case, the edge $e$ belongs to at least one cycle of
+      $G$.
+      Fix such a cycle, and write it in the form
+      $\tup{v_0, e_1, v_1, e_2, v_2, \ldots, e_k, v_k}$, with
+      $v_k = v_0$.
+      Thus, $e$ is one of the edges $e_1, e_2, \ldots, e_k$ (since
+      $e$ belongs to this cycle).
+      We WLOG assume that $e = e_1$ (since otherwise, we can
+      achieve $e = e_1$ by rotating the cycle).
+      The edges $e_1, e_2, \ldots, e_k$ are the edges of the cycle
+      $\tup{v_0, e_1, v_1, e_2, v_2, \ldots, e_k, v_k}$, and thus
+      are distinct (since the edges of a cycle are always distinct).
+      Thus, in particular, the edges $e_2, e_3, \ldots, e_k$ are
+      all different from $e_1$. Since $e = e_1$, this rewrites as
+      follows:
+      The edges $e_2, e_3, \ldots, e_k$ are all different from $e$.
+      Hence, $e_2, e_3, \ldots, e_k$ are edges of the multigraph
+      $G - e$.
+      Thus, $\tup{v_1, e_2, v_2, e_3, v_3, \ldots, e_k, v_k}$ is
+      a walk in $G - e$.
+      This is clearly a walk from $v_1$ to $v_0$ (since $v_1 = v_1$
+      and $v_k = v_0$).
+      Hence, there exists a walk from $v_1$ to $v_0$ in $G - e$.
+      In other words, $v_1 \simeq_{G - e} v_0$.
+      Thus, $v_0 \simeq_{G - e} v_1$ (since $\simeq_{G - e}$ is an
+      equivalence relation).
+      \par
+      Every two vertices $u \in V$ and $v \in V$ satisfying
+      $u \simeq_G v$ satisfy $u \simeq_{G - e} v$
+      \ \ \ \ \footnote{\textit{Proof.} Let $u \in V$ and $v \in V$
+        be two vertices satisfying $u \simeq_G v$.
+        We must show that $u \simeq_{G - e} v$. \par
+        Indeed, assume the contrary.
+        Thus, we do not have $u \simeq_{G - e} v$.
+        Lemma~\ref{lem.hw3.conn.uG-ev} thus shows that
+        there exist $x \in V$ and $y \in V$ such that
+        $\phi\tup{e} = \set{x, y}$ and $u \simeq_{G - e} x$ and
+        $v \simeq_{G - e} y$.
+        Consider these $x$ and $y$.
+        \par From $v \simeq_{G - e} y$, we obtain
+        $y \simeq_{G - e} v$ (since $\simeq_{G - e}$ is an
+        equivalence relation).
+        If we had $x \simeq_{G - e} y$, then (using the fact
+        that $\simeq_{G - e}$ is an equivalence relation) we would
+        obtain $u \simeq_{G - e} x \simeq_{G - e} y
+        \simeq_{G - e} v$, which would contradict the fact that
+        we do not have $u \simeq_{G - e} v$.
+        Hence, we cannot have $x \simeq_{G - e} y$.
+        Consequently, we cannot have $x = y$.
+        Thus, $x$ and $y$ are distinct.
+        \par We have $\phi\tup{e_1} = \set{v_0, v_1}$ (since
+        $\tup{v_0, e_1, v_1, e_2, v_2, \ldots, e_k, v_k}$ is a cycle
+        in $G$).
+        Hence, $\set{x, y} = \phi\tup{e} = \set{v_0, v_1}$.
+        Since $x$ and $y$ are distinct, this yields that we must have
+        either $\tup{x = v_0 \text{ and } y = v_1}$ or
+        $\tup{x = v_1 \text{ and } y = v_0}$.
+        But the first of these two options cannot happen (because if
+        we had $\tup{x = v_0 \text{ and } y = v_1}$, then the
+        we would have $x = v_0 \simeq_{G - e} v_1 = y$, which would
+        contradict the fact that we cannot have
+        $x \simeq_{G - e} y$).
+        Hence, the second of these two options must be the case.
+        In other words, we have $\tup{x = v_1 \text{ and } y = v_0}$.
+        Thus, $x = v_1 \simeq_{G - e} v_0 = y$.
+        This contradicts the fact that we cannot have
+        $x \simeq_{G - e} y$.
+        This contradiction proves that our assumption was wrong.
+        Hence, $u \simeq_{G - e} v$ is proven.}.
+      Conversely, every two vertices $u \in V$ and $v \in V$
+      satisfying $u \simeq_{G - e} v$ satisfy $u \simeq_G v$
+      \ \ \ \ \footnote{This was proven above.}.
+      Combining the preceding two sentences, we conclude that
+      for any two vertices $u \in V$ and $v \in V$, we have
+      $u \simeq_{G - e} v$ if and only if we have $u \simeq_G v$.
+      In other words, the equivalence relations $\simeq_{G - e}$
+      and $\simeq_G$ on the set $V$ are identical.
+      Hence, the connected components of $G - e$ (being the
+      equivalence classes of the relation $\simeq_{G - e}$)
+      are precisely the connected components of $G$ (which
+      are the equivalence classes of the relation $\simeq_G$).
+      Therefore, the number of the connected components of
+      $G - e$ equals the number of the connected components of
+      $G$.
+      In other words, $\conn G = \conn \tup{G - e}$.
+      But recall that $e$ belongs to at least one cycle of $G$.
+      Hence, $\ive{e \text{ belongs to no cycle of } G} = 0$.
+      Thus,
+      \begin{align*}
+      \underbrace{\conn G}_{= \conn \tup{G - e}}
+         + \underbrack{\ive{e \text{ belongs to no cycle of } G}}
+                      {= 0}
+      &= \conn \tup{G - e} + 0
+      = \conn \tup{G - e} .
+      \end{align*}
+      Hence, Lemma~\ref{lem.hw3.conn.oneless} is proven in Case 2.
+\end{itemize}
+
+We thus have proven Lemma~\ref{lem.hw3.conn.oneless} in each
+of the two Cases 1 and 2. This completes its proof.
+\end{proof}
+
+A further lemma that I shall use has nothing to do with graphs;
+it is a simple (but important) property of sums of numbers:
+
+\begin{lemma}[telescope principle for sums] 
+\label{lem.hw3.conn.telescope}
+Let $k \in \NN$.
+Let $r_0, r_1, \ldots, r_k$ be $k+1$ integers.
+Then,
+\[
+\sum_{i=1}^k \tup{r_i - r_{i-1}} = r_k - r_0 .
+\]
+\end{lemma}
+
+Of course, the $r_0, r_1, \ldots, r_k$ in
+Lemma~\ref{lem.hw3.conn.telescope} can just as well be
+rational numbers or real numbers or complex numbers or elements
+of any abelian group (if you know what this means).
+
+\begin{proof}[Proof of Lemma~\ref{lem.hw3.conn.telescope}.]
+If $k = 0$, then Lemma~\ref{lem.hw3.conn.telescope} holds
+(because both sides of the equality in question equal $0$
+in this case).
+Hence, for the rest of this proof, we WLOG assume that we
+don't have $k = 0$.
+Thus, $k \geq 1$.
+
+Now,
+\begin{align*}
+\sum_{i=1}^k \tup{r_i - r_{i-1}}
+&= \sum_{i=1}^k r_i
+   - \sum_{i=1}^k r_{i-1}
+= \underbrack{\sum_{i=1}^k r_i}
+              {= \sum_{i=1}^{k-1} r_i + r_k \\
+                \text{(since } k \geq 1 \text{)}}
+   - \underbrack{\sum_{i=0}^{k-1} r_i}
+                {= r_0 + \sum_{i=1}^{k-1} r_i \\
+                  \text{(since } k \geq 1 \text{)}}
+\\
+&\qquad \left(\text{here, we have substituted } i \text{ for }
+                i-1 \text{ in the second sum}\right)
+\\
+&= \tup{\sum_{i=1}^{k-1} r_i + r_k}
+ - \tup{r_0 + \sum_{i=1}^{k-1} r_i}
+= r_k - r_0 .
+\end{align*}
+This proves Lemma~\ref{lem.hw3.conn.telescope}.
+\end{proof}
+
+\begin{proof}[First solution to Exercise~\ref{exe.hw3.conn}
+(sketched).]
+\textbf{(a)}
+Whenever $K$ is a subset of $H$,
+we shall use the notation $c\tup{K}$ for the nonnegative
+integer $\conn \tup{V, K, \phi\mid_K}$.
+Using this notation, we can rewrite the inequality
+\eqref{eq.exe.hw3.conn.ineq} (which we must prove)
+as follows:
+\begin{equation}
+c\tup{E} + c\tup{F} \leq c\tup{E \cup F} + c\tup{E \cap F} .
+\label{sol.hw3.conn.ineq}
+\end{equation}
+
+We shall use the Iverson bracket notation.
+We observe that each subset $K$ of $H$ and each $f \in K$ satisfy
+\begin{equation}
+c\tup{K \setminus \set{f}} - c\tup{K}
+= \ive{f \text{ belongs to no cycle of } \tup{V, K, \phi\mid_K}}
+\label{sol.hw3.conn.step0}
+\end{equation}
+\footnote{\textit{Proof of \eqref{sol.hw3.conn.step0}}.
+  Let $K$ be a subset of $H$. Let $f \in K$.
+  Thus, $f$ is an edge of the multigraph $\tup{V, K, \phi\mid_K}$.
+  Hence, Lemma~\ref{lem.hw3.conn.oneless} (applied to
+  $\tup{V, K, \phi\mid_K}$ and $f$ instead of $G$ and $e$) yields
+  \[
+  \conn \tup{ \tup{V, K, \phi\mid_K} - f }
+  = \conn \tup{V, K, \phi\mid_K}
+    + \ive{f \text{ belongs to no cycle of } \tup{V, K, \phi\mid_K}} .
+  \]
+  Since
+  $\tup{V, K, \phi\mid_K} - f
+  = \tup{V, K \setminus \set{f}, \phi\mid_{K \setminus \set{f}}}$,
+  this rewrites as
+  \begin{equation}
+  \conn \tup{V, K \setminus \set{f}, \phi\mid_{K \setminus \set{f}}}
+  = \conn \tup{V, K, \phi\mid_K}
+    + \ive{f \text{ belongs to no cycle of } \tup{V, K, \phi\mid_K}} .
+  \label{sol.hw3.conn.step0.pf.1}
+  \end{equation}
+  Now, the definition of $c\tup{K}$ yields
+  $c\tup{K} = \conn \tup{V, K, \phi\mid_K}$, whereas the definition of
+  $c\tup{K \setminus \set{f}}$
+  yields
+  $c\tup{K \setminus \set{f}} =
+  \conn \tup{V, K \setminus \set{f}, \phi\mid_{K \setminus \set{f}}}$.
+  Subtracting the former equality from the latter, we obtain
+  \begin{align*}
+  c\tup{K \setminus \set{f}} - c\tup{K}
+  &=
+  \conn \tup{V, K \setminus \set{f}, \phi\mid_{K \setminus \set{f}}}
+  - \conn \tup{V, K, \phi\mid_K} \\
+  &= \ive{f \text{ belongs to no cycle of } \tup{V, K, \phi\mid_K}}
+  \end{align*}
+  (by \eqref{sol.hw3.conn.step0.pf.1}).
+  This proves \eqref{sol.hw3.conn.step0}.}.
+
+% Next, we notice that each subset $K$ of $H$ and each $f \in H$
+% satisfy
+% \begin{equation}
+% 0 \leq c\tup{K \setminus \set{f}} - c\tup{K}
+% \label{sol.hw3.conn.step0b}
+% \end{equation}
+% \footnote{\textit{Proof of \eqref{sol.hw3.conn.stepb}}.
+%   Let $K$ be a subset of $H$. Let $f \in H$.
+%   If $f \in K$, then \eqref{sol.hw3.conn.step0b} follows from
+%   \begin{align*}
+%    c\tup{K \setminus \set{f}} - c\tup{K}
+%    &= \ive{f \text{ belongs to no cycle of } \tup{V, K, \phi\mid_K}}
+%    \qquad \left(\text{by \eqref{sol.hw3.conn.step0}}\right) \\
+%    &\geq 0 .
+%   \end{align*}
+%   Hence, for the rest of this proof, we WLOG assume that we don't
+%   have $f \in K$.
+%   Thus, $f \notin K$, so that $K \setminus \set{f} = K$.
+%   Hence,
+%   \begin{align*}
+%    c\tup{\underbrace{K \setminus \set{f}}_{= K}} - c\tup{K}
+%    &= c\tup{K} - c\tup{K} = 0 \geq 0.
+%   \end{align*}
+%   This proves \eqref{sol.hw3.conn.stepb}.}
+  
+If $K$ and $L$ are two subsets of $H$ satisfying
+$K \subseteq L$, and if $f$ is an element of $K$, then
+\begin{equation}
+c\tup{K \setminus \set{f}} - c\tup{K}
+\geq c\tup{L \setminus \set{f}} - c\tup{L}
+\label{sol.hw3.conn.step1}
+\end{equation}
+\footnote{\textit{Proof of \eqref{sol.hw3.conn.step1}.}
+  Let $K$ and $L$ be two subsets of $H$ satisfying
+  $K \subseteq L$, and let $f$ be an element of $K$.
+  \par
+  We need to prove the inequality \eqref{sol.hw3.conn.step1}.
+  \par
+  We have $f \in K$, so that $f \in K \subseteq L$.
+  Hence,
+  from \eqref{sol.hw3.conn.step0} (applied to $L$ instead of $K$), we
+  obtain
+  \begin{equation}
+  c\tup{L \setminus \set{f}} - c\tup{L}
+  = \ive{f \text{ belongs to no cycle of } \tup{V, L, \phi\mid_L}}
+  \leq 1
+  \label{sol.hw3.conn.step1.pf.1}
+  \end{equation}
+  (since the truth value of any statement is $\leq 1$).
+  Now, if $f$ belongs to no cycle of
+  $\tup{V, K, \phi\mid_K}$, then
+  \begin{align*}
+  c\tup{K \setminus \set{f}} - c\tup{K}
+  &= \ive{f \text{ belongs to no cycle of } \tup{V, K, \phi\mid_K}}
+  \qquad \left(\text{by \eqref{sol.hw3.conn.step0}}\right) \\
+  &= 1
+  \qquad \left(\text{since } f
+                \text{ belongs to no cycle of }
+                \tup{V, K, \phi\mid_K} \right) \\
+  &\geq c\tup{L \setminus \set{f}} - c\tup{L}
+  \qquad \left(\text{by \eqref{sol.hw3.conn.step1.pf.1}}\right) .
+  \end{align*}
+  Thus, if $f$ belongs to no cycle of
+  $\tup{V, K, \phi\mid_K}$, then \eqref{sol.hw3.conn.step1} is
+  proven.
+  Hence, for the rest of this proof, we WLOG assume that $f$
+  belongs to at least one cycle of $\tup{V, K, \phi\mid_K}$.
+  In other words, there exists a cycle $c$ of
+  $\tup{V, K, \phi\mid_K}$ such that $f$ belongs to $c$.
+  Consider this $c$.
+  But $\tup{V, K, \phi\mid_K}$ is a sub-multigraph of
+  $\tup{V, L, \phi\mid_L}$ (since $K \subseteq L$).
+  Hence, $c$ is a cycle of $\tup{V, L, \phi\mid_L}$ (because
+  $c$ is a cycle of $\tup{V, K, \phi\mid_K}$).
+  Therefore, $f$ belongs to at least one cycle of
+  $\tup{V, L, \phi\mid_L}$ (namely, to $c$).
+  Now, 
+  \begin{align*}
+  c\tup{K \setminus \set{f}} - c\tup{K}
+  &= \ive{f \text{ belongs to no cycle of } \tup{V, K, \phi\mid_K}}
+  \qquad \left(\text{by \eqref{sol.hw3.conn.step0}}\right) \\
+  &= 0
+  \qquad \left(\text{since } f
+                \text{ belongs to at least one cycle of }
+                \tup{V, K, \phi\mid_K} \right) .
+  \end{align*}
+  Comparing this with
+  \begin{align*}
+  c\tup{L \setminus \set{f}} - c\tup{L}
+  &= \ive{f \text{ belongs to no cycle of } \tup{V, L, \phi\mid_L}}
+  \\
+  &= 0
+  \qquad \left(\text{since } f
+                \text{ belongs to at least one cycle of }
+                \tup{V, L, \phi\mid_L} \right) ,
+  \end{align*}
+  we obtain
+  $c\tup{K \setminus \set{f}} - c\tup{K}
+  = c\tup{L \setminus \set{f}} - c\tup{L}$.
+  Hence,
+  $c\tup{K \setminus \set{f}} - c\tup{K}
+  \geq c\tup{L \setminus \set{f}} - c\tup{L}$.
+  This proves \eqref{sol.hw3.conn.step1}.
+}.
+
+Let $\tup{f_1, f_2, \ldots, f_k}$ be a list of all elements of
+$F \setminus E$ (with no element occurring twice).
+Thus, the elements $f_1, f_2, \ldots, f_k$ are distinct,
+and satisfy $F \setminus E = \set{f_1, f_2, \ldots, f_k}$.
+
+Let $F' = E \cup F$. Thus, $F' \subseteq H$ (since $E$ and $F$ are
+subsets of $H$) and $F \subseteq E \cup F = F'$.
+
+We have
+\begin{align}
+& c \tup{F \setminus \set{f_1, f_2, \ldots, f_i}}
+- c \tup{F \setminus \set{f_1, f_2, \ldots, f_{i-1}}}
+\nonumber \\
+&\geq
+c \tup{F' \setminus \set{f_1, f_2, \ldots, f_i}}
+- c \tup{F' \setminus \set{f_1, f_2, \ldots, f_{i-1}}}
+\label{sol.hw3.conn.step4}
+\end{align}
+for each $i \in \set{1, 2, \ldots, k}$
+\ \ \ \ \footnote{\textit{Proof of \eqref{sol.hw3.conn.step4}.}
+  Fix $i \in \set{1, 2, \ldots, k}$.
+  We have
+  $\underbrace{F}_{\subseteq F'}
+       \setminus \set{f_1, f_2, \ldots, f_{i-1}}
+   \subseteq F' \setminus \set{f_1, f_2, \ldots, f_{i-1}}$.
+  Furthermore, $f_i \in \set{f_1, f_2, \ldots, f_k}
+  = F \setminus E \subseteq F$.
+  Combining this with
+  $f_i \notin \set{f_1, f_2, \ldots, f_{i-1}}$ (since
+  $f_1, f_2, \ldots, f_k$ are distinct), we obtain
+  $f_i \in F \setminus \set{f_1, f_2, \ldots, f_{i-1}}$.
+  Hence, \eqref{sol.hw3.conn.step1} (applied to
+  $K = F \setminus \set{f_1, f_2, \ldots, f_{i-1}}$,
+  $L = F' \setminus \set{f_1, f_2, \ldots, f_{i-1}}$ and
+  $f = f_i$)
+  yields
+  \begin{align*}
+  & c\tup{\tup{F \setminus \set{f_1, f_2, \ldots, f_{i-1}}}
+                \setminus \set{f_i}}
+  - c \tup{F \setminus \set{f_1, f_2, \ldots, f_{i-1}}} \\
+  & \geq
+  c\tup{\tup{F' \setminus \set{f_1, f_2, \ldots, f_{i-1}}}
+                \setminus \set{f_i}}
+  - c \tup{F' \setminus \set{f_1, f_2, \ldots, f_{i-1}}} .
+  \end{align*}
+  Since
+  $\tup{F \setminus \set{f_1, f_2, \ldots, f_{i-1}}}
+    \setminus \set{f_i}
+  = F \setminus \set{f_1, f_2, \ldots, f_i}$ and
+  $\tup{F' \setminus \set{f_1, f_2, \ldots, f_{i-1}}}
+    \setminus \set{f_i}
+  = F' \setminus \set{f_1, f_2, \ldots, f_i}$,
+  this rewrites as
+  \[
+  c \tup{F \setminus \set{f_1, f_2, \ldots, f_i}}
+  - c \tup{F \setminus \set{f_1, f_2, \ldots, f_{i-1}}}
+  \geq
+  c \tup{F' \setminus \set{f_1, f_2, \ldots, f_i}}
+  - c \tup{F' \setminus \set{f_1, f_2, \ldots, f_{i-1}}} .
+  \]
+  This proves \eqref{sol.hw3.conn.step4}.
+}.
+
+But
+\begin{align}
+& \sum_{i=1}^k
+   \tup{c \tup{F \setminus \set{f_1, f_2, \ldots, f_i}}
+        - c \tup{F \setminus \set{f_1, f_2, \ldots, f_{i-1}}}}
+\nonumber \\
+&= c \tup{F \setminus \underbrace{\set{f_1, f_2, \ldots, f_k}}_{= F \setminus E}} 
+   - c \tup{F \setminus \underbrace{\set{f_1, f_2, \ldots, f_0}}_{= \varnothing}}
+\nonumber \\
+&\qquad
+\left(\text{by Lemma~\ref{lem.hw3.conn.telescope}, applied to }
+        r_i = c \tup{F \setminus \set{f_1, f_2, \ldots, f_i}}\right)
+\nonumber \\
+&= c \tup{\underbrace{F \setminus \tup{F \setminus E}}_{= E \cap F}}
+   - c \tup{\underbrace{F \setminus \varnothing}_{= F}}
+ = c \tup{E \cap F} - c \tup{F} .
+\label{sol.hw3.conn.telescope1}
+\end{align}
+
+The same argument (but with $F$ replaced by $F'$) shows that
+\begin{align}
+& \sum_{i=1}^k
+   \tup{c \tup{F' \setminus \set{f_1, f_2, \ldots, f_i}}
+        - c \tup{F' \setminus \set{f_1, f_2, \ldots, f_{i-1}}}}
+\nonumber \\
+&= c \tup{E \cap F'} - c \tup{F'} .
+\label{sol.hw3.conn.telescope2}
+\end{align}
+
+But $E \subseteq E \cup F = F'$, so that $E \cap F' = E$.
+
+Now, \eqref{sol.hw3.conn.telescope1} shows that
+\begin{align*}
+& c \tup{E \cap F} - c \tup{F} \\
+&= \sum_{i=1}^k
+   \underbrack{\tup{c \tup{F \setminus \set{f_1, f_2, \ldots, f_i}}
+               - c \tup{F \setminus \set{f_1, f_2, \ldots, f_{i-1}}}}}
+              {\geq
+               c \tup{F' \setminus \set{f_1, f_2, \ldots, f_i}}
+               - c \tup{F' \setminus \set{f_1, f_2, \ldots, f_{i-1}}}
+               \\ \text{(by \eqref{sol.hw3.conn.step4})}} \\
+&\geq \sum_{i=1}^k
+   \tup{c \tup{F' \setminus \set{f_1, f_2, \ldots, f_i}}
+        - c \tup{F' \setminus \set{f_1, f_2, \ldots, f_{i-1}}}} \\
+&= c \tup{\underbrace{E \cap F'}_{= E}}
+    - c \tup{\underbrace{F'}_{= E \cup F}}
+\qquad \left(\text{by \eqref{sol.hw3.conn.telescope2}}\right) \\
+&= c \tup{E} - c \tup{E \cup F} .
+\end{align*}
+In other words,
+$c\tup{E} + c\tup{F} \leq c\tup{E \cup F} + c\tup{E \cap F}$.
+This proves \eqref{sol.hw3.conn.ineq}.
+As we know, this yields \eqref{eq.exe.hw3.conn.ineq}
+(since \eqref{sol.hw3.conn.ineq} is just a rewritten version of
+\eqref{eq.exe.hw3.conn.ineq}).
+Hence, Exercise~\ref{exe.hw3.conn} \textbf{(a)} is solved.
+
+\textbf{(b)} There are many possible examples. \newline
+For example, let
+$\tup{V, H, \phi} = \tup{\set{1, 2, 3}, \set{12, 13, 23}, \id}$
+(this is just the complete graph $K_3$ on the three vertices
+$1, 2, 3$, regarded as a multigraph),
+and set $E = \set{12, 23}$ and $F = \set{23, 13}$.
+In this case,
+$\conn \tup{V, E, \phi\mid_E} = 1$,
+$\conn \tup{V, F, \phi\mid_F} = 1$,
+$\conn \tup{V, E \cup F, \phi\mid_{E \cup F}} = 1$
+and
+$\conn \tup{V, E \cap F, \phi\mid_{E \cap F}} = 2$,
+and thus the inequality \eqref{eq.exe.hw3.conn.ineq}
+becomes $1 + 1 \leq 1 + 2$.
+\end{proof}
+
+\subsubsection{Second solution}
+
+Now, we shall outline a second solution of
+Exercise~\ref{exe.hw3.conn}, following the hint.
+
+\begin{definition}
+Let $G = \tup{V, E, \phi}$ be a multigraph.
+
+\textbf{(a)} A subset $X$ of $E$ is said to be
+\textit{connective} if the connected components of
+$\tup{V, X, \phi\mid_X}$ are precisely the connected components
+of $G$.
+(Equivalently:
+A subset $X$ of $E$ is connective if and only if every
+two vertices that are connected by a walk in $G$ are
+also connected by a walk that only uses edges from $X$.)
+
+\textbf{(b)} A subset $X$ of $E$ is said to be
+\textit{independent} if
+the multigraph $\tup{V, X, \phi\mid_X}$ has no cycles
+(i.e., if no cycle of $G$ has all its edges belong to $X$).
+
+\textbf{(c)} A \textit{basis} of $G$ shall mean a subset $X$ of
+$E$ that is both connective and independent. 
+
+\textbf{(d)} When $X$ is a basis of a multigraph
+$G = \tup{V, E, \phi}$, the
+sub-multigraph $\tup{V, X, \phi\mid_X}$ is called a
+\textit{spanning forest} of $G$.
+\end{definition}
+
+There is an analogy between multigraphs and vector spaces.
+Under this analogy, a connective subset corresponds to a
+spanning subset; an independent subset corresponds to a
+linearly independent subset; a basis corresponds to a basis.
+
+\begin{proposition} \label{prop.hw3.conn.basis1}
+Let $G$ be a multigraph. Then, a basis of $G$ exists.
+\end{proposition}
+
+\begin{proof}[Proof of Proposition~\ref{prop.hw3.conn.basis1}.]
+For each connected component $C$ of $G$, consider a spanning
+tree of the induced sub-multigraph $G\ive{C}$ of $G$
+\ \ \ \ \footnote{Induced sub-multigraphs of $G$ are defined as
+follows:
+Write $G$ in the form $G = \tup{V, E, \phi}$.
+If $S$ is a subset of $V$, then the induces sub-multigraph
+$G\ive{S}$ is defined to be the sub-multigraph
+$\tup{S, E_S, \phi\mid_{E_S}}$ of $G$, where $E_S$ is the set
+of all edges $e \in E$ such that $\phi\tup{e} \subseteq S$
+(in other words, such that both endpoints of $e$ lie in $S$).}.
+Let $X_C$ be the set of all edges of this spanning tree.
+
+Let $X$ be the union of these sets $X_C$ over all connected
+components $C$ of $G$.
+Then, $X$ is connective.
+(Indeed, any two
+vertices lying in one and the same connected component of $G$
+must also be connected by the spanning tree of this component.)
+Also, $X$ is independent.
+(Indeed, the sub-multigraph $\tup{V, X, \phi\mid_X}$ has
+no cycles, because each spanning tree separately has no cycles, and
+because we cannot ``jump'' from one spanning tree to the other
+since they are in different connected components.)
+Hence, $X$ is a basis of $G$.
+\end{proof}
+
+\begin{proposition} \label{prop.hw3.conn.lec9.cor20}
+Let $G$ be a forest.
+Then, $\abs{\edges{G}} = \abs{\verts{G}} - \conn G$.
+\end{proposition}
+
+Proposition~\ref{prop.hw3.conn.lec9.cor20} is precisely
+Corollary 20 from
+\href{http://www-users.math.umn.edu/~dgrinber/5707s17/5707lec9.pdf}{lecture 9}
+(with the only difference being that we denoted $\conn G$
+by $b_0 \tup{G}$ in lecture 9),
+so we omit its proof here.
+
+\begin{proposition} \label{prop.hw3.conn.basis2}
+Let $G = \tup{V, E, \phi}$ be a multigraph.
+Let $X$ be a basis of $G$.
+Then, $\abs{X} = \abs{V} - \conn G$.
+\end{proposition}
+
+\begin{proof}[Proof of Proposition~\ref{prop.hw3.conn.basis2}
+(sketched).]
+The set $X$ is a basis of $G$.
+In other words, $X$ is a subset of $E$ that is both connective
+and independent.
+
+Since $X$ is connective, the connected components of
+$\tup{V, X, \phi\mid_X}$ are precisely the connected components
+of $G$.
+Hence, the number of the former connected components equals the
+number of the latter connected components.
+In other words, $\conn \tup{V, X, \phi\mid_X} = \conn G$.
+
+But $X$ is independent.
+In other words, the multigraph $\tup{V, X, \phi\mid_X}$ has no
+cycles.
+In other words, this multigraph is a forest.
+Hence, Proposition~\ref{prop.hw3.conn.lec9.cor20}
+(applied to $\tup{V, X, \phi\mid_X}$ instead of $G$) shows that
+$\abs{\edges{\tup{V, X, \phi\mid_X}}}
+= \abs{\verts{\tup{V, X, \phi\mid_X}}}
+   - \conn \tup{V, X, \phi\mid_X}$.
+Since $\edges{\tup{V, X, \phi\mid_X}} = X$,
+$\verts{\tup{V, X, \phi\mid_X}} = V$ and
+$\conn \tup{V, X, \phi\mid_X} = \conn G$, this rewrites as
+$\abs{X} = \abs{V} - \conn G$.
+\end{proof}
+
+Compare Proposition~\ref{prop.hw3.conn.basis2} to the well-known
+fact from linear algebra that any two bases of a vector space
+have the same size (the dimension of this vector space).
+
+\begin{proposition} \label{prop.hw3.conn.basis6}
+Let $G = \tup{V, E, \phi}$ be a multigraph.
+Let $X$ be a subset of $E$.
+Assume that for each edge $e \in E \setminus X$,
+there exists a path that uses only edges from $X$,
+and that connects the two endpoints of $e$
+(that is, the starting point and the ending point of
+this path are the two endpoints of $e$).
+Then, the subset $X$ of $E$ is connective.
+\end{proposition}
+
+\begin{proof}[Proof of Proposition~\ref{prop.hw3.conn.basis6}.]
+For each edge $e \in E \setminus X$, we fix some path
+that uses only edges from $X$, and that connects the
+two endpoints of $e$\ \ \ \ \footnote{The existence of
+such a path is guaranteed by the hypothesis of
+Proposition~\ref{prop.hw3.conn.basis6}.}.
+We shall refer to this path as the
+\textit{$X$-detour for $e$}.
+
+Now, let $u$ and $v$ be two vertices that are connected
+by a walk in $G$.
+Fix such a walk.
+Some of the edges of this walk may belong to
+$E \setminus X$.
+But if we replace all these edges by their $X$-detours,
+we obtain a (possibly longer) walk that uses only edges
+from $X$.
+Thus, $u$ and $v$ are connected by a walk that uses
+only edges from $X$.
+
+We thus have proven that every
+two vertices that are connected by a walk in $G$ are
+also connected by a walk that only uses edges from $X$.
+In other words, the subset $X$ of $E$ is connective.
+This proves Proposition~\ref{prop.hw3.conn.basis6}.
+\end{proof}
+
+\begin{lemma} \label{lem.hw3.conn.basis3l}
+Let $G = \tup{V, E, \phi}$ be a multigraph.
+Let $X$ be an independent subset of $E$.
+Assume that $X$ is not connective.
+Then, there exists an edge $e \in E \setminus X$
+such that the subset $X \cup \set{e}$ is independent.
+\end{lemma}
+
+\begin{proof}[Proof of Lemma~\ref{lem.hw3.conn.basis3l}.]
+Assume the contrary.
+Thus, for each edge $e \in E \setminus X$,
+the subset $X \cup \set{e}$ is not independent.
+
+Now, for each edge $e \in E \setminus X$, there
+exists a path that uses only edges
+from $X$, and that connects the two endpoints of $e$
+(that is, the starting point and the ending point of
+this path are the two endpoints of $e$)
+\ \ \ \ \footnote{\textit{Proof.} Let $e \in E \setminus X$
+  be an edge.
+  We know (from the previous paragraph) that
+  the subset $X \cup \set{e}$ is not independent.
+  In other words, there exists a cycle of $G$
+  all of whose edges belong to $X \cup \set{e}$.
+  Fix such a cycle.
+  Clearly, not all of the edges of this cycle belong to
+  $X$ (because the subset $X$ is independent, and thus
+  there exists no cycle of $G$ all of whose edges belong
+  to $X$).
+  Hence, at least one edge of this cycle must be $e$.
+  Therefore, \textbf{exactly one} edge of this cycle is
+  $e$ (since the edges of a cycle are always distinct).
+  If we remove the edge $e$ from this cycle, we thus
+  obtain a path that uses only edges from $X$, and that
+  connects the two endpoints of $e$.
+  Thus, there exists a path that uses only edges
+  from $X$, and that connects the two endpoints of $e$.}.
+Hence,
+Proposition~\ref{prop.hw3.conn.basis6}
+shows that the subset $X$ of $E$ is connective.
+This contradicts the hypothesis that
+$X$ is not connective.
+This contradiction completes the proof.
+\end{proof}
+
+\begin{proposition} \label{prop.hw3.conn.basis3}
+Let $G = \tup{V, E, \phi}$ be a multigraph.
+Let $Y$ be an independent subset of $E$.
+Then, there exists a basis of $G$ that contains $Y$ as a subset.
+\end{proposition}
+
+\begin{proof}[Proof of Proposition~\ref{prop.hw3.conn.basis3}
+(sketched).]
+We construct a sequence $\tup{Y_0, Y_1, \ldots, Y_k}$ of
+independent subsets of $E$ by the following algorithm:
+
+\begin{itemize}
+ \item Set $Y_0 = Y$ and $i = 0$.
+ \item \textbf{While} there exists an edge $e \in E \setminus Y_i$
+       such that the set $Y_i \cup \set{e}$ is still independent,
+       \textbf{do} the following:
+       \begin{itemize}
+       \item Pick such an $e$, and set $Y_{i+1} = Y_i \cup \set{e}$.
+             Then, set $i = i+1$.
+       \end{itemize}
+ \item Set $k = i$.
+\end{itemize}
+
+This algorithm must terminate.
+(Indeed, each subset $Y_{i+1}$ constructed during the algorithm
+has a larger size than the previous subset $Y_i$, but a subset
+of $E$ cannot have size larger than $\abs{E}$, so we cannot build an
+infinite sequence $\tup{Y_0, Y_1, Y_2, \ldots}$ of subsets of
+$E$ where each subset has larger size than the previous one.)
+Thus, the subset $Y_k$ built at the end of the algorithm has
+the following property: It is an independent subset of $E$,
+but there exists no edge $e \in E \setminus Y_k$ such that the
+set $Y_k \cup \set{e}$ is still independent.
+
+The algorithm guarantees that $Y_i \subseteq Y_{i+1}$ for each
+$i$ for which $Y_{i+1}$ has been constructed.
+Thus, $Y_0 \subseteq Y_1 \subseteq \cdots \subseteq Y_k$,
+so that $Y_0 \subseteq Y_k$ and thus
+$Y = Y_0 \subseteq Y_k$.
+Consequently, $Y_k$ contains $Y$ as a subset.
+
+It the subset $Y_k$ of $E$ was not connective, then
+Lemma~\ref{lem.hw3.conn.basis3l} (applied to $X = Y_k$) would
+show that there exists an edge $e \in E \setminus Y_k$
+such that the subset $Y_k \cup \set{e}$ is independent.
+This would contradict the fact that there exists no edge
+$e \in E \setminus Y_k$ such that the
+set $Y_k \cup \set{e}$ is still independent.
+Hence, the subset $Y_k$ is connective.
+Thus, $Y_k$ is both connective and independent.
+In other words, $Y_k$ is a basis of $G$.
+Hence, there exists a basis of $G$ that contains $Y$ as a subset
+(namely, $Y_k$).
+This proves Proposition~\ref{prop.hw3.conn.basis3}.
+\end{proof}
+
+Compare Proposition~\ref{prop.hw3.conn.basis3} to the well-known
+fact that a linearly independent subset of a vector space can always
+be extended to a basis.
+
+Notice that we can also use Proposition~\ref{prop.hw3.conn.basis3}
+to prove Proposition~\ref{prop.hw3.conn.basis1} again
+(namely, by applying Proposition~\ref{prop.hw3.conn.basis3}
+to $Y = \varnothing$, exploiting the obvious fact that
+$\varnothing$ is independent).
+
+\begin{proposition} \label{prop.hw3.conn.lec9.prop14}
+Let $G = \tup{V, E, \phi}$ be a multigraph.
+Then, $\conn G \geq \abs{V} - \abs{E}$.
+\end{proposition}
+
+Proposition~\ref{prop.hw3.conn.lec9.prop14} is precisely
+Proposition 14 from
+\href{http://www-users.math.umn.edu/~dgrinber/5707s17/5707lec9.pdf}{lecture 9}
+(with the only difference being that we denoted $\conn G$
+by $b_0 \tup{G}$ in lecture 9),
+so we omit its proof here.
+
+\begin{proposition} \label{prop.hw3.conn.basis4}
+Let $G = \tup{V, E, \phi}$ be a multigraph.
+Let $X$ be a connective subset of $E$.
+Then, $\abs{X} \geq \abs{V} - \conn G$.
+\end{proposition}
+
+\begin{proof}[Proof of Proposition~\ref{prop.hw3.conn.basis4}
+(sketched).]
+Since $X$ is connective, the connected components of
+$\tup{V, X, \phi\mid_X}$ are precisely the connected components
+of $G$.
+Hence, the number of the former connected components equals the
+number of the latter connected components.
+In other words, $\conn \tup{V, X, \phi\mid_X} = \conn G$.
+
+But Proposition~\ref{prop.hw3.conn.lec9.prop14}
+(applied to $\tup{V, X, \phi\mid_X}$, $X$ and $\phi\mid_X$ instead of
+$G$, $E$ and $\phi$) shows that
+$\conn \tup{V, X, \phi\mid_X} \geq \abs{V} - \abs{X}$.
+Thus,
+$\abs{X} \geq \abs{V} - \conn \tup{V, X, \phi\mid_X}
+= \conn G$.
+This proves Proposition~\ref{prop.hw3.conn.basis4}.
+\end{proof}
+
+\begin{proof}[Second solution to Exercise~\ref{exe.hw3.conn}
+ (sketched).]
+\textbf{(a)}
+Proposition~\ref{prop.hw3.conn.basis1} (applied to
+$\tup{V, E \cap F, \phi\mid_{E \cap F}}$ instead of $G$)
+shows that a basis of the multigraph
+$\tup{V, E \cap F, \phi\mid_{E \cap F}}$ exists.
+Fix such a basis, and denote it by $Y$.
+Thus, $Y$ is an independent subset of $E \cap F$.
+
+Proposition~\ref{prop.hw3.conn.basis3} (applied to
+$\tup{V, E, \phi\mid_E}$ and $\phi\mid_E$ instead of
+$G$ and $\phi$) shows that there exists a basis of
+$\tup{V, E, \phi\mid_E}$ that contains $Y$ as a subset.
+Fix such a basis, and denote it by $P$.
+Thus, $P$ is a subset of $E$ that is both independent and
+connective (with respect to the multigraph
+$\tup{V, E, \phi\mid_E}$).
+
+Proposition~\ref{prop.hw3.conn.basis3} (applied to
+$\tup{V, F, \phi\mid_F}$, $F$ and $\phi\mid_F$ instead of
+$G$, $E$ and $\phi$) shows that there exists a basis of
+$\tup{V, F, \phi\mid_F}$ that contains $Y$ as a subset.
+Fix such a basis, and denote it by $Q$.
+Thus, $Q$ is a subset of $F$ that is both independent and
+connective (with respect to the multigraph
+$\tup{V, F, \phi\mid_F}$).
+
+From $Y \subseteq P$ and $Y \subseteq Q$, we obtain
+$Y \subseteq P \cap Q$.
+
+It is not necessarily true that $P \cup Q$ is a basis of
+the multigraph $\tup{V, E \cup F, \phi\mid_{E \cup F}}$.
+However, it is not hard to see that $P \cup Q$ is a
+connective subset of $E \cup F$ (with respect to this
+multigraph).
+Indeed, for each edge
+$e \in \tup{E \cup F} \setminus \tup{P \cup Q}$,
+there exists a path that uses only edges from $P \cup Q$,
+and that connects the two endpoints of $e$
+\ \ \ \ \footnote{\textit{Proof.} Let
+  $e \in \tup{E \cup F} \setminus \tup{P \cup Q}$ be an edge.
+  Then,
+  $e \in \tup{E \cup F} \setminus \tup{P \cup Q}
+     \subseteq E \cup F$.
+  Hence, either $e \in E$ or $e \in F$ (or both).
+  We WLOG assume that $e \in E$ (since otherwise, an analogous
+  argument works).
+  Then, the two endpoints of $e$ lie in the same connected
+  component of the multigraph $\tup{V, E, \phi\mid_E}$
+  (because they are adjacent in this multigraph).
+  Hence, these two endpoints are connected by a path
+  using only edges from $P$ (since $P$ is a connective
+  subset of $E$ with respect to the
+  the multigraph $\tup{V, E, \phi\mid_E}$).
+  This path thus uses only edges from $P \cup Q$ (since
+  the edges from $P$ clearly are edges from $P \cup Q$),
+  and connects the two endpoints of $e$.
+  Hence, there exists a path that uses only edges from $P \cup Q$,
+  and that connects the two endpoints of $e$.}.
+Thus, Proposition~\ref{prop.hw3.conn.basis6} (applied to
+$\tup{V, E \cup F, \phi\mid_{E \cup F}}$, $E \cup F$,
+$\phi\mid_{E \cup F}$ and $P \cup Q$ instead of $G$,
+$E$, $\phi$ and $X$) shows that the subset $P \cup Q$ of
+$E \cup F$ is connective with respect to the multigraph
+$\tup{V, E \cup F, \phi\mid_{E \cup F}}$. Hence,
+Proposition~\ref{prop.hw3.conn.basis4} (applied to
+$\tup{V, E \cup F, \phi\mid_{E \cup F}}$, $E \cup F$,
+$\phi\mid_{E \cup F}$ and $P \cup Q$ instead of $G$,
+$E$, $\phi$ and $X$) shows that
+$\abs{P \cup Q}
+\geq \abs{V}
+- \conn \tup{V, E \cup F, \phi\mid_{E \cup F}}$.
+Hence,
+\begin{equation}
+\conn \tup{V, E \cup F, \phi\mid_{E \cup F}}
+\geq \abs{V} - \abs{P \cup Q} .
+\label{sol.hw3.conn.2nd.1}
+\end{equation}
+
+But $Y$ is a basis of $\tup{V, E \cap F, \phi\mid_{E \cap F}}$.
+Hence, Proposition~\ref{prop.hw3.conn.basis2} (applied to
+$\tup{V, E \cap F, \phi\mid_{E \cap F}}$, $E \cap F$,
+$\phi\mid_{E \cap F}$ and $Y$ instead of $G$,
+$E$, $\phi$ and $X$) shows that
+$\abs{Y} = \abs{V} - \conn \tup{V, E \cap F, \phi\mid_{E \cap F}}$.
+Hence,
+\[
+\conn \tup{V, E \cap F, \phi\mid_{E \cap F}}
+= \abs{V} - \underbrack{\abs{Y}}
+                       {\leq \abs{P \cap Q} \\
+                        \text{(since } Y \subseteq P \cap Q \text{)}}
+\geq \abs{V} - \abs{P \cap Q} .
+\]
+Adding this inequality to \eqref{sol.hw3.conn.2nd.1}, we obtain
+\begin{align*}
+\conn \tup{V, E \cup F, \phi\mid_{E \cup F}}
++ \conn \tup{V, E \cap F, \phi\mid_{E \cap F}}
+&\geq \tup{ \abs{V} - \abs{P \cup Q} }
+      + \tup{ \abs{V} - \abs{P \cap Q} } \\
+&= 2 \abs{V} - \underbrack{\tup{ \abs{P \cup Q} + \abs{P \cap Q} }}
+                          {= \abs{P} + \abs{Q}} \\
+&= 2 \abs{V} - \tup{\abs{P} + \abs{Q}} .
+\end{align*}
+
+On the other hand, $P$ is a basis of $\tup{V, E, \phi\mid_E}$.
+Hence, Proposition~\ref{prop.hw3.conn.basis2} (applied to
+$\tup{V, E, \phi\mid_E}$, $\phi\mid_E$ and $P$ instead of $G$,
+$\phi$ and $X$) shows that
+$\abs{P} = \abs{V} - \conn \tup{V, E, \phi\mid_E}$.
+Hence,
+\[
+\conn \tup{V, E, \phi\mid_E} = \abs{V} - \abs{P} .
+%\label{sol.hw3.conn.2nd.3}
+\]
+The same reasoning (but applied to $F$ and $Q$ instead of $E$
+and $P$) shows that
+\[
+\conn \tup{V, F, \phi\mid_F} = \abs{V} - \abs{Q} .
+%\label{sol.hw3.conn.2nd.4}
+\]
+Thus,
+\begin{align*}
+& \conn \tup{V, E \cup F, \phi\mid_{E \cup F}}
++ \conn \tup{V, E \cap F, \phi\mid_{E \cap F}} \\
+&\geq 2 \abs{V} - \tup{\abs{P} + \abs{Q}}
+= \underbrace{\abs{V} - \abs{P}}_{= \conn \tup{V, E, \phi\mid_E}}
+  + \underbrace{\abs{V} - \abs{Q}}_{= \conn \tup{V, F, \phi\mid_F}}
+\\
+&= \conn \tup{V, E, \phi\mid_E}
++ \conn \tup{V, F, \phi\mid_F} .
+\end{align*}
+This solves Exercise~\ref{exe.hw3.conn} \textbf{(a)}.
+
+\textbf{(b)} See the First solution above.
+\end{proof}
+
+\subsubsection{Third solution}
+
+The third solution of Exercise~\ref{exe.hw3.conn} (which will
+be roughly outlined) uses linear algebra.
+Let us first introduce some notations.
+
+\begin{definition}
+Let $n \in \NN$.
+Then, $\tup{\mathbf{e}_1, \mathbf{e}_2, \ldots, \mathbf{e}_n}$
+will denote the standard basis of the $\QQ$-vector space $\QQ^n$.
+This means that $\mathbf{e}_i$ is the column vector whose $i$-th
+coordinate is $1$, and whose all other coordinates are $0$.
+\end{definition}
+
+(Instead of $\QQ$-vector spaces, we can just as well use
+$\RR$-vector spaces or $\mathbb{C}$-vector spaces\footnote{Or
+  vector spaces over any field -- if you know what this means.}.
+I have chosen $\QQ$ merely because rational numbers feel more
+concrete to me.)
+
+The crux of the third solution is the following neat result
+from linear algebra:
+
+\begin{proposition} \label{prop.hw3.conn.LA}
+Let $G = \tup{V, E, \phi}$ be a multigraph, where
+$V = \set{1, 2, \ldots, n}$ for some $n \in \NN$.
+For each edge $e$ of $G$, define a vector $v_e \in \QQ^n$
+by picking $i \in V$ and $j \in V$ such that
+$\phi\tup{e} = \set{i, j}$, and setting
+$v_e = \mathbf{e}_i - \mathbf{e}_j$.
+(We are free to choose which of the two endpoints of $e$ is
+to become $i$ and which is to become $j$ here.)
+
+Then,
+\begin{equation}
+\conn G = \abs{V} - \dim \tup{\spann{\set{v_e \mid e \in E}}} .
+\label{eq.prop.hw3.conn.LA.conn=}
+\end{equation}
+
+(More precisely, $\spann{\set{v_e \mid e \in E}}$ is the
+$\QQ$-vector subspace of $\QQ^n$ that consists of all
+vectors
+$\left(
+\begin{matrix} p_1 \\ p_2 \\ \vdots \\ p_n \end{matrix}
+\right) \in \QQ^n$
+satisfying
+\[
+ \sum_{i \in C} p_i = 0
+ \text{ for each connected component } C \text{ of } G .
+\]
+Thus, it is the solution set of a system of $\conn G$
+many linear equations.)
+\end{proposition}
+
+(Notice that the equality \eqref{eq.prop.hw3.conn.LA.conn=} appears
+in the literature in various guises.
+For example, \cite[Theorem 1.3.5]{Quinla17} is a restatement of
+\eqref{eq.prop.hw3.conn.LA.conn=} in terms of matrices.)
+
+\begin{proof}[Hints to a proof of Proposition~\ref{prop.hw3.conn.LA}.]
+Let $\mathcal{P}$ denote the $\QQ$-vector subspace of $\QQ^n$ that
+consists of all vectors
+$\left(
+\begin{matrix} p_1 \\ p_2 \\ \vdots \\ p_n \end{matrix}
+\right) \in \QQ^n$
+satisfying
+\begin{equation}
+ \sum_{i \in C} p_i = 0
+ \text{ for each connected component } C \text{ of } G .
+\label{pf.prop.hw3.conn.LA.def-P}
+\end{equation}
+
+For each connected component $C$ of $G$, fix a vertex of $C$
+(chosen arbitrarily), and call it the \textit{root} of $C$.
+A vertex of $G$ is said to be a \textit{root} if and only if
+it is the root of its connected component.
+
+The \textit{depth} of a vertex $v \in V$ shall be defined as
+the distance from $v$ to the root of the connected component
+of $v$.
+This depth is a nonnegative integer, and it equals $0$ if and
+only if $v$ itself is a root.
+
+Let $\mathcal{S}$ denote the $\QQ$-vector subspace
+$\spann{\set{v_e \mid e \in E}}$ of $\QQ^n$.
+
+Let $\mathcal{R}$ be the $\QQ$-vector subspace
+$\spann{\set{\mathbf{e}_v \mid v \in G \text{ is a root}}}$
+of $\QQ^n$.
+In other words, $\mathcal{R}$ is the set of all vectors
+$\left(
+\begin{matrix} p_1 \\ p_2 \\ \vdots \\ p_n \end{matrix}
+\right) \in \QQ^n$
+satisfying
+\begin{equation}
+ p_i = 0
+ \text{ for each } i \in V \text{ that is not a root}.
+\label{pf.prop.hw3.conn.LA.def-R}
+\end{equation}
+Clearly,
+\[
+\dim \mathcal{R} = \tup{\text{the number of roots}}
+= \conn G.
+\]
+
+Now, it is not hard to see that
+\begin{equation}
+\mathbf{e}_i \in \mathcal{S} + \mathcal{R}
+\qquad \text{ for all } i \in V .
+\label{pf.prop.hw3.conn.LA.eiinSR}
+\end{equation}
+Indeed, this is easily proven by induction
+\footnote{In (slightly) more detail:
+  \par
+  We proceed by induction over the depth of $i$.
+  \par
+  The \textit{induction base} is the case when the depth
+  of $i$ is $0$.
+  This case is easy (because if the depth of $i$ is $0$,
+  then $i$ is a root, whence $\mathbf{e}_i \in \mathcal{R}
+  \subseteq \mathcal{S} + \mathcal{R}$).
+  \par
+  The \textit{induction step} requires us to prove
+  \eqref{pf.prop.hw3.conn.LA.eiinSR} for all $i$ of depth
+  $k+1$, assuming that \eqref{pf.prop.hw3.conn.LA.eiinSR}
+  holds for all $i$ of depth $k$.
+  This can be argued as follows:
+  Fix an $i \in V$ of depth $k+1$.
+  Then, there exists a neighbor $j \in V$ of $i$ that has
+  depth $k$ (since the depth is the distance from the
+  root).
+  Fix such a neighbor, and let $e$ be an edge connecting
+  $i$ to this neighbor.
+  Then, $\mathbf{e}_j \in \mathcal{S} + \mathcal{R}$
+  by the induction hypothesis (since $j$ has depth $k$).
+  \par
+  But the edge $e$ connects $i$ with $j$.
+  Hence, either $v_e = \mathbf{e}_i - \mathbf{e}_j$ or
+  $v_e = \mathbf{e}_j - \mathbf{e}_i$ (depending on the
+  way we defined $v_e$).
+  Thus, in either case,
+  $\mathbf{e}_i - \mathbf{e}_j \in \set{v_e, -v_e}
+  \subseteq \mathcal{S}$, so that
+  $\mathbf{e}_i \in \mathcal{S} + \mathbf{e}_j
+  \subseteq \mathcal{S} + \mathcal{R}$
+  (since $\mathbf{e}_j \in \mathcal{S} + \mathcal{R}$).
+  This completes the induction step.}.
+Since the vectors $\mathbf{e}_1, \mathbf{e}_2, \ldots,
+\mathbf{e}_n$ form a basis of $\QQ^n$,
+this shows that
+$\QQ^n = \mathcal{S} + \mathcal{R}$.
+
+Also, $\mathcal{S} \subseteq \mathcal{P}$ (to check this,
+show that all the generators $v_e$ of $\mathcal{S}$ lie in
+$\mathcal{P}$).
+Furthermore,
+$\mathcal{P} \cap \mathcal{R} = 0$\ \ \ \ \footnote{
+  \textit{Proof.} Let $\mathbf{p} = \left(
+   \begin{matrix} p_1 \\ p_2 \\ \vdots \\ p_n \end{matrix}
+    \right)$ be a vector in $\mathcal{P} \cap \mathcal{R}$.
+  Then, this vector must satisfy both equations
+  \eqref{pf.prop.hw3.conn.LA.def-P} and
+  \eqref{pf.prop.hw3.conn.LA.def-R} (since it lies in
+  both $\mathcal{P}$ and $\mathcal{R}$).
+  \par
+  Now, let $j \in V$ be a vertex.
+  We want to show that $p_j = 0$.
+  Indeed, if $j$ is not a root, then this follows
+  from \eqref{pf.prop.hw3.conn.LA.def-R} (applied to $i = j$).
+  So let us WLOG assume that $j$ is a root.
+  Let $C$ be the connected component containing $j$.
+  Then, the only root in $C$ is $i$.
+  Hence, all vertices $i \in C$ except for $j$ are not
+  roots.
+  Thus, all vertices $i \in C$ except for $j$ satisfy
+  $p_i = 0$ (by \eqref{pf.prop.hw3.conn.LA.def-R}).
+  Hence, $\sum_{i \in C} p_i = p_j$. Therefore, the equality
+  \eqref{pf.prop.hw3.conn.LA.def-P} simplifies to
+  $p_j = 0$.
+  \par
+  Now, forget that we fixed $j$.
+  We thus have proven that $p_j = 0$ for each $j \in V$.
+  In other words, all coordinates of our vector $\mathbf{p}$
+  are $0$.
+  In other words, $\mathbf{p} = 0$.
+  \par
+  We thus have shown that any vector
+  $\mathbf{p} \in \mathcal{P} \cap \mathcal{R}$ satisfies
+  $\mathbf{p} = 0$.
+  In other words, $\mathcal{P} \cap \mathcal{R} = 0$.}.
+Now, from $\mathcal{S} \subseteq \mathcal{P}$, we obtain
+$\mathcal{S} \cap \mathcal{R}
+\subseteq \mathcal{P} \cap \mathcal{R} = 0$.
+Combined with $\QQ^n = \mathcal{S} + \mathcal{R}$, this
+yields
+\[
+\QQ^n = \mathcal{S} \oplus \mathcal{R} .
+\]
+Taking dimensions, we find
+$
+\dim \tup{\QQ^n} = \dim \mathcal{S} + \dim \mathcal{R}
+$.
+Hence,
+\[
+\dim \mathcal{S} = \underbrace{\dim \tup{\QQ^n}}_{= n}
+                    - \underbrace{\dim \mathcal{R}}_{= \conn G}
+                 = n - \conn G.
+\]
+Hence,
+$\conn G = n - \dim \mathcal{S} = \abs{V} - \dim \mathcal{S}$
+(since $n = \abs{V}$).
+This proves \eqref{eq.prop.hw3.conn.LA.conn=}.
+
+Let us now prove the ``More precisely'' statement in
+Proposition~\ref{prop.hw3.conn.LA}.
+Indeed, this statement simply claims that
+$\mathcal{S} = \mathcal{P}$.
+To prove it, we assume the contrary.
+Thus, $\mathcal{S}$ is a proper subset of $\mathcal{P}$
+(because we know that $\mathcal{S} \subseteq \mathcal{P}$).
+Hence, $\dim \mathcal{S} < \dim \mathcal{P}$.
+But $\mathcal{P} \cap \mathcal{R} = 0$ yields that the
+sum $\mathcal{P} + \mathcal{R}$ is a direct sum.
+Hence,
+\[
+\dim \tup{\mathcal{P} + \mathcal{R}}
+= \underbrace{\dim \mathcal{P}}_{> \dim \mathcal{S}}
++ \dim \mathcal{R}
+> \dim \mathcal{S} + \dim \mathcal{R} = \dim \tup{\QQ^n} .
+\]
+This contradicts the fact that
+$\dim \tup{\mathcal{P} + \mathcal{R}} \leq \dim \tup{\QQ^n}$
+(which is a trivial consequence of the fact that
+$\mathcal{P} + \mathcal{R}$ is a subspace of $\QQ^n$).
+This contradiction shows that our assumption was wrong, and
+so $\mathcal{S} = \mathcal{P}$ is proven.
+Finally, the proof of Proposition~\ref{prop.hw3.conn.LA} is
+complete.
+\end{proof}
+
+This allows solving Exercise~\ref{exe.hw3.conn} as follows:
+
+\begin{proof}[Hints to a third solution of
+ Exercise~\ref{exe.hw3.conn}.]
+WLOG assume that $V = \set{1, 2, \ldots, n}$ for some $n \in \NN$.
+For each edge $e \in H$, define a vector $v_e \in \QQ^n$
+by picking $i \in V$ and $j \in V$ such that
+$\phi\tup{e} = \set{i, j}$, and setting
+$v_e = \mathbf{e}_i - \mathbf{e}_j$.
+
+Define two $\QQ$-vector subspaces $X$ and $Y$ of $\QQ^n$ by
+\[
+X = \spann{\set{v_e \mid e \in E}}
+\qquad \text{ and } \qquad
+Y = \spann{\set{v_e \mid e \in F}} .
+\]
+Then, notice that
+\[
+X + Y = \spann{\set{v_e \mid e \in E \cup F}}
+\]
+and
+\begin{equation}
+X \cap Y \supseteq \spann{\set{v_e \mid e \in E \cap F}}
+\label{sol.hw3.conn.3rd.cap}
+\end{equation}
+(this is not an equality, just an inclusion).
+But a classical fact from linear algebra says that
+$\dim X + \dim Y = \dim\tup{X + Y} + \dim\tup{X \cap Y}$.
+Substitute the above expressions for $X$, $Y$, $X + Y$ and
+$X \cap Y$ into this equality (thus turning it into an
+inequality, since \eqref{sol.hw3.conn.3rd.cap}
+is merely an inclusion).
+Finally, rewrite the dimensions of the spans using
+Proposition~\ref{prop.hw3.conn.LA}.
+The result is precisely the claim of Exercise~\ref{exe.hw3.conn}.
+\end{proof}
+
+\subsection{Exercise \ref{exe.hw3.whamilton}: forcing a Hamiltonian
+cycle on a tree}
+
+\begin{exercise} \label{exe.hw3.whamilton}
+Let $T$ be a tree having more than $1$ vertex.
+Let $L$ be the set of leaves of $T$.
+Prove that it
+is possible to add $\abs{L}-1$ new edges to $T$ in such a way that
+the resulting multigraph has a Hamiltonian cycle.
+\end{exercise}
+
+Exercise~\ref{exe.hw3.whamilton} is taken from
+\cite[Lemma 3.1, second inequality sign]{Wang17}.
+Rather than solve this exercise directly, we shall prove a stronger
+fact.
+First, we define a notation:
+
+\begin{definition}
+Let $T$ be a tree.
+Then, $\leaves{T}$ shall mean the set of all leaves of $T$.
+\end{definition}
+
+The following fact is simple:
+
+\begin{proposition} \label{prop.hw3.tree-leaf}
+Let $T$ be a tree such that $\abs{\verts{T}} > 2$.
+Let $v$ be a leaf of $T$.
+Let $T'$ denote the multigraph obtained from $T$ by
+removing this leaf $v$ and the unique edge that contains $v$.
+Let $u$ be the unique neighbor of $v$ in $T$.
+
+\textbf{(a)} The multigraph $T'$ is a tree again.
+
+\textbf{(b)} We have $u \notin \leaves{T}$.
+
+\textbf{(c)} If $u$ is a leaf of $T'$, then
+$\leaves{T'} = \tup{\leaves{T} \setminus \set{v}} \cup \set{u}$.
+
+\textbf{(d)} If $u$ is not a leaf of $T'$, then
+$\leaves{T'} = \leaves{T} \setminus \set{v}$.
+\end{proposition}
+
+Unfortunately, the length of a proof of
+Proposition~\ref{prop.hw3.tree-leaf} is far out of proportion to its
+simplicity.
+We recommend the reader to prove it themselves instead of reading the
+below argument.
+
+{\small
+\begin{proof}[Proof of Proposition~\ref{prop.hw3.tree-leaf}
+(sketched).]
+The vertex $v$ is a leaf of $T$.
+In other words, $\deg_T v = 1$.
+Hence, there is a unique edge of $T$ that contains $v$.
+Let $e$ be this edge.
+The other endpoint of this edge $e$ (besides $v$) is $u$
+(since $u$ is the unique neighbor of $v$ in $T$).
+Thus, the two endpoints of this edge $e$ are $u$ and $v$.
+
+Recall that $e$ is the unique edge of $T$ that contains $v$.
+Hence, $e$ is the unique edge that gets removed from $T$ in the
+construction of $T'$.
+In other words, $e$ is the only edge of $T$ that is not an edge of
+$T'$.
+
+Observe that $v$ is not a vertex of $T'$ (since the multigraph $T'$
+is obtained from $T$ by removing the vertex $v$).
+
+Also, the multigraph $T'$ is obtained from $T$ by removing the vertex
+$v$ (and an edge).
+Thus, the vertex set of $T'$ is obtained from the vertex set of $T$
+by removing the vertex $v$.
+In other words, $\verts{T'} = \verts{T} \setminus \set{v}$.
+Since $v \in \verts{T}$, we thus obtain
+$\abs{\verts{T'}} = \abs{\verts{T}} - 1 > 1$ (since
+$\abs{\verts{T}} > 2$).
+
+% The edges of $T'$ are precisely the edges of $T$ except for the edge
+% $e$ (since $T'$ was obtained from $T$ by removing the vertex $v$ and
+% the 
+
+Let us first show that $T'$ is a tree.
+This is an easy fact (and was done in class), but we briefly recall
+the argument for the sake of completeness:
+The multigraph $T'$ is connected\footnote{\textit{Proof.}
+  Let $p$ and $q$ be two vertices of $T'$.
+  Then, $p$ and $q$ are distinct from $v$ (since $v$ is not a vertex
+  of $T'$).
+  Since $T$ is connected (because $T$ is a tree), there exists a walk
+  from $p$ to $q$ in $T$.
+  Hence, there exists a path from $p$ to $q$ in $T$.
+  The starting point and the ending point of this path are both
+  distinct from $v$ (since these two vertices are $p$ and $q$, and we
+  know that $p$ and $q$ are distinct from $v$).
+  All intermediate vertices of this path (i.e., all its vertices other
+  than the starting point and the ending point) must be distinct from
+  $v$ as well
+  (since $v$ is a leaf, but an intermediate vertex of a path can
+  never be a leaf).
+  Thus, \textbf{all} vertices of this path are distinct from $v$.
+  Hence, all vertices of this path are vertices of $T'$.
+  Thus, this path is a path in $T'$.
+  Consequently, there is a path from $p$ to $q$ in $T'$ (namely, the
+  path that we have just constructed).
+  \par Thus, we have shown that if $p$ and $q$ are two vertices of
+  $T'$, then there is a path from $p$ to $q$ in $T'$.
+  Hence, $T'$ is connected (since $\abs{\verts{T'}} > 1 > 0$).}
+and is a forest\footnote{\textit{Proof.}
+  The multigraph $T$ has no cycles (since it is a tree).
+  Thus, the multigraph $T'$ has no cycles either (since any cycle of
+  $T'$ would be a cycle of $T$).
+  In other words, $T'$ is a forest.}.
+Thus, $T'$ is a tree.
+This proves Proposition~\ref{prop.hw3.tree-leaf} \textbf{(a)}.
+
+Each vertex $q$ of $T'$ satisfies
+\begin{equation}
+\deg_{T'} q \geq 1
+\label{pf.prop.hw3.tree-leaf.1}
+\end{equation}
+\footnote{\textit{Proof of \eqref{pf.prop.hw3.tree-leaf.1}.}
+  Let $q$ be a vertex of $T'$.
+  Recall that $\abs{\verts{T'}} > 1$, so that
+  $\abs{\verts{T'}} \geq 2$.
+  Hence, there exist at least two vertices of $T'$.
+  Thus, there exists at least one vertex of $T'$ distinct from $q$.
+  Fix such a vertex, and denote it by $p$.
+  \par
+  The multigraph $T'$ is connected.
+  Thus, there exists a walk from $q$ to $p$ in $T'$.
+  This walk has length $> 0$ (since $p$ is distinct from $q$), and
+  thus has at least one edge.
+  Hence, there exists an edge containing $q$ in $T'$
+  (namely, the very first edge of this walk).
+  In other words, $\deg_{T'} q \geq 1$.
+  This proves \eqref{pf.prop.hw3.tree-leaf.1}.
+}.
+
+The vertex $u$ is not a leaf of $T$\ \ \ \ \footnote{\textit{Proof.}
+  Assume the contrary.
+  Thus, $u$ is a leaf of $T$.
+  In other words, $\deg_T u = 1$.
+  In other words, there exists a unique edge of $T$ containing $u$.
+  This unique edge must be $e$ (since the edge $e$ contains $u$
+  (because the two endpoints of this edge $e$ are $u$ and $v$)).
+  Thus, $e$ is the only edge of $T$ containing $u$.
+  \par
+  But $u \neq v$ (since $u$ is a neighbor of $v$ in $T$).
+  Hence, $u \in \verts{T} \setminus \set{v} = \verts{T'}$.
+  In other words, $u$ is a vertex of $T'$.
+  Therefore, \eqref{pf.prop.hw3.tree-leaf.1} (applied to $q = u$)
+  shows that $\deg_{T'} u \geq 1$.
+  In other words, the number of edges of $T'$ containing $u$ is
+  $\geq 1$.
+  Hence, there exists at least one edge of $T'$ containing $u$.
+  Fix such an edge, and denote it by $f$.
+  \par
+  Now, $f$ is an edge of $T'$ containing $u$.
+  But $T'$ is a sub-multigraph of $T$.
+  Thus, $f$ is an edge of $T$ (since $f$ is an edge of $T'$).
+  Hence, $f$ is an edge of $T$ containing $u$.
+  Since $e$ is the only edge of $T$ containing $u$,
+  we thus conclude that $f = e$.
+  But $e$ is not an edge of $T'$ (since $e$ is the unique edge that
+  gets removed from $T$ in the construction of $T'$).
+  In other words, $f$ is not an edge of $T'$ (since $f = e$).
+  This contradicts the fact that $f$ is an edge of $T'$.
+  This contradiction proves that our assumption was false; qed.
+}.
+In other words, $u \notin \leaves{T}$.
+This proves Proposition~\ref{prop.hw3.tree-leaf} \textbf{(b)}.
+
+Next, let us notice that
+each $q \in \leaves{T} \setminus \set{v}$ satisfies
+$q \in \leaves{T'}$
+\ \ \ \ \footnote{\textit{Proof.}
+  Let $q \in \leaves{T} \setminus \set{v}$.
+  Thus, $q \in \leaves{T}$ and $q \neq v$.
+  Since $q \neq v$, we conclude that $q$ is a vertex of $T'$.
+  \par
+  We know that $q \in \leaves{T}$.
+  In other words, $q$ is a leaf of $T$.
+  In other words, $\deg_T q = 1$.
+  \par
+  But $T'$ is a submultigraph of $T$.
+  Hence, $\deg_{T'} q \leq \deg_T q = 1$.
+  Combining this with \eqref{pf.prop.hw3.tree-leaf.1}, we obtain
+  $\deg_{T'} q = 1$.
+  In other words, $q$ is a leaf of $T'$.
+  In other words, $q \in \leaves{T'}$.
+}.
+In other words,
+\begin{equation}
+\leaves{T} \setminus \set{v} \subseteq \leaves{T'} .
+\label{pf.prop.hw3.tree-leaf.2}
+\end{equation}
+
+On the other hand,
+each $q \in \leaves{T'} \setminus \set{u}$ satisfies
+$q \in \leaves{T} \setminus \set{v}$
+\ \ \ \ \footnote{\textit{Proof.}
+  Let $q \in \leaves{T'} \setminus \set{u}$.
+  Thus, $q \in \leaves{T'}$ and $q \neq u$.
+  \par
+  We know that $q \in \leaves{T'}$.
+  In other words, $q$ is a leaf of $T'$.
+  In other words, $\deg_{T'} q = 1$.
+  Hence, there is only one edge of $T'$ that contains $q$.
+  \par
+  Recall that $T'$ is a submultigraph of $T$.
+  Thus, $\deg_T q \geq \deg_{T'} q = 1$.
+  \par
+  Since $q$ is a vertex of $T'$, we have $q \neq v$ (since the
+  multigraph $T'$ is obtained from $T$ by removing the vertex $v$).
+  \par
+  Assume (for the sake of contradiction) that $\deg_T q \neq 1$.
+  Thus, $\deg_T q > 1$ (since $\deg_T q \geq 1$), so that
+  $\deg_T q \geq 2$ (since $\deg_T q$ is an integer).
+  In other words, there are at least $2$ edges of $T$ that contain
+  $q$.
+  This yields that there are more edges of $T$ that contain $q$
+  than there are edges of $T'$ that contain $q$
+  (because there is only one edge of $T'$ that contains $q$).
+  Hence, there exists an edge of $T$ that contains $q$ but that is not
+  an edge of $T'$.
+  This edge must be $e$ (since $e$ is the only edge of $T$ that is not
+  an edge of $T'$).
+  Thus, the edge $e$ contains $q$.
+  In other words, $q$ is one of the two endpoints of $e$.
+  In other words, $q$ is one of $u$ and $v$ (since the two endpoints
+  of $e$ are $u$ and $v$).
+  Since $q \neq u$, we thus obtain $q = v$.
+  This contradicts $q \neq v$.
+  This contradiction proves that our assumption was wrong.
+  Hence, we cannot have $\deg_T q \neq 1$.
+  \par
+  In other words, we have $\deg_T q = 1$.
+  In other words, $q$ is a leaf of $T$.
+  In other words, $q \in \leaves{T}$.
+  Combining this with $q \neq v$, we obtain
+  $q \in \leaves{T} \setminus \set{v}$.}.
+In other words,
+\begin{equation}
+\leaves{T'} \setminus \set{u} \subseteq \leaves{T} \setminus \set{v}
+\label{pf.prop.hw3.tree-leaf.3}
+\end{equation}
+
+\textbf{(c)} Assume that $u$ is a leaf of $T'$.
+In other words, $u \in \leaves{T'}$.
+Hence,
+\begin{align*}
+\leaves{T'}
+&= \underbrack{\tup{\leaves{T'} \setminus \set{u}}}
+              { \subseteq \leaves{T} \setminus \set{v} \\
+               \text{(by \eqref{pf.prop.hw3.tree-leaf.3})}}
+   \cup \set{u}
+\subseteq \tup{\leaves{T} \setminus \set{v}} \cup \set{u} .
+\end{align*}
+Combining this with
+\begin{align*}
+\underbrack{\tup{\leaves{T} \setminus \set{v}}}
+           {\subseteq \leaves{T'} \\
+            \text{(by \eqref{pf.prop.hw3.tree-leaf.2})}}
+\cup \underbrack{\set{u}}
+                {\subseteq \leaves{T'} \\
+                 \text{(since } u \in \leaves{T'} \text{)}}
+& \subseteq \leaves{T'} \cup \leaves{T'}
+= \leaves{T'} ,
+\end{align*}
+we obtain
+$\leaves{T'} = \tup{\leaves{T} \setminus \set{v}} \cup \set{u}$.
+This proves Proposition~\ref{prop.hw3.tree-leaf} \textbf{(c)}.
+
+\textbf{(d)} Assume that $u$ is not a leaf of $T'$.
+In other words, $u \notin \leaves{T'}$.
+Hence,
+\begin{align*}
+\leaves{T'}
+&= \leaves{T'} \setminus \set{u}
+\subseteq \leaves{T} \setminus \set{v}
+\qquad \left( \text{by \eqref{pf.prop.hw3.tree-leaf.3}} \right) .
+\end{align*}
+Combining this with \eqref{pf.prop.hw3.tree-leaf.2},
+we obtain
+$\leaves{T'} = \leaves{T} \setminus \set{v}$.
+This proves Proposition~\ref{prop.hw3.tree-leaf} \textbf{(d)}.
+\end{proof}
+}
+
+Also, here is a particularly trivial fact:
+
+\begin{proposition}
+\label{prop.hw3.tree-2}
+Let $T$ be a tree such that $\abs{\verts{T}} \leq 2$.
+Let $v$ and $w$ be two distinct leaves of $T$.
+Then, the vertices $v$ and $w$ are adjacent, and we have
+$\verts{T} = \leaves{T} = \set{v, w}$.
+\end{proposition}
+
+{\small
+\begin{proof}[Proof of Proposition~\ref{prop.hw3.tree-2}.]
+We have $\leaves{T} \subseteq \verts{T}$ (since each leaf of $T$ is
+a vertex of $T$).
+Thus, $\abs{\leaves{T}} \leq \abs{\verts{T}} \leq 2$.
+
+On the other hand, $v$ and $w$ are two distinct leaves of $T$.
+Thus, $T$ has at least two distinct leaves.
+In other words, $\abs{\leaves{T}} \geq 2$.
+Combined with $\abs{\leaves{T}} \leq 2$, this yields
+$\abs{\leaves{T}} = 2$.
+Hence,
+$2 = \abs{\leaves{T}} \leq \abs{\verts{T}}$.
+Combining this with $\abs{\verts{T}} \leq 2$,
+we find $\abs{\verts{T}} = 2$.
+In other words, $\verts{T}$ is a $2$-element set.
+Hence, the only $2$-element subset of the set $\verts{T}$ is this
+set $\verts{T}$ itself.
+
+Now, $v$ and $w$ are two distinct leaves of $T$.
+In other words, $v$ and $w$ are two distinct elements of
+$\leaves{T}$.
+Hence, $\set{v, w} \subseteq \leaves{T} \subseteq \verts{T}$.
+Thus, $\set{v, w}$ is a $2$-element subset of the set $\verts{T}$
+(in fact, $\set{v, w}$ is a $2$-element set since $v$ and $w$ are
+distinct).
+Therefore, $\set{v, w}$ is the set $\verts{T}$ itself
+(since the only $2$-element subset of the set $\verts{T}$ is this
+set $\verts{T}$ itself).
+In other words, $\set{v, w} = \verts{T}$.
+Combining $\set{v, w} \subseteq \leaves{T}$ with
+$\leaves{T} \subseteq \verts{T} = \set{v, w}$, we find
+$\set{v, w} = \leaves{T}$.
+Altogether, we thus know that $\verts{T} = \set{v, w} = \leaves{T}$,
+so that $\verts{T} = \leaves{T} = \set{v, w}$.
+
+The vertex $v$ of $T$ is a leaf of $T$.
+In other words, $v$ is a vertex of $T$ such that $\deg v = 1$.
+In other words, $v$ is a vertex of $T$ having exactly one neighbor.
+Let $q$ be this neighbor.
+
+Since $q \in \verts{T}$ (since $q$ is a vertex of $T$)
+and $q \neq v$ (because $q$ is a neighbor of $v$),
+we have $q \in \underbrace{\verts{T}}_{= \set{v, w}} \setminus \set{v}
+           = \set{v, w} \setminus \set{v} \subseteq \set{w}$,
+so that $q = w$.
+But the vertices $v$ and $q$ are adjacent (since $q$ is a neighbor of
+$v$).
+Since $q = w$, this rewrites as follows:
+The vertices $v$ and $w$ are adjacent.
+This completes the proof of Proposition~\ref{prop.hw3.tree-2}.
+\end{proof}
+}
+
+\begin{noncompile}
+Next, we shall introduce one more notation that makes sense for
+general multigraphs (although, of course, it is tailored to
+the particular goals we are trying to achieve):
+
+\begin{definition}
+Let $G$ be a multigraph.
+Let $v$ and $w$ be two vertices of $G$.
+Let $k \in \NN$.
+
+A \textit{$\tup{v, w, k}$-path-cover} of $G$ means a list
+$\tup{p_1, p_2, \ldots, p_k}$ of $k$ paths of $G$ having the
+following properties:
+\begin{itemize}
+ \item Each vertex of $G$ lies on exactly one of the paths
+       $p_1, p_2, \ldots, p_k$.
+ \item The starting point of the path $p_1$ is $v$.
+ \item The ending point of the path $p_k$ is $w$.
+\end{itemize}
+
+\end{definition}
+
+\begin{example}
+Let $G$ be the following multigraph:
+\[
+ \xymatrix{
+  & c \are[dl]_1 \are[r]^2 & f \are[dr]^3 \\
+  a \are[dr]_4 & & & c \are[dl]^5 \are[dr]^6 \\
+  & d \are[r]^7 \are[dl]_8 & g \are[dr]^9 & & k \are[dl]^{10} \\
+  b \are[dr]_{11} & & & j \are[dl]^{12} \\
+  & e \are[r]_{13} & h
+ } .
+\]
+(Here, we have chosen to use letters for vertices and numbers for
+edges.)
+Then, for example, the list
+\[
+ \tup{ \tup{c, 1, a, 4, d, 8, b, 11, e, 13, h},
+       \tup{j, 9, g},
+       \tup{k, 6, c, 3, f} }
+\]
+is a $\tup{c, f, 3}$-path-cover of $G$.
+Another example of a $\tup{c, f, 3}$-path-cover of $G$ is
+\[
+ \tup{ \tup{c, 1, a, 4, d, 8, b, 11, e, 13, h},
+       \tup{j, 9, g, 5, c, 6, k},
+       \tup{f} } .
+\]
+\end{example}
+
+\begin{remark}
+Let $G$ be a multigraph.
+Let $v$ and $w$ be two vertices of $G$.
+Then, a $\tup{v, w, 1}$-path-cover of $G$ is essentially a
+Hamiltonian path from $v$ to $w$ in $G$.
+(More precisely, it is the same as a list of size $1$,
+whose unique entry is a Hamiltonian path from $v$ to $w$ in $G$.)
+\end{remark}
+\end{noncompile}
+
+Next, we introduce some simple notations:
+
+\begin{definition}
+For any $k \in \NN$, we let $\ive{k}$ denote the set
+$\set{1, 2, \ldots, k}$.
+\end{definition}
+
+\begin{definition}
+Let $V$ be a finite set.
+A \textit{listing} of $V$ shall mean a list of elements of $V$
+such that each element of $V$ appears exactly once in this list.
+
+For example, the set $\set{1, 4, 6}$ has exactly $6$ listings;
+two of them are $\tup{1, 4, 6}$ and $\tup{4, 1, 6}$.
+\end{definition}
+
+\begin{definition}
+Let $G$ be a multigraph.
+Let $p$ and $q$ be two vertices of $G$.
+Then, we write $p \operatorname{nad}_G q$ if and only if
+$p$ is not adjacent to $q$ in $G$.
+\end{definition}
+
+The following fact is obvious:
+
+\begin{proposition}
+\label{prop.hw3.listing.add-vertex}
+Let $V$ be a finite set.
+Let $v \in V$.
+Let $\tup{v_1, v_2, \ldots, v_{n-1}}$ be a listing of the set
+$V \setminus \set{v}$.
+Then, $\tup{v_1, v_2, \ldots, v_{n-1}, v}$ is a listing of the
+set $V$.
+\end{proposition}
+
+Now comes a theorem which (once proven) will quickly yield the claim
+of Exercise~\ref{exe.hw3.whamilton}:
+
+\begin{theorem} \label{thm.hw3.uv-pc}
+Let $n \in \NN$.
+Let $T$ be a tree such that $\abs{\verts{T}} = n$.
+Let $v$ and $w$ be two distinct leaves of $T$.
+Then, there exists a listing $\tup{v_1, v_2, \ldots, v_n}$ of
+$\verts{T}$ such that $v_1 = w$ and $v_n = v$ and
+\[
+\abs{\set{i \in \ive{n-1} \ \mid \ v_i \operatorname{nad}_T v_{i+1} }}
+\leq \abs{\leaves{T}} - 2.
+\]
+\end{theorem}
+
+\begin{proof}[Proof of Theorem~\ref{thm.hw3.uv-pc}.]
+We shall prove Theorem~\ref{thm.hw3.uv-pc} by induction over $n$:
+
+\textit{Induction base:} Theorem~\ref{thm.hw3.uv-pc} holds in
+the case when $n \leq 2$.
+
+  [\textit{Proof.}
+  Assume that $n \leq 2$.
+  Thus, $\abs{\verts{T}} = n \leq 2$.
+  Proposition~\ref{prop.hw3.tree-2} shows that the vertices $v$ and
+  $w$ are adjacent, and that we have
+  $\verts{T} = \leaves{T} = \set{v, w}$.
+  From $\leaves{T} = \set{v, w}$, we obtain
+  $\abs{\leaves{T}} = \abs{\set{v, w}} = 2$ (since $v$ and $w$ are
+  distinct).
+  From $\verts{T} = \set{v, w}$, we obtain
+  $\abs{\verts{T}} = \abs{\set{v, w}} = 2$, whence
+  $n = \abs{\verts{T}} = 2$.
+  \par
+  But the list $\tup{w, v}$ is a listing of the set $\set{v, w}$
+  (since $v$ and $w$ are distinct), i.e., is a listing of the set
+  $\verts{T}$ (since $\set{v, w} = \verts{T}$).
+  Denote this listing by $\tup{v_1, v_2, \ldots, v_n}$.
+  (This is well-defined, since the length of this listing is $2 = n$.)
+  Thus, $\tup{v_1, v_2, \ldots, v_n} = \tup{w, v}$; hence,
+  $v_1 = w$ and $v_n = v$.
+  Moreover, there exists no $i \in \ive{n-1}$ satisfying
+  $v_i \operatorname{nad}_T v_{i+1}$\ \ \ \ \footnote{\textit{Proof.}
+    Assume the contrary.
+    Thus, there exists some $i \in \ive{n-1}$ satisfying
+    $v_i \operatorname{nad}_T v_{i+1}$.
+    Consider this $i$.
+    \par
+    We have $n = 2$, thus $n-1 = 1$, thus
+    $\ive{n-1} = \ive{1} = \set{1}$.
+    Hence, $i \in \ive{n-1} = \set{1}$, so that $i = 1$.
+    Hence, $v_i = v_1 = w$.
+    Moreover, from $i = 1$, we obtain $i+1 = 2 = n$, so that
+    $v_{i+1} = v_n = v$.
+    Now, recall that $v_i \operatorname{nad}_T v_{i+1}$.
+    In light of $v_i = w$ and $v_{i+1} = v$, this rewrites as
+    $w \operatorname{nad}_T v$.
+    In other words, the vertex $w$ is not adjacent to $v$ in $T$.
+    This contradicts the fact that $w$ is adjacent to $v$ (since the
+    vertices $v$ and $w$ are adjacent).
+    This contradiction completes our proof.}.
+  Hence,
+  $\set{i \in \ive{n-1} \ \mid \ v_i \operatorname{nad}_T v_{i+1} }
+  = \varnothing$, so that
+  \[
+  \abs{\set{i \in \ive{n-1} \ \mid \ v_i \operatorname{nad}_T v_{i+1} }}
+  = 0 \leq 0
+  = \underbrace{2}_{= \abs{\leaves{T}}} - 2
+  = \abs{\leaves{T}} - 2.
+  \]
+  Hence, we have constructed a listing $\tup{v_1, v_2, \ldots, v_n}$
+  of $\verts{T}$ such that $v_1 = w$ and $v_n = v$ and
+  \[
+  \abs{\set{i \in \ive{n-1} \ \mid \ v_i \operatorname{nad}_T v_{i+1} }}
+  \leq \abs{\leaves{T}} - 2.
+  \]
+  This proves that such a listing exists.
+  In other words, Theorem~\ref{thm.hw3.uv-pc} holds.
+  We thus have proven Theorem~\ref{thm.hw3.uv-pc} in the case when
+  $n \leq 2$.]
+
+This completes the induction base.
+
+\textit{Induction step:} Let $N > 2$ be an integer.
+Assume (as the induction hypothesis) that 
+Theorem~\ref{thm.hw3.uv-pc} holds in the case when $n = N - 1$.
+We must then prove that Theorem~\ref{thm.hw3.uv-pc} holds in the
+case when $n = N$.
+
+We have assumed that Theorem~\ref{thm.hw3.uv-pc} holds in the case
+when $n = N - 1$.
+In other words, the following fact holds:
+
+\begin{statement}
+  \textit{Fact 1:}
+  Let $T$ be a tree such that $\abs{\verts{T}} = N - 1$.
+  Let $v$ and $w$ be two distinct leaves of $T$.
+  Then, there exists a listing $\tup{v_1, v_2, \ldots, v_{N-1}}$ of
+  $\verts{T}$ such that $v_1 = w$ and $v_{N-1} = v$ and
+  \[
+  \abs{\set{i \in \ive{\tup{N-1}-1} \ \mid \ v_i \operatorname{nad}_T v_{i+1} }}
+  \leq \abs{\leaves{T}} - 2.
+  \]
+\end{statement}
+
+Now, let us prove that Theorem~\ref{thm.hw3.uv-pc} holds in the
+case when $n = N$.
+
+Let $T$ be a tree such that $\abs{\verts{T}} = N$.
+Let $v$ and $w$ be two distinct leaves of $T$.
+
+We want to prove that there exists a listing
+$\tup{v_1, v_2, \ldots, v_N}$ of
+$\verts{T}$ such that $v_1 = w$ and $v_N = v$ and
+\[
+\abs{\set{i \in \ive{N-1} \ \mid \ v_i \operatorname{nad}_T v_{i+1} }}
+\leq \abs{\leaves{T}} - 2.
+\]
+Such a listing will be called a \textit{helpful listing}.
+Thus, we want to prove that there exists a helpful listing.
+
+We have $\abs{\verts{T}} = N > 2$.
+
+Recall that $v$ is a leaf of $T$.
+Let $T'$ denote the multigraph obtained from $T$ by
+removing this leaf $v$ and the unique edge that contains $v$.
+Let $u$ be the unique neighbor of $v$ in $T$.
+Proposition~\ref{prop.hw3.tree-leaf} \textbf{(a)} shows that
+the multigraph $T'$ is a tree again.
+Proposition~\ref{prop.hw3.tree-leaf} \textbf{(b)} shows that
+$u \notin \leaves{T}$, and thus
+$u \notin \leaves{T} \setminus \set{v}$.
+Notice that $v \in \leaves{T}$ (since $v$ is a leaf of $T$)
+and $w \in \leaves{T}$ (since $w$ is a leaf of $T$).
+Thus, $w \neq u$ (because otherwise, we would have
+$w = u \notin \leaves{T}$, which would contradict
+$w \in \leaves{T}$).
+In other words, $u$ and $w$ are distinct.
+Also, $w \neq v$ (since $v$ and $w$ are distinct).
+
+We know that $u$ is a neighbor of $v$ in $T$.
+Hence, there exists an edge of $T$ having endpoints $u$ and $v$.
+Let us denote this edge by $e$.
+
+We have $N \geq 3$ (because $N$ is an integer and satisfies $N > 2$).
+The multigraph $T'$ was obtained by removing the vertex $v$ and one
+edge from $T$.
+Hence, the vertices of $T'$ are exactly the vertices of $T$ other than
+$v$.
+In other words, $\verts{T'} = \verts{T} \setminus \set{v}$.
+Thus,
+\begin{align*}
+\abs{\underbrace{\verts{T'}}_{= \verts{T} \setminus \set{v}}}
+&= \abs{\verts{T} \setminus \set{v}}
+= \underbrace{\abs{\verts{T}}}_{= N} - 1
+\qquad \left(\text{since } v \in \verts{T}\right) \\
+&= N - 1 \geq 2
+\qquad \left(\text{since } N \geq 3 \right) .
+\end{align*}
+
+We are in one of the following two cases:
+
+\textit{Case 1:} The vertex $u$ is a leaf of $T'$.
+
+\textit{Case 2:} The vertex $u$ is not a leaf of $T'$.
+
+Let us treat these cases separately:
+
+\begin{itemize}
+
+\item   Let us first consider Case 1.
+        In this case, the vertex $u$ is a leaf of $T'$.
+        Hence, Proposition~\ref{prop.hw3.tree-leaf} \textbf{(c)}
+        shows that
+        $\leaves{T'}
+        = \tup{\leaves{T} \setminus \set{v}} \cup \set{u}$.
+        Hence,
+        \begin{align*}
+        \abs{\leaves{T'}}
+        &= \abs{\tup{\leaves{T} \setminus \set{v}} \cup \set{u}} \\
+        &= \underbrack{\abs{\leaves{T} \setminus \set{v}}}
+                     {= \abs{\leaves{T}} - 1 \\
+                      \text{(since } v \in \leaves{T} \text{)}}
+          + 1
+        \qquad \left(\text{since }
+                      u \notin \leaves{T} \setminus \set{v}
+               \right) \\
+        &= \tup{\abs{\leaves{T}} - 1} + 1 = \abs{\leaves{T}} .
+        \end{align*}
+        
+        But $w \in \leaves{T} \setminus \set{v}$ (since
+        $w \in \leaves{T}$ and $w \neq v$) and thus
+        $w \in \leaves{T} \setminus \set{v}
+        \subseteq \tup{\leaves{T} \setminus \set{v}} \cup \set{u}
+        = \leaves{T'}$.
+        Hence, $w$ is a leaf of $T'$.
+        Hence, $u$ and $w$ are two distinct leaves of $T'$
+        (since $u$ and $w$ are leaves of $T'$, and are distinct).
+        Thus, Fact 1 (applied to $T'$ and $u$ instead of $T$ and $v$)
+        shows that there exists a listing
+        $\tup{v_1, v_2, \ldots, v_{N-1}}$ of $\verts{T'}$ such that
+        $v_1 = w$ and $v_{N-1} = u$ and
+        \begin{align}
+        \abs{\set{i \in \ive{\tup{N-1}-1} \ \mid \ v_i \operatorname{nad}_{T'} v_{i+1} }}
+        \leq \abs{\leaves{T'}} - 2.
+        \label{pf.thm.hw3.uv-pc.c1.1}
+        \end{align}
+        Consider this listing.
+        
+        We know that $\tup{v_1, v_2, \ldots, v_{N-1}}$ is a listing
+        of the set $\verts{T'} = \verts{T} \setminus \set{v}$.
+        Hence, Proposition~\ref{prop.hw3.listing.add-vertex}
+        (applied to $V = \verts{T}$ and $n = N$) shows that
+        $\tup{v_1, v_2, \ldots, v_{N-1}, v}$ is a listing of the
+        set $\verts{T}$.
+        
+        Let us extend the $\tup{N-1}$-tuple
+        $\tup{v_1, v_2, \ldots, v_{N-1}}$ to an $N$-tuple
+        $\tup{v_1, v_2, \ldots, v_N}$ by setting $v_N = v$.
+        Thus,
+        $\tup{v_1, v_2, \ldots, v_N}
+        = \tup{v_1, v_2, \ldots, v_{N-1}, v}$ is a listing of the
+        set $\verts{T}$ (as we have just seen).
+        Furthermore, $v_1 = w$ and $v_N = v$.
+        Next, we claim that
+        \begin{align}
+        \set{i \in \ive{N-1} \ \mid \ v_i \operatorname{nad}_T v_{i+1} }
+        \subseteq
+        \set{i \in \ive{\tup{N-1}-1} \ \mid \ v_i \operatorname{nad}_{T'} v_{i+1} } .
+        \label{pf.thm.hw3.uv-pc.c1.2}
+        \end{align}
+        
+        [\textit{Proof of \eqref{pf.thm.hw3.uv-pc.c1.2}:}
+        Let
+        $j \in \set{i \in \ive{N-1} \ \mid \ v_i \operatorname{nad}_T v_{i+1} }$
+        be arbitrary.
+        Thus, $j$ is an element of $\ive{N-1}$ satisfying
+        $v_j \operatorname{nad}_T v_{j+1}$.
+        We have $j \neq N-1$\ \ \ \ \footnote{\textit{Proof.}
+          Assume the contrary.
+          Thus, $j = N-1$.
+          Hence, $v_j = v_{N-1} = u$.
+          Also, from $j = N-1$, we obtain $j+1 = N$, so that
+          $v_{j+1} = v_N = v$.
+          Now, $v_j \operatorname{nad}_T v_{j+1}$ rewrites as
+          $u \operatorname{nad}_T v$ (since $v_j = u$ and
+          $v_{j+1} = v$).
+          In other words, the vertex $u$ is not adjacent to $v$ in
+          $T$.
+          In other words, $u$ is not a neighbor of $v$ in $T$.
+          This contradicts the fact that $u$ is a neighbor of $v$ in
+          $T$.
+          This contradiction proves that our assumption was wrong,
+          qed.}.
+        Combined with $j \in \ive{N-1}$, this yields
+        $j \in \ive{N-1} \setminus \set{N-1} = \ive{\tup{N-1}-1}$.
+        Hence, both $v_j$ and $v_{j+1}$ are entries of the list
+        $\tup{v_1, v_2, \ldots, v_{N-1}}$, and therefore are elements
+        of $\verts{T'}$ (since this list
+        $\tup{v_1, v_2, \ldots, v_{N-1}}$ is a listing of
+        $\verts{T'}$).
+        But we have $v_j \operatorname{nad}_T v_{j+1}$.
+        In other words, the vertex $v_j$ is not adjacent to $v_{j+1}$
+        in $T$.
+        If the vertex $v_j$ was adjacent to $v_{j+1}$ in $T'$, then
+        it would also be adjacent to $v_{j+1}$ in $T$ (since $T'$ is
+        a sub-multigraph of $T$), which would contradict the fact that
+        the vertex $v_j$ is not adjacent to $v_{j+1}$ in $T$.
+        Hence, the vertex $v_j$ is not adjacent to $v_{j+1}$ in $T'$.
+        In other words, we have
+        $v_j \operatorname{nad}_{T'} v_{j+1}$.
+        
+        Now, we have shown that $j$ is an element of
+        $\ive{\tup{N-1}-1}$, and that this element $j$ satisfies
+        $v_j \operatorname{nad}_{T'} v_{j+1}$.
+        Hence,
+        $j \in \set{i \in \ive{\tup{N-1}-1} \ \mid \ v_i \operatorname{nad}_{T'} v_{i+1} }$.
+        
+        Now, forget that we fixed $j$.
+        We thus have proven that \newline
+        $j \in \set{i \in \ive{\tup{N-1}-1} \ \mid \ v_i \operatorname{nad}_{T'} v_{i+1} }$
+        for each
+        $j \in \set{i \in \ive{N-1} \ \mid \ v_i \operatorname{nad}_T v_{i+1} }$.
+        In other words,
+        \[
+        \set{i \in \ive{N-1} \ \mid \ v_i \operatorname{nad}_T v_{i+1} }
+        \subseteq
+        \set{i \in \ive{\tup{N-1}-1} \ \mid \ v_i \operatorname{nad}_{T'} v_{i+1} } .
+        \]
+        This proves \eqref{pf.thm.hw3.uv-pc.c1.2}.]
+        
+        From \eqref{pf.thm.hw3.uv-pc.c1.2}, we obtain
+        \begin{align*}
+        \abs{\set{i \in \ive{N-1} \ \mid \ v_i \operatorname{nad}_T v_{i+1} }}
+        &\leq
+        \abs{\set{i \in \ive{\tup{N-1}-1} \ \mid \ v_i \operatorname{nad}_{T'} v_{i+1} }}
+        \\
+        &\leq
+        \underbrace{\abs{\leaves{T'}}}_{= \abs{\leaves{T}}} - 2
+        \qquad \left(\text{by \eqref{pf.thm.hw3.uv-pc.c1.1}}\right) \\
+        &= \abs{\leaves{T}} - 2.
+        \end{align*}
+        
+        Thus, we have shown that $\tup{v_1, v_2, \ldots, v_N}$ is a
+        listing of $\verts{T}$ such that $v_1 = w$ and $v_N = v$ and
+        \[
+        \abs{\set{i \in \ive{N-1} \ \mid \ v_i \operatorname{nad}_T v_{i+1} }}
+        \leq \abs{\leaves{T}} - 2.
+        \]
+        In other words, $\tup{v_1, v_2, \ldots, v_N}$ is a helpful
+        listing.
+        Hence, there exists a helpful listing in Case 1.
+
+\item   Let us now consider Case 2.
+        In this case, the vertex $u$ is not a leaf of $T'$.
+        Hence, Proposition~\ref{prop.hw3.tree-leaf} \textbf{(d)}
+        shows that
+        $\leaves{T'} = \leaves{T} \setminus \set{v}$.
+        Hence,
+        \begin{align*}
+        \abs{\leaves{T'}}
+        &= \abs{\leaves{T} \setminus \set{v}}
+        = \abs{\leaves{T}} - 1
+        %\qquad \left(\text{since } v \in \leaves{T}\right).
+        \end{align*}
+        (since $v \in \leaves{T}$).
+        
+        But $w \in \leaves{T} \setminus \set{v}$ (since
+        $w \in \leaves{T}$ and $w \neq v$) and thus
+        $w \in \leaves{T} \setminus \set{v}
+        = \leaves{T'}$.
+        Hence, $w$ is a leaf of $T'$.
+        
+        The tree $T'$ has at least two vertices (since
+        $\abs{\verts{T'}} \geq 2$).
+        It is known that any tree with at least two vertices must
+        have at least two leaves.
+        Since $T'$ is a tree with at least two vertices, we thus
+        conclude that $T'$ has at least two leaves.
+        Hence, $T'$ has at least one leaf distinct from $w$.
+        Pick such a leaf, and denote it by $p$.
+        Hence, $p$ and $w$ are two distinct leaves of $T'$
+        (since $p$ and $w$ are leaves of $T'$, and since $p$ is
+        distinct from $w$).
+        Thus, Fact 1 (applied to $T'$ and $p$ instead of $T$ and $v$)
+        shows that there exists a listing
+        $\tup{v_1, v_2, \ldots, v_{N-1}}$ of $\verts{T'}$ such that
+        $v_1 = w$ and $v_{N-1} = p$ and
+        \begin{align}
+        \abs{\set{i \in \ive{\tup{N-1}-1} \ \mid \ v_i \operatorname{nad}_{T'} v_{i+1} }}
+        \leq \abs{\leaves{T'}} - 2.
+        \label{pf.thm.hw3.uv-pc.c2.1}
+        \end{align}
+        Consider this listing.
+        
+        We know that $\tup{v_1, v_2, \ldots, v_{N-1}}$ is a listing
+        of the set $\verts{T'} = \verts{T} \setminus \set{v}$.
+        Hence, Proposition~\ref{prop.hw3.listing.add-vertex}
+        (applied to $V = \verts{T}$ and $n = N$) shows that
+        $\tup{v_1, v_2, \ldots, v_{N-1}, v}$ is a listing of the
+        set $\verts{T}$.
+        
+        Let us extend the $\tup{N-1}$-tuple
+        $\tup{v_1, v_2, \ldots, v_{N-1}}$ to an $N$-tuple
+        $\tup{v_1, v_2, \ldots, v_N}$ by setting $v_N = v$.
+        Thus,
+        $\tup{v_1, v_2, \ldots, v_N}
+        = \tup{v_1, v_2, \ldots, v_{N-1}, v}$ is a listing of the
+        set $\verts{T}$ (as we have just seen).
+        Furthermore, $v_1 = w$ and $v_N = v$.
+        Next, we claim that
+        \begin{align}
+        \set{i \in \ive{N-1} \ \mid \ v_i \operatorname{nad}_T v_{i+1} }
+        \setminus \set{N-1}
+        \subseteq
+        \set{i \in \ive{\tup{N-1}-1} \ \mid \ v_i \operatorname{nad}_{T'} v_{i+1} } .
+        \label{pf.thm.hw3.uv-pc.c2.2}
+        \end{align}
+        
+        [\textit{Proof of \eqref{pf.thm.hw3.uv-pc.c2.2}:}
+        Let
+        $j \in
+        \set{i \in \ive{N-1} \ \mid \ v_i \operatorname{nad}_T v_{i+1} }
+        \setminus \set{N-1}$
+        be arbitrary.
+        Thus,
+        $j \in
+        \set{i \in \ive{N-1} \ \mid \ v_i \operatorname{nad}_T v_{i+1} }$
+        and $j \notin \set{N-1}$.
+        From \newline
+        $j \in
+        \set{i \in \ive{N-1} \ \mid \ v_i \operatorname{nad}_T v_{i+1} }$,
+        we see that $j$ is an element of $\ive{N-1}$ satisfying
+        $v_j \operatorname{nad}_T v_{j+1}$.
+        From $j \notin \set{N-1}$, we obtain $j \neq N-1$.
+        Combined with $j \in \ive{N-1}$, this yields
+        $j \in \ive{N-1} \setminus \set{N-1} = \ive{\tup{N-1}-1}$.
+        Hence, both $v_j$ and $v_{j+1}$ are entries of the list
+        $\tup{v_1, v_2, \ldots, v_{N-1}}$, and therefore are elements
+        of $\verts{T'}$ (since this list
+        $\tup{v_1, v_2, \ldots, v_{N-1}}$ is a listing of
+        $\verts{T'}$).
+        But we have $v_j \operatorname{nad}_T v_{j+1}$.
+        In other words, the vertex $v_j$ is not adjacent to $v_{j+1}$
+        in $T$.
+        If the vertex $v_j$ was adjacent to $v_{j+1}$ in $T'$, then
+        it would also be adjacent to $v_{j+1}$ in $T$ (since $T'$ is
+        a sub-multigraph of $T$), which would contradict the fact that
+        the vertex $v_j$ is not adjacent to $v_{j+1}$ in $T$.
+        Hence, the vertex $v_j$ is not adjacent to $v_{j+1}$ in $T'$.
+        In other words, we have
+        $v_j \operatorname{nad}_{T'} v_{j+1}$.
+        
+        Now, we have shown that $j$ is an element of
+        $\ive{\tup{N-1}-1}$, and that this element $j$ satisfies
+        $v_j \operatorname{nad}_{T'} v_{j+1}$.
+        Hence,
+        $j \in \set{i \in \ive{\tup{N-1}-1} \ \mid \ v_i \operatorname{nad}_{T'} v_{i+1} }$.
+        
+        Now, forget that we fixed $j$.
+        We thus have proven that \newline
+        $j \in \set{i \in \ive{\tup{N-1}-1} \ \mid \ v_i \operatorname{nad}_{T'} v_{i+1} }$
+        for each
+        $j \in \set{i \in \ive{N-1} \ \mid \ v_i \operatorname{nad}_T v_{i+1} }
+        \setminus \set{N-1}$.
+        In other words,
+        \[
+        \set{i \in \ive{N-1} \ \mid \ v_i \operatorname{nad}_T v_{i+1} }
+        \setminus \set{N-1}
+        \subseteq
+        \set{i \in \ive{\tup{N-1}-1} \ \mid \ v_i \operatorname{nad}_{T'} v_{i+1} } .
+        \]
+        This proves \eqref{pf.thm.hw3.uv-pc.c2.2}.]
+        
+        Now,
+        \begin{align*}
+        &\abs{\set{i \in \ive{N-1} \ \mid \ v_i \operatorname{nad}_T v_{i+1} }
+             \setminus \set{N-1}} \\
+        &\geq \abs{\set{i \in \ive{N-1} \ \mid \ v_i \operatorname{nad}_T v_{i+1} }}
+         - \underbrace{\abs{\set{N-1}}}_{= 1} \\
+        &= \abs{\set{i \in \ive{N-1} \ \mid \ v_i \operatorname{nad}_T v_{i+1} }} - 1 .
+        \end{align*}
+        Hence, % From \eqref{pf.thm.hw3.uv-pc.c2.2}, we obtain
+        \begin{align*}
+        &\abs{\set{i \in \ive{N-1} \ \mid \ v_i \operatorname{nad}_T v_{i+1} }} - 1 \\
+        &\leq \abs{\set{i \in \ive{N-1} \ \mid \ v_i \operatorname{nad}_T v_{i+1} }
+             \setminus \set{N-1}} \\
+        &\leq
+        \abs{\set{i \in \ive{\tup{N-1}-1} \ \mid \ v_i \operatorname{nad}_{T'} v_{i+1} }}
+        \qquad \left(\text{by \eqref{pf.thm.hw3.uv-pc.c2.2}}\right)
+        \\
+        &\leq
+        \underbrace{\abs{\leaves{T'}}}_{= \abs{\leaves{T}} - 1} - 2
+        \qquad \left(\text{by \eqref{pf.thm.hw3.uv-pc.c1.1}}\right) \\
+        &= \tup{\abs{\leaves{T}} - 1} - 2 = \abs{\leaves{T}} - 3.
+        \end{align*}
+        Adding $1$ to both sides of this inequality, we obtain
+        \[
+        \abs{\set{i \in \ive{N-1} \ \mid \ v_i \operatorname{nad}_T v_{i+1} }}
+        \leq \abs{\leaves{T}} - 2 .
+        \]
+        
+        Thus, we have shown that $\tup{v_1, v_2, \ldots, v_N}$ is a
+        listing of $\verts{T}$ such that $v_1 = w$ and $v_N = v$ and
+        \[
+        \abs{\set{i \in \ive{N-1} \ \mid \ v_i \operatorname{nad}_T v_{i+1} }}
+        \leq \abs{\leaves{T}} - 2.
+        \]
+        In other words, $\tup{v_1, v_2, \ldots, v_N}$ is a helpful
+        listing.
+        Hence, there exists a helpful listing in Case 2.
+\end{itemize}
+
+Thus, in each of the two Cases 1 and 2, we have shown that there
+exists a helpful listing.
+Hence, there is always a helpful listing (since the two cases cover
+all possibilities).
+In other words, there always exists a listing
+$\tup{v_1, v_2, \ldots, v_N}$ of
+$\verts{T}$ such that $v_1 = w$ and $v_N = v$ and
+\[
+\abs{\set{i \in \ive{N-1} \ \mid \ v_i \operatorname{nad}_T v_{i+1} }}
+\leq \abs{\leaves{T}} - 2.
+\]
+Hence, we have proven that Theorem~\ref{thm.hw3.uv-pc} holds in the
+case when $n = N$.
+This completes the induction step.
+Thus, Theorem~\ref{thm.hw3.uv-pc} is proven.
+\end{proof}
+
+% \begin{corollary} \label{cor.hw3.uv-hamp}
+% Let $T$ be a tree such that $\abs{\verts{T}} \geq 2$.
+% Let $v$ and $w$ be two distinct leaves of $T$.
+% Then, it is possible to add $\abs{\leaves{T}}-2$ new edges to $T$ in
+% such a way that the resulting multigraph has a Hamiltonian path from
+% $v$ to $w$.
+% \end{corollary}
+
+\begin{proof}[Solution to Exercise~\ref{exe.hw3.whamilton}
+(sketched).]
+Let $n = \abs{\verts{T}}$.
+The tree $T$ has more than $1$ vertex.
+In other words, $\abs{\verts{T}} > 1$.
+Hence, $n = \abs{\verts{T}} > 1$.
+Thus, $n \geq 2$ (since $n$ is an integer).
+
+The tree $T$ has at least two vertices (since
+$\abs{\verts{T}} = n \geq 2$).
+It is known that any tree with at least two vertices must
+have at least two leaves.
+Since $T$ is a tree with at least two vertices, we thus
+conclude that $T$ has at least two leaves.
+In other words, there exist two distinct leaves of $T$.
+Pick two such leaves, and denote them by $v$ and $w$.
+Theorem~\ref{thm.hw3.uv-pc} shows that there exists a listing
+$\tup{v_1, v_2, \ldots, v_n}$ of
+$\verts{T}$ such that $v_1 = w$ and $v_n = v$ and
+\begin{equation}
+\abs{\set{i \in \ive{n-1} \ \mid \ v_i \operatorname{nad}_T v_{i+1} }}
+\leq \abs{\leaves{T}} - 2.
+\label{sol.hw3.whamilton.1}
+\end{equation}
+Consider such a listing.
+
+The $n$ elements $v_1, v_2, \ldots, v_n$ are distinct elements of
+$\verts{T}$ (since $\tup{v_1, v_2, \ldots, v_n}$ is a listing of
+$\verts{T}$).
+Hence, $v_n \neq v_1$ (since $n \geq 2$).
+
+Define a subset $S$ of $\ive{n-1}$ by
+$S = \set{i \in \ive{n-1} \ \mid \ v_i \operatorname{nad}_T v_{i+1} }$.
+Thus,
+\begin{align*}
+\abs{S}
+&= \abs{\set{i \in \ive{n-1} \ \mid \ v_i \operatorname{nad}_T v_{i+1} }}
+\leq \abs{\underbrace{\leaves{T}}_{= L}} - 2
+\qquad \left(\text{by \eqref{sol.hw3.whamilton.1}}\right) \\
+&= \abs{L} - 2 .
+\end{align*}
+Hence,
+\[
+\abs{L} - 1 - \underbrace{\abs{S}}_{\leq \abs{L} - 2}
+\geq \abs{L} - 1 - \tup{\abs{L} - 2} = 1 .
+\]
+
+Now, let $G$ be the multigraph obtained from $T$ by the following
+procedure:
+\begin{itemize}
+\item \textbf{Step 1:}
+      For each $i \in S$, add an edge with endpoints $v_i$ and
+      $v_{i+1}$.
+      (This is possible, because $v_i$ and $v_{i+1}$ are distinct
+      vertices of $T$ (since $v_1, v_2, \ldots, v_n$ are distinct).)
+\item \textbf{Step 2:}
+      Add $\abs{L} - 1 - \abs{S}$ many edges with endpoints $v_n$
+      and $v_1$.
+      (This is possible, since $v_n \neq v_1$, and because
+      $\abs{L} - 1 - \abs{S} \geq 1 \geq 0$.)
+\end{itemize}
+
+Let us state some simple observations about this multigraph $G$:
+
+\begin{statement}
+\textit{Observation 1:}
+The multigraph $G$ is obtained from $T$ by adding
+$\abs{L}-1$ new edges to $T$.
+\end{statement}
+
+\begin{proof}[Proof of Observation 1:]
+The multigraph $G$ is obtained from $T$ by the above procedure,
+which has two steps.
+Both steps consist in adding edges to the multigraph.
+In Step 1, exactly $\abs{S}$ many edges are added (because one edge
+is added for each $i \in S$).
+In Step 2, exactly $\abs{L} - 1 - \abs{S}$ further edges
+are added.
+Thus, altogether,
+$\abs{S} + \tup{\abs{L} - 1 - \abs{S}} = \abs{L} - 1$
+many edges are added.
+Hence, the multigraph $G$ is obtained from $T$ by adding
+$\abs{L}-1$ new edges to $T$.
+This proves Observation 1.
+\end{proof}
+
+\begin{statement}
+\textit{Observation 2:}
+The list $\tup{v_1, v_2, \ldots, v_n}$ is a listing of $\verts{G}$.
+\end{statement}
+
+\begin{proof}[Proof of Observation 2:]
+The multigraph $G$ is obtained from $T$ by adding some edges; but no
+vertices are ever added.
+Hence, the vertices of $G$ are precisely the vertices of $T$.
+In other words, $\verts{G} = \verts{T}$.
+
+But recall that the list $\tup{v_1, v_2, \ldots, v_n}$ is a listing
+of $\verts{T}$.
+Since $\verts{G} = \verts{T}$, this rewrites as follows:
+The list $\tup{v_1, v_2, \ldots, v_n}$ is a listing of $\verts{G}$.
+This proves Observation 2.
+\end{proof}
+
+Now, let us set $v_{n+1} = v_1$.
+Thus, $n+1$ vertices $v_1, v_2, \ldots, v_{n+1}$ of $G$ are defined.
+
+\begin{statement}
+\textit{Observation 3:}
+Let $j \in \ive{n}$.
+Then, there exists an edge of $G$ whose endpoints are $v_j$ and
+$v_{j+1}$.
+\end{statement}
+
+\begin{proof}[Proof of Observation 3:]
+We are in one of the following three cases:
+\begin{itemize}
+\item \textit{Case 1:} We have $j = n$.
+\item \textit{Case 2:} We have $j \in S$.
+\item \textit{Case 3:} We have neither $j = n$ nor $j \in S$.
+\end{itemize}
+
+We shall consider these cases separately:
+
+\begin{itemize}
+
+\item Let us first consider Case 1.
+      In this case, we have $j = n$.
+      Thus, $v_j = v_n$ and $v_{j+1} = v_{n+1} = v_1$.
+      Now, recall the procedure that we used to define the multigraph
+      $G$.
+      This procedure consisted of two steps.
+      In Step 2, we have added $\abs{L} - 1 - \abs{S}$ many edges with
+      endpoints $v_n$ and $v_1$.
+      Since $\abs{L} - 1 - \abs{S} \geq 1$, this shows that we have
+      added \textbf{at least one} edge with endpoints $v_n$ and $v_1$.
+      Hence, the multigraph $G$ has at least one edge whose endpoints
+      are $v_n$ and $v_1$.
+      Since $v_j = v_n$ and $v_{j+1} = v_1$, this rewrites as follows:
+      The multigraph $G$ has at least one edge whose endpoints are
+      $v_j$ and $v_{j+1}$.
+      In other words, there exists an edge of $G$ whose endpoints are
+      $v_j$ and $v_{j+1}$.
+      Hence, Observation 3 is proven in Case 1.
+
+\item Let us now consider Case 2.
+      In this case, we have $j \in S$.
+      % Hence,
+      % $j \in S
+      % = \set{i \in \ive{n-1} \ \mid \ v_i \operatorname{nad}_T v_{i+1} }$.
+      % In other words, $j$ is an element of $\ive{n-1}$ and satisfies
+      % $v_j \operatorname{nad}_T v_{j+1}$.
+      Now, recall the procedure that we used to define the multigraph
+      $G$.
+      This procedure consisted of two steps.
+      In Step 1, we have added an edge with endpoints $v_i$ and
+      $v_{i+1}$ for each $i \in S$.
+      Thus, in particular, we have added an edge with endpoints $v_j$
+      and $v_{j+1}$ (since $j \in S$).
+      Hence, the multigraph $G$ has at least one edge whose endpoints
+      are $v_j$ and $v_{j+1}$.
+      In other words, there exists an edge of $G$ whose endpoints are
+      $v_j$ and $v_{j+1}$.
+      Hence, Observation 3 is proven in Case 2.
+
+\item Let us now consider Case 3.
+      In this case, we have neither $j = n$ nor $j \in S$.
+      Since we have $j \in \ive{n}$ and $j \neq n$ (since we do not
+      have $j = n$), we must have
+      $j \in \ive{n} \setminus \set{n} = \ive{n-1}$.
+      But the multigraph $G$ was obtained from $T$ by adding edges.
+      Thus, $T$ is a sub-multigraph of $G$.
+      Hence, each edge of $T$ is an edge of $G$.
+      Now, the vertices $v_j$ and $v_{j+1}$ of $T$ are
+      adjacent\footnote{\textit{Proof.} Assume the contrary.
+        Thus, the vertices $v_j$ and $v_{j+1}$ of $T$ are not
+        adjacent.
+        In other words, $v_j \operatorname{nad}_T v_{j+1}$.
+        Now, we know that $j$ is an element of $\ive{n-1}$ satisfying
+        $v_j \operatorname{nad}_T v_{j+1}$.
+        In other words,
+        $j \in \set{i \in \ive{n-1} \ \mid \ v_i \operatorname{nad}_T v_{i+1} }$.
+        In light of
+        $S = \set{i \in \ive{n-1} \ \mid \ v_i \operatorname{nad}_T v_{i+1} }$,
+        this rewrites as $j \in S$.
+        This contradicts the fact that we don't have $j \in S$.
+        This contradiction shows that our assumption was false.}.
+      In other words, there exists an edge of $T$ whose endpoints are
+      $v_j$ and $v_{j+1}$.
+      Therefore, there exists an edge of $G$ whose endpoints are
+      $v_j$ and $v_{j+1}$
+      (since each edge of $T$ is an edge of $G$).
+      Hence, Observation 3 is proven in Case 3.
+\end{itemize}
+
+We thus have proven Observation 3 in all three cases.
+\end{proof}
+
+The list $\tup{v_1, v_2, \ldots, v_n}$ is a listing of
+$\verts{G}$ (by Observation 2).
+Thus, this list $\tup{v_1, v_2, \ldots, v_n}$ contains each element
+of $\verts{G}$ exactly once.
+In other words, this list $\tup{v_1, v_2, \ldots, v_n}$ contains each
+vertex of $G$ exactly once.
+In other words, each vertex of $G$ appears exactly once among the
+vertices $v_1, v_2, \ldots, v_n$.
+
+Now, we define $n$ edges $e_1, e_2, \ldots, e_n$ of $G$ as follows:
+For each $j \in \ive{n}$, we pick some edge of $G$ whose endpoints are
+$v_j$ and $v_{j+1}$ (such an edge exists because of Observation 3),
+and denote this edge by $e_j$.
+Thus, $\tup{v_1, e_1, v_2, e_2, v_3, \ldots, v_n, e_n, v_{n+1}}$ is a
+walk in $G$.
+This walk is a circuit (since $v_{n+1} = v_1$) and therefore a cycle
+(since the elements $v_1, v_2, \ldots, v_n$ are distinct).
+The non-ultimate vertices of this cycle are $v_1, v_2, \ldots, v_n$.
+Hence, each vertex of $G$ appears exactly once among the non-ultimate
+vertices of this cycle (since each vertex of $G$ appears exactly once
+among the vertices $v_1, v_2, \ldots, v_n$).
+In other words, this cycle is a Hamiltonian cycle of $G$.
+Thus, the multigraph $G$ has a Hamiltonian cycle.
+
+The multigraph $G$ is obtained by adding $\abs{L}-1$ new edges to $T$
+(by Observation 1), and has a Hamiltonian cycle.
+Thus, it is possible to add $\abs{L}-1$ new edges to $T$ in such a way
+that the resulting multigraph has a Hamiltonian cycle.
+This solves the exercise.
+\end{proof}
+
+\subsection{Exercise \ref{exe.hw3.d+d+d.directed}: the maximum
+perimeter of a triangle on a digraph}
+
+\subsubsection{Distances in a digraph}
+
+If $u$ and $v$ are two vertices of a digraph $D$, then
+$d \tup{u, v}$ denotes the \textit{distance} from $u$ to $v$. This
+is defined to be the minimum length of a path from $u$ to $v$ if
+such a path exists; otherwise it is defined to be the symbol $\infty$.
+Notice that $d \tup{u, v}$ is not usually the same as $d \tup{v, u}$
+(unlike for simple graphs).
+
+We observe the following simple facts:\footnote{The following facts
+  are analogues of the facts proven in Section 0.8.1 of the
+  \href{http://www-users.math.umn.edu/~dgrinber/5707s17/mt1s.pdf}{solution to midterm 1}.
+  They are proven in the same way as the latter facts
+  (of course, simple graphs must be replaced by digraphs).}
+
+\begin{lemma} \label{lem.hw3.d-leq-V}
+Let $u$ and $v$ be two vertices of a strongly connected digraph
+$D = \tup{V, A}$.
+Then, $d \tup{u, v} \leq \abs{V} - 1$.
+\end{lemma}
+
+Lemma~\ref{lem.hw3.d-leq-V} shows that if $u$ and $v$ are two
+vertices of a strongly connected digraph $D$, then $d \tup{u, v}$ is
+an actual integer (as opposed to $\infty$).
+
+\begin{lemma} \label{lem.hw3.walk-to-distance}
+Let $u$ and $v$ be two vertices of a digraph $D$. Let
+$k \in \NN$. If there exists a walk from $u$ to $v$ in $D$ having
+length $k$, then $d \tup{u, v} \leq k$.
+\end{lemma}
+
+\begin{lemma} \label{lem.hw3.distances-metric}
+Let $D = \tup{V, A}$ be a digraph.
+
+\textbf{(a)} Each $u \in V$ satisfies $d \tup{u, u} = 0$.
+
+\textbf{(b)} Each $u \in V$, $v \in V$ and $w \in V$ satisfy
+$d \tup{u, v} + d \tup{v, w} \geq d \tup{u, w}$.
+(This inequality has to be interpreted appropriately when one of the
+distances is infinite: For example, we understand $\infty$ to be
+greater than any integer, and we understand $\infty + m$ to be
+$\infty$ whenever $m \in \ZZ$.)
+
+\textbf{(c)} If $u \in V$ and $v \in V$ satisfy $d \tup{u, v} = 0$,
+then $u = v$.
+\end{lemma}
+
+\subsubsection{The exercise}
+
+\begin{exercise} \label{exe.hw3.d+d+d.directed}
+Let $a$, $b$ and $c$ be three vertices of a strongly connected
+digraph $D = \tup{V, A}$ such that $\abs{V} \geq 4$.
+
+\textbf{(a)} Prove that
+$d \tup{b, c} + d \tup{c, a} + d \tup{a, b} \leq 3 \abs{V} - 4$.
+
+\textbf{(b)} For each $n \geq 5$, construct an example in which
+$\abs{V} = n$ and
+$d \tup{b, c} + d \tup{c, a} + d \tup{a, b} = 3 \abs{V} - 4$.
+(No proof required for the example.)
+\end{exercise}
+
+We shall solve Exercise~\ref{exe.hw3.d+d+d.directed} after proving
+some lemmas:
+
+\begin{lemma} \label{lem.hw3.d+d+d.subwalks}
+Let $a$, $b$ and $c$ be three vertices of a digraph $D = \tup{V, A}$.
+Let $\tup{y_0, y_1, \ldots, y_j}$ be a walk from $a$ to $c$.
+Let $\tup{z_0, z_1, \ldots, z_k}$ be a walk from $c$ to $b$.
+Set $Y = \set{y_0, y_1, \ldots, y_{j-1}}$
+and $Z = \set{z_0, z_1, \ldots, z_{k-1}}$.
+
+Assume that $Y \cap Z \neq \varnothing$.
+Then, $d \tup{a, b} < j + k$.
+\end{lemma}
+
+\begin{proof}[Proof of Lemma~\ref{lem.hw3.d+d+d.subwalks}.]
+Recall that $\tup{y_0, y_1, \ldots, y_j}$ is a walk from $a$ to $c$.
+Hence, $y_0 = a$ and $y_j = c$.
+
+Also, $\tup{z_0, z_1, \ldots, z_k}$ is a walk from $c$ to $b$.
+Thus, $z_0 = c$ and $z_k = b$.
+
+We have $Y \cap Z \neq \varnothing$.
+Hence, there exists some $v \in Y \cap Z$.
+Consider this $v$.
+
+We have $v \in Y = \set{y_0, y_1, \ldots, y_{j-1}}$.
+In other words, $v = y_g$ for some $g \in \set{0, 1, \ldots, j-1}$.
+Consider this $g$.
+
+We have $v \in Z = \set{z_0, z_1, \ldots, z_{k-1}}$.
+In other words, $v = z_h$ for some $h \in \set{0, 1, \ldots, k-1}$.
+Consider this $h$.
+
+From $g \in \set{0, 1, \ldots, j-1}$, we obtain $g \leq j-1 < j$.
+
+Consider the
+subwalk\footnote{Here, a \textit{subwalk} of a walk
+  $\tup{w_0, w_1, \ldots, w_m}$ means a list of the form
+  $\tup{w_I, w_{I+1}, \ldots, w_J}$
+  for two elements $I$ and $J$ of $\set{0, 1, \ldots, m}$
+  satisfying $I \leq J$.
+  Such a list is always a walk.}
+$\tup{y_0, y_1, \ldots, y_g}$ of the walk
+$\tup{y_0, y_1, \ldots, y_j}$.
+This subwalk $\tup{y_0, y_1, \ldots, y_g}$ is a walk from $a$ to $v$
+(since $y_0 = a$ and $y_g = v$).
+
+Consider the subwalk $\tup{z_h, z_{h+1}, \ldots, z_k}$ of the walk
+$\tup{z_0, z_1, \ldots, z_k}$.
+This subwalk $\tup{z_h, z_{h+1}, \ldots, z_k}$ is a walk from $v$
+to $b$ (since $z_h = v$ and $z_k = b$).
+
+Now, the ending point of the walk $\tup{y_0, y_1, \ldots, y_g}$ is the
+starting point of the walk $\tup{z_h, z_{h+1}, \ldots, z_k}$ (since
+$y_g = v = z_h$).
+Hence, these two walks can be combined to one walk
+\[
+\tup{y_0, y_1, \ldots, y_{g-1}, z_h, z_{h+1}, \ldots, z_k}
+=
+\tup{y_0, y_1, \ldots, y_g, z_{h+1}, z_{h+2}, \ldots, z_k} .
+\]
+This resulting walk is a walk from $a$ to $b$ (since $y_0 = a$ and
+$z_k = b$), and has length $g + 1 + \tup{k-h-1}$.
+Hence, there exists a walk from $a$ to $b$ in $D$ having length
+$g + 1 + \tup{k-h-1}$ (namely, the walk we have just constructed).
+Hence, Lemma~\ref{lem.hw3.walk-to-distance} (applied to $a$, $b$ and
+$g + 1 + \tup{k-h-1}$ instead of $u$, $v$ and $k$) shows that
+\[
+d \tup{a, b}
+\leq g + 1 + \tup{k-h-1}
+= \underbrace{g}_{< j} + k - \underbrace{h}_{\geq 0}
+< j + k - 0 = j + k.
+\]
+This proves Lemma~\ref{lem.hw3.d+d+d.subwalks}.
+\end{proof}
+
+\begin{lemma} \label{lem.hw3.d+d+d.3points}
+Let $a$, $b$ and $c$ be three vertices of a strongly connected
+digraph $D = \tup{V, A}$.
+
+Assume that we have
+\begin{align*}
+d \tup{b, c} &= d \tup{b, a} + d \tup{a, c} \qquad \text{ and } \\
+d \tup{c, a} &= d \tup{c, b} + d \tup{b, a} \qquad \text{ and } \\
+d \tup{a, b} &= d \tup{a, c} + d \tup{c, b} .
+\end{align*}
+
+Then,
+\[
+d \tup{c, b} + d \tup{a, c} + d \tup{b, a} \leq \abs{V} .
+\]
+\end{lemma}
+
+\begin{proof}[Proof of Lemma~\ref{lem.hw3.d+d+d.3points}.]
+There exists a walk from $c$ to $b$ in $D$\ \ \ \ \footnote{since $D$
+is strongly connected.}.
+Hence, there exists a path from $c$ to $b$ in $D$.
+Hence, there exists a path from $c$ to $b$ in $D$ having minimum
+length.
+Fix such a path, and denote it by $\tup{x_0, x_1, \ldots, x_i}$.
+Define a subset $X$ of $V$ by $X = \set{x_0, x_1, \ldots, x_{i-1}}$.
+
+There exists a walk from $a$ to $c$ in $D$\ \ \ \ \footnote{since $D$
+is strongly connected.}.
+Hence, there exists a path from $a$ to $c$ in $D$.
+Hence, there exists a path from $a$ to $c$ in $D$ having minimum
+length.
+Fix such a path, and denote it by $\tup{y_0, y_1, \ldots, y_j}$.
+Define a subset $Y$ of $V$ by $Y = \set{y_0, y_1, \ldots, y_{j-1}}$.
+
+There exists a walk from $b$ to $a$ in $D$\ \ \ \ \footnote{since $D$
+is strongly connected.}.
+Hence, there exists a path from $b$ to $a$ in $D$.
+Hence, there exists a path from $b$ to $a$ in $D$ having minimum
+length.
+Fix such a path, and denote it by $\tup{z_0, z_1, \ldots, z_k}$.
+Define a subset $Z$ of $V$ by $Z = \set{z_0, z_1, \ldots, z_{k-1}}$.
+
+There exists a path from $c$ to $b$ (as we know).
+Hence, $d \tup{c, b}$ is defined as the minimum length of a path from
+$c$ to $b$.
+Thus,
+\begin{align*}
+d \tup{c, b}
+&= \tup{\text{the minimum length of a path from } c \text{ to } b } \\
+&= \tup{\text{the length of the path } \set{x_0, x_1, \ldots, x_{i-1}}
+       } \\
+&\qquad \left(\text{since } \set{x_0, x_1, \ldots, x_{i-1}}
+                \text{ is a path from } c \text{ to } b
+                \text{ having minimum length}\right) \\
+&= i .
+\end{align*}
+The same argument (applied to $a$, $c$, $j$ and
+$\tup{y_0, y_1, \ldots, y_j}$ instead of $c$, $b$, $i$ and
+$\tup{x_0, x_1, \ldots, x_i}$) shows that $d \tup{a, c} = j$.
+The same argument (applied to $b$, $a$, $k$ and
+$\tup{z_0, z_1, \ldots, z_k}$ instead of $a$, $c$, $j$ and
+$\tup{y_0, y_1, \ldots, y_j}$) shows that $d \tup{b, a} = k$.
+
+We have $\abs{X} = i$\ \ \ \ \footnote{\textit{Proof.}
+  The list $\tup{x_0, x_1, \ldots, x_i}$ is a path.
+  Hence, the vertices $x_0, x_1, \ldots, x_i$ are the vertices of
+  a path, and therefore are distinct (since the vertices of any path
+  are distinct).
+  Thus, the $i$ vertices $x_0, x_1, \ldots, x_{i-1}$ are distinct as
+  well.
+  Hence, $\abs{\set{x_0, x_1, \ldots, x_{i-1}}} = i$.
+  Since $\set{x_0, x_1, \ldots, x_{i-1}} = X$, this rewrites as
+  $\abs{X} = i$.
+}.
+Similarly, $\abs{Y} = j$ and $\abs{Z} = k$.
+
+Now, using Lemma~\ref{lem.hw3.d+d+d.subwalks}, we can easily see that
+\begin{equation}
+Y \cap Z = \varnothing
+\label{pf.lem.hw3.d+d+d.3points.1}
+\end{equation}
+\footnote{\textit{Proof of \eqref{pf.lem.hw3.d+d+d.3points.1}.}
+  Assume the contrary.
+  Thus, $Y \cap Z \neq \varnothing$.
+  Also, the list $\tup{y_0, y_1, \ldots, y_j}$ is a walk from $a$ to
+  $c$ (since it is a path from $a$ to $c$).
+  Furthermore, the list $\tup{z_0, z_1, \ldots, z_k}$ is a walk from
+  $b$ to $a$ (since it is a path from $b$ to $a$).
+  Thus, Lemma~\ref{lem.hw3.d+d+d.subwalks}
+  (applied to $b$, $c$, $a$, $k$, $j$,
+  $\tup{z_0, z_1, \ldots, z_k}$, $\tup{y_0, y_1, \ldots, y_j}$, $Z$
+  and $Y$ instead of
+  $a$, $b$, $c$, $j$, $k$,
+  $\tup{y_0, y_1, \ldots, y_j}$, $\tup{z_0, z_1, \ldots, z_k}$, $Y$
+  and $Z$)
+  shows that
+  $d \tup{b, c} < \underbrace{k}_{= d \tup{b, a}}
+                  + \underbrace{j}_{= d \tup{a, c}}
+                = d \tup{b, a} + d \tup{a, c}$.
+  This contradicts $d \tup{b, c} = d \tup{b, a} + d \tup{a, c}$.
+  This contradiction shows that our assumption was wrong.
+  This proves \eqref{pf.lem.hw3.d+d+d.3points.1}.
+}.
+Similarly,
+\begin{equation}
+Z \cap X = \varnothing
+\label{pf.lem.hw3.d+d+d.3points.2}
+\end{equation}
+and
+\begin{equation}
+X \cap Y = \varnothing .
+\label{pf.lem.hw3.d+d+d.3points.3}
+\end{equation}
+
+The equalities \eqref{pf.lem.hw3.d+d+d.3points.1},
+\eqref{pf.lem.hw3.d+d+d.3points.2} and
+\eqref{pf.lem.hw3.d+d+d.3points.3} (combined) show that the sets
+$X$, $Y$ and $Z$ are disjoint.
+Hence, the size of the union of these sets equals the sum of their
+sizes.
+In other words, $\abs{X \cup Y \cup Z} = \abs{X} + \abs{Y} + \abs{Z}$.
+But $X \cup Y \cup Z \subseteq V$ (since $X$, $Y$ and $Z$ are subsets
+of $V$), and thus $\abs{X \cup Y \cup Z} \leq \abs{V}$.
+Hence,
+\[
+\abs{V} \geq \abs{X \cup Y \cup Z}
+ = \underbrace{\abs{X}}_{= i = d \tup{c, b}}
+   + \underbrace{\abs{Y}}_{= j = d \tup{a, c}}
+   + \underbrace{\abs{Z}}_{= k = d \tup{b, a}}
+ = d \tup{c, b} + d \tup{a, c} + d \tup{b, a} .
+\]
+This proves Lemma~\ref{lem.hw3.d+d+d.3points}.
+\end{proof}
+
+\begin{lemma} \label{lem.hw3.d+d+d.V-1then}
+Let $a$, $b$ and $c$ be three vertices of a strongly connected
+digraph $D = \tup{V, A}$.
+
+Assume that $d \tup{a, b} = \abs{V} - 1$.
+Then, $d \tup{a, b} = d \tup{a, c} + d \tup{c, b}$.
+\end{lemma}
+
+\begin{proof}[Proof of Lemma~\ref{lem.hw3.d+d+d.V-1then}.]
+We have $d \tup{a, b} = \abs{V} - 1 \neq \infty$.
+Hence, there exists a path from $a$ to $b$.
+Thus, $d \tup{a, b}$ is defined as the minimum length of a path from
+$a$ to $b$.
+Hence, there exists a path from $a$ to $b$ having length
+$d \tup{a, b}$.
+Fix such a path, and denote it by $\tup{p_0, p_1, \ldots, p_k}$.
+
+Thus, $\tup{p_0, p_1, \ldots, p_k}$ is a path of length
+$d \tup{a, b}$.
+Hence,
+\[
+d \tup{a, b}
+= \tup{\text{the length of the path } \tup{p_0, p_1, \ldots, p_k} }
+= k .
+\]
+Hence, $k = d \tup{a, b} = \abs{V} - 1$, so that $k + 1 = \abs{V}$.
+
+But the $k+1$ elements $p_0, p_1, \ldots, p_k$ are the vertices of a
+path (namely, of the path $\tup{p_0, p_1, \ldots, p_k}$), and thus are
+distinct (since the vertices of a path are always distinct).
+Hence, $\abs{\set{p_0, p_1, \ldots, p_k}} = k + 1 = \abs{V}$.
+Clearly, $\set{p_0, p_1, \ldots, p_k}$ is a subset of the finite set
+$V$.
+
+Now, recall the following simple fact:
+If $S$ is a finite set, and if $T$ is a subset of $S$ satisfying
+$\abs{T} = \abs{S}$, then $T = S$.
+Applying this fact to $S = V$ and $T = \set{p_0, p_1, \ldots, p_k}$,
+we obtain $\set{p_0, p_1, \ldots, p_k} = V$
+(since $\set{p_0, p_1, \ldots, p_k}$ is a subset of the finite set
+$V$ satisfying $\abs{\set{p_0, p_1, \ldots, p_k}} = \abs{V}$).
+Hence, $c \in V = \set{p_0, p_1, \ldots, p_k}$.
+In other words, $c = p_i$ for some $i \in \set{0, 1, \ldots, k}$.
+Consider this $i$.
+
+Clearly, the list $\tup{p_0, p_1, \ldots, p_k}$ is a walk (since
+it is a path).
+Consider the
+subwalk\footnote{Here, a \textit{subwalk} of a walk
+  $\tup{w_0, w_1, \ldots, w_m}$ means a list of the form
+  $\tup{w_I, w_{I+1}, \ldots, w_J}$
+  for two elements $I$ and $J$ of $\set{0, 1, \ldots, m}$
+  satisfying $I \leq J$.
+  Such a list is always a walk.}
+$\tup{p_0, p_1, \ldots, p_i}$ of the walk
+$\tup{p_0, p_1, \ldots, p_k}$.
+This subwalk $\tup{p_0, p_1, \ldots, p_i}$ is a walk from $a$ to $c$
+(since $p_0 = a$ and $p_i = c$) and has length $i$.
+Thus, there exists a walk from $a$ to $c$ having length $i$
+(namely, the subwalk we have just constructed).
+Therefore, Lemma~\ref{lem.hw3.walk-to-distance} (applied to $a$, $c$
+and $i$ instead of $u$, $v$ and $k$) shows that
+$d \tup{a, c} \leq i$.
+
+Consider the subwalk $\tup{p_i, p_{i+1}, \ldots, p_k}$ of the walk
+$\tup{p_0, p_1, \ldots, p_k}$.
+This subwalk $\tup{p_i, p_{i+1}, \ldots, p_k}$ is a walk from $c$ to
+$b$ (since $p_i = c$ and $p_k = b$) and has length $k-i$.
+Thus, there exists a walk from $c$ to $b$ having length $k-i$
+(namely, the subwalk we have just constructed).
+Therefore, Lemma~\ref{lem.hw3.walk-to-distance} (applied to $c$, $b$
+and $k-i$ instead of $u$, $v$ and $k$) shows that
+$d \tup{c, b} \leq k-i$.
+
+Lemma~\ref{lem.hw3.distances-metric} \textbf{(b)} (applied to $a$, $c$
+and $b$ instead of $u$, $v$ and $w$) shows that
+\[
+d \tup{a, c} + d \tup{c, b} \geq d \tup{a, b} .
+\]
+Combining this with the inequality
+\[
+\underbrace{d \tup{a, c}}_{\leq i}
++ \underbrace{d \tup{c, b}}_{\leq k-i}
+\leq i + \tup{k-i} = k = d \tup{a, b} ,
+\]
+we obtain $d \tup{a, c} + d \tup{c, b} = d \tup{a, b}$.
+This proves Lemma~\ref{lem.hw3.d+d+d.V-1then}.
+\end{proof}
+
+\begin{proof}[Solution to Exercise~\ref{exe.hw3.d+d+d.directed}
+(sketched).]
+
+\textbf{(a)} Assume the contrary.
+Thus, $d \tup{b, c} + d \tup{c, a} + d \tup{a, b} > 3 \abs{V} - 4$.
+Since $d \tup{b, c} + d \tup{c, a} + d \tup{a, b}$ and
+$3 \abs{V} - 4$ are integers, this shows that
+\begin{equation}
+d \tup{b, c} + d \tup{c, a} + d \tup{a, b}
+\geq \tup{3 \abs{V} - 4} + 1
+= 3 \abs{V} - 3 .
+\label{sol.hw3.d+d+d.directed.1}
+\end{equation}
+
+Lemma~\ref{lem.hw3.d-leq-V} (applied to $u = b$ and $v = c$) yields
+$d \tup{b, c} \leq \abs{V} - 1$.
+Lemma~\ref{lem.hw3.d-leq-V} (applied to $u = c$ and $v = a$) yields
+$d \tup{c, a} \leq \abs{V} - 1$.
+Lemma~\ref{lem.hw3.d-leq-V} (applied to $u = a$ and $v = b$) yields
+$d \tup{a, b} \leq \abs{V} - 1$.
+
+Now, subtracting $d \tup{c, a} + d \tup{a, b}$ from both sides of
+the inequality \eqref{sol.hw3.d+d+d.directed.1}, we obtain
+\begin{align*}
+d \tup{b, c}
+&\geq 3 \abs{V} - 3 - \tup{\underbrace{d \tup{c, a}}_{\leq \abs{V} - 1}
+                           +
+                           \underbrace{d \tup{a, b}}_{\leq \abs{V} - 1}
+                          }
+\geq 3 \abs{V} - 3 - \tup{\tup{\abs{V} - 1} + \tup{\abs{V} - 1}} \\
+&= \abs{V} - 1 .
+\end{align*}
+Combining this with $d \tup{b, c} \leq \abs{V} - 1$, we obtain
+$d \tup{b, c} = \abs{V} - 1$.
+Similarly, $d \tup{c, a} = \abs{V} - 1$ and
+$d \tup{a, b} = \abs{V} - 1$.
+
+Now, Lemma~\ref{lem.hw3.d+d+d.V-1then} yields
+\begin{equation}
+d \tup{a, b} = d \tup{a, c} + d \tup{c, b} .
+\label{sol.hw3.d+d+d.directed.2ab}
+\end{equation}
+Furthermore, Lemma~\ref{lem.hw3.d+d+d.V-1then} (applied to $b$, $c$
+and $a$ instead of $a$, $b$ and $c$) yields
+\begin{equation}
+d \tup{b, c} = d \tup{b, a} + d \tup{a, c} .
+\label{sol.hw3.d+d+d.directed.2bc}
+\end{equation}
+Also, Lemma~\ref{lem.hw3.d+d+d.V-1then} (applied to $c$, $a$
+and $b$ instead of $a$, $b$ and $c$) yields
+\begin{equation}
+d \tup{c, a} = d \tup{c, b} + d \tup{b, a} .
+\label{sol.hw3.d+d+d.directed.2ca}
+\end{equation}
+Hence, Lemma~\ref{lem.hw3.d+d+d.3points} yields
+\[
+d \tup{c, b} + d \tup{a, c} + d \tup{b, a} \leq \abs{V} .
+\]
+
+Now, adding together the three equalities
+\eqref{sol.hw3.d+d+d.directed.2bc},
+\eqref{sol.hw3.d+d+d.directed.2ca} and
+\eqref{sol.hw3.d+d+d.directed.2ab}, we find
+\begin{align*}
+& d \tup{b, c} + d \tup{c, a} + d \tup{a, b} \\
+&= \tup{d \tup{b, a} + d \tup{a, c}}
+    + \tup{d \tup{c, b} + d \tup{b, a}}
+    + \tup{d \tup{a, c} + d \tup{c, b}} \\
+&= 2 \underbrace{\tup{d \tup{c, b} + d \tup{a, c} + d \tup{b, a}}}_{\leq \abs{V}}
+\leq 2 \abs{V} < 3 \abs{V} - 3
+\end{align*}
+(since $\tup{3 \abs{V} - 3} - 2 \abs{V}
+= \underbrace{\abs{V}}_{\geq 4} - 3 \geq 4 - 3 = 1 > 0$).
+This contradicts \eqref{sol.hw3.d+d+d.directed.1}.
+This contradiction proves that our assumption was false.
+Hence, Exercise~\ref{exe.hw3.d+d+d.directed} \textbf{(a)} is solved.
+
+\textbf{(b)} One possible example is the following digraph:
+\[
+\xymatrix{
+& c \ar[ld] & & & a \ar[lll] \\
+x_1 \ar[r] & x_2 \ar[r] & x_3 \ar[r] & \cdots \ar[r] & x_{k-1} \ar[r] & x_k \ar[lu] \ar[llld] \\
+& & b \ar[llu]
+}
+\]
+where $k = n-3$.
+In this digraph, we have $d \tup{b, c} = n - 1$ and
+$d \tup{c, a} = n - 2$ and $d \tup{a, b} = n - 1$.
+\end{proof}
+
+\subsection{Exercise \ref{exe.hw3.not-tripar}: cycles of length
+divisible by $3$, and proper $3$-colorings}
+
+Recall that a \textit{$k$-coloring} of a simple graph $G = \tup{V, E}$
+means a map $f : V \to \set{1, 2, \ldots, k}$. Such a $k$-coloring $f$
+is said to be \textit{proper} if no two adjacent vertices $u$ and $v$
+have the same color (i.e., satisfy $f \tup{u} = f \tup{v}$).
+
+\begin{exercise} \label{exe.hw3.not-tripar}
+We have learned that a simple graph $G$ (or multigraph $G$)
+has a proper $2$-coloring if
+and only if all cycles of $G$ have even length.
+
+\textbf{(a)} Is it true that if all cycles of a simple graph $G$ (or
+multigraph $G$) have length divisible by $3$, then $G$ has a proper
+$3$-coloring?
+
+\textbf{(b)} Is it true that if a simple graph $G$ has a proper
+$3$-coloring, then all cycles of $G$ have length divisible by $3$ ?
+\end{exercise}
+
+TODO: Solution. ((a) is true, but it is harder than I thought
+when posing this problem. Probably a proof appears in
+\cite{AGJJ09}. (b) is definitely false,
+as witnessed by the $4$-cycle $C_4$.)
+
+\subsection{Exercise \ref{exe.hw3.turan}: Tur\'an's theorem via
+independent sets}
+
+In class, we have proven the following fact:
+
+\begin{theorem} \label{thm.hw3.turan-indset}
+Let $G = \tup{V, E}$ be a simple graph.
+Then, $G$ has an independent set of size
+$\geq \dfrac{n}{1+d}$, where $n = \abs{V}$ and
+$d = \dfrac{1}{n} \sum_{v \in V} \deg v$.
+(Notice that $d$ is simply the average degree of a vertex of $G$.)
+\end{theorem}
+
+On the other hand, recall the following fact
+(Theorem 2.5.15 in the
+\href{http://www-users.math.umn.edu/~dgrinber/5707s17/nogra.pdf}{lecture notes})
+which was left unproven in class:
+
+\begin{theorem}[Tur\'an's theorem] \label{thm.intro.turan}
+Let $r$ be a positive integer.
+Let $G$ be a simple graph. Let $n = \abs{\verts{G}}$ be the number of
+vertices of $G$. Assume that
+$\abs{\edges{G}} > \dfrac{r-1}{r} \cdot \dfrac{n^2}{2}$. Then, there
+exist $r + 1$ distinct vertices
+of $G$ that are mutually adjacent (i.e., each two distinct ones among
+these $r + 1$ vertices are adjacent).
+\end{theorem}
+
+\begin{exercise} \label{exe.hw3.turan}
+Use Theorem~\ref{thm.hw3.turan-indset} to prove
+Theorem~\ref{thm.intro.turan}.
+\end{exercise}
+
+In order to solve Exercise~\ref{exe.hw3.turan}, let us first rewrite
+Theorem~\ref{thm.hw3.turan-indset} in terms of the number $\abs{E}$ of
+edges of $G$:
+
+\begin{corollary} \label{cor.hw3.turan-indset.edges}
+Let $G = \tup{V, E}$ be a simple graph.
+Then, $G$ has an independent set of size
+$\geq \dfrac{n^2}{n+2\abs{E}}$, where $n = \abs{V}$.
+\end{corollary}
+
+\begin{proof}[Proof of Corollary~\ref{cor.hw3.turan-indset.edges}.]
+From $G = \tup{V, E}$, we obtain $\verts{G} = V$ and $\edges{G} = E$.
+
+We know (from
+Proposition 2.5.6 in the
+\href{http://www-users.math.umn.edu/~dgrinber/5707s17/nogra.pdf}{lecture notes})
+that $\sum_{v \in \verts{G}} \deg v = 2 \abs{\edges{G}}$.
+
+Now, set $d = \dfrac{1}{n} \sum_{v \in V} \deg v$.
+Then,
+\begin{align*}
+d
+&= \dfrac{1}{n} \sum_{v \in V} \deg v
+= \dfrac{1}{n} \underbrack{\sum_{v \in \verts{G}} \deg v}
+                          {= 2 \abs{\edges{G}}}
+\qquad \left(\text{since } V = \verts{G}\right) \\
+&= \dfrac{1}{n} \cdot 2 \abs{\underbrace{\edges{G}}_{= E}}
+= \dfrac{1}{n} \cdot 2 \abs{E} = 2 \abs{E} / n .
+\end{align*}
+Hence,
+\begin{align*}
+\dfrac{n}{1+d}
+&= \dfrac{n}{1 + 2 \abs{E} / n}
+= \dfrac{n}{\tup{n + 2 \abs{E}} / n}
+= \dfrac{n^2}{n+2\abs{E}}.
+\end{align*}
+Now, Theorem~\ref{thm.hw3.turan-indset} shows that the graph
+$G$ has an independent set of size $\geq \dfrac{n}{1+d}$.
+Since $\dfrac{n}{1+d} = \dfrac{n^2}{n+2\abs{E}}$, this rewrites as
+follows:
+The graph $G$ has an independent set of size
+$\geq \dfrac{n^2}{n+2\abs{E}}$.
+This proves Corollary~\ref{cor.hw3.turan-indset.edges}.
+\end{proof}
+
+Now, we can prove Theorem~\ref{thm.intro.turan} (thus solving
+Exercise~\ref{exe.hw3.turan}):
+
+\begin{proof}[Proof of Theorem~\ref{thm.intro.turan}.]
+Let $V = \verts{G}$.
+
+Let $\overline{G}$ be the simple graph
+$\tup{V, \powset[2]{V} \setminus \edges{G}}$.
+Note that this graph $\overline{G}$ is called the \textit{complement
+graph} of $G$.
+
+Note that $n = \abs{\underbrace{\verts{G}}_{= V}} = \abs{V}$.
+But $\edges{G} \subseteq \powset[2]{V}$. Thus,
+\begin{align*}
+\abs{\powset[2]{V} \setminus \edges{G}}
+&= \underbrack{\abs{\powset[2]{V}}}
+             {= \dbinom{\abs{V}}{2} = \dbinom{n}{2} \\
+                \text{(since } \abs{V} = n \text{)}}
+  - \underbrack{\abs{\edges{G}}}
+               {> \dfrac{r-1}{r} \cdot \dfrac{n^2}{2}} \\
+&< \underbrace{\dbinom{n}{2}}_{= \dfrac{n\tup{n-1}}{2}}
+  - \dfrac{r-1}{r} \cdot \dfrac{n^2}{2}
+= \dfrac{n\tup{n-1}}{2} - \dfrac{r-1}{r} \cdot \dfrac{n^2}{2}
+= \dfrac{n \tup{n-r}}{2r} .
+\end{align*}
+Hence,
+\begin{equation}
+n + 2 \underbrack{\abs{\powset[2]{V} \setminus \edges{G}}}
+                 {< \dfrac{n \tup{n-r}}{2r}}
+< n + 2 \cdot \dfrac{n \tup{n-r}}{2r} = n^2 / r .
+\label{sol.hw3.turan.4}
+\end{equation}
+
+Corollary~\ref{cor.hw3.turan-indset.edges} (applied to $\overline{G}$
+and $\powset[2]{V} \setminus \edges{G}$ instead of $G$ and $E$) shows
+that
+$\overline{G}$ has an independent set of size
+$\geq \dfrac{n^2}{n+2\abs{\powset[2]{V} \setminus \edges{G}}}$.
+Fix such an independent set, and denote it by $I$.
+
+The set $I$ has size
+$\geq \dfrac{n^2}{n+2\abs{\powset[2]{V} \setminus \edges{G}}}$.
+In other words,
+\begin{align*}
+\abs{I}
+&\geq \dfrac{n^2}{n+2\abs{\powset[2]{V} \setminus \edges{G}}}
+> \dfrac{n^2}{n^2 / r}
+    \qquad \left(\text{by \eqref{sol.hw3.turan.4}}\right) \\
+&= r .
+\end{align*}
+Thus, $\abs{I} \geq r+1$ (since both $\abs{I}$ and $r$ are integers).
+Hence, there exist $r + 1$ distinct elements of $I$.
+Fix such $r + 1$ distinct elements, and denote them by
+$i_1, i_2, \ldots, i_{r+1}$.
+
+For any two distinct elements $a$ and $b$ of
+$\set{1, 2, \ldots, r+1}$, the vertices $i_a$ and $i_b$ of $G$ are
+adjacent\footnote{\textit{Proof.}
+  Let $a$ and $b$ be two distinct elements of
+  $\set{1, 2, \ldots, r+1}$.
+  We must show that the vertices $i_a$ and $i_b$ of $G$ are adjacent.
+  \par
+  Recall that $i_1, i_2, \ldots, i_{r+1}$ are $r + 1$ elements of $I$.
+  Thus, $i_a \in I$ and $i_b \in I$.
+  \par
+  Recall that the elements $i_1, i_2, \ldots, i_{r+1}$ are distinct.
+  Thus, $i_a \neq i_b$ (since $a$ and $b$ are distinct).
+  Hence, $i_a$ and $i_b$ are two distinct elements of $I$ (since
+  $i_a \in I$ and $i_b \in I$).
+  \par
+  The set $I$ is an independent set of $\overline{G}$.
+  In other words, $I$ is a subset of $V$ having the property that
+  no two distinct elements of $I$ are adjacent with respect to
+  $\overline{G}$ (by the definition of an ``independent set'').
+  \par
+  The elements $i_a$ and $i_b$ are two distinct elements of $I$.
+  Hence, $i_a$ and $i_b$ are not adjacent with respect to
+  $\overline{G}$ (since no two distinct elements of $I$ are adjacent
+  with respect to $\overline{G}$).
+  In other words, $\set{i_a, i_b} \notin \edges{\overline{G}}$.
+  \par
+  On the other hand, $i_a$ and $i_b$ are two distinct elements of $I$.
+  Hence, $\set{i_a, i_b}$ is a $2$-element subset of $I$.
+  Thus, $\set{i_a, i_b} \in \powset[2]{I} \subseteq \powset[2]{V}$
+  (since $I \subseteq V$).
+  Combining this with $\set{i_a, i_b} \notin \edges{\overline{G}}$,
+  we obtain
+  $\set{i_a, i_b} \in \powset[2]{V} \setminus \edges{\overline{G}}$.
+  But from
+  $\overline{G} = \tup{V, \powset[2]{V} \setminus \edges{G}}$, we
+  obtain
+  $\edges{\overline{G}} = \powset[2]{V} \setminus \edges{G}$.
+  Hence,
+  $\powset[2]{V} \setminus \edges{\overline{G}}
+  = \powset[2]{V} \setminus
+      \tup{\powset[2]{V} \setminus \edges{G}}
+  = \edges{G}$
+  (since $\edges{G} \subseteq \powset[2]{V}$).
+  Thus,
+  $\set{i_a, i_b} \in \powset[2]{V} \setminus \edges{\overline{G}}
+  = \edges{G}$.
+  In other words, the vertices $i_a$ and $i_b$ of $G$ are adjacent.
+  This completes our proof.}.
+In other words, the $r + 1$ vertices $i_1, i_2, \ldots, i_{r + 1}$ of
+$G$ are mutually adjacent.
+Hence, there exist $r + 1$ distinct vertices of $G$ that are mutually
+adjacent (namely, the $r + 1$ distinct vertices
+$i_1, i_2, \ldots, i_{r+1}$).
+This proves Theorem~\ref{thm.intro.turan}.
+\end{proof}
+
+\newpage
+
+\subsection{Exercise \ref{exe.hw3.vandermondes}: bijective proofs for
+Vandermonde-like identities?}
+
+\begin{exercise} \label{exe.hw3.vandermondes}
+\textbf{Extra credit:}
+
+In this exercise, ``number'' means (e.g.) a real number. (Feel
+free to restrict yourself to positive integers  if it helps you.
+The most general interpretation would be ``element of a commutative
+ring'', but you don't need to work in this generality.)
+
+For any $n$ numbers $x_1, x_2, \ldots, x_n$, we define
+$v\left(x_1, x_2, \ldots, x_n\right)$ to be the number
+\[
+ \prod_{1\leq i<j\leq n} \left( x_j - x_i \right)
+ =
+ \det \tup{ \tup{ x_j^{i-1} }_{1\leq i\leq n, \  1\leq j\leq n } } .
+\]
+
+Let $x_1, x_2, \ldots, x_n$ be $n$ numbers. Let $t$
+be a further number.
+Prove
+at least one of the following facts combinatorially
+(i.e., without using any properties of the determinant
+other than its definition as a sum over permutations):
+
+\textbf{(a)} We have
+\[
+\sum_{k=1}^{n} v\left(  x_{1},x_{2},\ldots,x_{k-1},x_{k}+t,x_{k+1}%
+,x_{k+2},\ldots,x_{n}\right)
+= n v\left(  x_{1},x_{2},\ldots,x_{n}\right)  .
+\]
+
+\textbf{(b)} For each $m\in\left\{ 0,1,\ldots,n-1\right\}  $, we have
+\[
+\sum_{k=1}^{n}x_{k}^{m}v\left(  x_{1},x_{2},\ldots,x_{k-1},t,x_{k+1}%
+,x_{k+2},\ldots,x_{n}\right)
+= t^{m}v\left(  x_{1},x_{2},\ldots,x_{n}\right)
+.
+\]
+
+\textbf{(c)} We have
+\begin{align*}
+&  \sum_{k=1}^{n}x_{k}v\left(  x_{1},x_{2},\ldots,x_{k-1},x_{k}+t,x_{k+1}%
+,x_{k+2},\ldots,x_{n}\right) \\
+&  =\left(  \dbinom{n}{2}t+\sum_{k=1}^{n}x_{k}\right)  v\left(  x_{1}%
+,x_{2},\ldots,x_{n}\right)  .
+\end{align*}
+
+\end{exercise}
+
+\begin{proof}[Hints to Exercise~\ref{exe.hw3.vandermondes}.]
+I hope that at least some parts of Exercise~\ref{exe.hw3.vandermondes}
+have combinatorial proofs similar to Gessel's proof of the Vandermonde
+determinant (as in
+\href{http://www-users.math.umn.edu/~dgrinber/5707s17/5707lec8.pdf}{lecture 8}).
+Noone solved any part of Exercise \ref{exe.hw3.vandermondes}, though.
+Feel free to continue trying (the extra credit is still available,
+and, more importantly, a chance to get your new proof published).
+
+Exercise~\ref{exe.hw3.vandermondes} \textbf{(a)} can be easily
+proven if you know some abstract algebra (specifically, properties of
+polynomial rings in several variables). Let me sketch the argument.
+(This is modelled on a well-known proof of the Vandermonde determinant
+identity
+$\prod_{1\leq i<j\leq n} \left( x_j - x_i \right)
+ =
+ \det \tup{ \tup{ x_j^{i-1} }_{1\leq i\leq n, \  1\leq j\leq n } }$
+itself, which can be found, e.g., in \cite[\S 17]{Garret10}.)
+
+First of all, let $x_1, x_2, \ldots, x_n$ and $t$ no longer be
+numbers; but instead, let them be indeterminates.
+Thus, we are working in the polynomial ring
+$\ZZ\left[x_1, x_2, \ldots, x_n, t\right]$.
+Let $P$ be the polynomial
+$\sum_{k=1}^{n} v\left(  x_{1},x_{2},\ldots,x_{k-1},x_{k}+t,x_{k+1}%
+,x_{k+2},\ldots,x_{n}\right)
+- n v\left(  x_{1},x_{2},\ldots,x_{n}\right)$.
+This polynomial is homogeneous of degree $n \tup{n-1} / 2$ (check
+this!).
+But the polynomial $P$ becomes $0$ whenever two of the variables
+$x_1, x_2, \ldots, x_n$ are
+equal\footnote{Check this -- it's not immediately obvious.
+  The main observation to make is that the polynomial
+  $v \tup{x_1, x_2, \ldots, x_n}$ gets multiplied by $-1$ whenever two
+  of the variables $x_1, x_2, \ldots, x_n$ get interchanged, and
+  becomes $0$ whenever two of the variables $x_1, x_2, \ldots, x_n$
+  are equal.}.
+Hence, this polynomial $P$ is divisible by $x_i - x_j$ for every pair
+$\tup{i, j}$ satisfying $1 \leq i < j \leq n$ (by some basic abstract
+algebra). Consequently, the polynomial $P$ is divisible by the
+product
+$\prod_{1 \leq i < j \leq n} \tup{x_i - x_j}$
+\ \ \ \ \footnote{This step is nontrivial.
+  We are claiming that if a polynomial is divisible by
+  $x_i - x_j$ for every pair $\tup{i, j}$ satisfying
+  $1 \leq i < j \leq n$, then this polynomial must also be divisible
+  by the product $\prod_{1 \leq i < j \leq n} \tup{x_i - x_j}$.
+  One way to prove this is by using the fact (often proven in the
+  first semester of abstract algebra) that the polynomial ring
+  $\ZZ\left[x_1, x_2, \ldots, x_n, t\right]$ is a unique factorization
+  domain.
+  There exist other arguments, but these too use at least the language
+  of rings.}.
+But this product is homogeneous of the same degree $n \tup{n-1} / 2$
+as the polynomial $P$ itself (since it has $n \tup{n-1} / 2$ factors,
+each of them linear).
+Hence, the quotient
+$\dfrac{P}{\prod_{1 \leq i < j \leq n} \tup{x_i - x_j}}$ must be a
+homogeneous polynomial of degree $0$, i.e., a constant.
+We thus merely need to show that this constant is $0$.
+The easiest way to do so is to evaluate this polynomial at $t = 0$.
+The result is clearly $0$.
+Since it is a constant, it thus is $0$ whatever $t$ is.
+And so Exercise~\ref{exe.hw3.vandermondes} \textbf{(a)} is proven
+(up to all the steps I have omitted).
+
+Exercise~\ref{exe.hw3.vandermondes} \textbf{(b)} can be solved in a
+similar manner -- actually, even easier. Let $Q$ be the polynomial
+$\sum_{k=1}^{n}x_{k}^{m}v\left(  x_{1},x_{2},\ldots,x_{k-1},t,x_{k+1}%
+,x_{k+2},\ldots,x_{n}\right)
+- t^{m}v\left(  x_{1},x_{2},\ldots,x_{n}\right)$.
+% considered as a polynomial in the variable $t$, where we regard
+% $x_1, x_2, \ldots, x_n$ as constants. We WLOG assume that
+% $x_1, x_2, \ldots, x_n$ are distinct\footnote{Again, the reason why
+% this can be WLOG assumed is some abstract algebra.}.
+Then, it is easy to see that the polynomial $Q$ vanishes whenever
+$t = x_i$ for any $i$.
+Thus, this polynomial $Q$ is divisible by all of the $n$
+linear polynomials $t-x_i$ with $i \in \set{1, 2, \ldots, n}$.
+Hence, this polynomial $Q$ must be divisible by their product
+$\prod_{i=1}^n \tup{t-x_i}$.
+However, this product has degree $n$ when considered as a polynomial
+in $t$ (treating $x_1, x_2, \ldots, x_n$ as constants), whereas the
+polynomial $Q$ has degree $\leq m \leq n-1$ (again, when considered
+as a polynomial in $t$).
+The only way a polynomial can be divisible by a polynomial of larger
+degree is when the former polynomial is $0$. Hence, $Q$ must be $0$.
+
+Actually,
+Exercise~\ref{exe.hw3.vandermondes} \textbf{(b)} is a famous formula
+in disguise -- namely, the \textit{Lagrange interpolation formula}.
+Namely, if we divide both sides of the claim by
+$v \tup{x_1, x_2, \ldots, x_n}$ (assuming that $x_1, x_2, \ldots, x_n$
+are distinct\footnote{This is a harmless assumption that you can make
+  whenever you want to prove an identity like this... but proving that
+  this is so takes a bit of abstract algebra, too.},
+then we obtain
+\[
+\sum_{k=1}^n x_k^m \dfrac{\prod_{i \neq k} \tup{  t - x_i}}
+                         {\prod_{i \neq k} \tup{x_k - x_i}}
+= t^m .
+\]
+More generally, if $f$ is any polynomial (in one variable) of degree
+$\leq n-1$, then
+\[
+\sum_{k=1}^n f \tup{x_k} \dfrac{\prod_{i \neq k} \tup{  t - x_i}}
+                               {\prod_{i \neq k} \tup{x_k - x_i}}
+= f \tup{t} .
+\]
+This is often stated as follows:
+If $x_1, x_2, \ldots, x_n$ are $n$ distinct real numbers, and
+$y_1, y_2, \ldots, y_n$ are $n$ further real numbers, then
+there is a unique polynomial $g = g \tup{t}$ of degree $\leq n-1$
+satisfying $f \tup{x_i} = y_i$ for all $i$, and this polynomial $g$ is
+\[
+\sum_{k=1}^n y_k \dfrac{\prod_{i \neq k} \tup{  t - x_i}}
+                       {\prod_{i \neq k} \tup{x_k - x_i}}
+.
+\]
+See, for example,
+\url{http://www.math.uconn.edu/~leykekhman/courses/MATH3795/Lectures/Lecture_14_poly_interp.pdf} .
+
+Exercise~\ref{exe.hw3.vandermondes} \textbf{(c)} is a harder variant
+of Exercise~\ref{exe.hw3.vandermondes} \textbf{(a)}; this time the
+quotient of the polynomials has degree $1$, which makes it harder to
+identify it (evaluating it at $t=0$ is not enough).
+It is a step in one of the classical proofs of the hook-length formula
+in algebraic combinatorics -- see \cite[\S 4.3, Exercise
+10]{Fulton-Young} or \cite[Lemma 4.13]{Uecker16}
+or \cite[Lemma 2]{GlaNg04}\footnote{To be fully
+  precise: \cite[Lemma 2]{GlaNg04} is obtained from
+  Exercise~\ref{exe.hw3.vandermondes} \textbf{(c)} by applying it to
+  $n = m$, $t = -1$ and $x_i = z_i$. Conversely,
+  Exercise~\ref{exe.hw3.vandermondes} \textbf{(c)} follows from
+  \cite[Lemma 2]{GlaNg04} (applied to $m = n$ and $z_i = -x_k / t$).
+  Hence, the two facts are equivalent.}.
+
+Meanwhile, elementary (but still not combinatorial) proofs also exist:
+\begin{itemize}
+\item Exercise~\ref{exe.hw3.vandermondes} \textbf{(a)} is solved in
+      \cite[Proposition 7.65]{detnotes}.
+\item Exercise~\ref{exe.hw3.vandermondes} \textbf{(b)} is solved in
+      \cite[Proposition 7.67]{detnotes}.
+\item Exercise~\ref{exe.hw3.vandermondes} \textbf{(c)} is solved in
+      \cite[Exercise 55]{detnotes}.
+\end{itemize}
+\end{proof}
+
+\begin{thebibliography}{9999999999}                                                                                       %
+
+\bibitem[AGJJ09]{AGJJ09}
+\href{http://www.sciencedirect.com/science/article/pii/S0012365X08005244}{S. Akbari, M. Ghanbari, S. Jahanbekam, M. Jamaali, \textit{List coloring of graphs having cycles of length divisible by a given number}, Discrete Mathematics \textbf{309}, Issue 3, 28 February 2009, pp. 613--614}.
+
+\bibitem[Fulton97]{Fulton-Young}William Fulton, \textit{Young Tableaux: With
+Applications to Representation Theory and Geometry}, Cambridge University
+Press 1997.
+
+\bibitem[Garret10]{Garret10}Paul Garrett,
+\textit{Abstract Algebra},
+ca. 2010,
+\newline\url{http://www-users.math.umn.edu/~garrett/m/algebra/}
+
+\bibitem[GlaNg04]{GlaNg04}
+Kenneth Glass, Chi-Keung Ng,
+\textit{A Simple Proof of the Hook Length Formula},
+The American Mathematical Monthly,
+Vol. 111, No. 8 (Oct., 2004), pp. 700--704.
+\newline\url{https://sites.math.washington.edu/~billey/classes/581.fall.2015/articles/glass.ng.2004.pdf}
+
+\bibitem[Grinbe16]{detnotes}Darij Grinberg, \textit{Notes on the combinatorial
+fundamentals of algebra}, 25 May 2017.
+\newline\url{http://www.cip.ifi.lmu.de/~grinberg/primes2015/sols.pdf}
+
+\bibitem[Quinla17]{Quinla17}Rachel Quinlan,
+\textit{Advanced Linear Algebra MA500-1: Lecture Notes
+Semester 1 2015-2016},
+version 14 March 2017.
+\newline\url{http://www.maths.nuigalway.ie/~rquinlan/teaching/}
+
+\bibitem[Uecker16]{Uecker16}Torsten Ueckerdt and Stefan Walzer,
+\textit{Lecture Notes Combinatorics},
+version 19 July 2016.
+\newline\url{http://www.math.kit.edu/iag6/lehre/co2015s/media/script.pdf}
+
+\bibitem[Wang17]{Wang17}
+\href{http://lanl.arxiv.org/abs/1701.01953v2}{Jian Wang,
+\textit{Maximum Linear Forests in Trees},
+arXiv preprint arXiv:1701.01953v2}.
+
+\end{thebibliography}
+
+
+
+\end{document}

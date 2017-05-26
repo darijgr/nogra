@@ -1,0 +1,2865 @@
+\documentclass[numbers=enddot,12pt,final,onecolumn,notitlepage]{scrartcl}%
+\usepackage[headsepline,footsepline,manualmark]{scrlayer-scrpage}
+\usepackage[all,cmtip]{xy}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{framed}
+\usepackage{comment}
+\usepackage{color}
+\usepackage{hyperref}
+\usepackage{ifthen}
+\usepackage[sc]{mathpazo}
+\usepackage[T1]{fontenc}
+\usepackage{needspace}
+\usepackage{tabls}
+\newcounter{exer}
+\theoremstyle{definition}
+\newtheorem{theo}{Theorem}[section]
+\newenvironment{theorem}[1][]
+{\begin{theo}[#1]\begin{leftbar}}
+{\end{leftbar}\end{theo}}
+\newtheorem{lem}[theo]{Lemma}
+\newenvironment{lemma}[1][]
+{\begin{lem}[#1]\begin{leftbar}}
+{\end{leftbar}\end{lem}}
+\newtheorem{prop}[theo]{Proposition}
+\newenvironment{proposition}[1][]
+{\begin{prop}[#1]\begin{leftbar}}
+{\end{leftbar}\end{prop}}
+\newtheorem{defi}[theo]{Definition}
+\newenvironment{definition}[1][]
+{\begin{defi}[#1]\begin{leftbar}}
+{\end{leftbar}\end{defi}}
+\newtheorem{remk}[theo]{Remark}
+\newenvironment{remark}[1][]
+{\begin{remk}[#1]\begin{leftbar}}
+{\end{leftbar}\end{remk}}
+\newtheorem{coro}[theo]{Corollary}
+\newenvironment{corollary}[1][]
+{\begin{coro}[#1]\begin{leftbar}}
+{\end{leftbar}\end{coro}}
+\newtheorem{conv}[theo]{Convention}
+\newenvironment{condition}[1][]
+{\begin{conv}[#1]\begin{leftbar}}
+{\end{leftbar}\end{conv}}
+\newtheorem{quest}[theo]{Question}
+\newenvironment{algorithm}[1][]
+{\begin{quest}[#1]\begin{leftbar}}
+{\end{leftbar}\end{quest}}
+\newtheorem{warn}[theo]{Warning}
+\newenvironment{conclusion}[1][]
+{\begin{warn}[#1]\begin{leftbar}}
+{\end{leftbar}\end{warn}}
+\newtheorem{conj}[theo]{Conjecture}
+\newenvironment{conjecture}[1][]
+{\begin{conj}[#1]\begin{leftbar}}
+{\end{leftbar}\end{conj}}
+\newtheorem{exam}[theo]{Example}
+\newenvironment{example}[1][]
+{\begin{exam}[#1]\begin{leftbar}}
+{\end{leftbar}\end{exam}}
+\newtheorem{exmp}[exer]{Exercise}
+\newenvironment{exercise}[1][]
+{\begin{exmp}[#1]\begin{leftbar}}
+{\end{leftbar}\end{exmp}}
+\newenvironment{statement}{\begin{quote}}{\end{quote}}
+\iffalse
+\newenvironment{proof}[1][Proof]{\noindent\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+\fi
+\let\sumnonlimits\sum
+\let\prodnonlimits\prod
+\let\cupnonlimits\bigcup
+\let\capnonlimits\bigcap
+\renewcommand{\sum}{\sumnonlimits\limits}
+\renewcommand{\prod}{\prodnonlimits\limits}
+\renewcommand{\bigcup}{\cupnonlimits\limits}
+\renewcommand{\bigcap}{\capnonlimits\limits}
+\setlength\tablinesep{3pt}
+\setlength\arraylinesep{3pt}
+\setlength\extrarulesep{3pt}
+\voffset=0cm
+\hoffset=-0.7cm
+\setlength\textheight{22.5cm}
+\setlength\textwidth{15.5cm}
+\newenvironment{verlong}{}{}
+\newenvironment{vershort}{}{}
+\newenvironment{noncompile}{}{}
+\excludecomment{verlong}
+\includecomment{vershort}
+\excludecomment{noncompile}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\rev}{\operatorname{rev}}
+\newcommand{\conncomp}{\operatorname{conncomp}}
+\newcommand{\conn}{\operatorname{conn}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\powset}[2][]{\ifthenelse{\equal{#2}{}}{\mathcal{P}\left(#1\right)}{\mathcal{P}_{#1}\left(#2\right)}}
+% $\powset[k]{S}$ stands for the set of all $k$-element subsets of
+% $S$. The argument $k$ is optional, and if not provided, the result
+% is the whole powerset of $S$.
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+% $\set{...}$ yields $\left\{ ... \right\}$.
+\newcommand{\abs}[1]{\left| #1 \right|}
+% $\abs{...}$ yields $\left| ... \right|$.
+\newcommand{\tup}[1]{\left( #1 \right)}
+% $\tup{...}$ yields $\left( ... \right)$.
+\newcommand{\ive}[1]{\left[ #1 \right]}
+% $\ive{...}$ yields $\left[ ... \right]$.
+\newcommand{\verts}[1]{\operatorname{V}\left( #1 \right)}
+% $\verts{...}$ yields $\operatorname{V}\left( ... \right)$.
+\newcommand{\edges}[1]{\operatorname{E}\left( #1 \right)}
+% $\edges{...}$ yields $\operatorname{E}\left( ... \right)$.
+\newcommand{\arcs}[1]{\operatorname{A}\left( #1 \right)}
+% $\arcs{...}$ yields $\operatorname{A}\left( ... \right)$.
+\newcommand{\underbrack}[2]{\underbrace{#1}_{\substack{#2}}}
+% $\underbrack{...1}{...2}$ yields
+% $\underbrace{...1}_{\substack{...2}}$. This is useful for doing
+% local rewriting transformations on mathematical expressions with
+% justifications.
+\newcommand{\are}{\ar@{-}}
+% In an xymatrix environment, $\are$ gives an arrow without
+% arrowhead. I use this to represent edges in graphs.
+\newcommand{\arebi}[1][]{\ar@{<-}@/_/[#1] \ar@/^/[#1]}
+% In an xymatrix environment, $\arebi$ gives two arrows with
+% opposite direction. I use this to represent edges in
+% bidirected digraphs.
+\ihead{Math 5707 Spring 2017 (Darij Grinberg): homework set 5}
+\ohead{page \thepage}
+\cfoot{}
+\begin{document}
+
+\begin{center}
+\textbf{Math 5707 Spring 2017 (Darij Grinberg): homework set 5}
+
+\textbf{Solution sketches (DRAFT).}
+\end{center}
+
+\tableofcontents
+
+\subsection{Reminders}
+
+See the
+\href{http://www-users.math.umn.edu/~dgrinber/5707s17/nogra.pdf}{lecture notes}
+and also the
+\href{http://www-users.math.umn.edu/~dgrinber/5707s17/}{handwritten notes}
+for relevant material.
+See also
+\href{http://www-users.math.umn.edu/~dgrinber/5707s17/hw2s.pdf}{the solutions to homework set 2}
+for various conventions and notations that are in use here.
+
+\subsection{Sandpiles: recapitulating definitions and results}
+
+Let me recall the definitions of the basic concepts on chipfiring
+done in class.
+Various sources on this material are
+\cite{BjoLov92} (and, less directly, \cite{BjLoSh91}),
+\cite{HLMPPW13}, \cite[Lectures 29--31]{Musike09} and \cite{CorPet16}.
+(None of these is as readable as I would like to have it, but the
+whole subject is about 30 years old, with most activity very
+recent...
+Also, be aware of incompatible notations, as well as of the fact that
+some of the sources only consider undirected graphs.)
+The particular case of the ``integer lattice'' graph has attracted
+particular attention due to the mysterious pictures it generates;
+see \url{http://www.math.cmu.edu/~wes/sand.html#next-page} for some
+of these pictures, as well as
+\url{http://www.math.cornell.edu/~levine/apollonian-slides.pdf} for a
+talk with various illustrations.
+
+Let me give a brief (proof-less) survey of what we did in class (and
+a bit of what we should have done).
+
+Fix a loopless multidigraph $D = \tup{V, A, \phi}$.
+
+\begin{definition}
+A \textit{configuration} (on $D$) means a map $f : V \to \NN$.
+(Recall that $\NN = \set{0, 1, 2, \ldots}$.)
+
+A configuration is also called a \textit{chip configuration} or
+\textit{sandpile}.
+
+We like to think of a configuration as a way to place
+a finite number of game chips on the vertices of $D$:
+Namely, the configuration $f$ corresponds to placing
+$f \tup{v}$ chips on the vertex $v$ for each $v \in V$.
+The chips are understood to be undistinguishable, so the
+only thing that matters is how many of them are placed on
+each given vertex.
+Sometimes, we speak of grains of sand instead of chips.
+\end{definition}
+
+\begin{definition}
+A \textit{$\ZZ$-configuration} (on $D$) means a map
+$f : V \to \ZZ$.
+We shall regard each configuration as a $\ZZ$-configuration
+(since $\NN \subseteq \ZZ$).
+\end{definition}
+
+\begin{definition}
+Let $f : V \to \ZZ$ be a $\ZZ$-configuration.
+
+\textbf{(a)} A vertex $v \in V$ is said to be
+\textit{active} in $f$ if and only if
+$f\tup{v} \geq \deg^+ v$.
+(Recall that $\deg^+ v$ is the outdegree of $v$.)
+
+\textbf{(b)} The $\ZZ$-configuration $f$ is said to be
+\textit{stable} if no vertex $v \in V$ is active in $f$.
+\end{definition}
+
+Notice that there are only finitely many stable configuration
+(because if $f$ is a stable configuration, then, for each
+$v \in V$, the stability of $f$ implies $f \tup{v} \leq \deg^+ v$,
+whereas the fact that $f$ is a configuration implies
+$f \tup{v} \geq 0$; but these two inequalities combined
+leave only finitely many possible values for $f \tup{v}$).
+
+\begin{definition} \label{def.chip.add-configs}
+The set $\ZZ^V$ of all $\ZZ$-configuration can be equipped with
+operations of addition and subtraction, defined as follows:
+
+\begin{itemize}
+ \item For any two $\ZZ$-configurations $f : V \to \ZZ$ and
+       $g : V \to \ZZ$, we define a $\ZZ$-configuration
+       $f + g : V \to \ZZ$ by setting
+       \[
+        \tup{f + g} \tup{v}
+        = f \tup{v} + g \tup{v}
+        \qquad \text{ for each } v \in V .
+       \]
+
+ \item For any two $\ZZ$-configurations $f : V \to \ZZ$ and
+       $g : V \to \ZZ$, we define a $\ZZ$-configuration
+       $f - g : V \to \ZZ$ by setting
+       \[
+        \tup{f - g} \tup{v}
+        = f \tup{v} - g \tup{v}
+        \qquad \text{ for each } v \in V .
+       \]
+\end{itemize}
+
+These operations of addition and subtraction satisfy the
+standard rules (e.g., we always have
+$\tup{f+g} + h = f + \tup{g+h}$ and
+$\tup{f-g} - h = f - \tup{g+h}$).
+Hence, we can write terms like $f + g + h$ or $f - g - h$
+without having to explicitly place parentheses.
+
+Also, we can define a ``zero configuration'' $0 : V \to \ZZ$,
+which is the configuration that sends each $v \in V$ to the
+number $0$.
+(Hopefully, the dual use of the symbol $0$ for both the number
+$0$ and this zero configuration is not too confusing.)
+
+Also, for each $\ZZ$-configuration $f : V \to \ZZ$ and each
+integer $N$, we define a $\ZZ$-configuration $Nf : V \to \ZZ$
+by
+\[
+\tup{Nf} \tup{v} = N f \tup{v}
+\qquad \text{ for each } v \in V .
+\]
+\end{definition}
+
+\begin{definition}
+Let $f : V \to \ZZ$ be any $\ZZ$-configuration.
+Then, $\sum f$ shall denote the integer
+$\sum_{v \in V} f \tup{v}$.
+
+This integer $\sum f$ is called the \textit{degree} of $f$.
+\end{definition}
+
+If $f$ is a configuration, then $\sum f$ is the total
+number of chips in $f$.
+
+\begin{definition}
+Let $v \in V$ be a vertex.
+Then, a $\ZZ$-configuration $\Delta v$ is defined by setting
+\[
+ \tup{\Delta v} \tup{w}
+ = \begin{cases}
+    \deg^+ v , & \text{if } w = v ; \\
+    - a_{v, w}, & \text{if } w \neq v
+   \end{cases}
+  \qquad \text{ for all } w \in V ,
+\]
+where $a_{v, w}$ denotes the number of all arcs of $D$ having
+source $v$ and target $w$.
+(Note that $a_{v, w}$ might be $> 1$, since $D$ is a multidigraph.)
+\end{definition}
+
+\begin{definition}
+Let $v \in V$ be a vertex.
+Then, \textit{firing $v$} is the operation on
+$\ZZ$-configurations (i.e., formally speaking, the mapping from
+$\ZZ^V$ to $\ZZ^V$) that sends each $\ZZ$-configuration
+$f : V \to \ZZ$ to $f - \Delta v$.
+
+We sometimes say ``toppling $v$'' instead of ``firing $v$''.
+\end{definition}
+
+If $f : V \to \NN$ is a configuration, then the
+$\ZZ$-configuration $f - \Delta v$ obtained by firing $v$ can be
+described as follows:
+The vertex $v$ ``donates'' $\deg^+ v$ of its chips to its
+neighbors, by sending one chip along each of its outgoing arcs
+(i.e., for each arc having source $v$, the vertex $v$ sends one
+chip along this arc to the target of this arc).
+Thus, the number of chips on $v$ (weakly) decreases, while the
+number of chips on each other vertex (weakly) increases.
+Of course, the resulting $\ZZ$-configuration $f - \Delta v$ is
+not necessarily a configuration.
+(In fact, it is a configuration if and only if the vertex $v$ is
+active in $f$.)
+
+Notice that $\sum \tup{\Delta v} = 0$ for each vertex $v$.
+Thus,
+$\sum \tup{f - \Delta v}
+= \sum f - \underbrace{\sum \tup{\Delta v}}_{= 0}
+= \sum f$
+for each $\ZZ$-configuration $f : V \to \ZZ$ and each vertex $v$.
+In other words, firing a vertex $v$ does not change the degree of
+a $\ZZ$-configuration.
+
+\begin{definition}
+Let $f : V \to \NN$ be a configuration.
+
+Let $\tup{v_1, v_2, \ldots, v_k}$ be a sequence of vertices of
+$D$.
+
+\textbf{(a)} The sequence $\tup{v_1, v_2, \ldots, v_k}$ is said
+to be \textit{legal} for $f$ if for each
+$i \in \set{1, 2, \ldots, k}$, the vertex $v_i$ is active in
+the $\ZZ$-configuration
+$f - \Delta v_1 - \Delta v_2 - \cdots - \Delta v_{i-1}$.
+
+\textbf{(b)} The sequence $\tup{v_1, v_2, \ldots, v_k}$ is said
+to be \textit{stabilizing} for $f$ if the $\ZZ$-configuration
+$f - \Delta v_1 - \Delta v_2 - \cdots - \Delta v_k$ is stable.
+\end{definition}
+
+What is the rationale behind the notions of ``legal'' and
+``stabilizing''?
+A sequence of vertices provides a way to modify a
+configuration by first firing the first vertex in the sequence,
+then firing the second, and so on.
+The sequence is said to be \textit{legal} (for $f$) if the
+configuration remains a configuration throughout this ordeal
+(i.e., at no point does a vertex have a negative number of
+chips).
+The sequence is said to be \textit{stabilizing} (for $f$) if
+the $\ZZ$-configuration resulting from it at the very end is
+stable.
+
+We notice some obvious consequences of the definitions:
+
+\begin{itemize}
+ \item If a sequence $\tup{v_1, v_2, \ldots, v_k}$ is legal
+       for a configuration $f$, then all of the
+       $\ZZ$-configurations
+       $f - \Delta v_1 - \Delta v_2 - \cdots - \Delta v_i$
+       for $i \in \set{0, 1, \ldots, k}$ are actually
+       configurations.
+ \item If a sequence $\tup{v_1, v_2, \ldots, v_k}$ is legal
+       for a configuration $f$, then each prefix of this
+       sequence (i.e., each sequence of the form
+       $\tup{v_1, v_2, \ldots, v_i}$ for some
+       $i \in \set{0, 1, \ldots, k}$) is legal for $f$ as
+       well.
+ \item If a sequence $\tup{v_1, v_2, \ldots, v_k}$ is
+       stabilizing for a configuration $f$, then each
+       permutation of this sequence (i.e., each sequence of
+       the form
+       $\tup{v_{\sigma\tup{1}}, v_{\sigma\tup{2}}, \ldots,
+             v_{\sigma\tup{k}}}$ for a permutation
+       $\sigma$ of $\set{1, 2, \ldots, k}$) is stabilizing
+       as well.
+ \item If $\tup{v_1, v_2, \ldots, v_k}$ is a legal sequence
+       for a configuration $f$, then
+       $\tup{v_1, v_2, \ldots, v_k}$ is stabilizing if and
+       only if there exist no $v \in V$ such that the
+       sequence $\tup{v_1, v_2, \ldots, v_k, v}$ is legal.
+\end{itemize}
+
+
+An important property of chipfiring is the following result
+(sometimes called the ``least action principle''):
+
+\begin{theorem} \label{thm.chip.lap}
+Let $f : V \to \NN$ be any configuration.
+Let $\ell$ and $s$ be two sequences of vertices of $D$ such
+that $\ell$ is legal for $f$ while $s$ is stabilizing for $f$.
+Then, $\ell$ is a subpermutation of $s$.
+\end{theorem}
+
+Here, we are using the following notation:
+
+\begin{definition}
+Let $\tup{p_1, p_2, \ldots, p_u}$ and
+$\tup{q_1, q_2, \ldots, q_v}$ be two finite sequences.
+Then, we say that $\tup{p_1, p_2, \ldots, p_u}$ is
+a \textit{subpermutation} of $\tup{q_1, q_2, \ldots, q_v}$
+if and only if, for each object $t$, the following holds:
+The number of $i \in \set{1, 2, \ldots, u}$ satisfying
+$p_i = t$ is less or equal to the number of
+$j \in \set{1, 2, \ldots, v}$ satisfying $q_j = t$.
+
+Equivalently, the sequence $\tup{p_1, p_2, \ldots, p_u}$ is
+a subpermutation of the sequence $\tup{q_1, q_2, \ldots, q_v}$
+if and only if you can obtain the former from the latter by
+removing some entries and permuting the remaining entries.
+(``Some'' allows for the possibility of ``zero''.)
+\end{definition}
+
+\begin{corollary} \label{cor.chip.lap-cor}
+Let $f : V \to \NN$ be any configuration.
+Let $\ell$ and $\ell'$ be two sequences of vertices of $D$
+that are both legal and stabilizing for $f$.
+Then:
+
+\textbf{(a)} The sequence $\ell'$ is a permutation of $\ell$.
+
+In particular:
+
+\textbf{(b)} The sequences $\ell$ and $\ell'$ have the
+same length.
+
+\textbf{(c)} For each $t \in V$, the number of times $t$
+appears in $\ell'$ equals the number of times $t$ appears in
+$\ell$.
+
+\textbf{(d)} The configuration obtained from $f$ by firing
+all vertices in $\ell$ (one after the other) equals the
+configuration obtained from $f$ by firing
+all vertices in $\ell'$ (one after the other).
+\end{corollary}
+
+Next we state some facts about legal sequences:
+
+\begin{lemma} \label{lem.chip.leg-bound1}
+Let $f : V \to \NN$ be a configuration.
+Let $h = \sum f$.
+Let $\ell$ be a legal sequence for $f$.
+
+Let $a$ be an arc of $D$.
+Let $u$ be the source of $a$, and let $v$ be the target of $a$.
+
+\textbf{(a)}
+If $u$ appears more than $h$ times in the sequence $\ell$,
+then $v$ must appear at least once in the sequence $\ell$.
+
+\textbf{(b)}
+Fix $k \in \NN$.
+If $u$ appears more than $kh$ times in the sequence $\ell$,
+then $v$ must appear at least $k$ times in the sequence $\ell$.
+\end{lemma}
+
+\begin{lemma} \label{lem.chip.leg-bound1b}
+Let $f : V \to \NN$ be a configuration.
+Let $h = \sum f$.
+Let $\ell$ be a legal sequence for $f$.
+
+Let $u$ and $v$ be two vertices of $D$ such that there exists
+a path of length $d$ from $u$ to $v$.
+
+If $u$ appears at least $\dfrac{h^{d+1}-1}{h-1}$
+times in the sequence $\ell$,
+then $v$ must appear at least once in the sequence $\ell$.
+\end{lemma}
+
+\begin{proposition} \label{prop.chip.leg-everyone-fires}
+Let $f : V \to \NN$ be a configuration.
+Let $h = \sum f$.
+Let $\ell$ be a legal sequence for $f$.
+Let $n = \abs{V}$.
+
+Let $q$ be a vertex of $D$ such that for each vertex
+$u \in V$, there exists a path from $u$ to $q$.
+
+If the length of $\ell$ is
+$> \tup{n-1} \tup{ \dfrac{h^n-1}{h-1} - 1 }$,
+then $q$ must appear at least once in the sequence $\ell$.
+\end{proposition}
+
+\begin{proposition} \label{prop.chip.leg-period}
+Let $f : V \to \NN$ be a configuration.
+Let $h = \sum f$.
+Let $\ell = \tup{\ell_1, \ell_2, \ldots, \ell_k}$ be a
+legal sequence for $f$.
+Let
+$g = f - \Delta \ell_1 - \Delta \ell_2 - \cdots - \Delta \ell_k$
+be the configuration obtained from $f$ by firing the vertices in
+$\ell$ (one after the other).
+
+\textbf{(a)} We have $g \in \set{0, 1, \ldots, h}^V$.
+(In other words, $g \tup{v} \in \set{0, 1, \ldots, h}$
+for each $v \in V$.)
+
+\textbf{(b)} Let $n = \abs{V}$.
+If the sequence $\ell$ has length
+$\geq \tup{h+1}^n$, then there exist legal sequences (for $f$)
+of arbitrary length.
+\end{proposition}
+
+\begin{definition}
+Let $f : V \to \NN$ be a configuration.
+
+We say that $f$ is \textit{finitary} if there
+exists a sequence of vertices that is stabilizing for $f$.
+Otherwise, we say that $f$ is \textit{infinitary}.
+\end{definition}
+
+\begin{theorem} \label{thm.chip.dichotomy}
+Let $f : V \to \NN$ be a configuration.
+Then, exactly one of the following two statements holds:
+
+\begin{itemize}
+\item \textit{Statement 1:}
+      The configuration $f$ is finitary. \par
+      There exists a sequence $s$ of vertices that is both
+      legal and stabilizing for $f$. \par
+      All such sequences are permutations of $s$.
+      \par
+      All legal sequences (for $f$) are subpermutations
+      of $s$, and in particular are at most as long as $s$.
+
+\item \textit{Statement 2:}
+      The configuration $f$ is infinitary. \par
+      There exists no stabilizing sequence for $f$. \par
+      There exist legal sequences for $f$ of arbitrary length.
+      More precisely, each legal sequence for $f$ can be
+      extended to a longer legal sequence.
+\end{itemize}
+\end{theorem}
+
+\begin{definition} \label{def.chip.stabilization}
+Let $f : V \to \NN$ be a finitary configuration.
+Then, Statement 1 in Theorem~\ref{thm.chip.dichotomy} must
+hold.
+Therefore, there exists a sequence $s$ of vertices that is both
+legal and stabilizing for $f$.
+The \textit{stabilization} of $f$ means
+the configuration obtained from $f$ by firing
+all vertices in $s$ (one after the other).
+(This does not depend on the choice of $s$, because of
+Corollary~\ref{cor.chip.lap-cor} \textbf{(d)}.)
+
+The stabilization of $f$ is denoted by $f^\circ$.
+\end{definition}
+
+Something similar holds if we forbid firing a specific
+vertex:
+
+\begin{definition}
+Let $q \in V$.
+
+Let $f : V \to \NN$ be a configuration.
+
+Let $\tup{v_1, v_2, \ldots, v_k}$ be a sequence of vertices of
+$D$.
+
+\textbf{(a)} The sequence $\tup{v_1, v_2, \ldots, v_k}$ is said
+to be \textit{$q$-legal} for $f$ if it is legal and does not
+contain the vertex $q$.
+
+\textbf{(b)} The sequence $\tup{v_1, v_2, \ldots, v_k}$ is said
+to be \textit{$q$-stabilizing} for $f$ if the $\ZZ$-configuration
+$f - \Delta v_1 - \Delta v_2 - \cdots - \Delta v_k$ has no
+active vertices except (possibly) $q$.
+\end{definition}
+
+We can now define ``$q$-finitary'' and ``$q$-infinitary''
+and obtain an analogue of Theorem~\ref{thm.chip.dichotomy}.
+But the most commonly considered case is that when $q$ is
+a ``global sink'' (a vertex with no outgoing arcs, and which
+is reachable from any vertex),
+and in this case \textbf{every} configuration is
+$q$-finitary.
+Let us state this as its own result:
+
+\begin{theorem} \label{thm.chip.dichotomy-q}
+Let $f : V \to \NN$ be a configuration.
+Let $q \in V$.
+Assume that for each vertex $u \in V$, there exists a path
+$u \to q$.
+Then, there exists a sequence $s$ of vertices that is both
+$q$-legal and $q$-stabilizing for $f$.
+All such sequences are permutations of $s$.
+All $q$-legal sequences (for $f$) are subpermutations
+of $s$, and in particular are at most as long as $s$.
+\end{theorem}
+
+\begin{definition}
+Let $f : V \to \NN$ be a configuration.
+Let $q \in V$.
+Assume that for each vertex $u \in V$, there exists a path
+$u \to q$.
+Then, Theorem~\ref{thm.chip.dichotomy-q} shows that
+there exists a sequence $s$ of vertices that is both
+$q$-legal and $q$-stabilizing for $f$.
+The \textit{$q$-stabilization} of $f$ means
+the configuration obtained from $f$ by firing
+all vertices in $s$ (one after the other).
+(This does not depend on the choice of $s$, because of
+the analogue of
+Corollary~\ref{cor.chip.lap-cor} \textbf{(d)}
+for $q$-legal and $q$-stabilizing sequences.)
+\end{definition}
+
+
+\subsection{Exercise \ref{exe.chip.better-bounds}: better
+bounds for legal sequences}
+
+The following exercise improves on the bound given in
+Proposition~\ref{prop.chip.leg-period} \textbf{(b)} and
+also on the one given in
+Proposition~\ref{prop.chip.leg-everyone-fires}\footnote{To
+  see that Exercise~\ref{exe.chip.better-bounds} \textbf{(b)}
+  improves on the bound given in
+  Proposition~\ref{prop.chip.leg-everyone-fires},
+  we need to check that
+  $\tup{n-1} \tup{ \dfrac{h^n-1}{h-1} - 1} + 1
+  \geq \dbinom{n+h-1}{n-1}$.
+  This is easy for $n \leq 1$ (in fact, the case
+  $n = 0$ is impossible due to the existence of a
+  $q \in V$, and the case $n = 1$ is an equality
+  case).
+  In the remaining case $n \geq 2$,
+  the stronger inequality
+  $\dfrac{h^n-1}{h-1} - 1 + 1
+  \geq \dbinom{n+h-1}{n-1}$
+  can be proven by a simple induction
+  over $n$.}.
+I don't know whether the improved bounds can be further
+improved.
+
+\begin{exercise} \label{exe.chip.better-bounds}
+Fix a loopless multidigraph $D = \tup{V, A, \phi}$.
+Let $f : V \to \NN$ be a configuration.
+Let $h = \sum f$.
+Let $n = \abs{V}$.
+Assume that $n > 0$.
+
+Let $\ell = \tup{\ell_1, \ell_2, \ldots, \ell_k}$ be a
+legal sequence for $f$ having length
+$k \geq \dbinom{n+h-1}{n-1}$.
+
+Prove the following:
+
+\textbf{(a)} There exist legal sequences (for $f$) of
+arbitrary length.
+
+\textbf{(b)} Let $q$ be a vertex of $D$ such that for each vertex
+$u \in V$, there exists a path from $u$ to $q$.
+Then, $q$ must appear at least once in the sequence $\ell$.
+
+[\textbf{Hint:}
+For \textbf{(a)}, apply the same pigeonhole-principle argument
+as for Proposition~\ref{prop.chip.leg-period} \textbf{(b)}.]
+\end{exercise}
+
+In the solution of Exercise \ref{exe.chip.better-bounds}, the following
+classical fact will turn out useful:
+
+\begin{proposition}
+\label{prop.multichoose}Let $n\in\mathbb{N}$ and $h\in\mathbb{N}$ be such that
+$n>0$. The number of $n$-tuples $\left(  a_{1},a_{2},\ldots,a_{n}\right)  $ of
+nonnegative integers satisfying $a_{1}+a_{2}+\cdots+a_{n}=h$ is $\dbinom
+{n+h-1}{n-1}$.
+\end{proposition}
+
+\begin{proof}
+[Proof of Proposition \ref{prop.multichoose}.]See, for example,
+\url{https://math.stackexchange.com/questions/36250/number-of-monomials-of-certain-degree}
+for a proof of this fact (in the language of monomials). Or see \cite[\S 1.2]%
+{Stanle11} (search for \textquotedblleft weak composition\textquotedblright%
+\ and read the first paragraph that comes up).
+\end{proof}
+
+\begin{proof}
+[Hints to Exercise \ref{exe.chip.better-bounds}.]For each $i\in\left\{
+0,1,\ldots,k\right\}  $, the $\mathbb{Z}$-configuration $f-\Delta\ell
+_{1}-\Delta\ell_{2}-\cdots-\Delta\ell_{i}$ is a configuration (since the
+sequence $\left(  \ell_{1},\ell_{2},\ldots,\ell_{k}\right)  $ is legal for
+$f$). Moreover, each of the $k+1$ configurations $f-\Delta\ell_{1}-\Delta
+\ell_{2}-\cdots-\Delta\ell_{i}$ (with $i\in\left\{  0,1,\ldots,k\right\}  $)
+has exactly $h$ chips\footnote{\textit{Proof.} Let $i\in\left\{
+0,1,\ldots,k\right\}  $. Then,%
+\begin{align*}
+\sum\underbrace{\left(  f-\Delta\ell_{1}-\Delta\ell_{2}-\cdots-\Delta\ell
+_{i}\right)  }_{=f-\sum_{j=1}^{i}\Delta\ell_{j}}  &  =\sum\left(  f-\sum
+_{j=1}^{i}\Delta\ell_{j}\right)  =\underbrace{\sum f}_{=h}-\sum_{j=1}%
+^{i}\underbrace{\sum\left(  \Delta\ell_{j}\right)  }%
+_{\substack{=0\\\text{(since }\sum\left(  \Delta v\right)  =0\\\text{for each
+vertex }v\text{)}}}\\
+&  =h-\underbrace{\sum_{j=1}^{i}0}_{=0}=h.
+\end{align*}
+In other words, the configuration $f-\Delta\ell_{1}-\Delta\ell_{2}%
+-\cdots-\Delta\ell_{i}$ has exactly $h$ chips.}.
+
+There exist precisely $\dbinom{n+h-1}{n-1}$ configurations having exactly $h$
+chips\footnote{\textit{Proof.} Recall that $\mathbb{N}$ denotes the set of
+nonnegative integers.
+\par
+Let $v_{1},v_{2},\ldots,v_{n}$ be the vertices of $G$ (listed with no
+repetitions). Then, there is a bijection%
+\begin{align*}
+\left\{  \text{configurations on }G\right\}   &  \rightarrow\mathbb{N}^{n},\\
+f  &  \mapsto\left(  f\left(  v_{1}\right)  ,f\left(  v_{2}\right)
+,\ldots,f\left(  v_{n}\right)  \right)  .
+\end{align*}
+This bijection restricts to a bijection%
+\begin{align*}
+\left\{  \text{configurations on }G\text{ having exactly }h\text{
+chips}\right\}   &  \rightarrow\left\{  \left(  a_{1},a_{2},\ldots
+,a_{n}\right)  \in\mathbb{N}^{n}\ \mid\ a_{1}+a_{2}+\cdots+a_{n}=h\right\}
+,\\
+f  &  \mapsto\left(  f\left(  v_{1}\right)  ,f\left(  v_{2}\right)
+,\ldots,f\left(  v_{n}\right)  \right)
+\end{align*}
+(since the number of chips in a configuration $f$ on $G$ is $\sum f=f\left(
+v_{1}\right)  +f\left(  v_{2}\right)  +\cdots+f\left(  v_{n}\right)  $).
+Hence,%
+\begin{align*}
+&  \left\vert \left\{  \text{configurations on }G\text{ having exactly
+}h\text{ chips}\right\}  \right\vert \\
+&  =\left\vert \left\{  \left(  a_{1},a_{2},\ldots,a_{n}\right)  \in
+\mathbb{N}^{n}\ \mid\ a_{1}+a_{2}+\cdots+a_{n}=h\right\}  \right\vert \\
+&  =\dbinom{n+h-1}{n-1}\ \ \ \ \ \ \ \ \ \ \left(  \text{by Proposition
+\ref{prop.multichoose}}\right)  .
+\end{align*}
+In other words, there exist precisely $\dbinom{n+h-1}{n-1}$ configurations
+having exactly $h$ chips.}. Since $k+1>k\geq\dbinom{n+h-1}{n-1}$, we thus
+conclude (by the pigeonhole principle) that two of the $k+1$ configurations
+$f-\Delta\ell_{1}-\Delta\ell_{2}-\cdots-\Delta\ell_{i}$ (with $i\in\left\{
+0,1,\ldots,k\right\}  $) must be equal (because all these $k+1$ configurations
+are configurations having exactly $h$ chips). In other words, there exist two
+elements $i$ and $j$ of $\left\{  0,1,\ldots,k\right\}  $ satisfying $i<j$ and%
+\begin{equation}
+f-\Delta\ell_{1}-\Delta\ell_{2}-\cdots-\Delta\ell_{i}=f-\Delta\ell_{1}%
+-\Delta\ell_{2}-\cdots-\Delta\ell_{j}. \label{sol.chip.better-bounds.ivsj}%
+\end{equation}
+Consider these $i$ and $j$.
+
+The equality (\ref{sol.chip.better-bounds.ivsj}) means that the result of
+firing the vertices $\ell_{1},\ell_{2},\ldots,\ell_{i}$ in the configuration
+$f$ is the same as the result of firing the vertices $\ell_{1},\ell_{2}%
+,\ldots,\ell_{j}$ in the configuration $f$. Thus, after having firing the
+vertices $\ell_{1},\ell_{2},\ldots,\ell_{i}$ in the configuration $f$,
+additionally firing the vertices $\ell_{i+1},\ell_{i+2},\ldots,\ell_{j}$ does
+not change the configuration. Therefore, we can fire these vertices
+$\ell_{i+1},\ell_{i+2},\ldots,\ell_{j}$ over and over again, periodically
+coming back to the same configuration and never \textquotedblleft getting into
+debt\textquotedblright\ (i.e., after each firing we still have a
+configuration). Thus, for every $k\in\mathbb{N}$, the sequence%
+\begin{equation}
+\left(  \ell_{1},\ell_{2},\ldots,\ell_{i},\underbrace{\ell_{i+1},\ell
+_{i+2},\ldots,\ell_{j}}_{\text{repeated }k\text{ times}}\right)
+\label{sol.chip.better-bound.recurseq}%
+\end{equation}
+is legal for $f$. Therefore, for each $k\in\mathbb{N}$, there exists a legal
+sequence (for $f$): Namely, we construct such a sequence by taking the first
+$k$ entries of the legal sequence $\left(  \ell_{1},\ell_{2},\ldots,\ell
+_{i},\underbrace{\ell_{i+1},\ell_{i+2},\ldots,\ell_{j}}_{\text{repeated
+}k\text{ times}}\right)  $. Thus, we have shown that there exist legal
+sequences (for $f$) of arbitrary length. This solves Exercise
+\ref{exe.chip.better-bounds} \textbf{(a)}.
+
+\textbf{(b)} Let $\ell^{\prime}$ be the legal sequence
+(\ref{sol.chip.better-bound.recurseq}) defined for $k=\left(  n-1\right)
+\left(  \dfrac{h^{n}-1}{h-1}-1\right)  +1$. Then, the length of $\ell^{\prime
+}$ is%
+\begin{align*}
+\underbrace{i}_{\geq0}+k\underbrace{\left(  j-i\right)  }_{\substack{\geq
+1\\\text{(since }i<j\text{)}}}  &  \geq0+k\cdot1=k=\left(  n-1\right)  \left(
+\dfrac{h^{n}-1}{h-1}-1\right)  +1\\
+&  >\left(  n-1\right)  \left(  \dfrac{h^{n}-1}{h-1}-1\right)  .
+\end{align*}
+Hence, Proposition \ref{prop.chip.leg-everyone-fires} (applied to
+$\ell^{\prime}$ instead of $\ell$) yields that $q$ must appear at least once
+in the sequence $\ell^{\prime}$. Therefore, $q$ must also appear at least once
+in the sequence $\ell$ (since each entry of $\ell^{\prime}$ is an entry of
+$\ell$). This solves Exercise \ref{exe.chip.better-bounds} \textbf{(b)}.
+\end{proof}
+
+\subsection{Exercise \ref{exe.chip.examples}: examples of chip-firing}
+
+\Needspace{15cm}
+\begin{exercise} \label{exe.chip.examples}
+\textbf{(a)} Let $D$ be the following digraph:
+\[
+\xymatrix{
+ u \ar[r] & v \ar[r] & q
+}
+\]
+(i.e., the digraph $D$ with three vertices
+$u, v, q$ and two arcs $uv, vq$.)
+
+Let $k$ be a positive integer.
+Consider the configuration $g_k$ on $D$ which has $k$ chips at $u$
+and $0$ chips at each other vertex.
+
+Find the $q$-stabilization of $g_k$.
+
+\textbf{(b)} Let $D$ be the following digraph:
+\[
+\xymatrix{
+ u \are[r] & v \ar[r] & q
+}
+\]
+where a curve without an arrow stands for one arc in each
+direction.
+(Thus, formally speaking, the digraph $D$ has three vertices
+$u, v, q$ and three arcs $uv, vu, vq$.)
+
+Let $k$ be a positive integer.
+Consider the configuration $g_k$ on $D$ which has $k$ chips at $u$
+and $0$ chips at each other vertex.
+
+Find the $q$-stabilization of $g_k$.
+
+\textbf{(c)} Let $D$ be the following digraph:
+\[
+\xymatrix{
+ & v \are[dl] \are[dr] \ar[dd] \\
+ u \are[rr] \ar[dr] & & w \ar[dl] \\
+ & q
+}
+\]
+where a curve without an arrow stands for one arc in each
+direction.
+(Thus, formally speaking, the digraph $D$ has four vertices
+$u, v, w, q$ and nine arcs
+$uv, vu, vw, wv, wu, uw, uq, vq, wq$.)
+
+Let $k \geq 2$ be an integer.
+Consider the configuration $f_k$ on $D$ which has $k$ chips at each
+vertex (i.e., which has $f_k \tup{v} = k$ for each
+$v \in \set{u, v, w, q}$).
+
+Find the $q$-stabilization of $f_k$.
+\end{exercise}
+
+Before we approach this exercise, let us introduce a simple notation:
+
+\begin{definition}
+\label{def.firearrow}If $k$ and $k^{\prime}$ are two configurations on $D$,
+then $k\overset{\ast}{\rightarrow}k^{\prime}$ shall mean that there exists a
+legal sequence $\ell$ for $k$ such that firing all vertices in $\ell$ (one
+after the other) transforms $k$ into $k^{\prime}$. Thus, we have defined a
+binary relation $\overset{\ast}{\rightarrow}$ on the set of all configurations
+of $D$.
+\end{definition}
+
+\begin{proposition}
+\label{prop.firearrow.1}\textbf{(a)} The binary relation $\overset{\ast
+}{\rightarrow}$ is reflexive (i.e., each configuration $k$ satisfies
+$k\overset{\ast}{\rightarrow}k$) and transitive (i.e., every three
+configurations $k_{1}$, $k_{2}$ and $k_{3}$ satisfying $k_{1}\overset{\ast
+}{\rightarrow}k_{2}$ and $k_{2}\overset{\ast}{\rightarrow}k_{3}$ satisfy
+$k_{1}\overset{\ast}{\rightarrow}k_{3}$).
+
+\textbf{(b)} If $c$, $k$ and $k^{\prime}$ are three configurations satisfying
+$k\overset{\ast}{\rightarrow}k^{\prime}$, then $c+k\overset{\ast}{\rightarrow
+}c+k^{\prime}$.
+\end{proposition}
+
+\begin{proof}
+[Proof of Proposition \ref{prop.firearrow.1} (sketched).]\textbf{(a)} Each
+configuration $k$ satisfies $k\overset{\ast}{\rightarrow}k$ (because the empty
+sequence $\left(  {}\right)  $ is legal for $k$, and clearly firing all
+vertices in the empty sequence $\left(  {}\right)  $ transforms $k$ into $k$).
+Thus, the relation $\overset{\ast}{\rightarrow}$ is reflexive. It now remains
+to prove that the relation $\overset{\ast}{\rightarrow}$ is transitive.
+
+Let $k_{1}$, $k_{2}$ and $k_{3}$ be three configurations satisfying
+$k_{1}\overset{\ast}{\rightarrow}k_{2}$ and $k_{2}\overset{\ast}{\rightarrow
+}k_{3}$. We shall show that $k_{1}\overset{\ast}{\rightarrow}k_{3}$.
+
+From $k_{1}\overset{\ast}{\rightarrow}k_{2}$, we conclude that there exists a
+legal sequence $\ell_{1}$ for $k_{1}$ such that firing all vertices in
+$\ell_{1}$ transforms $k_{1}$ into $k_{2}$. Consider this $\ell_{1}$.
+
+From $k_{2}\overset{\ast}{\rightarrow}k_{3}$, we conclude that there exists a
+legal sequence $\ell_{2}$ for $k_{2}$ such that firing all vertices in
+$\ell_{2}$ transforms $k_{2}$ into $k_{3}$. Consider this $\ell_{2}$.
+
+Write the sequences $\ell_{1}$ and $\ell_{2}$ as $\ell_{1}=\left(  v_{1}%
+,v_{2},\ldots,v_{p}\right)  $ and $\ell_{2}=\left(  w_{1},w_{2},\ldots
+,w_{q}\right)  $. Let $\ell$ be the sequence $\left(  v_{1},v_{2},\ldots
+,v_{p},w_{1},w_{2},\ldots,w_{q}\right)  $. (This is called the concatenation
+of the sequences $\ell_{1}$ and $\ell_{2}$.) Then, firing all vertices in
+$\ell$ transforms $k_{1}$ into $k_{3}$ (because the first $p$ firings
+transform $k_{1}$ into $k_{2}$, and from there on the remaining $q$ firings
+take us to $k_{3}$). Moreover, all the $\mathbb{Z}$-configurations obtained
+during this firing process are configurations\footnote{In fact, all the
+$\mathbb{Z}$-configurations obtained during the first $p$ firings are
+configurations (because $\left(  v_{1},v_{2},\ldots,v_{p}\right)  =\ell_{1}$
+is a legal sequence for $k_{1}$), and all the $\mathbb{Z}$-configurations
+obtained during the remaining $q$ firings are configurations as well (since
+$\left(  w_{1},w_{2},\ldots,w_{q}\right)  =\ell_{2}$ is a legal sequence for
+$k_{2}$).}. Thus, the sequence $\ell$ is legal for $k_{1}$.
+
+We thus have found a legal sequence $\ell$ for $k_{1}$ such that firing all
+vertices in $\ell$ (one after the other) transforms $k_{1}$ into $k_{3}$.
+Hence, such a legal sequence $\ell$ exists. In other words, $k_{1}%
+\overset{\ast}{\rightarrow}k_{3}$ (by the definition of the relation
+$\overset{\ast}{\rightarrow}$).
+
+We thus have shown that every three configurations $k_{1}$, $k_{2}$ and
+$k_{3}$ satisfying $k_{1}\overset{\ast}{\rightarrow}k_{2}$ and $k_{2}%
+\overset{\ast}{\rightarrow}k_{3}$ satisfy $k_{1}\overset{\ast}{\rightarrow
+}k_{3}$. In other words, the relation $\overset{\ast}{\rightarrow}$ is
+transitive. This proves Proposition \ref{prop.firearrow.1} \textbf{(a)}.
+
+\textbf{(b)} Let $c$, $k$ and $k^{\prime}$ be three configurations satisfying
+$k\overset{\ast}{\rightarrow}k^{\prime}$.
+
+From $k\overset{\ast}{\rightarrow}k^{\prime}$, we conclude that there exists a
+legal sequence $\ell$ for $k$ such that firing all vertices in $\ell$
+transforms $k$ into $k^{\prime}$. Consider this $\ell$.
+
+The sequence $\ell$ is legal for $k$, and thus also for $c+k$ (since $\left(
+c+k\right)  \left(  v\right)  =\underbrace{c\left(  v\right)  }_{\geq
+0}+k\left(  v\right)  \geq k\left(  v\right)  $ for each vertex $v$ of $D$).
+Moreover, firing all vertices in $\ell$ transforms $c+k$ into $c+k^{\prime}$
+(since firing all vertices in $\ell$ transforms $k$ into $k^{\prime}$). Hence,
+we have found a legal sequence $\ell$ for $c+k$ such that firing all vertices
+in $\ell$ (one after the other) transforms $c+k$ into $c+k^{\prime}$. Hence,
+such a legal sequence $\ell$ exists. In other words, $c+k\overset{\ast
+}{\rightarrow}c+k^{\prime}$ (by the definition of the relation $\overset{\ast
+}{\rightarrow}$). This proves Proposition \ref{prop.firearrow.1} \textbf{(b)}.
+\end{proof}
+
+Similar facts hold for $q$-stabilization:
+
+\begin{definition}
+\label{def.firearrow-q}Let $q$ be a vertex of $D$. If $k$ and $k^{\prime}$ are
+two configurations on $D$, then $k\underset{q}{\overset{\ast}{\rightarrow}%
+}k^{\prime}$ shall mean that there exists a $q$-legal sequence $\ell$ for $k$
+such that firing all vertices in $\ell$ (one after the other) transforms $k$
+into $k^{\prime}$. Thus, we have defined a binary relation
+$\underset{q}{\overset{\ast}{\rightarrow}}$ on the set of all configurations
+of $D$.
+\end{definition}
+
+\begin{proposition}
+\label{prop.firearrow-q.1}Let $q$ be a vertex of $D$.
+
+\textbf{(a)} The binary relation $\underset{q}{\overset{\ast}{\rightarrow}}$
+is reflexive (i.e., each configuration $k$ satisfies
+$k\underset{q}{\overset{\ast}{\rightarrow}}k$) and transitive (i.e., every
+three configurations $k_{1}$, $k_{2}$ and $k_{3}$ satisfying $k_{1}%
+\underset{q}{\overset{\ast}{\rightarrow}}k_{2}$ and $k_{2}%
+\underset{q}{\overset{\ast}{\rightarrow}}k_{3}$ satisfy $k_{1}%
+\underset{q}{\overset{\ast}{\rightarrow}}k_{3}$).
+
+\textbf{(b)} If $c$, $k$ and $k^{\prime}$ are three configurations satisfying
+$k\underset{q}{\overset{\ast}{\rightarrow}}k^{\prime}$, then
+$c+k\underset{q}{\overset{\ast}{\rightarrow}}c+k^{\prime}$.
+\end{proposition}
+
+\begin{proof}
+[Proof of Proposition \ref{prop.firearrow-q.1} (sketched).]Analogous to the
+proof of Proposition \ref{prop.firearrow.1}.
+\end{proof}
+
+\begin{proof}
+[Hints to Exercise \ref{exe.chip.examples}.]\textbf{(a)} We shall write each
+configuration $f$ on $D$ as the triple $\left(  f\left(  u\right)  ,f\left(
+v\right)  ,f\left(  q\right)  \right)  $. Thus, $g_{k}=\left(  k,0,0\right)  $.
+
+For each $h\in\left\{  0,1,\ldots,k\right\}  $, define a configuration $z_{h}$
+by $z_{h}=\left(  k-h,0,h\right)  $.
+
+Now, for each $h\in\left\{  0,1,\ldots,k-1\right\}  $, we have%
+\[
+z_{h}\underset{q}{\overset{\ast}{\rightarrow}}z_{h+1}%
+\]
+\footnote{\textit{Proof.} Let $h\in\left\{  0,1,\ldots,k-1\right\}  $. The
+sequence $\left(  u,v\right)  $ is $q$-legal for $z_{h}$, and firing all
+vertices in this sequence transforms $z_{h}$ into $z_{h+1}$ (because this
+firing process looks as follows:%
+\[
+z_{h}=\left(  k-h,0,h\right)  \overset{\text{fire }u}{\longrightarrow}\left(
+k-h-1,1,h\right)  \overset{\text{fire }v}{\longrightarrow}\left(
+k-h-1,0,h+1\right)  =\left(  k-\left(  h+1\right)  ,0,h+1\right)  =z_{h+1}%
+\]
+). Hence, $z_{h}\underset{q}{\overset{\ast}{\rightarrow}}z_{h+1}$.}. Hence,%
+\[
+z_{0}\underset{q}{\overset{\ast}{\rightarrow}}z_{1}\underset{q}{\overset{\ast
+}{\rightarrow}}z_{2}\underset{q}{\overset{\ast}{\rightarrow}}z_{3}%
+\underset{q}{\overset{\ast}{\rightarrow}}\cdots\underset{q}{\overset{\ast
+}{\rightarrow}}z_{k-1}\underset{q}{\overset{\ast}{\rightarrow}}z_{k}.
+\]
+Since the relation $\underset{q}{\overset{\ast}{\rightarrow}}$ is transitive,
+we thus have $z_{0}\underset{q}{\overset{\ast}{\rightarrow}}z_{k}$. In other
+words, $g_{k}\underset{q}{\overset{\ast}{\rightarrow}}\left(  0,0,k\right)  $
+(since $z_{0}=\left(  k-0,0,0\right)  =\left(  k,0,0\right)  =g_{k}$ and
+$z_{k}=\left(  k-k,0,k\right)  =\left(  0,0,k\right)  $). Since the
+configuration $\left(  0,0,k\right)  $ is $q$-stable, this shows that $\left(
+0,0,k\right)  $ is the $q$-stabilization of $g_{k}$.
+
+\textbf{(b)} We shall write each configuration $f$ on $D$ as the triple
+$\left(  f\left(  u\right)  ,f\left(  v\right)  ,f\left(  q\right)  \right)
+$. Thus, $g_{k}=\left(  k,0,0\right)  $.
+
+For each $h\in\left\{  0,1,\ldots,k\right\}  $, define a configuration $z_{h}$
+by $z_{h}=\left(  k-h,0,h\right)  $.
+
+Now, for each $h\in\left\{  0,1,\ldots,k-2\right\}  $, we have%
+\[
+z_{h}\underset{q}{\overset{\ast}{\rightarrow}}z_{h+1}%
+\]
+\footnote{\textit{Proof.} Let $h\in\left\{  0,1,\ldots,k-2\right\}  $. The
+sequence $\left(  u,u,v\right)  $ is $q$-legal for $z_{h}$, and firing all
+vertices in this sequence transforms $z_{h}$ into $z_{h+1}$ (because this
+firing process looks as follows:%
+\begin{align*}
+&  z_{h}=\left(  k-h,0,h\right)  \overset{\text{fire }u}{\longrightarrow
+}\left(  k-h-1,1,h\right)  \overset{\text{fire }u}{\longrightarrow}\left(
+k-h-2,2,h\right) \\
+&  \overset{\text{fire }v}{\longrightarrow}\left(  k-h-1,0,h+1\right)
+=\left(  k-\left(  h+1\right)  ,0,h+1\right)  =z_{h+1}%
+\end{align*}
+). Hence, $z_{h}\underset{q}{\overset{\ast}{\rightarrow}}z_{h+1}$.}. Hence,%
+\[
+z_{0}\underset{q}{\overset{\ast}{\rightarrow}}z_{1}\underset{q}{\overset{\ast
+}{\rightarrow}}z_{2}\underset{q}{\overset{\ast}{\rightarrow}}z_{3}%
+\underset{q}{\overset{\ast}{\rightarrow}}\cdots\underset{q}{\overset{\ast
+}{\rightarrow}}z_{k-2}\underset{q}{\overset{\ast}{\rightarrow}}z_{k-1}.
+\]
+\footnote{This chain of relations can consist of a single configuration (and
+$0$ relation signs) when $k=1$. There is nothing wrong about this!} Since the
+relation $\underset{q}{\overset{\ast}{\rightarrow}}$ is transitive and
+reflexive, we thus have $z_{0}\underset{q}{\overset{\ast}{\rightarrow}}%
+z_{k-1}$. In other words, $g_{k}\underset{q}{\overset{\ast}{\rightarrow}%
+}\left(  1,0,k-1\right)  $ (since $z_{0}=\left(  k-0,0,0\right)  =\left(
+k,0,0\right)  =g_{k}$ and $z_{k-1}=\left(  k-\left(  k-1\right)
+,0,k-1\right)  =\left(  1,0,k-1\right)  $).
+
+Combining this with $\left(  1,0,k-1\right)  \underset{q}{\overset{\ast
+}{\rightarrow}}\left(  0,1,k-1\right)  $ (because firing the legal sequence
+$\left(  u\right)  $ transforms the configuration $\left(  1,0,k-1\right)  $
+into $\left(  0,1,k-1\right)  $), we obtain $g_{k}\underset{q}{\overset{\ast
+}{\rightarrow}}\left(  0,1,k-1\right)  $. Since the configuration $\left(
+0,1,k-1\right)  $ is $q$-stable, this shows that $\left(  0,1,k-1\right)  $ is
+the $q$-stabilization of $g_{k}$.
+
+\textbf{(c)} We shall write each configuration $f$ on $D$ as the $4$-tuple
+$\left(  f\left(  u\right)  ,f\left(  v\right)  ,f\left(  w\right)  ,f\left(
+q\right)  \right)  $. Thus, $f_{k}=\left(  k,k,k,k\right)  $.
+
+For each $h\in\left\{  0,1,\ldots,k\right\}  $, define a configuration $z_{h}$
+by $z_{h}=\left(  k-h,k-h,k-h,k+3h\right)  $.
+
+Now, for each $h\in\left\{  0,1,\ldots,k-3\right\}  $, we have%
+\[
+z_{h}\underset{q}{\overset{\ast}{\rightarrow}}z_{h+1}%
+\]
+\footnote{\textit{Proof.} Let $h\in\left\{  0,1,\ldots,k-3\right\}  $. The
+sequence $\left(  u,v,w\right)  $ is $q$-legal for $z_{h}$, and firing all
+vertices in this sequence transforms $z_{h}$ into $z_{h+1}$ (because this
+firing process looks as follows:%
+\begin{align*}
+z_{h}  &  =\left(  k-h,k-h,k-h,k+3h\right) \\
+&  \overset{\text{fire }u}{\longrightarrow}\left(
+k-h-3,k-h+1,k-h+1,k+3h+1\right)  \overset{\text{fire }v}{\longrightarrow
+}\left(  k-h-2,k-h-2,k-h+2,k+3h+2\right) \\
+&  \overset{\text{fire }w}{\longrightarrow}\left(
+k-h-1,k-h-1,k-h-1,k+3h+3\right) \\
+&  =\left(  k-\left(  h+1\right)  ,k-\left(  h+1\right)  ,k-\left(
+h+1\right)  ,k+3\left(  h+1\right)  \right)  =z_{h+1}%
+\end{align*}
+). Hence, $z_{h}\underset{q}{\overset{\ast}{\rightarrow}}z_{h+1}$.}. Hence,%
+\[
+z_{0}\underset{q}{\overset{\ast}{\rightarrow}}z_{1}\underset{q}{\overset{\ast
+}{\rightarrow}}z_{2}\underset{q}{\overset{\ast}{\rightarrow}}z_{3}%
+\underset{q}{\overset{\ast}{\rightarrow}}\cdots\underset{q}{\overset{\ast
+}{\rightarrow}}z_{k-3}\underset{q}{\overset{\ast}{\rightarrow}}z_{k-2}.
+\]
+\footnote{This chain of relations can consist of a single configuration (and
+$0$ relation signs) when $k=2$. There is nothing wrong about this!} Since the
+relation $\underset{q}{\overset{\ast}{\rightarrow}}$ is transitive and
+reflexive, we thus have $z_{0}\underset{q}{\overset{\ast}{\rightarrow}}%
+z_{k-2}$. In other words, $f_{k}\underset{q}{\overset{\ast}{\rightarrow}%
+}\left(  2,2,2,4k-6\right)  $ (since $z_{0}=\left(  k-0,k-0,k-0,k+3\cdot
+0\right)  =\left(  k,k,k,k\right)  =f_{k}$ and $z_{k-2}=\left(  k-\left(
+k-2\right)  ,k-\left(  k-2\right)  ,k-\left(  k-2\right)  ,k+3\left(
+k-2\right)  \right)  =\left(  2,2,2,4k-6\right)  $)). Since the configuration
+$\left(  2,2,2,4k-6\right)  $ is $q$-stable, this shows that $\left(
+2,2,2,4k-6\right)  $ is the $q$-stabilization of $f_{k}$.
+\end{proof}
+
+\subsection{Exercise \ref{exe.chip.adj-cycles}: a lower bound
+on the degree of an infinitary configuration}
+
+\subsubsection{The exercise}
+
+We shall use the notation
+$\operatorname{s}\tup{a}$ for the source of an arc
+$a \in A$.
+We shall also the notation
+$\operatorname{t}\tup{a}$ for the target of an arc
+$a \in A$.
+
+\begin{exercise} \label{exe.chip.adj-cycles}
+Assume that the multidigraph $D$ is strongly connected
+and satisfies $\abs{V} > 1$.
+Let $f : V \to \NN$ be an infinitary configuration.
+
+\textbf{(a)} Prove that $D$ cannot have more than
+$\sum f$ vertex-disjoint cycles.
+(A set of cycles is said to be \textit{vertex-disjoint}
+if no two distinct cycles in the set have a vertex in
+common.)
+
+\textbf{(b)} Prove that $D$ cannot have more than
+$\sum f$ arc-disjoint cycles.
+(A set of cycles is said to be \textit{arc-disjoint}
+if no two distinct cycles in the set have an arc in
+common.)
+\end{exercise}
+
+Exercise~\ref{exe.chip.adj-cycles} \textbf{(b)} is
+\cite[Theorem 2.2]{BjoLov92}, but the proof given there
+is vague and unrigorous.
+
+\subsubsection{Solution to part \textbf{(a)}}
+
+We shall first solve Exercise \ref{exe.chip.adj-cycles} \textbf{(a)}.
+First, let us introduce a simple notation:
+
+\begin{definition}
+\label{def.chip.cycle-non-void}Let $g:V\rightarrow\mathbb{N}$ be a
+configuration. Let $c$ be a cycle of $D$. We say that the cycle $c$ is
+\textit{non-void} in $g$ if and only if there exists at least one vertex $v$
+on $c$ satisfying $g\left(  v\right)  \geq1$. (In other words, the cycle $c$
+is non-void in $g$ if and only if at least one vertex of $c$ has at least one
+chip in $g$.)
+\end{definition}
+
+In the following lemma, we shall use the notation from Definition
+\ref{def.firearrow}.
+
+\begin{lemma}
+\label{lem.chip.adj-cycles.cycles-preserve}Let $g:V\rightarrow\mathbb{N}$ and
+$g^{\prime}:V\rightarrow\mathbb{N}$ be two configurations such that
+$g\overset{\ast}{\rightarrow}g^{\prime}$. Let $c$ be a cycle of $D$ such that
+$c$ is non-void in $g$. Then, $c$ is non-void in $g^{\prime}$.
+\end{lemma}
+
+\begin{proof}
+[Proof of Lemma \ref{lem.chip.adj-cycles.cycles-preserve} (sketched).]We must
+merely show that whenever we fire a vertex $w$ in $g$, the cycle $c$ remains
+non-void. But this is easy:
+
+We know that there exists at least one vertex $v$ on $c$ satisfying $g\left(
+v\right)  \geq1$ (since $c$ is non-void in $g$). Consider this $v$. Now:
+
+\begin{itemize}
+\item If $w=v$, then the vertex that follows $v$ on the cycle $c$ gains at
+least one chip when we fire $w$; thus, the cycle $c$ remains non-void in this case.
+
+\item If $w\neq v$, then the vertex $v$ does not lose any chips when we fire
+$w$; thus, the cycle $c$ remains non-void in this case as well.
+\end{itemize}
+
+This concludes the proof of Lemma \ref{lem.chip.adj-cycles.cycles-preserve}.
+\end{proof}
+
+\begin{proof}
+[Hints to Exercise \ref{exe.chip.adj-cycles}.]\textbf{(a)}
+Let $h=\sum f$. Thus, we must prove that $D$ cannot have more than $h$
+vertex-disjoint cycles.
+
+The configuration
+$f$ is infinitary. Thus, there exist arbitrarily long legal sequences for $f$.
+In particular, there exists a legal sequence $\ell=\left(  \ell_{1},\ell
+_{2},\ldots,\ell_{k}\right)  $ for $f$ of length $k>\left(  n-1\right)
+\left(  \dfrac{h^{n}-1}{h-1}-1\right)  $. Consider this $\ell$.
+
+Each vertex of $D$ appears at least once in the sequence $\ell$%
+\ \ \ \ \footnote{\textit{Proof.} Let $q$ be a vertex of $D$. We must show
+that $q$ appears at least once in the sequence $\ell$.
+\par
+For each vertex $u\in V$, there exists a path from $u$ to $q$ (since $D$ is
+strongly connected). Hence, Proposition \ref{prop.chip.leg-everyone-fires}
+shows that $q$ appears at least once in the sequence $\ell$.}.
+
+Let $f^{\prime}$ be the configuration obtained from $f$ by firing the vertices
+in $\ell$ (one after the other). Each cycle of $D$ is non-void in $f^{\prime}%
+$\ \ \ \ \footnote{\textit{Proof.} Let $c$ be a cycle of $D$. We must then
+show that $c$ is non-void in $f^{\prime}$.
+\par
+For each $i\in\left\{  0,1,\ldots,k\right\}  $, we define $f_{i}$ to be the
+configuration obtained from $f$ by firing the vertices $\ell_{1},\ell
+_{2},\ldots,\ell_{i}$ (in this order). (This is indeed a configuration, since
+the sequence $\ell$ is legal.) Thus, $f_{0}\overset{\ast}{\rightarrow}%
+f_{1}\overset{\ast}{\rightarrow}\cdots\overset{\ast}{\rightarrow}f_{k}$.
+Notice that $f_{0}=f$ and $f_{k}=f^{\prime}$ (by the definition of $f^{\prime
+}$).
+\par
+Pick a vertex $v$ on the cycle $c$. Then, $v$ appears at least once in the
+sequence $\ell$ (since each vertex of $D$ appears at least once in the
+sequence $\ell$). In other words, there exists some $i\in\left\{
+1,2,\ldots,k\right\}  $ satisfying $\ell_{i}=v$. Consider this $i$.
+\par
+The vertex $\ell_{i}$ is active in the configuration $f_{i-1}$ (because the
+configuration $f_{i}$ is obtained by firing $\ell_{i}$ from the configuration
+$f_{i-1}$). In other words, $f_{i-1}\left(  \ell_{i}\right)  \geq\deg
+^{-}\left(  \ell_{i}\right)  \geq1$ (since $D$ is strongly connected, but
+$\left\vert V\right\vert >1$). In other words, $f_{i-1}\left(  v\right)
+\geq1$ (since $\ell_{i}=v$). Thus, the cycle $c$ is non-void in $f_{i-1}$. But
+$f_{i-1}\overset{\ast}{\rightarrow}f_{k}$ (since $f_{0}\overset{\ast
+}{\rightarrow}f_{1}\overset{\ast}{\rightarrow}\cdots\overset{\ast
+}{\rightarrow}f_{k}$, and since the relation $\overset{\ast}{\rightarrow}$ is
+transitive). Hence, the cycle $c$ is non-void in $f_{k}$ (by Lemma
+\ref{lem.chip.adj-cycles.cycles-preserve}, applied to $g=f_{i-1}$ and
+$g^{\prime}=f_{k}$). In other words, the cycle $c$ is non-void in $f^{\prime}$
+(since $f_{k}=f^{\prime}$). Qed.}.
+
+Recall that we must prove that $D$ cannot have more than $h$
+vertex-disjoint cycles.
+
+Assume the contrary. Thus, $D$ has more than $h$ vertex-disjoint cycles. In
+other words, there exist $h+1$ vertex-disjoint cycles $c_{1},c_{2}%
+,\ldots,c_{h+1}$. Consider these cycles $c_{1},c_{2},\ldots,c_{h+1}$. All
+these cycles are non-void in $f^{\prime}$ (since each cycle of $D$ is non-void
+in $f^{\prime}$), and of course are vertex-disjoint. Thus, the configuration
+$f^{\prime}$ has $h+1$ vertex-disjoint non-void cycles. Thus, it has a chip on
+each of these cycles. Consequently, it has at least $h+1$ chips. In other
+words, $\sum f^{\prime}\geq h+1$.
+
+But $f^{\prime}$ is obtained from $f$ by firing vertices. Hence, $\sum
+f^{\prime}=\sum f$ (since firing vertices does not change the total number of
+chips). Thus, $\sum f=\sum f^{\prime}\geq h+1$, which contradicts $\sum
+f=h<h+1$. This contradiction proves that our assumption was wrong, qed.
+\end{proof}
+
+\subsubsection{Solution to part \textbf{(b)}}
+
+Our next goal is to solve Exercise \ref{exe.chip.adj-cycles} \textbf{(b)}.
+Our solution is going to be a rigorous version of
+\cite[proof of Theorem 2.2]{BjoLov92}.\footnote{This is one of
+  those cases where
+  making a proof rigorous is difficult and makes the proof
+  much longer.}
+We first need to prepare by introducing notations and showing lemmas.
+
+We begin by introducing some notations:
+
+\begin{definition}
+Let $f:V\rightarrow\mathbb{Z}$ and $g:V\rightarrow\mathbb{Z}$ be two
+$\mathbb{Z}$-configurations on a loopless multidigraph $D=\left(
+V,A,\phi\right)  $. Then, we say that $f\geq g$ if and only if each $v\in V$
+satisfies $f\left(  v\right)  \geq g\left(  v\right)  $.
+\end{definition}
+
+Thus, a $\mathbb{Z}$-configuration $f:V\rightarrow\mathbb{Z}$ is a
+configuration if and only if $f\geq0$ (where $0$ means the \textquotedblleft
+zero configuration\textquotedblright\ $0:V\rightarrow\mathbb{Z}$).
+
+\begin{definition}
+Let $v\in V$ be a vertex of a loopless multidigraph $D=\left(  V,A,\phi
+\right)  $. Then, a configuration $\delta_{v}:V\rightarrow\mathbb{N}$ is
+defined by setting
+\[
+\delta_{v}\left(  w\right)  =%
+\begin{cases}
+1, & \text{if }w=v;\\
+0, & \text{if }w\neq v
+\end{cases}
+\qquad\text{ for all }w\in V.
+\]
+(Roughly speaking, $\delta_{v}$ is the configuration having $1$ chip at vertex
+$v$ and no further chips.)
+\end{definition}
+
+Thus, each $\mathbb{Z}$-configuration $f:V\rightarrow\mathbb{Z}$ satisfies
+$f=\sum_{v\in V}f\left(  v\right)  \delta_{v}$. Notice that $\sum\delta_{v}=1$
+for each $v\in V$.
+
+\begin{definition}
+\label{def.chip.adj-cycles.K-captured}Consider a loopless multidigraph
+$D=\left(  V,A,\phi\right)  $.
+
+\textbf{(a)} If $c$ is a cycle of $D$, then $\operatorname*{V}\left(
+c\right)  $ shall mean the set of all vertices on $c$.
+
+\textbf{(b)} Let $K$ be a set of cycles of $D$. Let $f:V\rightarrow\mathbb{Z}$
+be a $\mathbb{Z}$-configuration on $D$. We say that $f$ is $K$%
+\textit{-captured} if and only if we can choose a vertex $v_{c}\in
+\operatorname*{V}\left(  c\right)  $ for each cycle $c\in K$ such that
+$f\geq\sum_{c\in K}\delta_{v_{c}}$.
+\end{definition}
+
+The notion of \textquotedblleft$K$-captured\textquotedblright\ $\mathbb{Z}%
+$-configurations is somewhat subtle. Intuitively speaking, a $\mathbb{Z}%
+$-configuration $f$ is $K$-captured if and only if (pretending that the chips
+in $f$ are distinguishable) we can assign to each cycle $c\in K$ a specific
+chip in $f$ that lies on a vertex of $c$, without having to assign the same
+chip to two different cycles. Notice that the vertices $v_{c}$ in Definition
+\ref{def.chip.adj-cycles.K-captured} \textbf{(b)} need not be distinct.
+(Intuitively speaking, this means that the chips assigned to different cycles
+may lie on the same vertices -- but they must not be the same chip.)
+
+We notice that if a $\mathbb{Z}$-configuration $f:V\rightarrow\mathbb{Z}$ is
+$K$-captured for some set $K$ of cycles of $D$, then $f$ is a configuration
+(since the vertices $v_{c}$ from Definition
+\ref{def.chip.adj-cycles.K-captured} \textbf{(b)} satisfy $f\geq\sum_{c\in
+K}\delta_{v_{c}}\geq0$). Also, we notice that a $\mathbb{Z}$-configuration
+$f:V\rightarrow\mathbb{Z}$ is $\varnothing$-captured if and only if $f$ is a configuration.
+
+\begin{lemma}
+\label{lem.chip.adj-cycles.capture-size}Let $f:V\rightarrow\mathbb{Z}$ be a
+configuration on a loopless multidigraph $D=\left(  V,A,\phi\right)  $. Let
+$K\subseteq C$ be such that $f$ is $K$-captured. Then, $\sum f\geq\left\vert
+K\right\vert $.
+\end{lemma}
+
+\begin{proof}
+[Proof of Lemma \ref{lem.chip.adj-cycles.capture-size}.] We know that $f$ is
+$K$-captured. In other words, we can choose a vertex $v_{c}\in
+\operatorname*{V}\left(  c\right)  $ for each cycle $c\in K$ such that
+$f\geq\sum_{c\in K}\delta_{v_{c}}$. Consider these vertices $v_{c}$.
+
+Now,%
+\begin{align*}
+\sum f  & =\sum_{p\in V}\underbrace{f\left(  p\right)  }_{\substack{\geq
+\left(  \sum_{c\in K}\delta_{v_{c}}\right)  \left(  p\right)  \\\text{(since
+}f\geq\sum_{c\in K}\delta_{v_{c}}\text{)}}}\geq\sum_{p\in V}\left(  \sum_{c\in
+K}\delta_{v_{c}}\right)  \left(  p\right)  =\sum_{p\in V}\sum_{c\in K}%
+\delta_{v_{c}}\left(  p\right)  \\
+& =\sum_{c\in K}\underbrace{\sum_{p\in V}\delta_{v_{c}}\left(  p\right)
+}_{\substack{=\sum\delta_{v_{c}}=1\\\text{(since }\sum\delta_{v}=1\text{ for
+each }v\in V\text{)}}}=\sum_{c\in K}1=\left\vert K\right\vert .
+\end{align*}
+This proves Lemma \ref{lem.chip.adj-cycles.capture-size}.
+\end{proof}
+
+The following lemma will be crucial:
+
+\begin{lemma}
+\label{lem.chip.adj-cycles.capture}Let $f:V\rightarrow\mathbb{Z}$ be a
+configuration on a loopless multidigraph $D=\left(  V,A,\phi\right)  $. Let
+$w\in V$ be a vertex such that $w$ is active in $f$. Let $C$ be a set of
+arc-disjoint cycles of $D$. Let $C_{w}=\left\{  c\in C\ \mid\ w\in
+\operatorname*{V}\left(  c\right)  \right\}  $. Let $K\subseteq C$ be such
+that $f$ is $K$-captured. Then, the configuration $f-\Delta w$ is $K\cup
+C_{w}$-captured.
+\end{lemma}
+
+\begin{proof}
+[Proof of Lemma \ref{lem.chip.adj-cycles.capture}.] We know that $f$ is
+$K$-captured. In other words, we can choose a vertex $v_{c}\in
+\operatorname*{V}\left(  c\right)  $ for each cycle $c\in K$ such that
+$f\geq\sum_{c\in K}\delta_{v_{c}}$. Consider these vertices $v_{c}$.
+
+Notice that $K\cup C_{w}\subseteq C$ (since $K\subseteq C$ and $C_{w}\subseteq
+C$).
+
+\begin{noncompile}
+Let $L=\left\{  c\in K\ \mid\ v_{c}\neq w\right\}  $ and $M=\left\{  c\in
+K\ \mid\ v_{c}=w\right\}  $. Notice that $M\subseteq C_{w}$%
+\ \ \ \ \footnote{\textit{Proof.} Let $c\in M$. Thus, $v_{c}=w$ (by the
+definition of $M$) and thus $w=v_{c}\in\operatorname*{V}\left(  c\right)  $.
+Hence, $c\in C_{w}$ (by the definition of $C_{w}$). Since we have proven this
+for each $c\in M$, we thus conclude that $M\subseteq C_{w}$.}.
+\end{noncompile}
+
+For each $c\in K\cup C_{w}$, we define a vertex $u_{c}\in\operatorname*{V}%
+\left(  c\right)  $ by%
+\[
+u_{c}=%
+\begin{cases}
+v_{c}, & \text{if }w\notin\operatorname*{V}\left(  c\right)  ;\\
+\left(  \text{the vertex succeeding }w\text{ on the cycle }c\right)  , &
+\text{if }w\in\operatorname*{V}\left(  c\right)
+\end{cases}
+.
+\]
+(This definition makes sense, because $v_{c}$ is a well-defined element of
+$\operatorname*{V}\left(  c\right)  $ whenever $w\notin\operatorname*{V}%
+\left(  c\right)  $\ \ \ \ \footnote{\textit{Proof.} Assume that
+$w\notin\operatorname*{V}\left(  c\right)  $. Then, $c\notin C_{w}$ (by the
+definition of $C_{w}$). Combining this with $c\in K\cup C_{w}$, we obtain
+$c\in\left(  K\cup C_{w}\right)  \setminus C_{w}\subseteq K$. Hence, $v_{c}$
+is a well-defined element of $\operatorname*{V}\left(  c\right)  $.}.) Notice
+that%
+\begin{equation}
+w\neq u_{c}\ \ \ \ \ \ \ \ \ \ \text{for each }c\in K\cup C_{w}%
+\label{pf.lem.chip.adj-cycles.capture.ucneq}%
+\end{equation}
+(because if we had $w=u_{c}$, then we would have $w=u_{c}\in\operatorname*{V}%
+\left(  c\right)  $, whence the definition of $u_{c}$ would yield
+$u_{c}=\left(  \text{the vertex succeeding }w\text{ on the cycle }c\right)
+\neq w=u_{c}$, which is absurd).
+
+Now, we claim that%
+\begin{equation}
+\left(  f-\Delta w\right)  \left(  p\right)  \geq\left(  \sum_{c\in K\cup
+C_{w}}\delta_{u_{c}}\right)  \left(  p\right)  \ \ \ \ \ \ \ \ \ \ \text{for
+every }p\in V.\label{pf.lem.chip.adj-cycles.capture.ineq}%
+\end{equation}
+
+
+[\textit{Proof of (\ref{pf.lem.chip.adj-cycles.capture.ineq}):} Let $p\in V$.
+We must prove the inequality (\ref{pf.lem.chip.adj-cycles.capture.ineq}).
+
+Notice that%
+\begin{align}
+\left(  \sum_{c\in K\cup C_{w}}\delta_{u_{c}}\right)  \left(  p\right)    &
+=\sum_{c\in K\cup C_{w}}\underbrace{\delta_{u_{c}}\left(  p\right)  }_{=%
+\begin{cases}
+1, & \text{if }p=u_{c};\\
+0, & \text{if }p\neq u_{c}%
+\end{cases}
+}=\sum_{c\in K\cup C_{w}}%
+\begin{cases}
+1, & \text{if }p=u_{c};\\
+0, & \text{if }p\neq u_{c}%
+\end{cases}
+\nonumber\\
+& =\left\vert \left\{  c\in K\cup C_{w}\ \mid\ p=u_{c}\right\}  \right\vert
+.\label{pf.lem.chip.adj-cycles.capture.ineq.rhs}%
+\end{align}
+
+
+We are in one of the following two cases:
+
+\begin{statement}
+\textit{Case 1:} We have $p=w$.
+\end{statement}
+
+\begin{statement}
+\textit{Case 2:} We have $p\neq w$.
+\end{statement}
+
+First, let us consider Case 1. In this case, we have $p=w$.
+
+\begin{noncompile}
+Hence, $\left(  \Delta w\right)  \left(  p\right)  =\left(  \Delta w\right)
+\left(  w\right)  =\deg^{+}w$ (by the definition of $\Delta w$).
+\end{noncompile}
+
+On the other hand, (\ref{pf.lem.chip.adj-cycles.capture.ineq}) becomes%
+\begin{align*}
+\left(  \sum_{c\in K\cup C_{w}}\delta_{u_{c}}\right)  \left(  p\right)    &
+=\left\vert \left\{  c\in K\cup C_{w}\ \mid\ \underbrace{p}_{=w}%
+=u_{c}\right\}  \right\vert =\left\vert \underbrace{\left\{  c\in K\cup
+C_{w}\ \mid\ w=u_{c}\right\}  }_{\substack{=\varnothing\\\text{(by
+(\ref{pf.lem.chip.adj-cycles.capture.ucneq}))}}}\right\vert \\
+& =\left\vert \varnothing\right\vert =0.
+\end{align*}
+But the vertex $w$ is active in $f$. Hence, $\left(  f-\Delta w\right)
+\left(  w\right)  \geq0$. Hence, $\left(  f-\Delta w\right)  \left(
+\underbrace{p}_{=w}\right)  =\left(  f-\Delta w\right)  \left(  w\right)
+\geq0=\left(  \sum_{c\in K\cup C_{w}}\delta_{u_{c}}\right)  \left(  p\right)
+$. Thus, (\ref{pf.lem.chip.adj-cycles.capture.ineq}) is proven in Case 1.
+
+Let us now consider Case 2. In this case, we have $p\neq w$. Hence, the
+definition of $\Delta w$ yields $\left(  \Delta w\right)  \left(  p\right)
+=-a_{w,p}$, where $a_{w,p}$ denotes the number of all arcs of $D$ having
+source $w$ and target $p$.
+
+Recall that $f\geq\sum_{c\in K}\delta_{v_{c}}$. Hence,%
+\begin{align}
+f\left(  p\right)    & \geq\left(  \sum_{c\in K}\delta_{v_{c}}\right)  \left(
+p\right)  =\sum_{c\in K}\underbrace{\delta_{v_{c}}\left(  p\right)  }_{=%
+\begin{cases}
+1, & \text{if }p=v_{c};\\
+0, & \text{if }p\neq v_{c}%
+\end{cases}
+}=\sum_{c\in K}%
+\begin{cases}
+1, & \text{if }p=v_{c};\\
+0, & \text{if }p\neq v_{c}%
+\end{cases}
+\nonumber\\
+& =\left\vert \left\{  c\in K\ \mid\ p=v_{c}\right\}  \right\vert
+.\label{pf.lem.chip.adj-cycles.capture.ineq.c2.1}%
+\end{align}
+
+
+Let $Q=\left\{  c\in K\ \mid\ p=v_{c}\right\}  $. Thus,
+(\ref{pf.lem.chip.adj-cycles.capture.ineq.c2.1}) rewrites as
+\begin{equation}
+f\left(  p\right)  \geq\left\vert Q\right\vert
+.\label{pf.lem.chip.adj-cycles.capture.ineq.c2.1b}%
+\end{equation}
+
+
+On the other hand, let $R=\left\{  c\in K\cup C_{w}\ \mid\ p=u_{c}\right\}
+\setminus Q$. Then, the sets $Q$ and $R$ are disjoint, and satisfy $\left\{
+c\in K\cup C_{w}\ \mid\ p=u_{c}\right\}  \subseteq Q\cup R$. Hence,%
+\begin{equation}
+\left\vert \left\{  c\in K\cup C_{w}\ \mid\ p=u_{c}\right\}  \right\vert
+\leq\left\vert Q\cup R\right\vert =\left\vert Q\right\vert +\left\vert
+R\right\vert \label{pf.lem.chip.adj-cycles.capture.ineq.c2.4}%
+\end{equation}
+(since $Q$ and $R$ are disjoint). Moreover, $R\subseteq C$%
+\ \ \ \ \footnote{\textit{Proof.} We have $R=\left\{  c\in K\cup C_{w}%
+\ \mid\ p=u_{c}\right\}  \setminus Q\subseteq\left\{  c\in K\cup C_{w}%
+\ \mid\ p=u_{c}\right\}  \subseteq K\cup C_{w}\subseteq C$.}. Thus, any two
+cycles in $R$ are arc-disjoint\footnote{\textit{Proof.} We have $R\subseteq
+C$. Hence, any two cycles in $R$ are arc-disjoint (since $C$ is a set of
+arc-disjoint cycles).}.
+
+But if $c$ is an element of $R$, then the arc with source $w$ that belongs to
+the cycle $c$ is a well-defined element of $\left\{  \text{arcs of }D\text{
+having source }w\text{ and target }p\right\}  $%
+\ \ \ \ \footnote{\textit{Proof.} Recall that%
+\begin{equation}
+R=\left\{  c\in K\cup C_{w}\ \mid\ p=u_{c}\right\}  \setminus Q=\left\{  c\in
+K\cup C_{w}\ \mid\ p=u_{c}\text{ and }c\notin Q\right\}
+.\label{pf.lem.chip.adj-cycles.capture.ineq.c2.fn3.pf.1}%
+\end{equation}
+\par
+Now, let $c$ be an element of $R$. Thus, $c$ is an element of $K\cup C_{w}$
+satisfying $p=u_{c}$ and $c\notin Q$ (by
+(\ref{pf.lem.chip.adj-cycles.capture.ineq.c2.fn3.pf.1})).
+\par
+Assume (for the sake of contradiction) that $w\notin\operatorname*{V}\left(
+c\right)  $. Hence, $c\notin C_{w}$ (by the definition of $C_{w}$, since $c\in
+K\cup C_{w}\subseteq C$). Combining this with $c\in K\cup C_{w}$, we obtain
+$c\in\left(  K\cup C_{w}\right)  \setminus C_{w}\subseteq K$.
+\par
+But the definition of $u_{c}$ yields $u_{c}=v_{c}$ (since $w\notin%
+\operatorname*{V}\left(  c\right)  $). Thus, $p=u_{c}=v_{c}$. Thus, $c\in K$
+and $p=v_{c}$. Hence, $c\in Q$ (by the definition of $Q$). This contradicts
+$c\notin Q$. This contradiction shows that our assumption (that $w\notin%
+\operatorname*{V}\left(  c\right)  $) was false. Hence, we must have
+$w\in\operatorname*{V}\left(  c\right)  $. In other words, the vertex $w$ lies
+on the cycle $c$. Thus, the arc with source $w$ that belongs to the cycle $c$
+is well-defined.
+\par
+It remains to prove that this arc is an element of $\left\{  \text{arcs of
+}D\text{ having source }w\text{ and target }p\right\}  $. In other words, it
+remains to prove that this arc has source $w$ and target $p$. Since it clearly
+has source $w$, we thus only need to show that it has target $p$.
+\par
+We have $w\in\operatorname*{V}\left(  c\right)  $. The definition of $u_{c}$
+thus yields $u_{c}=\left(  \text{the vertex succeeding }w\text{ on the cycle
+}c\right)  $. Hence, $p=u_{c}=\left(  \text{the vertex succeeding }w\text{ on
+the cycle }c\right)  $. Therefore, the arc with source $w$ that belongs to the
+cycle $c$ has target $p$. This completes our proof.}. Hence, the map%
+\begin{align*}
+R  & \rightarrow\left\{  \text{arcs of }D\text{ having source }w\text{ and
+target }p\right\}  ,\\
+c  & \mapsto\left(  \text{the arc with source }w\text{ that belongs to the
+cycle }c\right)
+\end{align*}
+is well-defined. This map is furthermore injective\footnote{\textit{Proof.}
+This is because any two cycles in $R$ are arc-disjoint.}. Hence,%
+\[
+\left\vert R\right\vert \leq\left\vert \left\{  \text{arcs of }D\text{ having
+source }w\text{ and target }p\right\}  \right\vert =a_{w,p}%
+\]
+(by the definition of $a_{w,p}$). Thus,
+(\ref{pf.lem.chip.adj-cycles.capture.ineq.c2.4}) becomes%
+\[
+\left\vert \left\{  c\in K\cup C_{w}\ \mid\ p=u_{c}\right\}  \right\vert
+\leq\underbrace{\left\vert Q\right\vert }_{\substack{\leq f\left(  p\right)
+\\\text{(by (\ref{pf.lem.chip.adj-cycles.capture.ineq.c2.1b}))}}%
+}+\underbrace{\left\vert R\right\vert }_{\leq a_{w,p}}\leq f\left(  p\right)
++a_{w,p}.
+\]
+Hence,%
+\[
+f\left(  p\right)  +a_{w,p}\geq\left\vert \left\{  c\in K\cup C_{w}%
+\ \mid\ p=u_{c}\right\}  \right\vert =\left(  \sum_{c\in K\cup C_{w}}%
+\delta_{u_{c}}\right)  \left(  p\right)
+\]
+(by (\ref{pf.lem.chip.adj-cycles.capture.ineq.rhs})). Since%
+\[
+\left(  f-\Delta w\right)  \left(  p\right)  =f\left(  p\right)
+-\underbrace{\left(  \Delta w\right)  \left(  p\right)  }_{=-a_{w,p}}=f\left(
+p\right)  +a_{w,p},
+\]
+this rewrites as $\left(  f-\Delta w\right)  \left(  p\right)  \geq\left(
+\sum_{c\in K\cup C_{w}}\delta_{u_{c}}\right)  \left(  p\right)  $. Thus,
+(\ref{pf.lem.chip.adj-cycles.capture.ineq}) is proven in Case 2.
+
+We have now proven (\ref{pf.lem.chip.adj-cycles.capture.ineq}) in each of the
+two Cases 1 and 2. Hence, (\ref{pf.lem.chip.adj-cycles.capture.ineq}) always holds.]
+
+From (\ref{pf.lem.chip.adj-cycles.capture.ineq}), we obtain $f-\Delta
+w\geq\sum_{c\in K\cup C_{w}}\delta_{u_{c}}$. 
+
+Thus, the configuration $f-\Delta w$ is $K\cup C_{w}$-captured (since
+$u_{c}\in\operatorname*{V}\left(  c\right)  $ for each $c\in K\cup C_{w}$).
+This proves Lemma \ref{lem.chip.adj-cycles.capture}.
+\end{proof}
+
+\begin{corollary}
+\label{cor.chip.adj-cycles.captures}Let $f:V\rightarrow\mathbb{Z}$ be a
+configuration on a loopless multidigraph $D=\left(  V,A,\phi\right)  $. Let
+$\left(  \ell_{1},\ell_{2},\ldots,\ell_{k}\right)  $ be a legal sequence for
+$f$. Let $C$ be a set of arc-disjoint cycles of $D$. Let $C_{w}=\left\{  c\in
+C\ \mid\ w\in\operatorname*{V}\left(  c\right)  \right\}  $ for each $w\in
+V$.  Let $K\subseteq C$ be such that $f$ is $K$-captured. Then, the
+configuration $f-\Delta\ell_{1}-\Delta\ell_{2}-\cdots-\Delta\ell_{k}$ is
+$K\cup C_{\ell_{1}}\cup C_{\ell_{2}}\cup\cdots\cup C_{\ell_{k}}$-captured.
+\end{corollary}
+
+\begin{proof}
+[Proof of Corollary \ref{cor.chip.adj-cycles.captures}.] We will show that for
+each $i\in\left\{  0,1,\ldots,k\right\}  $,
+\begin{equation}
+\text{the configuration }f-\Delta\ell_{1}-\Delta\ell_{2}-\cdots-\Delta\ell
+_{i}\text{ is }K\cup C_{\ell_{1}}\cup C_{\ell_{2}}\cup\cdots\cup C_{\ell_{i}%
+}\text{-captured.}\label{pf.cor.chip.adj-cycles.captures.i}%
+\end{equation}
+
+
+[\textit{Proof of (\ref{pf.cor.chip.adj-cycles.captures.i}):} We shall prove
+(\ref{pf.cor.chip.adj-cycles.captures.i}) by induction over $i$:
+
+\textit{Induction base:} If $i=0$, then
+(\ref{pf.cor.chip.adj-cycles.captures.i}) simply states that the configuration
+$f$ is $K$-captured. This is true, because it was an assumption. This
+completes the induction base.
+
+\textit{Induction step:} Let $j\in\left\{  0,1,\ldots,k\right\}  $ be
+positive. Assume that (\ref{pf.cor.chip.adj-cycles.captures.i}) holds for
+$i=j-1$. We must show that (\ref{pf.cor.chip.adj-cycles.captures.i}) holds for
+$i=j$.
+
+We have assumed that (\ref{pf.cor.chip.adj-cycles.captures.i}) holds for
+$i=j-1$. In other words,
+\[
+\text{the configuration }f-\Delta\ell_{1}-\Delta\ell_{2}-\cdots-\Delta
+\ell_{j-1}\text{ is }K\cup C_{\ell_{1}}\cup C_{\ell_{2}}\cup\cdots\cup
+C_{\ell_{j-1}}\text{-captured.}%
+\]
+But the vertex $\ell_{j}$ is active in the configuration $f-\Delta\ell
+_{1}-\Delta\ell_{2}-\cdots-\Delta\ell_{j-1}$ (since the sequence $\left(
+\ell_{1},\ell_{2},\ldots,\ell_{k}\right)  $ is legal for $f$). Hence, Lemma
+\ref{lem.chip.adj-cycles.capture} (applied to $f-\Delta\ell_{1}-\Delta\ell
+_{2}-\cdots-\Delta\ell_{j-1}$, $\ell_{j}$ and $K\cup C_{\ell_{1}}\cup
+C_{\ell_{2}}\cup\cdots\cup C_{\ell_{j-1}}$ instead of $f$, $w$ and $K$) shows
+that the configuration $\left(  f-\Delta\ell_{1}-\Delta\ell_{2}-\cdots
+-\Delta\ell_{j-1}\right)  -\Delta\ell_{j}$ is $\left(  K\cup C_{\ell_{1}}\cup
+C_{\ell_{2}}\cup\cdots\cup C_{\ell_{j-1}}\right)  \cup C_{\ell_{j}}%
+$-captured\footnote{since $K\cup C_{\ell_{1}}\cup C_{\ell_{2}}\cup\cdots\cup
+C_{\ell_{j-1}}\subseteq C$ (since both $K$ and each $C_{w}$ are subsets of
+$C$)}. In other words, the configuration $f-\Delta\ell_{1}-\Delta\ell
+_{2}-\cdots-\Delta\ell_{j}$ is $K\cup C_{\ell_{1}}\cup C_{\ell_{2}}\cup
+\cdots\cup C_{\ell_{j}}$-captured. In other words,
+(\ref{pf.cor.chip.adj-cycles.captures.i}) holds for $i=j$. This completes the
+induction step. Thus, (\ref{pf.cor.chip.adj-cycles.captures.i}) is proven by induction.]
+
+Now, applying (\ref{pf.cor.chip.adj-cycles.captures.i}) to $i=k$, we obtain
+the claim of Corollary \ref{cor.chip.adj-cycles.captures}.
+\end{proof}
+
+\begin{proof}
+[Solution to Exercise \ref{exe.chip.adj-cycles} \textbf{(b)} (sketched).]
+Assume the contrary. Thus, $D$ has more than $\sum f$ arc-disjoint cycles. In
+other words, there exists a set $C$ of arc-disjoint cycles of $D$ such that
+$\left\vert C\right\vert >\sum f$. Consider this $C$.
+
+Set $h=\sum f$. Thus, $\left\vert C\right\vert >\sum f=h$.
+
+Let $C_{w}=\left\{  c\in C\ \mid\ w\in\operatorname*{V}\left(  c\right)
+\right\}  $ for each $w\in V$.
+
+The configuration $f$ is infinitary. Hence, there exist legal sequences (for
+$f$) of arbitrary length. In particular, this shows that there exists a legal
+sequence $\ell=\left(  \ell_{1},\ell_{2},\ldots,\ell_{k}\right)  $ for $f$
+having length $k\geq\dbinom{n+h-1}{n-1}$. Consider such an $\ell$.
+
+Each vertex $q$ of $D$ must appear  at least once in the sequence $\ell
+$\ \ \ \ \footnote{\textit{Proof.} Let $q$ be a vertex of $D$. Then, for each
+vertex $u\in V$, there exists a path from $u$ to $q$ (since the multidigraph
+$D$ is strongly connected). Hence, Exercise \ref{exe.chip.better-bounds}
+\textbf{(b)} shows that $q$ must appear at least once in the sequence $\ell$.
+Qed.}. Thus, $C_{\ell_{1}}\cup C_{\ell_{2}}\cup\cdots\cup C_{\ell_{k}}%
+=C$\ \ \ \ \footnote{\textit{Proof.} Clearly, $C_{w}\subseteq C$ for each
+$w\in V$. Thus, $C_{\ell_{1}}\cup C_{\ell_{2}}\cup\cdots\cup C_{\ell_{k}%
+}\subseteq C$.
+\par
+On the other hand, let $c\in C$. Thus, $c$ is a cycle of $D$. Hence, there
+exists some $v\in\operatorname*{V}\left(  c\right)  $. Consider this $v$.
+Then, $v$ must appear at least once in the sequence $\ell$ (since each vertex
+$q$ of $D$ must appear at least once in the sequence $\ell$). In other words,
+there exists some $i\in\left\{  1,2,\ldots,k\right\}  $ such that $v=\ell_{i}%
+$. Consider this $i$. Now, from $\ell_{i}=v\in\operatorname*{V}\left(
+c\right)  $, we obtain $c\in C_{\ell_{i}}$ (by the definition of $C_{\ell_{i}%
+}$). Therefore, $c\in C_{\ell_{i}}\subseteq C_{\ell_{1}}\cup C_{\ell_{2}}%
+\cup\cdots\cup C_{\ell_{k}}$.
+\par
+Now, forget that we fixed $c$. We thus have proven that $c\in C_{\ell_{1}}\cup
+C_{\ell_{2}}\cup\cdots\cup C_{\ell_{k}}$ for each $c\in C$. In other words,
+$C\subseteq C_{\ell_{1}}\cup C_{\ell_{2}}\cup\cdots\cup C_{\ell_{k}}$.
+Combining this with $C_{\ell_{1}}\cup C_{\ell_{2}}\cup\cdots\cup C_{\ell_{k}%
+}\subseteq C$, we obtain $C_{\ell_{1}}\cup C_{\ell_{2}}\cup\cdots\cup
+C_{\ell_{k}}=C$.}.
+
+But the configuration $f$ is $\varnothing$-captured (since any configuration
+is $\varnothing$-captured). Hence, Corollary
+\ref{cor.chip.adj-cycles.captures} (applied to $K=\varnothing$) shows that the
+configuration $f-\Delta\ell_{1}-\Delta\ell_{2}-\cdots-\Delta\ell_{k}$ is
+$\varnothing\cup C_{\ell_{1}}\cup C_{\ell_{2}}\cup\cdots\cup C_{\ell_{k}}%
+$-captured. In other words, the configuration $f-\Delta\ell_{1}-\Delta\ell
+_{2}-\cdots-\Delta\ell_{k}$ is $C$-captured (since $\varnothing\cup
+C_{\ell_{1}}\cup C_{\ell_{2}}\cup\cdots\cup C_{\ell_{k}}=C_{\ell_{1}}\cup
+C_{\ell_{2}}\cup\cdots\cup C_{\ell_{k}}=C$). Hence, Lemma
+\ref{lem.chip.adj-cycles.capture} (applied to $f-\Delta\ell_{1}-\Delta\ell
+_{2}-\cdots-\Delta\ell_{k}$ and $C$ instead of $f$ and $K$) yields%
+\[
+\sum\left(  f-\Delta\ell_{1}-\Delta\ell_{2}-\cdots-\Delta\ell_{k}\right)
+\geq\left\vert C\right\vert >h.
+\]
+Since%
+\begin{align*}
+& \sum\underbrace{\left(  f-\Delta\ell_{1}-\Delta\ell_{2}-\cdots-\Delta
+\ell_{k}\right)  }_{=f-\sum_{i=1}^{k}\Delta\ell_{i}}\\
+& =\sum\left(  f-\sum_{i=1}^{k}\Delta\ell_{i}\right)  =\sum f-\sum_{i=1}%
+^{k}\underbrace{\sum\Delta\ell_{i}}_{\substack{=0\\\text{(since }\sum\Delta
+v=0\text{ for each }v\in V\text{)}}}=\sum f-\underbrace{\sum_{i=1}^{k}0}%
+_{=0}=\sum f,
+\end{align*}
+this rewrites as $\sum f>h$. This contradicts $h=\sum f$. This contradiction
+completes the solution of Exercise \ref{exe.chip.adj-cycles} \textbf{(b)}.
+\end{proof}
+
+Now that we have solved Exercise \ref{exe.chip.adj-cycles} \textbf{(b)}, we
+can obtain a second solution to Exercise \ref{exe.chip.adj-cycles}
+\textbf{(a)}:
+
+\begin{proof}
+[Second solution to Exercise \ref{exe.chip.adj-cycles} \textbf{(a)} (sketched).]
+Assume the contrary. Thus, $D$ has more than $\sum f$ vertex-disjoint cycles.
+Hence, $D$ has more than $\sum f$ arc-disjoint cycles (since vertex-disjoint
+cycles are automatically arc-disjoint). But this contradicts Exercise
+\ref{exe.chip.adj-cycles} \textbf{(b)}.  This contradiction completes the
+solution of Exercise \ref{exe.chip.adj-cycles} \textbf{(a)}.
+\end{proof}
+
+% Here is an old, INCORRECT hint to Exercise \ref{exe.chip.adj-cycles} \textbf{(b)}:
+%
+% [\textbf{Hint:} Reduce part \textbf{(b)} to part
+% \textbf{(a)} by constructing the following
+% multidigraph $D'$:
+%
+% \begin{itemize}
+% \item The vertices of $D'$ shall be the vertices of
+      % $D$ as well as $\abs{A}$ new vertices.
+      % Namely, we add a new vertex $v_a$ for each
+      % arc $a \in A$ of $D$.
+% \item The arcs of $D'$ are the following:
+      % For each arc $a \in A$ of $D$, we build two
+      % new arcs $a_1$ and $a_2$ with
+      % \begin{align*}
+      % \operatorname{s} \tup{a_1} = \operatorname{s} \tup{a};
+      % &\qquad
+      % \operatorname{t} \tup{a_1} = v_a;
+      % \\
+      % \operatorname{s} \tup{a_2} = v_a;
+      % &\qquad
+      % \operatorname{t} \tup{a_2} = \operatorname{t} \tup{a} .
+      % \end{align*}
+      % The arcs of $D'$ shall be these new arcs $a_1$
+      % and $a_2$ for all $a \in A$ (but not the original
+      % arcs of $D$).
+% \end{itemize}
+%
+% For each configuration $f$ on $D$, construct a
+% configuration $f'$ on $D'$ such that any legal
+% sequence for $f$ can be translated into a (longer)
+% legal sequence for $f'$.]
+
+\subsection{Exercise \ref{exe.chip.assoc}: an associativity
+law for stabilizations}
+
+Recall Definition~\ref{def.chip.stabilization}.
+
+\begin{exercise} \label{exe.chip.assoc}
+Let $f : V \to \NN$, $g : V \to \NN$ and $h : V \to \NN$
+be three configurations such that both configurations
+$f$ and $g + h$ are finitary, and such that the
+configuration $f + \tup{g + h}^\circ$ is also finitary.
+
+Prove the following:
+
+\textbf{(a)} The configurations $f + g$ and $h$ are also
+finitary.
+
+\textbf{(b)} The configurations $f + g + h$ and
+$\tup{f + g}^\circ + h$ are also finitary, and
+satisfy
+\[
+\tup{f + g + h}^\circ
+= \tup{f + \tup{g + h}^\circ}^\circ
+= \tup{\tup{f + g}^\circ + h}^\circ .
+\]
+\end{exercise}
+
+In order to solve Exercise \ref{exe.chip.assoc}, we shall use the notations
+from Definition \ref{def.firearrow}. We also state a few simple lemmas:
+
+\begin{lemma}
+\label{lem.chip.finitary-less}Let $c:V\rightarrow\mathbb{N}$ and
+$d:V\rightarrow\mathbb{N}$ be two configurations such that $c+d$ is finitary.
+Then, $c$ and $d$ are finitary.
+\end{lemma}
+
+\begin{proof}
+[Proof of Lemma \ref{lem.chip.finitary-less} (sketched).]The configuration
+$c+d$ is finitary. Thus, there exists a stabilizing sequence $s$ for $c+d$.
+Consider this $s$.
+
+Firing the vertices in $s$ (one after the other) transforms the configuration
+$c+d$ into a stable $\mathbb{Z}$-configuration $z$ (since $s$ is stabilizing).
+Consider this $z$.
+
+The $\mathbb{Z}$-configuration $z$ is stable. In other words, no vertex of $V$
+is active in $z$. In other words, $z\left(  v\right)  <\deg^{-}v$ for each
+$v\in V$. Hence,%
+\[
+\left(  z-d\right)  \left(  v\right)  =z\left(  v\right)
+-\underbrace{d\left(  v\right)  }_{\geq0}\leq z\left(  v\right)  <\deg^{-}v
+\]
+for each $v\in V$. In other words, no vertex of $V$ is active in $z-d$. In
+other words, the $\mathbb{Z}$-configuration $z-d$ is stable.
+
+But firing the vertices in $s$ (one after the other) transforms the
+configuration $c$ into the $\mathbb{Z}$-configuration $z-d$ (since firing the
+vertices in $s$ (one after the other) transforms the configuration $c+d$ into
+the $\mathbb{Z}$-configuration $z$). Thus, the sequence $s$ is stabilizing for
+$c$ (since the $\mathbb{Z}$-configuration $z-d$ is stable). Hence, there
+exists a stabilizing sequence for $c$. In other words, $c$ is finitary.
+Similarly, $d$ is finitary. This proves Lemma \ref{lem.chip.finitary-less}.
+\end{proof}
+
+\begin{lemma}
+\label{lem.chip.finitary-arrow}Let $c:V\rightarrow\mathbb{N}$ and
+$d:V\rightarrow\mathbb{N}$ be two configurations such that $c\overset{\ast
+}{\rightarrow}d$.
+
+\textbf{(a)} If $c$ is finitary, then $d$ is finitary and satisfies $c^{\circ
+}=d^{\circ}$.
+
+\textbf{(b)} If $d$ is finitary, then $c$ is finitary and satisfies $c^{\circ
+}=d^{\circ}$.
+\end{lemma}
+
+\begin{proof}
+[Proof of Lemma \ref{lem.chip.finitary-arrow} (sketched).]From $c\overset{\ast
+}{\rightarrow}d$, we conclude that there exists a legal sequence $\ell_{1}$
+for $c$ such that firing all vertices in $\ell_{1}$ transforms $c$ into $d$.
+Consider this $\ell_{1}$.
+
+\textbf{(b)} Assume that $d$ is finitary. Hence, the stabilization $d^{\circ}$
+is well-defined, and is a stable configuration (by the definition of
+stabilization). Also, $d^{\circ}$ is obtained from $d$ by firing vertices from
+a legal sequence (by the definition of $d^{\circ}$). Hence, $d\overset{\ast
+}{\rightarrow}d^{\circ}$. From $c\overset{\ast}{\rightarrow}d\overset{\ast
+}{\rightarrow}d^{\circ}$, we obtain $c\overset{\ast}{\rightarrow}d^{\circ}$
+(since the relation $\overset{\ast}{\rightarrow}$ is transitive). Since
+$d^{\circ}$ is stable, this shows that $c$ is finitary, and that $d^{\circ}$
+is the stabilization of $c$.
+
+Now, $c^{\circ}$ is well-defined (since $c$ is finitary) and satisfies
+$d^{\circ}=c^{\circ}$ (since $d^{\circ}$ is the stabilization of $c$). In
+other words, $c^{\circ}=d^{\circ}$. This proves Lemma
+\ref{lem.chip.finitary-arrow} \textbf{(b)}.
+
+\textbf{(a)} Assume that $c$ is finitary.
+
+Let us first show that $d$ is finitary.
+
+Indeed, assume the contrary. Thus, $d$ is infinitary. Hence, there exist
+arbitrarily long legal sequences for $d$. In other words, for each
+$N\in\mathbb{N}$, there exists a legal sequence for $d$ having length $\geq N$.
+
+Fix $N\in\mathbb{N}$. Then, there exists a legal sequence for $d$ having
+length $\geq N$ (as we have just seen). Fix such a legal sequence, and denote
+it by $\ell_{2}$.
+
+Write the sequences $\ell_{1}$ and $\ell_{2}$ as $\ell_{1}=\left(  v_{1}%
+,v_{2},\ldots,v_{p}\right)  $ and $\ell_{2}=\left(  w_{1},w_{2},\ldots
+,w_{q}\right)  $. Let $\ell$ be the sequence $\left(  v_{1},v_{2},\ldots
+,v_{p},w_{1},w_{2},\ldots,w_{q}\right)  $. (This is called the concatenation
+of the sequences $\ell_{1}$ and $\ell_{2}$.) Then, consider the process of
+firing all vertices in $\ell$ (one after the other) in $c$. All the
+$\mathbb{Z}$-configurations obtained during this firing process are
+configurations\footnote{In fact, all the $\mathbb{Z}$-configurations obtained
+during the first $p$ firings are configurations (because $\left(  v_{1}%
+,v_{2},\ldots,v_{p}\right)  =\ell_{1}$ is a legal sequence for $c$), and all
+the $\mathbb{Z}$-configurations obtained during the remaining $q$ firings are
+configurations as well (since the first $p$ firings have turned the
+configuration $c$ into $d$, but $\left(  w_{1},w_{2},\ldots,w_{q}\right)
+=\ell_{2}$ is a legal sequence for $d$).}. Thus, the sequence $\ell$ is legal
+for $c$. Moreover, the length of $\ell$ is $\underbrace{p}_{\geq0}+q\geq
+q=\left(  \text{the length of }\ell_{2}\right)  \geq N$ (since $\ell_{2}$ has
+length $\geq N$). Thus, there exists a legal sequence for $c$ having length
+$\geq N$ (namely, $\ell$).
+
+Now, forget that we fixed $N$. We thus have showed that for each
+$N\in\mathbb{N}$, there exists a legal sequence for $c$ having length $\geq N$
+(namely, $\ell$). In other words, there exist arbitrarily long legal sequences
+for $c$. In other words, $c$ is infinitary. This contradicts the fact that $c$
+is finitary. This contradiction shows that our assumption was false. Thus, we
+have proven that $d$ is finitary.
+
+Lemma \ref{lem.chip.finitary-arrow} \textbf{(b)} thus yields $c^{\circ
+}=d^{\circ}$. This proves Lemma \ref{lem.chip.finitary-arrow} \textbf{(a)}.
+\end{proof}
+
+\begin{proof}
+[Hints to Exercise \ref{exe.chip.assoc}.]For each finitary configuration $k$,
+we have%
+\begin{equation}
+k\overset{\ast}{\rightarrow}k^{\circ} \label{sol.chip.assoc.1}%
+\end{equation}
+(because $k^{\circ}$ is obtained from $k$ by firing vertices from a legal
+sequence). Hence, $g+h\overset{\ast}{\rightarrow}\left(  g+h\right)  ^{\circ}%
+$. Thus, Proposition \ref{prop.firearrow.1} \textbf{(b)} (applied to $c=f$ and
+$k=g+h$ and $k^{\prime}=\left(  g+h\right)  ^{\circ}$) yields
+$f+g+h\overset{\ast}{\rightarrow}f+\left(  g+h\right)  ^{\circ}$.
+
+But the configuration $f+\left(  g+h\right)  ^{\circ}$ is also finitary. Thus,
+(\ref{sol.chip.assoc.1}) (applied to $k=f+\left(  g+h\right)  ^{\circ}$)
+yields $f+\left(  g+h\right)  ^{\circ}\overset{\ast}{\rightarrow}\left(
+f+\left(  g+h\right)  ^{\circ}\right)  ^{\circ}$. Thus,%
+\[
+f+g+h\overset{\ast}{\rightarrow}f+\left(  g+h\right)  ^{\circ}\overset{\ast
+}{\rightarrow}\left(  f+\left(  g+h\right)  ^{\circ}\right)  ^{\circ}.
+\]
+Since the configuration $\left(  f+\left(  g+h\right)  ^{\circ}\right)
+^{\circ}$ is stable, we thus conclude that $f+g+h$ is finitary, and
+furthermore that the configuration $\left(  f+\left(  g+h\right)  ^{\circ
+}\right)  ^{\circ}$ is the stabilization of $f+g+h$. Thus,
+\begin{equation}
+\left(  f+g+h\right)  ^{\circ}=\left(  f+\left(  g+h\right)  ^{\circ}\right)
+^{\circ}. \label{sol.chip.assoc.4}%
+\end{equation}
+
+
+The configuration $f+g+h$ is finitary. Hence, Lemma
+\ref{lem.chip.finitary-less} (applied to $c=f+g$ and $d=h$) shows that the
+configurations $f+g$ and $h$ are also finitary. This solves Exercise
+\ref{exe.chip.assoc} \textbf{(a)}.
+
+\textbf{(b)} Applying (\ref{sol.chip.assoc.1}) to $k=f+g$, we obtain
+$f+g\overset{\ast}{\rightarrow}\left(  f+g\right)  ^{\circ}$. Thus,
+Proposition \ref{prop.firearrow.1} \textbf{(b)} (applied to $c=h$ and $k=f+g$
+and $k^{\prime}=\left(  f+g\right)  ^{\circ}$) yields $h+f+g\overset{\ast
+}{\rightarrow}h+\left(  f+g\right)  ^{\circ}$. Thus, $f+g+h=h+f+g\overset{\ast
+}{\rightarrow}h+\left(  f+g\right)  ^{\circ}=\left(  f+g\right)  ^{\circ}+h$.
+Hence, Lemma \ref{lem.chip.finitary-arrow} \textbf{(a)} (applied to $c=f+g+h$
+and $d=\left(  f+g\right)  ^{\circ}+h$) shows that the configuration $\left(
+f+g\right)  ^{\circ}+h$ is finitary and satisfies
+\begin{equation}
+\left(  f+g+h\right)  ^{\circ}=\left(  \left(  f+g\right)  ^{\circ}+h\right)
+^{\circ} \label{sol.chip.assoc.5}%
+\end{equation}
+(since the configuration $f+g+h$ is finitary). Combining
+(\ref{sol.chip.assoc.4}) and (\ref{sol.chip.assoc.5}), we obtain%
+\[
+\left(  f+g+h\right)  ^{\circ}=\left(  f+\left(  g+h\right)  ^{\circ}\right)
+^{\circ}=\left(  \left(  f+g\right)  ^{\circ}+h\right)  ^{\circ}.
+\]
+This completes the solution of Exercise \ref{exe.chip.assoc} \textbf{(b)}.
+\end{proof}
+
+\subsection{Exercise \ref{exe.chip.Z2}: chip-firing on
+the integer lattice}
+
+Now, we shall briefly discuss chip-firing on the
+integer lattice $\ZZ^2$; this is one of the most famous
+cases of chip-firing, leading to some of the pretty
+pictures.
+For examples and illustrations, check out
+\cite{Ellenb15} as well as some of the links above.
+
+We have not defined infinite graphs in class; the
+theory of infinite graphs involves some subtleties that
+would take us too far.
+However, for this particular exercise, we need only a
+specific infinite graph, which is fairly simple.
+
+\begin{definition}
+\textbf{(a)} A \textit{locally finite multigraph} means
+a triple $\tup{V, E, \phi}$, where $V$ and $E$ are sets
+and $\phi : E \to \powset[2]{V}$ is a map having the
+following property:
+\begin{enumerate}
+\item[(*)] For each $v \in V$, there exist only finitely
+many $e \in E$ satisfying $v \in \phi \tup{e}$.
+\end{enumerate}
+
+Most of the concepts defined for (usual) multigraphs still
+make sense for locally finite multigraphs.
+In particular, the elements of $V$ are called the
+vertices, and the elements of $E$ are called the
+edges.
+The property (*) says that each vertex is contained in
+only finitely many edges; this allows us to define
+the degree of a vertex.
+
+\textbf{(b)} The \textit{integer lattice} shall mean
+the locally finite multigraph defined as follows:
+\begin{itemize}
+\item The vertices of the integer lattice are the
+      pairs $\tup{i, j}$ of two integers $i$ and $j$.
+      In other words, the vertex set of the integer
+      lattice is
+        $\ZZ^2 = \set{ \tup{i, j} \ \mid \ i \in \ZZ
+                        \text{ and } j \in \ZZ }$.
+      We view these vertices as points in the
+      plane, and draw the multigraph accordingly.
+\item Two vertices of the integer lattice are
+      adjacent if and only if they have distance $1$
+      (as points in the plane).
+      In other words, a vertex $\tup{i, j}$ is
+      adjacent to the four vertices
+      $\tup{i+1, j}, \tup{i, j+1}, \tup{i-1, j},
+      \tup{i, j-1}$ and no others.
+\end{itemize}
+
+\textbf{(c)} You can guess how locally finite
+multidigraphs are defined.
+Each locally finite multigraph can be regarded as a
+locally finite multidigraph by replacing each edge
+by a pair of two arcs (directed in both possible
+directions).
+\end{definition}
+
+Let us show a piece of the integer lattice, viewed as
+a locally finite multigraph:
+\[
+\xymatrix{
+& \are[d] & \are[d] & \are[d] & \\
+\are[r] & \tup{-1, 1} \are[d] \are[r] & \tup{0, 1} \are[d] \are[r] & \tup{1, 1} \are[d] \are[r] & \\
+\are[r] & \tup{-1, 0} \are[d] \are[r] & \tup{0, 0} \are[d] \are[r] & \tup{1, 0} \are[d] \are[r] & \\
+\are[r] & \tup{-1, -1} \are[d] \are[r] & \tup{0, -1} \are[d] \are[r] & \tup{1, -1} \are[d] \are[r] & \\
+& & & &
+}
+\]
+And here is it again, viewed as a locally finite
+multidigraph:
+\[
+\xymatrix{
+& \arebi[d] & \arebi[d] & \arebi[d] & \\
+\arebi[r] & \tup{-1, 1} \arebi[d] \arebi[r] & \tup{0, 1} \arebi[d] \arebi[r] & \tup{1, 1} \arebi[d] \arebi[r] & \\
+\arebi[r] & \tup{-1, 0} \arebi[d] \arebi[r] & \tup{0, 0} \arebi[d] \arebi[r] & \tup{1, 0} \arebi[d] \arebi[r] & \\
+\arebi[r] & \tup{-1, -1} \arebi[d] \arebi[r] & \tup{0, -1} \arebi[d] \arebi[r] & \tup{1, -1} \arebi[d] \arebi[r] & \\
+& & & &
+}
+\]
+
+\begin{exercise} \label{exe.chip.Z2}
+Let $f$ be a configuration on the integer lattice
+(where we view the integer lattice as a locally
+finite multidigraph).
+(The notion of a configuration and related notions
+are defined in the same way as for usual, finite
+multidigraphs.)
+
+Assume that only finitely many vertices $v \in \ZZ^2$
+satisfy $f \tup{v} \neq 0$.
+(Thus, the total number of chips $\sum f$ is finite.)
+
+An edge $e$ of the integer lattice is
+said to be \textit{non-void} in $f$ if and only if
+at least one of the endpoints of $e$ has at least one
+chip in $f$.
+
+Prove the following:
+
+\textbf{(a)} If an edge of the integer lattice is
+non-void in $f$, then this edge remains non-void after
+firing any legal sequence of vertices.
+(``Firing a sequence'' means firing all the vertices
+in the sequence, one after the other.)
+
+\textbf{(b)} The total number of configurations that
+can be obtained from $f$ by firing a legal sequence
+of vertices is finite.
+
+\textbf{(c)} If we fire any active vertex, then the
+sum $\sum_{\tup{i, j} \in \ZZ^2} f \tup{\tup{i, j}}
+\cdot \tup{i + j}^2$ increases.
+
+\textbf{(d)} The configuration $f$ is finitary (so its
+stabilization is well-defined).
+\end{exercise}
+
+This exercise gives the reason why pictures such as the
+ones in \cite{Ellenb15} exist (although it does not
+explain their shapes and patterns).
+
+\begin{proof}
+[Hints to Exercise \ref{exe.chip.Z2}.]\textbf{(a)} Recall that we view the
+integer lattice as a locally finite multidigraph. Thus, each edge $e$ of the
+integer lattice is not an actual edge, but really is two arcs $\left(
+u,v\right)  $ and $\left(  v,u\right)  $ (where $u$ and $v$ are its
+endpoints). These two arcs form a cycle, which we denote by $c_{e}$ (we choose
+arbitrarily which vertex to begin this cycle at). Clearly, $e$ is non-void in
+a configuration $f$ if and only if the cycle $c_{e}$ is non-void in $f$ (where
+the notion of \textquotedblleft non-void\textquotedblright\ for a cycle is
+understood as in Definition \ref{def.chip.cycle-non-void}). Thus, Exercise
+\ref{exe.chip.Z2} \textbf{(a)} follows from Lemma
+\ref{lem.chip.adj-cycles.cycles-preserve} (at least if we extend the latter
+lemma to locally finite multidigraphs).
+
+\textbf{(b)} For each configuration $g$, we shall denote by $S_{g}$ the set
+$\left\{  v\in\mathbb{Z}^{2}\ \mid\ g\left(  v\right)  \neq0\right\}  $.
+Clearly, if $\sum g$ is finite, then the set $S_{g}$ is finite. Thus, in
+particular, the set $S_{g}$ is finite whenever the configuration $g$ is
+obtained from $f$ by repeatedly firing vertices.
+
+Now, we make the following observation:
+
+\begin{statement}
+\textit{Observation 1:} If a configuration $g^{\prime}$ is obtained from a
+configuration $g$ by firing an active vertex, then each $v\in S_{g^{\prime}}$
+either belongs to $S_{g}$ or has at least one neighbor in $S_{g}$.
+\end{statement}
+
+Observation 1 is easy to check.
+
+Using Observation 1, Exercise \ref{exe.chip.Z2} \textbf{(a)}, and
+straightforward induction (over the length of the legal sequence), we can
+argue the following observation:
+
+\begin{statement}
+\textit{Observation 2:} If a configuration $g^{\prime}$ is obtained from a
+configuration $g$ by firing a legal sequence of vertices, then for each $v\in
+S_{g^{\prime}}$, there exists a vertex $w\in S_{g}$ and a walk $p$ from $w$ to
+$v$ such that each edge of $p$ is non-void in $g^{\prime}$.
+\end{statement}
+
+Now, let $h=\sum f$. Define a subset $T$ of $\mathbb{Z}^{2}$ by%
+\[
+T=\left\{  v\in\mathbb{Z}^{2}\ \mid\ \text{there exists some }w\in S_{f}\text{
+such that }d\left(  v,w\right)  \leq4h\right\}  .
+\]
+We call this set $T$ the $4h$\textit{-neighborhood of }$S_{f}$. This set $T$
+is finite (since $S_{f}$ is finite).
+
+Let $f^{\prime}$ be a configuration obtained from a configuration $f$ by
+firing a legal sequence of vertices. Let $v\in S_{f^{\prime}}$. Then,
+Observation 2 (applied to $g=f$ and $g^{\prime}=f^{\prime}$) shows that there
+exists a vertex $w\in S_{f}$ and a walk $p$ from $w$ to $v$ such that each
+edge of $p$ is non-void in $f^{\prime}$. Consider these $w$ and $p$. We WLOG
+assume that the walk $p$ is a path (since otherwise, we can simply remove
+cycles from $p$ until $p$ becomes a path). Since $\sum f^{\prime}=\sum f=h$,
+there cannot be more than $4h$ edges that are non-void in $f^{\prime}$ (since
+each chip makes only $4$ edges non-void, and there can be overlap). Thus, the
+path $p$ cannot have more than $4h$ edges (since each edge of $p$ is non-void
+in $f^{\prime}$). In other words, the length of the path $p$ is $\leq4h$.
+Thus, there exists a path of length $\leq4h$ from $w$ to $v$ (namely, the path
+$p$). Hence, $d\left(  w,v\right)  \leq4h$. Hence, $v\in T$ (by the definition
+of $T$, because $w\in S_{f}$).
+
+Now, forget that we fixed $v$. We thus have shown that $v\in T$ for each $v\in
+S_{f^{\prime}}$. In other words, $S_{f^{\prime}}\subseteq T$. Hence,
+$f^{\prime}\left(  v\right)  =0$ for each $v\in\mathbb{Z}^{2}\setminus T$.
+Moreover, $f^{\prime}\left(  v\right)  \in\left\{  0,1,\ldots,h\right\}  $ for
+each $v\in T$ (since $f^{\prime}\left(  v\right)  \leq\sum f^{\prime}=h$).
+
+Now, forget that we fixed $f^{\prime}$. We thus have proven that each
+configuration $f^{\prime}$ obtained from a configuration $f$ by firing a legal
+sequence of vertices satisfies%
+\begin{align*}
+f^{\prime}\left(  v\right)   &  =0\ \ \ \ \ \ \ \ \ \ \text{for each }%
+v\in\mathbb{Z}^{2}\setminus T,\ \ \ \ \ \ \ \ \ \ \text{and}\\
+f^{\prime}\left(  v\right)   &  \in\left\{  0,1,\ldots,h\right\}
+\ \ \ \ \ \ \ \ \ \ \text{for each }v\in T.
+\end{align*}
+Thus, all the configurations $f^{\prime}$ obtained from a configuration $f$ by
+firing a legal sequence of vertices can be regarded as maps from $T$ to
+$\left\{  0,1,\ldots,h\right\}  $. Of course, there are only finitely many
+such maps; thus, there are only finitely many configurations that can be
+obtained from $f$ by firing a legal sequence of vertices. This solves Exercise
+\ref{exe.chip.Z2} \textbf{(b)}.
+
+\textbf{(c)} Firing a given vertex $\left(  p,q\right)  $ results in four
+chips disappearing from this vertex and reappearing on its four adjacent
+vertices $\left(  p+1,q\right)  ,\left(  p-1,q\right)  ,\left(  p,q+1\right)
+,\left(  p,q-1\right)  $. Thus, the value of $\sum_{\left(  i,j\right)
+\in\mathbb{Z}^{2}}f\left(  \left(  i,j\right)  \right)  \cdot\left(
+i+j\right)  ^{2}$ increases by%
+\[
+\left(  \left(  p+1\right)  +q\right)  ^{2}+\left(  \left(  p-1\right)
++q\right)  ^{2}+\left(  p+\left(  q+1\right)  \right)  ^{2}+\left(  p+\left(
+q-1\right)  \right)  ^{2}-4\left(  p+q\right)  ^{2}=4.
+\]
+In particular, it increases. This solves Exercise \ref{exe.chip.Z2}
+\textbf{(c)}.
+
+\textbf{(d)} Let $\ell=\left(  \ell_{1},\ell_{2},\ldots,\ell_{k}\right)  $ be
+a legal sequence for $f$. Then, for each $i\in\left\{  0,1,\ldots,k\right\}
+$, the $\mathbb{Z}$-configuration $f-\Delta\ell_{1}-\Delta\ell_{2}%
+-\cdots-\Delta\ell_{i}$ is a configuration; denote this configuration by
+$f_{i}$. For each $i\in\left\{  1,2,\ldots,k\right\}  $, the configuration
+$f_{i}$ is obtained from $f$ by firing a legal sequence of vertices.
+
+But each $p\in\left\{  1,2,\ldots,k\right\}  $ satisfies
+\[
+\sum_{\left(  i,j\right)  \in\mathbb{Z}^{2}}f_{p-1}\left(  \left(  i,j\right)
+\right)  \cdot\left(  i+j\right)  ^{2}<\sum_{\left(  i,j\right)  \in
+\mathbb{Z}^{2}}f_{p}\left(  \left(  i,j\right)  \right)  \cdot\left(
+i+j\right)  ^{2}%
+\]
+(by Exercise \ref{exe.chip.Z2} \textbf{(c)}, because the configuration $f_{p}$
+is obtained from $f_{p-1}$ by firing the vertex $\ell_{p}$). Thus, the
+sequence%
+\[
+\left(  \sum_{\left(  i,j\right)  \in\mathbb{Z}^{2}}f_{p}\left(  \left(
+i,j\right)  \right)  \cdot\left(  i+j\right)  ^{2}\right)  _{p\in\left\{
+0,1,\ldots,k\right\}  }%
+\]
+is strictly increasing. Hence, its entries are distinct. Thus, the
+configurations $f_{0},f_{1},\ldots,f_{k}$ are distinct.
+
+Recall that for each $i\in\left\{  1,2,\ldots,k\right\}  $, the configuration
+$f_{i}$ is obtained from $f$ by firing a legal sequence of vertices. But
+Exercise \ref{exe.chip.Z2} \textbf{(b)} shows that the total number of such
+configurations is finite. Hence, if $k$ is large enough, then two of the
+configurations $f_{0},f_{1},\ldots,f_{k}$ are equal. This contradicts the fact
+that the configurations $f_{0},f_{1},\ldots,f_{k}$ are distinct. Hence, $k$
+cannot be large enough.
+
+Now, forget that we fixed $k$. We thus have shown that if $\ell=\left(
+\ell_{1},\ell_{2},\ldots,\ell_{k}\right)  $ is a legal sequence for $f$, then
+$k$ cannot be arbitrarily large. In other words, $f$ does not have arbitrarily
+long legal sequences. In other words, $f$ is finitary. This solves Exercise
+\ref{exe.chip.Z2} \textbf{(d)}.
+\end{proof}
+
+\subsection{Exercise \ref{exe.aco.score-vector}: acyclic
+orientations are determined by their score vectors}
+
+Now, we leave the chip-firing setting.
+
+Roughly speaking, an \textit{orientation} of
+a multigraph $G$ is a way to assign to each edge of $G$
+a direction (thus making it an arc).
+If the resulting \textbf{digraph} has no cycles, then
+this orientation will be called \textit{acyclic}.
+A rigorous way to state this definition is the
+following:
+
+\begin{definition} \label{def.aco.aco}
+Let $G = \tup{V, E, \psi}$ be a multigraph.
+
+\textbf{(a)} An \textit{orientation} of $G$ is a map
+$\phi : E \to V \times V$ such that each $e \in E$
+has the following property:
+If we write $\phi \tup{e}$ in the form
+$\phi \tup{e} = \tup{u, v}$, then
+$\psi \tup{e} = \set{u, v}$.
+
+\textbf{(b)} An orientation $\phi$ of $G$ is said to
+be \textit{acyclic} if and only if the multidigraph
+$\tup{V, E, \phi}$ has no cycles.
+\end{definition}
+
+\begin{example}
+Let $G = \tup{V, E, \psi}$ be the following multigraph:
+\[
+\xymatrix{
+& 2 \are[dl]^a \are@/_2pc/[dl]_b \are[dr]^c \\
+1 \are[rr]_d & & 3
+}
+\]
+Then, the following four maps $\phi$ are orientations of $G$:
+\begin{itemize}
+\item the map sending $a$ to $\tup{1, 2}$, sending $b$ to
+      $\tup{1, 2}$, sending $c$ to $\tup{3, 2}$, and
+      sending $d$ to $\tup{1, 3}$;
+\item the map sending $a$ to $\tup{2, 1}$, sending $b$ to
+      $\tup{1, 2}$, sending $c$ to $\tup{3, 2}$, and
+      sending $d$ to $\tup{3, 1}$;
+\item the map sending $a$ to $\tup{1, 2}$, sending $b$ to
+      $\tup{1, 2}$, sending $c$ to $\tup{2, 3}$, and
+      sending $d$ to $\tup{1, 3}$;
+\item the map sending $a$ to $\tup{1, 2}$, sending $b$ to
+      $\tup{1, 2}$, sending $c$ to $\tup{2, 3}$, and
+      sending $d$ to $\tup{3, 1}$.
+\end{itemize}
+Here are the multidigraphs $\tup{V, E, \phi}$ corresponding to
+these four maps (in the order mentioned):
+\[
+\begin{tabular}{|c|c|c|c|}
+\xymatrix{
+& 2 \ar@{<-}[dl]^a \ar@{<-}@/_2pc/[dl]_b \ar@{<-}[dr]^c \\
+1 \ar[rr]_d & & 3
+} &
+\xymatrix{
+& 2 \ar[dl]^a \ar@{<-}@/_2pc/[dl]_b \ar@{<-}[dr]^c \\
+1 \ar@{<-}[rr]_d & & 3
+} &
+\xymatrix{
+& 2 \ar@{<-}[dl]^a \ar@{<-}@/_2pc/[dl]_b \ar[dr]^c \\
+1 \ar[rr]_d & & 3
+} &
+\xymatrix{
+& 2 \ar@{<-}[dl]^a \ar@{<-}@/_2pc/[dl]_b \ar[dr]^c \\
+1 \ar@{<-}[rr]_d & & 3
+}
+\end{tabular}
+\]
+Only the first and the third of these orientations
+$\phi$ are acyclic (since only the first and the third
+of these multidigraphs have no cycles).
+\end{example}
+
+\begin{exercise} \label{exe.aco.score-vector}
+Let $G = \tup{V, E, \psi}$ be a multigraph.
+
+Prove the following:
+
+\textbf{(a)} If $\phi$ is any acyclic orientation of $G$,
+and if $V \neq \varnothing$,
+then there exists a $v \in V$ such that no arc of the
+multidigraph $\tup{V, E, \phi}$ has target $v$.
+
+\textbf{(b)} If $\phi_1$ and $\phi_2$ are two acyclic orientations
+of $G$ such that each $v \in V$ satisfies
+\[
+\deg^+_{\tup{V, E, \phi_1}} v = \deg^+_{\tup{V, E, \phi_2}} v ,
+\]
+then $\phi_1 = \phi_2$.
+\end{exercise}
+
+Our solution to Exercise \ref{exe.aco.score-vector} uses the
+following fact:
+
+\begin{proposition} \label{prop.mt3.deg-cycle-muldir}
+Let $D = \tup{V, A, \phi}$ be a multidigraph with $\abs{V} > 0$.
+Assume that each vertex $v \in V$ satisfies $\deg^- v > 0$. 
+Then, $D$ has at least one cycle.
+\end{proposition}
+
+\begin{proof}[Proof of Proposition~\ref{prop.mt3.deg-cycle-muldir}.]
+Proposition~\ref{prop.mt3.deg-cycle-muldir} is simply the
+obvious generalization of
+\href{http://www-users.math.umn.edu/~dgrinber/5707s17/mt1s.pdf}{Exercise 3 on
+Midterm 1} to multidigraphs;
+it is proven in precisely the same way.
+\end{proof}
+
+\begin{proof}
+[Hints to Exercise \ref{exe.aco.score-vector}.]\textbf{(a)} Let $\phi$ be any
+acyclic orientation of $G$. Thus, the multidigraph $\left(  V,E,\phi\right)  $
+has no cycles.
+
+Assume that $V\neq\varnothing$. Then, $\left\vert V\right\vert >0$.
+
+If each vertex $v\in V$ satisfies $\deg_{\left(  V,E,\phi\right)  }^{-}v>0$,
+then the multidigraph $\left(  V,E,\phi\right)  $ has at least one
+cycle\footnote{This follows from
+Proposition~\ref{prop.mt3.deg-cycle-muldir} (applied to
+$\tup{V, E, \phi}$ and $E$ instead of $D$ and $A$).}.
+Therefore, not each vertex $v\in V$ satisfies $\deg_{\left(
+V,E,\phi\right)  }^{-}v>0$ (because the multidigraph $\left(  V,E,\phi\right)
+$ has no cycles). In other words, there exists a vertex $v\in V$ satisfying
+$\deg_{\left(  V,E,\phi\right)  }^{-}v=0$. In other words, there exists a
+$v\in V$ such that no arc of the multidigraph $\left(  V,E,\phi\right)  $ has
+target $v$. This solves Exercise \ref{exe.aco.score-vector} \textbf{(a)}.
+
+\textbf{(b)} We shall solve Exercise \ref{exe.aco.score-vector} \textbf{(b)}
+by induction over $\left\vert V\right\vert $.
+
+The \textit{induction base} (the case when $\left\vert V\right\vert =0$) is
+obvious (because in these case there are no edges, and thus there is only one
+possible orientation).
+
+Now, we come to the \textit{induction step}: Let $N\in\mathbb{N}$ be positive.
+Assume (as the induction hypothesis) that Exercise \ref{exe.aco.score-vector}
+\textbf{(b)} holds whenever $\left\vert V\right\vert =N-1$. We must now prove
+that Exercise \ref{exe.aco.score-vector} \textbf{(b)} also holds whenever
+$\left\vert V\right\vert =N$.
+
+So let $G$, $V$, $E$ and $\psi$ be as in Exercise \ref{exe.aco.score-vector}
+\textbf{(b)}, and assume that $\left\vert V\right\vert =N$. Let $\phi_{1}$ and
+$\phi_{2}$ be two acyclic orientations of $G$ such that each $v\in V$
+satisfies
+\begin{equation}
+\deg_{\left(  V,E,\phi_{1}\right)  }^{+}v=\deg_{\left(  V,E,\phi_{2}\right)
+}^{+}v. \label{sol.aco.score-vector.b.1}%
+\end{equation}
+We must then prove that $\phi_{1}=\phi_{2}$.
+
+We have $\left\vert V\right\vert =N>0$, thus $V\neq\varnothing$. Hence,
+Exercise \ref{exe.aco.score-vector} \textbf{(a)} (applied to $\phi=\phi_{1}$)
+shows that there exists a $v\in V$ such that no arc of the multidigraph
+$\left(  V,E,\phi_{1}\right)  $ has target $v$. Fix such a $v$, and denote it
+by $w$. Thus, no arc of the multidigraph $\left(  V,E,\phi_{1}\right)  $ has
+target $w$. Hence, $\deg_{\left(  V,E,\phi_{1}\right)  }^{-}w=0$.
+
+But $\phi_{1}$ is an orientation of $G$. Hence, some of the edges of $G$ that
+contain $w$ become arcs with source $w$ in $\phi_{1}$, whereas the remaining
+edges of $G$ that contain $w$ become arcs with target $w$ in $\phi_{1}$.
+Therefore,
+\begin{equation}
+\deg_{\left(  V,E,\phi_{1}\right)  }^{-}w+\deg_{\left(  V,E,\phi_{1}\right)
+}^{+}w=\deg_{G}w. \label{sol.aco.score-vector.b.deg+deg1}%
+\end{equation}
+Similarly,%
+\begin{equation}
+\deg_{\left(  V,E,\phi_{2}\right)  }^{-}w+\deg_{\left(  V,E,\phi_{2}\right)
+}^{+}w=\deg_{G}w. \label{sol.aco.score-vector.b.deg+deg2}%
+\end{equation}
+
+
+Now, (\ref{sol.aco.score-vector.b.deg+deg1}) yields%
+\[
+\deg_{G}w=\underbrace{\deg_{\left(  V,E,\phi_{1}\right)  }^{-}w}_{=0}%
++\deg_{\left(  V,E,\phi_{1}\right)  }^{+}w=\deg_{\left(  V,E,\phi_{1}\right)
+}^{+}w=\deg_{\left(  V,E,\phi_{2}\right)  }^{+}w
+\]
+(by (\ref{sol.aco.score-vector.b.1}), applied to $v=w$). Hence,%
+\[
+\deg_{\left(  V,E,\phi_{2}\right)  }^{+}w=\deg_{G}w=\deg_{\left(  V,E,\phi
+_{2}\right)  }^{-}w+\deg_{\left(  V,E,\phi_{2}\right)  }^{+}%
+w\ \ \ \ \ \ \ \ \ \ \left(  \text{by (\ref{sol.aco.score-vector.b.deg+deg2}%
+)}\right)  .
+\]
+Subtracting $\deg_{\left(  V,E,\phi_{2}\right)  }^{+}w$ from both sides of
+this equality, we find $0=\deg_{\left(  V,E,\phi_{2}\right)  }^{-}w$. Hence,
+no arc of the multidigraph $\left(  V,E,\phi_{2}\right)  $ has target $w$.
+
+Now, we see that
+\begin{equation}
+\text{each edge }e\text{ of }G\text{ satisfying }w\in\psi\left(  e\right)
+\text{ satisfies }\phi_{1}\left(  e\right)  =\phi_{2}\left(  e\right)
+\label{sol.aco.score-vector.b.wine}%
+\end{equation}
+\footnote{\textit{Proof of (\ref{sol.aco.score-vector.b.wine}):} Let $e$ be an
+edge of $G$ satisfying $w\in\psi\left(  e\right)  $. Write $\psi\left(
+e\right)  $ in the form $\psi\left(  e\right)  =\left\{  u,w\right\}  $ for
+some $u\in V$. Then, $\phi_{1}\left(  e\right)  $ is either $\left(
+u,w\right)  $ or $\left(  w,u\right)  $. But since no arc of the multidigraph
+$\left(  V,E,\phi_{1}\right)  $ has target $w$, we cannot have $\phi
+_{1}\left(  e\right)  =\left(  u,w\right)  $. Hence, we have $\phi_{1}\left(
+e\right)  =\left(  w,u\right)  $. Similarly, $\phi_{2}\left(  e\right)
+=\left(  w,u\right)  $ (since no arc of the multidigraph $\left(  V,E,\phi
+_{2}\right)  $ has target $w$). Hence, $\phi_{1}\left(  e\right)  =\left(
+w,u\right)  =\phi_{2}\left(  e\right)  $. This proves
+(\ref{sol.aco.score-vector.b.wine}).}.
+
+On the other hand, let $G^{\prime}=\left(  V^{\prime},E^{\prime},\psi^{\prime
+}\right)  $ be the multigraph obtained from $G$ by removing the vertex $w$ and
+all edges containing $w$. (Thus, $V^{\prime}=V\setminus\left\{  w\right\}  $,
+$E^{\prime}=\left\{  e\in E\ \mid\ w\notin\psi\left(  e\right)  \right\}  $
+and $\psi^{\prime}=\psi\mid_{E^{\prime}}$.) Notice that $\left\vert V^{\prime
+}\right\vert =\left\vert V\setminus\left\{  w\right\}  \right\vert
+=\underbrace{\left\vert V\right\vert }_{=N}-1=N-1$.
+
+Let $\phi_{1}^{\prime}$ and $\phi_{2}^{\prime}$ be the two orientations of the
+multigraph $G^{\prime}$ obtained by restricting $\phi_{1}$ and $\phi_{2}$.
+(Thus, $\phi_{1}^{\prime}=\phi_{1}\mid_{E^{\prime}}$ and $\phi_{2}^{\prime
+}=\phi_{2}\mid_{E^{\prime}}$.) Clearly, the orientation $\phi_{1}^{\prime}$ is
+acyclic (since each cycle of the multidigraph $\left(  V^{\prime},E^{\prime
+},\phi_{1}^{\prime}\right)  $ would be a cycle of the multidigraph $\left(
+V,E,\phi_{1}\right)  $, but the latter multidigraph has no cycles since
+$\phi_{1}$ is acyclic). Similarly, the orientation $\phi_{2}^{\prime}$ is acyclic.
+
+Each $v\in V^{\prime}$ satisfies%
+\[
+\deg_{\left(  V^{\prime},E^{\prime},\phi_{1}^{\prime}\right)  }^{+}%
+v=\deg_{\left(  V^{\prime},E^{\prime},\phi_{2}^{\prime}\right)  }^{+}v
+\]
+\footnote{\textit{Proof.} Let $v\in V^{\prime}$. Thus, $v\in V^{\prime
+}=V\setminus\left\{  w\right\}  $, so that $v\in V$ and $v\neq w$.
+\par
+Now, recall that no arc of the multidigraph $\left(  V,E,\phi_{1}\right)  $
+has target $w$. Hence, each arc of the multidigraph $\left(  V,E,\phi
+_{1}\right)  $ having source $v$ is also an arc of the multidigraph $\left(
+V^{\prime},E^{\prime},\phi_{1}^{\prime}\right)  $. Therefore, the arcs of the
+multidigraph $\left(  V,E,\phi_{1}\right)  $ having source $v$ are precisely
+the arcs of the multidigraph $\left(  V^{\prime},E^{\prime},\phi_{1}^{\prime
+}\right)  $ having source $v$. Therefore, $\deg_{\left(  V^{\prime},E^{\prime
+},\phi_{1}^{\prime}\right)  }^{+}v=\deg_{\left(  V,E,\phi_{1}\right)  }^{+}v$.
+Similarly, $\deg_{\left(  V^{\prime},E^{\prime},\phi_{2}^{\prime}\right)
+}^{+}v=\deg_{\left(  V,E,\phi_{2}\right)  }^{+}v$. Now,%
+\begin{align*}
+\deg_{\left(  V^{\prime},E^{\prime},\phi_{1}^{\prime}\right)  }^{+}v  &
+=\deg_{\left(  V,E,\phi_{1}\right)  }^{+}v=\deg_{\left(  V,E,\phi_{2}\right)
+}^{+}v\ \ \ \ \ \ \ \ \ \ \left(  \text{by (\ref{sol.aco.score-vector.b.1}%
+)}\right) \\
+&  =\deg_{\left(  V^{\prime},E^{\prime},\phi_{2}^{\prime}\right)  }^{+}v,
+\end{align*}
+qed.}. Hence, the induction hypothesis (applied to $G^{\prime}$, $V^{\prime}$,
+$E^{\prime}$, $\psi^{\prime}$, $\phi_{1}^{\prime}$ and $\phi_{2}^{\prime}$
+instead of $G$, $V$, $E$, $\psi$, $\phi_{1}$ and $\phi_{2}$) shows that
+$\phi_{1}^{\prime}=\phi_{2}^{\prime}$ (since $\left\vert V^{\prime}\right\vert
+=N-1$).
+
+Thus,%
+\begin{equation}
+\text{each edge }e\text{ of }G\text{ satisfying }w\notin\psi\left(  e\right)
+\text{ satisfies }\phi_{1}\left(  e\right)  =\phi_{2}\left(  e\right)
+\label{sol.aco.score-vector.b.wnine}%
+\end{equation}
+\footnote{\textit{Proof of (\ref{sol.aco.score-vector.b.wnine}):} Let $e$ be
+an edge of $G$ satisfying $w\notin\psi\left(  e\right)  $. Then, $e$ is an
+edge of the multigraph $G^{\prime}$ (by the definition of $G^{\prime}$).
+Hence, $\phi_{1}^{\prime}\left(  e\right)  $ and $\phi_{2}^{\prime}\left(
+e\right)  $ are well-defined. Moreover, $\phi_{1}^{\prime}$ is a restriction
+of $\phi_{1}$; hence, $\phi_{1}^{\prime}\left(  e\right)  =\phi_{1}\left(
+e\right)  $. Similarly, $\phi_{2}^{\prime}\left(  e\right)  =\phi_{2}\left(
+e\right)  $. Now, $\phi_{1}\left(  e\right)  =\underbrace{\phi_{1}^{\prime}%
+}_{=\phi_{2}^{\prime}}\left(  e\right)  =\phi_{2}^{\prime}\left(  e\right)
+=\phi_{2}\left(  e\right)  $. This proves (\ref{sol.aco.score-vector.b.wnine}%
+).}. Combining this with (\ref{sol.aco.score-vector.b.wine}), we conclude that
+each edge $e$ of $G$ satisfies $\phi_{1}\left(  e\right)  =\phi_{2}\left(
+e\right)  $. In other words, we have $\phi_{1}=\phi_{2}$.
+
+Thus, we have proven that Exercise \ref{exe.aco.score-vector} \textbf{(b)}
+also holds whenever $\left\vert V\right\vert =N$. This completes the induction
+step. Hence, Exercise \ref{exe.aco.score-vector} \textbf{(b)} is solved.
+\end{proof}
+
+\subsection{Exercise \ref{exe.flows-cuts.cut-lattice}: the
+lattice structure on minimum cuts}
+
+Let us recall some terminology from
+\href{http://www-users.math.umn.edu/~dgrinber/5707s17/5707lec16.pdf}{lecture 16}:
+
+\begin{itemize}
+\item A \textit{network} consists of:
+      \begin{itemize}
+      \item a digraph $\tup{V, A}$;
+      \item two distinct vertices $s \in V$ and $t \in V$,
+            called the \textit{source} and the \textit{sink},
+            respectively (although we do not require $s$ to
+            have indegree $0$ or $t$ to have outdegree $1$);
+      \item a function $c : A \to \QQ_+$, called the
+            \textit{capacity function}.
+            (Here, $\QQ_+$ means the set
+            $\set{ x \in \QQ \mid x \geq 0 }$.)
+      \end{itemize}
+
+\item Given a network consisting of a digraph
+      $\tup{V, A}$, a source $s \in V$ and a sink $t \in V$,
+      and a capacity function $c : A \to \QQ_+$, we define
+      the following notations:
+      \begin{itemize}
+      \item For any subset $S$ of $V$, we let $\overline{S}$
+            denote the subset $V \setminus S$ of $V$.
+      \item If $P$ and $Q$ are two subsets of $V$, then
+            $\ive{P, Q}$ shall mean the set of all arcs
+            $a \in A$ whose source belongs to $P$ and whose
+            target belongs to $Q$.
+            (In other words,
+            $\ive{P, Q} = A \cap \tup{P \times Q}$.)
+      \item If $P$ and $Q$ are two subsets of $V$, then the
+            number $c \tup{P, Q} \in \QQ_+$ is defined by
+            \[
+            c \tup{P, Q} = \sum_{a \in \ive{P, Q}} c \tup{a} .
+            \]
+      \end{itemize}
+\end{itemize}
+
+We also refer to lecture 16 for the definition of a flow
+(which is not necessary for the following problem, but may
+be helpful).
+
+\begin{exercise} \label{exe.flows-cuts.cut-lattice}
+Consider a network consisting of a digraph
+$\tup{V, A}$, a source $s \in V$ and a sink $t \in V$,
+and a capacity function $c : A \to \QQ_+$
+such that $s \neq t$.
+
+An \textit{$s$-$t$-cutting subset} shall mean a subset
+$S$ of $V$ satisfying $s \in S$ and $t \notin S$.
+
+Let $m$ denote the minimum possible value of
+$c \tup{S, \overline{S}}$ where $S$ ranges over the
+$s$-$t$-cutting subsets.
+(Recall that this is the maximum value of an
+$s$-$t$-flow, according to the
+maximum-flow-minimum-cut theorem.)
+
+An $s$-$t$-cutting subset $S$ is said to be
+\textit{cut-minimal} if it satisfies
+$c \tup{S, \overline{S}} = m$.
+
+Let $X$ and $Y$ be two cut-minimal $s$-$t$-cutting subsets.
+Prove that $X \cap Y$ and $X \cup Y$ also are
+cut-minimal $s$-$t$-cutting subsets.
+\end{exercise}
+
+Exercise~\ref{exe.flows-cuts.cut-lattice} is not new;
+it appears, e.g., in \cite[Corollary 3]{PicQue80}\footnote{To
+  be fully precise, the version in
+  \cite[Corollary 3]{PicQue80} differs by having $c$ be
+  a map $A \to \RR_{> 0}$ (where $\RR_{> 0}$ is the set of
+  all positive reals) instead of having $c$ be a map
+  $A \to \QQ_+$. But the difference is unsubstantial,
+  and roughly the same proofs work for both results.}.
+
+In our solution of Exercise \ref{exe.flows-cuts.cut-lattice}, we shall use
+some further material from
+\href{http://www-users.math.umn.edu/~dgrinber/5707s17/5707lec16.pdf}{lecture
+16}. Namely, we shall use the concept of flows, and the following fact:
+
+\begin{lemma}
+\label{lem.flows-cuts.flow-estimate}Consider a network consisting of a digraph
+$\left(  V,A\right)  $, a source $s\in V$ and a sink $t\in V$, and a capacity
+function $c:A\rightarrow\mathbb{Q}_{+}$ such that $s\neq t$. Let $f$ be a flow
+on this network.
+
+Let $S$ be a subset of $S$ satisfying $s\in S$ and $t\notin S$.
+
+\textbf{(a)} We have $\left\vert f\right\vert \leq c\left(  S,\overline
+{S}\right)  $.
+
+\textbf{(b)} We have $\left\vert f\right\vert =c\left(  S,\overline{S}\right)
+$ if and only if%
+\begin{equation}
+\left(  \text{each }u\notin S\text{ and }v\in S\text{ satisfy }f\left(
+u,v\right)  =0\right)  \label{eq.lem.flows-cuts.flow-estimate.b.1}%
+\end{equation}
+and%
+\begin{equation}
+\left(  \text{each }u\in S\text{ and }v\notin S\text{ satisfy }f\left(
+u,v\right)  =c\left(  u,v\right)  \right)  .
+\label{eq.lem.flows-cuts.flow-estimate.b.2}%
+\end{equation}
+
+\end{lemma}
+
+\begin{proof}
+[Proof of Lemma \ref{lem.flows-cuts.flow-estimate} (sketched).]\textbf{(a)}
+This is part of Prop. 2 \textbf{(c)} in
+\href{http://www-users.math.umn.edu/~dgrinber/5707s17/5707lec16.pdf}{lecture
+16}.
+
+\textbf{(b)} To prove this, trace the proof of Prop. 2 \textbf{(c)} in
+\href{http://www-users.math.umn.edu/~dgrinber/5707s17/5707lec16.pdf}{lecture
+16}, and analyze what it means that all inequalities become equalities.
+\end{proof}
+
+\begin{proof}
+[Hints to Exercise \ref{exe.flows-cuts.cut-lattice}.]From the
+max-flow-min-cut-theorem (specifically, Thm. 3 \textbf{(a)} in
+\href{http://www-users.math.umn.edu/~dgrinber/5707s17/5707lec16.pdf}{lecture
+16}), we know that%
+\begin{align*}
+&  \max\left\{  \left\vert f\right\vert \ \mid\ f\text{ is a flow}\right\} \\
+&  =\min\left\{  c\left(  S,\overline{S}\right)  \ \mid
+\ \underbrace{S\subseteq V\text{; }s\in S\text{; }t\notin S}%
+_{\Longleftrightarrow\ \left(  S\text{ is an }s\text{-}t\text{-cutting subset
+of }V\right)  }\right\} \\
+&  =\min\left\{  c\left(  S,\overline{S}\right)  \ \mid\ S\text{ is an
+}s\text{-}t\text{-cutting subset of }V\right\} \\
+&  =m\ \ \ \ \ \ \ \ \ \ \left(  \text{by the definition of }m\right)  .
+\end{align*}
+Hence, there exists a flow $f$ with $\left\vert f\right\vert =m$. Consider
+such an $f$.
+
+The subset $X$ is $s$-$t$-cutting; thus, $X$ is a subset of $V$ satisfying
+$s\in X$ and $t\notin X$.
+
+The subset $Y$ is $s$-$t$-cutting; thus, $Y$ is a subset of $V$ satisfying
+$s\in Y$ and $t\notin Y$.
+
+We have $c\left(  X,\overline{X}\right)  =m$ (since $X$ is cut-minimal) and
+$c\left(  Y,\overline{Y}\right)  =m$ (since $Y$ is cut-minimal). Thus,
+$\left\vert f\right\vert =m=c\left(  X,\overline{X}\right)  $ and $\left\vert
+f\right\vert =m=c\left(  Y,\overline{Y}\right)  $.
+
+We have $s\in X\cap Y$ (since $s\in X$ and $s\in Y$) and $s\in X\cup Y$
+(likewise). We have $t\notin X\cup Y$ (since $t\notin X$ and $t\notin Y$) and
+$t\notin X\cap Y$ (likewise). The subset $X\cap Y$ of $V$ is $s$-$t$-cutting
+(since $s\in X\cap Y$ and $t\notin X\cap Y$). Similarly, the subset $X\cup Y$
+of $V$ is $s$-$t$-cutting.
+
+Lemma \ref{lem.flows-cuts.flow-estimate} \textbf{(b)} (applied to $S=X$) shows
+that $\left\vert f\right\vert =c\left(  X,\overline{X}\right)  $ if and only
+if
+\begin{equation}
+\left(  \text{each }u\notin X\text{ and }v\in X\text{ satisfy }f\left(
+u,v\right)  =0\right)  \label{sol.flows-cuts.cut-lattice.X1}%
+\end{equation}
+and%
+\begin{equation}
+\left(  \text{each }u\in X\text{ and }v\notin X\text{ satisfy }f\left(
+u,v\right)  =c\left(  u,v\right)  \right)  .
+\label{sol.flows-cuts.cut-lattice.X2}%
+\end{equation}
+Therefore, (\ref{sol.flows-cuts.cut-lattice.X1}) and
+(\ref{sol.flows-cuts.cut-lattice.X2}) hold (since $\left\vert f\right\vert
+=c\left(  X,\overline{X}\right)  $).
+
+Lemma \ref{lem.flows-cuts.flow-estimate} \textbf{(b)} (applied to $S=Y$) shows
+that $\left\vert f\right\vert =c\left(  Y,\overline{Y}\right)  $ if and only
+if
+\begin{equation}
+\left(  \text{each }u\notin Y\text{ and }v\in Y\text{ satisfy }f\left(
+u,v\right)  =0\right)  \label{sol.flows-cuts.cut-lattice.Y1}%
+\end{equation}
+and%
+\begin{equation}
+\left(  \text{each }u\in Y\text{ and }v\notin Y\text{ satisfy }f\left(
+u,v\right)  =c\left(  u,v\right)  \right)  .
+\label{sol.flows-cuts.cut-lattice.Y2}%
+\end{equation}
+Therefore, (\ref{sol.flows-cuts.cut-lattice.Y1}) and
+(\ref{sol.flows-cuts.cut-lattice.Y2}) hold (since $\left\vert f\right\vert
+=c\left(  Y,\overline{Y}\right)  $).
+
+Now,
+\begin{equation}
+\left(  \text{each }u\notin X\cap Y\text{ and }v\in X\cap Y\text{ satisfy
+}f\left(  u,v\right)  =0\right)  \label{sol.flows-cuts.cut-lattice.cap1}%
+\end{equation}
+\footnote{\textit{Proof of (\ref{sol.flows-cuts.cut-lattice.cap1}):} Let
+$u\notin X\cap Y$ and $v\in X\cap Y$. We must show that $f\left(  u,v\right)
+=0$.
+\par
+We have $v\in X\cap Y\subseteq Y$. Hence, if $u\notin Y$, then $f\left(
+u,v\right)  =0$ follows immediately from (\ref{sol.flows-cuts.cut-lattice.Y1}%
+). Thus, for the rest of this proof, we WLOG assume that $u\notin Y$ does not
+hold. Hence, $u\in Y$. Now, $u\in Y$ but $u\notin X\cap Y$. Hence, $u\in
+Y\setminus\left(  X\cap Y\right)  =Y\setminus X$, so that $u\notin X$. But
+$v\in X\cap Y\subseteq X$. Hence, (\ref{sol.flows-cuts.cut-lattice.X1}) shows
+that $f\left(  u,v\right)  =0$. This proves
+(\ref{sol.flows-cuts.cut-lattice.cap1}).} and%
+\begin{equation}
+\left(  \text{each }u\in X\cap Y\text{ and }v\notin X\cap Y\text{ satisfy
+}f\left(  u,v\right)  =c\left(  u,v\right)  \right)
+\label{sol.flows-cuts.cut-lattice.cap2}%
+\end{equation}
+\footnote{\textit{Proof of (\ref{sol.flows-cuts.cut-lattice.cap2}):} Let $u\in
+X\cap Y$ and $v\notin X\cap Y$. We must show that $f\left(  u,v\right)
+=c\left(  u,v\right)  $.
+\par
+We have $u\in X\cap Y\subseteq Y$. Hence, if $v\notin Y$, then $f\left(
+u,v\right)  =c\left(  u,v\right)  $ follows immediately from
+(\ref{sol.flows-cuts.cut-lattice.Y2}). Thus, for the rest of this proof, we
+WLOG assume that $v\notin Y$ does not hold. Hence, $v\in Y$. Now, $v\in Y$ but
+$v\notin X\cap Y$. Hence, $v\in Y\setminus\left(  X\cap Y\right)  =Y\setminus
+X$, so that $v\notin X$. But $u\in X\cap Y\subseteq X$. Hence,
+(\ref{sol.flows-cuts.cut-lattice.X2}) shows that $f\left(  u,v\right)
+=c\left(  u,v\right)  $. This proves (\ref{sol.flows-cuts.cut-lattice.cap2}).}.
+
+But Lemma \ref{lem.flows-cuts.flow-estimate} \textbf{(b)} (applied to $S=X\cap
+Y$) shows that $\left\vert f\right\vert =c\left(  X\cap Y,\overline{X\cap
+Y}\right)  $ if and only if (\ref{sol.flows-cuts.cut-lattice.cap1}) and
+(\ref{sol.flows-cuts.cut-lattice.cap2}) hold. Hence, $\left\vert f\right\vert
+=c\left(  X\cap Y,\overline{X\cap Y}\right)  $ (since
+(\ref{sol.flows-cuts.cut-lattice.cap1}) and
+(\ref{sol.flows-cuts.cut-lattice.cap2}) hold). Thus, $c\left(  X\cap
+Y,\overline{X\cap Y}\right)  =\left\vert f\right\vert =m$. In other words, the
+$s$-$t$-cutting subset $X\cap Y$ of $V$ is cut-minimal.
+
+Furthermore,
+\begin{equation}
+\left(  \text{each }u\notin X\cup Y\text{ and }v\in X\cup Y\text{ satisfy
+}f\left(  u,v\right)  =0\right)  \label{sol.flows-cuts.cut-lattice.cup1}%
+\end{equation}
+\footnote{\textit{Proof of (\ref{sol.flows-cuts.cut-lattice.cup1}):} Let
+$u\notin X\cup Y$ and $v\in X\cup Y$. We must show that $f\left(  u,v\right)
+=0$.
+\par
+From $u\notin X\cup Y$, we obtain $u\notin X$ and $u\notin Y$. Hence, if $v\in
+X$, then $f\left(  u,v\right)  =0$ follows immediately from
+(\ref{sol.flows-cuts.cut-lattice.X1}). Thus, for the rest of this proof, we
+WLOG assume that $v\in X$ does not hold. Hence, $v\notin X$. Now, $v\in X\cup
+Y$ but $v\notin X$. Hence, $v\in\left(  X\cup Y\right)  \setminus X=Y\setminus
+X\subseteq Y$. But $u\notin Y$. Hence, (\ref{sol.flows-cuts.cut-lattice.Y1})
+shows that $f\left(  u,v\right)  =0$. This proves
+(\ref{sol.flows-cuts.cut-lattice.cup1}).} and%
+\begin{equation}
+\left(  \text{each }u\in X\cup Y\text{ and }v\notin X\cup Y\text{ satisfy
+}f\left(  u,v\right)  =c\left(  u,v\right)  \right)
+\label{sol.flows-cuts.cut-lattice.cup2}%
+\end{equation}
+\footnote{\textit{Proof of (\ref{sol.flows-cuts.cut-lattice.cup2}):} Let $u\in
+X\cup Y$ and $v\notin X\cup Y$. We must show that $f\left(  u,v\right)
+=c\left(  u,v\right)  $.
+\par
+From $v\notin X\cup Y$, we obtain $v\notin X$ and $v\notin Y$. Hence, if $u\in
+X$, then $f\left(  u,v\right)  =c\left(  u,v\right)  $ follows immediately
+from (\ref{sol.flows-cuts.cut-lattice.X2}). Thus, for the rest of this proof,
+we WLOG assume that $u\in X$ does not hold. Hence, $u\notin X$. Now, $u\in
+X\cup Y$ but $u\notin X$. Hence, $u\in\left(  X\cup Y\right)  \setminus
+X=Y\setminus X\subseteq Y$. But $v\notin Y$. Hence,
+(\ref{sol.flows-cuts.cut-lattice.Y2}) shows that $f\left(  u,v\right)
+=c\left(  u,v\right)  $. This proves (\ref{sol.flows-cuts.cut-lattice.cup2}).}.
+
+But Lemma \ref{lem.flows-cuts.flow-estimate} \textbf{(b)} (applied to $S=X\cup
+Y$) shows that $\left\vert f\right\vert =c\left(  X\cup Y,\overline{X\cup
+Y}\right)  $ if and only if (\ref{sol.flows-cuts.cut-lattice.cup1}) and
+(\ref{sol.flows-cuts.cut-lattice.cup2}) hold. Hence, $\left\vert f\right\vert
+=c\left(  X\cup Y,\overline{X\cup Y}\right)  $ (since
+(\ref{sol.flows-cuts.cut-lattice.cup1}) and
+(\ref{sol.flows-cuts.cut-lattice.cup2}) hold). Thus, $c\left(  X\cup
+Y,\overline{X\cup Y}\right)  =\left\vert f\right\vert =m$. In other words, the
+$s$-$t$-cutting subset $X\cup Y$ of $V$ is cut-minimal. Exercise
+\ref{exe.flows-cuts.cut-lattice} is thus shown.
+\end{proof}
+
+\begin{thebibliography}{99999999}
+
+\bibitem[BjoLov92]{BjoLov92}
+Anders Bj\"orner, L\'aszl\'o Lov\'asz,
+\textit{Chip-firing games on directed graphs},
+J. Algebraic Combinatorics 1 (1991), pp. 305--328,
+revised version, July 1992.
+\newline\url{http://www.cs.elte.hu/~lovasz/morepapers/abacus.pdf}
+
+\bibitem[BjLoSh91]{BjLoSh91}
+Anders Bj\"orner, L\'aszl\'o Lov\'asz, P. W. Shor,
+\textit{Chip-firing games on graphs},
+Europ. J. Comb. 12 (1991), pp. 283--291.
+\newline\url{http://www.cs.elte.hu/~lovasz/morepapers/chips.pdf}
+
+\bibitem[CorPet16]{CorPet16}
+Scott Corry, David Perkinson,
+\textit{Divisors and Sandpiles},
+draft of 20 November 2016.
+\newline\url{http://people.reed.edu/~davidp/divisors_and_sandpiles/}
+
+\bibitem[Ellenb15]{Ellenb15}
+Jordan Ellenberg,
+\textit{The Amazing, Autotuning Sandpile},
+Nautilus, 2 April 2015.
+\newline\url{http://nautil.us/issue/23/dominoes/the-amazing-autotuning-sandpile}
+
+\bibitem[ForFul74]{ForFul74}
+L. R. Ford, D. R. Fulkerson,
+\textit{Flows in Networks},
+Princeton University Press,
+sixth printing 1974.
+
+\bibitem[HLMPPW13]{HLMPPW13}
+Alexander E. Holroyd, Lionel Levine, Karola M\'esz\'aros,
+Yuval Peres, James Propp, David B. Wilson,
+\textit{Chip-Firing and Rotor-Routing on Directed Graphs},
+arXiv:0801.3306v4.
+\newline\url{https://arxiv.org/abs/0801.3306v4}
+
+\bibitem[Musike09]{Musike09}
+Gregg Musiker,
+\textit{18.312: Algebraic Combinatorics, Spring 2009},
+MIT OpenCourseWare.
+\newline\url{https://ocw.mit.edu/courses/mathematics/18-312-algebraic-combinatorics-spring-2009/readings-and-lecture-notes/}
+
+\bibitem[PicQue80]{PicQue80}
+Jean-Claude Picard, Maurice Queyranne,
+\textit{On the structure of all minimum cuts in a network and applications},
+Mathematical Programming,
+December 1982, Volume 22, Issue 1, pp. 121--121.
+\newline\url{https://link.springer.com/article/10.1007/BF01581031}
+
+\bibitem[Stanle11]{Stanle11}Richard P. Stanley, \textit{Enumerative
+Combinatorics, volume 1}, Cambridge University Press, 2011. \newline%
+\url{http://math.mit.edu/~rstan/ec/ec1/}
+
+\end{thebibliography}
+
+\end{document}

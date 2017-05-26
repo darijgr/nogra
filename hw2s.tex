@@ -1,0 +1,2397 @@
+\documentclass[numbers=enddot,12pt,final,onecolumn,notitlepage]{scrartcl}%
+\usepackage[headsepline,footsepline,manualmark]{scrlayer-scrpage}
+\usepackage[all,cmtip]{xy}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{framed}
+\usepackage{comment}
+\usepackage{color}
+\usepackage{hyperref}
+\usepackage{ifthen}
+\usepackage[sc]{mathpazo}
+\usepackage[T1]{fontenc}
+\usepackage{needspace}
+\usepackage{tabls}
+%TCIDATA{OutputFilter=latex2.dll}
+%TCIDATA{Version=5.50.0.2960}
+%TCIDATA{LastRevised=Friday, September 16, 2016 20:39:00}
+%TCIDATA{SuppressPackageManagement}
+%TCIDATA{<META NAME="GraphicsSave" CONTENT="32">}
+%TCIDATA{<META NAME="SaveForMode" CONTENT="1">}
+%TCIDATA{BibliographyScheme=Manual}
+%TCIDATA{Language=American English}
+%BeginMSIPreambleData
+\providecommand{\U}[1]{\protect\rule{.1in}{.1in}}
+%EndMSIPreambleData
+\newcounter{exer}
+\theoremstyle{definition}
+\newtheorem{theo}{Theorem}[section]
+\newenvironment{theorem}[1][]
+{\begin{theo}[#1]\begin{leftbar}}
+{\end{leftbar}\end{theo}}
+\newtheorem{lem}[theo]{Lemma}
+\newenvironment{lemma}[1][]
+{\begin{lem}[#1]\begin{leftbar}}
+{\end{leftbar}\end{lem}}
+\newtheorem{prop}[theo]{Proposition}
+\newenvironment{proposition}[1][]
+{\begin{prop}[#1]\begin{leftbar}}
+{\end{leftbar}\end{prop}}
+\newtheorem{defi}[theo]{Definition}
+\newenvironment{definition}[1][]
+{\begin{defi}[#1]\begin{leftbar}}
+{\end{leftbar}\end{defi}}
+\newtheorem{remk}[theo]{Remark}
+\newenvironment{remark}[1][]
+{\begin{remk}[#1]\begin{leftbar}}
+{\end{leftbar}\end{remk}}
+\newtheorem{coro}[theo]{Corollary}
+\newenvironment{corollary}[1][]
+{\begin{coro}[#1]\begin{leftbar}}
+{\end{leftbar}\end{coro}}
+\newtheorem{conv}[theo]{Convention}
+\newenvironment{condition}[1][]
+{\begin{conv}[#1]\begin{leftbar}}
+{\end{leftbar}\end{conv}}
+\newtheorem{quest}[theo]{Question}
+\newenvironment{algorithm}[1][]
+{\begin{quest}[#1]\begin{leftbar}}
+{\end{leftbar}\end{quest}}
+\newtheorem{warn}[theo]{Warning}
+\newenvironment{conclusion}[1][]
+{\begin{warn}[#1]\begin{leftbar}}
+{\end{leftbar}\end{warn}}
+\newtheorem{conj}[theo]{Conjecture}
+\newenvironment{conjecture}[1][]
+{\begin{conj}[#1]\begin{leftbar}}
+{\end{leftbar}\end{conj}}
+\newtheorem{exam}[theo]{Example}
+\newenvironment{example}[1][]
+{\begin{exam}[#1]\begin{leftbar}}
+{\end{leftbar}\end{exam}}
+\newtheorem{exmp}[exer]{Exercise}
+\newenvironment{exercise}[1][]
+{\begin{exmp}[#1]\begin{leftbar}}
+{\end{leftbar}\end{exmp}}
+\newenvironment{statement}{\begin{quote}}{\end{quote}}
+\iffalse
+\newenvironment{proof}[1][Proof]{\noindent\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+\fi
+\let\sumnonlimits\sum
+\let\prodnonlimits\prod
+\let\cupnonlimits\bigcup
+\let\capnonlimits\bigcap
+\renewcommand{\sum}{\sumnonlimits\limits}
+\renewcommand{\prod}{\prodnonlimits\limits}
+\renewcommand{\bigcup}{\cupnonlimits\limits}
+\renewcommand{\bigcap}{\capnonlimits\limits}
+\setlength\tablinesep{3pt}
+\setlength\arraylinesep{3pt}
+\setlength\extrarulesep{3pt}
+\voffset=0cm
+\hoffset=-0.7cm
+\setlength\textheight{22.5cm}
+\setlength\textwidth{15.5cm}
+\newenvironment{verlong}{}{}
+\newenvironment{vershort}{}{}
+\newenvironment{noncompile}{}{}
+\excludecomment{verlong}
+\includecomment{vershort}
+\excludecomment{noncompile}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\rev}{\operatorname{rev}}
+\newcommand{\conncomp}{\operatorname{conncomp}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\powset}[2][]{\ifthenelse{\equal{#2}{}}{\mathcal{P}\left(#1\right)}{\mathcal{P}_{#1}\left(#2\right)}}
+% $\powset[k]{S}$ stands for the set of all $k$-element subsets of
+% $S$. The argument $k$ is optional, and if not provided, the result
+% is the whole powerset of $S$.
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+% $\set{...}$ yields $\left\{ ... \right\}$.
+\newcommand{\abs}[1]{\left| #1 \right|}
+% $\abs{...}$ yields $\left| ... \right|$.
+\newcommand{\tup}[1]{\left( #1 \right)}
+% $\tup{...}$ yields $\left( ... \right)$.
+\newcommand{\ive}[1]{\left[ #1 \right]}
+% $\ive{...}$ yields $\left[ ... \right]$.
+\newcommand{\verts}[1]{\operatorname{V}\left( #1 \right)}
+% $\verts{...}$ yields $\operatorname{V}\left( ... \right)$.
+\newcommand{\edges}[1]{\operatorname{E}\left( #1 \right)}
+% $\edges{...}$ yields $\operatorname{E}\left( ... \right)$.
+\newcommand{\arcs}[1]{\operatorname{A}\left( #1 \right)}
+% $\arcs{...}$ yields $\operatorname{A}\left( ... \right)$.
+\newcommand{\underbrack}[2]{\underbrace{#1}_{\substack{#2}}}
+% $\underbrack{...1}{...2}$ yields
+% $\underbrace{...1}_{\substack{...2}}$. This is useful for doing
+% local rewriting transformations on mathematical expressions with
+% justifications.
+\ihead{Math 5707 Spring 2017 (Darij Grinberg): homework set 2}
+\ohead{page \thepage}
+\cfoot{}
+\begin{document}
+
+\begin{center}
+\textbf{Math 5707 Spring 2017 (Darij Grinberg): homework set 2}
+
+\textbf{Solution sketches.}
+\end{center}
+
+\tableofcontents
+
+\subsection{Notations and conventions}
+
+See the
+\href{http://www-users.math.umn.edu/~dgrinber/5707s17/nogra.pdf}{lecture notes}
+and also the
+\href{http://www-users.math.umn.edu/~dgrinber/5707s17/}{handwritten notes}
+for relevant material.
+If you reference results from the lecture notes, please \textbf{mention the date and time} of the version of the notes you are using (as the numbering changes during updates).
+
+Let me recall a few notations:
+\begin{itemize}
+\item A \textit{simple graph} is a pair $\tup{V, E}$, where $V$ is a
+      finite set and where $E$ is a subset of $\powset[2]{V}$.
+      The set $V$ is called the \textit{vertex set} of the simple
+      graph (and the elements of $V$ are called the \textit{vertices}
+      of the simple graph),
+      whereas the set $E$ is called the \textit{edge set} of the
+      simple graph (and the elements of $E$ are called the
+      \textit{edges} of the simple graph).
+\item A \textit{multigraph} is a triple $\tup{V, E, \phi}$, where $V$
+      and $E$ are finite sets and where $\phi$ is a map from $E$ to
+      $\powset[2]{V}$. The set $V$ is called the \textit{vertex set}
+      of the multigraph (and the elements of $V$ are called the
+      \textit{vertices} of the multigraph); the set $E$ is called the
+      \textit{edge set} of the multigraph (and the elements of $E$ are
+      called the \textit{edges} of the multigraph); the map $\phi$ is
+      called the \textit{endpoint map} of the multigraph. If $e$ is an
+      edge of the multigraph, then the two elements of $\phi\tup{e}$
+      are called the \textit{endpoints} of $e$.
+\item A \textit{digraph} is a pair $\tup{V, A}$, where $V$ is a
+      finite set and where $A$ is a subset of $V \times V$. The set
+      $V$ is called the \textit{vertex set} of the digraph (and the
+      elements of $V$ are called the \textit{vertices} of the
+      digraph); the set $A$ is called the \textit{arc set} of the
+      digraph (and the elements of $A$ are called the \textit{arcs}
+      of the digraph). If $\tup{v, w}$ is an arc of the digraph, then
+      $v$ is called the \textit{source} of this arc, and $w$ is called
+      the \textit{target} of this arc. If the source of an arc equals
+      its target, then this arc is said to be a \textit{loop}.
+\item A \textit{multidigraph} is a triple $\tup{V, A, \phi}$, where
+      $V$ and $A$ are finite sets and where $\phi$ is a map from $A$
+      to $V \times V$. The set $V$ is called the \textit{vertex set}
+      of the multidigraph (and the elements of $V$ are called the
+      \textit{vertices} of the multidigraph); the set $A$ is called
+      the \textit{arc set} of the multidigraph (and the elements of
+      $A$ are called the \textit{arcs} of the multidigraph). If $a$
+      is an arc of the multidigraph, and if
+      $\tup{v, w} = \phi\tup{a}$, then $v$ is called the
+      \textit{source} of this arc, and $w$ is called the
+      \textit{target} of this arc.
+\item If $u$ and $v$ are two vertices of a simple graph $G$, then we
+      use the shorthand notation $uv$ for the set $\set{u, v}$ (even
+      if this set is not an arc of $G$, and even if it is not a
+      two-element set). If $u$ and $v$ are two vertices of a digraph
+      $G$, then we use the shorthand notation $uv$ for the pair
+      $\tup{u, v}$. We hope the two notations will not be confused.
+\item A \textit{walk} in a simple graph $G$ (or in a digraph $G$) is
+      defined to be a list of the form $\tup{v_0, v_1, \ldots, v_k}$,
+      where $v_0, v_1, \ldots, v_k$ are vertices of $G$, and where
+      $v_i v_{i+1}$ is an edge of $G$ (or an arc of $G$, respectively)
+      for each $i \in \set{0, 1, \ldots, k-1}$. Here, the meaning of
+      $v_i v_{i+1}$ depends on whether $G$ is a simple graph or a
+      digraph (namely, it means a set in the former case,
+      and a pair in the latter). \\
+      A \textit{walk} in a multigraph $G$ is defined to be a list of
+      the form
+      $\tup{v_0, e_1, v_1, e_2, v_2, \ldots, e_k, v_k}$, where
+      $v_0, v_1, \ldots, v_k$ are vertices of $G$, and where $e_i$ is
+      an edge of $G$ having endpoints $v_{i-1}$ and $v_i$ for each
+      $i \in \set{1, 2, \ldots, k}$. \\
+      A \textit{walk} in a multidigraph $G$ is defined to be a list of
+      the form $\tup{v_0, a_1, v_1, a_2, v_2, \ldots, a_k, v_k}$,
+      where $v_0, v_1, \ldots, v_k$ are vertices of $G$, and where
+      $a_i$ is an arc of $G$ having source $v_{i-1}$ and target $v_i$
+      for each $i \in \set{1, 2, \ldots, k}$. \\
+      In each of these cases, the \textit{vertices} of the walk are
+      defined to be $v_0, v_1, \ldots, v_k$. Moreover, $v_0$ is called
+      the \textit{starting point} of the walk, and $v_k$ is called the
+      \textit{ending point} of the walk. The \textit{edges} of the
+      walk are defined to be $v_0 v_1, v_1 v_2, \ldots, v_{k-1} v_k$
+      (if $G$ is a simple graph) or
+      $e_1, e_2, \ldots, e_k$ (if $G$ is a multigraph). The
+      \textit{arcs} of the walk are defined to be
+      $v_0 v_1, v_1 v_2, \ldots, v_{k-1} v_k$
+      (if $G$ is a digraph) or
+      $a_1, a_2, \ldots, a_k$ (if $G$ is a multidigraph).
+\item A \textit{path} in a simple graph $G$ (or in a digraph $G$, or
+      in a multigraph $G$, or in a multidigraph $G$) means a walk in
+      $G$ such that the vertices of the walk are distinct.
+\item A \textit{circuit} in a simple graph $G$ (or in a digraph $G$,
+      or in a multigraph $G$, or in a multidigraph $G$) means a walk
+      in $G$ such that the starting point of the walk equals the
+      ending point of the walk. \\
+      If $v_0, v_1, \ldots, v_k$ are the vertices of a circuit
+      $\mathbf{c}$, then $v_0, v_1, \ldots, v_{k-1}$ are called the
+      \textit{non-ultimate vertices} of $\mathbf{c}$.
+\item A \textit{cycle} in a simple graph $G$ means a circuit
+      $\tup{v_0, v_1, \ldots, v_k}$ in $G$ such that the vertices
+      $v_0, v_1, \ldots, v_{k-1}$ are distinct and such that
+      $k \geq 3$. \\
+      A \textit{cycle} in a digraph $G$ means a circuit
+      $\tup{v_0, v_1, \ldots, v_k}$ in $G$ such that the vertices
+      $v_0, v_1, \ldots, v_{k-1}$ are distinct and such that
+      $k \geq 1$. (In particular, each loop $\tup{v, v}$ gives rise to
+      a cycle.) \\
+      A \textit{cycle} in a multigraph $G$ means a circuit
+      $\tup{v_0, e_1, v_1, e_2, v_2, \ldots, e_k, v_k}$ such that the
+      vertices $v_0, v_1, \ldots, v_{k-1}$ are distinct, the edges
+      $e_1, e_2, \ldots, e_k$ are also distinct, and such that
+      $k \geq 2$. \\
+      A \textit{cycle} in a multidigraph $G$ means a circuit
+      $\tup{v_0, a_1, v_1, a_2, v_2, \ldots, a_k, v_k}$ in $G$ such
+      that the vertices $v_0, v_1, \ldots, v_{k-1}$ are distinct and
+      such that $k \geq 1$.
+\item A simple graph $G$ (or multigraph $G$, or digraph $G$, or
+      multidigraph $G$) is said to be \textit{strongly connected} if
+      its vertex set is nonempty\footnote{Do not forget this
+      requirement!} and it has the property that for any two vertices
+      $u$ and $v$ of $G$, there exists at least one walk from $u$ to
+      $v$ in $G$. (Note that if there exists a walk from $u$ to $v$ in
+      $G$, then there also exists a path from $u$ to $v$ in $G$.)
+      \par
+      When $G$ is a simple graph or a multigraph, we usually say
+      ``$G$ is connected'' instead of ``$G$ is strongly connected''.
+\item A \textit{Hamiltonian path} in a simple graph $G$ (or multigraph
+      $G$, or digraph $G$, or multidigraph $G$) means a path
+      $\mathbf{p}$ in $G$ such that each vertex of $G$ appears
+      exactly once among the vertices of $\mathbf{p}$.
+\item A \textit{Hamiltonian cycle} in a simple graph $G$ (or
+      multigraph $G$, or digraph $G$, or multidigraph $G$) means a
+      cycle $\mathbf{c}$ of $G$ such that each vertex of $G$ appears
+      exactly once among the non-ultimate vertices of $\mathbf{c}$.
+\item A walk $\mathbf{w}$ in a simple graph $G$ (or multigraph $G$) is
+      said to be \textit{Eulerian} if each edge of $G$ appears exactly
+      once among the edges of $\mathbf{w}$. \\
+      A walk $\mathbf{w}$ in a digraph $G$ (or multidigraph $G$) is
+      said to be \textit{Eulerian} if each arc of $G$ appears exactly
+      once among the arcs of $\mathbf{w}$. \\
+      Notice that this automatically defines the notion of an Eulerian
+      circuit (namely, an Eulerian circuit is just a circuit that is
+      Eulerian).
+\end{itemize}
+
+\subsection{Exercise \ref{exe.hw2.hamilGxH}: Hamiltonian paths in
+Cartesian product graphs}
+
+\begin{exercise} \label{exe.hw2.hamilGxH}
+Let $G$ and $H$ be two simple graphs. The \textit{Cartesian product} of $G$
+and $H$ is a new simple graph, denoted $G \times H$, which is defined as
+follows:
+\begin{itemize}
+\item The vertex set $\verts{G \times H}$ of $G \times H$ is the
+Cartesian product $\verts{G} \times \verts{H}$.
+
+\item A vertex $\tup{g, h}$ of $G \times H$ is adjacent to a vertex
+$\tup{g', h'}$ of $G \times H$ if and only if we have
+\begin{itemize}
+\item \textbf{either} $g = g'$ and $hh' \in \edges{H}$,
+\item \textbf{or} $h = h'$ and $gg' \in \edges{G}$.
+\end{itemize}
+(In particular, exactly one of the two equalities $g = g'$ and $h = h'$
+has to hold when $\tup{g, h}$ is adjacent to $\tup{g', h'}$.)
+\end{itemize}
+
+\textbf{(a)} Recall the $n$-dimensional cube graph $Q_n$ defined for
+each $n \in \NN$. (Its vertices are $n$-tuples $\tup{a_1, a_2, \ldots,
+a_n} \in \set{0, 1}^n$, and two such vertices are adjacent if and only
+if they differ in exactly one entry.) Prove that $Q_n \cong
+Q_{n-1} \times Q_1$ for each positive integer $n$. (Thus, $Q_n$ can
+be obtained from $Q_1$ by repeatedly forming Cartesian products; i.e.,
+it is a ``Cartesian power'' of $Q_1$.)
+
+\textbf{(b)} Assume that each of the graphs $G$ and $H$ has a
+Hamiltonian path. Prove that $G \times H$ has a Hamiltonian path.
+
+\textbf{(c)} Assume that both numbers $\abs{\verts{G}}$ and
+$\abs{\verts{H}}$ are $> 1$, and that at least one of them is even.
+Assume again that each of the graphs $G$ and $H$ has a Hamiltonian
+path. Prove that $G \times H$ has a Hamiltonian cycle.
+
+\end{exercise}
+
+\begin{proof}[Solution sketch to Exercise~\ref{exe.hw2.hamilGxH}.]
+\textbf{(a)} It suffices to check that the map
+\[
+\set{0, 1}^n \to \set{0, 1}^{n-1} \times \set{0, 1}, \qquad
+\tup{a_1, a_2, \ldots, a_n}
+ \mapsto \tup{ \tup{a_1, a_2, \ldots, a_{n-1}}, a_n}
+\]
+is a graph isomorphism from $Q_n$ to $Q_{n-1} \times Q_1$. The proof
+of this is straightforward; the main step is to check that two
+$n$-tuples
+$\tup{a_1, a_2, \ldots, a_n}$ and $\tup{b_1, b_2, \ldots, b_n}$ in
+$\set{0, 1}^n$ differ in exactly one entry (i.e., are adjacent as
+vertices of $Q_n$) if and only if
+\begin{itemize}
+\item \textbf{either} we have
+$\tup{a_1, a_2, \ldots, a_{n-1}} = \tup{b_1, b_2, \ldots, b_{n-1}}$ 
+and $a_n \neq b_n$,
+\item \textbf{or} the $\tup{n-1}$-tuples
+$\tup{a_1, a_2, \ldots, a_{n-1}}$ and
+$\tup{b_1, b_2, \ldots, b_{n-1}}$ 
+differ in exactly one entry (i.e., are adjacent as vertices of
+$Q_{n-1}$) and we have $a_n = b_n$.
+\end{itemize}
+This is obvious.
+
+\textbf{(b)} By assumption, there exists a Hamiltonian path
+$\tup{g_1, g_2, \ldots, g_n}$ of $G$, and there exists a Hamiltonian
+path $\tup{h_1, h_2, \ldots, h_m}$ of $H$. Use these two paths to
+construct the Hamiltonian path
+\begin{align}
+& \left(
+            \tup{g_1, h_1}, \tup{g_1, h_2}, \ldots, \tup{g_1, h_m}, \right. \nonumber \\
+&    \left. \  \tup{g_2, h_m}, \tup{g_2, h_{m-1}}, \ldots, \tup{g_2, h_1}, \right. \nonumber \\
+&    \left. \  \tup{g_3, h_1}, \tup{g_3, h_2}, \ldots, \tup{g_3, h_m}, \right. \nonumber \\
+&    \left. \  \tup{g_4, h_m}, \tup{g_4, h_{m-1}}, \ldots, \tup{g_4, h_1}, \right. \nonumber \\
+&    \left. \  \cdots \right)
+    \label{sol.hw2.hamilGxH.1}
+\end{align}
+in $G \times H$. (This Hamiltonian path first traverses all vertices
+of the form $\tup{g_1, h_i}$ in the order of increasing $i$, then
+traverses all vertices of the form $\tup{g_2, h_i}$ in the order of
+decreasing $i$, then traverses all vertices of the form
+$\tup{g_3, h_i}$ in the order of increasing $i$, and so on, always
+alternating between increasing and decreasing $i$. It ends at the
+vertex $\tup{g_n, h_m}$ if $n$ is odd, and at the vertex
+$\tup{g_n, h_1}$ if $n$ is even. Here is how it looks like:
+\[
+\xymatrix{
+\tup{g_1, h_1} \ar[r] & \tup{g_1, h_2} \ar[r] & \cdots \ar[r] & \tup{g_1, h_m} \ar[d] \\
+\tup{g_2, h_1} \ar[d] & \tup{g_2, h_2} \ar[l] & \cdots \ar[l] & \tup{g_2, h_m} \ar[l] \\
+\tup{g_3, h_1} \ar[r] & \tup{g_3, h_2} \ar[r] & \cdots \ar[r] & \tup{g_3, h_m} \ar[d] \\
+\tup{g_4, h_1} \ar[d] & \tup{g_4, h_2} \ar[l] & \cdots \ar[l] & \tup{g_4, h_m} \ar[l] \\
+\vdots
+}
+\]
+where the arrows merely signify the order in which the vertices are
+traversed by the path (the edges are still undirected).)
+
+\textbf{(c)} At least one of the integers $\abs{\verts{G}}$ and
+$\abs{\verts{H}}$ is even.
+Since
+$G \times H \cong H \times G$ (in fact, there is a graph isomorphism
+$G \times H \to H \times G$ sending each vertex $\tup{v, w}$ of
+$G \times H$ to $\tup{w, v}$), we can WLOG assume that
+$\abs{\verts{G}}$ is even (because otherwise we can simply switch
+$G$ with $H$).
+Assume this, and recall furthermore that $\abs{\verts{H}} > 1$.
+
+By assumption, there exists a Hamiltonian path
+$\tup{g_1, g_2, \ldots, g_n}$ of $G$, and there exists a Hamiltonian
+path $\tup{h_0, h_1, \ldots, h_m}$ of $H$. (Note that I am indexing
+the vertices of the former path from $1$, but indexing the vertices
+of the latter path from $0$.) Thus, $n = \abs{\verts{G}}$ is even.
+Also, $n = \abs{\verts{G}} > 1$.
+Also, $m + 1 = \abs{\verts{H}} > 1$, so that $m > 0$.
+
+Now, consider the path \eqref{sol.hw2.hamilGxH.1}. It is not a
+Hamiltonian path, since it misses the vertices of the form
+$\tup{g_i, h_0}$. But it is a path from $\tup{g_1, h_1}$ to
+$\tup{g_n, h_1}$ (since $n$ is even) that uses each vertex
+\textbf{not} of this form exactly once; thus, we can extend it to
+a Hamiltonian cycle of $G \times H$ by appending the following
+vertices at its end:
+\[
+ \tup{g_n, h_0}, \tup{g_{n-1}, h_0}, \ldots, \tup{g_1, h_0},
+ \tup{g_1, h_1}.
+\]
+(In other words, we close the path by going back to its starting
+point along the missing vertices $\tup{g_i, h_0}$.) Hence, we have
+found a Hamiltonian cycle of $G \times H$.
+
+(Here is how this Hamiltonian cycle looks like:
+\[
+\xymatrix{
+\tup{g_1, h_0} \ar[r] & \tup{g_1, h_1} \ar[r] & \tup{g_1, h_2} \ar[r] & \cdots \ar[r] & \tup{g_1, h_m} \ar[d] \\
+\tup{g_2, h_0} \ar[u] & \tup{g_2, h_1} \ar[d] & \tup{g_2, h_2} \ar[l] & \cdots \ar[l] & \tup{g_2, h_m} \ar[l] \\
+\tup{g_3, h_0} \ar[u] & \tup{g_3, h_1} \ar[r] & \tup{g_3, h_2} \ar[r] & \cdots \ar[r] & \tup{g_3, h_m} \ar[d] \\
+\tup{g_4, h_0} \ar[u] & \tup{g_4, h_1} \ar[d] & \tup{g_4, h_2} \ar[l] & \cdots \ar[l] & \tup{g_4, h_m} \ar[l] \\
+\vdots \ar[u] & \vdots \ar[d] \\
+\tup{g_{n-1}, h_0} \ar[u] & \tup{g_{n-1}, h_1} \ar[r] & \tup{g_{n-1}, h_2} \ar[r] & \cdots \ar[r] & \tup{g_{n-1}, h_m} \ar[d] \\
+\tup{g_n, h_0} \ar[u] & \tup{g_n, h_1} \ar[l] & \tup{g_n, h_2} \ar[l] & \cdots \ar[l] & \tup{g_n, h_m} \ar[l]
+}
+\]
+where the arrows merely signify the order in which the vertices are
+traversed by the cycle (the edges are still undirected).)
+\end{proof}
+
+\subsection{Exercise~\ref{exe.eulertrails.Kn}: Eulerian circuits in
+$K_3$, $K_5$ and $K_7$}
+
+\begin{exercise} \label{exe.eulertrails.Kn}
+Let $n$ be a positive integer. Recall that $K_n$ denotes the complete
+graph on $n$ vertices. This is the graph with vertex set $V =
+\set{1, 2, \ldots, n}$ and edge set $\mathcal{P}_2\tup{V}$ (so each two
+distinct vertices are connected).
+
+Find Eulerian circuits for the graphs $K_3$, $K_5$, and $K_7$.
+\end{exercise}
+
+\begin{proof}[Solution sketch to Exercise~\ref{exe.eulertrails.Kn}.]
+An Eulerian circuit of $K_3$ is $\tup{1, 2, 3, 1}$.
+
+An Eulerian circuit of $K_5$ is
+$\tup{1, 2, 3, 4, 5, 1, 3, 5, 2, 4, 1}$.
+
+An Eulerian circuit of $K_7$ is
+$\tup{1, 2, 3, 4, 5, 6, 7,
+      1, 3, 5, 7, 2, 4, 6,
+      1, 4, 7, 3, 6, 2, 5,
+      1}$.
+
+[\textit{Remark:} Of course, other choices are possible. For each
+odd positive integer $n$, the complete graph $K_n$ has an Eulerian
+circuit (because it is connected, and each of its vertices has even
+degree $n-1$), and so it has at least one Eulerian circuit; but in
+truth, there are many. (How many? See
+\href{http://oeis.org/A007082}{OEIS entry A007082}. There doesn't seem
+to be an explicit formula.)
+
+When $n$ is an odd prime\footnote{Everyone gets confused by the notion
+of an ``odd prime'' at least once in their life. But it means exactly
+what it says: a prime that is odd. In other words, a prime that is
+distinct from $2$.}, there is actually a simple way to construct
+an Eulerian circuit in $K_n$: For each $k \in \set{1, 2, \ldots,
+\tup{n-1}/2}$, let $c_k$ be the cycle $\tup{a_0, a_1, \ldots, a_n}$,
+where $a_i$ denotes the unique element of $\tup{1, 2, \ldots, n}$ that
+is congruent to $ki + 1$ modulo $n$. Then, the cycles $c_1, c_2,
+\ldots, c_{\tup{n-1}/2}$ can be combined to a single Eulerian circuit.
+Finding Eulerian circuits on $K_n$ for non-prime $n$ is harder, but
+of course the algorithm done in class still works.]
+\end{proof}
+
+\subsection{Exercise~\ref{exe.debruijn.1}: de Bruijn sequences exist}
+
+\begin{exercise} \label{exe.debruijn.1}
+Let $n$ be a positive integer, and $K$ be a nonempty finite set.
+Let $k = \abs{K}$.
+A \textit{de Bruijn sequence} of order $n$ on $K$ means a list
+$\tup{c_0, c_1, \ldots, c_{k^n-1}}$ of $k^n$ elements of $K$
+such that
+
+\begin{enumerate}
+\item[(1)] for each
+$n$-tuple $\tup{a_1, a_2, \ldots, a_n} \in K^n$ of elements of $K$,
+there exists a \textbf{unique} $r \in \set{0, 1, \ldots, k^n-1}$ such
+that
+$\tup{a_1, a_2, \ldots, a_n} = \tup{c_r, c_{r+1}, \ldots, c_{r+n-1}}$.
+\end{enumerate}
+
+Here, the indices are understood to be cyclic modulo $k^n$; that is,
+$c_q$ (for $q \geq k^n$) is defined to be $c_{q \% k^n}$, where
+$q \% k^n$ denotes the remainder of $q$ modulo $k^n$.
+
+(Note that the condition (1) can be restated as follows: If we
+write the elements $c_0, c_1, \ldots, c_{k^n-1}$ on a circular
+necklace (in this order), so that the last element $c_{k^n-1}$ is
+followed by the first one, then each $n$-tuple of elements of $K$
+appears as a string of $n$ consecutive elements on the necklace, and
+the position at which it appears on the necklace is unique.)
+
+For example, $\tup{c_0, c_1, c_2, c_3, c_4, c_5, c_6, c_7, c_8}
+= \tup{1, 1, 2, 2, 3, 3, 1, 3, 2}$ is a de Bruijn sequence
+of order $2$ on the set $\set{1, 2, 3}$, because for each $2$-tuple
+$\tup{a_1, a_2} \in \set{1, 2, 3}^2$, there exists a unique $r \in \set{0, 1,
+\ldots, 8}$ such that $\tup{a_1, a_2} = \tup{c_r, c_{r+1}}$. Namely:
+\begin{align*}
+\tup{1, 1} = \tup{c_0, c_1}; \qquad
+\tup{1, 2} = \tup{c_1, c_2}; \qquad
+\tup{1, 3} = \tup{c_6, c_7}; \\
+\tup{2, 1} = \tup{c_8, c_9}; \qquad
+\tup{2, 2} = \tup{c_2, c_3}; \qquad
+\tup{2, 3} = \tup{c_3, c_4}; \\
+\tup{3, 1} = \tup{c_5, c_6}; \qquad
+\tup{3, 2} = \tup{c_7, c_8}; \qquad
+\tup{3, 3} = \tup{c_4, c_5}.
+\end{align*}
+
+Prove that there exists a de Bruijn sequence of order $n$ on $K$
+(no matter what $n$ and $K$ are).
+
+\textbf{Hint:} Let $D$ be the digraph with vertex set $K^{n-1}$ and
+an arc from $\tup{a_1, a_2, \ldots, a_{n-1}}$ to
+$\tup{a_2, a_3, \ldots, a_n}$ for each
+$\tup{a_1, a_2, \ldots, a_n} \in K^n$ (and no other arcs). Prove that
+$D$ has an Eulerian circuit.
+\end{exercise}
+
+\begin{proof}[Solution sketch to Exercise \ref{exe.debruijn.1}.]
+The hint suggests defining a digraph. I shall use a multidigraph
+instead, as this is slightly simpler and cleaner.
+
+Recall that a \textit{multidigraph} means a triple
+$\tup{V, A, \phi}$, where $V$ and $A$ are two finite sets and where
+$\phi$ is a map from $A$ to $V \times V$. We define a multidigraph
+$D$ to be $\tup{K^{n-1}, K^n, f}$, where the map
+$f : K^n \to K^{n-1} \times K^{n-1}$ is given by the formula
+\[
+f\tup{a_1, a_2, \ldots, a_n}
+= \tup{ \tup{a_1, a_2, \ldots, a_{n-1}},
+        \tup{a_2, a_3, \ldots, a_n} }.
+\]
+(As usual, we write $f\tup{a_1, a_2, \ldots, a_n}$ for
+$f\tup{\tup{a_1, a_2, \ldots, a_n}}$, since the extra parentheses do
+not add any clarity.) Thus, in the multidigraph $D$, there is an arc
+from $\tup{a_1, a_2, \ldots, a_{n-1}}$ to
+$\tup{a_2, a_3, \ldots, a_n}$ for each
+$\tup{a_1, a_2, \ldots, a_n} \in K^n$. (Note that if $n = 1$, then
+there is only one vertex, namely the empty $0$-tuple $\tup{}$, but
+there are $\abs{K}$ many arcs from it to itself. This is why we are
+using a multidigraph instead of a digraph. Of course, you are free to
+throw the $n = 1$ case aside, seeing how easy it is to handle
+separately.)
+
+Recall that the \textit{indegree} of a vertex $v$ of a multidigraph
+$\tup{V, A, \phi}$ is defined to be the number of all arcs $a \in A$
+whose target is $v$ (that is, which satisfy $\phi\tup{a} = \tup{x, v}$
+for some $x \in V$). This indegree is denoted by $\deg^- v$.
+Also, the \textit{outdegree} of a vertex $v$ of a multidigraph
+$\tup{V, A, \phi}$ is defined to be the number of all arcs $a \in A$
+whose source is $v$ (that is, which satisfy $\phi\tup{a} = \tup{v, x}$
+for some $x \in V$). This outdegree is denoted by $\deg^+ v$.
+
+Recall that a multidigraph $\tup{V, A, \phi}$ is said to be
+\textit{strongly connected} if $V \neq \varnothing$ and if, for any
+$u \in V$ and $v \in V$, there is at least one walk from $u$ to $v$
+in the multidigraph.
+The multidigraph $D$ is strongly connected\footnote{\textit{Proof.}
+Let $u \in K^{n-1}$ and $v \in K^{n-1}$. We must prove that there is
+at least one walk from $u$ to $v$ in $D$. Write the $\tup{n-1}$-tuples
+$u$ and $v$ as $u = \tup{u_1, u_2, \ldots, u_{n-1}}$ and
+$v = \tup{v_1, v_2, \ldots, v_{n-1}}$, respectively.
+Then, the walk
+\begin{align*}
+& \left( \tup{u_1, u_2, u_3, u_4, \ldots, u_{n-1}} , \tup{u_1, u_2, u_3, u_4, \ldots, u_{n-1}, v_1} , \right. \\
+& \left. \phantom{u_1, } \tup{u_2, u_3, u_4, \ldots, u_{n-1}, v_1} , \tup{u_2, u_3, u_4, \ldots, u_{n-1}, v_1, v_2} , \right. \\
+& \left. \phantom{u_1, u_2, } \tup{u_3, u_4, \ldots, u_{n-1}, v_1, v_2} , \tup{u_3, u_4, \ldots, u_{n-1}, v_1, v_2, v_3} , \right. \\
+& \left. \phantom{u_1, u_2, u_3, } \cdots , \right. \\
+& \left. \phantom{u_1, u_2, u_3, u_4, \ldots, } \tup{u_{n-1}, v_1, v_2, \ldots, v_{n-2}} , \tup{u_{n-1}, v_1, v_2, \ldots, v_{n-2}, v_{n-1}} , \right. \\
+& \left. \phantom{u_1, u_2, u_3, u_4, \ldots, u_{n-1}, } \tup{v_1, v_2, \ldots, v_{n-2}, v_{n-1}} \right)
+\end{align*}
+is a walk from $u$ to $v$ in $D$. Hence, such a walk exists.}.
+Moreover, each vertex $v \in K^{n-1}$ satisfies
+$\deg^- v = \deg^+ v$ (where both indegree and outdegree are taken
+respective to the multidigraph $D$)\ \ \ \ \footnote{\textit{Proof.}
+Let $v \in K^{n-1}$. Write the $\tup{n-1}$-tuple $v$ in the form
+$v = \tup{v_1, v_2, \ldots, v_{n-1}}$.
+Now, $\deg^- v$ is the number of arcs of $D$
+with target $v$. But these arcs are exactly the $n$-tuples of the
+form $\tup{k, v_1, v_2, \ldots, v_{n-1}} \in K^n$ with $k \in K$
+(by the definition of the multidigraph $D$). Hence, there are
+exactly $\abs{K}$ of them. Therefore, $\deg^- v = \abs{K}$ (since
+$\deg^- v$ is the number of these arcs). Similarly,
+$\deg^+ v = \abs{K}$. Thus, $\deg^- v = \abs{K} = \deg^+ v$.}.
+
+Recall that a multidigraph has an Eulerian circuit if and only if it
+is strongly connected and each vertex $v$ satisfies
+$\deg^- v = \deg^+ v$. Hence, the multidigraph $D$ has an Eulerian
+circuit (since it is strongly connected and each vertex $v$ satisfies
+$\deg^- v = \deg^+ v$). Consider such an Eulerian circuit
+$\mathbf{c}$. It contains
+each arc of $D$ exactly once, and thus has $k^n$ arcs (since
+the number of arcs of $D$ is $\abs{K^n} = \abs{K}^n = k^n$).
+Let $p_0, p_1, \ldots, p_{k^n-1}$ be these arcs (listed in the order
+in which they appear on the Eulerian circuit). We extend the
+indexing of these arcs modulo $k^n$; in other words, we set
+$p_i = p_{i \% k^n}$ for each $i \in \ZZ$. (This, of course, does not
+conflict with the already introduced notations 
+$p_0, p_1, \ldots, p_{k^n-1}$, since each
+$i \in \set{0, 1, \ldots, k^n-1}$ satisfies $i \% k^n = i$.)
+
+Let me now explain what I intend to do before I go into the
+technical details. We want to construct a de Bruijn sequence
+$\tup{c_0, c_1, \ldots, c_{k^n-1}}$. I claim that the sequence
+of the first entries of the $n$-tuples $p_0, p_1, \ldots, p_{k^n-1}$
+is such a de Bruijn sequence. Once this is proven, the exercise
+will clearly be solved.
+
+For each $n$-tuple $h$ and each $j \in \set{1, 2, \ldots, n}$,
+we will denote the $j$-th entry of $h$ by $h\ive{j}$. So each
+$n$-tuple $h$ has the form
+$h = \tup{h\ive{1}, h\ive{2}, \ldots, h\ive{n}}$.
+Now, I claim that
+\begin{equation}
+p_i\ive{j+1} = p_{i+1}\ive{j}
+\qquad \text{ for each } i \in \ZZ
+\text{ and } j \in \set{1, 2, \ldots, n-1}
+\label{pf.debruijn.1.rec.one-step}
+\end{equation}
+\footnote{\textit{Proof of \eqref{pf.debruijn.1.rec.one-step}.}
+Let $i \in \ZZ$. The arc $p_{i+1}$ immediately follows the arc
+$p_i$ on the Eulerian circuit $\mathbf{c}$. Hence, the target of
+the arc $p_i$ is the source of the arc $p_{i+1}$. But by the
+definition of the multidigraph $D$, the former target is
+$\tup{p_i\ive{2}, p_i\ive{3}, \ldots, p_i\ive{n}}$, whereas the
+latter source is
+$\tup{p_{i+1}\ive{1}, p_{i+1}\ive{2}, \ldots, p_{i+1}\ive{n-1}}$.
+Hence, we have shown that
+$\tup{p_i\ive{2}, p_i\ive{3}, \ldots, p_i\ive{n}}
+= \tup{p_{i+1}\ive{1}, p_{i+1}\ive{2}, \ldots, p_{i+1}\ive{n-1}}$.
+In other words, $p_i\ive{j+1} = p_{i+1}\ive{j}$ for each
+$j \in \set{1, 2, \ldots, n-1}$. This proves
+\eqref{pf.debruijn.1.rec.one-step}.}. Hence,
+\begin{equation}
+p_i\ive{j+g} = p_{i+g}\ive{j}
+\qquad \text{ for each } i \in \ZZ \text{ and } g \in \NN
+\text{ and } j \in \set{1, 2, \ldots, n-g}
+\label{pf.debruijn.1.rec.g-steps}
+\end{equation}
+\footnote{Indeed, \eqref{pf.debruijn.1.rec.g-steps} can easily
+be proven by induction on $g$, using
+\eqref{pf.debruijn.1.rec.one-step} in the induction step.}.
+From this, we can easily obtain
+\begin{equation}
+\tup{p_i\ive{1}, p_{i+1}\ive{1}, \ldots, p_{i+n-1}\ive{1}}
+= p_i
+\qquad \text{ for each } i \in \ZZ
+\label{pf.debruijn.1.=pi}
+\end{equation}
+\footnote{\textit{Proof.} Let $i \in \ZZ$. Then,
+\eqref{pf.debruijn.1.rec.g-steps} (applied to $j=1$) shows that
+$p_i\ive{1+g} = p_{i+g}\ive{1}$ for each
+$g \in \set{0,1,\ldots,n-1}$. In other words,
+$\tup{p_i\ive{1}, p_i\ive{2}, \ldots, p_i\ive{n}}
+= \tup{p_i\ive{1}, p_{i+1}\ive{1}, \ldots, p_{i+n-1}\ive{1}}$.
+Therefore,
+$\tup{p_i\ive{1}, p_{i+1}\ive{1}, \ldots, p_{i+n-1}\ive{1}}
+= \tup{p_i\ive{1}, p_i\ive{2}, \ldots, p_i\ive{n}}
+= p_i$.}.
+
+Now, recall that $p_0, p_1, \ldots, p_{k^n-1}$ are the arcs
+of an Eulerian circuit of $D$. Hence, each arc of $D$ appears
+exactly once in the list $\tup{p_0, p_1, \ldots, p_{k^n-1}}$.
+In other words, for each arc $a$ of $D$, there exists a unique
+$r \in \set{0, 1, \ldots, k^n-1}$ such that $a = p_i$.
+Since the arcs of $D$ are the $n$-tuples in $K^n$, we can
+rewrite this as follows: For each $n$-tuple $a \in K^n$,
+there exists a unique
+$r \in \set{0, 1, \ldots, k^n-1}$ such that $a = p_r$. Since
+each $r \in \ZZ$ satisfies
+$\tup{p_r\ive{1}, p_{r+1}\ive{1}, \ldots, p_{r+n-1}\ive{1}}
+= p_r$ (by \eqref{pf.debruijn.1.=pi}, applied to $i=r$),
+this further rewrites as follows:
+For each $n$-tuple $a \in K^n$,
+there exists a unique $r \in \set{0, 1, \ldots, k^n-1}$
+such that
+$a = \tup{p_r\ive{1}, p_{r+1}\ive{1}, \ldots, p_{r+n-1}\ive{1}}$.
+Renaming $a$ as $\tup{a_1, a_2, \ldots, a_n}$ in this result,
+we obtain the following:
+For each
+$n$-tuple $\tup{a_1, a_2, \ldots, a_n} \in K^n$ of elements of $K$,
+there exists a unique $r \in \set{0, 1, \ldots, k^n-1}$ such
+that
+$\tup{a_1, a_2, \ldots, a_n}
+= \tup{p_r\ive{1}, p_{r+1}\ive{1}, \ldots, p_{r+n-1}\ive{1}}$.
+In other words, the list
+$\tup{p_0\ive{1}, p_1\ive{1}, \ldots, p_{k^n-1}\ive{1}}$ is a
+de Bruijn sequence of order $n$ on $K$ (because the indices are
+cyclic modulo $k^n$, so the result in the previous sentence is
+precisely what is required in the definition of a de Bruijn
+sequence). Therefore, there exists a de Bruijn sequence of order
+$n$ on $K$.
+
+[\textit{Remark:} The underlying philosophy of this solution was
+to reduce the question of the existence of a de Bruijn sequence
+to the existence of an Eulerian circuit in a multidigraph. At a
+first glance, this appears unexpected, since it seems more natural
+to model a de Bruijn sequence by a Hamiltonian cycle (in a different
+multidigraph) instead. However, there are few good criteria for the
+existence of a Hamiltonian cycle, whereas the existence of an
+Eulerian circuit is easy to check. This is why modelling
+de Bruijn sequences by Eulerian circuits proves to be the more
+useful approach.
+
+This exercise is merely the starting point of a theory. For example,
+it is generalized by the following theorem:
+\begin{theorem} \label{sol.debruijn.1.gen}
+Let $d$ and $m$ be two positive integers such that $d \mid m$ and
+$d > 1$. Then, there exists a permutation
+$\tup{x_1, x_2, \ldots, x_m}$ of the list $\tup{0, 1, \ldots, m-1}$
+with the following property:
+For each $i \in \set{1, 2, \ldots, m}$, we have
+$x_{i+1} \equiv d x_i + r_i \mod m$ for some
+$r_i \in \set{0, 1, \ldots, d-1}$. (Here, $x_{m+1}$ should be
+understood as $x_1$.)
+\end{theorem}
+
+Why does Theorem~\ref{sol.debruijn.1.gen} generalize
+Exercise~\ref{exe.debruijn.1}? Well, if $m = d^n$ is a power of $d$,
+then we can identify
+the integers $0, 1, \ldots, d-1$ with $n$-tuples of elements of
+$\set{0, 1, \ldots, d-1}$ (by representing them in base $d$, including
+just enough leading zeroes to ensure that they all have $n$ digits).
+Thus, Theorem~\ref{sol.debruijn.1.gen} turns into
+Exercise~\ref{exe.debruijn.1} in this
+case. With some work, the solution of Exercise~\ref{exe.debruijn.1}
+can be extended to a proof of Theorem~\ref{sol.debruijn.1.gen}.
+(Some work is required to prove that the digraph is still strongly
+connected.) Note that
+\href{https://anhngq.files.wordpress.com/2010/07/imo-2002-shortlist.pdf}{IMO Shortlist 2002}
+problem C6 is equivalent to the $d = 2$ particular case of
+Theorem~\ref{sol.debruijn.1.gen}.
+
+For more variations on the notion of a de Bruijn sequence, see
+\cite{ChDiGr92}. There are several
+questions left open in that paper, some of which are apparently still
+unsolved.
+
+On the other hand, we can also ask ourselves: How many de Bruijn
+sequences of order $n$ exist for a given $n$ and $K$ ?
+Interestingly, the answer is very explicit: The number of all
+de Bruijn sequences of order $n$ is
+\[
+ k!^{k^{n-1}} ,
+ \qquad \text{ where } k = \abs{K} .
+\]
+\footnote{Some authors treat two de Bruijn sequences as equal
+if one of them is obtained from the other by cyclic rotation.
+With that convention, the number has to be divided by $k^n$.}
+This is proven in the case of $K = \set{0, 1}$ in
+\cite[Corollary 10.11]{Stanley13}. The general case can be proven
+along the same lines.]
+\end{proof}
+
+\subsection{Exercise~\ref{exe.digraph.indeg=outdeg}: Indegrees and
+outdegrees in digraphs}
+
+Recall that the \textit{indegree} of a vertex $v$ of a digraph
+$D = \tup{V, A}$ is defined to be the number of all arcs $a \in A$
+whose target is $v$. This indegree is denoted by
+$\deg^-\tup{v}$ or by $\deg^-_D\tup{v}$ (whenever the graph $D$ is not
+clear from the context).
+
+Likewise, the \textit{outdegree} of a vertex $v$ of a digraph
+$D = \tup{V, A}$ is defined to be the number of all arcs $a \in A$
+whose source is $v$. This outdegree is denoted by
+$\deg^+\tup{v}$ or by $\deg^+_D\tup{v}$ (whenever the graph $D$ is not
+clear from the context).
+
+\begin{exercise} \label{exe.digraph.indeg=outdeg}
+Let $D$ be a digraph. Show that
+$\sum_{v \in \verts{D}} \deg^-\tup{v}
+= \sum_{v \in \verts{D}} \deg^+\tup{v}$.
+\end{exercise}
+
+\begin{proof}[Solution to Exercise~\ref{exe.digraph.indeg=outdeg}.]
+Let us actually prove a somewhat more general fact:
+\begin{statement}
+\textit{Fact 1.} Let $\tup{V, A, \phi}$ be a
+multidigraph.
+%\footnote{See the solution to
+%Exercise~\ref{exe.debruijn.1} above for the definition of
+%a multidigraph, and for the definitions of indegrees and
+%outdegrees of vertices of a multidigraph.}.
+Then,
+$\sum_{v \in V} \deg^- v = \sum_{v \in V} \deg^+ v$.
+\end{statement}
+
+Fact 1 generalizes Exercise~\ref{exe.digraph.indeg=outdeg},
+because each digraph $D = \tup{V, A}$ gives rise to a
+multidigraph $\tup{V, A, \id_A}$, and the indegrees and
+the outdegrees of the vertices of the former digraph are
+exactly the same as in the latter multidigraph. Hence,
+proving Fact 1 will suffice.
+
+\begin{proof}[Proof of Fact 1.] For each arc $a \in A$, let
+$s \tup{a}$ denote the source of $a$, and let $t \tup{a}$ denote the
+target of $a$. (Thus, each $a \in A$ satisfies
+$\phi \tup{a} = \tup{ s \tup{a}, t \tup{a} }$.)
+
+Now, let us count the number of arcs $a \in A$ of our multidigraph in
+two different ways:
+
+\begin{itemize}
+\item Each arc $a \in A$ has a unique source $s \tup{a}$. Thus, we can
+obtain the number $\abs{A}$ of all arcs $a \in A$ by computing,
+for each $v \in V$, the number of all arcs $a \in A$ satisfying
+$s \tup{a} = v$, and then adding up these
+numbers over all $v \in V$. Thus, we obtain
+\begin{equation}
+\abs{A}
+= \sum_{v \in V}
+  \underbrace{\left(\text{the number of all } a \in A
+                \text{ satisfying } s \tup{a} = v \right)}_{
+              \substack{= \deg^+ v \\
+                \text{(by the definition of the outdegree } \deg^+ v
+                \text{ of } v \text{})}}
+= \sum_{v \in V} \deg^+ v .
+\label{sol.digraph.indeg=outdeg.2}
+\end{equation}
+
+\item Each arc $a \in A$ has a unique target $t \tup{a}$. Thus, we can
+obtain the number $\abs{A}$ of all arcs $a \in A$ by computing,
+for each $v \in V$, the number of all arcs $a \in A$ satisfying
+$t \tup{a} = v$, and then adding up these
+numbers over all $v \in V$. Thus, we obtain
+\begin{equation}
+\abs{A}
+= \sum_{v \in V}
+  \underbrace{\left(\text{the number of all } a \in A
+                \text{ satisfying } t \tup{a} = v \right)}_{
+              \substack{= \deg^- v \\
+                \text{(by the definition of the indegree } \deg^- v
+                \text{ of } v \text{})}}
+= \sum_{v \in V} \deg^- v .
+\label{sol.digraph.indeg=outdeg.1}
+\end{equation}
+\end{itemize}
+
+Comparing \eqref{sol.digraph.indeg=outdeg.1} with
+\eqref{sol.digraph.indeg=outdeg.2}, we obtain
+$\sum_{v \in V} \deg^- v = \sum_{v \in V} \deg^+ v$.
+This proves Fact 1.
+\end{proof}
+\end{proof}
+
+\subsection{Exercise~\ref{exe.tourn.num3cycs}: Counting $3$-cycles in
+tournaments}
+
+The next few exercises are about \textit{tournaments}. A
+\textit{tournament} is a loopless\footnote{A digraph $\tup{V, A}$ is
+said to be \textit{loopless} if it has no loops. (A \textit{loop}
+means an arc of the form $\tup{v, v}$ for some $v \in V$.)} digraph
+$D = \tup{V, A}$ with the following
+property: For any two distinct vertices $u \in V$ and $v \in V$,
+\textbf{precisely} one of the two pairs $\tup{u, v}$ and $\tup{v, u}$
+belongs to $A$. (In other words, any two distinct vertices are
+connected by an arc in one direction, but not in both.)
+
+A \textit{$3$-cycle}\footnote{Note that our
+notions of $3$-cycles and of cycles are somewhat different in nature:
+A $3$-cycle is a triple of distinct vertices, whereas a cycle of
+length $k$ is a $\tup{k+1}$-tuple of vertices with its first and its
+last entry being the same vertex. Thus, a $3$-cycle $\tup{u, v, w}$ is
+not in itself a cycle, but rather corresponds to the cycle
+$\tup{u, v, w, u}$. But, of course, the $3$-cycles are in bijection
+with the cycles of length $3$; thus, the difference between these two
+notions is merely notational.} in a tournament $D = \tup{V, A}$ means
+a triple $\tup{u, v, w}$ of vertices in $V$ such that all three pairs
+$\tup{u, v}$, $\tup{v, w}$ and $\tup{w, u}$ belong to $A$.
+
+\begin{exercise} \label{exe.tourn.num3cycs}
+Let $D = \tup{V, A}$ be a tournament.
+Set $n = \abs{V}$ and $m = \sum_{v \in V} \dbinom{\deg^-\tup{v}}{2}$.
+
+\textbf{(a)} Show that $m = \sum_{v \in V} \dbinom{\deg^+\tup{v}}{2}$.
+
+\textbf{(b)} Show that the number of $3$-cycles in $D$ is
+$3\tup{\dbinom{n}{3} - m}$.
+\end{exercise}
+
+\begin{proof}[Solution sketch to Exercise~\ref{exe.tourn.num3cycs}.]
+Let us introduce some convenient notations for this exercise:
+\begin{itemize}
+\item A \textit{3-set} shall mean a $3$-element subset of $V$.
+Clearly, the number of all 3-sets is $\dbinom{n}{3}$ (since
+$\abs{V} = n$).
+\item A 3-set $\set{u, v, w}$ is said to be \textit{cyclic} if its
+elements in \textbf{some} order form a $3$-cycle (i.e., if one of the
+triples $\tup{u, v, w}$, $\tup{u, w, v}$, $\tup{v, u, w}$,
+$\tup{v, w, u}$, $\tup{w, u, v}$ and $\tup{w, v, u}$ is a $3$-cycle).
+\item A 3-set $\set{u, v, w}$ is said to be \textit{acyclic} if it is
+not cyclic.
+\item We say that a 3-set $S$ is \textit{sourced} at a vertex
+$u \in V$ if this vertex $u$ belongs to $S$ and if the arcs $uv$ and
+$uw$ are in $A$, where $v$ and $w$ are the two vertices of $S$
+distinct from $u$.
+\item We say that a 3-set $S$ is \textit{targeted} at a vertex
+$u \in V$ if this vertex $u$ belongs to $S$ and if the arcs $vu$ and
+$wu$ are in $A$, where $v$ and $w$ are the two vertices of $S$
+distinct from $u$.
+\end{itemize}
+
+\textbf{(a)} Let us count the number of all acyclic 3-sets in two
+different ways.
+
+First, we make a few observations:
+
+\begin{statement}
+\textit{Observation 1:} Let $u$, $v$ and $w$ be three distinct
+vertices in $V$ such that the arcs $uv$ and $uw$ are in $A$.
+Then, $\set{u, v, w}$ is an acyclic 3-set sourced at $u$.
+\end{statement}
+\begin{proof}[Proof of Observation 1.]
+Trivial.
+\end{proof}
+
+\begin{statement}
+\textit{Observation 2:} Let $u \in V$ be a vertex. Then, the number
+of all acyclic 3-sets sourced at $u$ is $\dbinom{\deg^+ u}{2}$.
+\end{statement}
+\begin{proof}[Proof of Observation 2.]
+First of all, we introduce one more notion:
+An \textit{out-neighbor} of $u$ shall mean a vertex $x \in V$
+such that the arc $ux$ is in $A$.
+Clearly, the out-neighbors of $u$ are in bijection with the arcs of
+$D$ whose source is $u$\ \ \ \ \footnote{\textit{Proof.} The two maps
+\begin{align*}
+\tup{\text{the set of all out-neighbors of } u}
+&\to
+\tup{\text{the set of all arcs of } D \text{ whose source is } u}, \\
+x &\mapsto ux
+\end{align*}
+and
+\begin{align*}
+\tup{\text{the set of all arcs of } D \text{ whose source is } u}
+&\to
+\tup{\text{the set of all out-neighbors of } u}, \\
+a &\mapsto \tup{\text{the target of } a}
+\end{align*}
+are mutually inverse (this can be checked in a straightforward
+manner). Note that we are here relying on the fact that $D$ is a
+digraph, not a multidigraph!}. Hence, the number of the former
+out-neighbors equals the number of the latter arcs.
+Since the number of the latter arcs
+is $\deg^+ u$ (indeed, this is how $\deg^+ u$ was defined), we can
+thus conclude that the number of the former out-neighbors is
+$\deg^+ u$. In other words, the number of all out-neighbors of $u$
+is $\deg^+ u$.
+
+Observation 2 now easily follows: A 3-set is an acyclic 3-set sourced
+at $u$ if and only if it consists of $u$ and two distinct
+out-neighbors of $u$. Hence, choosing an acyclic 3-set sourced at $u$
+is tantamount to choosing two distinct out-neighbors of $u$ (without
+specifying the order\footnote{See the next footnote for a more
+rigorous way to write up this argument.}.
+But the latter can be done in exactly $\dbinom{\deg^+ u}{2}$
+ways (since the number of all out-neighbors of $u$ is $\deg^+ u$).
+Hence, the number of all acyclic 3-sets sourced at $u$ is
+$\dbinom{\deg^+ u}{2}$.\ \ \ \ \footnote{Here is a more rigorous way
+to present this argument:
+
+Let $U$ be the set of all out-neighbors of $u$. Let $G$ be the set of
+all acyclic 3-sets sourced at $u$. Then, the maps
+\begin{align*}
+G \to \powset[2]{U},
+\qquad S \mapsto S \setminus \set{u}
+\end{align*}
+and
+\begin{align*}
+\powset[2]{U} \to G,
+\qquad T \mapsto T \cup \set{u}
+\end{align*}
+are well-defined (this is easy to check: e.g., you have to apply
+Observation 1, and you have to argue that
+if $S$ is a 3-set sourced at $u$, then the two elements of
+$S \setminus \set{u}$ are two distinct out-neighbors of $u$) and
+mutually inverse (this is essentially obvious). Hence, they provide
+bijections between $G$ and $\powset[2]{U}$. Thus,
+$\abs{G} = \abs{\powset[2]{U}} = \dbinom{\abs{U}}{2}$ (since every
+finite set $Q$ and each $k \in \NN$ satisfy
+$\abs{\powset[k]{Q}} = \dbinom{\abs{Q}}{k}$). But $U$ is the set of
+all out-neighbors of $u$, and thus has size $\abs{U} = \deg^+ u$
+(since the number of all out-neighbors of $u$ is $\deg^+ u$). Hence,
+$\abs{G} = \dbinom{\abs{U}}{2}$ rewrites as
+$\abs{G} = \dbinom{\deg^+ u}{2}$. Since $G$ is the set of all acyclic
+3-sets sourced at $u$, this means precisely that
+the number of all acyclic 3-sets sourced at $u$ is
+$\dbinom{\deg^+ u}{2}$.} This proves Observation 2.
+\end{proof}
+
+\begin{statement}
+\textit{Observation 3:} Let $S$ be an acyclic 3-set. Then, there is
+a \textbf{unique} vertex $u \in V$ such that $S$ is sourced at $u$.
+\end{statement}
+\begin{proof}[Proof of Observation 3.]
+This can be straightforwardly verified: Write $S$ in the form
+$\set{a, b, c}$. We want to know which of the six pairs $ab$, $ba$,
+$bc$, $cb$, $ca$ and $ac$ belong to $A$ (i.e., are arcs of $D$).
+We know that
+exactly one of the two arcs $ab$ and $ba$
+belongs to $A$ (since $D$ is a tournament);
+exactly one of the two arcs $bc$ and $cb$
+belongs to $A$ (since $D$ is a tournament);
+exactly one of the two arcs $ca$ and $ac$
+belongs to $A$ (since $D$ is a tournament).
+Hence, a total of $2\cdot 2\cdot 2 = 8$ cases are possible
+regarding the question which of the six pairs $ab$, $ba$,
+$bc$, $cb$, $ca$ and $ac$ belong to $A$
+(for example, one case is that $ab$, $cb$ and $ca$ belong to $A$, but
+$ba$, $bc$ and $ac$ do not). Two of these cases are impossible due to
+the requirement that $S$ be acyclic\footnote{Indeed, the two
+impossible cases are ``$ab$, $bc$ and $ca$ belong to $A$, but $ba$,
+$cb$ and $ac$ do not'' (because $\tup{a, b, c}$ would be a
+$3$-cycle in this case) and
+``$ba$, $cb$ and $ac$ belong to $A$, but $ab$, $bc$ and $ca$ do not''
+(because $\tup{a, c, b}$ would be a $3$-cycle in this case).}. In the
+remaining six cases, it is easy to check that Observation 3 holds.
+(For example, if $ab$, $cb$ and $ca$ belong to $A$, then there is a
+\textbf{unique} vertex $u \in V$ such that $S$ is sourced at $u$;
+namely, this $u$ is $c$. It is unique because clearly, if $S$ is
+sourced at $u$, then $u$ has to be an element of $S$, and the only
+element of $S$ that works is $c$.) Thus, Observation 3 is proven.
+\end{proof}
+
+Now, Observation 3 yields
+\begin{align}
+& \tup{\text{the number of all acyclic 3-sets}} \nonumber \\
+&= \sum_{u \in V}
+     \underbrack{\tup{
+                 \text{the number of all acyclic 3-sets sourced at }
+                 u}}{
+                     = \dbinom{\deg^+ u}{2} \\
+                     \text{(by Observation 2)}
+                    }
+ = \sum_{u \in V} \dbinom{\deg^+ u}{2}
+  \nonumber \\
+&= \sum_{v \in V} \dbinom{\deg^+ v}{2}
+\label{sol.tourn.num3cycs.1}
+\end{align}
+(here, we renamed the summation index $u$ as $v$).
+
+On the other hand, we have the following observations, which mimic
+the Observations 1, 2 and 3 above (but with sources replaced by
+targets, and arcs changing directions), and whose proofs are
+analogous to those of the latter:
+
+\begin{statement}
+\textit{Observation 4:} Let $u$, $v$ and $w$ be three distinct
+vertices in $V$ such that the arcs $vu$ and $wu$ are in $A$.
+Then, $\set{u, v, w}$ is an acyclic 3-set targeted at $u$.
+\end{statement}
+
+\begin{statement}
+\textit{Observation 5:} Let $u \in V$ be a vertex. Then, the number
+of all acyclic 3-sets targeted at $u$ is $\dbinom{\deg^- u}{2}$.
+\end{statement}
+
+\begin{statement}
+\textit{Observation 6:} Let $S$ be an acyclic 3-set. Then, there is
+a \textbf{unique} vertex $u \in V$ such that $S$ is targeted at $u$.
+\end{statement}
+
+As I said, the proofs of Observations 4, 5 and 6 are analogous to the
+proofs of Observations 1, 2 and 3, and so are omitted. Now, similarly
+to how we proved \eqref{sol.tourn.num3cycs.1} using Observations 1, 2
+and 3, we can now prove the equality
+\begin{equation}
+\tup{\text{the number of all acyclic 3-sets}}
+= \sum_{v \in V} \dbinom{\deg^- v}{2}
+\label{sol.tourn.num3cycs.2}
+\end{equation}
+using Observations 4, 5 and 6. Comparing this equality with
+\eqref{sol.tourn.num3cycs.1}, we find \newline
+$ \sum_{v \in V} \dbinom{\deg^+ v}{2}
+= \sum_{v \in V} \dbinom{\deg^- v}{2} = m$. This solves part
+\textbf{(a)} of the exercise.
+
+\textbf{(b)} Let us make one more observation:
+
+\begin{statement}
+\textit{Observation 7:} Let $S$ be a cyclic 3-set. Then, there exist
+exactly three $3$-cycles $\tup{u, v, w}$ satisfying
+$\set{u, v, w} = S$.
+\end{statement}
+\begin{proof}[Proof of Observation 7.]
+We know that $S$ is a cyclic 3-set. In other words, $S$ is a
+$3$-element subset of $V$ whose elements in \textbf{some} order form a
+$3$-cycle (because this is how a ``cyclic 3-set'' was defined). In
+other words, $S = \set{a, b, c}$ for some $3$-cycle $\tup{a, b, c}$.
+Consider this $\tup{a, b, c}$. Hence, $ab$, $bc$ and $ca$ are arcs of
+$D$; therefore, $ba$, $cb$ and $ac$ are not arcs of $D$ (since $D$ is
+a tournament).
+
+There are exactly six triples $\tup{u, v, w} \in V^3$ satisfying
+$\set{u, v, w} = S$ (namely, the triples $\tup{a, b, c}$,
+$\tup{a, c, b}$, $\tup{b, a, c}$, $\tup{b, c, a}$, $\tup{c, a, b}$ and
+$\tup{c, b, a}$). Among these six triples, exactly three are
+$3$-cycles (in fact,
+all of the three triples $\tup{a, b, c}$, $\tup{b, c, a}$ and
+$\tup{c, a, b}$ are $3$-cycles, whereas none of the three triples
+$\tup{a, c, b}$, $\tup{b, a, c}$ and $\tup{c, b, a}$ is a
+$3$-cycle). Hence, there exist
+exactly three $3$-cycles $\tup{u, v, w}$ satisfying
+$\set{u, v, w} = S$. This proves Observation 7.
+\end{proof}
+
+Now, it is obvious that for each $3$-cycle $\tup{u, v, w}$, the set
+$\set{u, v, w}$ is a cyclic 3-set. Hence, we can count the
+number of all $3$-cycles as follows:
+\begin{align}
+&  \tup{\text{the number of all } 3\text{-cycles}} \nonumber \\
+&= \sum_{S \text{ is a cyclic 3-set}}
+      \underbrack{\tup{\text{the number of all } 3\text{-cycles}
+                       \tup{u, v, w} \text{ satisfying }
+                       \set{u, v, w} = S}
+                 }{= 3 \\ \text{(by Observation 7)}} \nonumber \\
+&= \sum_{S \text{ is a cyclic 3-set}} 3 \nonumber \\
+&= 3 \tup{\text{the number of all cyclic 3-sets}} .
+\label{sol.tourn.num3cycs.b.1}
+\end{align}
+
+But recall that the number of all 3-sets is $\dbinom{n}{3}$. Each of
+these 3-sets is either cyclic or acyclic (but not both). Hence,
+\begin{align*}
+\tup{\text{the number of all cyclic 3-sets}}
+&= \dbinom{n}{3}
+   - \underbrack{\tup{\text{the number of all acyclic 3-sets}}
+                }{= \sum_{v \in V} \dbinom{\deg^- v}{2} \\
+                  \text{(by \eqref{sol.tourn.num3cycs.2})}}
+\\
+&= \dbinom{n}{3}
+   - \underbrack{\sum_{v \in V} \dbinom{\deg^- v}{2}
+                }{= m}
+= \dbinom{n}{3} - m .
+\end{align*}
+Hence, \eqref{sol.tourn.num3cycs.b.1} rewrites as follows:
+\[
+\tup{\text{the number of all } 3\text{-cycles}}
+= 3 \tup{\dbinom{n}{3} - m}.
+\]
+This solves part \textbf{(b)} of the exercise.
+
+[\textit{Remark:} There is a simpler argument for \textbf{(a)}; let me
+briefly outline it:
+\begin{align*}
+& \sum_{v \in V} \dbinom{\deg^- v}{2}
+  - \sum_{v \in V} \dbinom{\deg^+ v}{2}
+= \sum_{v \in V}
+    \underbrack{\tup{\dbinom{\deg^- v}{2} - \dbinom{\deg^+ v}{2}}
+               }{= \dfrac{1}{2} \tup{\deg^- v - \deg^+ v}
+                   \tup{\deg^- v + \deg^+ v + 1}} \\
+&= \sum_{v \in V}
+    \dfrac{1}{2} \tup{\deg^- v - \deg^+ v}
+    \underbrack{\tup{\deg^- v + \deg^+ v + 1}}{= n \\ \text{(why?)}}
+= \dfrac{n}{2}
+    \underbrack{\sum_{v \in V} \tup{\deg^- v - \deg^+ v}
+               }{= \sum_{v \in V} \deg^- v - \sum_{v \in V} \deg^+ v
+                 = 0 \\
+                 \text{(by Exercise~\ref{exe.digraph.indeg=outdeg})}}
+= 0.
+\end{align*}
+However, this is of little help in proving part \textbf{(b)}.]
+\end{proof}
+
+\subsection{Some lemmas}
+
+Before the next exercise, we prove a few simple facts that will
+eventually prove useful:
+
+\begin{lemma} \label{lem.digraph.balanced-cycle}
+Let $D = \tup{V, A, \phi}$ be a multidigraph such that each vertex
+$v \in V$ satisfies $\deg^- v = \deg^+ v$. Assume that the set $A$ is
+nonempty (i.e., the multidigraph $D$ has at least one arc). Then, $D$
+has at least one cycle. (This cycle may be a one-vertex cycle, i.e.,
+it may be of the form $\tup{v, v}$ for a vertex $v \in V$, provided
+that there is an arc from $v$ to $v$.)
+\end{lemma}
+
+\begin{proof}[Proof of Lemma~\ref{lem.digraph.balanced-cycle}.]
+We know that the set $A$ is nonempty.
+In other words, the multidigraph $D$ has at least one arc.
+Thus, there exists at least one path of
+length $\geq 1$ in $D$ (namely, the path consisting of this arc).
+
+The set of paths of $D$ is finite\footnote{\textit{Proof.} Recall that
+the vertices of a path in $D$ must be distinct. Hence, a path in $D$
+cannot have length larger than $\abs{V}$ (since $D$ has only $\abs{V}$
+many vertices). Therefore, there are only finitely many paths in $D$
+(since there are only finitely many paths in $D$ of any given
+length).} and nonempty\footnote{since we just have shown that
+there exists at least one path of length $\geq 1$ in $D$}. Hence,
+there exists a longest path in $D$ (that is, a path in $D$ having the
+maximum length). Fix such a path, and denote it by
+$\tup{v_0, a_1, v_1, a_2, v_2, \ldots, a_k, v_k}$. (As usual, this
+means that the vertices on this path are $v_0, v_1, \ldots, v_k$, and
+the arcs along this path are $a_1, a_2, \ldots, a_k$.) The vertices
+$v_0, v_1, \ldots, v_k$ are distinct (since
+$\tup{v_0, a_1, v_1, a_2, v_2, \ldots, a_k, v_k}$ is a path).
+
+We have $k \geq 1$\ \ \ \ \footnote{\textit{Proof.}
+  We know that there exists at least one path of
+  length $\geq 1$ in $D$.
+  Hence, any longest path in $D$ has length $\geq 1$.
+  In particular, this shows that the path
+  $\tup{v_0, a_1, v_1, a_2, v_2, \ldots, a_k, v_k}$ has length
+  $\geq 1$ (since this path is a longest path in $D$).
+  In other words, $k \geq 1$.}.
+Thus, the arc $a_k$ is well-defined.
+This arc $a_k$ has target $v_k$. Thus, at least one arc has target
+$v_k$. Hence, $\deg^- \tup{v_k} > 0$. But recall that
+each vertex $v \in V$ satisfies $\deg^- v = \deg^+ v$. Applying this
+to $v = v_k$, we obtain $\deg^- \tup{v_k} = \deg^+ \tup{v_k}$.
+Hence, $\deg^+ \tup{v_k} = \deg^- \tup{v_k} > 0$. Hence, there exists
+some arc with source $v_k$. Fix such an arc, and denote it by
+$a_{k+1}$ (this is allowed, since so far we have only defined $a_i$
+for $i \in \set{1, 2, \ldots, k}$).
+Let $v_{k+1}$ be the target of this arc (this is allowed, since so far
+we have only defined $v_i$ for $i \in \set{0, 1, \ldots, k}$).
+
+Now,
+$\tup{v_0, a_1, v_1, a_2, v_2, \ldots, a_k, v_k, a_{k+1}, v_{k+1}}$ is
+clearly a walk in $D$. If this walk was a path, then it would be a
+longer path than $\tup{v_0, a_1, v_1, a_2, v_2, \ldots, a_k, v_k}$,
+which is absurd (since
+$\tup{v_0, a_1, v_1, a_2, v_2, \ldots, a_k, v_k}$
+was chosen to be a longest path in $D$). Hence, it is not a path.
+Therefore, the vertices $v_0, v_1, \ldots, v_k, v_{k+1}$ are not
+distinct (because if they were distinct, then the walk
+$\tup{v_0, a_1, v_1, a_2, v_2, \ldots, a_k, v_k, a_{k+1}, v_{k+1}}$
+would be a path). In other words, two of these vertices are equal. In
+other words, there exist two elements $i$ and $j$ of
+$\set{0, 1, \ldots, k+1}$ such that $i < j$ and $v_i = v_j$. Consider
+these $i$ and $j$.
+Recall that the vertices $v_0, v_1, \ldots, v_k$ are distinct.
+Hence, $j$ must be $k+1$ (since otherwise, $v_i = v_j$ would
+contradict the distinctness of $v_0, v_1, \ldots, v_k$). Thus,
+$v_j = v_{k+1}$. Therefore, $v_i = v_j = v_{k+1}$. Hence,
+$\tup{v_i, a_{i+1}, v_{i+1}, a_{i+2}, v_{i+2}, \ldots,
+      a_{k+1}, v_{k+1}}$
+is a circuit in $D$. This circuit is furthermore a cycle (since the
+vertices $v_i, v_{i+1}, \ldots, v_k$ are distinct (because
+$v_0, v_1, \ldots, v_k$ are distinct), and since $i < j = k+1$).
+Hence, there exists a cycle in $D$.
+This proves Lemma~\ref{lem.digraph.balanced-cycle}.
+\end{proof}
+
+\begin{corollary} \label{cor.digraph.balanced-cycle.digraph}
+Let $D = \tup{V, A}$ be a digraph such that each vertex
+$v \in V$ satisfies $\deg^- v = \deg^+ v$. Assume that the set $A$ is
+nonempty (i.e., the digraph $D$ has at least one arc). Then, $D$
+has at least one cycle.
+\end{corollary}
+
+\begin{proof}[Proof of
+Corollary~\ref{cor.digraph.balanced-cycle.digraph}.]
+The digraph $D = \tup{V, A}$ gives rise to a multidigraph
+$D' = \tup{V, A, \id}$. The vertices in $V$ have the same
+indegrees with respect to the latter multidigraph $D'$ as they
+have with respect to the former digraph $D$; in other words,
+each $v \in V$ satisfies $\deg^-_{D'} v = \deg^-_D v$.
+Thus, we do not need to distinguish between $\deg^-_D v$ and
+$\deg^-_{D'} v$; we can use the notation $\deg^- v$ for both of
+these numbers.
+Applying Lemma~\ref{lem.digraph.balanced-cycle} to
+$D'$ and $\id$ instead of $D$ and $\phi$, we therefore
+conclude that $D'$ has at least one cycle. If we denote this
+cycle by $\tup{v_0, a_1, v_1, a_2, v_2, \ldots, a_k, v_k}$,
+then $\tup{v_0, v_1, \ldots, v_k}$ is a cycle of the digraph
+$D$. Thus, the digraph $D$ has at least one cycle.
+This proves
+Corollary~\ref{cor.digraph.balanced-cycle.digraph}.
+\end{proof}
+
+\begin{lemma} \label{lem.tourn.AvsB}
+Let $V$ be a finite set. Let $E = \tup{V, A}$ and $F = \tup{V, B}$ be
+two tournaments with vertex set $V$. Let $u \in V$ and $v \in V$.
+Then, we have the following logical equivalence:
+\begin{equation}
+\tup{ \tup{u, v} \in B \setminus A }
+\Longleftrightarrow
+\tup{ \tup{v, u} \in A \setminus B } .
+\label{sol.tourn.3-cyc-rev.o4.pf.equiv}
+\end{equation}
+\end{lemma}
+
+\begin{proof}[Proof of Lemma~\ref{lem.tourn.AvsB}.]
+Let us first prove the implication
+\begin{equation}
+\tup{ \tup{u, v} \in B \setminus A }
+\Longrightarrow
+\tup{ \tup{v, u} \in A \setminus B }.
+\label{sol.tourn.3-cyc-rev.o4.pf.equiv.pf.1}
+\end{equation}
+Indeed, assume that $\tup{u, v} \in B \setminus A$ holds.
+Thus, $\tup{u, v} \in B$ and $\tup{u, v} \notin A$. The pair
+$\tup{u, v}$ belongs to $B$, thus is an arc of the tournament $F$.
+Therefore, $\tup{u, v}$ is not a loop (since tournaments have no
+loops). In other words, $u \neq v$. Hence, exactly one of the pairs
+$\tup{u, v}$ and $\tup{v, u}$ is an arc of $E$ (since $E$ is a
+tournament). In other words, exactly one of the pairs
+$\tup{u, v}$ and $\tup{v, u}$ belongs to $A$ (since $A$ is the set of
+the arcs of $E$). Since $\tup{u, v} \notin A$, we thus have
+$\tup{v, u} \in A$.
+On the other hand, recall again that $u \neq v$. Thus, exactly one of
+the pairs $\tup{u, v}$ and $\tup{v, u}$ is an arc of $F$ (since $F$ is
+a tournament). In other words, exactly one of the pairs
+$\tup{u, v}$ and $\tup{v, u}$ belongs to $B$ (since $B$ is the set of
+the arcs of $F$). Since $\tup{u, v} \in B$, we thus have
+$\tup{v, u} \notin B$. Combining $\tup{v, u} \in A$ with
+$\tup{v, u} \notin B$, we obtain $\tup{v, u} \in A \setminus B$.
+
+Now, forget that we assumed that
+$\tup{u, v} \in B \setminus A$ holds. We thus have proven that
+$\tup{v, u} \in A \setminus B$ under the assumption that
+$\tup{u, v} \in B \setminus A$. In other words, we have proven the
+implication \eqref{sol.tourn.3-cyc-rev.o4.pf.equiv.pf.1}.
+
+But we can also apply the implication
+\eqref{sol.tourn.3-cyc-rev.o4.pf.equiv.pf.1} to $v$, $u$, $B$, $A$,
+$F$ and $E$ instead of $u$, $v$, $A$, $B$, $E$ and $F$. Thus, we
+obtain the implication
+\begin{equation}
+\tup{ \tup{v, u} \in A \setminus B }
+\Longrightarrow
+\tup{ \tup{u, v} \in B \setminus A }.
+\end{equation}
+Combining this implication with
+\eqref{sol.tourn.3-cyc-rev.o4.pf.equiv.pf.1}, we obtain the
+equivalence \eqref{sol.tourn.3-cyc-rev.o4.pf.equiv}. Thus,
+Lemma~\ref{lem.tourn.AvsB} is proven.
+\end{proof}
+
+\subsection{Exercise~\ref{exe.tourn.3-cyc-rev}: Transforming
+tournaments by reversing $3$-cycles}
+
+\begin{exercise} \label{exe.tourn.3-cyc-rev}
+If a tournament $D$ has a $3$-cycle $\tup{u, v, w}$, then
+we can define a new tournament $D'_{u, v, w}$ as follows: The vertices
+of $D'_{u, v, w}$ shall be the same as those of $D$. The arcs of
+$D'_{u, v, w}$ shall be the same as those of $D$, except that the
+three arcs $\tup{u, v}$, $\tup{v, w}$ and $\tup{w, u}$ are replaced
+by the three new arcs $\tup{v, u}$, $\tup{w, v}$ and $\tup{u, w}$.
+(Visually speaking, $D'_{u, v, w}$ is obtained from $D$ by turning the
+arrows on the arcs $\tup{u, v}$, $\tup{v, w}$ and $\tup{w, u}$
+around.) We say that the new tournament $D'_{u, v, w}$ is obtained
+from the old tournament $D$ by a
+\textit{$3$-cycle reversal operation}.
+
+Now, let $V$ be a finite set, and let $E$ and $F$ be two tournaments
+with vertex set $V$. Prove that $F$ can be obtained from $E$ by a
+sequence of $3$-cycle reversal operations if and only if each
+$v \in V$ satisfies $\deg^-_E \tup{v} = \deg^-_F \tup{v}$.
+% (Here, $\deg^-_D \tup{v}$
+% denotes the indegree of $v$ with respect to a given digraph $D$.
+(Note that a sequence may be empty, which allows handling the case
+$E = F$ even if $E$ has no $3$-cycles to reverse.)
+\end{exercise}
+
+\begin{proof}[Solution sketch to Exercise~\ref{exe.tourn.3-cyc-rev}.]
+Exercise~\ref{exe.tourn.3-cyc-rev} is
+\cite[Theorem 35]{Moon13}.
+
+Here is another solution:
+
+Let us forget about $V$, $E$ and $F$. Instead, we first introduce
+some more terminology:
+\begin{itemize}
+\item If $\tup{u, v}$ is an arc
+of a tournament $D$, then \textit{reversing} this arc $\tup{u, v}$
+means
+replacing it by the arc $\tup{v, u}$ (in other words, removing the arc
+$\tup{u, v}$, and adding a new arc $\tup{v, u}$ instead). The digraph
+that results from this operation is again a tournament.
+(Visually speaking, reversing an arc in a tournament means turning the
+arrow on this arc around.)
+\end{itemize}
+
+Using this terminology, our concept of ``$3$-cycle reversal
+operation'' can be reformulated as follows: A tournament $D'$ is
+obtained from $D$ by a
+\textit{$3$-cycle reversal operation} if and only if there exists a
+$3$-cycle $\tup{u, v, w}$ such that $D'$ is obtained from $D$ by
+reversing the arcs $\tup{u, v}$, $\tup{v, w}$ and $\tup{w, u}$.
+If this is the case, we shall also say (more concretely) that $D'$ is
+obtained from $D$ by \textit{reversing the $3$-cycle $\tup{u, v, w}$}.
+
+Let us introduce a new operation:
+\begin{itemize}
+\item If a tournament $D$ has a
+cycle $\mathbf{c} = \tup{v_0, v_1, \ldots, v_k}$, then we let
+$D''_{\mathbf{c}}$ be the tournament obtained from $D$ by reversing
+the arcs $\tup{v_0, v_1}, \tup{v_1, v_2}, \ldots, \tup{v_{k-1}, v_k}$.
+In other words, we let $D''_{\mathbf{c}}$ be the tournament obtained
+from $D$ by reversing all arcs of the cycle $\mathbf{c}$.
+% The vertices of $D''_{\mathbf{c}}$ shall be the same as those of $D$.
+% The arcs of $D''_{\mathbf{c}}$ shall be the same as those of $D$,
+% except that the $k$ arcs
+% replaced by the $k$ arcs
+% $\tup{v_1, v_0}, \tup{v_2, v_1}, \ldots, \tup{v_k, v_{k-1}}$.
+% (Visually speaking, $D''_{\mathbf{c}}$ is obtained from $D$ by turning
+% the arrows on the arcs
+% $\tup{v_0, v_1}, \tup{v_1, v_2}, \ldots, \tup{v_{k-1}, v_k}$
+% around.)
+We say that the new tournament $D''_{\mathbf{c}}$ is obtained
+from the old tournament $D$ by
+\textit{reversing the cycle $\mathbf{c}$}.
+\end{itemize}
+
+We now claim the following facts:
+
+\begin{statement}
+\textit{Observation 1:} Let $D$ be a tournament. Let $\mathbf{c}$ be a
+cycle of $D$. Then, $\mathbf{c}$ has length $\geq 3$.
+\end{statement}
+\begin{proof}[Proof of Observation 1.]
+Assume the contrary. Then, $\mathbf{c}$ has length $< 3$. In other
+words, $\mathbf{c}$ has length $1$ or $2$.
+
+But $D$ is a tournament, and thus has no loops.
+
+If the cycle $\mathbf{c}$ had length $1$, then it would have the
+form $\tup{v, v}$ for some vertex $v$ of $D$. Therefore, $\tup{v, v}$
+would be an arc of $D$; this would imply that $D$ has a loop; but this
+contradicts the fact that $D$ has no loops. Hence, the cycle
+$\mathbf{c}$ cannot have length $1$. Therefore, this cycle must have
+length $2$ (since we know that $\mathbf{c}$ has length $1$ or $2$).
+Hence, this cycle $\mathbf{c}$ has the form $\tup{u, v, u}$ for some
+vertices $u$ and $v$ of $D$. Consider these $u$ and $v$. Thus, both
+$\tup{u, v}$ and $\tup{v, u}$ are arcs of $D$. But this contradicts
+the fact that \textbf{exactly} one of the pairs
+$\tup{u, v}$ and $\tup{v, u}$ is an arc of $D$ (since $D$ is a
+tournament). This contradiction proves that our assumption was wrong.
+Hence, Observation 1 is proven.
+\end{proof}
+
+\begin{statement}
+\textit{Observation 2:} Let $D$ be a tournament. Let $\mathbf{c}$ be a
+cycle of $D$. Let $D''$ be the tournament obtained from $D$ by
+reversing the cycle $\mathbf{c}$. Then, $D''$ can also be obtained
+from $D$ by a sequence of $3$-cycle reversal operations.
+\end{statement}
+
+\begin{proof}[Proof of Observation 2.]
+We shall prove Observation 2 by strong induction over the length of
+$\mathbf{c}$. Thus, we fix an integer $k$, and we assume (as the
+induction hypothesis) that Observation 2 is proven in the case when
+the cycle $\mathbf{c}$ has length $< k$. We must now prove
+Observation 2 in the case when the cycle $\mathbf{c}$ has length $k$.
+
+So let us consider the situation of Observation 2, and assume that
+the cycle $\mathbf{c}$ has length $k$. Write this cycle $\mathbf{c}$
+in the form $\tup{v_0, v_1, \ldots, v_k}$; thus, the vertices
+$v_0, v_1, \ldots, v_{k-1}$ of $D$ are distinct, but $v_0 = v_k$.
+Observation 1 shows that $\mathbf{c}$ has length $\geq 3$; in other
+words, we have $k \geq 3$ (since $k$ is the length of $\mathbf{c}$).
+
+We want to prove that $D''$ can be obtained from $D$ by a sequence of
+$3$-cycle reversal operations.
+% If $k = 3$, then this is
+% easy\footnote{\textit{Proof.} Assume that $k = 3$. Hence, the cycle
+% $\mathbf{c}$ has the form $\tup{u, v, w, u}$ for some three distinct
+% vertices $u$, $v$ and $w$ of $D$ (since the length of $\mathbf{c}$ is
+% $k = 3$). Consider these $u$, $v$ and $w$. Since
+% $\tup{u, v, w, u} = \mathbf{c}$ is a cycle, we conclude that
+% $\tup{u, v}$, $\tup{v, w}$ and $\tup{w, u}$ are arcs of $D$. Hence,
+% $\tup{u, v, w}$ is a $3$-cycle of $D$.
+
+% Thus, the tournament $D'_{u, v, w}$ defined in
+% Exercise~\ref{exe.tourn.3-cyc-rev} is obtained from $D$ by reversing
+% the arcs $\tup{u, v}$, $\tup{v, w}$ and $\tup{w, u}$. Meanwhile, the
+% tournament $D''$ is also obtained from $D$ by reversing
+% the arcs $\tup{u, v}$, $\tup{v, w}$ and $\tup{w, u}$ (because $D''$
+% is obtained from $D$ by reversing the cycle $\mathbf{c}$, but this
+% cycle is $\tup{u, v, w, u}$). Hence, the two tournaments
+% $D'_{u, v, w}$ and $D''$ are obtained from $D$ by reversing the same
+% arcs. Therefore, these two tournaments are equal. In other words,
+% $D'' = D'_{u, v, w}$. Hence, $D''$ can be obtained from $D$ by a
+% $3$-cycle reversal (since $D'_{u, v, w}$ can be obtained from $D$ by a
+% $3$-cycle reversal). Therefore, $D''$ can also be obtained
+% from $D$ by a sequence of $3$-cycle reversals (namely, by the sequence
+% consisting only of this one $3$-cycle reversal). Qed.}. Hence, we
+% WLOG assume that $k \neq 3$. Thus, $k > 3$ (since $k \geq 3$).
+
+Recall that $v_0, v_1, \ldots, v_{k-1}$ are distinct. Since
+$k \geq 3$, this shows that $v_0$ and $v_2$ are distinct. Hence,
+exactly one of $\tup{v_0, v_2}$ and $\tup{v_2, v_0}$ is an arc of $D$
+(since $D$ is a tournament). We thus are in one of the following two
+cases:
+
+\begin{itemize}
+\item \textit{Case 1:} The pair $\tup{v_0, v_2}$ is an arc of $D$.
+\item \textit{Case 2:} The pair $\tup{v_2, v_0}$ is an arc of $D$.
+\end{itemize}
+
+We consider each of these two cases separately:
+
+\begin{itemize}
+\item Let us consider Case 1 first. In this case, the pair
+      $\tup{v_0, v_2}$ is an arc of $D$. Hence,
+      $\tup{v_0, v_2, v_3, \ldots, v_k}$ (this is just the list
+      $\tup{v_0, v_1, v_2, \ldots, v_k}$ with the vertex $v_1$
+      removed) is a circuit of $D$ (since
+      $\tup{v_0, v_1, v_2, \ldots, v_k} = \mathbf{c}$ is a cycle of
+      $D$), and furthermore is a cycle (since the vertices
+      $v_0, v_2, v_3, \ldots, v_{k-1}$ are pairwise distinct, and
+      since $k \geq 3$) and has
+      length $k-1 < k$. Denote this cycle by $\mathbf{c}'$.
+      Let $D_1$ be the tournament obtained from $D$ by
+      reversing the cycle $\mathbf{c}'$. \\
+      Recall that (by the induction hypothesis) Observation 2 is
+      proven in the case when the cycle $\mathbf{c}$ has length $< k$.
+      Hence, we can apply Observation 2 to $\mathbf{c}'$ and $D_1$
+      instead of $\mathbf{c}$ and $D''$ (since the cycle $\mathbf{c}'$
+      has length $< k$). Thus, we conclude that $D_1$ can also be
+      obtained from $D$ by a sequence of $3$-cycle reversal
+      operations. \\
+      Next, we observe that the arc $\tup{v_0, v_2}$ of $D$ has been
+      reversed when we reversed the cycle $\mathbf{c}'$. Therefore,
+      the tournament $D_1$ (unlike $D$) has no arc $\tup{v_0, v_2}$,
+      but instead has the arc $\tup{v_2, v_0}$. On the other hand, the
+      two arcs $\tup{v_0, v_1}$ and $\tup{v_1, v_2}$ have not been
+      modified when we reversed the cycle $\mathbf{c}'$ (since these
+      arcs are not part of the cycle $\mathbf{c}'$). Hence, these two
+      arcs are arcs of $D_1$ as well. Thus, we know that
+      $\tup{v_0, v_1}$, $\tup{v_1, v_2}$ and $\tup{v_2, v_0}$ are arcs
+      of $D_1$. Therefore, $\tup{v_0, v_1, v_2}$ is a $3$-cycle of
+      $D_1$. Let $D_2$ be the tournament obtained from $D_1$ by
+      reversing this $3$-cycle $\tup{v_0, v_1, v_2}$. Thus, $D_2$ is
+      obtained from $D_1$ by a $3$-cycle reversal operation.
+      Since $D_1$ (in turn) is obtained from $D$ by a sequence of
+      $3$-cycle reversal operations,
+      we thus conclude that $D_2$ is obtained from $D$ by a sequence
+      of $3$-cycle reversal operations.\\
+      But $D_2 = D''$\ \ \ \ \footnote{\textit{Proof.} Recall how
+      $D_2$ was obtained from $D$:
+      \begin{itemize}
+      \item First, we obtained $D_1$ from $D$ by reversing the cycle
+            $\mathbf{c}' = \tup{v_0, v_2, v_3, \ldots, v_k}$ in $D$.
+            This amounts to reversing the arcs
+            $\tup{v_0, v_2}, \tup{v_2, v_3}, \tup{v_3, v_4},
+            \ldots, \tup{v_{k-1}, v_k}$.
+      \item Then, we obtained $D_2$ from $D_1$ by reversing the
+            $3$-cycle $\tup{v_0, v_1, v_2}$.
+            This amounts to reversing the arcs
+            $\tup{v_0, v_1}$, $\tup{v_1, v_2}$ and $\tup{v_2, v_0}$.
+      \end{itemize}
+      Thus, in total, we have reversed the arcs
+      $\tup{v_0, v_2}, \tup{v_2, v_3}, \tup{v_3, v_4},
+      \ldots, \tup{v_{k-1}, v_k}$ and then the three arcs
+      $\tup{v_0, v_1}, \tup{v_1, v_2}, \tup{v_2, v_0}$
+      to obtain $D_2$ from $D$.
+      Clearly, the reversal of the arc
+      $\tup{v_0, v_2}$ was undone by the (later) reversal of the
+      arc $\tup{v_2, v_0}$; therefore, we can forget about these two
+      reversals. Hence, $D_2$ is obtained from $D$ by reversing the
+      arcs $\tup{v_2, v_3}, \tup{v_3, v_4},
+      \ldots, \tup{v_{k-1}, v_k}, \tup{v_0, v_1}, \tup{v_1, v_2}$.
+      But this is tantamount to reversing the cycle $\mathbf{c}$
+      (since $\mathbf{c} = \tup{v_0, v_1, v_2, \ldots, v_k}$).
+      Hence, $D_2$ is obtained from $D$ by reversing the cycle
+      $\mathbf{c}$. But $D''$ is obtained from $D$ in exactly the same
+      way (i.e., by reversing the cycle $\mathbf{c}$). Hence,
+      $D_2 = D''$.}.
+      But we know that $D_2$ is obtained from $D$ by a sequence of
+      $3$-cycle reversal operations.
+      In other words, $D''$ is obtained from $D$ by a sequence of
+      $3$-cycle reversal operations. This proves what we wanted
+      to prove in Case 1.
+\item The argument in Case 2 is closely similar to the one we gave for
+      Case 1. The only difference is the following: In Case 1, we have
+      \textbf{first} reversed the cycle
+      $\mathbf{c}' = \tup{v_0, v_2, v_3, \ldots, v_k}$, thus obtaining
+      a tournament $D_1$, and
+      \textbf{then} reversed the $3$-cycle $\tup{v_0, v_1, v_2}$ in
+      $D_1$, thus obtaining a new tournament $D_2$ which was equal to
+      $D''$. In contrast, this time, we have to proceed the other way
+      round: We have to
+      \textbf{first} reverse the $3$-cycle $\tup{v_0, v_1, v_2}$,
+      thus obtaining a tournament $D_1$, and
+      \textbf{then} reverse the cycle
+      $\mathbf{c}' = \tup{v_0, v_2, v_3, \ldots, v_k}$ in $D_1$, thus
+      obtaining a new tournament $D_2$ which again is equal to $D''$.
+      Apart from this, nothing changes.
+\end{itemize}
+
+Hence, in either case, we have shown that
+$D''$ can be obtained from $D$ by a sequence of $3$-cycle reversal
+operations.
+In other words, Observation 2 holds for our $D$ and $\mathbf{c}$. This
+completes the induction step. Hence, Observation 2 is proven by
+strong induction.
+\end{proof}
+
+\begin{statement}
+\textit{Observation 3:} Let $V$ be a finite set. Let $E$ and $F$ be
+two tournaments with vertex set $V$. Assume that $F$ can be obtained
+from $E$ by a sequence of $3$-cycle reversal operations.
+Then, each $v \in V$ satisfies $\deg^-_E \tup{v} = \deg^-_F \tup{v}$.
+\end{statement}
+
+\begin{proof}[Proof of Observation 3.]
+Fix $x \in V$. We shall prove that
+\begin{equation}
+\deg^-_E \tup{x} = \deg^-_F \tup{x}
+.
+\label{sol.tourn.3-cyc-rev.o3.pf.1}
+\end{equation}
+It is clearly enough to prove
+\eqref{sol.tourn.3-cyc-rev.o3.pf.1} in the case when $F$ can
+be obtained from $E$ by \textbf{one} $3$-cycle reversal operation
+(because then, the validity of \eqref{sol.tourn.3-cyc-rev.o3.pf.1}
+in the general case would follow by induction). So we
+WLOG assume that $F$ can
+be obtained from $E$ by \textbf{one} $3$-cycle reversal operation.
+In other words, there exists a $3$-cycle $\tup{u, v, w}$ of $E$
+such that $F$ can be obtained from $E$ by reversing the $3$-cycle
+$\tup{u, v, w}$. Consider this $\tup{u, v, w}$.
+
+If $x \notin \set{u, v, w}$, then the arcs of $E$ having target
+$x$ are precisely the arcs of $F$ having target $x$ (since $F$
+can be obtained from $E$ by reversing the $3$-cycle
+$\tup{u, v, w}$, but this reversal clearly does not affect the
+arcs having target $x$). Therefore, if $x \notin \set{u, v, w}$,
+then $\deg^-_E \tup{x} = \deg^-_F \tup{x}$. In other words,
+\eqref{sol.tourn.3-cyc-rev.o3.pf.1} is proven in the case when
+$x \notin \set{u, v, w}$.
+Hence, we WLOG assume that we don't have
+$x \notin \set{u, v, w}$. In other words, we have
+$x \in \set{u, v, w}$. In other words, either $x=u$ or $x=v$ or
+$x=w$. We WLOG assume that $x=u$ (since the other two cases are
+similar).
+
+Reversing the $3$-cycle $\tup{u, v, w}$ removes the arcs
+$\tup{u, v}, \tup{v, w}, \tup{w, u}$ from the digraph $E$ while
+adding the arcs $\tup{v, u}, \tup{w, v}, \tup{u, w}$. Therefore, in
+total, one arc having target $u$ is removed (namely, the arc
+$\tup{w, u}$), and one arc having target $u$ is added (namely, the
+arc $\tup{v, u}$). As a consequence, the number of arcs of $F$
+having target $u$ is obtained from the number of arcs of $E$ having
+target $u$ by subtracting $1$ and then adding $1$ back. In other
+words,
+$\deg^-_F \tup{u} = \deg^-_E \tup{u} - 1 + 1 = \deg^-_E \tup{u}$.
+Hence, $\deg^-_E \tup{u} = \deg^-_F \tup{u}$. Since $x = u$, this
+rewrites as $\deg^-_E \tup{x} = \deg^-_F \tup{x}$.
+Thus, \eqref{sol.tourn.3-cyc-rev.o3.pf.1} is proven.
+
+Now, forget that we fixed $x$. We thus have shown that
+each $x \in V$ satisfies $\deg^-_E \tup{x} = \deg^-_F \tup{x}$.
+Renaming $x$ as $v$ in this statement, we conclude that
+each $v \in V$ satisfies $\deg^-_E \tup{v} = \deg^-_F \tup{v}$.
+This proves Observation 3.
+\end{proof}
+
+\begin{statement}
+\textit{Observation 4:} Let $V$ be a finite set. Let
+$E = \tup{V, A}$ and $F = \tup{V, B}$ be
+two digraphs with vertex set $V$. Let $v \in V$.
+
+\textbf{(a)} We have
+$\deg^-_{\tup{V, A\setminus B}} \tup{v}
+- \deg^-_{\tup{V, B\setminus A}} \tup{v}
+= \deg^-_E \tup{v} - \deg^-_F \tup{v}$.
+
+\textbf{(b)} Assume that $E$ and $F$ are tournaments.
+Assume furthermore that
+$\deg^-_E \tup{v} = \deg^-_F \tup{v}$. Then,
+$\deg^-_{\tup{V, A\setminus B}} \tup{v}
+= \deg^+_{\tup{V, A\setminus B}} \tup{v}$.
+\end{statement}
+
+\begin{proof}[Proof of Observation 4.]
+Recall first that
+\begin{align}
+\tup{\text{the number of all } u \in V \text{ satisfying }
+      \tup{u, v} \in A}
+ = \deg^-_E \tup{v}
+\label{sol.tourn.3-cyc-rev.o4.pf.deg-}
+\end{align}
+\footnote{\textit{Proof of
+\eqref{sol.tourn.3-cyc-rev.o4.pf.deg-}.} Recall
+that $E = \tup{V, A}$ is a digraph (not a multidigraph);
+therefore, the arcs of $E$ are pairs of vertices in $V$.
+Hence, it is easy to check that the two maps
+\begin{align*}
+\tup{\text{the set of all } u \in V \text{ satisfying }
+     \tup{u, v} \in A}
+&\to
+\tup{\text{the set of all arcs of } E \text{ whose target is } v}, \\
+u &\mapsto \tup{u, v}
+\end{align*}
+and
+\begin{align*}
+\tup{\text{the set of all arcs of } E \text{ whose target is } v}
+&\to
+\tup{\text{the set of all } u \in V \text{ satisfying }
+     \tup{u, v} \in A}
+, \\
+a &\mapsto \tup{\text{the source of } a}
+\end{align*}
+are mutually inverse. Thus, they are inverse bijections between
+the set of all arcs of $E$ whose target is $v$ and the set of all
+$u \in V$ satisfying $\tup{u, v} \in A$. Consequently, the size
+of the latter set equals the size of the former set. In other
+words, the number of all $u \in V$ satisfying $\tup{u, v} \in A$
+equals the number of all arcs of $E$ whose target is $v$. But
+since the latter number is $\deg^-_E \tup{v}$ (in fact, this is how
+$\deg^-_E \tup{v}$ is defined), this rewrites as follows: The number
+of all $u \in V$ satisfying $\tup{u, v} \in A$ equals
+$\deg^-_E \tup{v}$. This proves
+\eqref{sol.tourn.3-cyc-rev.o4.pf.deg-}.}. Hence,
+\begin{align}
+\sum_{\substack{u \in V;\\ \tup{u, v} \in A}} 1
+&= \underbrack{\tup{\text{the number of all } u \in V \text{ satisfying }
+                \tup{u, v} \in A}}{= \deg^-_E \tup{v}} \cdot 1
+\nonumber \\
+&= \deg^-_E \tup{v} \cdot 1
+= \deg^-_E \tup{v} .
+\label{sol.tourn.3-cyc-rev.o4.pf.A}
+\end{align}
+The same argument (applied to $F$ and $B$ instead of $E$ and $A$) shows
+that
+\begin{align}
+\sum_{\substack{u \in V;\\ \tup{u, v} \in B}} 1
+= \deg^-_F \tup{v} .
+\label{sol.tourn.3-cyc-rev.o4.pf.B}
+\end{align}
+Furthermore, the same argument that we used to prove
+\eqref{sol.tourn.3-cyc-rev.o4.pf.A} can be applied to
+$\tup{V, A \setminus B}$ and $A \setminus B$ instead of $E$ and $A$.
+As a result, we find that
+\begin{align}
+\sum_{\substack{u \in V;\\ \tup{u, v} \in A \setminus B}} 1
+= \deg^-_{\tup{V, A\setminus B}} \tup{v} .
+\label{sol.tourn.3-cyc-rev.o4.pf.A-B}
+\end{align}
+Finally, the same argument that we used to prove
+\eqref{sol.tourn.3-cyc-rev.o4.pf.A} can be applied to
+$\tup{V, B \setminus A}$ and $B \setminus A$ instead of $E$ and $A$.
+As a result, we find that
+\begin{align}
+\sum_{\substack{u \in V;\\ \tup{u, v} \in B \setminus A}} 1
+= \deg^-_{\tup{V, B\setminus A}} \tup{v} .
+\label{sol.tourn.3-cyc-rev.o4.pf.B-A}
+\end{align}
+
+Now, \eqref{sol.tourn.3-cyc-rev.o4.pf.A} yields
+\begin{align}
+& \deg^-_E \tup{v} \nonumber \\
+&= \sum_{\substack{u \in V;\\ \tup{u, v} \in A}} 1
+=
+\underbrack{\sum_{\substack{u \in V;\\ \tup{u, v} \in A;\\
+                                \tup{u, v} \in B}} 1}
+           {= \sum_{\substack{u \in V;\\ \tup{u, v} \in A \cap B}} 1}
++
+\underbrack{\sum_{\substack{u \in V;\\ \tup{u, v} \in A;\\
+                                \tup{u, v} \notin B}} 1}
+           {= \sum_{\substack{u \in V;\\ \tup{u, v} \in A \setminus
+                                B}} 1} \nonumber \\
+& \qquad \left(\text{since each } u \in V \text{ satisfies either }
+                \tup{u, v} \in B \text{ or } \tup{u, v} \notin B
+                \text{, but not both}\right) \nonumber \\
+&= \sum_{\substack{u \in V;\\ \tup{u, v} \in A \cap B}} 1
+   + \sum_{\substack{u \in V;\\ \tup{u, v} \in A \setminus B}} 1 .
+\label{sol.tourn.3-cyc-rev.o4.pf.A2}
+\end{align}
+Meanwhile, \eqref{sol.tourn.3-cyc-rev.o4.pf.B} yields
+\begin{align}
+& \deg^-_F \tup{v} \nonumber \\
+&= \sum_{\substack{u \in V;\\ \tup{u, v} \in B}} 1
+=
+\underbrack{\sum_{\substack{u \in V;\\ \tup{u, v} \in B;\\
+                                \tup{u, v} \in A}} 1}
+           {= \sum_{\substack{u \in V;\\ \tup{u, v} \in A \cap B}} 1}
++
+\underbrack{\sum_{\substack{u \in V;\\ \tup{u, v} \in B;\\
+                                \tup{u, v} \notin A}} 1}
+           {= \sum_{\substack{u \in V;\\ \tup{u, v} \in B \setminus
+                                A}} 1} \nonumber \\
+& \qquad \left(\text{since each } u \in V \text{ satisfies either }
+                \tup{u, v} \in A \text{ or } \tup{u, v} \notin A
+                \text{, but not both}\right) \nonumber \\
+&= \sum_{\substack{u \in V;\\ \tup{u, v} \in A \cap B}} 1
+   + \sum_{\substack{u \in V;\\ \tup{u, v} \in B \setminus A}} 1 .
+\label{sol.tourn.3-cyc-rev.o4.pf.B2}
+\end{align}
+Subtracting \eqref{sol.tourn.3-cyc-rev.o4.pf.B2} from
+\eqref{sol.tourn.3-cyc-rev.o4.pf.A2}, we find
+\begin{align*}
+& \deg^-_E \tup{v} - \deg^-_F \tup{v} \\
+&= \tup{\sum_{\substack{u \in V;\\ \tup{u, v} \in A \cap B}} 1
+        + \sum_{\substack{u \in V;\\ \tup{u, v} \in A \setminus B}} 1}
+ - \tup{\sum_{\substack{u \in V;\\ \tup{u, v} \in A \cap B}} 1
+        + \sum_{\substack{u \in V;\\ \tup{u, v} \in B \setminus A}} 1}
+\\
+&= \underbrack{\sum_{\substack{u \in V;\\ \tup{u, v} \in A
+                        \setminus B}} 1}
+              {= \deg^-_{\tup{V, A\setminus B}} \tup{v} \\
+               \text{(by \eqref{sol.tourn.3-cyc-rev.o4.pf.A-B})}}
+ - \underbrack{\sum_{\substack{u \in V;\\ \tup{u, v} \in B
+                        \setminus A}} 1}
+              {= \deg^-_{\tup{V, B\setminus A}} \tup{v} \\
+               \text{(by \eqref{sol.tourn.3-cyc-rev.o4.pf.B-A})}}
+= \deg^-_{\tup{V, A\setminus B}} \tup{v}
+- \deg^-_{\tup{V, B\setminus A}} \tup{v}.
+\end{align*}
+This proves Observation 4 \textbf{(a)}.
+
+\textbf{(b)} The summation sign
+$\sum_{\substack{u \in V;\\ \tup{u, v} \in B \setminus A}}$ in
+\eqref{sol.tourn.3-cyc-rev.o4.pf.B-A} can be rewritten as
+$\sum_{\substack{u \in V;\\ \tup{v, u} \in A \setminus B}}$
+(because of the equivalence \eqref{sol.tourn.3-cyc-rev.o4.pf.equiv}).
+Thus, \eqref{sol.tourn.3-cyc-rev.o4.pf.B-A} rewrites as follows:
+\begin{align}
+\sum_{\substack{u \in V;\\ \tup{v, u} \in A \setminus B}} 1
+= \deg^-_{\tup{V, B\setminus A}} \tup{v} .
+\label{sol.tourn.3-cyc-rev.o4.pf.B-A2}
+\end{align}
+
+On the other hand,
+\begin{align}
+\tup{\text{the number of all } u \in V \text{ satisfying }
+      \tup{v, u} \in A}
+ = \deg^+_E \tup{v}
+\label{sol.tourn.3-cyc-rev.o4.pf.deg+}
+\end{align}
+\footnote{The proof of
+\eqref{sol.tourn.3-cyc-rev.o4.pf.deg+} is analogous to that of
+\eqref{sol.tourn.3-cyc-rev.o4.pf.deg-}, and so is left to the
+reader.}. Hence,
+\begin{align}
+\sum_{\substack{u \in V;\\ \tup{v, u} \in A}} 1
+&= \underbrack{\tup{\text{the number of all } u \in V \text{ satisfying }
+                \tup{v, u} \in A}}{= \deg^+_E \tup{v}} \cdot 1
+\nonumber \\
+&= \deg^+_E \tup{v} \cdot 1
+= \deg^+_E \tup{v} .
+\end{align}
+The same argument (applied to $\tup{V, A \setminus B}$ and
+$A \setminus B$ instead of $E$ and $A$) shows
+that
+\[
+\sum_{\substack{u \in V;\\ \tup{v, u} \in A \setminus B}} 1
+= \deg^+_{\tup{V, A \setminus B}} \tup{v} .
+\]
+Comparing this with \eqref{sol.tourn.3-cyc-rev.o4.pf.B-A2}, we find
+$\deg^-_{\tup{V, B\setminus A}} \tup{v}
+= \deg^+_{\tup{V, A \setminus B}} \tup{v}$. Now,
+Observation 4 \textbf{(a)} yields
+$\deg^-_{\tup{V, A\setminus B}} \tup{v}
+- \deg^-_{\tup{V, B\setminus A}} \tup{v}
+= \deg^-_E \tup{v} - \deg^-_F \tup{v} = 0$ (since
+$\deg^-_E \tup{v} = \deg^-_F \tup{v}$). Hence,
+$\deg^-_{\tup{V, A\setminus B}} \tup{v}
+= \deg^-_{\tup{V, B\setminus A}} \tup{v}
+= \deg^+_{\tup{V, A \setminus B}} \tup{v}$.
+This proves Observation 4 \textbf{(b)}.
+\end{proof}
+
+\begin{statement}
+\textit{Observation 5:} Let $V$ be a finite set. Let
+$E = \tup{V, A}$ and $F = \tup{V, B}$ be
+two tournaments with vertex set $V$ such that $A \neq B$.
+Assume that each
+$v \in V$ satisfies $\deg^-_E \tup{v} = \deg^-_F \tup{v}$.
+Then:
+
+\textbf{(a)} The digraph $\tup{V, A \setminus B}$ has at least one
+cycle.
+
+\textbf{(b)} Each cycle of the digraph $\tup{V, A \setminus B}$
+is also a cycle of $E$.
+
+\textbf{(c)} Let $\tup{v_0, v_1, \ldots, v_k}$ be a cycle of the
+digraph $\tup{V, A \setminus B}$. Then,
+\begin{align*}
+& \set{\tup{v_0, v_1}, \tup{v_1, v_2}, \ldots,
+       \tup{v_{k-1}, v_k}} \subseteq A \setminus B
+\qquad \text{and} \\
+& \set{\tup{v_1, v_0}, \tup{v_2, v_1}, \ldots,
+       \tup{v_k, v_{k-1}}} \subseteq B \setminus A .
+\end{align*}
+\end{statement}
+
+\begin{proof}[Proof of Observation 5.]
+\textbf{(a)} The set
+$A \setminus B$ is nonempty\ \ \ \ \footnote{\textit{Proof.}
+Assume the contrary. Thus, $A \setminus B = \varnothing$.
+Hence, $A \subseteq B$. Since $A \neq B$, we thus conclude that
+$A$ is a proper subset of $B$. Hence, there exists some
+$\tup{u, v} \in B \setminus A$. Consider this $\tup{u, v}$.
+From $\tup{u, v} \in B \setminus A$, we obtain
+$\tup{v, u} \in A \setminus B$ (by the equivalence
+\eqref{sol.tourn.3-cyc-rev.o4.pf.equiv}). Hence,
+$\tup{v, u} \in A \setminus B = \varnothing$, which is absurd.
+Hence, we have obtained a contradiction. Therefore, our
+assumption was false, qed.}.
+Furthermore, each vertex $v \in V$ satisfies
+$\deg^-_{\tup{V, A \setminus B}} v
+= \deg^+_{\tup{V, A \setminus B}} v$\ \ \ \ \footnote{\textit{Proof.}
+Let $v \in V$. The hypothesis of Observation 5 yields
+$\deg^-_E \tup{v} = \deg^-_F \tup{v}$. Hence,
+Observation 4 \textbf{(b)} shows that
+$\deg^-_{\tup{V, A\setminus B}} \tup{v}
+= \deg^+_{\tup{V, A\setminus B}} \tup{v}$.
+Qed.}. Thus, Corollary~\ref{cor.digraph.balanced-cycle.digraph}
+(applied to $\tup{V, A \setminus B}$ and
+$A \setminus B$ instead of $D$ and $A$) yields that the
+digraph $\tup{V, A \setminus B}$ has at least one cycle.
+This proves Observation 5 \textbf{(a)}.
+
+\textbf{(b)} Each arc of the digraph $\tup{V, A \setminus B}$ is
+also an arc of $\tup{V, A}$ (since $A \setminus B \subseteq A$). In
+other words, each arc of the digraph $\tup{V, A \setminus B}$ is
+also an arc of $E$ (since $E = \tup{V, A}$). Therefore, each cycle
+of the digraph $\tup{V, A \setminus B}$ is also a cycle of $E$.
+This proves Observation 5 \textbf{(b)}.
+
+\textbf{(c)} The arcs
+$\tup{v_0, v_1}, \tup{v_1, v_2}, \ldots, \tup{v_{k-1}, v_k}$ are the
+arcs of the cycle $\tup{v_0, v_1, \ldots, v_k}$ of the
+digraph $\tup{V, A \setminus B}$, and thus are arcs of the digraph
+$\tup{V, A \setminus B}$. In other words, they belong to
+$A \setminus B$. In other words,
+$\set{\tup{v_0, v_1}, \tup{v_1, v_2}, \ldots,
+       \tup{v_{k-1}, v_k}} \subseteq A \setminus B$.
+
+On the other hand, each $i \in \set{0, 1, \ldots, k-1}$ satisfies
+$\tup{v_{i+1}, v_i} \in B \setminus A$
+\ \ \ \ \footnote{\textit{Proof.} Let $i \in \set{0, 1, \ldots, k-1}$.
+We know that the arcs
+$\tup{v_0, v_1}, \tup{v_1, v_2}, \ldots, \tup{v_{k-1}, v_k}$ belong
+to $A \setminus B$. In particular, $\tup{v_i, v_{i+1}}$ belongs to
+$A \setminus B$. In other words, $\tup{v_i, v_{i+1}} \in
+A \setminus B$. But \eqref{sol.tourn.3-cyc-rev.o4.pf.equiv}
+(applied to $v_{i+1}$ and $v_i$ instead of $u$ and $v$) yields that
+we have the logical equivalence
+\[
+\tup{ \tup{v_{i+1}, v_i} \in B \setminus A }
+\Longleftrightarrow
+\tup{ \tup{v_i, v_{i+1}} \in A \setminus B } .
+\]
+Hence, we have $\tup{v_{i+1}, v_i} \in B \setminus A$ (since we know
+that $\tup{v_i, v_{i+1}} \in A \setminus B$). Qed.}. In other words,
+$\set{\tup{v_1, v_0}, \tup{v_2, v_1}, \ldots,
+       \tup{v_k, v_{k-1}}} \subseteq B \setminus A$.
+The proof of Observation 5 \textbf{(c)} is now complete.
+\end{proof}
+
+\begin{statement}
+\textit{Observation 6:} Let $V$ be a finite set. Let
+$E = \tup{V, A}$ and $F = \tup{V, B}$ be
+two tournaments with vertex set $V$ such that $A \neq B$.
+Assume that each
+$v \in V$ satisfies $\deg^-_E \tup{v} = \deg^-_F \tup{v}$.
+
+Let $\mathbf{c}$ be a cycle of the digraph $\tup{V, A \setminus B}$.
+Thus, $\mathbf{c}$ is also a cycle of $E$ (by
+Observation 5 \textbf{(b)}).
+Let $E'' = \tup{V, A''}$ be the tournament obtained from $E$ by
+reversing the cycle $\mathbf{c}$. (This is well-defined,
+since $\mathbf{c}$ is a cycle of $E$.) Then:
+
+\textbf{(a)} We have $\abs{A'' \setminus B} < \abs{A \setminus B}$.
+
+\textbf{(b)} Each $v \in V$ satisfies
+$\deg^-_{E''} \tup{v} = \deg^-_F \tup{v}$.
+
+\textbf{(c)} The tournament $E''$ can be obtained from $E$ by a
+sequence of $3$-cycle reversal operations.
+\end{statement}
+
+\begin{proof}[Proof of Observation 6.]
+Write the cycle $\mathbf{c}$ in the form
+$\tup{v_0, v_1, \ldots, v_k}$ (with $v_0, v_1, \ldots, v_k \in V$).
+Then, Observation 5 \textbf{(c)} yields
+\begin{align}
+& \set{\tup{v_0, v_1}, \tup{v_1, v_2}, \ldots,
+       \tup{v_{k-1}, v_k}} \subseteq A \setminus B
+\qquad \text{and}
+\label{sol.tourn.3-cyc-rev.o6.pf.1}\\
+& \set{\tup{v_1, v_0}, \tup{v_2, v_1}, \ldots,
+       \tup{v_k, v_{k-1}}} \subseteq B \setminus A .
+\label{sol.tourn.3-cyc-rev.o6.pf.2}
+\end{align}
+
+Set $X = \set{\tup{v_0, v_1}, \tup{v_1, v_2}, \ldots,
+              \tup{v_{k-1}, v_k}}$
+and $Y = \set{\tup{v_1, v_0}, \tup{v_2, v_1}, \ldots,
+              \tup{v_k, v_{k-1}}}$.
+Thus, the relations \eqref{sol.tourn.3-cyc-rev.o6.pf.1}
+and \eqref{sol.tourn.3-cyc-rev.o6.pf.2} rewrite as
+$X \subseteq A \setminus B$ and
+$Y \subseteq B \setminus A$, respectively.
+In particular, no element of $X$ belongs to $B$ (since
+$X \subseteq A \setminus B$); thus, $X \setminus B = X$.
+Also, $Y \subseteq B \setminus A \subseteq B$, so that
+$Y \setminus B = \varnothing$.
+
+Also, clearly, $k \geq 1$ (since
+$\tup{v_0, v_1, \ldots, v_k} = \mathbf{c}$ is a cycle),
+and thus the set $X$ is nonempty. Hence, $\abs{X} > 0$.
+
+\textbf{(a)} Recall that the tournament $E''$ is obtained
+from $E$ by reversing the cycle
+$\mathbf{c} = \tup{v_0, v_1, \ldots, v_k}$. In other words, the
+tournament $E''$ is obtained from $E$ by reversing the arcs
+$\tup{v_0, v_1}, \tup{v_1, v_2}, \ldots, \tup{v_{k-1}, v_k}$
+(because this is how ``reversing the cycle
+$\tup{v_0, v_1, \ldots, v_k}$'' was defined). In other words, the
+tournament $E''$ is obtained from $E$ by removing the arcs
+$\tup{v_0, v_1}, \tup{v_1, v_2}, \ldots, \tup{v_{k-1}, v_k}$
+and adding the new arcs
+$\tup{v_1, v_0}, \tup{v_2, v_1}, \ldots, \tup{v_k, v_{k-1}}$.
+Since the arc set of $E''$ is $A''$, whereas the arc set of $E$
+is $A$, we therefore have
+\begin{align*}
+A''
+&= \tup{A \setminus
+   \underbrack{\set{\tup{v_0, v_1}, \tup{v_1, v_2},
+                    \ldots, \tup{v_{k-1}, v_k}}}
+              {= X}}
+   \cup
+   \underbrack{\set{\tup{v_1, v_0}, \tup{v_2, v_1},
+                    \ldots, \tup{v_k, v_{k-1}}}}
+              {= Y} \\
+&= \tup{A \setminus X} \cup Y .
+\end{align*}
+Hence,
+\begin{align*}
+A'' \setminus B
+&= \tup{\tup{A \setminus X} \cup Y} \setminus B
+= \tup{\tup{A \setminus B} \setminus
+  \underbrack{\tup{X \setminus B}}{= X}} \cup
+  \underbrack{\tup{Y \setminus B}}{= \varnothing}
+= \tup{\tup{A \setminus B} \setminus X} \cup \varnothing \\
+&= \tup{A \setminus B} \setminus X,
+\end{align*}
+and therefore
+\begin{align*}
+\abs{A'' \setminus B}
+&= \abs{\tup{A \setminus B} \setminus X}
+= \abs{A \setminus B} - \abs{X}
+\qquad \left(\text{since } X \subseteq A \setminus B \right) \\
+&< \abs{A \setminus B}
+\qquad \left(\text{since } \abs{X} > 0\right) .
+\end{align*}
+This proves Observation 6 \textbf{(a)}.
+
+\textbf{(c)} Observation 2 (applied to $E$ and $E''$ instead of
+$D$ and $D''$) shows that $E''$ can also be obtained
+from $E$ by a sequence of $3$-cycle reversal
+operations. This proves Observation 6 \textbf{(c)}.
+
+\textbf{(b)} Let $v \in V$.
+Then, $\deg^-_E \tup{v} = \deg^-_F \tup{v}$ (by the hypothesis
+of Observation 6). But we know (from Observation 6 \textbf{(c)})
+that the tournament $E''$ can also be obtained
+from $E$ by a sequence of $3$-cycle reversal operations. Hence,
+Observation 3 (applied to $E''$ instead of $F$) shows that
+$\deg^-_E \tup{v} = \deg^-_{E''} \tup{v}$. Therefore,
+$\deg^-_{E''} \tup{v} = \deg^-_E \tup{v} = \deg^-_F \tup{v}$.
+This proves Observation 6 \textbf{(b)}.
+\end{proof}
+
+\begin{statement}
+\textit{Observation 7:} Let $V$ be a finite set. Let $E$ and $F$ be
+two tournaments with vertex set $V$. Assume that
+each $v \in V$ satisfies $\deg^-_E \tup{v} = \deg^-_F \tup{v}$.
+Then, $F$ can be obtained
+from $E$ by a sequence of $3$-cycle reversal operations.
+\end{statement}
+
+\begin{proof}[Proof of Observation 7.]
+We shall prove Observation 7 by strong induction over
+$\abs{\arcs{E} \setminus \arcs{F}}$. Thus, we fix some $N \in \NN$,
+and we assume (as the induction hypothesis) that Observation 7 is
+already proven in the case when
+$\abs{\arcs{E} \setminus \arcs{F}} < N$. In other words, if $E$ and
+$F$ are two tournaments with vertex set $V$, if each $v \in V$
+satisfies $\deg^-_E \tup{v} = \deg^-_F \tup{v}$, and if we have
+$\abs{\arcs{E} \setminus \arcs{F}} < N$, then
+\begin{equation}
+F \text{ can be obtained from } E
+\text{ by a sequence of }3\text{-cycle reversal operations}.
+\label{sol.tourn.3-cyc-rev.o7.pf.IH}
+\end{equation}
+
+Now, we need to prove Observation 7 in the case when
+$\abs{\arcs{E} \setminus \arcs{F}} = N$.
+So let $E$ and $F$ be two tournaments wirth vertex set $V$, and
+assume that each $v \in V$ satisfies
+$\deg^-_E \tup{v} = \deg^-_F \tup{v}$. Assume furthermore that
+$\abs{\arcs{E} \setminus \arcs{F}} = N$.
+Our goal is to prove that $F$ can be obtained
+from $E$ by a sequence of $3$-cycle reversal operations.
+
+Write the tournaments $E$ and $F$ in
+the forms $E = \tup{V, A}$ and $F = \tup{V, B}$. (This is possible,
+since both $E$ and $F$ have vertex set $V$.) Thus, $\arcs{E} = A$
+and $\arcs{F} = B$.
+If $A = B$, then
+our claim is obvious\footnote{\textit{Proof.} Assume that
+$A = B$. Thus, $\tup{V, A} = \tup{V, B}$, so that
+$E = \tup{V, A} = \tup{V, B} = F$. Hence, $F$ can be obtained
+from $E$ by a sequence of $3$-cycle reversal operations
+(namely, by the empty sequence). But this is exactly what we have
+to prove.}. Hence, we WLOG assume that we don't have $A = B$.
+Thus, $A \neq B$.
+
+At this point, all we need to do is combining observations that
+we already have proven. Observation 5 \textbf{(a)} shows that
+the digraph $\tup{V, A \setminus B}$ has at least one
+cycle. Fix such a cycle, and denote it by $\mathbf{c}$. Then,
+$\mathbf{c}$ is also a cycle of $E$ (by Observation 5 \textbf{(b)}).
+Let $E'' = \tup{V, A''}$ be the tournament obtained from $E$ by
+reversing the cycle $\mathbf{c}$. (This is well-defined,
+since $\mathbf{c}$ is a cycle of $E$.) Thus,
+$\arcs{E''} = A''$. Observation 6 \textbf{(b)}
+shows that each $v \in V$ satisfies
+$\deg^-_{E''} \tup{v} = \deg^-_F \tup{v}$.
+Observation 6 \textbf{(a)} shows that
+$\abs{A'' \setminus B} < \abs{A \setminus B}$.
+Since $A'' = \arcs{E''}$, $A = \arcs{E}$ and $B = \arcs{F}$,
+this rewrites as
+$\abs{\arcs{E''} \setminus \arcs{F}}
+< \abs{\arcs{E} \setminus \arcs{F}}$.
+Since $\abs{\arcs{E} \setminus \arcs{F}} = N$, this furthermore
+rewrites as
+$\abs{\arcs{E''} \setminus \arcs{F}} < N$. Hence, we can apply
+\eqref{sol.tourn.3-cyc-rev.o7.pf.IH} to $E''$ instead of $E$ (since
+we have also shown that each $v \in V$ satisfies
+$\deg^-_{E''} \tup{v} = \deg^-_F \tup{v}$). As a result, we conclude
+that $F$ can be obtained from $E''$ by a sequence of
+$3$-cycle reversal operations. But the tournament $E''$ can (in
+turn) be obtained from $E$ by a sequence of $3$-cycle reversal
+operations (by Observation 6 \textbf{(c)}). Combining the previous
+two sentences, we conclude that $F$ can be obtained from $E$ by
+a sequence of $3$-cycle reversal operations (indeed, we first apply
+the sequence of $3$-cycle reversal operations that lets us obtain
+$E''$ from $E$, and then apply the
+the sequence of $3$-cycle reversal operations that lets us obtain
+$F$ from $E''$). But this is exactly the claim that we wanted to
+prove. Hence, we have proven Observation 7 in the case when
+$\abs{\arcs{E} \setminus \arcs{F}} = N$.
+Thus, the proof of Observation 7 (by strong induction) is complete.
+\end{proof}
+
+Exercise~\ref{exe.tourn.3-cyc-rev} now follows from Observation 3
+and Observation 7. (Indeed, the claim of
+Exercise~\ref{exe.tourn.3-cyc-rev} is an ``if and only if''
+statement. The ``if'' part of this statement follows from
+Observation 7, whereas the ``only if'' part follows from
+Observation 3.)
+\end{proof}
+
+\subsection{Exercise~\ref{exe.tourn.2-path-rev}: Transforming
+tournaments by reversing $2$-paths}
+
+A tournament $D = \tup{V, A}$ is called \textit{transitive} if it
+has no $3$-cycles.
+
+\begin{exercise} \label{exe.tourn.2-path-rev}
+If a tournament $D = \tup{V, A}$ has three distinct vertices
+$u$, $v$ and $w$ satisfying $\tup{u, v} \in A$ and $\tup{v, w} \in A$,
+then we can define a new tournament $D''_{u, v, w}$ as follows:
+The vertices of $D''_{u, v, w}$ shall be the same as those of $D$. The
+arcs of $D''_{u, v, w}$ shall be the same as those of $D$, except that
+the two arcs $\tup{u, v}$ and $\tup{v, w}$ are replaced
+by the two new arcs $\tup{v, u}$ and $\tup{w, v}$.
+We say that the new tournament $D''_{u, v, w}$ is obtained
+from the old tournament $D$ by a \textit{$2$-path reversal operation}.
+
+Let $D$ be any tournament. Prove that there is a sequence of
+$2$-path reversal operations that transforms $D$ into a transitive
+tournament.
+\end{exercise}
+
+\begin{proof}[Solution sketch to Exercise~\ref{exe.tourn.2-path-rev}.]
+We shall solve Exercise~\ref{exe.tourn.2-path-rev} by induction on
+$\abs{V}$, where $V$ denotes the vertex set of $D$.
+
+The \textit{induction base} (i.e., the case $\abs{V} = 0$)
+is obvious (because in this case, $D$ is already transitive, and thus
+the empty sequence of $2$-path reversal operations transforms $D$ into
+a transitive tournament).
+
+Now, to the \textit{induction step}. Fix a positive
+integer $N$, and assume (as the induction hypothesis) that
+Exercise~\ref{exe.tourn.2-path-rev} is already solved in the case when
+$\abs{V} = N-1$. Now, we must solve
+Exercise~\ref{exe.tourn.2-path-rev} in the case when
+$\abs{V} = N$. So let us fix a tournament $D$ with vertex set $V$
+satisfying $\abs{V} = N$.
+Write $D$ in the form $D = \tup{V, A}$.
+
+We say that a tournament is \textit{sinkless} if it has no vertex that
+has outdegree $0$.
+
+We shall now prove the following observation:
+
+\begin{statement}
+\textit{Observation 1:} Assume that the tournament $D$ is sinkless.
+Let $u \in V$. Then, we can apply a $2$-path reversal operation to $D$
+that decreases $\deg^+ u$ by $1$.
+\end{statement}
+\begin{proof}[Proof of Observation 1.]
+The tournament $D$ is sinkless. In other words, it has no vertex that
+has outdegree $0$. In particular, the vertex $u$ does not have
+outdegree $0$. Hence, there exists at least one arc $\tup{u, v}$ of
+$D$ having source $u$. Consider such an arc. Furthermore, the vertex
+$v$ also does not have outdegree $0$ (since $D$ has no vertex that has
+outdegree $0$). Thus, there exists at least one arc $\tup{v, w}$ of
+$D$ having source $v$. Consider such an arc.
+
+We have $u \neq v$ (since $\tup{u, v}$ is an arc of $D$) and
+$v \neq w$ (since $\tup{v, w}$ is an arc of $D$). Also, if we had
+$u = w$, then both $\tup{v, u} = \tup{v, w}$ and $\tup{u, v}$ would
+be arcs of $D$, and this would contradict the fact that $D$ is a
+tournament (indeed, a tournament has only one arc between two distinct
+vertices). Hence, we cannot have $u = w$. Thus, $u \neq w$.
+Now, the three vertices $u$, $v$ and $w$ of $D$ are distinct (since
+$u \neq v$, $v \neq w$ and $u \neq w$) and satisfy
+$\tup{u, v} \in A$ and $\tup{v, w} \in A$ (since $\tup{u, v}$ and
+$\tup{v, w}$ are arcs of $D$). Hence, a new tournament $D''_{u, v, w}$
+is defined. Recall that this new tournament $D''_{u, v, w}$ differs
+from $D$ in that the two arcs $\tup{u, v}$ and $\tup{v, w}$ are
+replaced by the two new arcs $\tup{v, u}$ and $\tup{w, v}$ (due to the
+definition of $D''_{u, v, w}$). In particular, $D''_{u, v, w}$ is
+lacking the arc $\tup{u, v}$ that $D$ used to have, but does not have
+any new arcs (i.e., arcs that $D$ lacked) with source $u$. Thus,
+$\deg^+_{D''_{u, v, w}} u = \deg^+_{D} u - 1$.
+
+But the tournament $D''_{u, v, w}$ clearly is obtained from $D$ by a
+$2$-path reversal operation. This $2$-path reversal operation has
+decreased $\deg^+ u$ by $1$
+(since $\deg^+_{D''_{u, v, w}} u = \deg^+_{D} u - 1$). Hence,
+Observation 1 is proven.
+\end{proof}
+
+\begin{statement}
+\textit{Observation 2:} We can apply a sequence of $2$-path reversal
+operations to $D$ that ensures the following: The tournament obtained
+at the end of this sequence is not sinkless.
+\end{statement}
+\begin{proof}[Proof of Observation 2.]
+If $D$ already is not sinkless, then Observation 2 obviously holds
+(just apply the empty sequence). Otherwise, fix any vertex $u \in V$.
+(This is possible, since $\abs{V} = N > 0$.) Observation 1 shows that
+we can apply a $2$-path reversal operation to $D$ that decreases
+$\deg^+ u$ by $1$. Apply this $2$-path reversal operation, and replace
+$D$ by the resulting tournament. Repeat this step as often as
+possible (each time applying Observation 2 anew, as long as $D$ is
+sinkless). This process must eventually come to an
+end\footnote{Indeed, each time we apply the $2$-path reversal
+operation, the outdegree $\deg^+ u$ is decreased by $1$; but this
+outdegree cannot keep decreasing by $1$ indefinitely.}, and thus we
+eventually end up with a tournament that is no longer
+sinkless.\footnote{Note that we are not guaranteed to obtain
+$\deg^+ u = 0$ in the final tournament. We are only guaranteed that it
+will not be sinkless! There may be another vertex $v$ satisfying
+$\deg^+ v = 0$ instead.}
+This proves Observation 2.
+\end{proof}
+
+Now, our goal is to show that there is a sequence of $2$-path reversal
+operations that transforms $D$ into a transitive tournament. We
+achieve this by performing the following procedure:
+
+\begin{itemize}
+\item \textbf{First step:} We first perform a sequence of
+      $2$-path reversal operations that transforms $D$ into a
+      tournament that is not sinkless. Such a sequence exists because
+      of Observation 2. Let $E$ be the tournament obtained at the end
+      of this step.
+\item \textbf{Second step:} Now, the tournament $E$ is not sinkless.
+      In other words, $E$ has a vertex that has outdegree $0$. Fix
+      such a vertex, and denote it by $p$. Let $E_1$ be the
+      tournament obtained from $E$ by removing the vertex $p$ and the
+      arcs whose target or source is $p$.\ \ \ \ \footnote{Formally
+      speaking, if we write the tournament $E$ as $\tup{V, A'}$, then
+      $E_1$ is the tournament $\tup{V_1, A'_1}$,
+      where $V_1 = V \setminus \set{p}$, where
+      $A'_1 = \set{ a \in A' \mid
+      \text{ neither the source nor the target of } a \text{ is } p}$.
+      Of course, due to $p$ having outdegree $0$, the tournament $E$
+      has no arcs with source $p$, and so we only need to care about
+      arcs with target $p$.}
+      Then, the number of the vertices of $E_1$ is
+      $\abs{V} - 1 = N - 1$ (since $\abs{V} = N$). Therefore, by the
+      induction hypothesis, we can apply
+      Exercise~\ref{exe.tourn.2-path-rev} to $E_1$ instead of $D$.
+      We thus conclude that there is a sequence of $2$-path reversal
+      operations that transforms $E_1$ into a transitive tournament.
+      Fix such a sequence, and apply it ``inside $E$'' (i.e., apply
+      the same operations to $E$, ignoring the vertex $p$).
+      Let $F$ be the tournament obtained at the end of this step.
+\end{itemize}
+
+The tournament $F$ is thus obtained from $D$ by a sequence of
+$2$-path reversal operations. What do we know about $F$ ?
+
+\begin{itemize}
+\item First, we
+know that the vertex $p$ has outdegree $0$ in $F$ (because it had
+outdegree $0$ in $E$, and because no arcs with source or target $p$
+have been modified by the operations that transformed $E$ into $F$).
+In other words, the tournament $F$ has no arcs with source $p$.
+Therefore, the tournament $F$ has no $3$-cycles that contain the
+vertex $p$ (because if a $3$-cycle contains $p$, then there must be
+an arc with source $p$).
+
+\item
+We furthermore know that the tournament obtained from $F$ by removing
+the vertex $p$ is transitive (because the operations that transformed
+$E$ into $F$ were chosen in such a way as to transform $E_1$ into a
+transitive tournament). In other words, the tournament obtained from
+$F$ by removing the vertex $p$ has no $3$-cycles. Equivalently, the
+tournament $F$ has no $3$-cycles that do not contain the vertex $p$.
+\end{itemize}
+
+We thus have seen that the tournament $F$ has no $3$-cycles that
+contain the vertex $p$, but also has no $3$-cycles that do not contain
+the vertex $p$. Hence, the tournament $F$ has no $3$-cycles at all.
+In other words, the tournament $F$ is transitive.
+
+Hence, there is a sequence of $2$-path reversal operations that
+transforms $D$ into a transitive tournament (namely, the sequence of
+operations that transformed $D$ into $F$). In other words,
+Exercise~\ref{exe.tourn.2-path-rev} is solved in the case when
+$\abs{V} = N$. This completes the induction step, and so the solution
+of Exercise~\ref{exe.tourn.2-path-rev} is complete.
+\end{proof}
+
+\begin{remark}
+Exercise~\ref{exe.tourn.2-path-rev} suggests an additional question:
+If $E$ and $F$ are two tournaments with the same vertex set, then is
+it always possible to transform $E$ into $F$ by a sequence of
+$2$-path reversal operations?
+
+The answer to this question is ``no'', and there is a rather neat
+reason for this: WLOG assume that the common vertex set of $E$ and $F$
+is $\set{1, 2, \ldots, n}$. If $D$ is a tournament with vertex set
+$\set{1, 2, \ldots, n}$, then an \textit{inversion} of $D$ will mean
+an arc $\tup{i, j}$ of $D$ satisfying $i > j$. Now, it is easy to see
+that if we apply a $2$-path reversal operation to a tournament with
+vertex set $\set{1, 2, \ldots, n}$, then the number of inversions of
+the tournament does not change modulo $2$ (i.e., if this number was
+even, then it remains even; and if this number was odd, then it
+remains odd). Hence, $E$ cannot be transformed into $F$ by a sequence
+of $2$-path reversal operations unless the number of inversions of $E$
+is congruent to the number of inversions of $F$ modulo $2$.
+
+But what if they are congruent? I don't know. Feel free to comment!
+\end{remark}
+
+\begin{thebibliography}{9999999999}                                                                                       %
+
+\bibitem[ChDiGr92]{ChDiGr92}
+Fan Chung, Persi Diaconis, Ron Graham,
+\textit{Universal cycles for combinatorial structures},
+Discrete Mathematics 110 (1992), pp. 43--59,
+\newline\url{http://www.math.ucsd.edu/~fan/wp/universalcycle.pdf}.
+
+\bibitem[Moon13]{Moon13}
+John W. Moon,
+\textit{Topics on Tournaments},
+Project Gutenberg Release \#42833, 2013,
+\newline \url{http://onlinebooks.library.upenn.edu/webbin/gutbook/lookup?num=42833}.
+
+\bibitem[Stanle13]{Stanley13}
+Richard P. Stanley,
+\textit{Algebraic Combinatorics:
+Walks, Trees, Tableaux, and More},
+Springer 2013.
+\newline See \url{http://www-math.mit.edu/~rstan/algcomb/} for errata
+and a downloadable draft of the book.
+
+\end{thebibliography}
+
+\end{document}

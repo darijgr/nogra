@@ -1,0 +1,379 @@
+\documentclass[numbers=enddot,12pt,final,onecolumn,notitlepage]{scrartcl}%
+\usepackage[headsepline,footsepline,manualmark]{scrlayer-scrpage}
+\usepackage[all,cmtip]{xy}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{framed}
+\usepackage{comment}
+\usepackage{color}
+\usepackage{hyperref}
+\usepackage{ifthen}
+\usepackage[sc]{mathpazo}
+\usepackage[T1]{fontenc}
+\usepackage{needspace}
+\usepackage{tabls}
+%TCIDATA{OutputFilter=latex2.dll}
+%TCIDATA{Version=5.50.0.2960}
+%TCIDATA{LastRevised=Friday, September 16, 2016 20:39:00}
+%TCIDATA{SuppressPackageManagement}
+%TCIDATA{<META NAME="GraphicsSave" CONTENT="32">}
+%TCIDATA{<META NAME="SaveForMode" CONTENT="1">}
+%TCIDATA{BibliographyScheme=Manual}
+%TCIDATA{Language=American English}
+%BeginMSIPreambleData
+\providecommand{\U}[1]{\protect\rule{.1in}{.1in}}
+%EndMSIPreambleData
+\newcounter{exer}
+\theoremstyle{definition}
+\newtheorem{theo}{Theorem}[section]
+\newenvironment{theorem}[1][]
+{\begin{theo}[#1]\begin{leftbar}}
+{\end{leftbar}\end{theo}}
+\newtheorem{lem}[theo]{Lemma}
+\newenvironment{lemma}[1][]
+{\begin{lem}[#1]\begin{leftbar}}
+{\end{leftbar}\end{lem}}
+\newtheorem{prop}[theo]{Proposition}
+\newenvironment{proposition}[1][]
+{\begin{prop}[#1]\begin{leftbar}}
+{\end{leftbar}\end{prop}}
+\newtheorem{defi}[theo]{Definition}
+\newenvironment{definition}[1][]
+{\begin{defi}[#1]\begin{leftbar}}
+{\end{leftbar}\end{defi}}
+\newtheorem{remk}[theo]{Remark}
+\newenvironment{remark}[1][]
+{\begin{remk}[#1]\begin{leftbar}}
+{\end{leftbar}\end{remk}}
+\newtheorem{coro}[theo]{Corollary}
+\newenvironment{corollary}[1][]
+{\begin{coro}[#1]\begin{leftbar}}
+{\end{leftbar}\end{coro}}
+\newtheorem{conv}[theo]{Convention}
+\newenvironment{condition}[1][]
+{\begin{conv}[#1]\begin{leftbar}}
+{\end{leftbar}\end{conv}}
+\newtheorem{quest}[theo]{Question}
+\newenvironment{algorithm}[1][]
+{\begin{quest}[#1]\begin{leftbar}}
+{\end{leftbar}\end{quest}}
+\newtheorem{warn}[theo]{Warning}
+\newenvironment{conclusion}[1][]
+{\begin{warn}[#1]\begin{leftbar}}
+{\end{leftbar}\end{warn}}
+\newtheorem{conj}[theo]{Conjecture}
+\newenvironment{conjecture}[1][]
+{\begin{conj}[#1]\begin{leftbar}}
+{\end{leftbar}\end{conj}}
+\newtheorem{exam}[theo]{Example}
+\newenvironment{example}[1][]
+{\begin{exam}[#1]\begin{leftbar}}
+{\end{leftbar}\end{exam}}
+\newtheorem{exmp}[exer]{Exercise}
+\newenvironment{exercise}[1][]
+{\begin{exmp}[#1]\begin{leftbar}}
+{\end{leftbar}\end{exmp}}
+\newenvironment{statement}{\begin{quote}}{\end{quote}}
+\iffalse
+\newenvironment{proof}[1][Proof]{\noindent\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+\fi
+\let\sumnonlimits\sum
+\let\prodnonlimits\prod
+\let\cupnonlimits\bigcup
+\let\capnonlimits\bigcap
+\renewcommand{\sum}{\sumnonlimits\limits}
+\renewcommand{\prod}{\prodnonlimits\limits}
+\renewcommand{\bigcup}{\cupnonlimits\limits}
+\renewcommand{\bigcap}{\capnonlimits\limits}
+\setlength\tablinesep{3pt}
+\setlength\arraylinesep{3pt}
+\setlength\extrarulesep{3pt}
+\voffset=0cm
+\hoffset=-0.7cm
+\setlength\textheight{22.5cm}
+\setlength\textwidth{15.5cm}
+\newenvironment{verlong}{}{}
+\newenvironment{vershort}{}{}
+\newenvironment{noncompile}{}{}
+\excludecomment{verlong}
+\includecomment{vershort}
+\excludecomment{noncompile}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\rev}{\operatorname{rev}}
+\newcommand{\conncomp}{\operatorname{conncomp}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\powset}[2][]{\ifthenelse{\equal{#2}{}}{\mathcal{P}\left(#1\right)}{\mathcal{P}_{#1}\left(#2\right)}}
+% $\powset[k]{S}$ stands for the set of all $k$-element subsets of
+% $S$. The argument $k$ is optional, and if not provided, the result
+% is the whole powerset of $S$.
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+% $\set{...}$ yields $\left\{ ... \right\}$.
+\newcommand{\abs}[1]{\left| #1 \right|}
+% $\abs{...}$ yields $\left| ... \right|$.
+\newcommand{\tup}[1]{\left( #1 \right)}
+% $\tup{...}$ yields $\left( ... \right)$.
+\newcommand{\ive}[1]{\left[ #1 \right]}
+% $\ive{...}$ yields $\left[ ... \right]$.
+\newcommand{\verts}[1]{\operatorname{V}\left( #1 \right)}
+% $\verts{...}$ yields $\operatorname{V}\left( ... \right)$.
+\newcommand{\edges}[1]{\operatorname{E}\left( #1 \right)}
+% $\edges{...}$ yields $\operatorname{E}\left( ... \right)$.
+\newcommand{\arcs}[1]{\operatorname{A}\left( #1 \right)}
+% $\arcs{...}$ yields $\operatorname{A}\left( ... \right)$.
+\newcommand{\underbrack}[2]{\underbrace{#1}_{\substack{#2}}}
+% $\underbrack{...1}{...2}$ yields
+% $\underbrace{...1}_{\substack{...2}}$. This is useful for doing
+% local rewriting transformations on mathematical expressions with
+% justifications.
+\ihead{Math 5707 Spring 2017 (Darij Grinberg): homework set 3}
+\ohead{page \thepage}
+\cfoot{}
+\begin{document}
+
+\begin{center}
+\textbf{Math 5707 Spring 2017 (Darij Grinberg): homework set 3}
+
+\textbf{due: Wed, 8 Mar 2017, in class} or by email
+(\texttt{dgrinber@umn.edu}) before class
+
+\textbf{Please hand in solutions to FIVE of the 8 problems.}
+{\color{red}
+(If you hand in more, the grader will choose five to grade.)}
+\end{center}
+
+See the
+\href{http://www-users.math.umn.edu/~dgrinber/5707s17/nogra.pdf}{lecture notes}
+and also the
+\href{http://www-users.math.umn.edu/~dgrinber/5707s17/}{handwritten notes}
+for relevant material.
+Also, some definitions can be found in
+\href{http://www-users.math.umn.edu/~dgrinber/5707s17/hw2s.pdf}{the solutions to hw2}.
+If you reference results from the lecture notes, please \textbf{mention the date and time} of the version of the notes you are using (as the numbering changes during updates).
+
+If $v$ is a vertex of a simple graph $G = \tup{V, E}$, then the
+\textit{eccentricity} of $v$ is defined to be
+$\max \set{ d\tup{v, u} \mid u \in V }$ (where $d\tup{v, u}$ is the
+distance between $v$ and $u$, as usual). A \textit{center} of a simple
+graph $G$ means a vertex whose eccentricity is minimum (among the
+eccentricities of all vertices).
+
+\begin{exercise} \label{exe.hw3.centerlp}
+Let $T$ be a tree. Let $\tup{v_0, v_1, \ldots, v_k}$ be a longest path
+of $T$. Prove that each center of $T$ belongs to this path (i.e., is
+one of the vertices $v_0, v_1, \ldots, v_k$).
+\end{exercise}
+
+\begin{exercise} \label{exe.hw3.countST}
+\textbf{(a)} Consider the cycle graph $C_n$ for some $n \geq 2$. Its
+vertices are $1, 2, \ldots, n$, and its edges are $12, 23, \ldots,
+\tup{n-1}n, n1$. (Here is how it looks for $n = 5$:
+\[
+\xymatrix{
+& & 1 \ar@{-}[rrd] \\
+5 \ar@{-}[rru] \ar@{-}[rd] & & & & 2 \ar@{-}[ld] \\
+& 4 \ar@{-}[rr] & & 3
+}
+\]
+)
+Find the number of spanning trees of $C_n$.
+
+\textbf{(b)} Consider the directed cycle graph $\overrightarrow{C}_n$
+for some $n \geq 2$. It is a digraph; its vertices are
+$1, 2, \ldots, n$, and its arcs are $12, 23, \ldots, \tup{n-1}n, n1$.
+(Here is how it looks for $n = 5$:
+\[
+\xymatrix{
+& & 1 \ar[rrd] \\
+5 \ar[rru] & & & & 2 \ar[ld] \\
+& 4 \ar[lu] & & 3 \ar[ll]
+}
+\]
+)
+Find the number of oriented spanning trees of $\overrightarrow{C}_n$
+with root $1$.
+
+\textbf{(c)} Fix $m \geq 1$. Let $G$ be the simple graph with $3m+2$
+vertices
+\[
+a, b, x_1, x_2, \ldots, x_m, y_1, y_2, \ldots, y_m, z_1, z_2, \ldots,
+z_m
+\]
+and the following $3m+3$ edges:
+\begin{align*}
+& ax_1, ay_1, az_1, \\
+& x_i x_{i+1}, y_i y_{i+1}, z_i z_{i+1} \qquad \text{ for all }
+                i \in \set{1, 2, \ldots, m-1}, \\
+& x_m b, y_m b, z_m b .
+\end{align*}
+(Thus, the graph consists of two vertices $a$ and $b$ connected by
+three paths, each of length $m+1$, with no overlaps between the paths
+except for their starting and ending points. Here is a picture for
+$m = 3$:
+\[
+\xymatrix{
+& x_1 \ar@{-}[r] & x_2 \ar@{-}[r] & x_3 \ar@{-}[dr] \\
+a \ar@{-}[r] \ar@{-}[ru] \ar@{-}[rd] & y_1 \ar@{-}[r] & y_2 \ar@{-}[r] & y_3 \ar@{-}[r] & b \\
+& z_1 \ar@{-}[r] & z_2 \ar@{-}[r] & z_3 \ar@{-}[ru]
+}
+\]
+)
+Compute the number of spanning trees of $G$.
+
+[To argue why your number is correct, a sketch of the argument in 1-2
+sentences should be enough; a fully rigorous proof is not required.]
+\end{exercise}
+
+\begin{exercise} \label{exe.hw3.conn}
+If $G$ is a multigraph, then $\operatorname{conn} G$ shall denote the
+number of connected components of $G$. (Note that this is $0$ when $G$
+has no vertices, and $1$ if $G$ is connected.)
+
+Let $\tup{V, H, \phi}$ be a multigraph. Let $E$ and $F$ be two
+subsets of $H$.
+
+\textbf{(a)} Prove that
+\begin{align}
+& \operatorname{conn} \tup{V, E, \phi\mid_E}
++ \operatorname{conn} \tup{V, F, \phi\mid_F} \nonumber \\
+& \leq
+\operatorname{conn} \tup{V, E \cup F, \phi\mid_{E \cup F}}
++ \operatorname{conn} \tup{V, E \cap F, \phi\mid_{E \cap F}} .
+\label{eq.exe.hw3.conn.ineq}
+\end{align}
+
+[Feel free to restrict yourself to the case of a simple graph; in this
+case, $E$ and $F$ are two subsets of $\powset[2]{V}$, and you have to
+show that
+\[
+\operatorname{conn} \tup{V, E} + \operatorname{conn} \tup{V, F}
+\leq \operatorname{conn} \tup{V, E \cup F}
++ \operatorname{conn} \tup{V, E \cap F} .
+\]
+This isn't any easier than the general case, but saves you the hassle
+of carrying the map $\phi$ around.
+
+Also, feel free to take inspiration from the
+\href{http://math.stackexchange.com/questions/500511/dimension-of-the-sum-of-two-vector-subspaces}{proof
+of the classical fact that
+$\dim X + \dim Y = \dim \tup{X + Y} + \dim \tup{X \cap Y}$ when $X$
+and $Y$ are two subspaces of a finite-dimensional vector space $U$}.
+That proof relies on choosing a basis of $X \cap Y$ and extending it
+to bases of $X$ and $Y$, then merging the extended bases to a basis of
+$X + Y$. A ``basis'' of a multigraph $G$ is a spanning forest: a
+spanning subgraph that is a forest and has the same number of
+connected components as $G$. More precisely, it is the set of the
+edges of a spanning forest.]
+
+\textbf{(b)} Give an example where the inequality
+\eqref{eq.exe.hw3.conn.ineq} does \textbf{not} become an equality.
+\end{exercise}
+
+\begin{exercise} \label{exe.hw3.whamilton}
+Let $T$ be a tree having more than $1$ vertex.
+Let $L$ be the set of leaves of $T$. Prove that it
+is possible to add $\abs{L}-1$ new edges to $T$ in such a way that
+the resulting multigraph has a Hamiltonian cycle.
+\end{exercise}
+
+If $u$ and $v$ are two vertices of a digraph $G$, then
+$d \tup{u, v}$ denotes the \textit{distance} from $u$ to $v$. This
+is defined to be the length of the shortest path from $u$ to $v$ if
+such a path exists; otherwise it is defined to be the symbol $\infty$.
+Notice that $d \tup{u, v}$ is not usually the same as $d \tup{v, u}$
+(unlike for simple graphs).
+
+\begin{exercise} \label{exe.hw3.d+d+d.directed}
+Let $a$, $b$ and $c$ be three vertices of a strongly connected
+digraph $G = \tup{V, A}$ such that $\abs{V} > 4$.
+
+\textbf{(a)} Prove that
+$d \tup{b, c} + d \tup{c, a} + d \tup{a, b} \leq 3 \abs{V} - 4$.
+
+\textbf{(b)} For each $n \geq 5$, construct an example in which
+$\abs{V} = n$ and
+$d \tup{b, c} + d \tup{c, a} + d \tup{a, b} = 3 \abs{V} - 4$.
+(No proof required for the example.)
+\end{exercise}
+
+Recall that a \textit{$k$-coloring} of a simple graph $G = \tup{V, E}$
+means a map $f : V \to \set{1, 2, \ldots, k}$. Such a $k$-coloring $f$
+is said to be \textit{proper} if no two adjacent vertices $u$ and $v$
+have the same color (i.e., satisfy $f \tup{u} = f \tup{v}$).
+
+\begin{exercise} \label{exe.hw3.not-tripar}
+We have learned that a simple graph $G$ (or multigraph $G$)
+has a proper $2$-coloring if
+and only if all cycles of $G$ have even length.
+
+\textbf{(a)} Is it true that if all cycles of a simple graph $G$ (or
+multigraph $G$) have length divisible by $3$, then $G$ has a proper
+$3$-coloring?
+
+\textbf{(b)} Is it true that if a simple graph $G$ has a proper
+$3$-coloring, then all cycles of $G$ have length divisible by $3$ ?
+\end{exercise}
+
+\begin{exercise} \label{exe.hw3.turan}
+In class, we have proven the following fact: If $G = \tup{V, E}$ is a
+simple graph, then $G$ has an independent set of size
+$\geq \dfrac{n}{1+d}$, where $n = \abs{V}$ and
+$d = \dfrac{1}{n} \sum_{v \in V} \deg v$. (Notice that $d$ is simply
+the average degree of a vertex of $G$.)
+
+Use this to prove Tur\'an's theorem (Theorem 2.5.15 in the
+\href{http://www-users.math.umn.edu/~dgrinber/5707s17/nogra.pdf}{lecture notes}).
+\end{exercise}
+
+\begin{exercise}
+\textbf{Extra credit:}
+
+In this exercise, ``number'' means (e.g.) a real number. (Feel
+free to restrict yourself to positive integers  if it helps you.
+The most general interpretation would be ``element of a commutative
+ring'', but you don't need to work in this generality.)
+
+For any $n$ numbers $x_1, x_2, \ldots, x_n$, we define
+$v\left(x_1, x_2, \ldots, x_n\right)$ to be the number
+\[
+ \prod_{1\leq i<j\leq n} \left( x_j - x_i \right)
+ =
+ \det \tup{ \tup{ x_j^{i-1} }_{1\leq i\leq n, \  1\leq j\leq n } } .
+\]
+
+Let $x_1, x_2, \ldots, x_n$ be $n$ numbers. Let $t$
+be a further number.
+Prove
+at least one of the following facts combinatorially
+(i.e., without using any properties of the determinant
+other than its definition as a sum over permutations):
+
+\textbf{(a)} We have
+\[
+\sum_{k=1}^{n} v\left(  x_{1},x_{2},\ldots,x_{k-1},x_{k}+t,x_{k+1}%
+,x_{k+2},\ldots,x_{n}\right)
+= n v\left(  x_{1},x_{2},\ldots,x_{n}\right)  .
+\]
+
+\textbf{(b)} For each $m\in\left\{ 0,1,\ldots,n-1\right\}  $, we have
+\[
+\sum_{k=1}^{n}x_{k}^{m}v\left(  x_{1},x_{2},\ldots,x_{k-1},t,x_{k+1}%
+,x_{k+2},\ldots,x_{n}\right)
+= t^{m}v\left(  x_{1},x_{2},\ldots,x_{n}\right)
+.
+\]
+
+\textbf{(c)} We have
+\begin{align*}
+&  \sum_{k=1}^{n}x_{k}v\left(  x_{1},x_{2},\ldots,x_{k-1},x_{k}+t,x_{k+1}%
+,x_{k+2},\ldots,x_{n}\right) \\
+&  =\left(  \dbinom{n}{2}t+\sum_{k=1}^{n}x_{k}\right)  v\left(  x_{1}%
+,x_{2},\ldots,x_{n}\right)  .
+\end{align*}
+
+\end{exercise}
+
+\end{document}

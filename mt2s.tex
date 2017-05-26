@@ -1,0 +1,3271 @@
+\documentclass[numbers=enddot,12pt,final,onecolumn,notitlepage]{scrartcl}%
+\usepackage[headsepline,footsepline,manualmark]{scrlayer-scrpage}
+\usepackage[all,cmtip]{xy}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{framed}
+\usepackage{comment}
+\usepackage{color}
+\usepackage{hyperref}
+\usepackage{ifthen}
+\usepackage[sc]{mathpazo}
+\usepackage[T1]{fontenc}
+\usepackage{needspace}
+\usepackage{tabls}
+%TCIDATA{OutputFilter=latex2.dll}
+%TCIDATA{Version=5.50.0.2960}
+%TCIDATA{LastRevised=Friday, September 16, 2016 20:39:00}
+%TCIDATA{SuppressPackageManagement}
+%TCIDATA{<META NAME="GraphicsSave" CONTENT="32">}
+%TCIDATA{<META NAME="SaveForMode" CONTENT="1">}
+%TCIDATA{BibliographyScheme=Manual}
+%TCIDATA{Language=American English}
+%BeginMSIPreambleData
+\providecommand{\U}[1]{\protect\rule{.1in}{.1in}}
+%EndMSIPreambleData
+\newcounter{exer}
+\theoremstyle{definition}
+\newtheorem{theo}{Theorem}[section]
+\newenvironment{theorem}[1][]
+{\begin{theo}[#1]\begin{leftbar}}
+{\end{leftbar}\end{theo}}
+\newtheorem{lem}[theo]{Lemma}
+\newenvironment{lemma}[1][]
+{\begin{lem}[#1]\begin{leftbar}}
+{\end{leftbar}\end{lem}}
+\newtheorem{prop}[theo]{Proposition}
+\newenvironment{proposition}[1][]
+{\begin{prop}[#1]\begin{leftbar}}
+{\end{leftbar}\end{prop}}
+\newtheorem{defi}[theo]{Definition}
+\newenvironment{definition}[1][]
+{\begin{defi}[#1]\begin{leftbar}}
+{\end{leftbar}\end{defi}}
+\newtheorem{remk}[theo]{Remark}
+\newenvironment{remark}[1][]
+{\begin{remk}[#1]\begin{leftbar}}
+{\end{leftbar}\end{remk}}
+\newtheorem{coro}[theo]{Corollary}
+\newenvironment{corollary}[1][]
+{\begin{coro}[#1]\begin{leftbar}}
+{\end{leftbar}\end{coro}}
+\newtheorem{conv}[theo]{Convention}
+\newenvironment{condition}[1][]
+{\begin{conv}[#1]\begin{leftbar}}
+{\end{leftbar}\end{conv}}
+\newtheorem{quest}[theo]{Question}
+\newenvironment{algorithm}[1][]
+{\begin{quest}[#1]\begin{leftbar}}
+{\end{leftbar}\end{quest}}
+\newtheorem{warn}[theo]{Warning}
+\newenvironment{conclusion}[1][]
+{\begin{warn}[#1]\begin{leftbar}}
+{\end{leftbar}\end{warn}}
+\newtheorem{conj}[theo]{Conjecture}
+\newenvironment{conjecture}[1][]
+{\begin{conj}[#1]\begin{leftbar}}
+{\end{leftbar}\end{conj}}
+\newtheorem{exam}[theo]{Example}
+\newenvironment{example}[1][]
+{\begin{exam}[#1]\begin{leftbar}}
+{\end{leftbar}\end{exam}}
+\newtheorem{exmp}[exer]{Exercise}
+\newenvironment{exercise}[1][]
+{\begin{exmp}[#1]\begin{leftbar}}
+{\end{leftbar}\end{exmp}}
+\newenvironment{statement}{\begin{quote}}{\end{quote}}
+\iffalse
+\newenvironment{proof}[1][Proof]{\noindent\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+\fi
+\let\sumnonlimits\sum
+\let\prodnonlimits\prod
+\let\cupnonlimits\bigcup
+\let\capnonlimits\bigcap
+\renewcommand{\sum}{\sumnonlimits\limits}
+\renewcommand{\prod}{\prodnonlimits\limits}
+\renewcommand{\bigcup}{\cupnonlimits\limits}
+\renewcommand{\bigcap}{\capnonlimits\limits}
+\setlength\tablinesep{3pt}
+\setlength\arraylinesep{3pt}
+\setlength\extrarulesep{3pt}
+\voffset=0cm
+\hoffset=-0.7cm
+\setlength\textheight{22.5cm}
+\setlength\textwidth{15.5cm}
+\newenvironment{verlong}{}{}
+\newenvironment{vershort}{}{}
+\newenvironment{noncompile}{}{}
+\excludecomment{verlong}
+\includecomment{vershort}
+\excludecomment{noncompile}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\conn}{\operatorname{conn}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\powset}[2][]{\ifthenelse{\equal{#2}{}}{\mathcal{P}\left(#1\right)}{\mathcal{P}_{#1}\left(#2\right)}}
+% $\powset[k]{S}$ stands for the set of all $k$-element subsets of
+% $S$. The argument $k$ is optional, and if not provided, the result
+% is the whole powerset of $S$.
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+% $\set{...}$ yields $\left\{ ... \right\}$.
+\newcommand{\abs}[1]{\left| #1 \right|}
+% $\abs{...}$ yields $\left| ... \right|$.
+\newcommand{\tup}[1]{\left( #1 \right)}
+% $\tup{...}$ yields $\left( ... \right)$.
+\newcommand{\ive}[1]{\left[ #1 \right]}
+% $\ive{...}$ yields $\left[ ... \right]$.
+\newcommand{\verts}[1]{\operatorname{V}\left( #1 \right)}
+% $\verts{...}$ yields $\operatorname{V}\left( ... \right)$.
+\newcommand{\edges}[1]{\operatorname{E}\left( #1 \right)}
+% $\edges{...}$ yields $\operatorname{E}\left( ... \right)$.
+\newcommand{\arcs}[1]{\operatorname{A}\left( #1 \right)}
+% $\arcs{...}$ yields $\operatorname{A}\left( ... \right)$.
+\newcommand{\underbrack}[2]{\underbrace{#1}_{\substack{#2}}}
+% $\underbrack{...1}{...2}$ yields
+% $\underbrace{...1}_{\substack{...2}}$. This is useful for doing
+% local rewriting transformations on mathematical expressions with
+% justifications.
+\ihead{Math 5707 Spring 2017 (Darij Grinberg): midterm 2}
+\ohead{page \thepage}
+\cfoot{}
+\begin{document}
+
+\begin{center}
+\textbf{Math 5707 Spring 2017 (Darij Grinberg): midterm 2}
+
+\textbf{Solution sketches.}
+\end{center}
+
+See the \href{http://www-users.math.umn.edu/~dgrinber/5707s17}{website} for relevant material.
+
+If $u$ and $v$ are two vertices of a simple graph (or multigraph) $G$,
+then $d_G \tup{u, v}$ (often abbreviated as $d \tup{u, v}$ when $G$
+is clear from the context) means the distance from $u$ to $v$ in $G$
+(that is, the minimum length of a path from $u$ to $v$ if such a path
+exists; otherwise, the symbol $\infty$).
+
+{\small Results proven in the notes, or in the handwritten notes, or in class, or in previous homework sets can be used without proof; but they should be referenced clearly (e.g., not ``by a theorem done in class'' but ``by the theorem that states that a strongly connected digraph has a Eulerian circuit if and only if each vertex has indegree equal to its outdegree'').
+If you reference results from the lecture notes, please \textbf{mention the date and time} of the version of the notes you are using (as the numbering changes during updates).
+
+As always, proofs need to be provided, and they have to be clear and rigorous. Obvious details can be omitted, but they actually have to be obvious.}
+
+% Proofs need to be provided unless explicitly not required. An answer without proof is usually worth at most a little part of the score. Proofs should be written with the amount of rigor typical for advanced mathematics; it is OK to use metaphor and visualization, but the actual logical argument behind it should always be clear. Details can be omitted when they are easy to fill in, not when they are hard to properly explain. (In case of doubt, err on the side of more details and more rigor. See various books referenced in the notes, e.g., \href{https://www.classes.cs.uchicago.edu/archive/2016/spring/27500-1/hw3.pdf}{the Bondy/Murty book from 2008}, or \href{https://courses.csail.mit.edu/6.042/spring16/mcs.pdf}{the Lehman/Leighton/Meyer notes}, for examples of written-up proofs in graph theory.)
+
+\tableofcontents
+
+\subsection{Reminder: Hall's Marriage Theorem}
+
+Recall Hall's Marriage Theorem (or, rather, its ``hard'' direction):
+
+\begin{theorem} \label{thm.hall.hard-direction}
+Let $\tup{G; X, Y}$ be a bipartite graph.
+(Recall that this means that $G$ is a graph and $X$ and $Y$ are two
+subsets of $\verts{G}$ such that
+\begin{itemize}
+\item each vertex of $G$ lies in exactly
+one of the two sets $X$ and $Y$;
+\item each edge of $G$ has
+exactly one endpoint in $X$ and exactly one endpoint in $Y$.
+\end{itemize}
+)
+
+Assume that every subset $S$ of $X$ satisfies
+$\abs{N_G\tup{S}} \geq \abs{S}$.
+(Here, as usual, $N_G\tup{S}$ denotes the set
+$\set{ v \in \verts{G} \ \mid \ \text{at least one neighbor of } v
+                        \text{ belongs to } S }$.)
+
+Then, $G$ has an $X$-complete matching.
+\end{theorem}
+
+\subsection{Exercise~\ref{exe.mt2.verts-to-edges-nonincident}:
+assigning to each vertex an edge avoiding it}
+
+\begin{exercise} \label{exe.mt2.verts-to-edges-nonincident}
+Let $G = \tup{V, E}$ be a simple graph such that
+$\abs{E} \geq \abs{V}$.
+Show that there exists an injective map $f : V \to E$ such that each
+$v \in V$ satisfies $v \notin f\tup{v}$.
+
+(In other words, show that we can assign to each vertex $v$ of $G$
+an edge that does not contain $v$, in such a way that edges assigned
+to distinct vertices are distinct.)
+\end{exercise}
+
+\begin{proof}[Solution to
+Exercise~\ref{exe.mt2.verts-to-edges-nonincident} (sketched).]
+Define a simple graph $H$ as follows:
+\begin{itemize}
+\item The vertices of the simple graph $H$ are the elements of
+      $V \cup E$.
+      (We assume WLOG that the sets $V$ and $E$ are disjoint; if they
+      aren't, then rename the elements of $V$ as $1, 2, \ldots, n$,
+      which ensures that they are.)
+\item The edges of $H$ are the $2$-element sets
+      $\set{v, e}$ with $v \in V$ and $e \in E$ satisfying
+      $v \notin e$.
+\end{itemize}
+Then, $\tup{H; V, E}$ is a bipartite graph.
+
+It is sufficient to show that the graph $H$ has a $V$-complete
+matching\footnote{Indeed, this will solve the exercise, because if
+we have found such a matching $M$, then we can define an injective map
+$f : V \to E$ by sending each $v \in V$ to the $M$-partner of $v$.}.
+In order to do so, we apply Theorem~\ref{thm.hall.hard-direction} to
+$H$, $V$ and $E$ instead of $G$, $X$ and $Y$.
+We thus need to check that every subset $S$ of $V$ satisfies
+$\abs{N_H\tup{S}} \geq \abs{S}$.
+
+So let us fix a subset $S$ of $V$.
+We must prove that $\abs{N_H\tup{S}} \geq \abs{S}$.
+
+\begin{itemize}
+
+\item If $\abs{S} = 0$, then this is obvious.
+
+\item If $\abs{S} = 1$, then this is easy to see: \par
+      Indeed, assume that $\abs{S} = 1$.
+      Thus, $S = \set{v}$ for a single vertex $v$ of $G$.
+      Consider this $v$.
+      Thus, the set $N_H \tup{S}$ consists of all edges of $G$ that
+      do not pass through $v$.
+      If each edge of $G$ would pass through $v$, then $G$ would have
+      at most $\abs{V} - 1$ edges, so that we would have
+      $\abs{E} \leq \abs{V} - 1 < \abs{V}$, which would contradict
+      $\abs{E} \geq \abs{V}$.
+      Thus, there is at least one edge of $G$ that does not pass
+      through $v$.
+      In other words, the set $N_H \tup{S}$ is nonempty (since
+      the set $N_H \tup{S}$ consists of all edges of $G$ that
+      do not pass through $v$).
+      Hence, $\abs{N_H \tup{S}} \geq 1 = \abs{S}$.
+      Thus, $\abs{N_H\tup{S}} \geq \abs{S}$ holds in this case as
+      well.
+
+\item If $\abs{S} = 2$, then this is also easy to check: \par
+      Indeed, assume that $\abs{S} = 2$.
+      Thus, $S = \set{v, w}$ for two distinct vertices $v$ and $w$ of
+      $G$.
+      Consider these $v$ and $w$.
+      Thus, the set $N_H \tup{S}$ consists of all edges of $G$ that
+      do not pass through both $v$ and $w$.
+      Hence, this set $N_H \tup{S}$ contains either all edges of $G$
+      or all but one edges of $G$ (since at most one edge can
+      pass through both $v$ and $w$).
+      Therefore, $\abs{N_H \tup{S}} \geq \abs{E} - 1 \geq \abs{V} - 1$
+      (since $\abs{E} \geq \abs{V}$). \par
+      Recall that we must prove that $\abs{N_H\tup{S}} \geq \abs{S}$.
+      Indeed, assume the contrary.
+      Thus, $\abs{N_H\tup{S}} < \abs{S}$.
+      Hence, $2 = \abs{S} > \abs{N_H\tup{S}} \geq \abs{V} - 1$, so
+      that $\abs{V} < 2 + 1 = 3$, thus $\abs{V} \leq 2$.
+      Hence, the graph $G$ has at most $2$ vertices, and therefore at
+      most $1$ edge.
+      In other words, $\abs{E} \leq 1$.
+      But $S \subseteq V$ and thus
+      $\abs{S} \leq \abs{V} \leq \abs{E} \leq 1$.
+      This contradicts the fact that $\abs{S} = 2$.
+      This contradiction proves that our assumption was wrong.
+      Hence, $\abs{N_H\tup{S}} \geq \abs{S}$ holds in this case as
+      well.
+
+\item If $\abs{S} > 2$, then this holds for simple reasons: \par
+      Indeed, assume that $\abs{S} > 2$.
+      Thus, there is no edge of $G$ passing through each vertex in
+      $S$.
+      Hence, each edge of $G$ belongs to $N_H \tup{S}$ (since the set
+      $N_H \tup{S}$ consists of all edges of $G$ that do not pass
+      through each vertex in $S$).
+      In other words, $N_H \tup{S} = E$.
+      Hence, $\abs{N_H \tup{S}} = \abs{E} \geq \abs{V} \geq \abs{S}$
+      (since $V \supseteq S$).
+      Hence, $\abs{N_H\tup{S}} \geq \abs{S}$ holds in this case as
+      well.
+
+\end{itemize}
+
+Hence, $\abs{N_H\tup{S}} \geq \abs{S}$ is always proven, and so
+the exercise is solved.
+\end{proof}
+
+\subsection{Exercise~\ref{exe.mt2.verts-to-edges-incident}:
+assigning to each vertex an edge containing it}
+
+\begin{exercise} \label{exe.mt2.verts-to-edges-incident}
+Let $G = \tup{V, E}$ be a \textbf{connected} simple graph such that
+$\abs{E} \geq \abs{V}$.
+Show that there exists an injective map $f : V \to E$ such that each
+$v \in V$ satisfies $v \in f\tup{v}$.
+
+(In other words, show that we can assign to each vertex $v$ of $G$
+an edge that contains $v$, in such a way that edges assigned
+to distinct vertices are distinct.)
+\end{exercise}
+
+\begin{proof}[Solution to
+Exercise~\ref{exe.mt2.verts-to-edges-incident} (sketched).]
+Unlike Exercise~\ref{exe.mt2.verts-to-edges-nonincident}, this
+exercise is not about applying Hall's marriage theorem (although maybe
+it can be solved in this way as well).
+Instead, I solve it using spanning trees:
+
+Corollary 20 from
+\href{http://www-users.math.umn.edu/~dgrinber/5707s17/5707lec9.pdf}{lecture 9 (handwritten notes)}
+shows that if $G$ is a forest, then $\abs{E} = \abs{V} - b_0 \tup{G}$
+(where $b_0 \tup{G}$ is the number of connected components of $G$).
+Hence, if $G$ was a forest, then we would have
+\[
+\abs{E} = \abs{V} - \underbrack{b_0 \tup{G}}
+                               {= 1 \\ \text{(since } G
+                                    \text{ is connected)}}
+= \abs{V} - 1 < \abs{V} ,
+\]
+which would contradict $\abs{E} \geq \abs{V}$.
+Hence, $G$ cannot be a forest.
+Consequently, $G$ must have a cycle.
+Fix such a cycle, and fix any edge $e$ on this cycle.
+
+Let $G'$ be the simple graph obtained from $G$ by removing the edge
+$e$.
+Then, $G'$ is still connected (since the edge we removed belonged to
+a cycle, and thus could be avoided by going around the cycle).
+Hence, $G'$ has a spanning tree (since any connected graph has a
+spanning tree).
+Fix such a spanning tree, and denote it by $T$.
+
+Pick any endpoint $u$ of the edge $e$.
+Now, define a map $f : V \to E$ as follows:
+\begin{itemize}
+\item Set $f \tup{u} = e$.
+\item For any $v \in V$ distinct from $u$, we define $f \tup{v}$ as
+      follows:
+      There is a unique path from $v$ to $u$ in the tree $T$.
+      This path has length $> 0$ (since $v \neq u$), and thus has a
+      well-defined first edge.
+      Let $f \tup{v}$ be this first edge.
+\end{itemize}
+
+It is clear that this map $f$ is well-defined and has the property
+that each $v \in V$ satisfies $v \in f\tup{v}$.
+It thus remains to check that this map $f$ is injective.
+This is easy\footnote{\textit{Proof.} Assume the contrary.
+  Thus, there exist two distinct vertices $v_1$ and $v_2$ in $V$
+  such that $f \tup{v_1} = f \tup{v_2}$.
+  Consider these $v_1$ and $v_2$.
+  Notice that $v_1 \in f \tup{v_1}$ (since each $v \in V$
+  satisfies $v \in f\tup{v}$) and $v_2 \in f \tup{v_2}$
+  (similarly).
+  \par
+  At least one of $v_1$ and $v_2$ is distinct from $u$ (since
+  $v_1$ and $v_2$ are distinct).
+  Thus, we can WLOG assume that $v_1 \neq u$.
+  Assume this.
+  From $v_1 \neq u$, we conclude that $f \tup{v_1}$ is the
+  first edge of the path from $v_1$ to $u$ in the tree $T$
+  (by the definition of $f$).
+  In particular, $f \tup{v_1}$ is an edge of the tree $T$, and
+  thus is distinct from $e$ (since $e$ is not an edge of the
+  tree $T$).
+  Thus, $f \tup{v_1} \neq e$, so that
+  $f \tup{v_2} = f \tup{v_1} \neq e = f \tup{u}$.
+  Hence, $v_2 \neq u$.
+  Therefore, $f \tup{v_2}$ is the
+  first edge of the path from $v_2$ to $u$ in the tree $T$
+  (by the definition of $f$).
+  Hence, the unique path from $v_2$ to $u$ in the tree $T$
+  uses the edge $f \tup{v_2}$.
+  As a consequence, this path uses the vertex $v_1$
+  (because $v_1 \in f \tup{v_1} = f \tup{v_2}$).
+  Since $v_1 \neq v_2$, we thus have
+  $d_T \tup{v_2, u} > d_T \tup{v_1, u}$.
+  \par
+  But recall that $f \tup{v_1}$ is the
+  first edge of the path from $v_1$ to $u$ in the tree $T$.
+  Hence, the unique path from $v_1$ to $u$ in the tree $T$
+  uses the edge $f \tup{v_1}$.
+  As a consequence, this path uses the vertex $v_2$
+  (because $v_2 \in f \tup{v_2} = f \tup{v_1}$).
+  Since $v_2 \neq v_1$, we thus have
+  $d_T \tup{v_1, u} > d_T \tup{v_2, u}$.
+  This contradicts
+  $d_T \tup{v_2, u} > d_T \tup{v_1, u}$.}.
+\end{proof}
+
+\subsection{Exercise~\ref{exe.mt2.menger-postnikov}:
+a ``transitivity'' property for arc-disjoint paths}
+
+\subsubsection{Statement}
+
+\begin{exercise} \label{exe.mt2.menger-postnikov}
+Let $D = \tup{V, A}$ be a digraph.
+Let $k \in \NN$.
+Let $u$, $v$ and $w$ be three vertices of $D$.
+Assume that there exist $k$ arc-disjoint paths from $u$ to $v$.
+Assume furthermore that there exist $k$ arc-disjoint paths from $v$
+to $w$.
+
+Prove that there exist $k$ arc-disjoint paths from $u$ to $w$.
+
+[\textbf{Note:} If $u = w$, then the trivial path $\tup{u}$ counts as
+being arc-disjoint from itself (so in this case, there exist
+arbitrarily many arc-disjoint paths from $u$ to $w$).]
+\end{exercise}
+
+\subsubsection{First solution}
+
+To prepare for the solution of this exercise, let us recall
+Menger's theorem in its directed arc-disjoint version
+(see Exercise 1 on
+\href{http://www-users.math.umn.edu/~dgrinber/5707s17/hw4.pdf}{Homework set 4}):
+
+\begin{theorem}[Menger's theorem, DA (directed arc-disjoint
+version)] \label{thm.menger.DA}
+Let $D = \tup{V, A, \phi}$ be a multidigraph.
+Let $s$ and $t$ be two distinct vertices of $D$.
+
+An \textit{$s$-$t$-path} in $D$ means a path from $s$ to $t$ in $D$.
+
+Several paths in $D$ are said to be
+\textit{arc-disjoint} if no two have an arc in common.
+
+A subset $C$ of $A$ is said to be an \textit{$s$-$t$-cut} if it has
+the form
+\[
+C = \set{ a \in A \mid \text{the source of } a \text{ belongs to } U
+                        \text{, but the target of } a \text{ does not}
+        }
+\]
+for some subset $U$ of $V$ satisfying $s \in U$ and $t \notin U$.
+
+The maximum number of arc-disjoint $s$-$t$-paths equals
+the minimum size of an $s$-$t$-cut.
+\end{theorem}
+
+A corollary of Theorem~\ref{thm.menger.DA} is the following fact:
+
+\begin{corollary} \label{cor.menger.DA.1}
+Let $D = \tup{V, A, \phi}$ be a multidigraph.
+Let $s$ and $t$ be two vertices of $D$.
+Let $k \in \NN$.
+Then, there exist $k$ arc-disjoint paths from $s$ to $t$ if and only
+if there exists no $s$-$t$-cut of size $< k$.
+\end{corollary}
+
+\begin{proof}[Proof of Corollary~\ref{cor.menger.DA.1} (sketched).]
+If $s = t$, then it is clear that Corollary~\ref{cor.menger.DA.1}
+holds\footnote{\textit{Proof.}
+  Assume that $s = t$.
+  Then, there exist $k$ arc-disjoint paths from $s$ to $t$
+  (indeed, the path $\tup{s}$ of length $0$ is arc-disjoint from
+  itself, and so we can pick it $k$ times),
+  and there exists no $s$-$t$-cut of size $k$ (indeed, there exists
+  no $s$-$t$-cut of any size, because there exists no
+  subset $U$ of $V$ satisfying $s \in U$ and $t \notin U$).
+  Hence, Corollary~\ref{cor.menger.DA.1} holds in this case.}.
+Thus, we WLOG assume that $s \neq t$.
+Hence, Theorem~\ref{thm.menger.DA} shows that the maximum number of
+arc-disjoint $s$-$t$-paths equals the minimum size of an $s$-$t$-cut.
+Denote these two equal numbers by $m$.
+Thus:
+
+\begin{itemize}
+
+\item The number $m$ is the maximum number of arc-disjoint
+      $s$-$t$-paths.
+      Hence, there exist $m$ arc-disjoint $s$-$t$-paths.
+      Therefore, there exist $k$ arc-disjoint $s$-$t$-paths whenever
+      $k \leq m$ (indeed, just throw away $m-k$ of the $m$
+      arc-disjoint $s$-$t$-paths whose existence we have observed in
+      the previous sentence), but not when $k > m$
+      (since $m$ is the \textbf{maximum} number of arc-disjoint
+      $s$-$t$-paths).
+      Thus, we have the following logical equivalence:
+      \begin{equation}
+      \tup{\text{there exist } k \text{ arc-disjoint }
+           s\text{-}t\text{-paths}}
+      \ \Longleftrightarrow \  \tup{k \leq m} .
+      \label{pf.cor.menger.DA.1.1}
+      \end{equation}
+
+\item The number $m$ is the minimum size of an $s$-$t$-cut.
+      Hence, there exists no $s$-$t$-cut of any size $< m$, but there
+      exists an $s$-$t$-cut of size $m$.
+      Thus, there exists no $s$-$t$-cut of size $< k$ if and only
+      if $k \leq m$.
+      In other words, we have the following logical equivalence:
+      \begin{equation}
+      \tup{\text{there exists no } s\text{-}t\text{-cut of size }
+           < k}
+      \ \Longleftrightarrow \  \tup{k \leq m} .
+      \label{pf.cor.menger.DA.1.2}
+      \end{equation}
+
+\end{itemize}
+
+Comparing the logical equivalences \eqref{pf.cor.menger.DA.1.1} and
+\eqref{pf.cor.menger.DA.1.2}, we obtain the equivalence
+\[
+\tup{\text{there exist } k \text{ arc-disjoint }
+           s\text{-}t\text{-paths}}
+\ \Longleftrightarrow \  \  %
+\tup{\text{there exists no } s\text{-}t\text{-cut of size }
+           < k} .
+\]
+This proves Corollary~\ref{cor.menger.DA.1}.
+\end{proof}
+
+\begin{proof}[First solution to
+Exercise~\ref{exe.mt2.menger-postnikov} (sketched).]
+Corollary~\ref{cor.menger.DA.1} (applied to $s = u$ and $t = v$) shows
+that there exist $k$ arc-disjoint paths from $u$ to $v$ if and only
+if there exists no $u$-$v$-cut of size $< k$.
+Hence, there exists no $u$-$v$-cut of size $< k$
+(since there exist $k$ arc-disjoint paths from $u$ to $v$).
+Similarly, there exists no $v$-$w$-cut of size $< k$.
+
+Now, we claim that there exists no $u$-$w$-cut of size $< k$.
+
+Indeed, assume the contrary.
+Thus, there exists an $u$-$w$-cut of size $< k$.
+Fix such a $u$-$w$-cut, and write it in the form
+\begin{equation}
+C = \set{ a \in A \mid \text{the source of } a \text{ belongs to } U
+                        \text{, but the target of } a \text{ does not}
+        }
+\label{sol.mt2.menger-postnikov.C=}
+\end{equation}
+for some subset $U$ of $V$ satisfying $u \in U$ and $w \notin U$.
+Then, $\abs{C} < k$ (since the $u$-$w$-cut $C$ has size $< k$).
+
+Now, we have either $v \in U$ or $v \notin U$.
+But each of these two cases leads to a contradiction:
+
+\begin{itemize}
+
+\item If $v \notin U$, then $C$ is an $u$-$v$-cut (since it has the
+      form \eqref{sol.mt2.menger-postnikov.C=} for the subset $U$
+      of $V$, which satisfies $u \in U$ and $v \notin U$), and thus
+      there exists a $u$-$v$-cut of size $< k$; but this
+      contradicts the fact that there exists no $u$-$v$-cut of size
+      $< k$.
+
+\item If $v \in U$, then $C$ is a $v$-$w$-cut (since it has the
+      form \eqref{sol.mt2.menger-postnikov.C=} for the subset $U$
+      of $V$, which satisfies $v \in U$ and $w \notin U$), and thus
+      there exists a $v$-$w$-cut of size $< k$; but this
+      contradicts the fact that there exists no $v$-$w$-cut of size
+      $< k$.
+
+\end{itemize}
+
+Thus, we always get a contradiction.
+Hence, our assumption was wrong.
+
+We thus have shown that there exists no $u$-$w$-cut of size $< k$.
+
+But Corollary~\ref{cor.menger.DA.1} (applied to $s = u$ and $t = w$)
+shows that there exist $k$ arc-disjoint paths from $u$ to $w$ if and
+only if there exists no $u$-$w$-cut of size $< k$.
+Hence, there $k$ arc-disjoint paths from $u$ to $w$ (since
+there exists no $u$-$w$-cut of size $< k$).
+This solves Exercise~\ref{exe.mt2.menger-postnikov}.
+\end{proof}
+
+\subsubsection{An extension of the stable marriage problem}
+
+I am going to outline a second solution to
+Exercise~\ref{exe.mt2.menger-postnikov} as well.
+That solution will rely on a slight generalization of the stable
+marriage problem.
+
+I assume that you are familiar with the basic theory of the
+stable marriage problem (see \cite[Section 6.4]{LeLeMe16}),
+specifically with the algorithm that is called the
+``Mating Ritual'' in \cite[Section 6.4]{LeLeMe16}\footnote{This
+algorithm is also called the ``deferred-acceptance algorithm''
+in \url{http://www.math.jhu.edu/~eriehl/pechakucha.pdf}.
+That said, this name is also used for some variations of this
+algorithm.}.
+
+Now, let me formulate a more general version of the stable
+marriage problem, which I shall call the \textit{contracted
+stable marriage problem}:
+
+\begin{statement}
+\textbf{Contracted stable marriage problem.}
+
+Suppose that we have a population of $k$ men and $k$ women
+(for some $k \in \NN$).
+Assume furthermore that a finite set $C$ of
+``contracts'' is given.
+%These will simply be called ``contracts''.
+Each contract involves exactly one man and exactly
+one woman.\footnote{Think of the contracts as marriage
+contracts prepared ``just in case''. The names of the
+spouses-to-be have already been written in, but the
+contracts have not been signed, and in particular there
+can be mutually exclusive contracts for the same man or
+woman.}
+Assume that, for each pair $\tup{m, w}$ consisting of a man $m$
+and a woman $w$, there is \textbf{at least} one contract
+that involves $m$ and $w$.
+(Hence, there are at least $k^2$ contracts, but
+there can be more.)
+
+Suppose that each person has a preference list of all the
+contracts that involve him/her; i.e., he/she ranks
+all contracts that involve him/her in the order of
+preferability.
+(No ties are allowed.)
+
+A \textit{matching} shall mean a subset $K$ of $C$ such
+that each man is involved in exactly one contract in $K$,
+and such that each woman is involved in exactly one
+contract in $K$.
+Thus, visually speaking, a matching is a way to marry off
+all $k$ men and all $k$ women to each other (in the
+classical meaning of the word -- i.e., heterosexual and
+monogamous)
+by having them sign some of the contracts in $C$
+(of course, each person signs exactly one contract).
+
+If $p$ is a person and $K$ is a matching, then the
+unique contract $c \in K$ that involves $p$ will be called
+the \textit{$K$-marriage contract of $p$}.
+
+If $K$ is a matching and $c \in C$ is a contract, then
+the contract $c$ is said to be \textit{rogue} (for $K$) if
+\begin{itemize}
+ \item this contract $c$ is not in $K$,
+ \item the man involved in $c$ prefers $c$ to his
+       $K$-marriage contract, and
+ \item the woman involved in $c$ prefers $c$ to her
+       $K$-marriage contract.
+\end{itemize}
+Thus, roughly speaking, a rogue contract is a contract
+$c$ that has not been signed in the matching $K$, but that
+would make both persons involved in $c$ happier than
+whatever contracts they did sign in $K$.
+
+A matching $K$ is called \textit{stable} if there exist
+no rogue contracts for $K$.
+
+The \textit{contracted stable marriage problem} asks us
+to find a stable matching.
+\end{statement}
+
+Notice that this problem generalizes the stable marriage
+problem discussed in \cite[Section 6.4]{LeLeMe16}; indeed, the
+latter problem is the particular case when each pair $\tup{m, w}$
+consisting of a man $m$ and a woman $w$ is involved in precisely
+one contract.
+Roughly speaking, the contracted stable marriage problem
+extends the latter by allowing some couples to marry in
+several distinct ways, some of which may be more or less
+preferable to one of the partners.
+\footnote{Generally, passing from the classical stable marriage
+problem to the contracted stable marriage problem is akin
+to generalizing theorems from simple graphs to multigraphs.}
+
+The contracted stable marriage problem can be solved by a
+modification of the ``Mating Ritual'' analyzed in
+\cite[Section 6.4]{LeLeMe16}.
+Namely:
+\begin{itemize}
+ \item each man should keep a preference list of contracts that
+       involve him (instead of a list of women),
+       and he should serenade with a contract in hand (i.e.,
+       each day he picks up his most preferable
+       \textbf{contract}, and then he proposes to the woman
+       involved with this specific contract);
+ \item each woman should dismiss all but the best contracts
+       proposed to her by her suitors (as opposed to dismissing
+       the suitors themselves);
+ \item a man whose contract gets dismissed crosses off this
+       contract (rather than the woman who dismissed him) from
+       his list,
+       so he may possibly return to her later with another
+       contract;
+ \item when the ritual terminates, the women marry their
+       current suitors using the contracts that these suitors
+       are currently proposing.
+\end{itemize}
+
+The analysis of this algorithm is similar to the one made in
+\cite[Section 6.4.2 and Section 6.4.3]{LeLeMe16}; some
+modifications need to be made (e.g., Invariant $P$ should
+be replaced by
+``For every contract $c$ involving a woman $w$ and a man $m$,
+if $c$ is crossed off $m$'s list, then $w$ has a suitor
+offering her a contract $d$ that she prefers over $c$.'').
+Thus, we obtain the following result
+(generalizing \cite[Theorem 6.4.4]{LeLeMe16}):
+
+\begin{theorem} \label{thm.stable-matching.contracted.MR.correct}
+The modified ``Mating Ritual'' produces a stable matching
+for the contracted stable marriage problem.
+\end{theorem}
+
+\subsubsection{Second solution}
+
+I shall now sketch a second solution to
+Exercise~\ref{exe.mt2.menger-postnikov}, suggested by
+\href{https://math.mit.edu/~apost/}{Alexander Postnikov}.
+But first, let me give the motivation behind this solution:
+
+\begin{itemize}
+\item The following appears to be a reasonable approach to solving
+      Exercise~\ref{exe.mt2.menger-postnikov}: \par
+      Fix $k$ arc-disjoint paths $p_1, p_2, \ldots, p_k$ from $u$ to
+      $v$. (These exist by assumption.) \par
+      Fix $k$ arc-disjoint paths $q_1, q_2, \ldots, q_k$ from $v$ to
+      $w$. (These exist by assumption.) \par
+      Now, we are looking for $k$ arc-disjoint paths from $u$ to $w$.
+      The most obvious thing one could try is to take the $k$ walks
+      $t_1, t_2, \ldots, t_k$, where each $t_i$ is the concatenation
+      of $p_i$ with $q_i$.
+\item However, this does not always work.
+      The $t_i$ are walks, but not necessarily paths.
+      Fortunately, we know how to deal with this:
+      Just keep removing cycles from the $t_i$ until no cycles remain.
+\item Sadly, we are still not done.
+      The $t_i$ are paths now, but are not necessarily arc-disjoint.
+      Indeed, it could happen that (for example) $p_2$ and $q_5$ have
+      a common arc; but then $t_2$ and $t_5$ would not be
+      arc-disjoint.
+      The common arc might disappear when we remove cycles,
+      but it does not have to; it might also stay.
+\item We could now try being more strategical:
+      Let us look for a bijection
+      $\sigma : \set{1, 2, \ldots, k} \to \set{1, 2, \ldots, k}$
+      such that if we define $t_i$ as the concatenation of
+      $p_i$ with $q_{\sigma \tup{i}}$ (rather than with $q_i$), then
+      the resulting paths $t_i$ (after removing cycles) will be
+      arc-disjoint.
+      However, how do we find such a bijection? Does it always exist?
+\item Let a \textit{common arc} mean an arc which belongs to one of
+      the paths $p_1, p_2, \ldots, p_k$ and also belongs to one of the
+      paths $q_1, q_2, \ldots, q_k$.
+      As we have seen, common arcs are the source of our headache, and
+      we should try to make sure that each common arc survives at most
+      once in the resulting paths $t_1, t_2, \ldots, t_k$ (after
+      the cycles are removed).
+      How do we achieve this?
+\item Here is one approach that sounds hopeful:
+      If a path $p_i$ has an arc in common with the path
+      $q_{\sigma \tup{i}}$, then the concatenation $t_i$ of these two
+      paths will contain this common arc twice,
+      and therefore, after removing cycles, it will only contain it
+      once; thus, this particular common arc will no longer make
+      troubles.
+      Hence, it appears reasonable to want $p_i$ to have an arc in
+      common with $q_{\sigma \tup{i}}$ for as many $i$ as possible.
+\item It also appears reasonable to ensure that if $p_i$ has an arc in
+      common with $q_{\sigma \tup{i}}$, then this arc appears as early
+      as possible in $p_i$, and as late as possible in
+      $q_{\sigma \tup{i}}$.
+      Indeed, this makes sure that the path produced by removing
+      cycles in the concatenation $t_i$ will be as small as possible,
+      and therefore (if we are lucky) we will get rid of other common
+      arcs as well.
+\item Now we are trying to solve several optimization problems at once
+      -- we want to have our common arcs appear as early as possible
+      in $p_i$ and as late as possible in $q_{\sigma \tup{i}}$.
+      Such problems are not always solvable.
+      Usually, there is a tradeoff, and we have to settle for a
+      compromise.
+\item The stable marriage problem is a prototypical example of the
+      search for such a compromise.
+      We can thus try to apply it here.
+      The first approximation is the following: \par
+      Model the $k$ paths $p_1, p_2, \ldots, p_k$ by $k$ men
+      labelled $1, 2, \ldots, k$. \par
+      Model the $k$ paths $q_1, q_2, \ldots, q_k$ by $k$ women
+      labelled $1, 2, \ldots, k$. \par
+      Man $i$ would be happy to marry woman $j$ if and only if the
+      paths $p_i$ and $q_j$ have an arc in common; the earlier this
+      arc appears in $p_i$, the happier he would be marrying $j$.
+      As a last resort, he is also willing to marry woman $j$ if the
+      paths $p_i$ and $q_j$ have no arcs in common, but he would be
+      less happy this way. \par
+      Likewise, woman $j$ would be happy to marry man $i$ if and only
+      if the paths $p_i$ and $q_j$ have an arc in common; the later
+      this arc appears in $q_j$, the happier she would be marrying
+      $i$.
+      As a last resort, she is also willing to marry man $i$ if the
+      paths $p_i$ and $q_j$ have no arcs in common, but she would be
+      less happy this way. \par
+      Everyone ranks their potential spouses by these preferences, and
+      we seek a stable marriage.
+      When man $i$ and woman $j$ marry, we set
+      $\sigma \tup{i} = j$, and thus a bijection
+      $\sigma : \set{1, 2, \ldots, k} \to \set{1, 2, \ldots, k}$
+      is defined.
+\item However, this still is not completely correct!
+      The problem is that a path $p_i$ can have more than one arc in
+      common with a path $q_j$.
+      This may mess up the preferences of both man $i$ and woman $j$,
+      since they would have to decide whether to take the first or the
+      last intersections into account.
+      In a sense, there seem to be several ways in which man $i$ can
+      marry woman $j$ -- one for each arc that the two paths have in
+      common.
+      So we are looking at an instance of the contracted stable
+      marriage problem.
+\end{itemize}
+
+The following solution is what comes out if you follow this strategy.
+It is fairly long and technical, neat as the idea may be.
+
+\begin{proof}[Second solution of
+Exercise~\ref{exe.mt2.menger-postnikov} (sketched).]
+
+We have assumed that
+there exist $k$ arc-disjoint paths from $u$ to $v$.
+Fix such $k$ paths, and denote them by $p_1, p_2, \ldots, p_k$.
+
+We have assumed that
+there exist $k$ arc-disjoint paths from $v$ to $w$.
+Fix such $k$ paths, and denote them by $q_1, q_2, \ldots, q_k$.
+
+If $p$ is any path in $D$, and if $a$ is any arc of $p$,
+then we shall let $\ive{a} p$ denote the positive integer
+$h$ such that $a$ is the $h$-th arc of $p$.
+(Of course, this $h$ is uniquely determined, since a path
+never uses an arc more than once.)
+
+Now, we fabricate a population of
+\begin{itemize}
+ \item $k$ men labelled $1, 2, \ldots, k$, and
+ \item $k$ women labelled $1, 2, \ldots, k$,
+\end{itemize}
+as well as a set $C$ of contracts (in the sense of the
+contracted stable marriage problem) defined as follows:
+\begin{itemize}
+ \item For each arc $a$ that appears in one of the paths
+       $p_1, p_2, \ldots, p_k$ and also appears in one of
+       the paths $q_1, q_2, \ldots, q_k$, we define a
+       contract $c_a$ as follows:
+       Let $i$ be such that $a$ appears in $p_i$.
+       (This $i$ is unique, because $a$ cannot appear in
+       more than one of the paths $p_1, p_2, \ldots, p_k$;
+       this is because these paths are arc-disjoint.)
+       Let $j$ be such that $a$ appears in $q_j$.
+       (This $j$ is unique for a similar reason.)
+       The contract $c_a$ shall involve man $i$ and woman
+       $j$.
+ \item For each $i \in \set{1, 2, \ldots, k}$ and
+       $j \in \set{1, 2, \ldots, k}$, we define a contract
+       $d_{i, j}$ involving man $i$ and woman $j$.
+       This contract will be called a ``dummy contract''.
+\end{itemize}
+The set $C$ shall consist of all contracts $c_a$ and all
+contracts $d_{i, j}$.
+The dummy contracts guarantee that for each pair
+$\tup{m, w}$ consisting of a man $m$ and a woman $w$,
+there is at least one contract that involves $m$ and $w$.
+
+Each of the $k$ men and each of the $k$ women shall have
+a preference list of all the contracts that involve him/her;
+namely, we define these preference lists as follows:
+\begin{itemize}
+ \item For each $i \in \set{1, 2, \ldots, k}$, the
+       preference list of \textbf{man} $i$ shall consist of all
+       the contracts $c_a$ that involve him,
+       as well as all the dummy contracts of
+       the form $d_{i, j}$.
+       The contracts $c_a$ shall appear in the order of
+       \textbf{increasing} $\ive{a} p_i$ (that is, man $i$ prefers
+       those contracts $c_a$ whose number $\ive{a} p_i$ is
+       smaller),
+       whereas the dummy contracts shall appear in
+       arbitrary order;
+       the dummy contracts must appear below all the
+       contracts $c_a$ (that is, man $i$ prefers any of
+       the $c_a$ to any of the dummy contracts).
+ \item For each $j \in \set{1, 2, \ldots, k}$, the
+       preference list of \textbf{woman} $j$ shall consist of all
+       the contracts $c_a$ that involve her,
+       as well as all the dummy contracts of
+       the form $d_{i, j}$.
+       The contracts $c_a$ shall appear in the order of
+       \textbf{decreasing} $\ive{a} q_j$ (that is, woman $j$ prefers
+       those contracts $c_a$ whose number $\ive{a} q_j$ is
+       larger),
+       whereas the dummy contracts shall appear in
+       arbitrary order;
+       the dummy contracts must appear below all the
+       contracts $c_a$ (that is, woman $j$ prefers any of
+       the $c_a$ to any of the dummy contracts).
+\end{itemize}
+
+Consider the contracted stable marriage problem corresponding to
+this data.
+Theorem~\ref{thm.stable-matching.contracted.MR.correct} shows that
+the modified ``Mating Ritual'' produces a stable matching.
+Hence, a stable matching exists.
+Fix such a stable matching, and denote it by $K$.
+For each $i \in \set{1, 2, \ldots, k}$, we let $m_i$ denote
+the $K$-marriage contract of man $i$.
+
+For each $i \in \set{1, 2, \ldots, k}$, we define a path $s_i$
+from $u$ to $w$ as follows:
+\begin{itemize}
+\item Let the woman involved in the contract $m_i$ (that is, the
+      woman married off to $i$ in the stable matching $K$) be
+      woman $j$.
+\item If the contract $m_i$ is \textbf{not} a dummy contract,
+      then $m_i = c_a$ for some arc $a$.
+      In this case:
+      \begin{itemize}
+      \item Consider this arc $a$.
+      \item Let $r_i$ be the walk consisting of the first
+            $\ive{a} p_i$ arcs of the path $p_i$
+            (that is, all the arcs up to the point where it uses
+            the arc $a$, including that arc $a$) and of the
+            last\footnote{Here, $\ell\tup{x}$ denotes the length
+            of any walk $x$.}
+            $\ell\tup{q_j} - \ive{a} q_j$ arcs of the path
+            $q_j$ (that is, all the arcs that come after the point
+            where it uses the arc $a$).
+            This is a walk from $u$ to $w$.
+      \end{itemize}
+      Otherwise:
+      \begin{itemize}
+      \item Let $r_i$ be the walk consisting of all
+            arcs of the path $p_i$
+            and of all arcs of the path $q_j$.
+            (In other words, let $r_i$ be the concatenation of
+            the paths $p_i$ and $q_j$.)
+            This is a walk from $u$ to $w$.
+      \end{itemize}
+      In either case, we have defined a walk $r_i$ from $u$ to $w$.
+\item We obtain a path $s_i$ from $u$ to $w$ by successively
+      removing cycles from $r_i$ until no cycles remain.
+      (The result of this process may depend on the choices made,
+      but this does not matter to us, as any result is good.)
+\end{itemize}
+
+We have thus defined $k$ paths $s_1, s_2, \ldots, s_k$ from
+$u$ to $w$.
+
+Let us make some observations:
+
+\begin{statement}
+\textit{Observation 1:}
+Fix $i \in \set{1, 2, \ldots, k}$.
+Let $j \in \set{1, 2, \ldots, k}$ be such that woman $j$ is
+the $K$-partner of man $i$
+(that is, the contract $m_i$ involves man $i$ and woman $j$).
+
+Assume that the contract $m_i$ has the form
+$m_i = c_a$ for some arc $a$.
+
+Let $b$ be an arc of the path $s_i$.
+
+Then, either $b$ is an arc of $p_i$ satisfying
+$\ive{b} p_i \leq \ive{a} p_i$,
+or $b$ is an arc of $q_j$ satisfying
+$\ive{b} q_j > \ive{a} q_j$.
+\end{statement}
+
+\begin{proof}[Proof of Observation 1.]
+The path $s_i$ was obtained by removing cycles from $r_i$.
+Thus, each arc of $s_i$ is an arc of $r_i$.
+Hence, $b$ is an arc of $r_i$ (since $b$ is an arc of $s_i$).
+
+But $r_i$ was defined as the walk consisting of the first
+$\ive{a} p_i$ arcs of the path $p_i$
+(that is, all the arcs up to the point where it uses
+the arc $a$, including that arc $a$) and of the
+last $\ell\tup{q_j} - \ive{a} q_j$ arcs of the path
+$q_j$ (that is, all the arcs that come after the point
+where it uses the arc $a$).
+Therefore, each arc of $r_i$ is either one of the first
+$\ive{a} p_i$ arcs of the path $p_i$,
+or one of the last $\ell\tup{q_j} - \ive{a} q_j$ arcs of the path
+$q_j$.
+In particular, this must hold for the arc $b$
+(since $b$ is an arc of $r_i$).
+In other words, either $b$ is an arc of $p_i$ satisfying
+$\ive{b} p_i \leq \ive{a} p_i$,
+or $b$ is an arc of $q_j$ satisfying
+$\ive{b} q_j > \ive{a} q_j$.
+This finishes the proof of Observation 1.
+\end{proof}
+
+\begin{statement}
+\textit{Observation 2:}
+Fix $i \in \set{1, 2, \ldots, k}$.
+Let $j \in \set{1, 2, \ldots, k}$ be such that woman $j$ is
+the $K$-partner of man $i$
+(that is, the contract $m_i$ involves man $i$ and woman $j$).
+
+Assume that the contract $m_i$ is a dummy contract.
+
+Let $b$ be an arc of the path $s_i$.
+
+Then, either $b$ is an arc of $p_i$,
+or $b$ is an arc of $q_j$.
+\end{statement}
+
+\begin{proof}[Proof of Observation 2.]
+Analogous to the proof of Observation 1.
+\end{proof}
+
+\begin{statement}
+\textit{Observation 3:}
+Fix $i \in \set{1, 2, \ldots, k}$.
+Let $j \in \set{1, 2, \ldots, k}$ be such that woman $j$ is
+the $K$-partner of man $i$
+(that is, the contract $m_i$ involves man $i$ and woman $j$).
+
+Let $b$ be an arc of the path $s_i$.
+Assume that the contract $c_b$ exists.
+
+Then, one of the following two statements holds:
+
+\begin{itemize}
+\item \textit{Statement O3.1:}
+   The arc $b$ belongs to the path $p_i$, and
+   man $i$ weakly prefers\footnote{We say that a person
+   $p$ ``weakly prefers'' a contract $\kappa_1$ to a
+   contract $\kappa_2$ if we have either
+   $\kappa_1 = \kappa_2$ or the person $p$ prefers
+   $\kappa_1$ to $\kappa_2$.}   
+   the contract $c_b$ over his $K$-marriage contract.
+
+\item \textit{Statement O3.2:}
+   The arc $b$ belongs to the path $q_j$, and
+   woman $j$ prefers
+   the contract $c_b$ over her $K$-marriage contract.
+\end{itemize}
+\end{statement}
+
+\begin{proof}[Proof of Observation 3.]
+The contract $m_i$ is either of the form $m_i = c_a$ for
+some arc $a$, or a dummy contract.
+
+In the former case, Observation 3 follows from
+Observation 1.
+
+In the latter case, Observation 3 follows from
+Observation 2 (using the fact that everyone prefers
+any contract of the form $c_a$ over any dummy contract).
+\end{proof}
+
+\begin{statement}
+\textit{Observation 4:}
+Let $i$ and $x$ be two distinct elements of
+$\set{1, 2, \ldots, k}$ such that the paths $s_i$ and $s_x$ have
+an arc in common.
+Let $b$ be an arc common to these two paths $s_i$ and $s_x$.
+
+Choose $j \in \set{1, 2, \ldots, k}$ such that
+woman $j$ is the $K$-partner of man $i$
+(that is, the contract $m_i$ involves man $i$ and woman $j$).
+
+Choose $y \in \set{1, 2, \ldots, k}$ such that
+woman $y$ is the $K$-partner of man $x$
+(that is, the contract $m_x$ involves man $x$ and woman $y$).
+
+Then, one of the following two statements holds:
+
+\begin{itemize}
+\item \textit{Statement O4.1:}
+   The arc $b$ belongs to the path $p_i$ and to the
+   path $q_y$.
+
+\item \textit{Statement O4.2:}
+   The arc $b$ belongs to the path $p_x$ and to the
+   path $q_j$.
+\end{itemize}
+
+\end{statement}
+
+\begin{proof}[Proof of Observation 4.]
+The women $j$ and $y$ are married (in $K$) to the two distinct
+men $i$ and $x$.
+Therefore, these two women must too be distinct.
+In other words, $j$ and $y$ are distinct.
+
+Either $b$ is an arc of $p_i$, or $b$ is an arc of
+$q_j$\ \ \ \ \footnote{In fact, the contract $m_i$ either
+  is a contract of the form $m_i = c_a$ for some arc $a$,
+  or is a dummy contract.
+  In the former case, the claim follows from Observation 1;
+  in the latter case, the claim follows from Observation 2.}.
+Similarly, either $b$ is an arc of $p_x$, or $b$ is an arc
+of $q_y$.
+Thus, we are in one of the following four cases:
+
+\begin{itemize}
+ \item \textit{Case 1:} The arc $b$ is an arc of $p_i$ and is an
+       arc of $p_x$.
+ \item \textit{Case 2:} The arc $b$ is an arc of $p_i$ and is an
+       arc of $q_y$.
+ \item \textit{Case 3:} The arc $b$ is an arc of $q_j$ and is an
+       arc of $p_x$.
+ \item \textit{Case 4:} The arc $b$ is an arc of $q_j$ and is an
+       arc of $q_y$.
+\end{itemize}
+
+However, the paths $p_1, p_2, \ldots, p_k$ are arc-disjoint.
+Hence, the paths $p_i$ and $p_x$ have no arcs in common (since
+$i$ and $x$ are distinct).
+Hence, $b$ cannot be an arc of $p_i$ and an arc of $p_x$ at the
+same time.
+Therefore, Case 2 is impossible.
+Similarly, Case 4 is impossible (here, we use the fact that $j$
+and $y$ are distinct).
+Thus, only Case 1 and Case 3 remain to be discussed.
+But clearly, Statement O4.1 holds in Case 1, whereas
+Statement O4.2 holds in Case 3.
+Thus, one of the two Statements always holds.
+This proves Observation 4.
+\end{proof}
+
+We are now going to show that the $k$ paths
+$s_1, s_2, \ldots, s_k$ are arc-disjoint.
+
+Indeed, assume the contrary.
+Thus, there exist two distinct elements $i$ and $x$ of
+$\set{1, 2, \ldots, k}$ such that the paths $s_i$ and $s_x$ have
+an arc in common.
+Consider these $i$ and $x$.
+
+The paths $s_i$ and $s_x$ have an arc in common.
+Fix such an arc, and denote it by $b$.
+
+Choose $j \in \set{1, 2, \ldots, k}$ such that
+woman $j$ is the $K$-partner of man $i$
+(that is, the contract $m_i$ involves man $i$ and woman $j$).
+
+Choose $y \in \set{1, 2, \ldots, k}$ such that
+woman $y$ is the $K$-partner of man $x$
+(that is, the contract $m_x$ involves man $x$ and woman $y$).
+
+Observation 4 shows that one of the following two statements holds:
+
+\begin{itemize}
+\item \textit{Statement O4.1:}
+   The arc $b$ belongs to the path $p_i$ and to the
+   path $q_y$.
+
+\item \textit{Statement O4.2:}
+   The arc $b$ belongs to the path $p_x$ and to the
+   path $q_j$.
+\end{itemize}
+
+We WLOG assume that Statement O4.1 holds (because otherwise,
+we can simply switch $i$ and $j$ with $x$ and $y$).
+
+However, the paths $p_1, p_2, \ldots, p_k$ are arc-disjoint.
+Hence, the paths $p_i$ and $p_x$ have no arcs in common (since
+$i$ and $x$ are distinct).
+Hence, the arc $b$ cannot belong to $p_i$ and to $p_x$ at the
+same time.
+Thus, $b$ does not belong to $p_x$ (since $p$ belongs to $p_i$).
+Similarly, $b$ does not belong to $q_j$.
+
+The arc $b$ belongs to both paths $p_i$ and $q_y$.
+Hence, the contract $c_b$ exists (and involves man $i$ and
+woman $y$).
+Thus,
+Observation 3 (applied to $x$ and $y$ instead of $i$ and $j$)
+shows that one of the following two statements holds:
+
+\begin{itemize}
+\item \textit{Statement X3.1:}
+   The arc $b$ belongs to the path $p_x$, and
+   man $x$ weakly prefers
+   the contract $c_b$ over his $K$-marriage contract.
+
+\item \textit{Statement X3.2:}
+   The arc $b$ belongs to the path $q_y$, and
+   woman $y$ prefers
+   the contract $c_b$ over her $K$-marriage contract.
+\end{itemize}
+
+But Statement X3.1 cannot hold, since $b$ does not belong to $p_x$.
+Hence, Statement X3.2 must hold.
+In particular, woman $y$ prefers the contract $c_b$ over her
+$K$-marriage contract.
+This shows that $c_b$ is not her $K$-marriage contract.
+Therefore, the contract $c_b$ is not in $K$.
+
+Observation 3 shows that one of the following two statements holds:
+
+\begin{itemize}
+\item \textit{Statement I3.1:}
+   The arc $b$ belongs to the path $p_i$, and
+   man $i$ weakly prefers
+   the contract $c_b$ over his $K$-marriage contract.
+
+\item \textit{Statement I3.2:}
+   The arc $b$ belongs to the path $q_j$, and
+   woman $j$ prefers
+   the contract $c_b$ over her $K$-marriage contract.
+\end{itemize}
+
+But the arc $b$ does not belong to $q_j$.
+Therefore, Statement I3.2 cannot hold.
+Thus, Statement I3.1 must hold (since one of Statement I3.1 and
+Statement I3.2 holds).
+Hence, man $i$ weakly prefers
+the contract $c_b$ over his $K$-marriage contract.
+Since $c_b$ is not his $K$-marriage contract (because the contract
+$c_b$ is not in $K$), we can remove the word ``weakly'' from this
+sentence.
+Thus, man $i$ prefers the contract $c_b$ over his $K$-marriage
+contract.
+Recall that the same can be said about woman $y$.
+Hence, the contract $c_b$ is rogue (for $K$).
+This contradicts the fact that there exist no rogue contract for
+$K$ (since $K$ is a stable matching).
+This contradiction proves that our assumption was false.
+
+Hence, we have shown that the $k$ paths
+$s_1, s_2, \ldots, s_k$ are arc-disjoint.
+Thus, there exist $k$ arc-disjoint paths from $u$ to $w$
+(namely, $s_1, s_2, \ldots, s_k$).
+\end{proof}
+
+\subsection{Exercise~\ref{exe.mt2.chrompoly}:
+the chromatic polynomial}
+
+\begin{exercise} \label{exe.mt2.chrompoly}
+Let $G = \tup{V, E}$ be a simple graph.
+Define a polynomial $\chi_G$ in a single indeterminate $x$ (with
+integer coefficients) by
+\[
+\chi_G = \sum_{F \subseteq E} \tup{-1}^{\abs{F}} x^{\conn\tup{V, F}} .
+\]
+(Here, as usual, $\conn H$ denotes the number of connected components
+of any graph $H$.)
+This polynomial $\chi_G$ is called the \textit{chromatic polynomial}
+of $G$.
+
+Fix $k \in \NN$.
+Recall that a \textit{$k$-coloring} of $G$ means a map
+$f : V \to \set{1, 2, \ldots, k}$.
+(The image $f \tup{v}$ of a vertex $v \in V$ under this map is called
+the \textit{color} of $v$ under this $k$-coloring $f$.)
+A $k$-coloring $f$ of $G$ is said to be \textit{proper} if
+each edge $\set{u, v}$ of $G$ satisfies $f \tup{u} \neq f \tup{v}$.
+(In other words, a $k$-coloring $f$ of $G$ is proper if and only if
+no two adjacent vertices share the same color.)
+
+Prove that the number of proper $k$-colorings of $G$ is
+$\chi_G \tup{k}$.
+
+[\textbf{Hint:} Show that $k^{\conn\tup{V, F}}$ also counts certain
+$k$-colorings (I like to call them ``$F$-improper colorings''
+-- what could that mean?).
+Then, analyze how often (and with what signs) a given $k$-coloring of
+$G$ appears in the sum
+$\sum_{F \subseteq E} \tup{-1}^{\abs{F}} k^{\conn\tup{V, F}}$. ]
+\end{exercise}
+
+Note that most graph-theoretical literature defines the chromatic
+polynomial differently than I do in Exercise~\ref{exe.mt2.chrompoly}.
+Use the literature at your own peril!
+{\small Most authors define $\chi_G$ as the polynomial whose value at
+each $k \in \NN$ is the number of proper $k$-colorings.
+This may be more intuitive, but it leaves a question unanswered:
+Why is there such a polynomial in the first place?
+Exercise~\ref{exe.mt2.chrompoly} answers this question.}
+
+Exercise~\ref{exe.mt2.chrompoly} is \cite[Theorem 3.4]{Grinbe16}.
+However, the proof given in \cite{Grinbe16} is a long detour, seeing
+that the purpose of \cite{Grinbe16} is to generalize the result in
+several directions.
+We shall give a more direct proof that uses the same idea.
+(The idea goes back to Hassler Whitney in 1930 \cite[\S 6]{Whitney32},
+although he worded the argument differently and in far less modern
+language.)
+
+We are going to use the Iverson bracket notation (as in
+\cite[\S 3.3]{nogra}).
+We first recall an important result (\cite[Lemma 3.3.5]{nogra}):
+
+\begin{lemma} \label{lem.dominating.heinrich-lemma1}
+Let $P$ be a finite set. Then,
+\[
+\sum_{\substack{A \subseteq P}} \tup{-1}^{\abs{A}}
+= \ive{P = \varnothing} .
+\]
+(The symbol ``$\sum_{\substack{A \subseteq P}}$'' means ``sum over
+all subsets $A$ of $P$''. In other words, it means
+``$\sum_{\substack{A \in \powset{P}}}$''.)
+\end{lemma}
+
+Next, we introduce a specific notation related to colorings:
+
+\begin{definition}
+\label{def.mt2.chrompoly.Ef}
+Let $G = \tup{V, E}$ be a simple graph.
+Let $k \in \NN$.
+Let $f : V \to \set{1, 2, \ldots, k}$ be a $k$-coloring.
+We let $E_f$ denote the set of all edges $\set{u, v}$ of $G$
+satisfying $f \tup{u} = f \tup{v}$.
+(In other words, $E_f$ is the set of all edges $\set{u, v}$ of
+$G$ whose two endpoints $u$ and $v$ have the same color.)
+This set $E_f$ is a subset of $E$.
+\end{definition}
+
+Notice the following simple fact:
+
+\begin{proposition}
+\label{prop.mt2.chrompoly.EcapEf}
+Let $G = \tup{V, E}$ be a simple graph.
+Let $k \in \NN$.
+Let $f : V \to \set{1, 2, \ldots, k}$ be a $k$-coloring.
+Then, the $k$-coloring $f$ is proper if and only if
+$E_f = \varnothing$.
+\end{proposition}
+
+\begin{proof}
+[Proof of Proposition~\ref{prop.mt2.chrompoly.EcapEf}.]
+We have the following chain of equivalences:
+\begin{align*}
+&  \ \left(  \text{the }k\text{-coloring }f\text{ is proper}\right) \\
+&  \Longleftrightarrow\ \left(  \text{each edge } \set{u, v} \text{
+of }G\text{ satisfies }f\left(  u\right)  \neq f\left(  v\right)  \right) \\
+&  \ \ \ \ \ \ \ \ \ \ \left(  \text{by the definition of \textquotedblleft
+proper\textquotedblright}\right) \\
+&  \Longleftrightarrow\ \left(  \text{no edge } \set{u, v} \text{ of
+}G\text{ satisfies }f\left(  u\right)  =f\left(  v\right)  \right) \\
+&  \Longleftrightarrow\ \left(  \underbrace{\text{the set of all edges
+} \set{u, v} \text{ of }G\text{ satisfying }f\left(  u\right)
+=f\left(  v\right)  }_{\substack{=E_f \\\text{(by the definition of }%
+E_f \text{)}}}\text{ is empty}\right) \\
+&  \Longleftrightarrow\ \left(  E_f \text{ is empty}\right)
+\ \Longleftrightarrow\ \left(  E_f =\varnothing\right)  .
+\end{align*}
+This proves Proposition~\ref{prop.mt2.chrompoly.EcapEf}.
+\end{proof}
+
+\begin{lemma} \label{lem.mt2.chrompoly.kconn}
+Let $G = \tup{V, E}$ be a simple graph.
+Let $B$ be a subset of $E$.
+Then, the number of all $k$-colorings
+$f : V \to \set{1, 2, \ldots, k}$ satisfying $B \subseteq E_f $
+is $k^{ \conn \tup{V, B} }$.
+\end{lemma}
+
+\begin{proof}
+[Proof of Lemma~\ref{lem.mt2.chrompoly.kconn} (sketched).]
+We shall say that two vertices $u$ and $v$ of a graph $H$ are
+\textit{connected} in $H$ if these vertices $u$ and $v$ belong to the
+same connected component of $H$.
+(In other words, two vertices $u$ and $v$ of a graph $H$ are connected
+in $H$ if and only if there exists a walk from $u$ to $v$ in $H$.)
+
+Fix any $k$-coloring $f : V \to \set{1, 2, \ldots, k} $.
+We are first going to restate the condition $B \subseteq E_f$ in more
+familiar terms.
+Indeed, we have the following chain of equivalences:\footnote{See
+  below for justifications for the equivalence signs.}
+\begin{align}
+&  \ \left(  B\subseteq E_f \right) \nonumber\\
+&  \Longleftrightarrow\ \left(  \text{each } \set{u, v} \in B\text{
+satisfies } \set{u, v} \in E_f \right) \nonumber\\
+&  \Longleftrightarrow\ \left(  \text{each } \set{u, v} \in B\text{
+satisfies }f\left(  u\right)  =f\left(  v\right)  \right) \nonumber\\
+&  \Longleftrightarrow\ \left(  \text{every two vertices }p\text{ and }q\text{
+that are connected in } \tup{V, B} \text{ satisfy }f\left(  p\right)
+=f\left(  q\right)  \right) \nonumber\\
+&  \Longleftrightarrow\ \left(
+\begin{array}[c]{c}
+\text{whenever }C\text{ is a connected component of the graph }\left(
+V,B\right)  \text{,}\\
+\text{all the vertices in }C\text{ have the same color (in }f\text{)}
+\end{array}
+\right)  .
+\label{pf.lem.mt2.chrompoly.kconn.equiv}
+\end{align}
+Here, the second and third equivalence signs hold for the following
+reasons:
+
+\begin{itemize}
+\item The second equivalence sign holds because for each given
+$\set{u, v} \in B$, we have the equivalence
+\begin{align*}
+\left(  \set{u, v} \in E_f \right)
+& \Longleftrightarrow
+   \left( \set{u, v} \text{ is an edge of } G \text{ satisfying }
+      f \tup{u} = f \tup{v} \right) \\
+&\qquad \qquad \left(\text{by the definition of } E_f \right) \\
+& \Longleftrightarrow
+   \left( f \tup{u} = f \tup{v} \right)
+\end{align*}
+(because $\set{u, v}$ is always an edge of $G$
+(since $\set{u, v} \in B \subseteq E$)).
+
+\item The third equivalence sign holds for the following reasons:
+
+\begin{itemize}
+\item If each $ \set{u, v} \in B$ satisfies $f \tup{u} = f \tup{v}$,
+then every two vertices $p$ and $q$ that are connected
+in $ \tup{V, B} $ satisfy
+$f \tup{p} = f \tup{q}$\ \ \ \ \footnote{\textit{Proof.}
+    Assume that each $ \set{u, v} \in
+    B$ satisfies $f \tup{u} = f \tup{v}$. We must then show that
+    every two vertices $p$ and $q$ that are connected in $\tup{V, B}$
+    satisfy $f \tup{p} = f \tup{q}$.
+    \par
+    Fix any two vertices $p$ and $q$ that are connected in $ \tup{V, B} $.
+    Thus, there exists a walk from $p$ to $q$ in $ \tup{V, B} $. Fix such
+    a walk, and denote it by $\left(  w_{0},w_{1},\ldots,w_{k}\right)  $. Thus,
+    $w_{0}=p$ and $w_{k}=q$. For every $i\in \set{1, 2, \ldots, k} $, we
+    have $\left\{  w_{i-1},w_{i}\right\}  \in B$ (since the vertices $w_{i-1}$ and
+    $w_{i}$ are consecutive vertices on the walk $\left(  w_{0},w_{1},\ldots
+    ,w_{k}\right)  $, and thus are adjacent in the graph $ \tup{V, B} $)
+    and therefore $f\left(  w_{i-1}\right)  =f\left(  w_{i}\right)  $ (since each
+    $ \set{u, v} \in B$ satisfies $f\left(  u\right)  =f\left(
+    v\right)  $). In other words, $f\left(  w_{0}\right)  =f\left(  w_{1}\right)
+    =\cdots=f\left(  w_{k}\right)  $. Hence, $f\left(  w_{0}\right)  =f\left(
+    w_{k}\right)  $. Since $w_{0}=p$ and $w_{k}=q$, this rewrites as $f\left(
+    p\right)  =f\left(  q\right)  $. Qed.}.
+
+\item If every two vertices $p$ and $q$ that are connected in $\left(
+V,B\right)  $ satisfy $f\left(  p\right)  =f\left(  q\right)  $, then each
+$ \set{u, v} \in B$ satisfies $f\left(  u\right)  =f\left(
+v\right)  $\ \ \ \ \footnote{\textit{Proof.}
+    Assume that every two vertices
+    $p$ and $q$ that are connected in $ \tup{V, B} $ satisfy
+    $f \tup{p} = f \tup{q}$. We must then prove that each
+    $\set{u, v} \in B$ satisfies $f \tup{u} = f \tup{v}$.
+    \par
+    Fix any $\set{u, v} \in B$. Then, the vertices $u$ and $v$ are
+    adjacent in the graph $\tup{V, B}$, and thus are connected in
+    $\tup{V, B}$.
+    Hence, $f \tup{u} = f \tup{v}$
+    (since every two vertices $p$ and $q$ that are connected in
+    $\tup{V, B}$ satisfy $f \tup{p} = f \tup{q}$). Qed.}.
+\end{itemize}
+\end{itemize}
+
+Now, forget that we fixed $f$.
+We thus have shown that for each $k$-coloring
+$f : V \to \set{1, 2, \ldots, k}$, the equivalence
+\eqref{pf.lem.mt2.chrompoly.kconn.equiv} holds.
+Therefore, a $k$-coloring
+$f : V \to \set{1, 2, \ldots, k} $ satisfies $B\subseteq E_f $
+if and only if it has the property that whenever $C$ is a connected component
+of the graph $ \tup{V, B} $, all the vertices in $C$ have the same
+color (in $f$). Therefore, all $k$-colorings $f:V\rightarrow\left\{
+1,2,\ldots,k\right\}  $ satisfying $B\subseteq E_f $ can be obtained by the
+following procedure:
+
+\begin{itemize}
+\item \textbf{For each} connected component $C$ of the graph $\left(
+V,B\right)  $, pick a color $c_{C}$ (i.e., an element $c_{C}$ of $\left\{
+1,2,\ldots,k\right\}  $) and then color each vertex in $C$ with this color
+$c_{C}$ (i.e., set $f\left(  v\right)  =c_{C}$ for each $v\in C$).
+\end{itemize}
+
+\footnote{Let us restate this more rigorously: All $k$-colorings
+$f:V \to \set{1, 2, \ldots, k} $ satisfying $B\subseteq E_f $
+can be obtained by the following procedure:
+\par
+\begin{itemize}
+\item \textbf{For each} connected component $C$ of the graph $\left(
+V,B\right)  $,
+\par
+\begin{itemize}
+\item pick any number $c_C \in \set{1, 2, \ldots, k}$;
+\par
+\item set $f \tup{v} = c_C$ for each $v \in C$.
+\end{itemize}
+\end{itemize}
+}
+This procedure involves choices (because for each connected component
+$C$ of $\tup{V, B}$, we get to pick a color), and there is a total of
+$k^{ \conn  \tup{V, B} }$ possible choices that can be
+made (because we get to choose a color from $\set{1, 2, \ldots, k}$
+for each of the $ \conn  \tup{V, B} $ connected
+components of $ \tup{V, B} $).
+Each of these choices gives rise to a
+different $k$-coloring $f : V \to \set{1, 2, \ldots, k} $.
+Therefore, the number of all $k$-colorings
+$f : V \to \set{1, 2, \ldots, k}$ satisfying $B \subseteq E_f$ is
+$k^{ \conn  \tup{V, B} }$ (because all of these
+$k$-colorings can be obtained by this procedure).
+This proves Lemma~\ref{lem.mt2.chrompoly.kconn}.
+\end{proof}
+
+\begin{corollary} \label{cor.mt2.chrompoly.kconn2}
+Let $\tup{V, E}$ be a simple graph.
+Let $F$ be a subset of $E$. Then,
+\[
+k^{ \conn \tup{V, F} }
+= \sum_{\substack{f : V \to
+   \set{1, 2, \ldots, k} ; \\ F\subseteq E_f }} 1.
+\]
+\end{corollary}
+
+\begin{proof}
+[Proof of Corollary~\ref{cor.mt2.chrompoly.kconn2} (sketched).]
+We have
+\begin{align*}
+\sum_{\substack{f:V \to \set{1, 2, \ldots, k} ;\\F\subseteq
+E_f }}1 &  =\left(  \text{the number of all }
+f : V \to \set{1, 2, \ldots, k}  \text{ satisfying }
+F\subseteq E_f \right)  \cdot 1\\
+&  =\left(  \text{the number of all }f : V \to \set{1, 2, \ldots, k}
+\text{ satisfying } F\subseteq E_f \right)  \\
+&  =k^{ \conn \left(  V,F\right)  }
+\end{align*}
+(because Lemma \ref{lem.mt2.chrompoly.kconn} (applied to $B=F$) shows
+that the number of all $k$-colorings $f : V \to \set{1, 2, \ldots, k}$
+satisfying $F \subseteq E_f$ is $k^{ \conn \left(  V,F\right)
+}$).
+This proves Corollary~\ref{cor.mt2.chrompoly.kconn2}.
+\end{proof}
+
+\begin{proof}
+[Solution to Exercise~\ref{exe.mt2.chrompoly} (sketched).]
+Substituting $k$ for $x$ in the equality
+\[
+\chi_G
+=
+\sum_{F\subseteq E} \tup{-1}^{\abs{F}} x^{ \conn \tup{V, F} },
+\]
+we obtain
+\begin{align*}
+\chi_G \tup{k}
+&= \sum_{F\subseteq E} \tup{-1}^{\abs{F}}
+\underbrack{k^{ \conn \tup{V, F}  }}
+           { =\sum_{\substack{f : V \to \set{1, 2, \ldots, k};\\
+             F\subseteq E_f }} 1
+            \\ \text{(by Corollary \ref{cor.mt2.chrompoly.kconn2})}}
+= \sum_{F\subseteq E} \tup{-1}^{\abs{F}}
+  \sum_{\substack{f:V \to \set{1, 2, \ldots, k } ; \\ F\subseteq E_f }}
+  1\\
+&  =\underbrace{\sum_{F\subseteq E}\sum_{\substack{f:V\rightarrow\left\{
+1,2,\ldots,k\right\}  ;\\F\subseteq E_f }}}_{=\sum_{f:V\rightarrow\left\{
+1,2,\ldots,k\right\}  }\sum_{\substack{F\subseteq E;\\F\subseteq E_f }%
+}}\underbrace{\left(  -1\right)  ^{\left\vert F\right\vert }1}_{=\left(
+-1\right)  ^{\left\vert F\right\vert }}=\sum_{f:V\rightarrow\left\{
+1,2,\ldots,k\right\}  }\underbrace{\sum_{\substack{F\subseteq E;\\F\subseteq
+E_f }}}_{\substack{=\sum_{F\subseteq E_f }\\\text{(since }E_f \subseteq
+E\text{)}}}\left(  -1\right)  ^{\left\vert F\right\vert }\\
+&  =\sum_{f:V \to \set{1, 2, \ldots, k} }\sum_{F\subseteq
+E_f }\left(  -1\right)  ^{\left\vert F\right\vert }=\sum_{f:V\rightarrow
+ \set{1, 2, \ldots, k} }\underbrace{\sum_{A\subseteq E_f }\left(
+-1\right)  ^{\left\vert A\right\vert }}_{\substack{=\left[  E_f
+=\varnothing\right]  \\
+\text{(by Lemma \ref{lem.dominating.heinrich-lemma1},}\\
+\text{applied to }P=E_f \text{)}}}\\
+&  \ \ \ \ \ \ \ \ \ \ \left(
+\begin{array}[c]{c}
+\text{here, we have renamed the summation index }F\\
+\text{in the second sum as }A
+\end{array}
+\right)  \\
+&  =\sum_{f:V \to \set{1, 2, \ldots, k} }
+  \ive{ E_f =\varnothing }  \\
+&  =\sum_{\substack{f:V\rightarrow\left\{  1,2,\ldots,k\right\}
+;\\E_f =\varnothing}}\underbrace{\left[  E_f =\varnothing\right]
+}_{\substack{=1\\\text{(since }E_f =\varnothing\text{ is true)}}%
+}+\sum_{\substack{f:V \to \set{1, 2, \ldots, k} ;\\\text{not
+}E_f =\varnothing}}\underbrace{\left[  E_f =\varnothing\right]
+}_{\substack{=0\\\text{(since }E_f =\varnothing\text{ is false)}}}\\
+&  \ \ \ \ \ \ \ \ \ \ \left(
+\begin{array}[c]{c}
+\text{since each }f:V \to \set{1, 2, \ldots, k} \text{
+satisfies either }E_f =\varnothing\\
+\text{or }E_f \neq\varnothing\text{ (but not both)}%
+\end{array}
+\right)  \\
+&  =\sum_{\substack{f:V\rightarrow\left\{  1,2,\ldots,k\right\}
+;\\E_f =\varnothing}}1
++ \underbrack{\sum_{\substack{f:V\rightarrow\left\{  1,2,\ldots
+              ,k\right\}  ;\\\text{not }E_f =\varnothing}}0}
+             {= 0}
+=\sum_{ \substack{f : V \to \set{1, 2, \ldots, k} ;\\
+        E_f =\varnothing}}1\\
+&  =\left(  \text{the number of all }f:V\rightarrow\left\{  1,2,\ldots
+,k\right\}  \text{ such that }E_f =\varnothing\right)  \cdot1\\
+&  =\left(  \text{the number of all }f:V\rightarrow\left\{  1,2,\ldots
+,k\right\}  \text{ such that }\underbrace{E_f =\varnothing}%
+_{\substack{\Longleftrightarrow\ \left(  \text{the }k\text{-coloring }f\text{
+is proper}\right)  \\\text{(by Proposition \ref{prop.mt2.chrompoly.EcapEf})}%
+}}\right)  \\
+&  =\left(  \text{the number of all }f:V\rightarrow\left\{  1,2,\ldots
+,k\right\}  \text{ such that the }k\text{-coloring }f\text{ is proper}\right)
+\\
+&  =\left(  \text{the number of all proper }k\text{-colorings}\right)  .
+\end{align*}
+In other words, the number of proper $k$-colorings of $G$ is
+$\chi_G \tup{k}$.
+This solves Exercise~\ref{exe.mt2.chrompoly}.
+\end{proof}
+
+\subsection{Exercise~\ref{exe.mt2.chrompoly-examples}:
+some concrete chromatic polynomials}
+
+\begin{exercise} \label{exe.mt2.chrompoly-examples}
+In Exercise~\ref{exe.mt2.chrompoly}, we have defined the chromatic
+polynomial $\chi_G$ of a simple graph $G$.
+In this exercise, we shall compute it on some examples.
+
+\textbf{(a)} For each $n \in \NN$, prove that the complete graph $K_n$
+has chromatic polynomial
+$\chi_{K_n} = x \tup{x-1} \cdots \tup{x-n+1}$.
+
+\textbf{(b)} Let $T$ be a tree (regarded as a simple graph).
+Let $n = \abs{\verts{T}}$.
+Prove that $\chi_T = x \tup{x-1}^{n-1}$.
+
+\textbf{(c)} Find the chromatic polynomial $\chi_{P_3}$ of the path
+graph $P_3$.
+\end{exercise}
+
+Before we start solving Exercise~\ref{exe.mt2.chrompoly-examples},
+let us make a general remark about it.
+In order to prove a formula for the chromatic polynomial $\chi_G$
+of a graph $G$, at least two approaches are available:
+One is to use the definition of $\chi_G$; another is to
+use the claim of Exercise~\ref{exe.mt2.chrompoly}.
+In order to use the second approach, one needs to know that a
+polynomial $p$ is uniquely determined by its values at
+infinitely many points.
+In other words, one needs to know the following fact:
+
+\begin{lemma} \label{lem.mt2.chrompoly-examples.poly-determined}
+Let $p$ and $q$ be two polynomials in one variable $x$
+with rational coefficients.
+If $p \tup{k} = q \tup{k}$ holds for infinitely many
+rational numbers $k$, then we have $p = q$.
+\end{lemma}
+
+Lemma~\ref{lem.mt2.chrompoly-examples.poly-determined} is easy
+to derive from the following well-known fact:
+
+\begin{lemma} \label{lem.mt2.chrompoly-examples.poly-0}
+Let $p$ be a polynomial in one variable $x$
+with rational coefficients.
+If $p \tup{k} = 0$ holds for infinitely many
+rational numbers $k$, then we have $p = 0$.
+\end{lemma}
+
+\begin{proof}[Proof of
+Lemma~\ref{lem.mt2.chrompoly-examples.poly-0}.]
+Assume that $p \tup{k} = 0$ holds for infinitely many
+rational numbers $k$.
+In other words, the polynomial $p$ has infinitely
+many rational roots.
+
+It is known\footnote{see, e.g.,
+\url{https://proofwiki.org/wiki/Polynomial_over_Field_has_Finitely_Many_Roots}}
+that any nonzero polynomial (in one variable $x$)
+over a field\footnote{This
+includes polynomials with rational coefficients,
+but also polynomials with real or complex
+coefficients.} has finitely many roots.
+Hence, if the polynomial $p$ were nonzero, then $p$
+would have finitely many roots, which would contradict
+the fact that $p$ has infinitely many roots.
+Hence, $p$ cannot be nonzero.
+In other words, we have $p = 0$.
+This proves Lemma~\ref{lem.mt2.chrompoly-examples.poly-0}.
+\end{proof}
+
+\begin{proof}[Proof of
+Lemma~\ref{lem.mt2.chrompoly-examples.poly-determined}.]
+Assume that $p \tup{k} = q \tup{k}$ holds for infinitely many
+rational numbers $k$.
+Thus, for infinitely many rational numbers $k$, we have
+$\tup{p - q} \tup{k}
+= \underbrace{p \tup{k}}_{= q \tup{k}} - q \tup{k}
+= q \tup{k} - q \tup{k}
+= 0$.
+Hence, Lemma~\ref{lem.mt2.chrompoly-examples.poly-0}
+(applied to $p - q$ instead of $p$) shows that $p - q = 0$.
+In other words, $p = q$.
+This proves Lemma~\ref{lem.mt2.chrompoly-examples.poly-determined}.
+\end{proof}
+
+Now, we can attack
+Exercise~\ref{exe.mt2.chrompoly-examples} \textbf{(a)}:
+
+\begin{lemma} \label{lem.mt2.chrompoly-examples.a}
+Let $n \in \NN$.
+Then, the complete graph $K_n$
+has chromatic polynomial
+$\chi_{K_n} = x \tup{x-1} \cdots \tup{x-n+1}$.
+\end{lemma}
+
+\begin{proof}[Proof of Lemma~\ref{lem.mt2.chrompoly-examples.a}.]
+Fix an integer $k \geq n$.
+Recall the concept of $k$-colorings defined in
+Exercise~\ref{exe.mt2.chrompoly} (applied to $G = K_n$).
+
+Exercise~\ref{exe.mt2.chrompoly} (applied to $G = K_n$)
+shows that the number of proper $k$-colorings of $K_n$ is
+$\chi_{K_n} \tup{k}$.
+In other words:
+\begin{align}
+\tup{\text{the number of proper } k \text{-colorings of }
+     K_n}
+= \chi_{K_n} \tup{k} .
+\label{pf.lem.mt2.chrompoly-examples.a.1}
+\end{align}
+
+Now, let us compute this number in a different way.
+Namely, recall that the complete graph $K_n$ has $n$
+vertices $1, 2, \ldots, n$, and that any two distinct
+vertices of $K_n$ are adjacent.
+Thus, a $k$-coloring of $K_n$ is proper if and only if
+no two distinct vertices of $K_n$ have the same color.
+Hence, we obtain the following procedure for constructing
+a proper $k$-coloring of $K_n$:
+
+\begin{itemize}
+\item First, choose a color for the vertex $1$.
+      This color must belong to the set
+      $\set{1, 2, \ldots, k}$.
+      % Thus, there are $k$ choices.
+\item Next, choose a color for the vertex $2$.
+      This color must belong to the set
+      $\set{1, 2, \ldots, k}$, and must be distinct
+      from the color chosen for the vertex $1$ (since
+      no two distinct vertices of $K_n$ may have the
+      same color).
+      % Thus, there are $k-1$ choices.
+\item Next, choose a color for the vertex $3$.
+      This color must belong to the set
+      $\set{1, 2, \ldots, k}$, and must be distinct
+      from the two colors chosen for the vertices $1$
+      and $2$ (since no two distinct vertices of
+      $K_n$ may have the same color).
+      % Thus, there are $k-2$ choices\footnote{Here,
+        % we are using the fact that the two colors
+        % chosen for the vertices $1$ and $2$ are
+        % distinct.
+        % (But this is clear, because we chose the
+        % color for the vertex $2$ to be distinct
+        % from the color that we chose for the
+        % vertex $1$.)}.
+\item Next, choose a color for the vertex $4$.
+      This color must belong to the set
+      $\set{1, 2, \ldots, k}$, and must be distinct
+      from the three colors chosen for the vertices $1$,
+      $2$ and $3$ (since no two distinct vertices of
+      $K_n$ may have the same color).
+      % Thus, there are $k-3$ choices\footnote{Here,
+        % we are using the fact that the three colors
+        % chosen for the vertices $1$, $2$ and $3$ are
+        % distinct.
+        % (But this is clear, because we chose the
+        % color for each vertex to be distinct
+        % from the colors chosen before.)}.
+\item And so on. Keep going until all $n$ vertices
+      $1, 2, \ldots, n$ have been assigned colors.
+\end{itemize}
+
+This procedure clearly produces each proper $k$-coloring
+of $K_n$.
+Furthermore, this procedure involves choices, and there
+is a total of
+$k \tup{k-1} \tup{k-2} \cdots \tup{k-n+1}$
+possible choices that can be made\footnote{\textit{Proof.}
+  In our procedure, we first choose a color for the
+  vertex $1$, then choose a color for the vertex $2$,
+  then choose a color for the vertex $3$, and so on.
+  In other words, for each $i \in \set{1, 2, \ldots, n}$,
+  we choose a color for the vertex $i$ after having
+  chosen colors for the vertices $1, 2, \ldots, i-1$.
+  The color we choose for a given vertex $i$ must
+  belong to the $k$-element set $\set{1, 2, \ldots, k}$,
+  but must be distinct from the $i-1$ colors already
+  chosen for the vertices $1, 2, \ldots, i-1$;
+  thus, the number of ways in which we can choose this
+  color is $k - \tup{i-1}$ (because the $i-1$ colors
+  already chosen for the vertices $1, 2, \ldots, i-1$
+  are distinct (because we have chosen the color for
+  each vertex to be distinct from all the colors chosen
+  before)).
+  \par
+  Thus, altogether, for each $i \in \set{1, 2, \ldots, n}$,
+  we have to choose a color for the vertex $i$, and there
+  are $k - \tup{i-1}$ ways to choose this color.
+  Therefore, the total number of possible choices is
+  \[
+  \tup{k - \tup{1-1}} \tup{k - \tup{2-1}} \cdots \tup{k - \tup{n-1}}
+  = k \tup{k-1} \tup{k-2} \cdots \tup{k-n+1}.
+  \]
+  Qed.}.
+Each of these choices produces a different proper $k$-coloring
+of $K_n$.
+Thus, the number of proper $k$-colorings of $K_n$ is
+exactly $k \tup{k-1} \tup{k-2} \cdots \tup{k-n+1}$
+(because all proper $k$-colorings of $K_n$ can be
+obtained by this procedure).
+In other words,
+\[
+\tup{\text{the number of proper } k \text{-colorings of }
+     K_n}
+= k \tup{k-1} \tup{k-2} \cdots \tup{k-n+1} .
+\]
+Comparing this with
+\eqref{pf.lem.mt2.chrompoly-examples.a.1}, we obtain
+\begin{align}
+\chi_{K_n} \tup{k}
+= k \tup{k-1} \tup{k-2} \cdots \tup{k-n+1} .
+\label{pf.lem.mt2.chrompoly-examples.a.3}
+\end{align}
+
+Now, forget that we fixed $k$.
+We thus have shown that
+\eqref{pf.lem.mt2.chrompoly-examples.a.3}
+holds for every integer $k \geq n$.
+Thus, \eqref{pf.lem.mt2.chrompoly-examples.a.3}
+holds for infinitely many rational numbers $k$.
+Hence, Lemma~\ref{lem.mt2.chrompoly-examples.poly-determined}
+(applied to $p = \chi_{K_n}$ and
+$q = x \tup{x-1} \tup{x-2} \cdots \tup{x-n+1}$)
+shows that
+$\chi_{K_n} = x \tup{x-1} \tup{x-2} \cdots \tup{x-n+1}$.
+This proves
+Lemma~\ref{lem.mt2.chrompoly-examples.a}.
+\end{proof}
+
+Next, we recall a classical fact:
+
+\begin{proposition} \label{prop.hw3.tree-leaf.a}
+Let $T$ be a tree such that $\abs{\verts{T}} \geq 2$.
+Let $v$ be a leaf of $T$.
+Let $T'$ denote the multigraph obtained from $T$ by
+removing this leaf $v$ and the unique edge that contains $v$.
+% Let $u$ be the unique neighbor of $v$ in $T$.
+
+Then, the multigraph $T'$ is a tree again.
+\end{proposition}
+
+Next, let us deal with
+Exercise~\ref{exe.mt2.chrompoly-examples} \textbf{(b)}.
+
+\begin{lemma} \label{lem.mt2.chrompoly-examples.b}
+Let $T$ be a tree (regarded as a simple graph).
+Let $n = \abs{\verts{T}}$.
+Then, $\chi_T = x \tup{x-1}^{n-1}$.
+\end{lemma}
+
+\begin{proof}[Proof of Lemma~\ref{lem.mt2.chrompoly-examples.b}.]
+We shall prove Lemma~\ref{lem.mt2.chrompoly-examples.b} by
+induction on $n$.
+
+The \textit{induction base} (the case when $n = 1$) is
+simple and is left to the reader.
+
+\textit{Induction step:}
+Fix a positive integer $N > 1$.
+Assume that Lemma~\ref{lem.mt2.chrompoly-examples.b} has been
+proven in the case when $n = N - 1$.
+We must now prove Lemma~\ref{lem.mt2.chrompoly-examples.b} in
+the case when $n = N$.
+
+We have assumed that Lemma~\ref{lem.mt2.chrompoly-examples.b} has
+been proven in the case when $n = N - 1$.
+Thus, the following fact holds:
+\begin{statement}
+  \textit{Fact 1:}
+  Let $T$ be a tree (regarded as a simple graph)
+  such that $N - 1 = \abs{\verts{T}}$.
+  Then, $\chi_T = x \tup{x-1}^{\tup{N-1}-1}$.
+\end{statement}
+
+Now, let $T$ be a tree (regarded as a simple graph)
+such that $N = \abs{\verts{T}}$.
+We shall show that $\chi_T = x \tup{x-1}^{N-1}$.
+
+Indeed, $\abs{\verts{T}} = N > 1$, so that
+$\abs{\verts{T}} \geq 2$.
+Hence, the tree $T$ has at least $2$ vertices.
+Thus, the tree $T$ has a leaf (since each tree that
+has at least $2$ vertices must have a leaf).
+Fix such a leaf, and denote it by $v$.
+Let $u$ be the unique neighbor of $v$.
+Hence, the vertices $u$ and $v$ are adjacent, and
+$u$ is the only vertex of $T$ that is adjacent to $v$.
+
+Consider the multigraph $T'$ defined as in
+Proposition~\ref{prop.hw3.tree-leaf.a}.
+Then, Proposition~\ref{prop.hw3.tree-leaf.a} shows
+that $T'$ is a tree again.
+Regard $T'$ as a simple graph.
+
+The multigraph $T'$ is obtained from $T$ by removing
+a single vertex and a single edge.
+Hence,
+$\abs{\verts{T'}} = \underbrace{\abs{\verts{T}}}_{= N} - 1
+= N-1$,
+so that $N - 1 = \abs{\verts{T'}}$.
+Hence, Fact 1 (applied to $T'$ instead of $T$) shows that
+$\chi_{T'} = x \tup{x-1}^{\tup{N-1}-1}$.
+
+Fix an integer $k \geq 1$.
+Recall the concept of $k$-colorings defined in
+Exercise~\ref{exe.mt2.chrompoly} (applied to $G = T$, and
+to $G = T'$).
+
+Exercise~\ref{exe.mt2.chrompoly} (applied to $G = T'$)
+shows that the number of proper $k$-colorings of $T'$ is
+$\chi_{T'} \tup{k}$.
+
+Exercise~\ref{exe.mt2.chrompoly} (applied to $G = T$)
+shows that the number of proper $k$-colorings of $T$ is
+$\chi_{T} \tup{k}$.
+In other words:
+\begin{align}
+\tup{\text{the number of proper } k \text{-colorings of } T}
+= \chi_T \tup{k} .
+\label{pf.lem.mt2.chrompoly-examples.b.1}
+\end{align}
+
+Now, let us compute this number in a different way.
+Namely, observe that a $k$-coloring of $T$ differs from
+a $k$-coloring of $T'$ only in that the former assigns
+a color to the vertex $v$ whereas the latter does not.
+Furthermore, a $k$-coloring of $T$ is proper if and only if
+no two adjacent vertices of $T$ have the same color.
+This condition implies that the color assigned to $v$ must
+be distinct from the color assigned to $u$ (since $v$ and
+$u$ are adjacent).
+No other restrictions apply to the color assigned to $v$
+(since $u$ is the only vertex of $T$ that is adjacent to $v$).
+
+Hence, we obtain the following procedure for constructing
+a proper $k$-coloring of $T$:
+
+\begin{itemize}
+\item First, choose colors for the vertices of $T$
+      distinct from $v$.
+      These colors must belong to the set
+      $\set{1, 2, \ldots, k}$, and must have the property
+      that no two adjacent vertices have the same color.
+      In other words, these colors must form a proper
+      $k$-coloring of the tree $T'$
+      (because two vertices of $T$ distinct from $v$
+      are adjacent in $T$ if and only if they are adjacent
+      in $T'$).
+\item Next, choose a color for the vertex $v$.
+      This color must belong to the set
+      $\set{1, 2, \ldots, k}$, and must be distinct
+      from the color chosen for the vertex $u$.
+\end{itemize}
+
+This procedure clearly produces each proper $k$-coloring
+of $T$.
+Furthermore, this procedure involves two choices, and there
+is a total of
+$\chi_{T'} \tup{k} \cdot \tup{k-1}$
+possible choices that can be made\footnote{\textit{Proof.}
+  In our procedure, we first choose colors for the
+  vertices distinct from $v$, and then choose a color for
+  the vertex $v$.
+  \par
+  The colors that we choose for the vertices distinct from
+  $v$ must form a proper $k$-coloring of the tree $T'$.
+  Hence, the number of ways in which we can choose these
+  colors is the number of proper $k$-colorings of $T'$;
+  but as we know, the latter number is $\chi_{T'} \tup{k}$.
+  Hence, the number of ways in which we can choose the
+  colors for the vertices distinct from $v$ is
+  $\chi_{T'} \tup{k}$. \par
+  The color that we choose for the vertex $v$ must belong
+  to the $k$-element set $\set{1, 2, \ldots, k}$, and must be
+  distinct from the color chosen for the vertex $u$.
+  Thus, the number of ways in which we can choose this color
+  is $k-1$. \par
+  Hence, the first of our two choices can be done in
+  $\chi_{T'} \tup{k}$ different ways, whereas the second choice
+  can be done in $k-1$ different ways.
+  Therefore, the total number of possible choices is
+  $\chi_{T'} \tup{k} \cdot \tup{k-1}$.
+  Qed.}.
+Each of these choices produces a different proper $k$-coloring
+of $T$.
+Thus, the number of proper $k$-colorings of $T$ is
+exactly $\chi_{T'} \tup{k} \cdot \tup{k-1}$
+(because all proper $k$-colorings of $T$ can be
+obtained by this procedure).
+In other words,
+\[
+\tup{\text{the number of proper } k \text{-colorings of } T}
+= \chi_{T'} \tup{k} \cdot \tup{k-1} .
+\]
+Comparing this with
+\eqref{pf.lem.mt2.chrompoly-examples.b.1}, we obtain
+\begin{align}
+\chi_T \tup{k}
+= \chi_{T'} \tup{k} \cdot \tup{k-1}
+\label{pf.lem.mt2.chrompoly-examples.b.3}
+\end{align}
+
+Now, forget that we fixed $k$.
+We thus have shown that
+\eqref{pf.lem.mt2.chrompoly-examples.b.3}
+holds for every integer $k \geq 1$.
+Thus, \eqref{pf.lem.mt2.chrompoly-examples.b.3}
+holds for infinitely many rational numbers $k$.
+Hence, Lemma~\ref{lem.mt2.chrompoly-examples.poly-determined}
+(applied to $p = \chi_{T}$ and
+$q = \chi_{T'} \cdot \tup{x-1}$)
+shows that
+$\chi_{T} = \chi_{T'} \cdot \tup{x-1}$.
+Hence,
+\[
+\chi_{T}
+= \underbrace{\chi_{T'}}_{= x \tup{x-1}^{\tup{N-1}-1}} \cdot \tup{x-1}
+= x \underbrace{\tup{x-1}^{\tup{N-1}-1} \cdot \tup{x-1}}_{= \tup{x-1}^{N-1}}
+= x \tup{x-1}^{N-1} .
+\]
+
+Now, forget that we fixed $T$.
+We thus have shown that if $T$ is a tree (regarded as a simple
+graph) satisfying $N = \abs{\verts{T}}$,
+then $\chi_T = x \tup{x-1}^{N-1}$.
+In other words, Lemma~\ref{lem.mt2.chrompoly-examples.b}
+holds for $n = N$.
+This completes the induction step.
+Thus,
+Lemma~\ref{lem.mt2.chrompoly-examples.b} is proven
+by induction.
+\end{proof}
+
+Now, we have essentially solved
+Exercise~\ref{exe.mt2.chrompoly-examples}:
+
+\begin{proof}[Solution to
+Exercise~\ref{exe.mt2.chrompoly-examples}.]
+\textbf{(a)} Exercise~\ref{exe.mt2.chrompoly-examples}
+\textbf{(a)} follows from
+Lemma~\ref{lem.mt2.chrompoly-examples.a}.
+
+\textbf{(b)} Exercise~\ref{exe.mt2.chrompoly-examples}
+\textbf{(b)} follows from
+Lemma~\ref{lem.mt2.chrompoly-examples.b}.
+
+\textbf{(c)} The graph $P_3$ is a tree with
+$\abs{\verts{P_3}} = 3$.
+Thus, Lemma~\ref{lem.mt2.chrompoly-examples.b} (applied
+to $T = P_3$ and $n = 3$) shows that
+$\chi_T = x \tup{x-1}^{3-1} = x \tup{x-1}^2
+= x^3 - 2x^2 + x$.
+\end{proof}
+
+\subsection{Exercise~\ref{exe.mt2.tropigrass}:
+the distances between four points on a tree}
+
+\begin{exercise} \label{exe.mt2.tropigrass}
+Let $G$ be a tree.
+Let $x$, $y$, $z$ and $w$ be four vertices of $G$.
+
+Show that the two largest ones among the three numbers
+$d \tup{x, y} + d \tup{z, w}$,
+$d \tup{x, z} + d \tup{y, w}$ and
+$d \tup{x, w} + d \tup{y, z}$
+are equal.
+\end{exercise}
+
+Before solving this exercise, let us state some facts about
+distances in multigraphs:
+
+\begin{lemma} \label{lem.mt2.d-leq-V}
+Let $u$ and $v$ be two vertices of a connected multigraph
+$G = \tup{V, E, \phi}$.
+Then, $d \tup{u, v} \leq \abs{V} - 1$.
+\end{lemma}
+
+\begin{lemma} \label{lem.mt2.walk-to-distance}
+Let $u$ and $v$ be two vertices of a multigraph $G$.
+Let $k \in \NN$.
+If there exists a walk from $u$ to $v$ in $G$ having
+length $k$, then $d \tup{u, v} \leq k$.
+\end{lemma}
+
+\begin{lemma} \label{lem.mt2.distances-metric}
+Let $G = \tup{V, E, \phi}$ be a multigraph.
+
+\textbf{(a)} Each $u \in V$ satisfies $d \tup{u, u} = 0$.
+
+\textbf{(b)} Each $u \in V$ and $v \in V$ satisfy
+$d \tup{u, v} = d \tup{v, u}$.
+
+\textbf{(c)} Each $u \in V$, $v \in V$ and $w \in V$ satisfy
+$d \tup{u, v} + d \tup{v, w} \geq d \tup{u, w}$.
+(This inequality has to be interpreted appropriately when one of the
+distances is infinite: For example, we understand $\infty$ to be
+greater than any integer, and we understand $\infty + m$ to be
+$\infty$ whenever $m \in \ZZ$.)
+
+\textbf{(d)} If $u \in V$ and $v \in V$ satisfy $d \tup{u, v} = 0$,
+then $u = v$.
+\end{lemma}
+
+Lemma~\ref{lem.mt2.d-leq-V},
+Lemma~\ref{lem.mt2.walk-to-distance} and
+Lemma~\ref{lem.mt2.distances-metric} are analogues of three
+lemmas encountered in the
+\href{http://www-users.math.umn.edu/~dgrinber/5707s17/mt1s.pdf}{solutions to midterm \#1}
+(namely, Lemma 0.1, Lemma 0.2 and Lemma 0.3 in the latter
+solutions).
+More precisely, the former three lemmas differ from the
+latter three lemmas only in that the simple graph has been
+replaced by a multigraph.
+Proofs of the former three lemmas can be obtained from
+proofs of the latter three lemmas by making straightforward
+minor modifications\footnote{The most important
+  modification is to include the edges in the paths.}.
+We leave the details of these modifications to the reader.
+
+Let us further state a basic property of trees:
+
+\begin{lemma} \label{lem.mt2.tropigrass.tree-dist}
+Let $u$ and $v$ be two vertices of a tree $G$.
+Let $k \in \NN$.
+If there exists a path from $u$ to $v$ in $G$ having
+length $k$, then $d \tup{u, v} = k$.
+\end{lemma}
+
+\begin{proof}[Proof of Lemma~\ref{lem.mt2.tropigrass.tree-dist}.]
+It is known that the multigraph $G$ is a tree if and only
+if for every two vertices $x$ and $y$ of $G$, there is a
+unique path from $x$ to $y$ in $G$\ \ \ \ \footnote{This
+  is the equivalence
+  $\mathcal{T}_1 \Longleftrightarrow \mathcal{T}_2$ in
+  Theorem 13 in
+  \href{http://www-users.math.umn.edu/~dgrinber/5707s17/5707lec9.pdf}{Lecture 9}.}.
+Hence, for every two vertices $x$ and $y$ of $G$, there is a
+unique path from $x$ to $y$ in $G$
+(since the multigraph $G$ is a tree).
+Applying this to $x = u$ and $y = v$, we conclude that
+there is a unique path from $u$ to $v$ in $G$.
+Hence, any two paths from $u$ to $v$ must be equal.
+
+We have assumed that there exists a path from $u$ to $v$
+in $G$ having length $k$.
+Fix such a path, and denote it by $\mathbf{p}$.
+Thus, $\tup{\text{the length of }\mathbf{p}} = k$.
+
+We know that there exists a path from $u$ to $v$.
+Hence, $d \tup{u, v}$ is the minimum length of a path from
+$u$ to $v$ (by the definition of $d \tup{u, v}$).
+Thus, there exists a path from $u$ to $v$ having length
+$d \tup{u, v}$.
+Fix such a path, and denote it by $\mathbf{q}$.
+Hence, $\tup{\text{the length of }\mathbf{q}} = d \tup{u, v}$.
+
+Now, both $\mathbf{p}$ and $\mathbf{q}$ are paths from
+$u$ to $v$.
+Hence, $\mathbf{p}$ and $\mathbf{q}$ are equal (since
+any two paths from $u$ to $v$ must be equal).
+In other words, $\mathbf{p} = \mathbf{q}$.
+Hence,
+$\tup{\text{the length of }\mathbf{p}}
+= \tup{\text{the length of }\mathbf{q}} = d \tup{u, v}$.
+Comparing this with
+$\tup{\text{the length of }\mathbf{p}} = k$, we obtain
+$d \tup{u, v} = k$.
+This proves Lemma~\ref{lem.mt2.tropigrass.tree-dist}.
+\end{proof}
+
+Next, let us show a further useful lemma:
+
+\begin{lemma} \label{lem.mt2.tropigrass.3}
+Let $G$ be a connected multigraph.
+Let $x$, $y$ and $z$ be three vertices of $G$.
+
+Let $\tup{p_0, e_1, p_1, e_2, p_2, \ldots, e_g, p_g}$ be a path
+from $x$ to $y$.
+
+Let $i$ be an element of $\set{0, 1, \ldots, g}$ minimizing the
+distance $d \tup{z, p_i}$.
+
+Let $h = d \tup{z, p_i}$.
+
+Then:
+
+\textbf{(a)} There exists a path from $x$ to $z$ having
+length $i + h$.
+
+\textbf{(b)} There exists a path from $z$ to $y$ having
+length $g - i + h$.
+
+\textbf{(c)} If $j \in \set{0, 1, \ldots, g}$ is such that
+$i \leq j$, then there exists a path from $z$ to $p_j$
+having length $j - i + h$.
+\end{lemma}
+
+\begin{proof}[Proof of Lemma~\ref{lem.mt2.tropigrass.3} (sketched).]
+We have $h = d \tup{z, p_i}$.
+In other words, $h$ is the minimum length of a path from $z$
+to $p_i$ (since $d \tup{z, p_i}$ is defined as
+the minimum length of a path from $z$ to $p_i$).
+Thus, there exists a path from $z$ to $p_i$ having length $h$.
+Fix such a path, and denote it by
+$\tup{a_0, f_1, a_1, f_2, a_2, \ldots, f_h, a_h}$.
+Thus, $a_0 = z$ and $a_h = p_i$.
+
+Recall that $\tup{p_0, e_1, p_1, e_2, p_2, \ldots, e_g, p_g}$
+is a path from $x$ to $y$.
+Thus, $p_0 = x$ and $p_g = y$.
+
+The element $i \in \set{0, 1, \ldots, g}$ minimizes the
+distance $d \tup{z, p_i}$. Hence,
+\begin{equation}
+d \tup{z, p_j} \geq d \tup{z, p_i}
+\qquad \text{for each } j \in \set{0, 1, \ldots, g} .
+\label{pf.lem.mt2.tropigrass.3.min}
+\end{equation}
+
+The $g+1$ vertices $p_0, p_1, \ldots, p_g$ are
+distinct
+(since $\tup{p_0, e_1, p_1, e_2, p_2, \ldots, e_g, p_g}$ is a
+path).
+
+The $h+1$ vertices $a_0, a_1, \ldots, a_h$
+are distinct
+(since $\tup{a_0, f_1, a_1, f_2, a_2, \ldots, f_h, a_h}$
+is a path).
+Thus, in particular, the $h$ vertices
+$a_0, a_1, \ldots, a_{h-1}$ are distinct.
+In other words, the vertices $a_{h-1}, a_{h-2}, \ldots, a_0$ are
+distinct.
+
+We have
+\begin{equation}
+\set{a_0, a_1, \ldots, a_{h-1}} \cap \set{p_0, p_1, \ldots, p_g}
+= \varnothing
+\label{pf.lem.mt2.tropigrass.3.dj}
+\end{equation}
+\footnote{\textit{Proof of \eqref{pf.lem.mt2.tropigrass.3.dj}:}
+    Let $v \in
+    \set{a_0, a_1, \ldots, a_{h-1}} \cap \set{p_0, p_1, \ldots, p_g}$.
+    We shall derive a contradiction.
+
+    We have
+    $v \in
+    \set{a_0, a_1, \ldots, a_{h-1}} \cap \set{p_0, p_1, \ldots, p_g}
+    \subseteq \set{a_0, a_1, \ldots, a_{h-1}}$. Hence,
+    $v = a_k$ for some $k \in \set{0, 1, \ldots, h-1}$. Consider this
+    $k$.
+
+    We have $v \in
+    \set{a_0, a_1, \ldots, a_{h-1}} \cap \set{p_0, p_1, \ldots, p_g}
+    \subseteq \set{p_0, p_1, \ldots, p_g}$. Hence,
+    $v = p_j$ for some $j \in \set{0, 1, \ldots, g}$. Consider this
+    $j$. 
+
+    Recall that $\tup{a_0, f_1, a_1, f_2, a_2, \ldots, f_h, a_h}$
+    is a path, and thus is a walk. Hence,
+    $\tup{a_0, f_1, a_1, f_2, a_2, \ldots, f_k, a_k}$
+    is a walk as well. This walk
+    $\tup{a_0, f_1, a_1, f_2, a_2, \ldots, f_k, a_k}$
+    is a walk from $z$ to $v$ (since
+    $a_0 = z$ and $a_k = v$) and has length $p$.
+    Hence, there is a walk from $z$ to $v$ in $G$ having length
+    $k$ (namely, the walk
+    $\tup{a_0, f_1, a_1, f_2, a_2, \ldots, f_k, a_k}$).
+    Consequently, Lemma~\ref{lem.mt2.walk-to-distance}
+    (applied to $u = z$) shows that
+    $d \tup{z, v} \leq k \leq h-1$
+    (since $k \in \set{0, 1, \ldots, h-1}$).
+
+    But \eqref{pf.lem.mt2.tropigrass.3.min} yields
+    $d \tup{z, p_i} \leq d \tup{z, p_j} = d \tup{z, v}$
+    (since $p_j = v$). Thus, $d \tup{z, v} \geq d \tup{z, p_i}
+    = h > h-1$. This contradicts $d \tup{z, v} \leq h-1$.
+
+    Now, forget that we fixed $v$. Thus, we have obtained a
+    contradiction for each
+    $v \in
+    \set{a_0, a_1, \ldots, a_{h-1}} \cap \set{p_0, p_1, \ldots, p_g}$.
+    Hence, there exists no
+    $v \in
+    \set{a_0, a_1, \ldots, a_{h-1}} \cap \set{p_0, p_1, \ldots, p_g}$.
+    Thus,
+    $\set{a_0, a_1, \ldots, a_{h-1}} \cap \set{p_0, p_1, \ldots, p_g}
+    = \varnothing$.}.
+
+Recall that $\tup{a_0, f_1, a_1, f_2, a_2, \ldots, f_h, a_h}$
+is a path, and thus is a walk.
+Hence,
+$\tup{a_h, f_h, a_{h-1}, f_{h-1}, a_{h-2}, \ldots, f_1, a_0}$
+is a walk as well (being the reversal of the walk
+$\tup{a_0, f_1, a_1, f_2, a_2, \ldots, f_h, a_h}$).
+This walk is a walk from $p_i$ to $z$ (since $a_h = p_i$ and
+$a_0 = z$).
+
+\textbf{(a)} Recall that
+$\tup{p_0, e_1, p_1, e_2, p_2, \ldots, e_g, p_g}$ is a path,
+and thus is a walk.
+Hence,
+$\tup{p_0, e_1, p_1, e_2, p_2, \ldots, e_i, p_i}$ is a walk
+as well.
+This walk is a walk from $x$ to $p_i$ (since $p_0 = x$ and
+$p_i = p_i$).
+
+We have
+\begin{equation}
+\set{p_0, p_1, \ldots, p_i} \cap \set{a_{h-1}, a_{h-2}, \ldots, a_0}
+= \varnothing
+\label{pf.lem.mt2.tropigrass.3.dj-cor1}
+\end{equation}
+\footnote{\textit{Proof of \eqref{pf.lem.mt2.tropigrass.3.dj-cor1}:}
+  We have
+  \begin{align*}
+  \underbrack{\set{p_0, p_1, \ldots, p_i}}
+             {\subseteq \set{p_0, p_1, \ldots, p_g}}
+  \cap
+  \underbrack{\set{a_{h-1}, a_{h-2}, \ldots, a_0}}
+             {= \set{a_0, a_1, \ldots, a_{h-1}}}
+  & \subseteq
+  \set{p_0, p_1, \ldots, p_g} \cap \set{a_0, a_1, \ldots, a_{h-1}}
+  \\
+  &= \set{a_0, a_1, \ldots, a_{h-1}} \cap \set{p_0, p_1, \ldots, p_g}
+  = \varnothing
+  \end{align*}
+  (by \eqref{pf.lem.mt2.tropigrass.3.dj}).
+  Thus,
+  $\set{p_0, p_1, \ldots, p_i} \cap \set{a_{h-1}, a_{h-2}, \ldots, a_0}
+  = \varnothing$. }.
+The vertices
+$p_0, p_1, \ldots, p_i, a_{h-1}, a_{h-2}, \ldots, a_0$
+are distinct\footnote{\textit{Proof.}
+  This follows from the following three observations:
+  \begin{itemize}
+  \item The vertices $p_0, p_1, \ldots, p_i$ are distinct
+        (since the vertices $p_0, p_1, \ldots, p_g$ are
+        distinct).
+  \item The vertices $a_{h-1}, a_{h-2}, \ldots, a_0$ are
+        distinct.
+  \item The vertices $p_0, p_1, \ldots, p_i$ are distinct
+        from the vertices $a_{h-1}, a_{h-2}, \ldots, a_0$
+        (because of \eqref{pf.lem.mt2.tropigrass.3.dj-cor1}).
+  \end{itemize}
+  }.
+
+Now, we know that
+$\tup{p_0, e_1, p_1, e_2, p_2, \ldots, e_i, p_i}$ is a walk
+from $x$ to $p_i$, whereas
+$\tup{a_h, f_h, a_{h-1}, f_{h-1}, a_{h-2}, \ldots, f_1, a_0}$
+is a walk from $p_i$ to $z$.
+Since the ending point of the former walk is the starting
+point of the latter walk\footnote{Indeed, the ending point is the
+    former walk is $p_i$, while the starting point of the latter
+    walk is $p_i$ as well.},
+we can combine these two walks.
+We thus obtain a new walk
+$\tup{p_0, e_1, p_1, e_2, p_2, \ldots, e_i, p_i, f_h,
+      a_{h-1}, f_{h-1}, a_{h-2}, \ldots, f_1, a_0}$,
+which is a walk from $x$ to $z$ and has length
+$i + h$.
+Furthermore, this new walk is actually a path
+(since the vertices
+$p_0, p_1, \ldots, p_i, a_{h-1}, a_{h-2}, \ldots, a_0$
+are distinct),
+and therefore is a path from $x$ to $z$ having length
+$i + h$.
+Hence, there exists a path from $x$ to $z$ having
+length $i + h$ (namely, the path that we have just
+constructed).
+This proves Lemma~\ref{lem.mt2.tropigrass.3} \textbf{(a)}.
+
+\textbf{(c)} Let $j \in \set{0, 1, \ldots, g}$ be such that
+$i \leq j$.
+Thus, $j \in \set{i, i+1, \ldots, g}$ (since
+$j \in \set{0, 1, \ldots, g}$ and $j \geq i$).
+
+Recall that
+$\tup{p_0, e_1, p_1, e_2, p_2, \ldots, e_g, p_g}$ is a path,
+and thus is a walk.
+Hence,
+$\tup{p_i, e_{i+1}, p_{i+1}, e_{i+2}, p_{i+2}, \ldots, e_g, p_g}$
+is a walk as well.
+Thus,
+$\tup{p_i, e_{i+1}, p_{i+1}, e_{i+2}, p_{i+2}, \ldots, e_j, p_j}$
+is a walk as well (since $j \in \set{i, i+1, \ldots, g}$).
+This walk is a walk from $p_i$ to $p_j$ (since $p_i = p_i$ and
+$p_j = p_j$).
+
+We have
+\begin{equation}
+\set{a_0, a_1, \ldots, a_{h-1}} \cap \set{p_i, p_{i+1}, \ldots, p_j}
+= \varnothing
+\label{pf.lem.mt2.tropigrass.3.dj-cor2}
+\end{equation}
+\footnote{\textit{Proof of \eqref{pf.lem.mt2.tropigrass.3.dj-cor2}:}
+  We have
+  \begin{align*}
+  \set{a_0, a_1, \ldots, a_{h-1}}
+  \cap
+  \underbrack{\set{p_i, p_{i+1}, \ldots, p_j}}
+             {\subseteq \set{p_0, p_1, \ldots, p_g}}
+  & \subseteq
+  \set{a_0, a_1, \ldots, a_{h-1}} \cap \set{p_0, p_1, \ldots, p_g}
+  = \varnothing
+  \end{align*}
+  (by \eqref{pf.lem.mt2.tropigrass.3.dj}).
+  Thus,
+  $\set{a_0, a_1, \ldots, a_{h-1}}
+     \cap \set{p_i, p_{i+1}, \ldots, p_j}
+  = \varnothing$. }.
+The vertices
+$a_0, a_1, \ldots, a_{h-1}, p_i, p_{i+1}, \ldots, p_j$
+are distinct\footnote{\textit{Proof.}
+  This follows from the following three observations:
+  \begin{itemize}
+  \item The vertices $a_0, a_1, \ldots, a_{h-1}$ are
+        distinct.
+  \item The vertices $p_i, p_{i+1}, \ldots, p_j$ are distinct
+        (since the vertices $p_0, p_1, \ldots, p_g$ are
+        distinct).
+  \item The vertices $a_0, a_1, \ldots, a_{h-1}$ are distinct
+        from the vertices $p_i, p_{i+1}, \ldots, p_j$
+        (because of \eqref{pf.lem.mt2.tropigrass.3.dj-cor2}).
+  \end{itemize}
+  }.
+
+Now, the path
+$\tup{a_0, f_1, a_1, f_2, a_2, \ldots, f_h, a_h}$
+is a walk from $z$ to $p_i$
+(since it is a path from $z$ to $p_i$), whereas
+$\tup{p_i, e_{i+1}, p_{i+1}, e_{i+2}, p_{i+2}, \ldots, e_j, p_j}$
+is a walk from $p_i$ to $p_j$.
+Since the ending point of the former walk is the starting
+point of the latter walk\footnote{Indeed, the ending point is the
+    former walk is $p_i$, while the starting point of the latter
+    walk is $p_i$ as well.},
+we can combine these two walks.
+We thus obtain a new walk \newline
+$\tup{a_0, f_1, a_1, f_2, a_2, \ldots, f_{h-1}, a_{h-1}, f_h,
+      p_i, e_{i+1}, p_{i+1}, e_{i+2}, p_{i+2}, \ldots, e_j, p_j}$,
+which is a walk from $z$ to $p_j$ and has length
+$h + \tup{j-i}$.
+Furthermore, this new walk is actually a path
+(since the vertices
+$a_0, a_1, \ldots, a_{h-1}, p_i, p_{i+1}, \ldots, p_j$
+are distinct),
+and therefore is a path from $z$ to $p_j$ having length
+$h + \tup{j-i}$.
+Hence, there exists a path from $z$ to $p_j$ having
+length $h + \tup{j-i}$ (namely, the path that we have just
+constructed).
+In other words, there exists a path from $z$ to $p_j$ having
+length $j - i + h$ (since $h + \tup{j-i} = j - i + h$).
+This proves Lemma~\ref{lem.mt2.tropigrass.3} \textbf{(c)}.
+
+\textbf{(b)} We have $g \in \set{0, 1, \ldots, g}$ (since
+$g \in \NN$) and
+$i \leq g$ (since $i \in \set{0, 1, \ldots, g}$).
+Thus, Lemma~\ref{lem.mt2.tropigrass.3} \textbf{(c)}
+(applied to $j = g$) shows that
+there exists a path from $z$ to $p_g$
+having length $g - i + h$.
+Since $p_g = y$, this rewrites as follows:
+There exists a path from $z$ to $y$ having
+length $g - i + h$.
+This proves Lemma~\ref{lem.mt2.tropigrass.3} \textbf{(b)}.
+\end{proof}
+
+\begin{corollary} \label{cor.mt2.tropigrass.3t}
+Let $G$ be a tree.
+Let $x$, $y$ and $z$ be three vertices of $G$.
+
+Let $\tup{p_0, e_1, p_1, e_2, p_2, \ldots, e_g, p_g}$ be a path
+from $x$ to $y$.
+
+Let $i$ be an element of $\set{0, 1, \ldots, g}$ minimizing the
+distance $d \tup{z, p_i}$.
+
+Let $h = d \tup{z, p_i}$.
+
+Then:
+
+\textbf{(a)} We have $d \tup{x, z} = i + h$.
+
+\textbf{(b)} We have $d \tup{y, z} = g - i + h$.
+
+\textbf{(c)} If $j \in \set{0, 1, \ldots, g}$ is such that
+$i \leq j$, then $d \tup{z, p_j} = j - i + h$.
+\end{corollary}
+
+\begin{proof}[Proof of Corollary~\ref{cor.mt2.tropigrass.3t}.]
+\textbf{(a)} Lemma~\ref{lem.mt2.tropigrass.3} \textbf{(a)}
+shows that there exists a path from $x$ to $z$ having
+length $i + h$.
+Hence, Lemma~\ref{lem.mt2.tropigrass.tree-dist}
+(applied to $u = x$, $v = z$ and $k = i + h$) shows that
+$d \tup{x, z} = i + h$.
+This proves Corollary~\ref{cor.mt2.tropigrass.3t} \textbf{(a)}.
+
+\textbf{(b)} Lemma~\ref{lem.mt2.tropigrass.3} \textbf{(b)}
+shows that there exists a path from $z$ to $y$ having
+length $g - i + h$.
+Hence, Lemma~\ref{lem.mt2.tropigrass.tree-dist}
+(applied to $u = z$, $v = y$ and $k = g - i + h$) shows that
+$d \tup{z, y} = g - i + h$.
+
+Write the tree $G$ in the form $G = \tup{V, E, \phi}$.
+Then, $y$ and $z$ are elements of $V$ (since $y$ and $z$
+are vertices of $G$).
+Thus, Lemma~\ref{lem.mt2.distances-metric} \textbf{(b)}
+(applied to $u = y$ and $v = z$) yields
+$d \tup{y, z} = d \tup{z, y} = g - i + h$.
+This proves Corollary~\ref{cor.mt2.tropigrass.3t} \textbf{(b)}.
+
+\textbf{(c)} Let $j \in \set{0, 1, \ldots, g}$ be such that
+$i \leq j$.
+Lemma~\ref{lem.mt2.tropigrass.3} \textbf{(c)}
+shows that there exists a path from $z$ to $p_j$ having
+length $j - i + h$.
+Hence, Lemma~\ref{lem.mt2.tropigrass.tree-dist}
+(applied to $u = z$, $v = p_j$ and $k = j - i + h$) shows that
+$d \tup{z, p_j} = j - i + h$.
+This proves Corollary~\ref{cor.mt2.tropigrass.3t} \textbf{(c)}.
+\end{proof}
+
+\begin{proposition} \label{prop.mt2.tropigrass.xyzw}
+Let $G$ be a tree.
+Let $x$, $y$, $z$ and $w$ be four vertices of $G$.
+
+Let $\tup{p_0, e_1, p_1, e_2, p_2, \ldots, e_g, p_g}$ be a path
+from $x$ to $y$.
+
+Let $i$ be an element of $\set{0, 1, \ldots, g}$ minimizing the
+distance $d \tup{z, p_i}$.
+
+Let $j$ be an element of $\set{0, 1, \ldots, g}$ minimizing the
+distance $d \tup{w, p_j}$.
+
+\textbf{(a)} If $i \leq j$, then
+$d \tup{x, w} + d \tup{y, z} \geq d \tup{x, y} + d \tup{z, w}$.
+
+\textbf{(b)} If $i \geq j$, then
+$d \tup{x, z} + d \tup{y, w} \geq d \tup{x, y} + d \tup{z, w}$.
+\end{proposition}
+
+\begin{proof}[Proof of Proposition~\ref{prop.mt2.tropigrass.xyzw}.]
+\textbf{(a)} Assume that $i \leq j$.
+
+Let $h = d \tup{z, p_i}$.
+Let $k = d \tup{w, p_j}$.
+
+The path $\tup{p_0, e_1, p_1, e_2, p_2, \ldots, e_g, p_g}$ is a path
+from $x$ to $y$, and has length $g$.
+Hence, there exists a path from $u$ to $v$ in $G$ having
+length $g$ (namely, the path
+$\tup{p_0, e_1, p_1, e_2, p_2, \ldots, e_g, p_g}$).
+Thus, Lemma~\ref{lem.mt2.tropigrass.tree-dist}
+(applied to $x$, $y$ and $g$ instead of $u$, $v$ and $k$)
+yields $d \tup{x, y} = g$.
+
+Corollary~\ref{cor.mt2.tropigrass.3t} \textbf{(a)} (applied
+to $w$, $j$ and $k$ instead of $z$, $i$ and $h$) yields
+$d \tup{x, w} = j + k$.
+
+Corollary~\ref{cor.mt2.tropigrass.3t} \textbf{(b)} yields
+$d \tup{y, z} = g - i + h$.
+
+Corollary~\ref{cor.mt2.tropigrass.3t} \textbf{(c)} yields
+$d \tup{z, p_j} = j - i + h$.
+
+Also, $d \tup{z, w} \leq d \tup{z, p_j} + d \tup{w, p_j}$
+\ \ \ \ \footnote{\textit{Proof.}
+  Write the tree $G$ in the form $G = \tup{V, E, \phi}$.
+  Then, $z$, $w$ and $p_j$ are elements of $V$ (since
+  $z$, $w$ and $p_j$ are vertices of $G$).
+  Thus, Lemma~\ref{lem.mt2.distances-metric} \textbf{(b)}
+  (applied to $u = w$ and $v = p_j$) yields
+  $d \tup{w, p_j} = d \tup{p_j, w}$.
+  But Lemma~\ref{lem.mt2.distances-metric} \textbf{(c)}
+  (applied to $u = z$ and $v = p_j$) yields
+  $d \tup{z, p_j} + d \tup{p_j, w} \geq d \tup{z, w}$.
+  Hence,
+  $d \tup{z, w}
+  \leq
+   d \tup{z, p_j} + \underbrace{d \tup{p_j, w}}_{= d \tup{w, p_j}}
+  = d \tup{z, p_j} + d \tup{w, p_j}$.
+  }.
+Thus,
+$d \tup{z, w}
+\leq
+ \underbrace{d \tup{z, p_j}}_{= j - i + h}
+ + \underbrace{d \tup{w, p_j}}_{= k}
+= j - i + h + k$.
+
+Now,
+\[
+\underbrace{d \tup{x, y}}_{= g}
+  + \underbrace{d \tup{z, w}}_{= j - i + h - k}
+\leq g + j - i + h - k
+= \underbrace{j + k}_{= d \tup{x, w}}
+  + \underbrace{g - i + h}_{= d \tup{y, z}}
+= d \tup{x, w} + d \tup{y, z}.
+\]
+This proves
+Proposition~\ref{prop.mt2.tropigrass.xyzw} \textbf{(a)}.
+
+\textbf{(b)} Assume that $i \geq j$.
+Thus, $j \leq i$.
+Hence, Proposition~\ref{prop.mt2.tropigrass.xyzw} \textbf{(a)}
+(applied to $w$, $z$, $j$ and $i$ instead of $z$, $w$, $i$
+and $j$) yields
+$d \tup{x, z} + d \tup{y, w} \geq d \tup{x, y} + d \tup{w, z}$.
+But $d \tup{w, z} = d \tup{z, w}$\ \ \ \ \footnote{\textit{Proof.}
+  Write the tree $G$ in the form $G = \tup{V, E, \phi}$.
+  Then, $w$ and $z$ are elements of $V$ (since
+  $w$ and $z$ are vertices of $G$).
+  Thus, Lemma~\ref{lem.mt2.distances-metric} \textbf{(b)}
+  (applied to $u = w$ and $v = z$) yields
+  $d \tup{w, z} = d \tup{z, w}$.
+  }.
+Hence,
+\[
+d \tup{x, z} + d \tup{y, w}
+\geq d \tup{x, y} + \underbrace{d \tup{w, z}}_{= d \tup{z, w}}
+= d \tup{x, y} + d \tup{z, w} .
+\]
+This proves
+Proposition~\ref{prop.mt2.tropigrass.xyzw} \textbf{(b)}.
+\end{proof}
+
+\begin{corollary} \label{cor.mt2.tropigrass.3ineqs}
+Let $G$ be a tree.
+Let $x$, $y$, $z$ and $w$ be four vertices of $G$.
+
+\textbf{(a)} We have
+\begin{equation}
+d \tup{x, y} + d \tup{z, w}
+\leq \max
+  \set{ d \tup{x, z} + d \tup{y, w}, d \tup{x, w} + d \tup{y, z} } .
+\label{eq.cor.mt2.tropigrass.3ineqs.a}
+\end{equation}
+
+\textbf{(b)} We have
+\begin{equation}
+d \tup{x, z} + d \tup{y, w}
+\leq \max
+  \set{ d \tup{x, y} + d \tup{z, w}, d \tup{x, w} + d \tup{y, z} } .
+\label{eq.cor.mt2.tropigrass.3ineqs.b}
+\end{equation}
+
+\textbf{(c)} We have
+\begin{equation}
+d \tup{x, w} + d \tup{y, z}
+\leq \max
+  \set{ d \tup{x, y} + d \tup{z, w}, d \tup{x, z} + d \tup{y, w} } .
+\label{eq.cor.mt2.tropigrass.3ineqs.c}
+\end{equation}
+\end{corollary}
+
+\begin{proof}[Proof of Corollary~\ref{cor.mt2.tropigrass.3ineqs}.]
+We have
+$d \tup{w, z} = d \tup{z, w}$\ \ \ \ \footnote{\textit{Proof.}
+  Write the tree $G$ in the form $G = \tup{V, E, \phi}$.
+  Then, $w$ and $z$ are elements of $V$ (since
+  $w$ and $z$ are vertices of $G$).
+  Thus, Lemma~\ref{lem.mt2.distances-metric} \textbf{(b)}
+  (applied to $u = w$ and $v = z$) yields
+  $d \tup{w, z} = d \tup{z, w}$.
+  }.
+Similarly, $d \tup{y, w} = d \tup{w, y}$ and
+$d \tup{y, z} = d \tup{z, y}$.
+
+\textbf{(a)} Assume the contrary.
+Thus,
+\[
+d \tup{x, y} + d \tup{z, w}
+> \max
+  \set{ d \tup{x, z} + d \tup{y, w}, d \tup{x, w} + d \tup{y, z} } .
+\]
+Hence,
+\begin{equation}
+d \tup{x, y} + d \tup{z, w}
+> \max
+  \set{ d \tup{x, z} + d \tup{y, w}, d \tup{x, w} + d \tup{y, z} }
+\geq d \tup{x, z} + d \tup{y, w}
+\label{pf.cor.mt2.tropigrass.3ineqs.a.contr1}
+\end{equation}
+and
+\begin{equation}
+d \tup{x, y} + d \tup{z, w}
+> \max
+  \set{ d \tup{x, z} + d \tup{y, w}, d \tup{x, w} + d \tup{y, z} }
+\geq d \tup{x, w} + d \tup{y, z} .
+\label{pf.cor.mt2.tropigrass.3ineqs.a.contr2}
+\end{equation}
+
+The multigraph $G$ is a tree, and thus is
+connected.
+Hence, there exists a walk from $x$ to $y$.
+Thus, there exists a path from $x$ to $y$.
+Fix such a path, and denote it by
+$\tup{p_0, e_1, p_1, e_2, p_2, \ldots, e_g, p_g}$.
+
+Fix an element $i$ of $\set{0, 1, \ldots, g}$ minimizing the
+distance $d \tup{z, p_i}$.
+Fix an element $j$ of $\set{0, 1, \ldots, g}$ minimizing the
+distance $d \tup{w, p_j}$.
+
+We are now in one of the following two cases:
+
+\begin{itemize}
+\item \textit{Case 1:} We have $i \leq j$.
+
+\item \textit{Case 2:} We have $i \geq j$.
+\end{itemize}
+
+We shall derive a contradiction in each of these two cases.
+
+Indeed, let us first consider Case 1.
+In this case, we have $i \leq j$.
+Hence, Proposition~\ref{prop.mt2.tropigrass.xyzw} \textbf{(a)}
+shows that
+$d \tup{x, w} + d \tup{y, z} \geq d \tup{x, y} + d \tup{z, w}$.
+This contradicts \eqref{pf.cor.mt2.tropigrass.3ineqs.a.contr2}.
+Hence, we have found a contradiction in Case 1.
+
+Let us now consider Case 2.
+In this case, we have $i \geq j$.
+Hence, Proposition~\ref{prop.mt2.tropigrass.xyzw} \textbf{(b)}
+shows that
+$d \tup{x, z} + d \tup{y, w} \geq d \tup{x, y} + d \tup{z, w}$.
+This contradicts \eqref{pf.cor.mt2.tropigrass.3ineqs.a.contr1}.
+Hence, we have found a contradiction in Case 2.
+
+We thus have found a contradiction in each of the two Cases
+1 and 2.
+Thus, we always get a contradiction.
+This shows that our assumption was false.
+Hence, the proof of
+Corollary~\ref{cor.mt2.tropigrass.3ineqs} \textbf{(a)}
+is complete.
+
+\textbf{(b)}
+Corollary~\ref{cor.mt2.tropigrass.3ineqs} \textbf{(a)}
+(applied to $z$ and $y$ instead of $y$ and $z$) yields
+\begin{align*}
+d \tup{x, z} + d \tup{y, w}
+&\leq \max
+  \set{ d \tup{x, y} + d \tup{z, w},
+        d \tup{x, w} + \underbrace{d \tup{z, y}}_{= d \tup{y, z} } }
+  \\
+&= \max
+  \set{ d \tup{x, y} + d \tup{z, w}, d \tup{x, w} + d \tup{y, z} } .
+\end{align*}
+This proves
+Corollary~\ref{cor.mt2.tropigrass.3ineqs} \textbf{(b)}.
+
+\textbf{(c)}
+Corollary~\ref{cor.mt2.tropigrass.3ineqs} \textbf{(a)}
+(applied to $w$ and $y$ instead of $y$ and $w$) yields
+\begin{align*}
+d \tup{x, w} + d \tup{z, y}
+&\leq \max
+  \set{ d \tup{x, z} + \underbrace{d \tup{w, y}}_{= d \tup{y, w}},
+        d \tup{x, y} + \underbrace{d \tup{w, z}}_{= d \tup{z, w} } }
+  \\
+&= \max
+  \set{ d \tup{x, z} + d \tup{y, w}, d \tup{x, y} + d \tup{z, w} } \\
+&= \max
+  \set{ d \tup{x, y} + d \tup{z, w}, d \tup{x, z} + d \tup{y, w} } .
+\end{align*}
+This proves
+Corollary~\ref{cor.mt2.tropigrass.3ineqs} \textbf{(c)}.
+\end{proof}
+
+\begin{proof}[Solution to Exercise~\ref{exe.mt2.tropigrass}
+(sketched).]
+Let $a$, $b$ and $c$ be the three numbers
+$d \tup{x, y} + d \tup{z, w}$,
+$d \tup{x, z} + d \tup{y, w}$ and
+$d \tup{x, w} + d \tup{y, z}$,
+sorted in increasing order (so that
+$a \leq b \leq c$).
+Then, the two largest ones among the three numbers
+$d \tup{x, y} + d \tup{z, w}$,
+$d \tup{x, z} + d \tup{y, w}$ and
+$d \tup{x, w} + d \tup{y, z}$
+are $b$ and $c$.
+
+The three equalities
+\eqref{eq.cor.mt2.tropigrass.3ineqs.a},
+\eqref{eq.cor.mt2.tropigrass.3ineqs.b} and
+\eqref{eq.cor.mt2.tropigrass.3ineqs.c} (combined)
+show that each of the three numbers
+$d \tup{x, y} + d \tup{z, w}$,
+$d \tup{x, z} + d \tup{y, w}$ and
+$d \tup{x, w} + d \tup{y, z}$ is less than or
+equal to the maximum of the two others.
+Since the three numbers $a$, $b$ and $c$ are
+precisely the three numbers
+$d \tup{x, y} + d \tup{z, w}$,
+$d \tup{x, z} + d \tup{y, w}$ and
+$d \tup{x, w} + d \tup{y, z}$ (except possibly
+in a different order), we can rewrite this
+as follows:
+Each of the three numbers $a$, $b$ and $c$ is less than or
+equal to the maximum of the two others.
+In other words, we have $a \leq \max \set{b, c}$ and
+$b \leq \max \set{c, a}$ and $c \leq \max \set{a, b}$.
+But $a \leq b \leq c$ (since the three numbers $a$, $b$ and
+$c$ are sorted in increasing order).
+Now, $c \leq \max \set{a, b} = b$ (since $a \leq b$).
+Combined with $b \leq c$, this yields $b = c$.
+In other words, $b$ and $c$ are equal.
+In other words, two largest ones among the three numbers
+$d \tup{x, y} + d \tup{z, w}$,
+$d \tup{x, z} + d \tup{y, w}$ and
+$d \tup{x, w} + d \tup{y, z}$ are equal
+(since the two largest ones among the three numbers
+$d \tup{x, y} + d \tup{z, w}$,
+$d \tup{x, z} + d \tup{y, w}$ and
+$d \tup{x, w} + d \tup{y, z}$
+are $b$ and $c$).
+This solves the exercise.
+\end{proof}
+
+\subsection{Exercise~\ref{exe.mt2.eclectic-cycle}:
+on triple intersections}
+
+\begin{definition}
+Let $G = \tup{V, E, \phi}$ be a multigraph.
+
+For any subset $U$ of $V$, we let $G \ive{U}$ denote the
+sub-multigraph $\tup{U, E_U, \phi\mid_{E_U}}$ of $G$, where
+$E_U$ is the subset $\set{e \in E \mid \phi \tup{e} \subseteq U}$ of
+$E$.
+(Thus, $G \ive{U}$ is the sub-multigraph obtained from $G$ by removing
+all vertices that don't belong to $U$, and subsequently removing all
+edges that don't have both their endpoints in $U$.)
+This sub-multigraph $G \ive{U}$ is called the \textit{induced
+sub-multigraph of $G$ on the subset $U$}.
+\end{definition}
+
+\begin{exercise} \label{exe.mt2.eclectic-cycle}
+Let $G = \tup{V, E, \phi}$ be a multigraph.
+
+Let $A$, $B$ and $C$ be three subsets of $V$ such that the
+sub-multigraphs $G \ive{A}$, $G \ive{B}$ and $G \ive{C}$ are
+connected.
+
+A cycle of $G$ will be called \textit{eclectic} if it contains at
+least one edge of $G \ive{A}$, at least one edge of $G \ive{B}$ and
+at least one edge of $G \ive{C}$ (although these three edges are not
+required to be distinct).
+
+\textbf{(a)} If the sets $B \cap C$, $C \cap A$ and $A \cap B$ are
+nonempty, but $A \cap B \cap C$ is empty, then prove that $G$ has an
+eclectic cycle.
+
+\textbf{(b)} If the sub-multigraphs
+$G \ive{B \cap C}$, $G \ive{C \cap A}$
+and $G \ive{A \cap B}$ are connected, but the sub-multigraph
+$G \ive{A \cap B \cap C}$ is not connected, then prove that $G$ has
+an eclectic cycle.
+
+[\textbf{Note:} Keep in mind that the multigraph with $0$ vertices
+does not count as connected.]
+\end{exercise}
+
+\begin{proof}[Solution to Exercise~\ref{exe.mt2.eclectic-cycle}
+(sketched).]
+
+\textbf{(a)} Assume that the sets $B \cap C$, $C \cap A$ and
+$A \cap B$ are nonempty, but $A \cap B \cap C$ is empty.
+There exists at least one triple
+$\tup{u, v, w} \in \tup{B \cap C} \times \tup{C \cap A} \times
+                    \tup{A \cap B}$
+(since the sets $B \cap C$, $C \cap A$ and $A \cap B$ are nonempty),
+and for each such triple, the integers
+$d_{G \ive{A}} \tup{v, w}$, $d_{G \ive{B}} \tup{w, u}$ and
+$d_{G \ive{C}} \tup{u, v}$ are well-defined (i.e., not equal to
+$\infty$)\ \ \ \ \footnote{This is because
+  the multigraphs $G \ive{A}$, $G \ive{B}$ and $G \ive{C}$
+  are connected.}.
+Hence, we can pick a triple
+$\tup{u, v, w} \in \tup{B \cap C} \times \tup{C \cap A} \times
+                    \tup{A \cap B}$
+minimizing the sum
+$d_{G \ive{A}} \tup{v, w} + d_{G \ive{B}} \tup{w, u}
+ + d_{G \ive{C}} \tup{u, v}$.
+Pick such a triple.
+
+The vertices $u$, $v$ and $w$ are distinct (because if any two of them
+were equal, then these two equal vertices would lie in the set
+$A \cap B \cap C$, which however was assumed to be empty).
+Pick any path $p$ from $v$ to $w$ in $G \ive{A}$ having length
+$d_{G \ive{A}} \tup{v, w}$.
+Pick any path $q$ from $w$ to $u$ in $G \ive{B}$ having length
+$d_{G \ive{B}} \tup{w, u}$.
+Pick any path $r$ from $u$ to $v$ in $G \ive{C}$ having length
+$d_{G \ive{C}} \tup{u, v}$.
+Each of the paths $p$, $q$ and $r$ has length $\geq 1$ (since the
+vertices $u$, $v$ and $w$ are distinct).
+
+The paths $p$ and $q$ have no vertices in common apart from the
+vertex $w$ (at which the path $p$ ends and the path $q$
+starts)\footnote{\textit{Proof.} Assume the contrary.
+  Thus, the paths $p$ and $q$ have a vertex $w' \neq w$ in common.
+  Consider this $w'$.
+  Each vertex on the path $p$ belongs to $A$ (since $p$ is a path in
+  $G \ive{A}$). Thus, $w' \in A$. Similarly, $w' \in B$.
+  Hence, $w' \in A \cap B$.
+  Furthermore, $d_{G \ive{A}} \tup{v, w'} < d_{G \ive{A}} \tup{v, w}$
+  (because $w'$ lies on the path $p$, which has length
+  $d_{G \ive{A}} \tup{v, w}$, but is distinct from $w$) and
+  $d_{G \ive{B}} \tup{w', u} < d_{G \ive{B}} \tup{w, u}$
+  (similarly).
+  Hence,
+  $d_{G \ive{A}} \tup{v, w'} + d_{G \ive{B}} \tup{w', u}
+   + d_{G \ive{C}} \tup{u, v}
+  < d_{G \ive{A}} \tup{v, w} + d_{G \ive{B}} \tup{w, u}
+   + d_{G \ive{C}} \tup{u, v}$.
+  This contradicts the fact that our triple $\tup{u, v, w}$ was
+  chosen to minimize the sum
+  $d_{G \ive{A}} \tup{v, w} + d_{G \ive{B}} \tup{w, u}
+   + d_{G \ive{C}} \tup{u, v}$.}.
+Similarly, the paths $q$ and $r$ have no vertices in common apart from
+the vertex $u$ (at which the path $q$ ends and the path $r$ starts).
+Similarly, the paths $r$ and $p$ have no vertices in common apart from
+the vertex $v$ (at which the path $r$ ends and the path $p$ starts).
+Thus, we can combine the three paths $p$, $q$ and $r$ to form a cycle.
+This cycle contains an edge of $G \ive{A}$ (since the path $p$ is
+nonempty, and thus contributes an edge), an edge of $G \ive{B}$
+(similarly) and an edge of $G \ive{C}$ (similarly).
+Hence, this cycle is eclectic.
+Thus, $G$ has an eclectic cycle.
+This solves Exercise~\ref{exe.mt2.eclectic-cycle} \textbf{(a)}.
+
+\textbf{(b)} Assume that the sub-multigraphs $G \ive{B \cap C}$,
+$G \ive{C \cap A}$ and $G \ive{A \cap B}$ are connected, but the
+sub-multigraph $G \ive{A \cap B \cap C}$ is not connected.
+We must prove that $G$ has an eclectic cycle.
+
+The sets $B \cap C$, $C \cap A$ and $A \cap B$ are nonempty
+(since the multigraphs $G \ive{B \cap C}$,
+$G \ive{C \cap A}$ and $G \ive{A \cap B}$ are connected).
+If the set $A \cap B \cap C$ is empty, then
+Exercise~\ref{exe.mt2.eclectic-cycle} \textbf{(a)} proves that
+$G$ has an eclectic cycle.
+Hence, for the rest of this proof, we WLOG assume that the set
+$A \cap B \cap C$ is nonempty.
+
+The graph $G \ive{A \cap B \cap C}$ is not connected, but it has at
+least one vertex (since the set $A \cap B \cap C$ is nonempty).
+Thus, there exists at least one pair
+$\tup{u, v} \in \tup{A \cap B \cap C}^2$ such that there exists no
+path from $u$ to $v$ in $G \ive{A \cap B \cap C}$.
+Fix such a pair $\tup{u, v}$ minimizing the sum
+$d_{G \ive{C \cap A}} \tup{u, v} + d_{G \ive{A \cap B}} \tup{v, u}$.
+(This sum is an integer, since both sub-multigraphs $G \ive{C \cap A}$ and
+$G \ive{A \cap B}$ are connected.)
+
+The vertices $u$ and $v$ are distinct (since there exists no
+path from $u$ to $v$ in $G \ive{A \cap B \cap C}$).
+Pick any path $p$ from $u$ to $v$ in $G \ive{C \cap A}$ having length
+$d_{G \ive{C \cap A}} \tup{u, v}$.
+Pick any path $q$ from $v$ to $u$ in $G \ive{A \cap B}$ having length
+$d_{G \ive{A \cap B}} \tup{v, u}$.
+Each of the paths $p$ and $q$ has length $\geq 1$ (since the
+vertices $u$ and $v$ are distinct).
+
+The paths $p$ and $q$ have no vertices in common apart from the
+vertices $u$ and $v$\ \ \ \ \footnote{\textit{Proof.} Assume the
+  contrary.
+  Thus, the paths $p$ and $q$ have a vertex $w' \notin \set{u, v}$ in
+  common.
+  Consider this $w'$.
+  Each vertex on the path $p$ belongs to $C \cap A$ (since $p$ is a
+  path in $G \ive{C \cap A}$).
+  Thus, $w' \in C \cap A$. Similarly, $w' \in A \cap B$.
+  Hence,
+  $w' \in \tup{C \cap A} \cap \tup{A \cap B} = A \cap B \cap C$.
+  \par
+  Furthermore,
+  $d_{G \ive{C \cap A}} \tup{u, w'} < d_{G \ive{C \cap A}} \tup{u, v}$
+  (because $w'$ lies on the path $p$, which has length
+  $d_{G \ive{C \cap A}} \tup{u, v}$, but is distinct from $v$) and
+  $d_{G \ive{A \cap B}} \tup{w', u} < d_{G \ive{A \cap B}} \tup{v, u}$
+  (similarly).
+  Hence,
+  $d_{G \ive{C \cap A}} \tup{u, w'} + d_{G \ive{A \cap B}} \tup{w', u}
+  <
+  d_{G \ive{C \cap A}} \tup{u, v} + d_{G \ive{A \cap B}} \tup{v, u}$.
+  This contradicts the fact that our pair $\tup{u, v}$ was
+  chosen to minimize the sum
+  $d_{G \ive{C \cap A}} \tup{u, v} + d_{G \ive{A \cap B}} \tup{v, u}$,
+  unless there exists a path from $u$ to $w'$ in
+  $G \ive{A \cap B \cap C}$.
+  Hence, we conclude that
+  there exists a path from $u$ to $w'$ in $G \ive{A \cap B \cap C}$.
+  \par
+  Moreover,
+  $d_{G \ive{C \cap A}} \tup{w', v} < d_{G \ive{C \cap A}} \tup{u, v}$
+  (because $w'$ lies on the path $p$, which has length
+  $d_{G \ive{C \cap A}} \tup{u, v}$, but is distinct from $u$) and
+  $d_{G \ive{A \cap B}} \tup{v, w'} < d_{G \ive{A \cap B}} \tup{v, u}$
+  (similarly).
+  Hence,
+  $d_{G \ive{C \cap A}} \tup{w', v} + d_{G \ive{A \cap B}} \tup{v, w'}
+  <
+  d_{G \ive{C \cap A}} \tup{u, v} + d_{G \ive{A \cap B}} \tup{v, u}$.
+  This contradicts the fact that our pair $\tup{u, v}$ was
+  chosen to minimize the sum
+  $d_{G \ive{C \cap A}} \tup{u, v} + d_{G \ive{A \cap B}} \tup{v, u}$,
+  unless there exists a path from $w'$ to $v$ in
+  $G \ive{A \cap B \cap C}$.
+  Hence, we conclude that
+  there exists a path from $w'$ to $v$ in $G \ive{A \cap B \cap C}$.
+  \par
+  We now know that there exists a path from $u$ to $w'$ in
+  $G \ive{A \cap B \cap C}$, and that there exists a path from $w'$ to
+  $v$ in $G \ive{A \cap B \cap C}$.
+  Concatenating these paths, we obtain a walk from $u$ to $v$ in
+  $G \ive{A \cap B \cap C}$.
+  Hence, there exists a path from $u$ to $v$ in
+  $G \ive{A \cap B \cap C}$ as well.
+  This contradicts the fact that there exists no path from $u$ to $v$
+  in $G \ive{A \cap B \cap C}$.
+  This contradiction shows that our assumption was wrong, qed.}.
+Thus, we can combine these two paths $p$ and $q$ to form a cycle.
+This cycle contains an edge of $G \ive{C \cap A}$ (since the path $p$
+is nonempty, and thus contributes an edge) and an edge of
+$G \ive{A \cap B}$ (similarly).
+Therefore, this cycle contains an edge of $G \ive{A}$ (since any edge
+of $G \ive{C \cap A}$ is an edge of $G \ive{A}$),
+an edge of $G \ive{B}$ (since any edge
+of $G \ive{A \cap B}$ is an edge of $G \ive{B}$), and
+an edge of $G \ive{C}$ (since any edge
+of $G \ive{C \cap A}$ is an edge of $G \ive{C}$).
+Hence, this cycle is eclectic.
+Thus, $G$ has an eclectic cycle.
+This solves Exercise~\ref{exe.mt2.eclectic-cycle} \textbf{(b)}.
+\end{proof}
+
+Let us make some comments about the origin of
+Exercise~\ref{exe.mt2.eclectic-cycle}.
+Namely, I came up with it when generalizing the following classical
+fact:
+
+\begin{theorem} \label{thm.mt2.eclectic-cycle.tree}
+Let $G = \tup{V, E, \phi}$ be a tree.
+
+Let $A$, $B$ and $C$ be three subsets of $V$ such that the
+sub-multigraphs $G \ive{A}$, $G \ive{B}$ and $G \ive{C}$ are
+connected (and thus are trees as well).
+Assume further that the sets $B \cap C$, $C \cap A$ and $A \cap B$ are
+nonempty.
+Then, the sub-multigraph $G \ive{A \cap B \cap C}$ of $G$ is a tree.
+\end{theorem}
+
+\begin{proof}[Proof of Theorem~\ref{thm.mt2.eclectic-cycle.tree}
+(sketched).]
+The multigraph $G$ has no cycles (since it is a tree).
+
+Let us first show that the sub-multigraph $G \ive{B \cap C}$ is connected.
+
+Indeed, assume the contrary.
+Thus, there exist two vertices $u$ and $v$ of $G \ive{B \cap C}$ such
+that there exists no path from $u$ to $v$ in $G \ive{B \cap C}$
+(since $B \cap C$ is nonempty).
+Fix two such vertices $u$ and $v$.
+
+The multigraph $G$ is a tree.
+Hence, there exists a unique path from $u$ to $v$ in $G$.
+Denote this path by $p$.
+
+But $u \in B \cap C \subseteq B$ and $v \in B \cap C \subseteq B$.
+Thus, $u$ and $v$ are two vertices of the multigraph $G \ive{B}$.
+Since this multigraph $G \ive{B}$ is connected, we thus conclude that
+there exists a path from $u$ to $v$ in $G \ive{B}$.
+This path must clearly be a path from $u$ to $v$ in $G$
+(because $G \ive{B}$ is a sub-multigraph of $G$),
+and therefore must be the path $p$
+(since $p$ is the unique path from $u$ to $v$ in $G$).
+Therefore, the path $p$ is a path from $u$ to $v$ in $G \ive{B}$.
+In particular, the path $p$ is a path in $G \ive{B}$.
+Thus, all vertices of $p$ belong to $B$.
+
+Similarly, all vertices of $p$ belong to $C$.
+
+Now, we have shown that all vertices of $p$ belong to $B$, and that
+all vertices of $p$ belong to $C$.
+Hence, all vertices of $p$ belong to $B \cap C$ (since they belong to
+$B$ and to $C$ at the same time).
+Consequently, $p$ is a path from $u$ to $v$ in $G \ive{B \cap C}$.
+This contradicts the fact that there exists no path from $u$ to $v$
+in $G \ive{B \cap C}$.
+This contradiction proves that our assumption was false.
+
+Hence, we have proven that the sub-multigraph $G \ive{B \cap C}$ is
+connected.
+
+Similarly, the sub-multigraphs $G \ive{C \cap A}$ and $G \ive{A \cap B}$
+are connected.
+
+Now, we claim that
+the sub-multigraph $G \ive{A \cap B \cap C}$ is connected.
+
+Indeed, assume the contrary.
+Thus, the sub-multigraph $G \ive{A \cap B \cap C}$ is not connected.
+Hence, Exercise~\ref{exe.mt2.eclectic-cycle} \textbf{(b)} shows that
+$G$ has an eclectic cycle.
+Thus, $G$ has a cycle.
+This contradicts the fact that $G$ has no cycles.
+This contradiction proves that our assumption was wrong.
+
+Hence, we have proven that the sub-multigraph
+$G \ive{A \cap B \cap C}$ is connected.
+Furthermore, this sub-multigraph $G \ive{A \cap B \cap C}$ has no cycles
+(since it is a sub-multigraph of the tree $G$, which has no cycles).
+Hence, this sub-multigraph $G \ive{A \cap B \cap C}$ is a forest.
+Thus, $G \ive{A \cap B \cap C}$ is a connected forest, i.e., a tree.
+This proves Theorem~\ref{thm.mt2.eclectic-cycle.tree}.
+\end{proof}
+
+A generalization of Theorem~\ref{thm.mt2.eclectic-cycle.tree} is known
+as ``Helly's theorem for trees'' (see, e.g.,
+\cite[Theorem 4.1]{Horn71}):
+
+\begin{theorem} \label{thm.mt2.eclectic-cycle.helly}
+Let $G = \tup{V, E, \phi}$ be a tree.
+
+Let $A_1, A_2, \ldots, A_k$ be $k$ subsets of $V$ such that
+for each $i \in \set{1, 2, \ldots, k}$, the sub-multigraph
+$G \ive{A_i}$ is connected.
+Assume further that for each $1 \leq i < j \leq k$, the set
+$A_i \cap A_j$ is nonempty.
+Then, the sub-multigraph $G \ive{A_1 \cap A_2 \cap \cdots \cap A_k}$
+of $G$ is a tree.
+\end{theorem}
+
+It is not hard to derive
+Theorem~\ref{thm.mt2.eclectic-cycle.helly} from
+Theorem~\ref{thm.mt2.eclectic-cycle.tree} by induction over $k$.
+But I am wondering:
+
+\begin{algorithm}
+Is there a generalization of Exercise~\ref{exe.mt2.eclectic-cycle}
+that extends it to $k$ subsets of $V$, similarly to how
+Theorem~\ref{thm.mt2.eclectic-cycle.helly} extends
+Theorem~\ref{thm.mt2.eclectic-cycle.tree} ?
+\end{algorithm}
+
+Let me observe one more curiosity.
+Namely, Exercise~\ref{exe.mt2.eclectic-cycle} has an analogue for
+multidigraphs.
+To state this analogue, let us define induced
+sub-multidigraphs\footnote{We shall use the notation
+  $G = \tup{V, E, \phi}$ instead of the more common notation
+  $D = \tup{V, A, \phi}$ for our multidigraph in order to make
+  the analogy to Exercise~\ref{exe.mt2.eclectic-cycle} more
+  obvious.}:
+
+\begin{definition}
+Let $G = \tup{V, E, \phi}$ be a multidigraph.
+
+For any subset $U$ of $V$, we let $G \ive{U}$ denote the
+sub-multidigraph $\tup{U, E_U, \phi\mid_{E_U}}$ of $G$, where
+$E_U$ is the subset $\set{e \in E \mid \phi \tup{e} \in U \times U}$
+of $E$.
+(Thus, $G \ive{U}$ is the sub-multidigraph obtained from $G$ by
+removing all vertices that don't belong to $U$, and subsequently
+removing all arcs that don't have both their source and their target
+in $U$.)
+This sub-multidigraph $G \ive{U}$ is called the \textit{induced
+sub-multidigraph of $G$ on the subset $U$}.
+\end{definition}
+
+Now, the analogue of Exercise~\ref{exe.mt2.eclectic-cycle} states
+the following:
+
+\begin{proposition} \label{prop.mt2.eclectic-cycle.di}
+Let $G = \tup{V, E, \phi}$ be a multidigraph.
+
+Let $A$, $B$ and $C$ be three subsets of $V$ such that the
+sub-multidigraphs $G \ive{A}$, $G \ive{B}$ and $G \ive{C}$ are
+strongly connected.
+
+A cycle of $G$ will be called \textit{eclectic} if it contains at
+least one arc of $G \ive{A}$, at least one arc of $G \ive{B}$ and
+at least one arc of $G \ive{C}$ (although these three arcs are not
+required to be distinct).
+
+\textbf{(a)} If the sets $B \cap C$, $C \cap A$ and $A \cap B$ are
+nonempty, but $A \cap B \cap C$ is empty, then prove that $G$ has an
+eclectic cycle.
+
+\textbf{(b)} If the sub-multidigraphs
+$G \ive{B \cap C}$, $G \ive{C \cap A}$ and $G \ive{A \cap B}$ are
+strongly connected, but the sub-multidigraph
+$G \ive{A \cap B \cap C}$ is not strongly connected, then prove that
+$G$ has an eclectic cycle.
+
+[\textbf{Note:} Keep in mind that the multidigraph with $0$ vertices
+does not count as strongly connected.]
+\end{proposition}
+
+\begin{proof}[Proof of Proposition~\ref{prop.mt2.eclectic-cycle.di}
+(sketched).]
+The proof of Proposition~\ref{prop.mt2.eclectic-cycle.di} is
+completely analogous to the
+solution to Exercise~\ref{exe.mt2.eclectic-cycle}.
+(Of course, the obvious changes need to be made -- e.g., replacing
+``multigraph'' by ``multidigraph'', and replacing
+``connected'' by ``strongly connected''.)
+\end{proof}
+
+
+\begin{thebibliography}{999999}
+
+\bibitem[Grinbe16]{Grinbe16}
+Darij Grinberg,
+\textit{A note on non-broken-circuit sets and the chromatic polynomial},
+preprint, version 1.2, April 9, 2017.
+\newline
+\url{http://www.cip.ifi.lmu.de/~grinberg/algebra/chromatic.pdf}
+
+\bibitem[Grinbe17]{nogra}
+Darij Grinberg,
+\textit{Notes on graph theory},
+unfinished draft, version 24 February 2017.
+\newline
+\url{http://www-users.math.umn.edu/~dgrinber/5707s17/nogra.pdf}
+
+\bibitem[Horn71]{Horn71}
+W. A. Horn,
+\textit{Three Results for Trees, Using Mathematical Induction},
+Journal of Research of the National Bureau of Standards
+- B. Mathematical Sciences,
+Volume 76B, Nos. 1 and 2, January-June 1972.
+\newline
+\url{http://nistdigitalarchives.contentdm.oclc.org/cdm/ref/collection/p13011coll6/id/59825}
+
+\bibitem[LeLeMe16]{LeLeMe16}
+Eric Lehman, F. Thomson Leighton, Albert R. Meyer,
+\textit{Mathematics for Computer Science},
+revised 4th April 2017,
+\newline\url{https://courses.csail.mit.edu/6.042/spring17/mcs.pdf} .
+
+\bibitem[Whitne32]{Whitney32}
+Hassler Whitney,
+\textit{A logical expansion in mathematics},
+Bull. Amer. Math. Soc.,
+Volume 38, Number 8 (1932), pp. 572--579.
+\newline
+\url{https://projecteuclid.org/euclid.bams/1183496087}
+
+\end{thebibliography}
+
+\end{document}

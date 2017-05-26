@@ -1,0 +1,603 @@
+\documentclass[numbers=enddot,12pt,final,onecolumn,notitlepage]{scrartcl}%
+\usepackage[headsepline,footsepline,manualmark]{scrlayer-scrpage}
+\usepackage[all,cmtip]{xy}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{framed}
+\usepackage{comment}
+\usepackage{color}
+\usepackage{hyperref}
+\usepackage{ifthen}
+\usepackage[sc]{mathpazo}
+\usepackage[T1]{fontenc}
+\usepackage{needspace}
+\usepackage{tabls}
+%TCIDATA{OutputFilter=latex2.dll}
+%TCIDATA{Version=5.50.0.2960}
+%TCIDATA{LastRevised=Friday, September 16, 2016 20:39:00}
+%TCIDATA{SuppressPackageManagement}
+%TCIDATA{<META NAME="GraphicsSave" CONTENT="32">}
+%TCIDATA{<META NAME="SaveForMode" CONTENT="1">}
+%TCIDATA{BibliographyScheme=Manual}
+%TCIDATA{Language=American English}
+%BeginMSIPreambleData
+\providecommand{\U}[1]{\protect\rule{.1in}{.1in}}
+%EndMSIPreambleData
+\newcounter{exer}
+\theoremstyle{definition}
+\newtheorem{theo}{Theorem}[section]
+\newenvironment{theorem}[1][]
+{\begin{theo}[#1]\begin{leftbar}}
+{\end{leftbar}\end{theo}}
+\newtheorem{lem}[theo]{Lemma}
+\newenvironment{lemma}[1][]
+{\begin{lem}[#1]\begin{leftbar}}
+{\end{leftbar}\end{lem}}
+\newtheorem{prop}[theo]{Proposition}
+\newenvironment{proposition}[1][]
+{\begin{prop}[#1]\begin{leftbar}}
+{\end{leftbar}\end{prop}}
+\newtheorem{defi}[theo]{Definition}
+\newenvironment{definition}[1][]
+{\begin{defi}[#1]\begin{leftbar}}
+{\end{leftbar}\end{defi}}
+\newtheorem{remk}[theo]{Remark}
+\newenvironment{remark}[1][]
+{\begin{remk}[#1]\begin{leftbar}}
+{\end{leftbar}\end{remk}}
+\newtheorem{coro}[theo]{Corollary}
+\newenvironment{corollary}[1][]
+{\begin{coro}[#1]\begin{leftbar}}
+{\end{leftbar}\end{coro}}
+\newtheorem{conv}[theo]{Convention}
+\newenvironment{condition}[1][]
+{\begin{conv}[#1]\begin{leftbar}}
+{\end{leftbar}\end{conv}}
+\newtheorem{quest}[theo]{Question}
+\newenvironment{algorithm}[1][]
+{\begin{quest}[#1]\begin{leftbar}}
+{\end{leftbar}\end{quest}}
+\newtheorem{warn}[theo]{Warning}
+\newenvironment{conclusion}[1][]
+{\begin{warn}[#1]\begin{leftbar}}
+{\end{leftbar}\end{warn}}
+\newtheorem{conj}[theo]{Conjecture}
+\newenvironment{conjecture}[1][]
+{\begin{conj}[#1]\begin{leftbar}}
+{\end{leftbar}\end{conj}}
+\newtheorem{exam}[theo]{Example}
+\newenvironment{example}[1][]
+{\begin{exam}[#1]\begin{leftbar}}
+{\end{leftbar}\end{exam}}
+\newtheorem{exmp}[exer]{Exercise}
+\newenvironment{exercise}[1][]
+{\begin{exmp}[#1]\begin{leftbar}}
+{\end{leftbar}\end{exmp}}
+\newenvironment{statement}{\begin{quote}}{\end{quote}}
+\iffalse
+\newenvironment{proof}[1][Proof]{\noindent\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+\fi
+\let\sumnonlimits\sum
+\let\prodnonlimits\prod
+\let\cupnonlimits\bigcup
+\let\capnonlimits\bigcap
+\renewcommand{\sum}{\sumnonlimits\limits}
+\renewcommand{\prod}{\prodnonlimits\limits}
+\renewcommand{\bigcup}{\cupnonlimits\limits}
+\renewcommand{\bigcap}{\capnonlimits\limits}
+\setlength\tablinesep{3pt}
+\setlength\arraylinesep{3pt}
+\setlength\extrarulesep{3pt}
+\voffset=0cm
+\hoffset=-0.7cm
+\setlength\textheight{22.5cm}
+\setlength\textwidth{15.5cm}
+\newenvironment{verlong}{}{}
+\newenvironment{vershort}{}{}
+\newenvironment{noncompile}{}{}
+\excludecomment{verlong}
+\includecomment{vershort}
+\excludecomment{noncompile}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\conn}{\operatorname{conn}}
+\newcommand{\xing}{\operatorname{xing}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\powset}[2][]{\ifthenelse{\equal{#2}{}}{\mathcal{P}\left(#1\right)}{\mathcal{P}_{#1}\left(#2\right)}}
+% $\powset[k]{S}$ stands for the set of all $k$-element subsets of
+% $S$. The argument $k$ is optional, and if not provided, the result
+% is the whole powerset of $S$.
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+% $\set{...}$ yields $\left\{ ... \right\}$.
+\newcommand{\abs}[1]{\left| #1 \right|}
+% $\abs{...}$ yields $\left| ... \right|$.
+\newcommand{\tup}[1]{\left( #1 \right)}
+% $\tup{...}$ yields $\left( ... \right)$.
+\newcommand{\ive}[1]{\left[ #1 \right]}
+% $\ive{...}$ yields $\left[ ... \right]$.
+\newcommand{\verts}[1]{\operatorname{V}\left( #1 \right)}
+% $\verts{...}$ yields $\operatorname{V}\left( ... \right)$.
+\newcommand{\edges}[1]{\operatorname{E}\left( #1 \right)}
+% $\edges{...}$ yields $\operatorname{E}\left( ... \right)$.
+\newcommand{\arcs}[1]{\operatorname{A}\left( #1 \right)}
+% $\arcs{...}$ yields $\operatorname{A}\left( ... \right)$.
+\newcommand{\are}{\ar@{-}}
+% In an xymatrix environment, $\are$ gives an arrow without
+% arrowhead. I use this to represent edges in graphs.
+\newcommand{\underbrack}[2]{\underbrace{#1}_{\substack{#2}}}
+% $\underbrack{...1}{...2}$ yields
+% $\underbrace{...1}_{\substack{...2}}$. This is useful for doing
+% local rewriting transformations on mathematical expressions with
+% justifications.
+\ihead{Math 5707 Spring 2017 (Darij Grinberg): midterm 3}
+\ohead{page \thepage}
+\cfoot{}
+\begin{document}
+
+\begin{center}
+\textbf{Math 5707 Spring 2017 (Darij Grinberg): midterm 3}
+
+\textbf{due: Wed, 3 May 2017, in class} or by email
+(\texttt{dgrinber@umn.edu}) before class
+\end{center}
+
+See the \href{http://www-users.math.umn.edu/~dgrinber/5707s17}{website} for relevant material.
+
+{\small Results proven in the notes, or in the handwritten notes, or in class, or in previous homework sets can be used without proof; but they should be referenced clearly (e.g., not ``by a theorem done in class'' but ``by the theorem that states that a strongly connected digraph has a Eulerian circuit if and only if each vertex has indegree equal to its outdegree'').
+If you reference results from the lecture notes, please \textbf{mention the date and time} of the version of the notes you are using (as the numbering changes during updates).
+
+As always, proofs need to be provided, and they have to be clear and rigorous. Obvious details can be omitted, but they actually have to be obvious.
+
+% Proofs need to be provided unless explicitly not required. An answer without proof is usually worth at most a little part of the score. Proofs should be written with the amount of rigor typical for advanced mathematics; it is OK to use metaphor and visualization, but the actual logical argument behind it should always be clear. Details can be omitted when they are easy to fill in, not when they are hard to properly explain. (In case of doubt, err on the side of more details and more rigor. See various books referenced in the notes, e.g., \href{https://www.classes.cs.uchicago.edu/archive/2016/spring/27500-1/hw3.pdf}{the Bondy/Murty book from 2008}, or \href{https://courses.csail.mit.edu/6.042/spring16/mcs.pdf}{the Lehman/Leighton/Meyer notes}, for examples of written-up proofs in graph theory.)
+
+% See the \href{http://www-users.math.umn.edu/~dgrinber/5707s17/syll.pdf}{syllabus} for the rules. Note that 
+
+\textbf{This is a midterm}, so you are \textbf{not allowed to collaborate or contact others} (apart from me) for help with the problems. (Feel free to ask me for clarifications, but I will not give hints towards solving the problems.) Reading up (in books or on the internet) is allowed, but asking for help is not. If you get your solution from a book (or paper, or website), do cite the source\footnote{You won't be penalized for this.}, and do explain the solution in your own words. }
+
+\subsection{Exercise~\ref{exe.mt3.tropigrass2}:
+the distances between four points in a graph}
+
+\begin{exercise} \label{exe.mt3.tropigrass2}
+Let $G$ be a connected multigraph.
+Let $x$, $y$, $z$ and $w$ be four vertices of $G$.
+
+Assume that the two largest ones among the three numbers
+$d \tup{x, y} + d \tup{z, w}$,
+$d \tup{x, z} + d \tup{y, w}$ and
+$d \tup{x, w} + d \tup{y, z}$
+are \textbf{not} equal.
+
+Prove that $G$ has a cycle of length
+$\leq d \tup{x, z} + d \tup{y, w} + d \tup{x, w} + d \tup{y, z}$.
+
+[\textbf{Hint:} This is a strengthening of Exercise 6 on
+\href{http://www-users.math.umn.edu/~dgrinber/5707s17/mt2s.pdf}{midterm \#2}.
+Try deriving it by applying the latter exercise to a strategically
+chosen submultigraph of $G$.]
+\end{exercise}
+
+\subsection{Exercise~\ref{exe.mt3.chromatic-example}:
+more examples of chromatic polynomials}
+
+See Exercise 4 on
+\href{http://www-users.math.umn.edu/~dgrinber/5707s17/mt2s.pdf}{midterm \#2}
+for the definition and the properties of the chromatic polynomial.
+
+\Needspace{8cm}
+\begin{exercise} \label{exe.mt3.chromatic-example}
+\textbf{(a)} Let $n > 1$ be an integer.
+Prove that the chromatic polynomial of the cycle graph
+$C_n$ is
+\[
+\chi_{C_n} = \tup{x-1}^n + \tup{-1}^n \tup{x-1} .
+\]
+
+[\textbf{Hint:} Induct over $n$.]
+
+\textbf{(b)} Let $g \in \NN$.
+Let $G$ be the simple graph whose vertices are the $2g+1$
+integers $-g, -g+1, \ldots, g-1, g$, and whose edges are
+\begin{align*}
+& \set{0, i} \qquad \text{ for all } i \in \set{1, 2, \ldots, g}; \\
+& \set{0, -i} \qquad \text{ for all } i \in \set{1, 2, \ldots, g}; \\
+& \set{i, -i} \qquad \text{ for all } i \in \set{1, 2, \ldots, g}
+\end{align*}
+(these are $3g$ edges in total).
+
+Compute the chromatic polynomial $\chi_G$ of $G$.
+
+[Here is how $G$ looks like in the case when $g = 4$:
+\[
+\xymatrix{
+& 1 \are[ddr] \are[rr] & & -1 \are[ddl] \\
+-4 \are[dd] \are[drr] & & & & 2 \are[dd] \\
+& & 0 \are[urr] \are[drr] \are[dll] \are[ddl] \are[ddr] \\
+4 & & & & -2 \\
+& -3 \are[rr] & & 3
+}
+\]
+]
+\end{exercise}
+
+\subsection{Exercise~\ref{exe.mt3.lopsided-bipartite}:
+unhappy marriages in a lopsided bipartite graph}
+
+\begin{exercise} \label{exe.mt3.lopsided-bipartite}
+Let $\tup{G; X, Y}$ be a bipartite graph such that
+$\abs{Y} \geq 2 \abs{X} - 1$.
+Prove that there exists an injective map
+$f : X \to Y$ such that each $x \in X$ satisfies one
+of the following two statements:
+
+\begin{itemize}
+\item \textit{Statement 1:} The vertices $x$ and $f \tup{x}$
+      of $G$ are adjacent.
+
+\item \textit{Statement 2:} There exists no $x' \in X$ such
+      that the vertices $x$ and $f \tup{x'}$ of $G$ are
+      adjacent.
+\end{itemize}
+\end{exercise}
+
+(The intuition behind Exercise~\ref{exe.mt3.lopsided-bipartite}
+is something along the lines of:
+If there are significantly more ladies than there are
+gentlemen, then we can marry all gentlemen off in such a
+way that each gentleman is either married to a lady he
+likes, or none of the ladies he likes is married.)
+
+\subsection{Exercise~\ref{exe.mt3.xing}:
+crossing numbers of $n$-matchings}
+
+The purpose of the next exercise is to fill in some details
+(namely, the verification that the signs match)
+in our proof of one of the basic properties of the Pfaffian
+(the fact that the square of the Pfaffian is the
+determinant).
+
+For this section, fix an $n \in \NN$.
+We shall use the following notations:
+
+\begin{itemize}
+\item We use the Iverson bracket notation (i.e., the truth
+      value of a statement $\mathcal{A}$ will be called
+      $\ive{\mathcal{A}}$).
+
+\item We set $\ive{k} = \set{1, 2, \ldots, k}$ for each
+      $k \in \NN$.
+      (This does not conflict with the Iverson bracket
+      notation, since $k$ is not a statement.)
+
+\item We let $S_n$ denote the set of all the $n!$
+      permutations of the set $\ive{n}$.
+      (These permutations are the bijective maps
+      $\ive{n} \to \ive{n}$.)
+
+\item The $2$-element subsets of $\ive{n}$ will be called
+      \textit{edges}.
+      (This makes sense, since they are the edges of the
+      complete graph $K_n$.
+      We shall not consider any other graphs in this
+      section.)
+
+\item The \textit{length} $\ell\tup{\sigma}$
+      of a permutation $\sigma \in S_n$
+      is the number of all pairs $\tup{i, j} \in \ive{n}^2$
+      satisfying $i < j$ and $\sigma\tup{i} > \sigma\tup{j}$.
+      For example, the permutation in $S_4$ that sends
+      $1, 2, 3, 4$ to $3, 1, 4, 2$ (respectively) has
+      length $3$.
+
+\item The \textit{sign} of a permutation $\sigma \in S_n$
+      is the integer $\tup{-1}^{\ell\tup{\sigma}}$.
+      It is denoted by $\tup{-1}^\sigma$
+      (or by $\operatorname{sign} \sigma$).
+
+\item A \textit{matching} shall mean a set
+      $M \subseteq \powset[2]{\ive{n}}$ (that is, a set
+      $M$ of edges) with the
+      property that each element of $\ive{n}$ belongs to
+      \textbf{at most} one element of $M$
+      (equivalently, with the property that the edges
+      in $M$ are disjoint).
+      In other words, a \textit{matching} is
+      a matching of the complete graph $K_n$.
+      For instance, if $n \geq 7$, then
+      $\set{\set{1, 4}, \set{2, 7}}$ is a matching
+      (but $\set{\set{1, 4}, \set{4, 7}}$ is not).
+
+\item A \textit{perfect matching} shall mean
+      a matching $M$ such that each element
+      of $\ive{n}$ belongs to \textbf{exactly} one element
+      of $M$.
+      In other words, a \textit{perfect matching}
+      is a perfect matching of the complete graph $K_n$.
+      Note that such a perfect matching exists only if
+      $n$ is even; in this case, there are
+      $\tup{n-1} \tup{n-3} \tup{n-5} \cdots 1$ many such
+      perfect matchings, and each of them has size $n/2$.
+
+\item If $e$ and $f$ are two disjoint
+      edges, then we say that
+      $e$ \textit{crosses} $f$
+      if and only if exactly one element of $e$ lies
+      between\footnote{The word ``between'' is to be
+      understood in the sense of inequalities:
+      An integer $p$ is said to lie \textit{between}
+      two integers $u$ and $v$
+      if $\min \set{u, v} < p < \max \set{u, v}$.}
+      the two elements of $f$.
+      (For example, $\set{2, 6}$ crosses $\set{3, 7}$,
+      but does not cross $\set{3, 4}$ or $\set{1, 7}$
+      or $\set{7, 8}$.)
+      \par
+      It is easy to check
+      that the relation ``crosses'' is symmetric:
+      i.e., if $e$ and $f$ are two disjoint edges, then
+      $e$ crosses $f$ if and only if $f$ crosses $e$.
+      \par
+      The geometrical meaning of ``crossing'' is simple:
+      If we draw a regular polygon with $n$ vertices
+      $v_1, v_2, \ldots, v_n$ in the plane, then an
+      edge $\set{i, j}$ crosses an edge $\set{k, \ell}$ if
+      and only if the diagonal $v_i v_j$ crosses the
+      diagonal $v_k v_\ell$.
+      \par
+      Also easy to verify is the following simple fact:
+      If $\set{i, j}$ and $\set{k, \ell}$ are
+      two disjoint edges, then
+      \begin{equation}
+      \ive{\set{i, j} \text{ crosses } \set{k, \ell}}
+      \equiv \ive{i > k} + \ive{i > \ell} + \ive{j > k}
+             + \ive{j > \ell} \mod 2 .
+      \label{eq.mt3.xing.crosses-4}
+      \end{equation}
+      (You can use these facts without proof.)
+
+\item If $M$ is a matching, then the
+      \textit{crossing number} $\xing M$
+      of $M$ is defined to be the
+      number of all unordered pairs $\set{e, f}$ of two
+      disjoint edges $e \in M$ and $f \in M$ such that
+      $e$ crosses $f$.
+      (Notice that we are counting unordered pairs;
+      hence, we do not count $\set{e, f}$ and $\set{f, e}$
+      twice.)
+      \par
+      For example, the crossing number of the matching
+      $\set{\set{1, 5}, \set{2, 6}, \set{3, 4}}$ is $1$,
+      since the only two edges crossing in this matching
+      are $\set{1, 5}$ and $\set{2, 6}$.
+\end{itemize}
+
+\begin{exercise} \label{exe.mt3.xing}
+Let $n \in \NN$ be even.
+Let $\sigma \in S_n$ be a permutation.
+
+\textbf{(a)} Show that the perfect matching
+\[
+M_\sigma
+= \set{ \set{ \sigma\tup{1}, \sigma\tup{2} },
+        \set{ \sigma\tup{3}, \sigma\tup{4} },
+        \set{ \sigma\tup{5}, \sigma\tup{6} },
+        \ldots,
+        \set{ \sigma\tup{n-1}, \sigma\tup{n} } }
+\]
+satisfies
+\[
+\tup{-1}^{\xing \tup{M_\sigma}} \tup{-1}^k
+= \tup{-1}^\sigma ,
+\]
+where $k$ is the number of
+$i \in \set{1, 2, \ldots, n/2}$ satisfying
+$\sigma \tup{2i-1} > \sigma \tup{2i}$.
+
+\textbf{(b)} Let
+\[
+M = \set{ \set{a_1, b_1}, \set{a_2, b_2}, \ldots,
+           \set{a_{n/2}, b_{n/2}} }
+\]
+be any perfect matching.
+Define a new perfect matching $\sigma M$ by
+\[
+\sigma M
+= \set{ \set{ \sigma\tup{a_1}, \sigma\tup{b_1} },
+        \set{ \sigma\tup{a_2}, \sigma\tup{b_2} },
+        \ldots,
+        \set{ \sigma\tup{a_{n/2}}, \sigma\tup{b_{n/2}} } } .
+\]
+
+Let $p$ be the number of
+$i \in \set{1, 2, \ldots, n/2}$ satisfying
+$a_i > b_i$.
+
+Let $q$ be the number of
+$i \in \set{1, 2, \ldots, n/2}$ satisfying
+$\sigma \tup{a_i} > \sigma \tup{b_i}$.
+
+Prove that
+\[
+\tup{-1}^{\xing \tup{\sigma M}} \tup{-1}^p
+= \tup{-1}^\sigma \tup{-1}^{\xing M} \tup{-1}^q .
+\]
+\end{exercise}
+
+\subsection{Exercise~\ref{exe.mt3.aco.sink-push}:
+pushing sources in orientations 1}
+
+See
+\href{http://www-users.math.umn.edu/~dgrinber/5707s17/hw5.pdf}{homework set \#5}
+for the concepts of orientations and of acyclic orientations.
+
+\begin{definition}
+Let $G = \tup{V, E, \psi}$ be a multigraph.
+
+Let $\phi$ be an orientation of $G$.
+
+A vertex $v \in V$ is said to be a \textit{source} of $\phi$
+if no arc of the multidigraph $\tup{V, E, \phi}$ has target $v$.
+Exercise 6 \textbf{(a)} on
+\href{http://www-users.math.umn.edu/~dgrinber/5707s17/hw5.pdf}{homework set \#5}
+shows that if $\phi$ is acyclic and if
+$V \neq \varnothing$, then there exists a source of $\phi$.
+
+If $v$ is a source of $\phi$, then we can define a new
+orientation $\phi'$ of $G$ as follows:
+\begin{itemize}
+\item For each $e \in E$ satisfying $v \in \psi\tup{e}$,
+      we set $\phi'\tup{e} = \tup{u, v}$, where
+      $u$ is chosen such that $\phi\tup{e} = \tup{v, u}$.
+\item For all other $e \in E$, we set $\phi'\tup{e} = \phi\tup{e}$.
+\end{itemize}
+(Roughly speaking, this simply means that $\phi'$ is
+obtained by $\phi$ by reversing the directions of all
+edges that contain $v$.)
+We say that this new orientation $\phi'$ is obtained from
+$\phi$ by % \textit{pushing a source} (or, more specifically, by
+\textit{pushing the source $v$}.
+\end{definition}
+
+\Needspace{25cm}
+\begin{example}
+Let $G = \tup{V, E, \psi}$ be the following multigraph:
+\[
+\xymatrix{
+& 2 \are[dl]_a \are[dr]^b \\
+1 \are[d]_c & & 3 \are[d]^d \\
+4 \are@/^/[rr]^e \are@/_/[rr]_f & & 5
+} .
+\]
+Consider the orientation $\phi$ of $G$ for which the
+multidigraph $\tup{V, E, \phi}$ looks as follows:
+\[
+\xymatrix{
+& 2 \ar@{<-}[dl]_a \ar@{<-}[dr]^b \\
+1 \ar[d]_c & & 3 \ar[d]^d \\
+4 \ar@/^/[rr]^e \ar@{<-}@/_/[rr]_f & & 5
+} .
+\]
+(Formally speaking, this is the orientation $\phi$ that
+sends the edges $a, b, c, d, e, f$ to the pairs
+$\tup{1, 2}, \tup{3, 2}, \tup{1, 4}, \tup{3, 5}, \tup{4, 5},
+\tup{5, 4}$, respectively.)
+
+This orientation $\phi$ has two sources $1$ and $3$.
+We can transform this orientation by pushing the source
+$1$; this results in the following orientation $\phi'$
+(shown here by drawing the multidigraph $\tup{V, E, \phi'}$):
+\[
+\xymatrix{
+& 2 \ar[dl]_a \ar@{<-}[dr]^b \\
+1 \ar@{<-}[d]_c & & 3 \ar[d]^d \\
+4 \ar@/^/[rr]^e \ar@{<-}@/_/[rr]_f & & 5
+} .
+\]
+This new orientation $\phi'$ has a single source, $3$.
+If we push this source, we obtain a new orientation
+$\phi''$, which looks as follows (again, represented
+by the multidigraph $\tup{V, E, \phi''}$):
+\[
+\xymatrix{
+& 2 \ar[dl]_a \ar[dr]^b \\
+1 \ar@{<-}[d]_c & & 3 \ar@{<-}[d]^d \\
+4 \ar@/^/[rr]^e \ar@{<-}@/_/[rr]_f & & 5
+} .
+\]
+This orientation $\phi''$, in turn, has a single source, $2$.
+If we push this source, we obtain a new orientation
+$\phi'''$, which looks as follows (again, represented
+by the multidigraph $\tup{V, E, \phi'''}$):
+\[
+\xymatrix{
+& 2 \ar@{<-}[dl]_a \ar@{<-}[dr]^b \\
+1 \ar@{<-}[d]_c & & 3 \ar@{<-}[d]^d \\
+4 \ar@/^/[rr]^e \ar@{<-}@/_/[rr]_f & & 5
+} .
+\]
+This orientation $\phi'''$ has no sources, and thus cannot
+be transformed any further by pushing sources.
+\end{example}
+
+The preceding example might have suggested some questions:
+For example, given an orientation of a multigraph, can we
+keep pushing sources indefinitely, or will we eventually
+end up at an orientation that has no more sources?
+The following is easy to see:
+
+\begin{proposition}
+Let $\phi$ be an acyclic orientation of a multigraph
+$G = \tup{V, E, \psi}$.
+Let $v$ be a source of $\phi$.
+Then, the orientation obtained from $\phi$
+by pushing the source $v$ is again acyclic.
+\end{proposition}
+
+This proposition shows that if we start with an acyclic
+orientation of a multigraph (with at least one vertex),
+then we can keep pushing sources indefinitely (since
+the orientation always remains acyclic, and thus there
+always will be sources to push).
+The next exercise (specifically,
+Exercise~\ref{exe.mt3.aco.sink-push} \textbf{(b)})
+yields a converse (for connected multigraphs):
+If we can keep pushing sources indefinitely, then our
+orientation must have been acyclic.
+
+\begin{exercise} \label{exe.mt3.aco.sink-push}
+Let $G = \tup{V, E, \psi}$ be a connected multigraph.
+Set $n = \abs{V}$ and $h = \abs{E}$.
+
+Let $\tup{\phi_0, \phi_1, \ldots, \phi_k}$ be a sequence of
+orientations of $G$, and let
+$\tup{v_1, v_2, \ldots, v_k}$ be a sequence of vertices of $G$
+such that for each
+$i \in \set{1, 2, \ldots, k}$, the orientation $\phi_i$
+is obtained from $\phi_{i-1}$ by pushing the source $v_i$
+(in particular, this is saying that $v_i$ is a source of
+$\phi_{i-1}$).
+
+Assume that $k \geq \dbinom{n+h-1}{n-1}$.
+
+\textbf{(a)}
+Prove that each vertex of $G$ appears at least once in the
+sequence $\tup{v_1, v_2, \ldots, v_k}$.
+
+\textbf{(b)}
+Prove that the orientations $\phi_0, \phi_1, \ldots, \phi_k$
+are acyclic.
+\end{exercise}
+
+(At this point, let me remind you that you can freely
+use the exercises on the previous homework sets.)
+
+\subsection{Exercise~\ref{exe.mt3.aco.sink-push2}:
+pushing sources in orientations 2}
+
+\begin{exercise} \label{exe.mt3.aco.sink-push2}
+Let $G = \tup{V, E, \psi}$ be a tree.
+Let $\alpha$ and $\beta$ be two orientations of $G$.
+
+Prove that $\beta$ can be obtained from $\alpha$ by
+repeatedly pushing sources.
+
+(More rigorously:
+Prove that there exists a sequence
+$\tup{\phi_0, \phi_1, \ldots, \phi_k}$ of
+orientations of $G$, and a sequence
+$\tup{v_1, v_2, \ldots, v_k}$ of vertices of $G$
+such that
+\begin{itemize}
+\item we have $\phi_0 = \alpha$ and $\phi_k = \beta$, and
+\item for each
+      $i \in \set{1, 2, \ldots, k}$, the orientation $\phi_i$
+      is obtained from $\phi_{i-1}$ by pushing the source $v_i$
+      (in particular, this is saying that $v_i$ is a source of
+      $\phi_{i-1}$).
+\end{itemize}
+Notice that $k$ is allowed to be $0$.)
+\end{exercise}
+
+\end{document}

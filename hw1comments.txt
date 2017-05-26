@@ -1,0 +1,13 @@
+A couple comments on homework set #1:
+
+- The bound m+1 in Exercise 1 (b) can be improved significantly. You can easily get m+2 by an inductive argument: Find some triangle-or-anti-triangle; remove one of its vertices; find another; remove one of its vertices; proceed on and on until you have only 6 vertices left, at which point Exercise 1 (a) tells you that you still have at least 2 triangle-or-anti-triangles left. Thus, you have found m+2 triangle-or-anti-triangles. And they are all distinct, because each time you found one (except for the last two), you killed one of its vertices, thus guaranteeing that you would never find it again. This is how you get m+2. But a better bound (a cubic polynomial in m) has been obtained in A. W. Goodman, "On Sets of Acquaintances and Strangers at any Party", The American Mathematical Monthly, Vol. 66 (1959), No. 9, pp. 778-783 ( http://www.jstor.org/stable/2310464 ).
+
+- A few internet sources on Exercise 1: http://math.stackexchange.com/questions/101995/lower-bound-for-monochromatic-triangles-in-k-n // http://math.stackexchange.com/questions/109989/showing-that-k-7-contains-at-least-4-monochromatic-triangles // http://math.stackexchange.com/questions/454455/ramseys-theorem .
+
+- Exercise 2 is just Mantel's theorem, applied to the complement graph of G. But Nicholas Rancourt proved it without recourse to Mantel's theorem in his solutions. So now you have a proof of Mantel's theorem :) Another one will appear later on in the class.
+
+- Exercise 6 is a two-liner: Let G_k be the graph whose vertices are the same as those of G, but whose edge set is {uv | u and v are distinct vertices such that there exists a path of length <= k from u to v}. Then, the k-path-dominating sets of G are precisely the dominating sets of G_k, and we know already (by Brouwer) that there is an odd number of the latter.
+
+- Exercise 7 is an important fact. Slightly restated, it says the following: A graph G (with a nonempty vertex set) is connected if and only if it cannot be written as a disjoint union of two smaller graphs (where "smaller" means "having fewer vertices", and "can be written as" means "is isomorphic to").
+
+- Exercise 9 is from Frank Harary, Robert W. Robinson, "The Diameter of a Graph and its Complement", The American Mathematical Monthly, Vol. 92, No. 3. (Mar., 1985), pp. 211--212.

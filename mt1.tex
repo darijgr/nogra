@@ -1,0 +1,263 @@
+\documentclass[numbers=enddot,12pt,final,onecolumn,notitlepage]{scrartcl}%
+\usepackage[headsepline,footsepline,manualmark]{scrlayer-scrpage}
+\usepackage[all,cmtip]{xy}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{framed}
+\usepackage{comment}
+\usepackage{color}
+\usepackage{hyperref}
+\usepackage{ifthen}
+\usepackage[sc]{mathpazo}
+\usepackage[T1]{fontenc}
+\usepackage{needspace}
+\usepackage{tabls}
+%TCIDATA{OutputFilter=latex2.dll}
+%TCIDATA{Version=5.50.0.2960}
+%TCIDATA{LastRevised=Friday, September 16, 2016 20:39:00}
+%TCIDATA{SuppressPackageManagement}
+%TCIDATA{<META NAME="GraphicsSave" CONTENT="32">}
+%TCIDATA{<META NAME="SaveForMode" CONTENT="1">}
+%TCIDATA{BibliographyScheme=Manual}
+%TCIDATA{Language=American English}
+%BeginMSIPreambleData
+\providecommand{\U}[1]{\protect\rule{.1in}{.1in}}
+%EndMSIPreambleData
+\newcounter{exer}
+\theoremstyle{definition}
+\newtheorem{theo}{Theorem}[section]
+\newenvironment{theorem}[1][]
+{\begin{theo}[#1]\begin{leftbar}}
+{\end{leftbar}\end{theo}}
+\newtheorem{lem}[theo]{Lemma}
+\newenvironment{lemma}[1][]
+{\begin{lem}[#1]\begin{leftbar}}
+{\end{leftbar}\end{lem}}
+\newtheorem{prop}[theo]{Proposition}
+\newenvironment{proposition}[1][]
+{\begin{prop}[#1]\begin{leftbar}}
+{\end{leftbar}\end{prop}}
+\newtheorem{defi}[theo]{Definition}
+\newenvironment{definition}[1][]
+{\begin{defi}[#1]\begin{leftbar}}
+{\end{leftbar}\end{defi}}
+\newtheorem{remk}[theo]{Remark}
+\newenvironment{remark}[1][]
+{\begin{remk}[#1]\begin{leftbar}}
+{\end{leftbar}\end{remk}}
+\newtheorem{coro}[theo]{Corollary}
+\newenvironment{corollary}[1][]
+{\begin{coro}[#1]\begin{leftbar}}
+{\end{leftbar}\end{coro}}
+\newtheorem{conv}[theo]{Convention}
+\newenvironment{condition}[1][]
+{\begin{conv}[#1]\begin{leftbar}}
+{\end{leftbar}\end{conv}}
+\newtheorem{quest}[theo]{Question}
+\newenvironment{algorithm}[1][]
+{\begin{quest}[#1]\begin{leftbar}}
+{\end{leftbar}\end{quest}}
+\newtheorem{warn}[theo]{Warning}
+\newenvironment{conclusion}[1][]
+{\begin{warn}[#1]\begin{leftbar}}
+{\end{leftbar}\end{warn}}
+\newtheorem{conj}[theo]{Conjecture}
+\newenvironment{conjecture}[1][]
+{\begin{conj}[#1]\begin{leftbar}}
+{\end{leftbar}\end{conj}}
+\newtheorem{exam}[theo]{Example}
+\newenvironment{example}[1][]
+{\begin{exam}[#1]\begin{leftbar}}
+{\end{leftbar}\end{exam}}
+\newtheorem{exmp}[exer]{Exercise}
+\newenvironment{exercise}[1][]
+{\begin{exmp}[#1]\begin{leftbar}}
+{\end{leftbar}\end{exmp}}
+\newenvironment{statement}{\begin{quote}}{\end{quote}}
+\iffalse
+\newenvironment{proof}[1][Proof]{\noindent\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+\fi
+\let\sumnonlimits\sum
+\let\prodnonlimits\prod
+\let\cupnonlimits\bigcup
+\let\capnonlimits\bigcap
+\renewcommand{\sum}{\sumnonlimits\limits}
+\renewcommand{\prod}{\prodnonlimits\limits}
+\renewcommand{\bigcup}{\cupnonlimits\limits}
+\renewcommand{\bigcap}{\capnonlimits\limits}
+\setlength\tablinesep{3pt}
+\setlength\arraylinesep{3pt}
+\setlength\extrarulesep{3pt}
+\voffset=0cm
+\hoffset=-0.7cm
+\setlength\textheight{22.5cm}
+\setlength\textwidth{15.5cm}
+\newenvironment{verlong}{}{}
+\newenvironment{vershort}{}{}
+\newenvironment{noncompile}{}{}
+\excludecomment{verlong}
+\includecomment{vershort}
+\excludecomment{noncompile}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\powset}[2][]{\ifthenelse{\equal{#2}{}}{\mathcal{P}\left(#1\right)}{\mathcal{P}_{#1}\left(#2\right)}}
+% $\powset[k]{S}$ stands for the set of all $k$-element subsets of
+% $S$. The argument $k$ is optional, and if not provided, the result
+% is the whole powerset of $S$.
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+% $\set{...}$ yields $\left\{ ... \right\}$.
+\newcommand{\abs}[1]{\left| #1 \right|}
+% $\abs{...}$ yields $\left| ... \right|$.
+\newcommand{\tup}[1]{\left( #1 \right)}
+% $\tup{...}$ yields $\left( ... \right)$.
+\newcommand{\ive}[1]{\left[ #1 \right]}
+% $\ive{...}$ yields $\left[ ... \right]$.
+\newcommand{\verts}[1]{\operatorname{V}\left( #1 \right)}
+% $\verts{...}$ yields $\operatorname{V}\left( ... \right)$.
+\newcommand{\edges}[1]{\operatorname{E}\left( #1 \right)}
+% $\edges{...}$ yields $\operatorname{E}\left( ... \right)$.
+\newcommand{\arcs}[1]{\operatorname{A}\left( #1 \right)}
+% $\arcs{...}$ yields $\operatorname{A}\left( ... \right)$.
+\ihead{Math 5707 Spring 2017 (Darij Grinberg): midterm 1}
+\ohead{page \thepage}
+\cfoot{}
+\begin{document}
+
+\begin{center}
+\textbf{Math 5707 Spring 2017 (Darij Grinberg): midterm 1}
+
+\textbf{due: Mon, 27 Feb 2017, in class} or by email
+(\texttt{dgrinber@umn.edu}) before class
+\end{center}
+
+See the \href{http://www-users.math.umn.edu/~dgrinber/5707s17}{website} for relevant material.
+
+Results proven in the notes, or in the handwritten notes, or in class, or in previous homework sets can be used without proof; but they should be referenced clearly (e.g., not ``by a theorem done in class'' but ``by the theorem that states that a strongly connected digraph has a Eulerian circuit if and only if each vertex has indegree equal to its outdegree'').
+If you reference results from the lecture notes, please \textbf{mention the date and time} of the version of the notes you are using (as the numbering changes during updates).
+
+As always, proofs need to be provided, and they have to be clear and rigorous. Obvious details can be omitted, but they actually have to be obvious.
+
+% Proofs need to be provided unless explicitly not required. An answer without proof is usually worth at most a little part of the score. Proofs should be written with the amount of rigor typical for advanced mathematics; it is OK to use metaphor and visualization, but the actual logical argument behind it should always be clear. Details can be omitted when they are easy to fill in, not when they are hard to properly explain. (In case of doubt, err on the side of more details and more rigor. See various books referenced in the notes, e.g., \href{https://www.classes.cs.uchicago.edu/archive/2016/spring/27500-1/hw3.pdf}{the Bondy/Murty book from 2008}, or \href{https://courses.csail.mit.edu/6.042/spring16/mcs.pdf}{the Lehman/Leighton/Meyer notes}, for examples of written-up proofs in graph theory.)
+
+% See the \href{http://www-users.math.umn.edu/~dgrinber/5707s17/syll.pdf}{syllabus} for the rules. Note that 
+
+\textbf{This is a midterm}, so you are \textbf{not allowed to collaborate or contact others} (apart from me) for help with the problems. (Feel free to ask me for clarifications, but I will not give hints towards solving the problems.) Reading up (in books or on the internet) is allowed, but asking for help is not. If you get your solution from a book (or paper, or website), do cite the source\footnote{You won't be penalized for this.}, and do explain the solution in your own words.
+
+\begin{exercise} \label{exe.mt1.from-dom}
+Let $D = \tup{V, A}$ be a digraph. A \textit{from-dominating set} of
+$D$ shall mean a subset $S$ of $V$ such that for each vertex $v \in
+V \setminus S$, there exists at least one arc $uv \in A$ with
+$u \in S$.
+
+Assume that $D$ has a Hamiltonian path. Prove that $D$ has a
+from-dominating set of size $\leq \dfrac{\abs{V}+1}{2}$.
+\end{exercise}
+
+\begin{exercise} \label{exe.mt1.L-hamil}
+Let $G = \tup{V, E}$ be a simple graph. The \textit{line graph}
+$L \tup{G}$ is defined as the simple graph $\tup{E, F}$, where
+\[
+F = \set{ \set{e_1, e_2} \in \powset[2]{E}
+            \ \mid \ e_1 \cap e_2 \neq \varnothing } .
+\]
+(In other words, $L \tup{G}$ is the graph whose \textbf{vertices}
+are the \textbf{edges} of $G$, and in which two vertices $e_1$ and
+$e_2$ are adjacent if and only if the edges $e_1$ and $e_2$ of $G$
+share a common vertex.)
+
+Assume that $\abs{V} > 1$.
+
+\textbf{(a)} If $G$ has a Hamiltonian path, then prove that
+$L \tup{G}$ has a Hamiltonian path.
+
+\textbf{(b)} If $G$ has a Eulerian walk, then prove that $L \tup{G}$
+has a Hamiltonian path.
+\end{exercise}
+
+\begin{exercise} \label{exe.mt1.deg-cycle-dir}
+Let $D = \tup{V, A}$ be a digraph with $\abs{V} > 0$. Assume
+that each vertex $v \in V$ satisfies $\deg^- v > 0$. Prove that
+$D$ has at least one cycle.
+
+(Keep in mind that a length-1 circuit $\tup{v, v}$ counts as a cycle
+when $A$ contains the loop $\tup{v, v}$.)
+\end{exercise}
+
+\begin{exercise} \label{exe.mt1.deg-cycle-2}
+Let $G$ be a multigraph with at least one edge.
+Assume that each vertex of $G$ has even degree.
+Prove that $G$ has a cycle.
+\end{exercise}
+
+\begin{exercise} \label{exe.mt1.enmity}
+Let $k \in \NN$. Let $p_1, p_2, \ldots, p_k$ be $k$ nonnegative
+real numbers such that $p_1 + p_2 + \cdots + p_k \geq 1$.
+
+Let $G = \tup{V, E}$ be a simple graph. A \textit{$k$-coloring} of $G$
+shall mean a map $f : V \to \set{1, 2, \ldots, k}$.
+
+Prove that there exists a
+$k$-coloring $f$ of $G$ with the following property: For each vertex
+$v \in V$, at most $p_{f\tup{v}} \deg v$ neighbors of $v$ have the
+same color
+as $v$. Here, the \textit{color} of a vertex $w \in V$ (under the
+$k$-coloring $f$) means the value $f\tup{w}$.
+\end{exercise}
+
+\begin{noncompile}
+A \textit{forest} means a simple graph that has no cycles.
+
+\begin{exercise} \label{exe.mt1.forests-matroid}
+Let $G = \tup{V, E}$ be a forest. Let $H = \tup{V, F}$ be a forest
+with the same vertex set as $G$ but satisfying $\abs{F} > \abs{E}$.
+Prove that there exists some $f \in F \setminus E$ such that
+$\tup{V, E \cup \set{f}}$ is still a forest. (In other words, prove
+that we can add some edge from $H$ to the graph $G$ such that the
+resulting graph is still a forest, but this edge was not contained in
+$G$ to begin with.)
+\end{exercise}
+\end{noncompile}
+
+\begin{exercise} \label{exe.mt1.euler-add}
+Let $G$ be a connected multigraph. Let $m$ be the number of vertices
+of $G$ that have odd degree. Prove that we can add $m/2$ new edges to
+$G$ in such a way that the resulting multigraph will have an Eulerian
+circuit. (It is allowed to add an edge even if there is already an
+edge between the same two vertices.)
+\end{exercise}
+
+If $u$ and $v$ are two vertices of a simple graph $G$, then
+$d \tup{u, v}$ denotes the \textit{distance} between $u$ and $v$. This
+is defined to be the minimum length of a path from $u$ to $v$ if
+such a path exists; otherwise it is defined to be the symbol $\infty$.
+
+\begin{exercise} \label{exe.mt1.d+d+d}
+Let $a$, $b$ and $c$ be three vertices of a connected simple graph
+$G = \tup{V, E}$.
+Prove that
+$d \tup{b, c} + d \tup{c, a} + d \tup{a, b} \leq 2 \abs{V} - 2$.
+\end{exercise}
+
+\begin{exercise} \label{exe.mt1.cyctree}
+Let $G = \tup{V, E}$ be a simple graph such that $\abs{E} > \abs{V}$.
+Prove that $G$ has a cycle of length $\leq \dfrac{2n+2}{3}$,
+where $n = \abs{V}$.
+\end{exercise}
+
+% \begin{exercise} \label{...}
+% \end{exercise}
+
+% \begin{exercise} \label{...}
+% \end{exercise}
+
+% \begin{exercise} \label{...}
+% \end{exercise}
+
+% \begin{exercise} \label{...}
+% \end{exercise}
+
+\end{document}
