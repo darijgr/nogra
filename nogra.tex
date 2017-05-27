@@ -2224,7 +2224,7 @@ isomorphic to $K_n$) if and only if it is the complete graph on $V$
 and satisfies $\abs{V} = n$.
 
 If $V$ is a finite set, then each vertex $v$ of the complete graph on
-$V$ has degree $\deg v = \abs{V}-1$, because it is connected to the
+$V$ has degree $\deg v = \abs{V}-1$, because it is adjacent to the
 $\abs{V}-1$ remaining vertices of the complete graph.
 
 \begin{definition} \label{def.intro.empty-graph}
@@ -3139,6 +3139,24 @@ $u \simeq_G v$ if and only if there exists a walk from $u$ to $v$ in
 $G$.
 \end{definition}
 
+\begin{example} \label{exa.intro.equivalence-from-graph.1}
+Let $G$ be the simple graph defined in
+Example \ref{exa.simple.R33} \textbf{(a)}.
+Then, there exists a walk from $1$ to $4$ in $G$ (for example,
+the walk $\tup{1, 2, 3, 4}$, or the walk
+$\tup{1, 2, 3, 2, 3, 4}$, or the walk $\tup{1, 6, 5, 4}$,
+or many other walks).
+In other words, $1 \simeq_G 4$.
+
+It is actually easy to see that $u \simeq_G v$ for any two
+vertices $u$ and $v$ of $G$.
+If we want to prove this just using the definition of $\simeq_G$,
+then we have to construct a walk from $u$ to $v$ for each pair
+$\tup{u, v}$ of vertices of $G$.
+However, there is a simpler way to prove this -- see
+Example~\ref{exa.intro.equivalence-from-graph.2} below.
+\end{example}
+
 The binary relation $\simeq_G$ we just defined is of fundamental
 importance, although many authors do not define a specific symbol for
 it. As promised, it is an equivalence relation:
@@ -3148,6 +3166,22 @@ Let $G$ be a simple graph. Then, the binary relation $\simeq_G$
 (defined in Definition~\ref{def.intro.equivalence-from-graph}) is an
 equivalence relation.
 \end{proposition}
+
+\begin{example} \label{exa.intro.equivalence-from-graph.2}
+Let $G$ be the simple graph defined in
+Example \ref{exa.simple.R33} \textbf{(a)}.
+Then, there exists a walk from $1$ to $2$ in $G$ (for example,
+the walk $\tup{1, 2}$).
+Hence, $1 \simeq_G 2$.
+Similarly, $2 \simeq_G 3$, $3 \simeq_G 4$, $4 \simeq_G 5$ and
+$5 \simeq_G 6$.
+But Proposition~\ref{prop.intro.equivalence-from-graph.equiv}
+shows that $\simeq_G$ is an equivalence relation.
+Hence, from
+$1 \simeq_G 2 \simeq_G 3 \simeq_G 4 \simeq_G 5 \simeq_G 6$,
+we immediately conclude that $u \simeq_G v$ for any two
+vertices $u$ and $v$ of $G$.
+\end{example}
 
 \begin{proof}[Proof of
 Proposition~\ref{prop.intro.equivalence-from-graph.equiv}.]
@@ -3523,8 +3557,57 @@ the connected component of $v$ is the set of all vertices that are
 reachable from $v$ by walks (i.e., that are ending points of walks
 that start at $v$).
 
+\begin{example}
+\textbf{(a)} Let $G = \tup{V, E}$ be the simple graph defined in
+Example \ref{exa.simple.R33} \textbf{(a)}.
+Then, we know that (from
+Example~\ref{exa.intro.equivalence-from-graph.1}) that
+$u \simeq_G v$ for any two vertices $u$ and $v$ of $G$.
+Hence, for each $v \in V$, we have
+$\conncomp v
+= \set{ u \in V \ \mid \  \underbrack{u \simeq_G v}
+                                     {\text{this always holds}} }
+= \set{ u \in V } = V$.
+In other words, the connected component of any vertex $v$
+of $G$ is the whole set $V$.
+Thus, $G$ has only one connected component -- namely, $V$.
+
+\textbf{(b)} Let $n \in \NN$ be such that $n \geq 3$.
+Let $G = \tup{V, E}$ be the simple graph defined in
+Example \ref{exa.intro.discon-graph}.
+Then, two vertices $u$ and $v$ of $G$ satisfy
+$u \simeq_G v$ if and only if they satisfy
+$u \equiv v \mod 3$.
+Hence, $G$ has exactly three connected components:
+\begin{itemize}
+\item The connected component
+      $\conncomp 1
+       = \set{ u \in V \ \mid \  u \simeq_G 1 }
+       = \set{ u \in V \ \mid \  u \equiv 1 \mod 3 }
+       = \set{1, 4, 7, \ldots} \cap V$.
+\item The connected component
+      $\conncomp 2
+       = \set{ u \in V \ \mid \  u \simeq_G 2 }
+       = \set{ u \in V \ \mid \  u \equiv 2 \mod 3 }
+       = \set{2, 5, 8, \ldots} \cap V$.
+\item The connected component
+      $\conncomp 3
+       = \set{ u \in V \ \mid \  u \simeq_G 3 }
+       = \set{ u \in V \ \mid \  u \equiv 3 \mod 3 }
+       = \set{3, 6, 9, \ldots} \cap V$.
+\end{itemize}
+If we have $n < 3$ instead, then some of these
+connected components are missing (i.e., for $n = 3$,
+there is no $\conncomp 3$, and $G$ has only $2$
+connected components).
+\end{example}
+
 \begin{todo}
-Examples.
+Connected iff exactly 1 connected component.
+
+Remark about the graph with $0$ vertices.
+
+Remark about $K_n$ and $E_n$.
 \end{todo}
 
 \begin{todo}
@@ -4301,7 +4384,7 @@ a detached pair (by the definition of a ``detached pair'').}.
 Hence, the sum \newline
 $\sum_{\substack{A \subseteq V; \\ \tup{A, B}
 \text{ is a detached pair}}} \tup{-1}^{\abs{A}}$
-has an addend for $A = \varnothing$. If we split out this addend
+has an addend for $A = \varnothing$. If we split off this addend
 from this sum, we obtain
 \[
 \sum_{\substack{A \subseteq V; \\ \tup{A, B}
