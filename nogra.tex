@@ -484,7 +484,10 @@ a vertex $v$ of $G$ if the vertices $u$ and $v$ are non-adjacent
 
 \textbf{(d)} Let $v$ be a vertex of $G$ (that is, $v \in V$). Then,
 the \textit{neighbors} of $v$ are the vertices $u$ of $G$ that
-satisfy $vu \in E$. (Of course, these neighbors depend on both $v$ and
+satisfy $vu \in E$.
+In other words, the \textit{neighbors} of $v$ are the vertices of
+$G$ that are adjacent to $v$.
+(Of course, these neighbors depend on both $v$ and
 $G$. When $G$ is not clear from the context, we shall call them the
 ``neighbors of $v$ in $G$'' instead of just ``neighbors of $v$''.)
 \end{definition}
@@ -2300,11 +2303,13 @@ The map
 \set{1,2,\ldots,n} \to \set{1,2,\ldots,n},
 \ i \mapsto n+1-i
 \]
-(this is the permutation of $\set{1,2,\ldots,n}$ that sends the
-numbers $1,2,\ldots,n$ to $n,n-1,\ldots,1$, respectively)
-is an isomorphism $P_n \to P_n$. This isomorphism is called the
+\footnotemark
+\ is an isomorphism $P_n \to P_n$. This isomorphism is called the
 \textit{reflection} on the path $P_n$.
 \end{remark}
+\footnotetext{This map
+is the permutation of $\set{1,2,\ldots,n}$ that sends the
+numbers $1,2,\ldots,n$ to $n,n-1,\ldots,1$, respectively.}
 
 A look at the drawing \eqref{draw.def.intro.path-graph.P4} of $P_4$
 should explain why the name ``reflection'' was chosen for the
@@ -2358,10 +2363,8 @@ For each $k \in \ZZ$, the map
 \set{1,2,\ldots,n} \to \set{1,2,\ldots,n},
 \ i \mapsto \tup{i+k} \%_1 n
 \]
-(this is the permutation of $\set{1,2,\ldots,n}$ that sends the
-numbers $1,2,\ldots,n$ to $k+1,k+2,\ldots,n,1,2,\ldots,k$,
-respectively)
-is an isomorphism $C_n \to C_n$. This isomorphism is called the
+\footnotemark
+\ is an isomorphism $C_n \to C_n$. This isomorphism is called the
 \textit{$k$-rotation} on the cycle $C_n$. Note that this $k$-rotation
 depends only on the remainder of $k$ modulo $n$, not on the integer
 $k$ itself; in total, we thus have $n$ of these $k$-rotations.
@@ -2371,6 +2374,10 @@ isomorphism $C_n \to C_n$. Hence, any composition of this
 reflection with a $k$-rotation is also a graph isomorphism
 $C_n \to C_n$ (because of Proposition~\ref{prop.intro.iso.comp}).
 \end{remark}
+\footnotetext{If $k \in \set{0, 1, \ldots, n}$, then this map
+is the permutation of $\set{1,2,\ldots,n}$ that
+sends the numbers $1,2,\ldots,n$ to $k+1,k+2,\ldots,n,1,2,\ldots,k$,
+respectively.}
 
 Again, the names ``rotation'' and ``reflection'' reflect the
 fact that if the cycle graph $C_n$ is drawn as a regular $n$-gon,
@@ -6102,7 +6109,7 @@ Schilling, \textit{Linear Algebra As an Introduction to Abstract Mathematics},
 \bibitem[LeLeMe16]{LeLeMe16}
 Eric Lehman, F. Thomson Leighton, Albert R. Meyer,
 \textit{Mathematics for Computer Science},
-revised  Wednesday 17th May, 2017,
+revised  Wednesday 25th May, 2017,
 \newline\url{https://courses.csail.mit.edu/6.042/spring17/mcs.pdf} .
 
 \bibitem[LoPeVe03]{LoPeVe03}L\'aszl\'o Lov\'asz, J\'ozsef Pelik\'an,
