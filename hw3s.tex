@@ -1505,7 +1505,7 @@ tree of the induced sub-multigraph $G\ive{C}$ of $G$
 \ \ \ \ \footnote{Induced sub-multigraphs of $G$ are defined as
 follows:
 Write $G$ in the form $G = \tup{V, E, \phi}$.
-If $S$ is a subset of $V$, then the induces sub-multigraph
+If $S$ is a subset of $V$, then the induced sub-multigraph
 $G\ive{S}$ is defined to be the sub-multigraph
 $\tup{S, E_S, \phi\mid_{E_S}}$ of $G$, where $E_S$ is the set
 of all edges $e \in E$ such that $\phi\tup{e} \subseteq S$
@@ -2010,7 +2010,7 @@ Now, it is not hard to see that
 \qquad \text{ for all } i \in V .
 \label{pf.prop.hw3.conn.LA.eiinSR}
 \end{equation}
-Indeed, this is easily proven by induction
+Indeed, this is easily proven by induction%
 \footnote{In (slightly) more detail:
   \par
   We proceed by induction over the depth of $i$.
@@ -2070,7 +2070,7 @@ $\mathcal{P} \cap \mathcal{R} = 0$\ \ \ \ \footnote{
   from \eqref{pf.prop.hw3.conn.LA.def-R} (applied to $i = j$).
   So let us WLOG assume that $j$ is a root.
   Let $C$ be the connected component containing $j$.
-  Then, the only root in $C$ is $i$.
+  Then, the only root in $C$ is $j$.
   Hence, all vertices $i \in C$ except for $j$ are not
   roots.
   Thus, all vertices $i \in C$ except for $j$ satisfy
@@ -3829,7 +3829,20 @@ $3$-coloring, then all cycles of $G$ have length divisible by $3$ ?
 TODO: Solution. ((a) is true, but it is harder than I thought
 when posing this problem. Probably a proof appears in
 \cite{AGJJ09}. (b) is definitely false,
-as witnessed by the $4$-cycle $C_4$.)
+as witnessed by the $4$-cycle $C_4$.
+
+Ah, there is actually a simple proof of (a)! The main step is
+showing that if $G$ is a simple graph whose cycles all have length
+divisible by $3$, then at least one vertex of $G$ has degree $< 3$
+(unless $G$ has $0$ vertices).
+This fact is an olympiad problem and has been discussed in
+\href{https://artofproblemsolving.com/community/c6h5744}{Art of Problem Solving topic \#5744},
+where a nice proof has been given by Pascual2005.
+Now, using this fact, we can fix a vertex $v$ having degree $< 3$,
+and (by induction over the number of vertices) assume that the
+graph $G$ with $v$ removed already has a proper $3$-coloring;
+we then extend this $3$-coloring by assigning an appropriate
+color to $v$.)
 
 \subsection{Exercise \ref{exe.hw3.turan}: Tur\'an's theorem via
 independent sets}
@@ -4168,7 +4181,7 @@ Namely, if we divide both sides of the claim by
 $v \tup{x_1, x_2, \ldots, x_n}$ (assuming that $x_1, x_2, \ldots, x_n$
 are distinct\footnote{This is a harmless assumption that you can make
   whenever you want to prove an identity like this... but proving that
-  this is so takes a bit of abstract algebra, too.},
+  this is so takes a bit of abstract algebra, too.}),
 then we obtain
 \[
 \sum_{k=1}^n x_k^m \dfrac{\prod_{i \neq k} \tup{  t - x_i}}
@@ -4186,7 +4199,7 @@ This is often stated as follows:
 If $x_1, x_2, \ldots, x_n$ are $n$ distinct real numbers, and
 $y_1, y_2, \ldots, y_n$ are $n$ further real numbers, then
 there is a unique polynomial $g = g \tup{t}$ of degree $\leq n-1$
-satisfying $f \tup{x_i} = y_i$ for all $i$, and this polynomial $g$ is
+satisfying $g \tup{x_i} = y_i$ for all $i$, and this polynomial $g$ is
 \[
 \sum_{k=1}^n y_k \dfrac{\prod_{i \neq k} \tup{  t - x_i}}
                        {\prod_{i \neq k} \tup{x_k - x_i}}
@@ -4207,17 +4220,17 @@ or \cite[Lemma 2]{GlaNg04}\footnote{To be fully
   Exercise~\ref{exe.hw3.vandermondes} \textbf{(c)} by applying it to
   $n = m$, $t = -1$ and $x_i = z_i$. Conversely,
   Exercise~\ref{exe.hw3.vandermondes} \textbf{(c)} follows from
-  \cite[Lemma 2]{GlaNg04} (applied to $m = n$ and $z_i = -x_k / t$).
+  \cite[Lemma 2]{GlaNg04} (applied to $m = n$ and $z_i = -x_i / t$).
   Hence, the two facts are equivalent.}.
 
 Meanwhile, elementary (but still not combinatorial) proofs also exist:
 \begin{itemize}
 \item Exercise~\ref{exe.hw3.vandermondes} \textbf{(a)} is solved in
-      \cite[Proposition 7.65]{detnotes}.
+      \cite[Proposition 7.87]{detnotes}.
 \item Exercise~\ref{exe.hw3.vandermondes} \textbf{(b)} is solved in
-      \cite[Proposition 7.67]{detnotes}.
+      \cite[Proposition 7.89]{detnotes}.
 \item Exercise~\ref{exe.hw3.vandermondes} \textbf{(c)} is solved in
-      \cite[Exercise 55]{detnotes}.
+      \cite[Exercise 5.32]{detnotes}.
 \end{itemize}
 \end{proof}
 
@@ -4243,7 +4256,7 @@ Vol. 111, No. 8 (Oct., 2004), pp. 700--704.
 \newline\url{https://sites.math.washington.edu/~billey/classes/581.fall.2015/articles/glass.ng.2004.pdf}
 
 \bibitem[Grinbe16]{detnotes}Darij Grinberg, \textit{Notes on the combinatorial
-fundamentals of algebra}, 25 May 2017.
+fundamentals of algebra}, 18 November 2017.
 \newline\url{http://www.cip.ifi.lmu.de/~grinberg/primes2015/sols.pdf}
 
 \bibitem[Quinla17]{Quinla17}Rachel Quinlan,
