@@ -2156,8 +2156,9 @@ each chip makes only $4$ edges non-void, and there can be overlap). Thus, the
 path $p$ cannot have more than $4h$ edges (since each edge of $p$ is non-void
 in $f^{\prime}$). In other words, the length of the path $p$ is $\leq4h$.
 Thus, there exists a path of length $\leq4h$ from $w$ to $v$ (namely, the path
-$p$). Hence, $d\left(  w,v\right)  \leq4h$. Hence, $v\in T$ (by the definition
-of $T$, because $w\in S_{f}$).
+$p$). Hence, $d\left(  w,v\right)  \leq4h$. In other words,
+$d \tup{v, w} \leq 4h$.
+Hence, $v\in T$ (by the definition of $T$, because $w\in S_{f}$).
 
 Now, forget that we fixed $v$. We thus have shown that $v\in T$ for each $v\in
 S_{f^{\prime}}$. In other words, $S_{f^{\prime}}\subseteq T$. Hence,
@@ -2371,7 +2372,7 @@ target $v$. This solves Exercise \ref{exe.aco.score-vector} \textbf{(a)}.
 by induction over $\left\vert V\right\vert $.
 
 The \textit{induction base} (the case when $\left\vert V\right\vert =0$) is
-obvious (because in these case there are no edges, and thus there is only one
+obvious (because in this case there are no edges, and thus there is only one
 possible orientation).
 
 Now, we come to the \textit{induction step}: Let $N\in\mathbb{N}$ be positive.
@@ -2534,7 +2535,7 @@ Let us recall some terminology from
       \item two distinct vertices $s \in V$ and $t \in V$,
             called the \textit{source} and the \textit{sink},
             respectively (although we do not require $s$ to
-            have indegree $0$ or $t$ to have outdegree $1$);
+            have indegree $0$ or $t$ to have outdegree $0$);
       \item a function $c : A \to \QQ_+$, called the
             \textit{capacity function}.
             (Here, $\QQ_+$ means the set
