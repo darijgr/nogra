@@ -1,0 +1,3291 @@
+\documentclass[numbers=enddot,12pt,final,onecolumn,notitlepage]{scrartcl}%
+\usepackage[headsepline,footsepline,manualmark]{scrlayer-scrpage}
+\usepackage[all,cmtip]{xy}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{framed}
+\usepackage{comment}
+\usepackage{color}
+\usepackage{hyperref}
+\usepackage{ifthen}
+\usepackage[sc]{mathpazo}
+\usepackage[T1]{fontenc}
+\usepackage{needspace}
+\usepackage{tabls}
+\usepackage{amsfonts}
+\usepackage{graphicx}%
+\setcounter{MaxMatrixCols}{30}
+%TCIDATA{OutputFilter=latex2.dll}
+%TCIDATA{Version=5.50.0.2960}
+%TCIDATA{LastRevised=Monday, December 04, 2017 09:56:47}
+%TCIDATA{<META NAME="GraphicsSave" CONTENT="32">}
+%TCIDATA{<META NAME="SaveForMode" CONTENT="1">}
+%TCIDATA{BibliographyScheme=Manual}
+%BeginMSIPreambleData
+\providecommand{\U}[1]{\protect\rule{.1in}{.1in}}
+%EndMSIPreambleData
+\newcounter{exer}
+\theoremstyle{definition}
+\newtheorem{theo}{Theorem}[section]
+\newenvironment{theorem}[1][]
+{\begin{theo}[#1]\begin{leftbar}}
+{\end{leftbar}\end{theo}}
+\newtheorem{lem}[theo]{Lemma}
+\newenvironment{lemma}[1][]
+{\begin{lem}[#1]\begin{leftbar}}
+{\end{leftbar}\end{lem}}
+\newtheorem{prop}[theo]{Proposition}
+\newenvironment{proposition}[1][]
+{\begin{prop}[#1]\begin{leftbar}}
+{\end{leftbar}\end{prop}}
+\newtheorem{defi}[theo]{Definition}
+\newenvironment{definition}[1][]
+{\begin{defi}[#1]\begin{leftbar}}
+{\end{leftbar}\end{defi}}
+\newtheorem{remk}[theo]{Remark}
+\newenvironment{remark}[1][]
+{\begin{remk}[#1]\begin{leftbar}}
+{\end{leftbar}\end{remk}}
+\newtheorem{coro}[theo]{Corollary}
+\newenvironment{corollary}[1][]
+{\begin{coro}[#1]\begin{leftbar}}
+{\end{leftbar}\end{coro}}
+\newtheorem{conv}[theo]{Convention}
+\newenvironment{condition}[1][]
+{\begin{conv}[#1]\begin{leftbar}}
+{\end{leftbar}\end{conv}}
+\newtheorem{quest}[theo]{Question}
+\newenvironment{algorithm}[1][]
+{\begin{quest}[#1]\begin{leftbar}}
+{\end{leftbar}\end{quest}}
+\newtheorem{warn}[theo]{Warning}
+\newenvironment{conclusion}[1][]
+{\begin{warn}[#1]\begin{leftbar}}
+{\end{leftbar}\end{warn}}
+\newtheorem{conj}[theo]{Conjecture}
+\newenvironment{conjecture}[1][]
+{\begin{conj}[#1]\begin{leftbar}}
+{\end{leftbar}\end{conj}}
+\newtheorem{exam}[theo]{Example}
+\newenvironment{example}[1][]
+{\begin{exam}[#1]\begin{leftbar}}
+{\end{leftbar}\end{exam}}
+\newtheorem{exmp}[exer]{Exercise}
+\newenvironment{exercise}[1][]
+{\begin{exmp}[#1]\begin{leftbar}}
+{\end{leftbar}\end{exmp}}
+\newenvironment{statement}{\begin{quote}}{\end{quote}}
+\iffalse
+\newenvironment{proof}[1][Proof]{\noindent\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+\fi
+\let\sumnonlimits\sum
+\let\prodnonlimits\prod
+\let\cupnonlimits\bigcup
+\let\capnonlimits\bigcap
+\renewcommand{\sum}{\sumnonlimits\limits}
+\renewcommand{\prod}{\prodnonlimits\limits}
+\renewcommand{\bigcup}{\cupnonlimits\limits}
+\renewcommand{\bigcap}{\capnonlimits\limits}
+\setlength\tablinesep{3pt}
+\setlength\arraylinesep{3pt}
+\setlength\extrarulesep{3pt}
+\voffset=0cm
+\hoffset=-0.7cm
+\setlength\textheight{22.5cm}
+\setlength\textwidth{15.5cm}
+\newenvironment{verlong}{}{}
+\newenvironment{vershort}{}{}
+\newenvironment{noncompile}{}{}
+\excludecomment{verlong}
+\includecomment{vershort}
+\excludecomment{noncompile}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\rev}{\operatorname{rev}}
+\newcommand{\conncomp}{\operatorname{conncomp}}
+\newcommand{\conn}{\operatorname{conn}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\powset}[2][]{\ifthenelse{\equal{#2}{}}{\mathcal{P}\left(#1\right)}{\mathcal{P}_{#1}\left(#2\right)}}
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\tup}[1]{\left( #1 \right)}
+\newcommand{\ive}[1]{\left[ #1 \right]}
+\newcommand{\verts}[1]{\operatorname{V}\left( #1 \right)}
+\newcommand{\edges}[1]{\operatorname{E}\left( #1 \right)}
+\newcommand{\arcs}[1]{\operatorname{A}\left( #1 \right)}
+\newcommand{\underbrack}[2]{\underbrace{#1}_{\substack{#2}}}
+\newcommand{\are}{\ar@{-}}
+\newcommand{\arebi}[1][]{\ar@{<-}@/_/[#1] \ar@/^/[#1]}
+\newcommand{\of}{\text{ of }}
+\ihead{Math 5707 Spring 2017 (Darij Grinberg): Lecture 16}
+\ohead{page \thepage}
+\cfoot{}
+\begin{document}
+
+\title{UMN, Spring 2017, Math 5707: Lecture 16 (flows and cuts in networks)}
+\author{Darij Grinberg}
+\date{digitized and updated version,
+%TCIMACRO{\TeXButton{TeX field}{\today}}%
+%BeginExpansion
+\today
+%EndExpansion
+}
+\maketitle
+\tableofcontents
+
+\section{Network flows}
+
+\subsection{Introduction}
+
+We shall now study the basics of the theory of network flows. We will barely
+scratch the surface; for a more comprehensive survey, see Schrijver's
+\cite[Chapter 4]{Schrij17}. Also, \cite[\S 8.2]{Martin17} gives a neat
+introduction, and \cite{ForFul62} is the classical text on the subject. Also,
+\cite{Thalwi08} appears to be a thorough treatment of the subject with lots of
+technical details. See also the \textquotedblleft Lecture notes on maximum
+flows and minimum cut problems\textquotedblright\ in \cite{Goeman17}.
+
+We shall mostly follow \cite[\S 8.2]{Martin17}. In particular, we will only
+use elementary methods. More advanced disciplines (such as linear optimization
+and polyhedral geometry) offer alternative points of view on the theory of
+network flows; we shall ignore these. We shall also ignore real-life
+applications, although there are many (see \cite[Chapter 4]{Schrij17} for a
+few, and see \cite[\S 2]{Schrij12} for the Cold War origins of the subject).
+
+We let $\mathbb{N}$ denote the set $\left\{  0,1,2,\ldots\right\}  $ of all
+nonnegative integers.
+
+We let $\mathbb{Q}_{+}$ denote the set $\left\{  x\in\mathbb{Q}\mid
+x\geq0\right\}  $ of all nonnegative rational numbers.
+
+We let $\mathbb{R}_{+}$ denote the set $\left\{  x\in\mathbb{R}\mid
+x\geq0\right\}  $ of all nonnegative real numbers.
+
+\subsection{The concept of a network}
+
+Recall that a \textit{digraph} is defined to be a pair $\left(  V,A\right)  $
+consisting of a finite set $V$ and of a subset $A$ of $V\times V$. The
+elements of $V$ are called the \textit{vertices} of this digraph; the elements
+of $A$ are called its \textit{arcs}. If $a=\left(  u,v\right)  $ is an arc of
+a digraph $\left(  V,A\right)  $, then $u$ is called the \textit{source} of
+this arc $a$, and $v$ is called the \textit{target} of this arc $a$.
+
+The whole theory of network flows can just as well be built on the concept of
+a multidigraph instead of a digraph. But we shall restrict ourselves to
+digraphs for the sake of simplicity. (Also, the basic results for
+multidigraphs can be easily derived from the corresponding results for
+digraphs; so we aren't even sacrificing any real power.)
+
+\begin{definition}
+\label{def.network.basics}A \textit{network} consists of:
+
+\begin{itemize}
+\item a digraph $\left(  V,A\right)  $;
+
+\item two distinct vertices $s\in V$ and $t\in V$, called the \textit{source}
+and the \textit{sink}, respectively (although we do not require $s$ to have
+indegree $0$ or $t$ to have outdegree $0$);
+
+\item a function $c:A\rightarrow\mathbb{Q}_{+}$, called the \textit{capacity
+function}.
+\end{itemize}
+\end{definition}
+
+\begin{definition}
+\label{def.network.notations}Let $N$ be a network consisting of a digraph
+$\left(  V,A\right)  $, a source $s\in V$ and a sink $t\in V$, and a capacity
+function $c:A\rightarrow\mathbb{Q}_{+}$. Then, we define the following notations:
+
+\begin{itemize}
+\item For any arc $a\in A$, we call the number $c\left(  a\right)
+\in\mathbb{Q}_{+}$ the \textit{capacity} of the arc $a$.
+
+\item For any subset $S$ of $V$, we let $\overline{S}$ denote the subset
+$V\setminus S$ of $V$.
+
+\item If $P$ and $Q$ are two subsets of $V$, then $\left[  P,Q\right]  $ shall
+mean the set of all arcs $a\in A$ whose source belongs to $P$ and whose target
+belongs to $Q$. (In other words, $\left[  P,Q\right]  =A\cap\left(  P\times
+Q\right)  $.)
+
+\item If $P$ and $Q$ are two subsets of $V$, and if $d:A\rightarrow
+\mathbb{Q}_{+}$ is any function, then the number $d\left(  P,Q\right)
+\in\mathbb{Q}_{+}$ is defined by
+\[
+d\left(  P,Q\right)  =\sum_{a\in\left[  P,Q\right]  }d\left(  a\right)  .
+\]
+
+\end{itemize}
+\end{definition}
+
+We draw a network $N$ (with notations as in Definition
+\ref{def.network.notations}) as follows: We first draw the digraph $\left(
+V,A\right)  $ (with source $s$ and sink $t$ marked as such), and then we write
+the capacity $c\left(  a\right)  $ of each arc $a\in A$ atop the arc. For
+example, the picture%
+\begin{equation}%
+%TCIMACRO{\TeXButton{network}{\xymatrix@C=7pc@R=5pc{
+%s = 1 \ar[r]^2 \ar[dr]_1 & 3 \ar[r]^1 \ar[dr]_2 & 2 \ar[r]^2 & 5 \ar
+%[dl]_1 \ar[dr]^2 \\
+%& 7 \ar[r]_3 & 4 \ar[u]^1 \ar[r]_1 & 6 \ar[r]_1 & 8 = t
+%}} }%
+%BeginExpansion
+\xymatrix@C=7pc@R=5pc{
+s = 1 \ar[r]^2 \ar[dr]_1 & 3 \ar[r]^1 \ar[dr]_2 & 2 \ar[r]^2 & 5 \ar
+[dl]_1 \ar[dr]^2 \\
+& 7 \ar[r]_3 & 4 \ar[u]^1 \ar[r]_1 & 6 \ar[r]_1 & 8 = t
+}
+%EndExpansion
+\label{eq.network.example.1}%
+\end{equation}
+represents a network $N$ whose underlying digraph $\left(  V,A\right)  $ has
+$8$ vertices \newline$1,2,3,4,5,6,7,8$ and $11$ arcs \newline$\left(
+1,3\right)  ,\left(  1,7\right)  ,\left(  3,2\right)  ,\left(  3,4\right)
+,\left(  7,4\right)  ,\left(  4,2\right)  ,\left(  2,5\right)  ,\left(
+4,6\right)  ,\left(  5,4\right)  ,\left(  5,8\right)  ,\left(  6,8\right)  $,
+with $1$ chosen as source and $8$ chosen as sink, and with capacities given by
+$c\left(  \left(  1,3\right)  \right)  =2$, $c\left(  \left(  1,7\right)
+\right)  =1$, $c\left(  \left(  3,2\right)  \right)  =1$ etc.
+
+\subsection{The concept of a flow}
+
+\begin{definition}
+\label{def.flow.def}Let $N$, $V$, $A$, $s$, $t$ and $c$ be as in Definition
+\ref{def.network.notations}.
+
+A \textit{flow (on the network }$N$\textit{)} means a function $f:A\rightarrow
+\mathbb{Q}_{+}$ with the following properties:
+
+\begin{itemize}
+\item We have $0\leq f\left(  a\right)  \leq c\left(  a\right)  $ for all
+$a\in A$. This is called the \textit{capacity constraints}.
+
+\item For any vertex $v\in V\setminus\left\{  s,t\right\}  $, we have%
+\[
+f^{-}\left(  v\right)  =f^{+}\left(  v\right)  ,
+\]
+where the rational numbers $f^{-}\left(  v\right)  $ and $f^{+}\left(
+v\right)  $ are defined as follows:%
+\[
+f^{-}\left(  v\right)  =\sum_{\substack{a\in A\text{ is an arc}\\\text{with
+target }v}}f\left(  a\right)  \ \ \ \ \ \ \ \ \ \ \text{and}%
+\ \ \ \ \ \ \ \ \ \ f^{+}\left(  v\right)  =\sum_{\substack{a\in A\text{ is an
+arc}\\\text{with source }v}}f\left(  a\right)  .
+\]
+This is called the \textit{conservation constraints}.
+\end{itemize}
+\end{definition}
+
+We can visualize a network $N$ as a collection of water pipes (the pipes are
+the arcs $a\in A$; the capacity $c\left(  a\right)  $ of a pipe $a$ is how
+much water it can maximally transport in a second); then, a flow $f$ on $N$
+can be visualized as water flowing through the pipes (namely, the amount of
+water traveling through a pipe $a$ in a second is $f\left(  a\right)  $). The
+capacity constraints say that no pipe is over its capacity or carries a
+negative amount of water\footnote{Notice that each pipe has a pre-determined
+direction; water can only flow in that direction!}. The conservation
+constraints say that at every vertex $v$ other than $s$ and $t$, the amount of
+water coming in (that is, $f^{-}\left(  v\right)  $) equals the amount of
+water moving out (that is, $f^{+}\left(  v\right)  $); that is, there are no
+leaks and no water being injected into the system other than at $s$ and $t$.
+This is why $s$ is called the \textquotedblleft source\textquotedblright\ and
+$t$ is the \textquotedblleft sink\textquotedblright\footnote{although these
+words are not to be taken fully at face value: it is possible that the source
+has more water coming in than moving out, and that the sink has more water
+moving out than coming in}.
+
+To draw a flow $f$ on a network $N$ (with notations as in Definition
+\ref{def.network.notations}), we proceed in the same way as when drawing the
+network $N$ itself, but instead of writing the capacity $c\left(  a\right)  $
+atop each arc $a\in A$, we write \textquotedblleft$f\left(  a\right)  $ of
+$c\left(  a\right)  $\textquotedblright\ atop each arc $a\in A$. For example,
+here is a flow $f$ on the network $N$ shown on (\ref{eq.network.example.1}):%
+\begin{equation}%
+%TCIMACRO{\TeXButton{network with flow}{\xymatrix@C=7pc@R=5pc{
+%s = 1 \ar[r]^{1 \of2} \ar[dr]_{1 \of1} & 3 \ar[r]^{1 \of1} \ar[dr]_{0 \of2}
+%& 2 \ar[r]^{2 \of2} & 5 \ar[dl]_{1 \of1} \ar[dr]^{1 \of2} \\
+%& 7 \ar[r]_{1 \of3} & 4 \ar[u]^{1 \of1} \ar[r]_{1 \of1} & 6 \ar[r]_{1 \of1}
+%& 8 = t
+%}} }%
+%BeginExpansion
+\xymatrix@C=7pc@R=5pc{
+s = 1 \ar[r]^{1 \of2} \ar[dr]_{1 \of1} & 3 \ar[r]^{1 \of1} \ar[dr]_{0 \of2}
+& 2 \ar[r]^{2 \of2} & 5 \ar[dl]_{1 \of1} \ar[dr]^{1 \of2} \\
+& 7 \ar[r]_{1 \of3} & 4 \ar[u]^{1 \of1} \ar[r]_{1 \of1} & 6 \ar[r]_{1 \of1}
+& 8 = t
+}
+%EndExpansion
+\label{eq.flow.example.1}%
+\end{equation}
+(so, for example, $f\left(  \left(  1,3\right)  \right)  =1$, $f\left(
+\left(  2,5\right)  \right)  =2$ and $f\left(  \left(  3,4\right)  \right)
+=0$).
+
+Let us make a definition (which we already made temporarily in Definition
+\ref{def.flow.def}):
+
+\begin{definition}
+\label{def.f-f+}Let $N$, $V$, $A$, $s$, $t$ and $c$ be as in Definition
+\ref{def.network.notations}. Let $f:A\rightarrow\mathbb{Q}_{+}$ be any map.
+Let $v\in V$. Then, we define two rational numbers $f^{-}\left(  v\right)
+\in\mathbb{Q}_{+}$ and $f^{+}\left(  v\right)  \in\mathbb{Q}_{+}$ as follows:%
+\[
+f^{-}\left(  v\right)  =\sum_{\substack{a\in A\text{ is an arc}\\\text{with
+target }v}}f\left(  a\right)  \ \ \ \ \ \ \ \ \ \ \text{and}%
+\ \ \ \ \ \ \ \ \ \ f^{+}\left(  v\right)  =\sum_{\substack{a\in A\text{ is an
+arc}\\\text{with source }v}}f\left(  a\right)  .
+\]
+(We may call $f^{-}\left(  v\right)  $ the \textit{inflow} of $f$ into $v$,
+and we may call $f^{+}\left(  v\right)  $ the \textit{outflow} of $f$ from $v$.)
+\end{definition}
+
+We can now define the \textit{value} of a flow:
+
+\begin{definition}
+\label{def.flow.value}Let $N$, $V$, $A$, $s$, $t$ and $c$ be as in Definition
+\ref{def.network.notations}. Let $f:A\rightarrow\mathbb{Q}_{+}$ be a flow on
+$N$.
+
+The \textit{value} of the flow $f$ is defined to be the number $f^{+}\left(
+s\right)  -f^{-}\left(  s\right)  $. It is denoted by $\left\vert f\right\vert
+$.
+\end{definition}
+
+For example, the value of the flow $f$ shown in (\ref{eq.flow.example.1}) is
+$\left\vert f\right\vert =f^{+}\left(  s\right)  -f^{-}\left(  s\right)
+=2-0=2$.
+
+\begin{proposition}
+\label{prop.1}Let $N$, $V$, $A$, $s$, $t$ and $c$ be as in Definition
+\ref{def.network.notations}. Let $f:A\rightarrow\mathbb{Q}_{+}$ be a flow on
+$N$. Then,%
+\begin{align}
+\left\vert f\right\vert  &  =f^{+}\left(  s\right)  -f^{-}\left(  s\right)
+\label{eq.prop.1.1}\\
+&  =f^{-}\left(  t\right)  -f^{+}\left(  t\right)  . \label{eq.prop.1.2}%
+\end{align}
+
+\end{proposition}
+
+\begin{proof}
+[Proof of Proposition \ref{prop.1} (sketched).]The definition of $\left\vert
+f\right\vert $ yields $\left\vert f\right\vert =f^{+}\left(  s\right)
+-f^{-}\left(  s\right)  $. It thus remains to show that $\left\vert
+f\right\vert =f^{-}\left(  t\right)  -f^{+}\left(  t\right)  $.
+
+Each arc $a\in A$ has exactly one source. Thus,%
+\begin{equation}
+\sum_{a\in A}f\left(  a\right)  =\sum_{v\in V}\underbrace{\sum_{\substack{a\in
+A\text{ is an arc}\\\text{with source }v}}f\left(  a\right)  }%
+_{\substack{=f^{+}\left(  v\right)  \\\text{(by the definition of }%
+f^{+}\left(  v\right)  \text{)}}}=\sum_{v\in V}f^{+}\left(  v\right)  .
+\label{pf.prop.1.inflow}%
+\end{equation}
+Similarly,%
+\begin{equation}
+\sum_{a\in A}f\left(  a\right)  =\sum_{v\in V}f^{-}\left(  v\right)  .
+\label{pf.prop.1.outflow}%
+\end{equation}
+Comparing this with (\ref{pf.prop.1.inflow}), we obtain%
+\[
+\sum_{v\in V}f^{+}\left(  v\right)  =\sum_{v\in V}f^{-}\left(  v\right)  .
+\]
+Hence,%
+\begin{equation}
+\sum_{v\in V}\left(  f^{+}\left(  v\right)  -f^{-}\left(  v\right)  \right)
+=\underbrace{\sum_{v\in V}f^{+}\left(  v\right)  }_{=\sum_{v\in V}f^{-}\left(
+v\right)  }-\sum_{v\in V}f^{-}\left(  v\right)  =0. \label{pf.prop.1.2}%
+\end{equation}
+
+
+But the conservation constraints (which hold, since $f$ is a flow) say that
+for any vertex $v\in V\setminus\left\{  s,t\right\}  $, we have%
+\begin{equation}
+f^{-}\left(  v\right)  =f^{+}\left(  v\right)  . \label{pf.prop.1.cons}%
+\end{equation}
+Now, recall that $s$ and $t$ are distinct elements of $V$. Hence, we can split
+off the addends for $v=s$ and for $v=t$ from the sum $\sum_{v\in V}\left(
+f^{+}\left(  v\right)  -f^{-}\left(  v\right)  \right)  $. We thus obtain%
+\begin{align*}
+&  \sum_{v\in V}\left(  f^{+}\left(  v\right)  -f^{-}\left(  v\right)  \right)
+\\
+&  =\underbrace{\left(  f^{+}\left(  s\right)  -f^{-}\left(  s\right)
+\right)  }_{=\left\vert f\right\vert }+\left(  f^{+}\left(  t\right)
+-f^{-}\left(  t\right)  \right)  +\sum_{v\in V\setminus\left\{  s,t\right\}
+}\underbrace{\left(  f^{+}\left(  v\right)  -f^{-}\left(  v\right)  \right)
+}_{\substack{=0\\\text{(by (\ref{pf.prop.1.cons}))}}}\\
+&  =\left\vert f\right\vert +\left(  f^{+}\left(  t\right)  -f^{-}\left(
+t\right)  \right)  .
+\end{align*}
+Comparing this with (\ref{pf.prop.1.2}), we find $\left\vert f\right\vert
++\left(  f^{+}\left(  t\right)  -f^{-}\left(  t\right)  \right)  =0$. Thus,%
+\[
+\left\vert f\right\vert =-\left(  f^{+}\left(  t\right)  -f^{-}\left(
+t\right)  \right)  =f^{-}\left(  t\right)  -f^{+}\left(  t\right)  .
+\]
+This completes the proof of Proposition \ref{prop.1}.
+\end{proof}
+
+For the next proposition, let us recall the conventions we made in Definition
+\ref{def.network.notations}. In particular, if $S$ is any subset of $V$ (where
+notations as in Definition \ref{def.network.notations}), then $\overline{S}$
+denotes the complement $V\setminus S$ of $S$. Also, for any two subsets $P$
+and $Q$ of $V$ and any map $d:A\rightarrow\mathbb{Q}_{+}$, we have $d\left(
+P,Q\right)  =\sum_{a\in\left[  P,Q\right]  }d\left(  a\right)  $.
+
+\begin{proposition}
+\label{prop.2}Let $N$, $V$, $A$, $s$, $t$ and $c$ be as in Definition
+\ref{def.network.notations}. Let $f:A\rightarrow\mathbb{Q}_{+}$ be a flow on
+$N$. Let $S$ be a subset of $V$.
+
+\textbf{(a)} We have%
+\[
+f\left(  S,\overline{S}\right)  -f\left(  \overline{S},S\right)  =\sum_{v\in
+S}\left(  f^{+}\left(  v\right)  -f^{-}\left(  v\right)  \right)  .
+\]
+
+
+\textbf{(b)} If $s\in S$ and $t\notin S$, then%
+\[
+\left\vert f\right\vert =f\left(  S,\overline{S}\right)  -f\left(
+\overline{S},S\right)  .
+\]
+
+
+\textbf{(c)} If $s\in S$ and $t\notin S$, then $\left\vert f\right\vert \leq
+c\left(  S,\overline{S}\right)  $.
+
+\textbf{(d)} Assume that $s\in S$ and $t\notin S$. Then, $\left\vert
+f\right\vert =c\left(  S,\overline{S}\right)  $ if and only if%
+\begin{equation}
+\left(  f\left(  a\right)  =0\text{ for all }a\in\left[  \overline
+{S},S\right]  \right)  \label{eq.prop.2.d.b.1}%
+\end{equation}
+and%
+\begin{equation}
+\left(  f\left(  a\right)  =c\left(  a\right)  \text{ for all }a\in\left[
+S,\overline{S}\right]  \right)  . \label{eq.prop.2.d.b.2}%
+\end{equation}
+
+\end{proposition}
+
+\begin{proof}
+[Proof of Proposition \ref{prop.2} (sketched).]\textbf{(a)} We have%
+\begin{align}
+&  \sum_{v\in S}\left(  f^{+}\left(  v\right)  -f^{-}\left(  v\right)  \right)
+\nonumber\\
+&  =\sum_{v\in S}\underbrace{f^{+}\left(  v\right)  }_{\substack{=\sum
+_{\substack{a\in A\text{ is an arc}\\\text{with source }v}}f\left(  a\right)
+\\\text{(by the definition of }f^{+}\left(  v\right)  \text{)}}}-\sum_{v\in
+S}\underbrace{f^{-}\left(  v\right)  }_{\substack{=\sum_{\substack{a\in
+A\text{ is an arc}\\\text{with target }v}}f\left(  a\right)  \\\text{(by the
+definition of }f^{-}\left(  v\right)  \text{)}}}\nonumber\\
+&  =\underbrace{\sum_{v\in S}\sum_{\substack{a\in A\text{ is an arc}%
+\\\text{with source }v}}}_{\substack{=\sum_{\substack{a\in A\text{ is an
+arc}\\\text{with source in }S}}}}f\left(  a\right)  -\underbrace{\sum_{v\in
+S}\sum_{\substack{a\in A\text{ is an arc}\\\text{with target }v}%
+}}_{\substack{=\sum_{\substack{a\in A\text{ is an arc}\\\text{with target in
+}S}}}}f\left(  a\right) \nonumber\\
+&  =\sum_{\substack{a\in A\text{ is an arc}\\\text{with source in }S}}f\left(
+a\right)  -\sum_{\substack{a\in A\text{ is an arc}\\\text{with target in }%
+S}}f\left(  a\right)  . \label{pf.prop.2.a.1}%
+\end{align}
+
+
+But recall that $\overline{S}$ denotes the complement $V\setminus S$ of $S$.
+Thus, any vertex in $V$ must lie either in $S$ or in $\overline{S}$ (but not
+in both). Hence, any arc $a\in A$ must either have target in $S$ or target in
+$\overline{S}$ (but not both). Hence, the sum $\sum_{\substack{a\in A\text{ is
+an arc}\\\text{with source in }S}}f\left(  a\right)  $ can be split as
+follows:
+\begin{align}
+&  \sum_{\substack{a\in A\text{ is an arc}\\\text{with source in }S}}f\left(
+a\right) \nonumber\\
+&  =\underbrace{\sum_{\substack{a\in A\text{ is an arc}\\\text{with source in
+}S\\\text{and target in }S}}}_{\substack{=\sum_{a\in\left[  S,S\right]
+}\\\text{(by the definition of }\left[  S,S\right]  \text{)}}}f\left(
+a\right)  +\underbrace{\sum_{\substack{a\in A\text{ is an arc}\\\text{with
+source in }S\\\text{and target in }\overline{S}}}}_{\substack{=\sum
+_{a\in\left[  S,\overline{S}\right]  }\\\text{(by the definition of }\left[
+S,\overline{S}\right]  \text{)}}}f\left(  a\right) \nonumber\\
+&  =\sum_{a\in\left[  S,S\right]  }f\left(  a\right)  +\sum_{a\in\left[
+S,\overline{S}\right]  }f\left(  a\right)  . \label{pf.prop.2.a.2}%
+\end{align}
+
+
+Similarly, we can split $\sum_{\substack{a\in A\text{ is an arc}\\\text{with
+target in }S}}f\left(  a\right)  $ according to whether the source (not the
+target this time) of an arc lies in $S$ or in $\overline{S}$. We thus obtain%
+\begin{equation}
+\sum_{\substack{a\in A\text{ is an arc}\\\text{with target in }S}}f\left(
+a\right)  =\sum_{a\in\left[  S,S\right]  }f\left(  a\right)  +\sum
+_{a\in\left[  \overline{S},S\right]  }f\left(  a\right)  .
+\label{pf.prop.2.a.3}%
+\end{equation}
+
+
+Now, (\ref{pf.prop.2.a.1}) becomes%
+\begin{align*}
+&  \sum_{v\in S}\left(  f^{+}\left(  v\right)  -f^{-}\left(  v\right)  \right)
+\\
+&  =\underbrace{\sum_{\substack{a\in A\text{ is an arc}\\\text{with source in
+}S}}f\left(  a\right)  }_{\substack{=\sum_{a\in\left[  S,S\right]  }f\left(
+a\right)  +\sum_{a\in\left[  S,\overline{S}\right]  }f\left(  a\right)
+\\\text{(by (\ref{pf.prop.2.a.2}))}}}-\underbrace{\sum_{\substack{a\in A\text{
+is an arc}\\\text{with target in }S}}f\left(  a\right)  }_{\substack{=\sum
+_{a\in\left[  S,S\right]  }f\left(  a\right)  +\sum_{a\in\left[  \overline
+{S},S\right]  }f\left(  a\right)  \\\text{(by (\ref{pf.prop.2.a.3}))}}}\\
+&  =\left(  \sum_{a\in\left[  S,S\right]  }f\left(  a\right)  +\sum
+_{a\in\left[  S,\overline{S}\right]  }f\left(  a\right)  \right)  -\left(
+\sum_{a\in\left[  S,S\right]  }f\left(  a\right)  +\sum_{a\in\left[
+\overline{S},S\right]  }f\left(  a\right)  \right) \\
+&  =\sum_{a\in\left[  S,\overline{S}\right]  }f\left(  a\right)  -\sum
+_{a\in\left[  \overline{S},S\right]  }f\left(  a\right)  .
+\end{align*}
+Comparing this with%
+\[
+\underbrace{f\left(  S,\overline{S}\right)  }_{\substack{=\sum_{a\in\left[
+S,\overline{S}\right]  }f\left(  a\right)  \\\text{(by the definition of
+}f\left(  S,\overline{S}\right)  \text{)}}}-\underbrace{f\left(  \overline
+{S},S\right)  }_{\substack{=\sum_{a\in\left[  \overline{S},S\right]  }f\left(
+a\right)  \\\text{(by the definition of }f\left(  \overline{S},S\right)
+\text{)}}}=\sum_{a\in\left[  S,\overline{S}\right]  }f\left(  a\right)
+-\sum_{a\in\left[  \overline{S},S\right]  }f\left(  a\right)  ,
+\]
+we obtain $f\left(  S,\overline{S}\right)  -f\left(  \overline{S},S\right)
+=\sum_{v\in S}\left(  f^{+}\left(  v\right)  -f^{-}\left(  v\right)  \right)
+$. This proves Proposition \ref{prop.2} \textbf{(a)}.
+
+\textbf{(b)} Assume that $s\in S$ and $t\notin S$. Thus, $S\setminus\left\{
+s,t\right\}  =S\setminus\left\{  s\right\}  $ (since $t\notin S$).
+
+We can split off the addend for $v=s$ from the sum $\sum_{v\in S}\left(
+f^{+}\left(  v\right)  -f^{-}\left(  v\right)  \right)  $ (since $s\in S$). We
+thus obtain%
+\[
+\sum_{v\in S}\left(  f^{+}\left(  v\right)  -f^{-}\left(  v\right)  \right)
+=\underbrace{\left(  f^{+}\left(  s\right)  -f^{-}\left(  s\right)  \right)
+}_{=\left\vert f\right\vert }+\sum_{v\in S\setminus\left\{  s\right\}
+}\underbrace{\left(  f^{+}\left(  v\right)  -f^{-}\left(  v\right)  \right)
+}_{\substack{=0\\\text{(by (\ref{pf.prop.1.cons})}\\\text{(since }v\in
+S\setminus\left\{  s\right\}  =S\setminus\left\{  s,t\right\}  \subseteq
+V\setminus\left\{  s,t\right\}  \text{))}}}=\left\vert f\right\vert .
+\]
+Hence,%
+\[
+\left\vert f\right\vert =\sum_{v\in S}\left(  f^{+}\left(  v\right)
+-f^{-}\left(  v\right)  \right)  =f\left(  S,\overline{S}\right)  -f\left(
+\overline{S},S\right)
+\]
+(by Proposition \ref{prop.2} \textbf{(a)}). This proves Proposition
+\ref{prop.2} \textbf{(b)}.
+
+\textbf{(c)} Assume that $s\in S$ and $t\notin S$. The definition of $f\left(
+S,\overline{S}\right)  $ yields%
+\begin{equation}
+f\left(  S,\overline{S}\right)  =\sum_{a\in\left[  S,\overline{S}\right]
+}\underbrace{f\left(  a\right)  }_{\substack{\leq c\left(  a\right)
+\\\text{(by the capacity}\\\text{constraints)}}}\leq\sum_{a\in\left[
+S,\overline{S}\right]  }c\left(  a\right)  =c\left(  S,\overline{S}\right)
+\label{pf.prop.2.b.1}%
+\end{equation}
+(since $c\left(  S,\overline{S}\right)  $ is defined to be $\sum_{a\in\left[
+S,\overline{S}\right]  }c\left(  a\right)  $). The definition of $f\left(
+\overline{S},S\right)  $ yields%
+\begin{equation}
+f\left(  \overline{S},S\right)  =\sum_{a\in\left[  \overline{S},S\right]
+}\underbrace{f\left(  a\right)  }_{\substack{\geq0\\\text{(by the
+capacity}\\\text{constraints)}}}\geq\sum_{a\in\left[  \overline{S},S\right]
+}0=0. \label{pf.prop.2.b.2}%
+\end{equation}
+Proposition \ref{prop.2} \textbf{(b)} yields%
+\[
+\left\vert f\right\vert =\underbrace{f\left(  S,\overline{S}\right)
+}_{\substack{\leq c\left(  S,\overline{S}\right)  \\\text{(by
+(\ref{pf.prop.2.b.1}))}}}-\underbrace{f\left(  \overline{S},S\right)
+}_{\substack{\geq0\\\text{(by (\ref{pf.prop.2.b.2}))}}}\leq c\left(
+S,\overline{S}\right)  -0=c\left(  S,\overline{S}\right)  .
+\]
+This proves Proposition \ref{prop.2} \textbf{(c)}.
+
+\textbf{(d)} Let us analyze our above proof of Proposition \ref{prop.2}
+\textbf{(c)}. We have obtained the inequality (\ref{pf.prop.2.b.1}) by adding
+together the inequalities $f\left(  a\right)  \leq c\left(  a\right)  $ for
+all $a\in\left[  S,\overline{S}\right]  $. Thus, the inequality
+(\ref{pf.prop.2.b.1}) becomes an equality if and only if all of the latter
+inequalities $f\left(  a\right)  \leq c\left(  a\right)  $ for all
+$a\in\left[  S,\overline{S}\right]  $ become equalities. Hence, we have the
+following chain of equivalences:%
+\begin{align*}
+&  \ \left(  \text{the inequality (\ref{pf.prop.2.b.1}) becomes an
+equality}\right) \\
+&  \Longleftrightarrow\ \left(  \text{all of the inequalities }f\left(
+a\right)  \leq c\left(  a\right)  \text{ for all }a\in\left[  S,\overline
+{S}\right]  \text{ become equalities}\right) \\
+&  \Longleftrightarrow\ \left(  f\left(  a\right)  =c\left(  a\right)  \text{
+for all }a\in\left[  S,\overline{S}\right]  \right)  .
+\end{align*}
+
+
+We have obtained the inequality (\ref{pf.prop.2.b.2}) by adding together the
+inequalities $f\left(  a\right)  \geq0$ for all $a\in\left[  \overline
+{S},S\right]  $. Thus, the inequality (\ref{pf.prop.2.b.2}) becomes an
+equality if and only if all of the latter inequalities $f\left(  a\right)
+\geq0$ for all $a\in\left[  \overline{S},S\right]  $ become equalities. Hence,
+we have the following chain of equivalences:%
+\begin{align*}
+&  \ \left(  \text{the inequality (\ref{pf.prop.2.b.2}) becomes an
+equality}\right) \\
+&  \Longleftrightarrow\ \left(  \text{all of the inequalities }f\left(
+a\right)  \geq0\text{ for all }a\in\left[  \overline{S},S\right]  \text{
+become equalities}\right) \\
+&  \Longleftrightarrow\ \left(  f\left(  a\right)  =0\text{ for all }%
+a\in\left[  \overline{S},S\right]  \right)  .
+\end{align*}
+
+
+But we have proven the inequality $\left\vert f\right\vert \leq c\left(
+S,\overline{S}\right)  $ by subtracting the inequality (\ref{pf.prop.2.b.2})
+from the inequality (\ref{pf.prop.2.b.1}). Thus, the inequality $\left\vert
+f\right\vert \leq c\left(  S,\overline{S}\right)  $ becomes an equality if and
+only if both inequalities (\ref{pf.prop.2.b.2}) and (\ref{pf.prop.2.b.1})
+become equalities. Hence, we have the following chain of equivalences:%
+\begin{align*}
+&  \ \left(  \text{the inequality }\left\vert f\right\vert \leq c\left(
+S,\overline{S}\right)  \text{ becomes an equality}\right) \\
+&  \Longleftrightarrow\ \left(  \text{both inequalities (\ref{pf.prop.2.b.2})
+and (\ref{pf.prop.2.b.1}) become equalities}\right) \\
+&  \Longleftrightarrow\ \underbrace{\left(  \text{the inequality
+(\ref{pf.prop.2.b.1}) becomes an equality}\right)  }_{\Longleftrightarrow
+\ \left(  f\left(  a\right)  =c\left(  a\right)  \text{ for all }a\in\left[
+S,\overline{S}\right]  \right)  }\\
+&  \ \ \ \ \ \ \ \ \ \ \wedge\ \underbrace{\left(  \text{the inequality
+(\ref{pf.prop.2.b.2}) becomes an equality}\right)  }_{\Longleftrightarrow
+\ \left(  f\left(  a\right)  =0\text{ for all }a\in\left[  \overline
+{S},S\right]  \right)  }\\
+&  \Longleftrightarrow\ \underbrace{\left(  f\left(  a\right)  =c\left(
+a\right)  \text{ for all }a\in\left[  S,\overline{S}\right]  \right)
+}_{\Longleftrightarrow\ \left(  \text{(\ref{eq.prop.2.d.b.2}) holds}\right)
+}\wedge\underbrace{\left(  f\left(  a\right)  =0\text{ for all }a\in\left[
+\overline{S},S\right]  \right)  }_{\Longleftrightarrow\ \left(
+\text{(\ref{eq.prop.2.d.b.1}) holds}\right)  }\\
+&  \Longleftrightarrow\ \left(  \text{(\ref{eq.prop.2.d.b.2}) holds}\right)
+\wedge\left(  \text{(\ref{eq.prop.2.d.b.1}) holds}\right) \\
+&  \Longleftrightarrow\ \left(  \text{both (\ref{eq.prop.2.d.b.1}) and
+(\ref{eq.prop.2.d.b.2}) hold}\right)  .
+\end{align*}
+In other words, the inequality $\left\vert f\right\vert \leq c\left(
+S,\overline{S}\right)  $ becomes an equality if and only if both
+(\ref{eq.prop.2.d.b.1}) and (\ref{eq.prop.2.d.b.2}) hold. In other words,
+$\left\vert f\right\vert =c\left(  S,\overline{S}\right)  $ if and only if
+both (\ref{eq.prop.2.d.b.1}) and (\ref{eq.prop.2.d.b.2}) hold. This proves
+Proposition \ref{def.flow.def} \textbf{(d)}.
+\end{proof}
+
+\begin{remark}
+Let $N$, $V$, $A$, $s$, $t$ and $c$ be as in Definition
+\ref{def.network.notations}. Let $f:A\rightarrow\mathbb{Q}_{+}$ be a flow on
+$N$. Assume that $\left(  v,v\right)  \notin A$. Then, it is easy to see that
+$f^{+}\left(  v\right)  =f\left(  \left\{  v\right\}  ,\overline{\left\{
+v\right\}  }\right)  $ and $f^{-}\left(  v\right)  =f\left(  \overline
+{\left\{  v\right\}  },\left\{  v\right\}  \right)  $.
+\end{remark}
+
+\subsection{Cuts in networks}
+
+\begin{definition}
+\label{def.cuts}Let $N$, $V$, $A$, $s$, $t$ and $c$ be as in Definition
+\ref{def.network.notations}.
+
+\textbf{(a)} An $s$\textit{-}$t$\textit{-cutting subset of }$V$ shall mean a
+subset $S$ of $V$ satisfying $s\in S$ and $t\notin S$.
+
+\textbf{(b)} A \textit{cut of }$N$ shall mean a subset of $A$ having the form
+$\left[  S,\overline{S}\right]  $ for some $s$-$t$-cutting subset $S$ of $V$.
+
+\textbf{(c)} The \textit{capacity} of a cut $\left[  S,\overline{S}\right]  $
+is defined to be $c\left(  S,\overline{S}\right)  $. (Note that this is indeed
+well-defined: In fact, $c\left(  S,\overline{S}\right)  =\sum_{a\in\left[
+S,\overline{S}\right]  }c\left(  a\right)  $ clearly depends only on the cut
+$\left[  S,\overline{S}\right]  $ rather than on the set $S$.)
+\end{definition}
+
+For example, if $N$ is the network shown in (\ref{eq.network.example.1}), then
+$\left\{  1,3,4\right\}  $ is an $s$-$t$-cutting subset; the cut $\left[
+\left\{  1,3,4\right\}  ,\overline{\left\{  1,3,4\right\}  }\right]  $
+corresponding to this subset is $\left\{  \left(  1,7\right)  ,\left(
+3,2\right)  ,\left(  4,2\right)  ,\left(  4,6\right)  \right\}  $ and has
+capacity%
+\begin{align*}
+c\left(  \left\{  1,3,4\right\}  ,\overline{\left\{  1,3,4\right\}  }\right)
+&  =\sum_{a\in\left\{  \left(  1,7\right)  ,\left(  3,2\right)  ,\left(
+4,2\right)  ,\left(  4,6\right)  \right\}  }c\left(  a\right) \\
+&  =\underbrace{c\left(  \left(  1,7\right)  \right)  }_{=1}%
++\underbrace{c\left(  \left(  3,2\right)  \right)  }_{=1}+\underbrace{c\left(
+\left(  4,2\right)  \right)  }_{=1}+\underbrace{c\left(  \left(  4,6\right)
+\right)  }_{=1}=4.
+\end{align*}
+We can illustrate this cut by drawing all arcs belonging to the cut as double
+arrows ($\Longrightarrow$):%
+
+\[%
+%TCIMACRO{\TeXButton{network with cut}{\xymatrix@C=7pc@R=5pc{
+%\boxed{s = 1} \ar[r]^2 \ar@{=>}[dr]_1 & \boxed{3} \ar@{=>}[r]^1 \ar
+%[dr]_2 & 2 \ar[r]^2 & 5 \ar[dl]_1 \ar[dr]^2 \\
+%& 7 \ar[r]_3 & \boxed{4} \ar@{=>}[u]^1 \ar@{=>}[r]_1 & 6 \ar[r]_1 & 8 = t
+%}}}%
+%BeginExpansion
+\xymatrix@C=7pc@R=5pc{
+\boxed{s = 1} \ar[r]^2 \ar@{=>}[dr]_1 & \boxed{3} \ar@{=>}[r]^1 \ar
+[dr]_2 & 2 \ar[r]^2 & 5 \ar[dl]_1 \ar[dr]^2 \\
+& 7 \ar[r]_3 & \boxed{4} \ar@{=>}[u]^1 \ar@{=>}[r]_1 & 6 \ar[r]_1 & 8 = t
+}%
+%EndExpansion
+\]
+(where the vertices in $\left\{  1,3,4\right\}  $ have been marked by boxes).
+
+Notice that every network $N$ (with notations as in Definition
+\ref{def.network.notations}) has two special cuts: the first is the cut
+\[
+\left[  \left\{  s\right\}  ,\overline{\left\{  s\right\}  }\right]  =\left\{
+a\in A\ \mid\ \text{the source of }a\text{ is }s\text{, but the target is
+not}\right\}
+\]
+corresponding to the $s$-$t$-cutting subset $\left\{  s\right\}  $; the second
+is the cut%
+\[
+\left[  \overline{\left\{  t\right\}  },\left\{  t\right\}  \right]  =\left\{
+a\in A\ \mid\ \text{the target of }a\text{ is }t\text{, but the source is
+not}\right\}
+\]
+corresponding to the $s$-$t$-cutting subset $\overline{\left\{  t\right\}  }$.
+
+\subsection{The max-flow-min-cut theorems}
+
+Proposition \ref{prop.2} \textbf{(c)} thus says that the value of a flow is
+always $\leq$ to the capacity of a cut. But can we achieve equality?
+
+One of the most important results in combinatorics -- the
+\textit{max-flow-min-cut theorem} -- says that \textquotedblleft
+yes\textquotedblright: In each network, we can find a flow and a cut such that
+the value of the flow equals the capacity of the cut. More precisely, there
+are three \textquotedblleft max-flow-min-cut theorems\textquotedblright,
+corresponding to different kinds of flows. The first one is about the kind of
+flows we have defined above:
+
+\begin{theorem}
+\label{thm.3a}Let $N$, $V$, $A$, $s$, $t$ and $c$ be as in Definition
+\ref{def.network.notations}. Then,%
+\begin{equation}
+\max\left\{  \left\vert f\right\vert \ \mid\ f\text{ is a flow}\right\}
+=\min\left\{  c\left(  S,\overline{S}\right)  \ \mid\ S\subseteq V;\ s\in
+S;\ t\notin S\right\}  . \label{eq.thm.3a.1}%
+\end{equation}
+In particular, the left-hand side of this equation is well-defined (i.e.,
+there exists a flow $f$ for which $\left\vert f\right\vert $ is maximum). (Of
+course, the right-hand side of (\ref{eq.thm.3a.1}) is well-defined, because
+there are only finitely many subsets $S$ of $V$ satisfying $s\in S$ and
+$t\notin S$.)
+\end{theorem}
+
+The equality (\ref{eq.thm.3a.1}) in Theorem \ref{thm.3a} says that the maximum
+value of a flow equals the minimum value of $c\left(  S,\overline{S}\right)  $
+where $S$ ranges over the $s$-$t$-cutting subsets of $V$. In other words, the
+maximum value of a flow equals the minimum capacity of a cut.
+
+Another variant of the max-flow-min-cut theorem makes the same claim about
+\textit{integer flows} -- i.e., flows $f:A\rightarrow\mathbb{Q}_{+}$ such that
+every arc $a\in A$ satisfies $f\left(  a\right)  \in\mathbb{N}$. Accordingly,
+it requires that the capacities $c\left(  a\right)  $ of arcs also are
+integers. Let us state it precisely:
+
+\begin{definition}
+Let $N$, $V$, $A$, $s$, $t$ and $c$ be as in Definition
+\ref{def.network.notations}. An \textit{integer flow} means a flow
+$f:A\rightarrow\mathbb{Q}_{+}$ satisfying $\left(  f\left(  a\right)
+\in\mathbb{N}\text{ for each }a\in A\right)  $.
+\end{definition}
+
+\begin{theorem}
+\label{thm.3b}Let $N$, $V$, $A$, $s$, $t$ and $c$ be as in Definition
+\ref{def.network.notations}. Assume that $c\left(  a\right)  \in\mathbb{N}$
+for each $a\in A$. Then,%
+\begin{align*}
+&  \max\left\{  \left\vert f\right\vert \ \mid\ f\text{ is an integer
+flow}\right\} \\
+&  =\min\left\{  c\left(  S,\overline{S}\right)  \ \mid\ S\subseteq V;\ s\in
+S;\ t\notin S\right\}  .
+\end{align*}
+In particular, the left-hand side of this equation is well-defined (i.e.,
+there exists a flow $f$ for which $\left\vert f\right\vert $ is maximum).
+\end{theorem}
+
+Finally, a third variant (which we shall not prove) makes the same statement
+as Theorem \ref{thm.3a} but with $\mathbb{Q}_{+}$ replaced by $\mathbb{R}_{+}$:
+
+\begin{theorem}
+\label{thm.3c}Let $N$, $V$, $A$, $s$, $t$ and $c$ be as in Definition
+\ref{def.network.notations}, except that $c$ is now a map $A\rightarrow
+\mathbb{R}_{+}$ instead of being a map $A\rightarrow\mathbb{Q}_{+}$. (That is,
+the capacities of arcs are now allowed to be irrational.) Also, let us
+temporarily modify the definition of a flow in such a way that a flow is a map
+$A\rightarrow\mathbb{R}_{+}$ instead of being a map $A\rightarrow
+\mathbb{Q}_{+}$. Then,%
+\[
+\max\left\{  \left\vert f\right\vert \ \mid\ f\text{ is a flow}\right\}
+=\min\left\{  c\left(  S,\overline{S}\right)  \ \mid\ S\subseteq V;\ s\in
+S;\ t\notin S\right\}  .
+\]
+In particular, the left-hand side of this equation is well-defined (i.e.,
+there exists a flow $f$ for which $\left\vert f\right\vert $ is maximum).
+\end{theorem}
+
+There are various proofs of these three theorems. In particular, Theorem
+\ref{thm.3a} and Theorem \ref{thm.3c} can be viewed as an application of
+\textit{linear programming duality}, a fundamental principle in linear
+optimization. We will instead proceed elementarily. Along the way, we will see
+how to \textbf{construct} a flow $f$ maximizing $\left\vert f\right\vert $ and
+an $s$-$t$-cutting subset $S$ minimizing $c\left(  S,\overline{S}\right)  $
+(two problems that occur in real life).
+
+\subsection{The residual digraph}
+
+First, let us define the so-called \textit{residual digraph} of a flow:
+
+\begin{definition}
+\label{def.Df}Let $N$, $V$, $A$, $s$, $t$ and $c$ be as in Definition
+\ref{def.network.notations}.
+
+\textbf{(a)} If $a$ is a pair $\left(  u,v\right)  \in V\times V$, then we let
+$a^{-1}$ denote the pair $\left(  v,u\right)  \in V\times V$. (This is simply
+a suggestive notation; it has nothing to do with reciprocals of numbers.) We
+call $a^{-1}$ the \textit{reversal} of the arc $a$. Notice that $\left(
+a^{-1}\right)  ^{-1}=a$ for each $a\in V\times V$.
+
+\textbf{(b)} Let $f:A\rightarrow\mathbb{Q}_{+}$ be any flow on $N$. We define
+the \textit{residual digraph }$D_{f}$ to be the digraph $\left(
+V,A_{f}\right)  $, where%
+\[
+A_{f}=\left\{  a\in A\ \mid\ f\left(  a\right)  <c\left(  a\right)  \right\}
+\cup\left\{  a^{-1}\ \mid\ a\in A;\ f\left(  a\right)  >0\right\}  .
+\]
+
+\end{definition}
+
+Notice that the residual digraph $D_{f}$ is not a sub-digraph of $\left(
+V,A\right)  $; indeed, it can have more arcs than $\left(  V,A\right)  $ has.
+(When $a\in A$ is an arc of $\left(  V,A\right)  $, there is no guarantee that
+$a^{-1}$ is also an arc of $\left(  V,A\right)  $.)
+
+\begin{example}
+Let $f$ be the following flow:%
+\[%
+%TCIMACRO{\TeXButton{network with flow}{\xymatrix@C=7pc@R=5pc{
+%s = 1 \ar[r]^{1 \of2} \ar[dr]_{1 \of3} & 2 \ar[r]^{0 \of1} \ar[dr]^{1 \of1}
+%& 4 \ar[dr]^{0 \of1} \\
+%& 3 \ar[r]_{1 \of2} & 5 \ar[r]_{2 \of2} & 6 = t
+%}}}%
+%BeginExpansion
+\xymatrix@C=7pc@R=5pc{
+s = 1 \ar[r]^{1 \of2} \ar[dr]_{1 \of3} & 2 \ar[r]^{0 \of1} \ar[dr]^{1 \of1}
+& 4 \ar[dr]^{0 \of1} \\
+& 3 \ar[r]_{1 \of2} & 5 \ar[r]_{2 \of2} & 6 = t
+}%
+%EndExpansion
+\]
+(where, as before, we write \textquotedblleft$f\left(  a\right)  $ of
+$c\left(  a\right)  $\textquotedblright\ atop each arc $a$). Then, the
+residual digraph $D_{f}$ is%
+\[%
+%TCIMACRO{\TeXButton{residual digraph}{\xymatrix@C=7pc@R=5pc{
+%s = 1 \ar@/^1pc/[r] \ar@/_3pc/[dr] & 2 \ar[r] \ar@/^1pc/[l] & 4 \ar[dr] \\
+%& 3 \ar@/^1pc/[lu] \ar@/^1pc/[r] & 5 \ar@/^1pc/[l] \ar[lu] & 6 = t \ar[l]
+%}}}%
+%BeginExpansion
+\xymatrix@C=7pc@R=5pc{
+s = 1 \ar@/^1pc/[r] \ar@/_3pc/[dr] & 2 \ar[r] \ar@/^1pc/[l] & 4 \ar[dr] \\
+& 3 \ar@/^1pc/[lu] \ar@/^1pc/[r] & 5 \ar@/^1pc/[l] \ar[lu] & 6 = t \ar[l]
+}%
+%EndExpansion
+.
+\]
+Notice that $D_{f}$ has cycles even though $\left(  V,A\right)  $ has none!
+\end{example}
+
+The intuition for the digraph $D_{f}$ is that $D_{f}$ shows the
+\textquotedblleft wiggle-room\textquotedblright\ for modifying $f$ without
+breaking the capacity constraints (ignoring, for the time being, the
+conservation constraints). Indeed, the arcs of the digraph $D_{f}$ are the
+arcs $a\in A$ satisfying $f\left(  a\right)  <c\left(  a\right)  $ (that is,
+the arcs $a$ used under their capacity in $f$) as well as the reverses of the
+arcs $a\in A$ satisfying $f\left(  a\right)  >0$ (that is, of the arcs $a$
+that have nonzero flow going through them). The former arcs can afford an
+increase in the flow going through them (without violating the capacity
+constraints), whereas the latter arcs can afford a reduction in the flow
+through them. Of course, if we modify the flow on a single arc, then we will
+most likely break the conservation constraints. The key to finding a maximum
+flow is thus to change a flow in such a way that both capacity and
+conservation constraints are preserved; the residual digraph $D_{f}$ is merely
+the first step.
+
+\subsection{The augmenting path lemma}
+
+Recall that if $s$ and $t$ are two vertices of a digraph $D$, then a
+\textit{walk} from $s$ to $t$ in $D$ means a sequence $\left(  v_{0}%
+,v_{1},\ldots,v_{k}\right)  $, where $v_{0},v_{1},\ldots,v_{k}$ are vertices
+of $D$ satisfying $v_{0}=s$ and $v_{k}=t$, and where $v_{i}v_{i+1}$ is an arc
+of $D$ for each $i\in\left\{  0,1,\ldots,k-1\right\}  $. The \textit{arcs} of
+this walk are defined to be the arcs $v_{0}v_{1},v_{1}v_{2},\ldots
+,v_{k-1}v_{k}$ of $D$. A walk $\left(  v_{0},v_{1},\ldots,v_{k}\right)  $ from
+$s$ to $t$ in a digraph $D$ is said to be a \textit{path} from $s$ to $t$ if
+the vertices $v_{0},v_{1},\ldots,v_{k}$ are distinct.
+
+The main workhorse of our proof will be the following lemma:
+
+\begin{lemma}
+\label{lem.4}Let $N$, $V$, $A$, $s$, $t$ and $c$ be as in Definition
+\ref{def.network.notations}.
+
+Let $f:A\rightarrow\mathbb{Q}_{+}$ be a flow.
+
+\textbf{(a)} If the digraph $D_{f}$ has a path from $s$ to $t$, then there is
+a flow $f^{\prime}$ with a larger value than $f$.
+
+\textbf{(b)} If the digraph $D_{f}$ has no path from $s$ to $t$, then there
+exists a subset $S$ of $V$ satisfying $s\in V$ and $t\notin V$ and $c\left(
+S,\overline{S}\right)  =\left\vert f\right\vert $.
+\end{lemma}
+
+Before we prove this, we need to lay some more groundwork.
+
+\begin{definition}
+Let $N$, $V$, $A$, $s$, $t$ and $c$ be as in Definition
+\ref{def.network.notations}.
+
+\textbf{(a)} We identify the maps $g:A\rightarrow\mathbb{Q}$ satisfying
+$\left(  g\left(  a\right)  \geq0\text{ for all }a\in A\right)  $ (that is,
+the maps $g:A\rightarrow\mathbb{Q}$ satisfying $g\left(  A\right)
+\subseteq\mathbb{Q}_{+}$) with the maps $A\rightarrow\mathbb{Q}_{+}$.
+
+\textbf{(b)} We extend the notations $f^{-}\left(  v\right)  $ and
+$f^{+}\left(  v\right)  $ from Definition \ref{def.f-f+} to arbitrary maps
+$f:A\rightarrow\mathbb{Q}$ (not just maps $f:A\rightarrow\mathbb{Q}_{+}$). Of
+course, $f^{-}\left(  v\right)  $ and $f^{+}\left(  v\right)  $ will then be
+elements of $\mathbb{Q}$, not necessarily of $\mathbb{Q}_{+}$.
+
+We also extend the notation $\left\vert f\right\vert $ from Definition
+\ref{def.flow.value} to arbitrary maps $f:A\rightarrow\mathbb{Q}$ (not just
+flows). Thus, $\left\vert f\right\vert =f^{+}\left(  s\right)  -f^{-}\left(
+s\right)  $ for any map $f:A\rightarrow\mathbb{Q}$.
+
+\textbf{(c)} If $f:A\rightarrow\mathbb{Q}$ and $g:A\rightarrow\mathbb{Q}$ are
+two maps, then $f+g$ denotes a new map $A\rightarrow\mathbb{Q}$ that is
+defined by%
+\[
+\left(  f+g\right)  \left(  a\right)  =f\left(  a\right)  +g\left(  a\right)
+\ \ \ \ \ \ \ \ \ \ \text{for all }a\in A.
+\]
+
+
+\textbf{(d)} We say that a map $f:A\rightarrow\mathbb{Q}$ \textit{satisfies
+the conservation constraints} if and only if each $v\in V\setminus\left\{
+s,t\right\}  $ satisfies $f^{-}\left(  v\right)  =f^{+}\left(  v\right)  $.
+\end{definition}
+
+Notice that any flow $f:A\rightarrow\mathbb{Q}_{+}$ satisfies the conservation constraints.
+
+\begin{lemma}
+\label{lem.5}Let $N$, $V$, $A$, $s$, $t$ and $c$ be as in Definition
+\ref{def.network.notations}.
+
+\textbf{(a)} Any two maps $f:A\rightarrow\mathbb{Q}$ and $g:A\rightarrow
+\mathbb{Q}$ satisfy $\left\vert f+g\right\vert =\left\vert f\right\vert
++\left\vert g\right\vert $.
+
+\textbf{(b)} Let $f:A\rightarrow\mathbb{Q}$ and $g:A\rightarrow\mathbb{Q}$ be
+two maps satisfying the conservation constraints. Then, the map
+$f+g:A\rightarrow\mathbb{Q}$ also satisfies the conservation constraints.
+\end{lemma}
+
+\begin{proof}
+[Proof of Lemma \ref{lem.5} (sketched).]\textbf{(b)} This is exactly as
+straightforward as you would expect: Fix $v\in V\setminus\left\{  s,t\right\}
+$. Then, the definition of $\left(  f+g\right)  ^{-}\left(  v\right)  $ yields%
+\begin{align*}
+\left(  f+g\right)  ^{-}\left(  v\right)   &  =\sum_{\substack{a\in A\text{ is
+an arc}\\\text{with target }v}}\underbrace{\left(  f+g\right)  \left(
+a\right)  }_{\substack{=f\left(  a\right)  +g\left(  a\right)  \\\text{(by the
+definition of }f+g\text{)}}}=\sum_{\substack{a\in A\text{ is an arc}%
+\\\text{with target }v}}\left(  f\left(  a\right)  +g\left(  a\right)  \right)
+\\
+&  =\underbrace{\sum_{\substack{a\in A\text{ is an arc}\\\text{with target }%
+v}}f\left(  a\right)  }_{\substack{=f^{-}\left(  v\right)  \\\text{(by the
+definition of }f^{-}\left(  v\right)  \text{)}}}+\underbrace{\sum
+_{\substack{a\in A\text{ is an arc}\\\text{with target }v}}g\left(  a\right)
+}_{\substack{=g^{-}\left(  v\right)  \\\text{(by the definition of }%
+g^{-}\left(  v\right)  \text{)}}}\\
+&  =f^{-}\left(  v\right)  +g^{-}\left(  v\right)  .
+\end{align*}
+Similarly, $\left(  f+g\right)  ^{+}\left(  v\right)  =f^{+}\left(  v\right)
++g^{+}\left(  v\right)  $. But the map $f$ satisfies the conservation
+constraints; hence, $f^{-}\left(  v\right)  =f^{+}\left(  v\right)  $.
+Similarly, $g^{-}\left(  v\right)  =g^{+}\left(  v\right)  $.
+
+Now, $\left(  f+g\right)  ^{-}\left(  v\right)  =\underbrace{f^{-}\left(
+v\right)  }_{=f^{+}\left(  v\right)  }+\underbrace{g^{-}\left(  v\right)
+}_{=g^{+}\left(  v\right)  }=f^{+}\left(  v\right)  +g^{+}\left(  v\right)
+=\left(  f+g\right)  ^{+}\left(  v\right)  $.
+
+Now forget that we fixed $v$. We thus have proven that each $v\in
+V\setminus\left\{  s,t\right\}  $ satisfies $\left(  f+g\right)  ^{-}\left(
+v\right)  =\left(  f+g\right)  ^{+}\left(  v\right)  $. In other words, the
+map $f+g$ satisfies the conservation constraints. This proves Lemma
+\ref{lem.5} \textbf{(b)}.
+
+\textbf{(a)} The proof (which uses the same ideas as the proof of Lemma
+\ref{lem.5} \textbf{(b)}) is left to the reader.
+\end{proof}
+
+\begin{definition}
+\label{def.A-}Let $N$, $V$, $A$, $s$, $t$ and $c$ be as in Definition
+\ref{def.network.notations}.
+
+Then, $A^{-1}$ shall denote the set $\left\{  a^{-1}\ \mid\ a\in A\right\}  $.
+This is a subset of $V\times V$.
+\end{definition}
+
+\begin{lemma}
+\label{lem.6}Let $N$, $V$, $A$, $s$, $t$ and $c$ be as in Definition
+\ref{def.network.notations}.
+
+Let $\mathbf{p}$ be a path from $s$ to $t$ in the digraph $\left(  V,A\cup
+A^{-1}\right)  $.
+
+Let $P$ be the set of arcs of $\mathbf{p}$. Thus, $P\subseteq A\cup A^{-1}$.
+
+Let $\rho\in\mathbb{Q}$.
+
+Assume that each arc in $P$ is colored either red or blue, in such a way that:
+
+\begin{itemize}
+\item if an arc $b\in P$ is colored red, then $b\in A$;
+
+\item if an arc $b\in P$ is colored blue, then $b\in A^{-1}$ (that is,
+$b^{-1}\in A$).
+\end{itemize}
+
+(Such a coloring can always be found: Indeed, every arc $b\in P$ that does not
+belong to $A^{-1}$ must be colored blue; every arc $b\in P$ that does not
+belong to $A$ must be colored red; every arc $b\in P$ that belongs to both $A$
+and $A^{-1}$ can be colored either red or blue.)
+
+Define a map $g:A\rightarrow\mathbb{Q}$ by setting%
+\[
+g\left(  a\right)  =%
+\begin{cases}
+\rho, & \text{if }a\in P\text{ and }a\text{ is red};\\
+-\rho, & \text{if }a^{-1}\in P\text{ and }a^{-1}\text{ is blue};\\
+0, & \text{otherwise}%
+\end{cases}
+\ \ \ \ \ \ \ \ \ \ \text{for all }a\in A.
+\]
+(This is well-defined, because the conditions $a\in P$ and $a^{-1}\in P$
+cannot hold at the same time (since $\mathbf{p}$ is a path).)
+
+\textbf{(a)} This map $g$ satisfies the conservation constraints (i.e., each
+$v\in V\setminus\left\{  s,t\right\}  $ satisfies $g^{-}\left(  v\right)
+=g^{+}\left(  v\right)  $).
+
+\textbf{(b)} We have $\left\vert g\right\vert =\rho$.
+\end{lemma}
+
+\begin{proof}
+[Proof of Lemma \ref{lem.6} (sketched).]\textbf{(a)} Let $v\in V\setminus
+\left\{  s,t\right\}  $ be arbitrary. We must prove that $g^{-}\left(
+v\right)  =g^{+}\left(  v\right)  $.
+
+If $v$ does not lie on the path $\mathbf{p}$, then this is obvious (since in
+this case, each arc $a$ having source $v$ or target $v$ satisfies $g\left(
+a\right)  =0$, and thus we have $g^{-}\left(  v\right)  =0$ and $g^{+}\left(
+v\right)  =0$).
+
+Thus, WLOG assume that $v$ does lie on the path $\mathbf{p}$. Since $v$ is
+neither the starting point nor the ending point of this path $\mathbf{p}$
+(because $v\in V\setminus\left\{  s,t\right\}  $, but the starting and ending
+points of $\mathbf{p}$ are $s$ and $t$), we thus conclude that there is
+exactly one arc $x\in P$ having source $v$, and exactly one arc $y\in P$
+having target $v$. Consider these arcs $x$ and $y$. Notice that $x$ and $y$
+are arcs of the digraph $\left(  V,A\cup A^{-1}\right)  $, not necessarily
+arcs of $\left(  V,A\right)  $.
+
+The arcs $x$ and $y$ are distinct\footnote{\textit{Proof.} Assume the
+contrary. Thus, $x=y$. Hence, the arc $x=y$ has source $v$ (since $x$ has
+source $v$) and target $v$ (since $y$ has target $v$). In other words, this
+arc $x=y$ equals $\left(  v,v\right)  $. Thus, it is a loop. But the arc $x=y$
+is an arc of the path $\mathbf{p}$ (since $x\in P$), and thus cannot be a loop
+(since a loop can never be an arc of a path). This is a contradiction, qed.}.
+
+We have $x\in P$. Thus, the arc $x$ is colored either red or blue. Hence, we
+are in one of the following two cases:
+
+\begin{statement}
+\textit{Case 1:} The arc $x$ is colored red.
+\end{statement}
+
+\begin{statement}
+\textit{Case 2:} The arc $x$ is colored blue.
+\end{statement}
+
+Let us consider Case 2. In this case, the arc $x$ is colored blue. Hence,
+$x\in A^{-1}$ (by the requirements on the coloring), so that $x^{-1}\in A$.
+The definition of $g$ thus shows that $g\left(  x^{-1}\right)  =-\rho$ (since
+$\left(  x^{-1}\right)  ^{-1}=x\in P$ and since $\left(  x^{-1}\right)
+^{-1}=x$ is blue).
+
+But $y\in P$. Thus, the arc $y$ is colored either red or blue. Hence, we are
+in one of the following two subcases:
+
+\begin{statement}
+\textit{Subcase 2.1:} The arc $y$ is colored red.
+\end{statement}
+
+\begin{statement}
+\textit{Subcase 2.2:} The arc $y$ is colored blue.
+\end{statement}
+
+Let us consider Subcase 2.2. In this subcase, the arc $y$ is colored blue.
+Hence, $y\in A^{-1}$ (by the requirements on the coloring), so that $y^{-1}\in
+A$. The definition of $g$ thus shows that $g\left(  y^{-1}\right)  =-\rho$
+(since $\left(  y^{-1}\right)  ^{-1}=y\in P$ and since $\left(  y^{-1}\right)
+^{-1}=y$ is blue).
+
+Here is how the two arcs $x$ and $y$ look like in the digraph $\left(  V,A\cup
+A^{-1}\right)  $:%
+\[%
+%TCIMACRO{\TeXButton{two arcs}{\xymatrix{
+%& \ar[r]^y & v \ar[r]^x &
+%}}}%
+%BeginExpansion
+\xymatrix{
+& \ar[r]^y & v \ar[r]^x &
+}%
+%EndExpansion
+.
+\]
+And here is how the corresponding arcs $x^{-1}$ and $y^{-1}$ look like in the
+underlying digraph $\left(  V,A\right)  $ of our network:%
+\begin{equation}%
+%TCIMACRO{\TeXButton{two arcs}{\xymatrix{
+%& & v \ar[l]_{y^{-1}} & \ar[l]_{x^{-1}}
+%}}}%
+%BeginExpansion
+\xymatrix{
+& & v \ar[l]_{y^{-1}} & \ar[l]_{x^{-1}}
+}%
+%EndExpansion
+. \label{pf.lem.6.a.sc2.2.3}%
+\end{equation}
+Both arcs $x^{-1}$ and $y^{-1}$ are sent to $-\rho$ by $g$ (as we have seen).
+All other arcs in $A$ having source or target $v$ are sent to $0$ by
+$g$\ \ \ \ \footnote{\textit{Proof.} Let $d$ be any arc in $A$ having source
+or target $v$. Assume that $d$ is distinct from both $x^{-1}$ and $y^{-1}$. We
+must prove that $g\left(  d\right)  =0$.
+\par
+Assume the contrary. Thus, $g\left(  d\right)  \neq0$. According to the
+definition of $g$, we thus conclude that we have either $\left(  d\in P\text{
+and }d\text{ is red}\right)  $ or $\left(  d^{-1}\in P\text{ and }d\text{ is
+blue}\right)  $.
+\par
+If $\left(  d\in P\text{ and }d\text{ is red}\right)  $, then $d$ is either
+$x$ or $y$ (since $d\in P$, but the only arcs in $P$ having source or target
+$v$ are $x$ and $y$), which yields that $d$ must be blue (since both $x$ and
+$y$ are blue), contradicting the fact that $d$ is red.
+\par
+If $\left(  d^{-1}\in P\text{ and }d\text{ is blue}\right)  $, then $d^{-1}$
+is either $x$ or $y$ (since $d\in P$, but the only arcs in $P$ having source
+or target $v$ are $x$ and $y$), which yields that $d$ is either $x^{-1}$ or
+$y^{-1}$, contradicting the fact that $d$ is distinct from both $x^{-1}$ and
+$y^{-1}$.
+\par
+Thus, we have obtained a contradiction from both possible options. This
+completes our proof of $g\left(  d\right)  =0$.}. Hence, in particular, all
+arcs in $A$ having target $v$ are sent to $0$ by $g$, except for the arc
+$x^{-1}$. Thus, $g^{-}\left(  v\right)  =g\left(  x^{-1}\right)  =-\rho$. A
+similar argument shows that $g^{+}\left(  v\right)  =-\rho$. Thus,
+$g^{-}\left(  v\right)  =-\rho=g^{+}\left(  v\right)  $. Thus, $g^{-}\left(
+v\right)  =g^{+}\left(  v\right)  $ is proven in Subcase 2.2.
+
+The proof in Subcase 2.1 is rather similar, with the little difference that
+now the picture (\ref{pf.lem.6.a.sc2.2.3}) is replaced by%
+\[%
+%TCIMACRO{\TeXButton{two arcs}{\xymatrix{
+%& \ar[r]^y & v & \ar[l]_{x^{-1}}
+%}}}%
+%BeginExpansion
+\xymatrix{
+& \ar[r]^y & v & \ar[l]_{x^{-1}}
+}%
+%EndExpansion
+,
+\]
+and so we have $g^{-}\left(  v\right)  =\left(  -\rho\right)  +\rho=0$ and
+$g^{+}\left(  v\right)  =0$. But again the result is the same.
+
+Thus, Case 2 is settled. The proof in Case 1 is similar (again, we need to
+consider two subcases, depending on whether the arc $y$ is colored red or blue).
+
+Altogether, we have now proven $g^{-}\left(  v\right)  =g^{+}\left(  v\right)
+$ in each possible case.
+
+Now, forget that we fixed $v$. We thus have shown that each $v\in
+V\setminus\left\{  s,t\right\}  $ satisfies $g^{-}\left(  v\right)
+=g^{+}\left(  v\right)  $. In other words, $g$ satisfies the conservation
+constraints. This proves Lemma \ref{lem.6} \textbf{(a)}.
+
+\textbf{(b)} This is somewhat similar to our above proof of Lemma \ref{lem.6}
+\textbf{(a)}, with the vertex $s$ playing the role of $v$.
+
+The vertex $s$ is the starting point of the path $\mathbf{p}$, but not its
+ending point (since its ending point is $t\neq s$). Hence, there is exactly
+one arc $x\in P$ having source $s$, and there are no arcs $y\in P$ having
+target $s$.
+
+We have $x\in P$. Thus, the arc $x$ is colored either red or blue. Hence, we
+are in one of the following two cases:
+
+\begin{statement}
+\textit{Case 1:} The arc $x$ is colored red.
+\end{statement}
+
+\begin{statement}
+\textit{Case 2:} The arc $x$ is colored blue.
+\end{statement}
+
+Let us consider Case 2. In this case, the arc $x$ is colored blue. Hence,
+$x\in A^{-1}$ (by the requirements on the coloring), so that $x^{-1}\in A$.
+The definition of $g$ thus shows that $g\left(  x^{-1}\right)  =-\rho$ (since
+$\left(  x^{-1}\right)  ^{-1}=x\in P$ and since $\left(  x^{-1}\right)
+^{-1}=x$ is blue).
+
+All other arcs in $A$ having source or target $s$ are sent to $0$ by
+$g$\ \ \ \ \footnote{This is easy to check -- just as in the above proof of
+Lemma \ref{lem.6} \textbf{(a)}.}. Hence, in particular, all arcs in $A$ having
+target $s$ are sent to $0$ by $g$, except for the arc $x^{-1}$. Thus,
+$g^{-}\left(  s\right)  =g\left(  x^{-1}\right)  =-\rho$. A similar argument
+shows that $g^{+}\left(  s\right)  =0$. Now, the definition of $\left\vert
+g\right\vert $ yields $\left\vert g\right\vert =\underbrace{g^{+}\left(
+s\right)  }_{=0}-\underbrace{g^{-}\left(  s\right)  }_{=-\rho}=0-\left(
+-\rho\right)  =\rho$. Thus, Lemma \ref{lem.6} \textbf{(b)} is proven in Case 2.
+
+A similar argument works in Case 1. Thus, Lemma \ref{lem.6} \textbf{(b)} is
+always proven.
+\end{proof}
+
+We are now ready to prove Lemma \ref{lem.4}:
+
+\begin{proof}
+[Proof of Lemma \ref{lem.4} (sketched).]The definition of $D_{f}$ yields
+$D_{f}=\left(  V,A_{f}\right)  $, where%
+\[
+A_{f}=\left\{  a\in A\ \mid\ f\left(  a\right)  <c\left(  a\right)  \right\}
+\cup\left\{  a^{-1}\ \mid\ a\in A;\ f\left(  a\right)  >0\right\}  .
+\]
+Consider this $A_{f}$. Clearly, $A_{f}\subseteq A\cup A^{-1}$, so that $D_{f}$
+is a sub-digraph of the digraph $\left(  V,A\cup A^{-1}\right)  $.
+
+\textbf{(a)} Assume that the digraph $D_{f}$ has a path from $s$ to $t$. Fix
+such a path, and denote it by $\mathbf{p}$.
+
+Hence, $\mathbf{p}$ is a path in the digraph $\left(  V,A\cup A^{-1}\right)  $
+(since $\mathbf{p}$ is a path in $D_{f}$, but $D_{f}$ is a sub-digraph of the
+digraph $\left(  V,A\cup A^{-1}\right)  $).
+
+Let $P$ be the set of arcs of $\mathbf{p}$. Thus, $P\subseteq A_{f}$ (since
+$\mathbf{p}$ is a path in $D_{f}=\left(  V,A_{f}\right)  $). The path
+$\mathbf{p}$ is a path from $s$ to $t$, and thus has at least one arc (since
+$s\neq t$); hence, the set $P$ is nonempty.
+
+We color each arc $b\in P$ either red or blue, according to the following rules:
+
+\begin{itemize}
+\item If $b\in\left\{  a\in A\ \mid\ f\left(  a\right)  <c\left(  a\right)
+\right\}  $, then we color $b$ red.
+
+\item Otherwise, if $b\in\left\{  a^{-1}\ \mid\ a\in A;\ f\left(  a\right)
+>0\right\}  $, then we color $b$ blue.
+\end{itemize}
+
+This yields a well-defined coloring, because every $b\in P$ must belong to at
+least one of the two sets $\left\{  a\in A\ \mid\ f\left(  a\right)  <c\left(
+a\right)  \right\}  $ and $\left\{  a^{-1}\ \mid\ a\in A;\ f\left(  a\right)
+>0\right\}  $\ \ \ \ \footnote{indeed, $b\in P\subseteq A_{f}=\left\{  a\in
+A\ \mid\ f\left(  a\right)  <c\left(  a\right)  \right\}  \cup\left\{
+a^{-1}\ \mid\ a\in A;\ f\left(  a\right)  >0\right\}  $}.
+
+Furthermore, our coloring of the arcs in $P$ clearly has the property that:
+
+\begin{itemize}
+\item if an arc $b\in P$ is colored red, then $b\in A$;
+
+\item if an arc $b\in P$ is colored blue, then $b\in A^{-1}$ (that is,
+$b^{-1}\in A$).
+\end{itemize}
+
+For each arc $b\in P$, we define a number $\rho_{b}\in\mathbb{Q}$ by%
+\[
+\rho_{b}=%
+\begin{cases}
+c\left(  b\right)  -f\left(  b\right)  , & \text{if }b\text{ is red};\\
+f\left(  b^{-1}\right)  , & \text{if }b\text{ is blue}%
+\end{cases}
+.
+\]
+This number $\rho_{b}$ is always positive\footnote{\textit{Proof.} Let $b\in
+P$ be any arc. We must prove that $\rho_{b}$ is positive.
+\par
+We have $b\in P\subseteq A_{f}=\left\{  a\in A\ \mid\ f\left(  a\right)
+<c\left(  a\right)  \right\}  \cup\left\{  a^{-1}\ \mid\ a\in A;\ f\left(
+a\right)  >0\right\}  $. Thus, either $b\in\left\{  a\in A\ \mid\ f\left(
+a\right)  <c\left(  a\right)  \right\}  $ or $b\in\left\{  a^{-1}\ \mid\ a\in
+A;\ f\left(  a\right)  >0\right\}  $. So we are in one of the following two
+cases:
+\par
+\textit{Case 1:} We have $b\in\left\{  a\in A\ \mid\ f\left(  a\right)
+<c\left(  a\right)  \right\}  $.
+\par
+\textit{Case 2:} We don't have $b\in\left\{  a\in A\ \mid\ f\left(  a\right)
+<c\left(  a\right)  \right\}  $, but we have $b\in\left\{  a^{-1}\ \mid\ a\in
+A;\ f\left(  a\right)  >0\right\}  $.
+\par
+Let us first consider Case 1. In this case, we have $b\in\left\{  a\in
+A\ \mid\ f\left(  a\right)  <c\left(  a\right)  \right\}  $. Hence, the
+definition of the coloring yields that $b$ is colored red. But $b\in\left\{
+a\in A\ \mid\ f\left(  a\right)  <c\left(  a\right)  \right\}  $; in other
+words, $b\in A$ and $f\left(  b\right)  <c\left(  b\right)  $. Since $b$ is
+red, the definition of $\rho_{b}$ yields $\rho_{b}=c\left(  b\right)
+-f\left(  b\right)  >0$ (since $f\left(  b\right)  <c\left(  b\right)  $).
+Thus, we have shown that $\rho_{b}$ is positive in Case 1.
+\par
+Let us now consider Case 2. In this case, we don't have $b\in\left\{  a\in
+A\ \mid\ f\left(  a\right)  <c\left(  a\right)  \right\}  $, but we have
+$b\in\left\{  a^{-1}\ \mid\ a\in A;\ f\left(  a\right)  >0\right\}  $. Hence,
+the definition of the coloring yields that $b$ is colored blue. But
+$b\in\left\{  a^{-1}\ \mid\ a\in A;\ f\left(  a\right)  >0\right\}  $. In
+other words, $b=a^{-1}$ for some $a\in A$ satisfying $f\left(  a\right)  >0$.
+In other words, $b^{-1}\in A$ and $f\left(  b^{-1}\right)  >0$. Since $b$ is
+blue, the definition of $\rho_{b}$ yields $\rho_{b}=f\left(  b^{-1}\right)
+>0$. Thus, we have shown that $\rho_{b}$ is positive in Case 2.
+\par
+We have now proven that $\rho_{b}$ is positive in both Cases 1 and 2. Hence,
+$\rho_{b}$ is always positive, qed.}.
+
+We now define $\rho\in\mathbb{Q}$ by $\rho=\min\left\{  \rho_{b}\mid b\in
+P\right\}  $. (This is well-defined, since $P$ is nonempty and finite.) Then,
+$\rho$ is positive (since all $\rho_{b}$ are positive), so that $\rho\geq0$.
+
+Now, define a map $g:A\rightarrow\mathbb{Q}$ as in Lemma \ref{lem.6}. Then,
+Lemma \ref{lem.6} \textbf{(a)} shows that the map $g$ satisfies the
+conservation constraints. Also, the map $f$ satisfies the conservation
+constraints (since $f$ is a flow). Hence, Lemma \ref{lem.5} \textbf{(b)} shows
+that the map $f+g$ satisfies the conservation constraints. Also, Lemma
+\ref{lem.5} \textbf{(a)} shows that $\left\vert f+g\right\vert =\left\vert
+f\right\vert +\underbrace{\left\vert g\right\vert }_{\substack{=\rho
+\\\text{(by Lemma \ref{lem.6} \textbf{(b)})}}}=\left\vert f\right\vert +\rho$.
+
+Next, we claim that the map $f+g$ also satisfies the capacity constraints --
+i.e., that we have%
+\begin{equation}
+0\leq\left(  f+g\right)  \left(  a\right)  \leq c\left(  a\right)
+\ \ \ \ \ \ \ \ \ \ \text{for each }a\in A. \label{pf.lem.4.a.capac1}%
+\end{equation}
+
+
+[\textit{Proof of (\ref{pf.lem.4.a.capac1}):} Fix $a\in A$. Recall that $f$ is
+a flow; thus, $f$ satisfies the capacity constraints. Hence, $0\leq f\left(
+a\right)  \leq c\left(  a\right)  $.
+
+Now, we are in one of the following three cases:
+
+\begin{statement}
+\textit{Case 1:} We have $a\in P$, and the arc $a$ is red.
+\end{statement}
+
+\begin{statement}
+\textit{Case 2:} We have $a^{-1}\in P$, and the arc $a^{-1}$ is blue.
+\end{statement}
+
+\begin{statement}
+\textit{Case 3:} Neither of these two.
+\end{statement}
+
+Let us first consider Case 3. In this case, the definition of $g$ yields
+$g\left(  a\right)  =0$. Thus, $\left(  f+g\right)  \left(  a\right)
+=f\left(  a\right)  +\underbrace{g\left(  a\right)  }_{=0}=f\left(  a\right)
+$. Hence, $0\leq f\left(  a\right)  \leq c\left(  a\right)  $ rewrites as
+$0\leq\left(  f+g\right)  \left(  a\right)  \leq c\left(  a\right)  $. Thus,
+(\ref{pf.lem.4.a.capac1}) is proven in Case 3.
+
+Let us now consider Case 2. In this case, we have $a^{-1}\in P$, and the arc
+$a^{-1}$ is blue. Hence, the definition of $g$ yields $g\left(  a\right)
+=-\rho$. But the definition of $\rho$ yields $\rho=\min\left\{  \rho_{b}\mid
+b\in P\right\}  \leq\rho_{a^{-1}}$ (since $a^{-1}\in P$ and thus $\rho
+_{a^{-1}}\in\left\{  \rho_{b}\mid b\in P\right\}  $). Since $a^{-1}$ is blue,
+the definition of $\rho_{a^{-1}}$ yields $\rho_{a^{-1}}=f\left(
+\underbrace{\left(  a^{-1}\right)  ^{-1}}_{=a}\right)  =f\left(  a\right)  $.
+Hence, $\rho\leq\rho_{a^{-1}}=f\left(  a\right)  $. Now, $\left(  f+g\right)
+\left(  a\right)  =f\left(  a\right)  +\underbrace{g\left(  a\right)
+}_{=-\rho}=f\left(  a\right)  -\rho\geq0$ (since $\rho\leq f\left(  a\right)
+$). Combining this with $\left(  f+g\right)  \left(  a\right)  =f\left(
+a\right)  +\underbrace{g\left(  a\right)  }_{=-\rho}=f\left(  a\right)
+-\underbrace{\rho}_{\geq0}\leq f\left(  a\right)  \leq c\left(  a\right)  $,
+we obtain $0\leq\left(  f+g\right)  \left(  a\right)  \leq c\left(  a\right)
+$. Thus, (\ref{pf.lem.4.a.capac1}) is proven in Case 2.
+
+Let us finally consider Case 1. In this case, we have $a\in P$, and the arc
+$a$ is red. Hence, the definition of $g$ yields $g\left(  a\right)  =\rho$.
+But the definition of $\rho$ yields $\rho=\min\left\{  \rho_{b}\mid b\in
+P\right\}  \leq\rho_{a}$ (since $a\in P$ and thus $\rho_{a}\in\left\{
+\rho_{b}\mid b\in P\right\}  $). Since $a$ is red, the definition of $\rho
+_{a}$ yields $\rho_{a}=c\left(  a\right)  -f\left(  a\right)  $. Hence,
+$\rho\leq\rho_{a}=c\left(  a\right)  -f\left(  a\right)  $. Now, $\left(
+f+g\right)  \left(  a\right)  =f\left(  a\right)  +\underbrace{g\left(
+a\right)  }_{=\rho}=f\left(  a\right)  +\rho\leq c\left(  a\right)  $ (since
+$\rho\leq c\left(  a\right)  -f\left(  a\right)  $). Combining this with
+$\left(  f+g\right)  \left(  a\right)  =f\left(  a\right)
++\underbrace{g\left(  a\right)  }_{=\rho}=f\left(  a\right)  +\underbrace{\rho
+}_{\geq0}\geq f\left(  a\right)  \geq0$, we obtain $0\leq\left(  f+g\right)
+\left(  a\right)  \leq c\left(  a\right)  $. Thus, (\ref{pf.lem.4.a.capac1})
+is proven in Case 1.
+
+We have thus proven (\ref{pf.lem.4.a.capac1}) in all three Cases 1, 2 and 3.
+Thus, (\ref{pf.lem.4.a.capac1}) is proven.]
+
+From (\ref{pf.lem.4.a.capac1}), we conclude in particular that $\left(
+f+g\right)  \left(  a\right)  \geq0$ for each $a\in A$. Thus, $f+g$ is a map
+$A\rightarrow\mathbb{Q}_{+}$. We have shown that this map $f+g:A\rightarrow
+\mathbb{Q}_{+}$ satisfies both the capacity constraints and the conservation
+constraints. In other words, $f+g$ is a flow (by the definition of a flow).
+Furthermore, this flow has value $\left\vert f+g\right\vert =\left\vert
+f\right\vert +\rho>\left\vert f\right\vert $ (since $\rho$ is positive). In
+other words, it has a larger value than $f$. Thus, there is a flow $f^{\prime
+}$ with a larger value than $f$ (namely, $f^{\prime}=f+g$). This proves Lemma
+\ref{lem.4} \textbf{(a)}.
+
+\textbf{(b)} Assume that the digraph $D_{f}$ has no path from $s$ to $t$. We
+must prove that there exists a subset $S$ of $V$ satisfying $s\in V$ and
+$t\notin V$ and $c\left(  S,\overline{S}\right)  =\left\vert f\right\vert $.
+
+Indeed, define a subset $S$ of $V$ by%
+\[
+S=\left\{  v\in V\ \mid\ \text{the digraph }D_{f}\text{ has a path from
+}s\text{ to }v\right\}  .
+\]
+We shall show that $s\in S$ and $t\notin S$ and $c\left(  S,\overline
+{S}\right)  =\left\vert f\right\vert $. This will clearly complete the proof
+of Lemma \ref{lem.4} \textbf{(b)}.
+
+First of all, the digraph $D_{f}$ clearly has a path from $s$ to $s$ (namely,
+the trivial path $\left(  s\right)  $). In other words, $s\in S$ (by the
+definition of $S$).
+
+Furthermore, the digraph $D_{f}$ has no path from $s$ to $t$ (by assumption).
+In other words, $t\notin S$ (by the definition of $S$).
+
+It thus remains to show that $c\left(  S,\overline{S}\right)  =f$.
+
+Let us first observe that%
+\begin{equation}
+\text{any }\left(  u,v\right)  \in A_{f}\text{ satisfying }u\in S\text{ must
+satisfy }v\in S. \label{pf.lem.4.b.2}%
+\end{equation}
+
+
+[\textit{Proof of (\ref{pf.lem.4.b.2}):} Let $\left(  u,v\right)  \in A_{f}$
+be such that $u\in S$. We must prove $v\in S$.
+
+We have $u\in S$. In other words, the digraph $D_{f}$ has a path from $s$ to
+$u$ (by the definition of $S$). Since $\left(  u,v\right)  $ is an arc of
+$D_{f}$ (because $\left(  u,v\right)  \in A_{f}$), we can extend this path by
+the arc $\left(  u,v\right)  $ to obtain a walk from $s$ to $v$. We can then
+trim down this walk to a path from $s$ to $v$ (by removing circuits). Thus,
+the digraph $D_{f}$ has a path from $s$ to $v$. In other words, $v\in S$ (by
+the definition of $S$). This proves (\ref{pf.lem.4.b.2}).]
+
+Next, we observe that%
+\begin{equation}
+f\left(  a\right)  =0\ \ \ \ \ \ \ \ \ \ \text{for each }a\in\left[
+\overline{S},S\right]  . \label{pf.lem.4.b.3}%
+\end{equation}
+
+
+[\textit{Proof of (\ref{pf.lem.4.b.3}):} Let $a\in\left[  \overline
+{S},S\right]  $. Thus, $a\in A$ and $a=\left(  v,u\right)  $ for some
+$v\in\overline{S}$ and $u\in S$ (by the definition of $\left[  \overline
+{S},S\right]  $). Consider these $v$ and $u$.
+
+We must prove that $f\left(  a\right)  =0$. Assume the contrary. Thus,
+$f\left(  a\right)  \neq0$, so that $f\left(  a\right)  >0$ (since $f\left(
+a\right)  \geq0$). By the definition of $A_{f}$, we thus have $a^{-1}\in
+A_{f}$. But $a=\left(  v,u\right)  $, so that $a^{-1}=\left(  u,v\right)  $.
+Thus, $\left(  u,v\right)  =a^{-1}\in A_{f}$. Therefore, (\ref{pf.lem.4.b.2})
+yields $v\in S$. This contradicts $v\in\overline{S}$. This contradiction shows
+that our assumption was false. Hence, $f\left(  a\right)  =0$ holds, and
+(\ref{pf.lem.4.b.3}) is proven.]
+
+Similarly, we have%
+\begin{equation}
+f\left(  a\right)  =c\left(  a\right)  \ \ \ \ \ \ \ \ \ \ \text{for each
+}a\in\left[  S,\overline{S}\right]  . \label{pf.lem.4.b.4}%
+\end{equation}
+
+
+[\textit{Proof of (\ref{pf.lem.4.b.4}):} Let $a\in\left[  S,\overline
+{S}\right]  $. Thus, $a\in A$ and $a=\left(  u,v\right)  $ for some $u\in S$
+and $v\in\overline{S}$ (by the definition of $\left[  S,\overline{S}\right]
+$). Consider these $u$ and $v$.
+
+We must prove that $f\left(  a\right)  =c\left(  a\right)  $. Assume the
+contrary. Thus, $f\left(  a\right)  \neq c\left(  a\right)  $, so that
+$f\left(  a\right)  <c\left(  a\right)  $ (since $f\left(  a\right)  \leq
+c\left(  a\right)  $ (by the capacity constraints)). By the definition of
+$A_{f}$, we thus have $a\in A_{f}$. Thus, $\left(  u,v\right)  =a\in A_{f}$.
+Therefore, (\ref{pf.lem.4.b.2}) yields $v\in S$. This contradicts
+$v\in\overline{S}$. This contradiction shows that our assumption was false.
+Hence, $f\left(  a\right)  =0$ holds, and (\ref{pf.lem.4.b.4}) is proven.]
+
+Now, the definition of $f\left(  \overline{S},S\right)  $ yields $f\left(
+\overline{S},S\right)  =\sum_{a\in\left[  \overline{S},S\right]
+}\underbrace{f\left(  a\right)  }_{\substack{=0\\\text{(by (\ref{pf.lem.4.b.3}%
+))}}}=0$.
+
+Also, the definition of $f\left(  S,\overline{S}\right)  $ yields $f\left(
+S,\overline{S}\right)  =\sum_{a\in\left[  S,\overline{S}\right]
+}\underbrace{f\left(  a\right)  }_{\substack{=c\left(  a\right)  \\\text{(by
+(\ref{pf.lem.4.b.4}))}}}=\sum_{a\in\left[  S,\overline{S}\right]  }c\left(
+a\right)  =c\left(  S,\overline{S}\right)  $ (by the definition of $c\left(
+S,\overline{S}\right)  $).
+
+Now, Proposition \ref{prop.2} \textbf{(b)} yields%
+\[
+\left\vert f\right\vert =\underbrace{f\left(  S,\overline{S}\right)
+}_{=c\left(  S,\overline{S}\right)  }-\underbrace{f\left(  \overline
+{S},S\right)  }_{=0}=c\left(  S,\overline{S}\right)  .
+\]
+In other words, $c\left(  S,\overline{S}\right)  =\left\vert f\right\vert $.
+This completes our proof of Lemma \ref{lem.4} \textbf{(b)}.
+\end{proof}
+
+An analogue of Lemma \ref{lem.4} holds for integer flows (assuming integer capacities):
+
+\begin{lemma}
+\label{lem.4int}Let $N$, $V$, $A$, $s$, $t$ and $c$ be as in Definition
+\ref{def.network.notations}. Assume that $c\left(  a\right)  \in\mathbb{N}$
+for each $a\in A$.
+
+Let $f:A\rightarrow\mathbb{Q}_{+}$ be an integer flow. Then,
+
+\textbf{(a)} If the digraph $D_{f}$ has a path from $s$ to $t$, then there is
+an integer flow $f^{\prime}$ with a larger value than $f$.
+
+\textbf{(b)} If the digraph $D_{f}$ has no path from $s$ to $t$, then there
+exists a subset $S$ of $V$ satisfying $s\in V$ and $t\notin V$ and $c\left(
+S,\overline{S}\right)  =\left\vert f\right\vert $.
+\end{lemma}
+
+\begin{proof}
+[Proof of Lemma \ref{lem.4int} (sketched).]The same argument we gave above for
+Lemma \ref{lem.4} works here, but we need to notice that all the $\rho_{b}$
+are integers (since the $f\left(  a\right)  $ and the $c\left(  a\right)  $
+are integers), and therefore $\rho$ is an integer.
+\end{proof}
+
+\subsection{The Ford-Fulkerson algorithm}
+
+We next claim the following:
+
+\begin{lemma}
+\label{lem.3bat}Let $N$, $V$, $A$, $s$, $t$ and $c$ be as in Definition
+\ref{def.network.notations}. Assume that $c\left(  a\right)  \in\mathbb{N}$
+for each $a\in A$. Then, there exist an integer flow $f:A\rightarrow
+\mathbb{Q}_{+}$ and a subset $S$ of $V$ satisfying $s\in S$ and $t\notin S$
+and $c\left(  S,\overline{S}\right)  =\left\vert f\right\vert $.
+\end{lemma}
+
+\begin{proof}
+[Proof of Lemma \ref{lem.3bat} (sketched).]Let us first recall that if we are
+given a digraph and two of its vertices, we can easily check whether there is
+a path from one vertex to the other. (A stupid way to do this would be to try
+all possible paths; but there are fast algorithms, such as
+\href{https://en.wikipedia.org/wiki/Dijkstra's_algorithm}{Dijkstra's
+algorithm}.)
+
+We claim that the following algorithm always terminates and constructs an
+integer flow $f:A\rightarrow\mathbb{Q}_{+}$ and a subset $S$ of $V$ satisfying
+$s\in S$ and $t\notin S$ and $c\left(  S,\overline{S}\right)  =\left\vert
+f\right\vert $:
+
+\begin{statement}
+\underline{\textbf{Ford-Fulkerson algorithm:}}
+
+\underline{\textbf{Input:}} $N$, $V$, $A$, $s$, $t$ and $c$ as in Definition
+\ref{def.network.notations}, with the property that $c\left(  a\right)
+\in\mathbb{N}$ for each $a\in A$.
+
+\underline{\textbf{Output:}} an integer flow $f:A\rightarrow\mathbb{Q}_{+}$
+and a subset $S$ of $V$ satisfying $s\in S$ and $t\notin S$ and $c\left(
+S,\overline{S}\right)  =\left\vert f\right\vert $.
+
+\underline{\textbf{Algorithm:}}
+
+\begin{itemize}
+\item Define an integer flow $f:A\rightarrow\mathbb{Q}_{+}$ by $\left(
+f\left(  a\right)  =0\text{ for all }a\in A\right)  $. (This is clearly a
+flow; it is called the \textit{zero flow}.)
+
+\item \textbf{While}\footnote{This word \textquotedblleft\textbf{While}%
+\textquotedblright\ marks the beginning of a
+\href{https://en.wikipedia.org/wiki/While_loop}{while loop}. The end of this
+loop is marked by the word \textquotedblleft\textbf{Endwhile}%
+\textquotedblright. Roughly speaking, the instructions inside a while loop
+need to be performed over and over until the condition is no longer true
+(i.e., in our case, until the digraph $D_{f}$ no longer has a path from $s$ to
+$t$). So we need to check whether $D_{f}$ has a path from $s$ to $t$, then --
+if there is such a path -- perform whatever is inside the while loop, then
+again check whether $D_{f}$ has a path from $s$ to $t$, then -- if there is
+such a path -- again perform whatever is inside the while loop, and so on,
+until we finally fail the check (i.e., until $D_{f}$ no longer has a path from
+$s$ to $t$). Only then do we proceed beyond the while loop.} the digraph
+$D_{f}$ has a path from $s$ to $t$\ \ \ \ \footnote{This can be checked, e.g.,
+using Dijkstra's algorithm, as mentioned above.}, \textbf{do the following:}
+
+\begin{itemize}
+\item Apply Lemma \ref{lem.4int} \textbf{(a)} to construct an integer flow
+$f^{\prime}$ with a larger value than $f$. (Strictly speaking, what we mean is
+to apply the construction given in the proof of Lemma \ref{lem.4int}
+\textbf{(a)}.)
+
+\item Replace $f$ by $f^{\prime}$. (Thus, the flow $f$ now has a larger value
+than it had before.)
+\end{itemize}
+
+\textbf{Endwhile}.
+
+\item Now, the digraph $D_{f}$ has no path from $s$ to $t$. Therefore, Lemma
+\ref{lem.4int} \textbf{(b)} shows that there exists a subset $S$ of $V$
+satisfying $s\in V$ and $t\notin V$ and $c\left(  S,\overline{S}\right)
+=\left\vert f\right\vert $. Consider this $S$. (Again, the actual construction
+of $S$ is hidden in the proof of Lemma \ref{lem.4int} \textbf{(b)}.)
+
+\item Output (the current values of) $f$ and $S$.
+\end{itemize}
+\end{statement}
+
+Why does this algorithm work? In other words, why does it necessarily
+terminate (i.e., why don't we get stuck in the while loop forever?), and why
+does the output satisfy the requirements (that $f:A\rightarrow\mathbb{Q}_{+}$
+is an integer flow and that $S$ is a subset of $V$ satisfying $s\in S$ and
+$t\notin S$ and $c\left(  S,\overline{S}\right)  =\left\vert f\right\vert $) ?
+
+The second question has already been answered in the description of the
+algorithm; so all we need to do is answer the first question. In other words,
+we need to prove the following claim:
+
+\begin{statement}
+\textit{Claim 1:} The algorithm cannot get stuck in the while loop (i.e., it
+cannot happen that it keeps running this loop forever).
+\end{statement}
+
+[\textit{Proof of Claim 1:} The value of any integer flow is an integer. Thus,
+$\left\vert f\right\vert $ is an integer throughout the execution of the
+algorithm (since $f$ is an integer flow throughout the execution of the algorithm).
+
+On the other hand, Proposition \ref{prop.2} \textbf{(c)} (applied to $\left\{
+s\right\}  $ instead of $S$) shows that $\left\vert f\right\vert \leq c\left(
+\left\{  s\right\}  ,\overline{\left\{  s\right\}  }\right)  $ throughout the
+execution of the algorithm (since $s\in\left\{  s\right\}  $ and
+$t\notin\left\{  s\right\}  $).
+
+Each iteration of the while loop increases the value $\left\vert f\right\vert
+$ (because $f$ is replaced by a new integer flow $f^{\prime}$ with a larger
+value than the previous $f$), and thus increases it by at least $1$ (since
+$\left\vert f\right\vert $ is an integer throughout the execution of the
+algorithm, but if an integer increases, then it increases by at least $1$).
+Hence, if the while loop is traversed $K$ times (for some $K\in\mathbb{N}$),
+then the value $\left\vert f\right\vert $ increases by at least $K$, and thus
+this value $\left\vert f\right\vert $ must be at least $K$ afterwards (because
+the value $\left\vert f\right\vert $ at the beginning of the algorithm is
+$0$). Applying this to $K=c\left(  \left\{  s\right\}  ,\overline{\left\{
+s\right\}  }\right)  +1$, we conclude that if the while loop is traversed
+$c\left(  \left\{  s\right\}  ,\overline{\left\{  s\right\}  }\right)  +1$
+times, then the value $\left\vert f\right\vert $ must be at least $c\left(
+\left\{  s\right\}  ,\overline{\left\{  s\right\}  }\right)  +1$ afterwards.
+Since the value $\left\vert f\right\vert $ can never be at least $c\left(
+\left\{  s\right\}  ,\overline{\left\{  s\right\}  }\right)  +1$ (because we
+have $\left\vert f\right\vert \leq c\left(  \left\{  s\right\}  ,\overline
+{\left\{  s\right\}  }\right)  <c\left(  \left\{  s\right\}  ,\overline
+{\left\{  s\right\}  }\right)  +1$ throughout the execution of the algorithm),
+we thus conclude that the while loop cannot be traversed $c\left(  \left\{
+s\right\}  ,\overline{\left\{  s\right\}  }\right)  +1$ times. Thus, the while
+loop can only be traversed at most $c\left(  \left\{  s\right\}
+,\overline{\left\{  s\right\}  }\right)  $ times. In particular, the algorithm
+must eventually leave the while loop. This proves Claim 1.]
+
+So we have shown that the algorithm works. Clearly, its output gives us
+precisely the $f$ and the $S$ whose existence is claimed by Lemma
+\ref{lem.3bat}. Thus, Lemma \ref{lem.3bat} is proven.
+\end{proof}
+
+Finally, we can prove Theorem \ref{thm.3b}:
+
+\begin{proof}
+[Proof of Theorem \ref{thm.3b} (sketched).]Lemma \ref{lem.3bat} shows that
+there exist an integer flow $f:A\rightarrow\mathbb{Q}_{+}$ and a subset $S$ of
+$V$ satisfying $s\in S$ and $t\notin S$ and $c\left(  S,\overline{S}\right)
+=\left\vert f\right\vert $. Denote these $f$ and $S$ by $g$ and $Q$. Thus,
+$g:A\rightarrow\mathbb{Q}_{+}$ is an integer flow, and $Q$ is a subset of $V$
+satisfying $s\in Q$, $t\notin Q$ and $c\left(  Q,\overline{Q}\right)
+=\left\vert g\right\vert $.
+
+The set $\left\{  c\left(  S,\overline{S}\right)  \ \mid\ S\subseteq V;\ s\in
+S;\ t\notin S\right\}  $ is nonempty and finite. Hence, its minimum
+$\min\left\{  c\left(  S,\overline{S}\right)  \ \mid\ S\subseteq V;\ s\in
+S;\ t\notin S\right\}  $ is well-defined.
+
+We have $\left\vert g\right\vert =c\left(  Q,\overline{Q}\right)  \in\left\{
+c\left(  S,\overline{S}\right)  \ \mid\ S\subseteq V;\ s\in S;\ t\notin
+S\right\}  $ (since $Q\subseteq V$ and $s\in Q$ and $t\notin Q$) and thus%
+\begin{equation}
+\left\vert g\right\vert \geq\min\left\{  c\left(  S,\overline{S}\right)
+\ \mid\ S\subseteq V;\ s\in S;\ t\notin S\right\}  . \label{pf.thm.3b.1}%
+\end{equation}
+
+
+On the other hand, $\left\vert f\right\vert \leq c\left(  Q,\overline
+{Q}\right)  $ for every integer flow $f$ (by Proposition \ref{prop.2}
+\textbf{(c)}, applied to $S=Q$). In other words, $\left\vert f\right\vert
+\leq\left\vert g\right\vert $ for every integer flow $f$ (since $c\left(
+Q,\overline{Q}\right)  =\left\vert g\right\vert $). In other words, any
+element of the set $\left\{  \left\vert f\right\vert \ \mid\ f\text{ is an
+integer flow}\right\}  $ is $\leq\left\vert g\right\vert $. Since we also know
+that $\left\vert g\right\vert $ is an element of this set (because $g$ is an
+integer flow), we thus conclude that $\left\vert g\right\vert $ is the maximum
+of this set. In other words,%
+\begin{equation}
+\left\vert g\right\vert =\max\left\{  \left\vert f\right\vert \ \mid\ f\text{
+is an integer flow}\right\}  \label{pf.thm.3b.2}%
+\end{equation}
+(and in particular, $\max\left\{  \left\vert f\right\vert \ \mid\ f\text{ is
+an integer flow}\right\}  $ exists). Now, (\ref{pf.thm.3b.1}) yields%
+\[
+\min\left\{  c\left(  S,\overline{S}\right)  \ \mid\ S\subseteq V;\ s\in
+S;\ t\notin S\right\}  \leq c\left(  Q,\overline{Q}\right)  =\max\left\{
+\left\vert f\right\vert \ \mid\ f\text{ is an integer flow}\right\}  .
+\]
+Combining this with%
+\[
+\max\left\{  \left\vert f\right\vert \ \mid\ f\text{ is an integer
+flow}\right\}  \leq\min\left\{  c\left(  S,\overline{S}\right)  \ \mid
+\ S\subseteq V;\ s\in S;\ t\notin S\right\}
+\]
+(because every subset $S$ of $V$ satisfying $s\in S$ and $t\notin S$ and every
+integer flow $f$ satisfy $\left\vert f\right\vert \leq c\left(  S,\overline
+{S}\right)  $ (by Proposition \ref{prop.2} \textbf{(c)})), we obtain%
+\[
+\max\left\{  \left\vert f\right\vert \ \mid\ f\text{ is an integer
+flow}\right\}  =\min\left\{  c\left(  S,\overline{S}\right)  \ \mid
+\ S\subseteq V;\ s\in S;\ t\notin S\right\}  .
+\]
+This proves Theorem \ref{thm.3b}.
+\end{proof}
+
+\begin{remark}
+\label{rmk.3balg}The Ford-Fulkerson algorithm that we used in our proof of
+Lemma \ref{lem.3bat} constructs an integer flow $f$ and a subset $S$ of $V$.
+Denote these $f$ and $S$ by $g$ and $S$. Then, $g$ is an integer flow of
+maximum value (among all integer flows on $N$). This follows immediately from
+(\ref{pf.thm.3b.2}). Thus, we have found an algorithm to construct an integer
+flow of maximum value.
+\end{remark}
+
+The proof of Theorem \ref{thm.3a} is no longer far away. We first need an
+analogue of Lemma \ref{lem.3bat}:
+
+\begin{lemma}
+\label{lem.3aat}Let $N$, $V$, $A$, $s$, $t$ and $c$ be as in Definition
+\ref{def.network.notations}. Then, there exist a flow $f:A\rightarrow
+\mathbb{Q}_{+}$ and a subset $S$ of $V$ satisfying $s\in S$ and $t\notin S$
+and $c\left(  S,\overline{S}\right)  =\left\vert f\right\vert $.
+\end{lemma}
+
+\begin{proof}
+[Proof of Lemma \ref{lem.3aat} (sketched).]The numbers $c\left(  a\right)  $
+for $a\in A$ are finitely many nonnegative rational numbers (since $c$ is a
+map $A\rightarrow\mathbb{Q}_{+}$). Thus, they can be brought to a common
+denominator: i.e., there exists a positive integer $p$ such that $p\cdot
+c\left(  a\right)  \in\mathbb{N}$ for each $a\in A$. Consider this $p$. Define
+the function $c_{p}:A\rightarrow\mathbb{Q}_{+}$ by
+\[
+c_{p}\left(  a\right)  =p\cdot c\left(  a\right)
+\ \ \ \ \ \ \ \ \ \ \text{for each }a\in A.
+\]
+Thus, $c_{p}\left(  a\right)  =p\cdot c\left(  a\right)  \in\mathbb{N}$ for
+each $a\in A$.
+
+Let $N_{p}$ be the network which is the same as $N$, except that the capacity
+function $c$ has been replaced by $c_{p}$. Thus, Lemma \ref{lem.3bat} (applied
+to $N_{p}$ and $c_{p}$ instead of $N$ and $c$) yields that there exist an
+integer flow $f:A\rightarrow\mathbb{Q}_{+}$ on the network $N_{p}$ and a
+subset $S$ of $V$ satisfying $s\in S$ and $t\notin S$ and $c_{p}\left(
+S,\overline{S}\right)  =\left\vert f\right\vert $. Consider these $f$ and $S$,
+and denote them by $f_{p}$ and $S$. Thus, $f_{p}$ is an integer flow on the
+network $N_{p}$, and $S$ is a subset of $V$ satisfying $s\in S$ and $t\notin
+S$ and $c_{p}\left(  S,\overline{S}\right)  =\left\vert f_{p}\right\vert $.
+
+It is easy to see that $c_{p}\left(  P,Q\right)  =p\cdot c\left(  P,Q\right)
+$ for any two subsets $P$ and $Q$ of $V$. Thus, $c_{p}\left(  S,\overline
+{S}\right)  =p\cdot c\left(  S,\overline{S}\right)  $, so that $c\left(
+S,\overline{S}\right)  =\underbrace{c_{p}\left(  S,\overline{S}\right)
+}_{=\left\vert f_{p}\right\vert }/p=\left\vert f_{p}\right\vert /p$.
+
+Now, define a map $f:A\rightarrow\mathbb{Q}_{+}$ (not an integer flow, in
+general) by setting%
+\[
+f\left(  a\right)  =f_{p}\left(  a\right)  /p\ \ \ \ \ \ \ \ \ \ \text{for
+each }a\in A.
+\]
+This map $f$ is obtained by rescaling the flow $f_{p}$ on the network $N_{p}$
+by the factor $1/p$; thus, it is easy to see that $f$ is a flow on the network
+$N$. (Roughly speaking, the capacity constraints for $f$ are obtained from the
+capacity constraints for $f_{p}$ by dividing by $p$; the same holds for the
+conservation constraints.)
+
+Also, it is easy to see that $\left\vert f\right\vert =\left\vert
+f_{p}\right\vert /p$. Comparing this with $c\left(  S,\overline{S}\right)
+=\left\vert f_{p}\right\vert /p$, we obtain $c\left(  S,\overline{S}\right)
+=\left\vert f\right\vert $.
+
+We thus have found a flow $f:A\rightarrow\mathbb{Q}_{+}$ on the network $N$
+and a subset $S$ of $V$ satisfying $s\in S$ and $t\notin S$ and $c\left(
+S,\overline{S}\right)  =\left\vert f\right\vert $. This proves Lemma
+\ref{lem.3aat}.
+\end{proof}
+
+\begin{proof}
+[Proof of Theorem \ref{thm.3a} (sketched).]The proof of Theorem \ref{thm.3a}
+is analogous to the proof of Theorem \ref{thm.3b}, but we need to use Lemma
+\ref{lem.3aat} instead of Lemma \ref{lem.3bat}.
+\end{proof}
+
+As we said, we will not prove Theorem \ref{thm.3c} here; its proof is harder.
+An analogue of Lemma \ref{lem.3aat} for $\mathbb{R}_{+}$ instead of
+$\mathbb{Q}_{+}$ indeed holds, but the way we proved Lemma \ref{lem.3aat} does
+not generalize to $\mathbb{R}_{+}$ (since there are no common denominators for
+incommensurable irrational numbers). Notice also that the Ford-Fulkerson
+algorithm (which we showed in the proof of Lemma \ref{lem.3bat}) works for
+flows $f:A\rightarrow\mathbb{Q}_{+}$, but may fail when $\mathbb{Q}_{+}$ is
+replaced by $\mathbb{R}_{+}$; the paper \cite{Zwick95} gives an example where
+it gets stuck in the while loop due to an edge with irrational capacity (the
+golden ratio). The good news is that Theorem \ref{thm.3c} is almost entirely
+useless in combinatorics, to my knowledge at least. If you want to see a proof
+of Theorem \ref{thm.3c}, check out texts on linear programming.
+
+\begin{exercise}
+Assume that we generalize the concept of a network by allowing the capacity
+function $c$ to take the value $\infty$ as well (where $\infty$ is a symbol
+that is understood to satisfy $\infty+q=\infty$ and $\infty+\infty=\infty$ and
+$\infty>q$ for all $q\in\mathbb{Q}$). In other words, some arcs $a$ may have
+\textquotedblleft infinite capacity\textquotedblright, which means that the
+capacity constraints for these arcs $a$ simply say that $0\leq f\left(
+a\right)  $ (without requiring $f\left(  a\right)  $ to be $\leq$ to anything
+specific). Prove the following:
+
+\textbf{(a)} Theorem \ref{thm.3a} and Theorem \ref{thm.3b} still hold in this
+generality, if we additionally assume that there exists \textbf{some} subset
+$S$ of $V$ satisfying $s\in S$ and $t\notin S$ and $c\left(  S,\overline
+{S}\right)  <\infty$.
+
+\textbf{(b)} If every subset $S$ of $V$ satisfying $s\in S$ and $t\notin S$
+satisfies $c\left(  S,\overline{S}\right)  =\infty$, then prove that, for
+every $n\in\mathbb{N}$, there exists an integer flow $f$ of value $\left\vert
+f\right\vert =n$.
+\end{exercise}
+
+\begin{exercise}
+State and prove analogues of the above results in which the underlying digraph
+of the network $N$ is replaced by a multidigraph.
+\end{exercise}
+
+\subsection{\label{sect.hall}Application: Bipartite matching and Hall's
+marriage theorem}
+
+As we said, the max-flow-min-cut theorems (particularly, Theorem \ref{thm.3b})
+have multiple applications. In many of these applications, the network isn't
+visible right away, but instead has to be constructed. Let me present one such
+application: the bipartite matching problem.
+
+If $W$ is a set, then $\mathcal{P}_{2}\left(  W\right)  $ shall mean the set
+of all $2$-element subsets of $W$. Recall that a \textit{simple graph} is a
+pair $\left(  W,E\right)  $ consisting of a finite set $W$ and a subset $E$ of
+$\mathcal{P}_{2}\left(  W\right)  $. The elements of $W$ are called the
+\textit{vertices} of this simple graph; the elements of $E$ are called its
+\textit{edges}. If $e$ is an edge of a graph, then the two vertices contained
+in $e$ are called the \textit{endpoints} of $e$.
+
+\begin{definition}
+\label{def.bipgraph}A \textit{bipartite graph} means a triple $\left(
+G;X,Y\right)  $ (the semicolon means the same thing as a comma), where
+$G=\left(  W,E\right)  $ is a simple graph, and where $X$ and $Y$ are two
+subsets of $W$ with the following properties:
+
+\begin{itemize}
+\item We have $X\cap Y=\varnothing$ and $X\cup Y=W$.
+
+\item Each edge of $G$ contains exactly one vertex in $X$ and exactly one
+vertex in $Y$.
+\end{itemize}
+\end{definition}
+
+For example, if $G$ is the following graph:%
+\begin{equation}%
+%TCIMACRO{\TeXButton{a graph not yet made bipartite}{\xymatrix{
+%1 \are[r] \are[d] & 2 \are[d] & 5 \are[d] \\
+%4 \are[r] & 3 & 6
+%}}}%
+%BeginExpansion
+\xymatrix{
+1 \are[r] \are[d] & 2 \are[d] & 5 \are[d] \\
+4 \are[r] & 3 & 6
+}%
+%EndExpansion
+, \label{eq.bipartite.example1}%
+\end{equation}
+then $\left(  G;\left\{  1,3,5\right\}  ,\left\{  2,4,6\right\}  \right)  $ is
+a bipartite graph, and $\left(  G;\left\{  2,4,6\right\}  ,\left\{
+1,3,5\right\}  \right)  $ is another bipartite graph, and $\left(  G;\left\{
+1,3,6\right\}  ,\left\{  2,4,5\right\}  \right)  $ is yet another bipartite
+graph, but $\left(  G;\left\{  1,2,3\right\}  ,\left\{  4,5,6\right\}
+\right)  $ is not a bipartite graph (because the edge $\left\{  1,2\right\}  $
+of $G$ contains two vertices in $\left\{  1,2,3\right\}  $, rather than one in
+$\left\{  1,2,3\right\}  $ and one in $\left\{  4,5,6\right\}  $).
+
+We often draw bipartite graphs in a rather special way. Namely, in order to
+draw a bipartite graph $\left(  G;X,Y\right)  $, we draw the graph $G$, but
+making sure that all vertices are aligned in two columns, where the left
+column contains all the vertices in $X$ and the right column contains all the
+vertices in $Y$. For example, if $G$ is the graph shown in
+(\ref{eq.bipartite.example1}), then the bipartite graph $\left(  G;\left\{
+1,3,5\right\}  ,\left\{  2,4,6\right\}  \right)  $ is drawn as%
+\[%
+%TCIMACRO{\TeXButton{a bipartite graph}{\xymatrix{
+%1 \are[r] \are[rd] & 2 \\
+%3 \are[r] \are[ru] & 4 \\
+%5 \are[r] & 6
+%}}}%
+%BeginExpansion
+\xymatrix{
+1 \are[r] \are[rd] & 2 \\
+3 \are[r] \are[ru] & 4 \\
+5 \are[r] & 6
+}%
+%EndExpansion
+,
+\]
+whereas the bipartite graph $\left(  G;\left\{  2,4,6\right\}  ,\left\{
+1,3,5\right\}  \right)  $ is drawn as%
+\[%
+%TCIMACRO{\TeXButton{a bipartite graph}{\xymatrix{
+%2 \are[r] \are[rd] & 1 \\
+%4 \are[r] \are[ru] & 3 \\
+%6 \are[r] & 5
+%}}}%
+%BeginExpansion
+\xymatrix{
+2 \are[r] \are[rd] & 1 \\
+4 \are[r] \are[ru] & 3 \\
+6 \are[r] & 5
+}%
+%EndExpansion
+.
+\]
+
+
+The concept of a bipartite graph can be extended from simple graphs to
+multigraphs, but we will not have much use for this extension here.
+
+\begin{definition}
+Let $G=\left(  W,E\right)  $ be a simple graph. A \textit{matching} in $G$
+means a subset $M$ of $E$ such that no two distinct edges in $M$ have a vertex
+in common.
+\end{definition}
+
+For example, the set $\left\{  \left\{  1,2\right\}  ,\left\{  5,6\right\}
+\right\}  $ is a matching in the graph $G$ shown in
+(\ref{eq.bipartite.example1}); so is the set $\left\{  \left\{  1,2\right\}
+,\left\{  3,4\right\}  ,\left\{  5,6\right\}  \right\}  $ (but not the set
+$\left\{  \left\{  1,2\right\}  ,\left\{  2,3\right\}  ,\left\{  5,6\right\}
+\right\}  $, because its two edges $\left\{  1,2\right\}  $ and $\left\{
+2,3\right\}  $ have the vertex $2$ in common). Also, the empty set
+$\varnothing$ is a matching in any graph.
+
+In graph theory, we are often interested in matchings that contain as many
+edges as possible. There are, of course, simple bounds on how many edges a
+matching can contain: For example, a matching in a simple graph $G=\left(
+W,E\right)  $ can never have more than $\left\vert W\right\vert /2$ edges
+(since each edge \textquotedblleft uses up\textquotedblright\ two vertices).
+Also, if $\left(  G;X,Y\right)  $ is a bipartite graph, then a matching in $G$
+can never have more than $\left\vert X\right\vert $ edges (since each edge
+\textquotedblleft uses up\textquotedblright\ a vertex in $X$). How can we find
+a maximum-sized matching in $G$ ? This is known as the \textit{bipartite
+matching problem} (when $\left(  G;X,Y\right)  $ is a bipartite graph). It
+turns out that the Ford-Fulkerson algorithm (developed in the above proof of
+Lemma \ref{lem.3bat}) gives a way to solve this problem in polynomial time.
+
+Let us introduce a couple more concepts:
+
+\begin{definition}
+Let $M$ be a matching in a simple graph $G=\left(  W,E\right)  $.
+
+\textbf{(a)} A vertex $v$ of $G$ is said to be \textit{matched in $M$} if
+there exists an edge $e\in M$ such that $v$ is an endpoint of $e$. In this
+case, this edge is unique (since $M$ is a matching), and the other endpoint of
+this edge (i.e., the one distinct from $v$) is called the \textit{$M$-partner}
+of $v$.
+
+\textbf{(b)} Let $S$ be a subset of $W$. The matching $M$ is said to be
+\textit{$S$-complete} if each vertex $v\in S$ is matched in $M$.
+\end{definition}
+
+For example, if $G$ is the graph shown in (\ref{eq.bipartite.example1}), then
+the matching $\left\{  \left\{  1,2\right\}  ,\left\{  3,4\right\}  ,\left\{
+5,6\right\}  \right\}  $ is $\left\{  1,3,6\right\}  $-complete (since all
+three vertices $1,3,6$ are matched in it\footnote{Their $\left\{  \left\{
+1,2\right\}  ,\left\{  3,4\right\}  ,\left\{  5,6\right\}  \right\}
+$-partners are $2,4,5$, respectively.}, but the matching $\left\{  \left\{
+1,2\right\}  ,\left\{  5,6\right\}  \right\}  $ is not (since the vertex $3$
+is not matched in it).
+
+\begin{definition}
+Let $G=\left(  W,E\right)  $ be a simple graph.
+
+\textbf{(a)} If $v$ is a vertex of $G$, then a \textit{neighbor} of $v$ means
+any vertex $w$ of $G$ such that $\left\{  v,w\right\}  \in E$.
+
+\textbf{(b)} Let $U$ be a subset of $W$. Then, $N\left(  U\right)  $ shall
+denote the subset%
+\[
+\left\{  v\in W\ \mid\ v\text{ has a neighbor in }U\right\}
+\]
+of $W$.
+\end{definition}
+
+For example, if $G$ is the graph shown in (\ref{eq.bipartite.example1}), then
+the neighbors of the vertex $1$ are $2$ and $4$, and we have $N\left(
+\left\{  1,2\right\}  \right)  =\left\{  1,2,3,4\right\}  $ and $N\left(
+\left\{  1,3\right\}  \right)  =\left\{  2,4\right\}  $ and $N\left(  \left\{
+2,5\right\}  \right)  =\left\{  1,3,6\right\}  $ and $N\left(  \varnothing
+\right)  =\varnothing$.
+
+The following is almost trivial:
+
+\begin{proposition}
+\label{prop.bipartite.NXY}Let $\left(  G;X,Y\right)  $ be a bipartite graph.
+Let $U$ be a subset of $X$. Then, $N\left(  U\right)  \subseteq Y$.
+\end{proposition}
+
+\begin{proof}
+[Proof of Proposition \ref{prop.bipartite.NXY}.]Write the graph $G$ in the
+form $G=\left(  W,E\right)  $. Recall that $\left(  G;X,Y\right)  $ is a
+bipartite graph; hence, $X\cap Y=\varnothing$ and $X\cup Y=W$. Thus,
+$Y=W\setminus X$ and $X=W\setminus Y$.
+
+Now, let $p\in N\left(  U\right)  $ be arbitrary. Thus, $p\in N\left(
+U\right)  =\left\{  v\in W\ \mid\ v\text{ has a neighbor in }U\right\}  $ (by
+the definition of $N\left(  U\right)  $). In other words, $p$ is an element of
+$W$ that has a neighbor in $U$.
+
+The vertex $p$ has a neighbor in $U$. Fix such a neighbor, and denote it by
+$q$. Thus, $q\in U\subseteq X=W\setminus Y$, so that $q\notin Y$. We know that
+$q$ is a neighbor of $p$; in other words, $\left\{  p,q\right\}  \in E$. In
+other words, $\left\{  p,q\right\}  $ is an edge of $G$.
+
+But $\left(  G;X,Y\right)  $ is a bipartite graph. Hence, each edge of $G$
+contains exactly one vertex in $X$ and exactly one vertex in $Y$. Thus, in
+particular, each edge of $G$ contains a vertex in $Y$. Applying this to
+$\left\{  p,q\right\}  $, we conclude that $\left\{  p,q\right\}  $ contains a
+vertex in $Y$. In other words, one of the two vertices $p$ and $q$ lies in
+$Y$. This vertex cannot be $q$ (since $q\notin Y$), and thus must be $p$.
+Hence, $p$ lies in $Y$. In other words, $p\in Y$.
+
+Now, forget that we fixed $p$. We have thus shown that $p\in Y$ for each $p\in
+N\left(  U\right)  $. In other words, $N\left(  U\right)  \subseteq Y$. This
+proves Proposition \ref{prop.bipartite.NXY}.
+\end{proof}
+
+We shall now study matchings in bipartite graphs. The most important result
+about such matchings is the following fact, known as \textit{Hall's marriage
+theorem}:
+
+\begin{theorem}
+\label{thm.hall}Let $\left(  G;X,Y\right)  $ be a bipartite graph. Then, $G$
+has an $X$-complete matching if and only if each subset $U$ of $X$ satisfies
+$\left\vert N\left(  U\right)  \right\vert \geq\left\vert U\right\vert $.
+\end{theorem}
+
+Theorem \ref{thm.hall} has applications throughout mathematics, and several
+equivalent versions; it also has fairly elementary (but tricky) proofs (see,
+e.g., \cite[\S 12.5.2]{LeLeMe17}). We shall derive it from Theorem \ref{thm.3b}.
+
+In order to do so (and also, in order to reduce the bipartite matching problem
+to the Ford-Fulkerson algorithm), we need to construct a network from a given
+bipartite graph such that the integer flows in the network shall correspond to
+the matchings in the graph. Let us do this.
+
+\begin{condition}
+For the rest of Section \ref{sect.hall}, we fix a bipartite graph $\left(
+G;X,Y\right)  $.
+\end{condition}
+
+Thus, each edge of $G$ contains exactly one vertex in $X$ and exactly one
+vertex in $Y$. In other words, if $e$ is an edge of $G$, then exactly one
+endpoint of $e$ lies in $X$, and exactly one endpoint of $e$ lies in $Y$.
+Thus, we can make the following definition:
+
+\begin{definition}
+For each edge $e$ of $G$, we let $\overrightarrow{e}$ be the pair $\left(
+x,y\right)  \in X\times Y$, where $x$ is the unique endpoint of $e$ lying in
+$X$, and where $y$ is the unique endpoint of $e$ lying in $Y$. Thus, if
+$\overrightarrow{e}=\left(  x,y\right)  $, then $e=\left\{  x,y\right\}  $.
+\end{definition}
+
+Now, we shall construct a network $N$ out of our bipartite graph $\left(
+G;X,Y\right)  $. Before we give the rigorous definition, let us show it on an
+example:\newpage
+
+\begin{example}
+For this example, let $G=\left(  V,E\right)  $ be the simple graph with
+vertices $1,2,3,4,5,6,7$ and edges $\left\{  1,4\right\}  ,\left\{
+1,5\right\}  ,\left\{  2,4\right\}  ,\left\{  2,7\right\}  ,\left\{
+3,5\right\}  ,\left\{  3,6\right\}  $. Set $X=\left\{  1,2,3\right\}  $ and
+$Y=\left\{  4,5,6,7\right\}  $; then, $\left(  G;X,Y\right)  $ is a bipartite
+graph which can be drawn as follows:%
+\[%
+%TCIMACRO{\TeXButton{a bipartite graph}{\xymatrix@C=5pc{
+%1 \are[r] \are[rd] & 4 \\
+%2 \are[ru] \are[rdd] & 5 \\
+%3 \are[ru] \are[r] & 6 \\
+%& 7
+%}}}%
+%BeginExpansion
+\xymatrix@C=5pc{
+1 \are[r] \are[rd] & 4 \\
+2 \are[ru] \are[rdd] & 5 \\
+3 \are[ru] \are[r] & 6 \\
+& 7
+}%
+%EndExpansion
+.
+\]
+
+
+Now, we replace each edge $e$ of $G$ by the corresponding pair
+$\overrightarrow{e}$; this transforms our simple graph into the following
+digraph:%
+\[%
+%TCIMACRO{\TeXButton{a bipartite graph with directed arcs}{\xymatrix@C=5pc{
+%1 \ar[r] \ar[rd] & 4 \\
+%2 \ar[ru] \ar[rdd] & 5 \\
+%3 \ar[ru] \ar[r] & 6 \\
+%& 7
+%}}}%
+%BeginExpansion
+\xymatrix@C=5pc{
+1 \ar[r] \ar[rd] & 4 \\
+2 \ar[ru] \ar[rdd] & 5 \\
+3 \ar[ru] \ar[r] & 6 \\
+& 7
+}%
+%EndExpansion
+.
+\]
+The arcs of this digraph will be called the $G$\textit{-arcs} (to stress that
+they come directly from the edges of $G$, as opposed to the next arcs that we
+are going to add).
+
+Next, we add a new vertex, which we call $s$ and which we draw on the very
+left. This $s$ will be the source of our network. For each $x\in X$, we add an
+arc $\left(  s,x\right)  $ to our digraph; these new arcs (a total of
+$\left\vert X\right\vert $ arcs, one for each $x\in X$) will be called the
+$s$\textit{-arcs}. Here is how our digraph now looks like:%
+\[%
+%TCIMACRO{\TeXButton{a bipartite graph with directed arcs and s}{\xymatrix@C
+%=5pc{
+%& 1 \ar[r] \ar[rd] & 4 \\
+%s \ar[ru] \ar[r] \ar[rd] & 2 \ar[ru] \ar[rdd] & 5 \\
+%& 3 \ar[ru] \ar[r] & 6 \\
+%& & 7
+%}}}%
+%BeginExpansion
+\xymatrix@C=5pc{
+& 1 \ar[r] \ar[rd] & 4 \\
+s \ar[ru] \ar[r] \ar[rd] & 2 \ar[ru] \ar[rdd] & 5 \\
+& 3 \ar[ru] \ar[r] & 6 \\
+& & 7
+}%
+%EndExpansion
+.
+\]
+
+
+Next, we add a new vertex, which we call $t$ and which we draw on the very
+right. This $t$ will be the sink of our network. For each $y\in Y$, we add an
+arc $\left(  y,t\right)  $ to our digraph; these new arcs (a total of
+$\left\vert Y\right\vert $ arcs, one for each $y\in Y$) will be called the
+$t$\textit{-arcs}. Here is how our digraph now looks like:%
+\[%
+%TCIMACRO{\TeXButton{a bipartite graph with directed arcs and s and
+%t}{\xymatrix@C=5pc{
+%& 1 \ar[r] \ar[rd] & 4 \ar[rd] \\
+%s \ar[ru] \ar[r] \ar[rd] & 2 \ar[ru] \ar[rdd] & 5 \ar[r] & t \\
+%& 3 \ar[ru] \ar[r] & 6 \ar[ru] \\
+%& & 7 \ar[ruu]
+%}}}%
+%BeginExpansion
+\xymatrix@C=5pc{
+& 1 \ar[r] \ar[rd] & 4 \ar[rd] \\
+s \ar[ru] \ar[r] \ar[rd] & 2 \ar[ru] \ar[rdd] & 5 \ar[r] & t \\
+& 3 \ar[ru] \ar[r] & 6 \ar[ru] \\
+& & 7 \ar[ruu]
+}%
+%EndExpansion
+.
+\]
+This $9$-vertex digraph will be the underlying digraph of our network $N$. The
+source and the target of $N$ shall be $s$ and $t$, respectively. The capacity
+function $c$ is determined by setting $c\left(  a\right)  =1$ for each arc of
+the network.
+
+We claim that the integer flows on the network $N$ are in bijection with the
+matchings in $G$. Again, let us show how this bijection acts on an example.
+Consider the following integer flow on $N$:%
+\begin{equation}%
+%TCIMACRO{\TeXButton{an integer flow on N}{\xymatrix@C=5pc{
+%& 1 \ar[r] \ar[rd] & 4 \ar@{=>}[rd] \\
+%s \ar[ru] \ar@{=>}[r] \ar@{=>}[rd] & 2 \ar@{=>}[ru] \ar[rdd] & 5 \ar[r] & t \\
+%& 3 \ar[ru] \ar@{=>}[r] & 6 \ar@{=>}[ru] \\
+%& & 7 \ar[ruu]
+%}}}%
+%BeginExpansion
+\xymatrix@C=5pc{
+& 1 \ar[r] \ar[rd] & 4 \ar@{=>}[rd] \\
+s \ar[ru] \ar@{=>}[r] \ar@{=>}[rd] & 2 \ar@{=>}[ru] \ar[rdd] & 5 \ar[r] & t \\
+& 3 \ar[ru] \ar@{=>}[r] & 6 \ar@{=>}[ru] \\
+& & 7 \ar[ruu]
+}%
+%EndExpansion
+, \label{eq.exam.hall.bij1}%
+\end{equation}
+where a simple arrow ($\longrightarrow$) stands for an arc which the flow
+sends to $0$, and where a double arrow ($\Longrightarrow$) stands for an arc
+which the flow sends to $1$. (This is just an alternative way of drawing a
+flow when each arc has capacity $1$.) Consider the arcs that are sent to $1$
+by this flow. Two of these arcs are $G$-arcs, namely $\left(  2,4\right)  $
+and $\left(  3,6\right)  $. The corresponding edges $\left\{  2,4\right\}  $
+and $\left\{  3,6\right\}  $ of $G$ form a matching: the matching $\left\{
+\left\{  2,4\right\}  ,\left\{  3,6\right\}  \right\}  $. This matching has
+size $2$, which is exactly the value of our integer flow.
+\end{example}
+
+Let us now formalize what we did in this example. First, here is the general
+definition of the network $N$:
+
+\begin{definition}
+\textbf{(a)} Pick two distinct new objects $s$ and $t$. Let $V$ be the set
+$W\cup\left\{  s,t\right\}  $. Define three subsets $A_{G}$, $A_{s}$ and
+$A_{t}$ of $V\times V$ as follows:%
+\[
+A_{G}=\left\{  \overrightarrow{e}\ \mid\ e\in E\right\}
+;\ \ \ \ \ \ \ \ \ \ A_{s}=\left\{  \left(  s,x\right)  \ \mid\ x\in
+X\right\}  ;\ \ \ \ \ \ \ \ \ \ A_{t}=\left\{  \left(  y,t\right)
+\ \mid\ y\in Y\right\}  .
+\]
+Let $A$ be the union $A_{G}\cup A_{s}\cup A_{t}$; this is also a subset of
+$V\times V$. Thus, $\left(  V,A\right)  $ is a digraph. The elements of
+$A_{G}$ shall be called the $G$\textit{-arcs}; the elements of $A_{s}$ shall
+be called the $s$\textit{-arcs}; the elements of $A_{t}$ shall be called the
+$t$\textit{-arcs}. Thus, the arcs of the digraph $\left(  V,A\right)  $ are
+the $G$-arcs, the $s$-arcs and the $t$-arcs.
+
+\textbf{(b)} Define the function $c:A\rightarrow\mathbb{Q}_{+}$ by $\left(
+c\left(  a\right)  =1\text{ for each }a\in A\right)  $. Thus, $c$ is a
+constant function.
+
+\textbf{(c)} Let $N$ be the network consisting of the digraph $\left(
+V,A\right)  $, the source $s$, the sink $t$ and the capacity function $c$.
+\end{definition}
+
+We notice that the sets $A_{G}$, $A_{s}$ and $A_{t}$ are mutually disjoint;
+i.e., there is no overlap between the $G$-arcs, the $s$-arcs and the $t$-arcs.
+This is essentially obvious (for example, all $s$-arcs have source $s$,
+whereas none of the other types of arcs do; likewise, all $t$-arcs have target
+$t$, whereas none of the other types of arcs do).
+
+Our specific choice of capacity function $c$ ensures that integer flows on $N$
+have a very simple form: If $f$ is an integer flow on $N$, and if $a\in A$ is
+any arc, then $f\left(  a\right)  $ is either $0$ or $1$. (Indeed, $f\left(
+a\right)  $ must be an integer since $f$ is an integer flow; but the capacity
+constraints enforce $0\leq f\left(  a\right)  \leq1$, so that this integer
+$f\left(  a\right)  $ must be either $0$ or $1$.) Thus, an integer flow $f$ on
+$N$ is uniquely determined by knowing which of the arcs $a\in A$ it sends to
+$1$ (because then, it has to send all the other arcs to $0$).
+
+Another consequence of our definition of capacity function $c$ is the following:
+
+\begin{lemma}
+\label{lem.hall.cPQ}Let $P$ and $Q$ be two subsets of $V$. Then, $c\left(
+P,Q\right)  =\left\vert \left[  P,Q\right]  \right\vert $.
+\end{lemma}
+
+\begin{proof}
+[Proof of Lemma \ref{lem.hall.cPQ}.]The definition of $c\left(  P,Q\right)  $
+yields%
+\[
+c\left(  P,Q\right)  =\sum_{a\in\left[  P,Q\right]  }\underbrace{c\left(
+a\right)  }_{\substack{=1\\\text{(by the definition of }c\text{)}}}=\sum
+_{a\in\left[  P,Q\right]  }1=\left\vert \left[  P,Q\right]  \right\vert
+\cdot1=\left\vert \left[  P,Q\right]  \right\vert .
+\]
+This proves Lemma \ref{lem.hall.cPQ}.
+\end{proof}
+
+Now, we want to formulate the bijection between integer flows on $N$ and
+matchings in $G$. First, we need a simple property of integer flows on our
+specific network $N$:\ \ \ \ \footnote{We are using the \textit{Iverson
+bracket notation}: If $\mathcal{A}$ is any logical statement, then $\left[
+\mathcal{A}\right]  $ denotes the integer $%
+\begin{cases}
+1, & \text{if }\mathcal{A}\text{ is true};\\
+0, & \text{if }\mathcal{A}\text{ is false}%
+\end{cases}
+$.}
+
+\begin{proposition}
+\label{prop.hall.lem1}Let $f$ be any integer flow on $N$. Let $M$ be the
+subset $\left\{  e\in E\ \mid\ f\left(  \overrightarrow{e}\right)  =1\right\}
+$ of $E$.
+
+\textbf{(a)} We have $f\left(  \left(  s,x\right)  \right)  =\sum
+_{\substack{e\in E;\\x\in e}}f\left(  \overrightarrow{e}\right)  $ for each
+$x\in X$.
+
+\textbf{(b)} We have $f\left(  \left(  y,t\right)  \right)  =\sum
+_{\substack{e\in E;\\y\in e}}f\left(  \overrightarrow{e}\right)  $ for each
+$y\in Y$.
+
+\textbf{(c)} We have $M=\left\{  \left\{  x,y\right\}  \ \mid\ \left(
+x,y\right)  \in A_{G};\ f\left(  \left(  x,y\right)  \right)  =1\right\}  $.
+
+\textbf{(d)} The set $M=\left\{  e\in E\ \mid\ f\left(  \overrightarrow{e}%
+\right)  =1\right\}  $ is a matching in $G$.
+
+\textbf{(e)} We have $\left\vert M\right\vert =\left\vert f\right\vert $.
+
+\textbf{(f)} For any vertex $x\in X$, we have $\left[  x\text{ is matched in
+}M\right]  =f\left(  \left(  s,x\right)  \right)  $.
+
+\textbf{(g)} For any vertex $y\in Y$, we have $\left[  y\text{ is matched in
+}M\right]  =f\left(  \left(  y,t\right)  \right)  $.
+\end{proposition}
+
+For example, if $f$ is the flow shown in (\ref{eq.exam.hall.bij1}), then the
+set $M$ in Proposition \ref{prop.hall.lem1} is the matching $\left\{  \left\{
+2,4\right\}  ,\left\{  3,6\right\}  \right\}  $ in $G$.
+
+\begin{proof}
+[Proof of Proposition \ref{prop.hall.lem1} (sketched).]We shall only prove the
+parts of Proposition \ref{prop.hall.lem1} used in the below proof of Theorem
+\ref{thm.hall} (namely, parts \textbf{(a)}, \textbf{(b)}, \textbf{(d)} and
+\textbf{(e)}); the rest is left to the reader.
+
+We first make the following observations:
+
+\begin{statement}
+\textit{Observation 1:} Let $x\in X$ and $e\in E$. Then, the arc
+$\overrightarrow{e}$ has source $x$ if and only if $x\in e$.
+\end{statement}
+
+[\textit{Proof of Observation 1:} $\Longrightarrow:$ Assume that the arc
+$\overrightarrow{e}$ has source $x$. We must prove that $x\in e$.
+
+Recall that $\overrightarrow{e}$ is defined to be the pair $\left(
+x_{1},y_{1}\right)  $, where $x_{1}$ is the unique endpoint of $e$ lying in
+$X$, and where $y_{1}$ is the unique endpoint of $e$ lying in $Y$. Consider
+these $x_{1}$ and $y_{1}$. The source of the arc $\overrightarrow{e}$ is
+$x_{1}$ (since $\overrightarrow{e}=\left(  x_{1},y_{1}\right)  $). But we have
+assumed that the arc $\overrightarrow{e}$ has source $x$. Combining the
+previous two sentences, we conclude that $x_{1}=x$. But $x_{1}$ is an endpoint
+of $e$ (since $x_{1}$ is the unique endpoint of $e$ lying in $X$). In other
+words, $x_{1}\in e$. Hence, $x=x_{1}\in e$. This proves the $\Longrightarrow$
+direction of Observation 1.
+
+$\Longleftarrow:$ Assume that $x\in e$. We must show that the arc
+$\overrightarrow{e}$ has source $x$.
+
+Recall that $\overrightarrow{e}$ is defined to be the pair $\left(
+x_{1},y_{1}\right)  $, where $x_{1}$ is the unique endpoint of $e$ lying in
+$X$, and where $y_{1}$ is the unique endpoint of $e$ lying in $Y$. Consider
+these $x_{1}$ and $y_{1}$. But $x$ is an endpoint of $e$ (since $x\in e$) and
+lies in $X$ (since $x\in X$). Thus, the unique endpoint of $e$ lying in $X$
+must be $x$. In other words, $x_{1}$ must be $x$ (since $x_{1}$ is the unique
+endpoint of $e$ lying in $X$). Now, the arc $\overrightarrow{e}$ has source
+$x_{1}$ (since $\overrightarrow{e}=\left(  x_{1},y_{1}\right)  $). In other
+words, the arc $\overrightarrow{e}$ has source $x$ (since $x_{1}=x$). Thus,
+the $\Longleftarrow$ direction of Observation 1 is proven.]
+
+\begin{statement}
+\textit{Observation 2:} Let $y\in Y$ and $e\in E$. Then, the arc
+$\overrightarrow{e}$ has target $y$ if and only if $y\in e$.
+\end{statement}
+
+[\textit{Proof of Observation 2:} Analogous to Observation 1.]
+
+\begin{statement}
+\textit{Observation 3:} The arcs $\overrightarrow{e}$ for $e\in E$ are
+pairwise distinct.
+\end{statement}
+
+[\textit{Proof of Observation 3:} If $e\in E$ is any edge, then $e$ can be
+reconstructed uniquely from the pair $\overrightarrow{e}$ (indeed, if
+$\overrightarrow{e}=\left(  x,y\right)  $, then $e=\left\{  x,y\right\}  $, as
+we have shown before). Thus, if $e_{1}$ and $e_{2}$ are two edges in $E$ such
+that $\overrightarrow{e_{1}}=\overrightarrow{e_{2}}$, then $e_{1}=e_{2}$. In
+other words, the arcs $\overrightarrow{e}$ for $e\in E$ are pairwise distinct.
+This proves Observation 3.]
+
+Now, we observe that $s\notin W$, so that $s\notin X$ and $s\notin Y$. Also,
+$X\cap Y=\varnothing$ (since $\left(  G;X,Y\right)  $ is a bipartite graph),
+so that $X\subseteq V\setminus Y$.
+
+\begin{statement}
+\textit{Observation 4:} Let $x\in X$. Then, the arcs $a\in A$ having source
+$x$ are exactly the arcs $\overrightarrow{e}$ for $e\in E$ satisfying $x\in e$.
+\end{statement}
+
+[\textit{Proof of Observation 4:} We have $x\in X$ but $s\notin X$ (since
+$s\notin W$). Thus, $x\neq s$. Hence, there are no $s$-arcs having source $x$
+(since all $s$-arcs have source $s\neq x$). Also, $x\notin Y$ (since $x\in
+X\subseteq V\setminus Y$). Thus, there are no $t$-arcs having source $x$
+(since all $s$-arcs have source lying in $Y$).
+
+Recall that there are three types of arcs $a\in A$: the $G$-arcs, the $s$-arcs
+and the $t$-arcs. Among these three types, only $G$-arcs can have source $x$
+(because we have seen that there are no $s$-arcs having source $x$, and that
+there are no $t$-arcs having source $x$). Hence,%
+\begin{align*}
+&  \left\{  \text{the arcs }a\in A\text{ having source }x\right\} \\
+&  =\left\{  \text{the }G\text{-arcs having source }x\right\} \\
+&  =\left\{  \text{the arcs }\overrightarrow{e}\text{ (with }e\in E\text{)
+having source }x\right\} \\
+&  \ \ \ \ \ \ \ \ \ \ \left(  \text{since the }G\text{-arcs are precisely the
+arcs }\overrightarrow{e}\text{ (with }e\in E\text{)}\right) \\
+&  =\left\{  \overrightarrow{e}\ \mid\ e\in E;\ \underbrace{\text{the arc
+}\overrightarrow{e}\text{ has source }x}_{\substack{\Longleftrightarrow
+\ \left(  x\in e\right)  \\\text{(by Observation 1)}}}\right\} \\
+&  =\left\{  \overrightarrow{e}\ \mid\ e\in E;\ x\in e\right\}  =\left\{
+\text{the arcs }\overrightarrow{e}\text{ for }e\in E\text{ satisfying }x\in
+e\right\}  .
+\end{align*}
+In other words, the arcs $a\in A$ having source $x$ are exactly the arcs
+$\overrightarrow{e}$ for $e\in E$ satisfying $x\in e$. This proves Observation 4.]
+
+\begin{statement}
+\textit{Observation 5:} Let $y\in Y$. Then, the arcs $a\in A$ having target
+$y$ are exactly the arcs $\overrightarrow{e}$ for $e\in E$ satisfying $y\in e$.
+\end{statement}
+
+[\textit{Proof of Observation 5:} Analogous to Observation 4.]
+
+\begin{statement}
+\textit{Observation 6:} Let $x\in X$. Then, there is a unique arc $a\in A$
+having target $x$, namely the $s$-arc $\left(  s,x\right)  $.
+\end{statement}
+
+[\textit{Proof of Observation 6:} We have $x\in X\subseteq W$ but $t\notin W$.
+Thus, $x\neq t$. Hence, there are no $t$-arcs having target $x$ (since all
+$t$-arcs have target $t\neq x$). Also, $x\notin Y$ (since $x\in X\subseteq
+V\setminus Y$). Thus, there are no $G$-arcs having target $x$ (since all
+$G$-arcs have target lying in $Y$).
+
+Recall that there are three types of arcs $a\in A$: the $G$-arcs, the $s$-arcs
+and the $t$-arcs. Among these three types, only $s$-arcs can have target $x$
+(because we have seen that there are no $t$-arcs having target $x$, and that
+there are no $G$-arcs having target $x$). Hence,%
+\[
+\left\{  \text{the arcs }a\in A\text{ having target }x\right\}  =\left\{
+\text{the }s\text{-arcs having target }x\right\}  .
+\]
+
+
+But the $s$-arcs are simply the pairs of the form $\left(  s,x^{\prime
+}\right)  $ for all $x^{\prime}\in X$ (by the definition of the $s$-arcs).
+Thus, there is a unique $s$-arc having target $x$, namely $\left(  s,x\right)
+$ (since $x\in X$). In other words, $\left\{  \text{the }s\text{-arcs having
+target }x\right\}  =\left\{  \left(  s,x\right)  \right\}  $. Hence,%
+\[
+\left\{  \text{the arcs }a\in A\text{ having target }x\right\}  =\left\{
+\text{the }s\text{-arcs having target }x\right\}  =\left\{  \left(
+s,x\right)  \right\}  .
+\]
+In other words, there is a unique arc $a\in A$ having target $x$, namely the
+$s$-arc $\left(  s,x\right)  $. This proves Observation 6.]
+
+\begin{statement}
+\textit{Observation 7:} Let $y\in Y$. Then, there is a unique arc $a\in A$
+having source $y$, namely the $t$-arc $\left(  y,t\right)  $.
+\end{statement}
+
+[\textit{Proof of Observation 7:} Analogous to Observation 6.]
+
+\begin{statement}
+\textit{Observation 8:} The arcs $a\in A$ having source $s$ are exactly the
+arcs $\left(  s,x\right)  $ for $x\in X$, and these arcs are pairwise distinct.
+\end{statement}
+
+[\textit{Proof of Observation 8:} We have $s\notin W$ and thus $s\notin X$
+(since $X\subseteq W$). Hence, there are no $G$-arcs having source $s$ (since
+all $G$-arcs have source lying in $X$). Also, $s\notin Y$. Thus, there are no
+$t$-arcs having source $s$ (since all $t$-arcs have source lying in $Y$).
+
+Recall that there are three types of arcs $a\in A$: the $G$-arcs, the $s$-arcs
+and the $t$-arcs. Among these three types, only $s$-arcs can have source $s$
+(because we have seen that there are no $G$-arcs having source $s$, and that
+there are no $t$-arcs having source $s$). Hence,%
+\begin{align*}
+&  \left\{  \text{the arcs }a\in A\text{ having source }s\right\} \\
+&  =\left\{  \text{the }s\text{-arcs having source }s\right\} \\
+&  =\left\{  \text{the }s\text{-arcs}\right\}  \ \ \ \ \ \ \ \ \ \ \left(
+\text{since \textbf{all} }s\text{-arcs have source }s\right) \\
+&  =A_{s}=\left\{  \left(  s,x\right)  \ \mid\ x\in X\right\}  .
+\end{align*}
+In other words, the arcs $a\in A$ having source $s$ are exactly the arcs
+$\left(  s,x\right)  $ for $x\in X$. Furthermore, these arcs are pairwise
+distinct (since the targets $x$ of these arcs are pairwise distinct). This
+proves Observation 8.]
+
+\begin{statement}
+\textit{Observation 9:} There are no arcs $a\in A$ having target $s$.
+\end{statement}
+
+[\textit{Proof of Observation 9:} We have $s\notin W$ and thus $s\notin X$
+(since $X\subseteq W$). Hence, there are no $s$-arcs having target $s$ (since
+all $G$-arcs have target lying in $X$). Also, $s\notin W$ and thus $s\notin Y$
+(since $Y\subseteq W$). Hence, there are no $G$-arcs having target $s$ (since
+all $G$-arcs have target lying in $Y$). Finally, $s\neq t$. Thus, there are no
+$t$-arcs having target $s$ (since all $t$-arcs have target $t\neq s$).
+
+Recall that there are three types of arcs $a\in A$: the $G$-arcs, the $s$-arcs
+and the $t$-arcs. Among these three types, none can have target $s$ (since we
+have seen that there are no $G$-arcs having target $s$, no $s$-arcs having
+target $s$, and no $t$-arcs having target $s$). Thus, there are no arcs $a\in
+A$ having target $s$. This proves Observation 9.]
+
+Recall that $f$ is a flow; thus, $f$ satisfies the capacity constraints and
+the conservation constraints.
+
+\textbf{(a)} Let $x\in X$. Then, $x\in X\subseteq W=V\setminus\left\{
+s,t\right\}  $. Hence, $f^{-}\left(  x\right)  =f^{+}\left(  x\right)  $
+(since $f$ satisfies the conservation constraints).
+
+Observation 6 shows that there is a unique arc $a\in A$ having target $x$,
+namely the $s$-arc $\left(  s,x\right)  $. Thus, $\sum_{\substack{a\in A\text{
+is an arc}\\\text{with target }x}}f\left(  a\right)  =f\left(  \left(
+s,x\right)  \right)  $.
+
+The definition of $f^{-}\left(  x\right)  $ yields
+\begin{equation}
+f^{-}\left(  x\right)  =\sum_{\substack{a\in A\text{ is an arc}\\\text{with
+target }x}}f\left(  a\right)  =f\left(  \left(  s,x\right)  \right)  .
+\label{pf.prop.hall.lem1.a.f-}%
+\end{equation}
+
+
+Observation 4 shows that the arcs $a\in A$ having source $x$ are exactly the
+arcs $\overrightarrow{e}$ for $e\in E$ satisfying $x\in e$. Since these arcs
+$\overrightarrow{e}$ are pairwise distinct (by Observation 3), we thus
+conclude that $\sum_{\substack{a\in A\text{ is an arc}\\\text{with source }%
+x}}f\left(  a\right)  =\sum_{\substack{e\in E;\\x\in e}}f\left(
+\overrightarrow{e}\right)  $.
+
+The definition of $f^{+}\left(  x\right)  $ yields%
+\begin{equation}
+f^{+}\left(  x\right)  =\sum_{\substack{a\in A\text{ is an arc}\\\text{with
+source }x}}f\left(  a\right)  =\sum_{\substack{e\in E;\\x\in e}}f\left(
+\overrightarrow{e}\right)  . \label{pf.prop.hall.lem1.a.f+}%
+\end{equation}
+
+
+Now, recall that $f^{-}\left(  x\right)  =f^{+}\left(  x\right)  $. In view of
+(\ref{pf.prop.hall.lem1.a.f-}) and (\ref{pf.prop.hall.lem1.a.f+}), this
+rewrites as $f\left(  \left(  s,x\right)  \right)  =\sum_{\substack{e\in
+E;\\x\in e}}f\left(  \overrightarrow{e}\right)  $. This proves Proposition
+\ref{prop.hall.lem1} \textbf{(a)}.
+
+\textbf{(b)} The proof of Proposition \ref{prop.hall.lem1} \textbf{(b)} is
+analogous to that of Proposition \ref{prop.hall.lem1} \textbf{(a)}.
+
+\textbf{(d)} Clearly, $M=\left\{  e\in E\ \mid\ f\left(  \overrightarrow{e}%
+\right)  =1\right\}  $ is a subset of $E$. We must prove that this subset $M$
+is a matching in $G$. Since we already know that $M$ is a subset of $E$, we
+only need to verify that no two distinct edges in $M$ have a vertex in common
+(by the definition of a matching).
+
+Let us assume the contrary. Thus, there exist two distinct edges $g$ and $h$
+in $M$ that have a vertex in common. Consider such $g$ and $h$.
+
+The edges $g$ and $h$ have a vertex in common. In other words, there exists a
+$w\in W$ such that $w\in g$ and $w\in h$. Consider this $w$.
+
+We have $g\in M\subseteq E$ and $w\in g$. Thus, $g$ is an edge $e\in E$
+satisfying $w\in e$. Similarly, $h$ is an edge $e\in E$ satisfying $w\in e$.
+
+From $g\in M=\left\{  e\in E\ \mid\ f\left(  \overrightarrow{e}\right)
+=1\right\}  $, we conclude that $f\left(  \overrightarrow{g}\right)  =1$.
+Similarly, $f\left(  \overrightarrow{h}\right)  =1$.
+
+We have $w\in W=X\cup Y$ (since $\left(  G;X,Y\right)  $ is a bipartite
+graph); thus, we have either $w\in X$ or $w\in Y$. So we are in one of the
+following two cases:
+
+\begin{statement}
+\textit{Case 1:} We have $w\in X$.
+\end{statement}
+
+\begin{statement}
+\textit{Case 2:} We have $w\in Y$.
+\end{statement}
+
+Let us consider Case 1. In this case, we have $w\in X$. Proposition
+\ref{prop.hall.lem1} \textbf{(a)} (applied to $w=x$) thus yields%
+\begin{align*}
+f\left(  \left(  s,w\right)  \right)   &  =\sum_{\substack{e\in E;\\w\in
+e}}f\left(  \overrightarrow{e}\right)  =\underbrace{f\left(
+\overrightarrow{g}\right)  }_{=1}+\underbrace{f\left(  \overrightarrow{h}%
+\right)  }_{=1}+\sum_{\substack{e\in E;\\w\in e;\\e\notin\left\{  g,h\right\}
+}}\underbrace{f\left(  \overrightarrow{e}\right)  }_{\substack{\geq
+0\\\text{(since }f\text{ is a map }A\rightarrow\mathbb{Q}_{+}\text{)}}}\\
+&  \ \ \ \ \ \ \ \ \ \ \left(
+\begin{array}
+[c]{c}%
+\text{here, we have split off the addends for }e=g\text{ and }e=h\text{,}\\
+\text{since }g\text{ and }h\text{ are two distinct edges }e\in E\text{
+satisfying }w\in e
+\end{array}
+\right) \\
+&  \geq1+1+\sum_{\substack{e\in E;\\w\in e;\\e\notin\left\{  g,h\right\}
+}}0=2.
+\end{align*}
+
+
+But recall that $f$ satisfies the capacity constraints. Thus, $0\leq f\left(
+a\right)  \leq c\left(  a\right)  $ for each arc $a\in A$. Applying this to
+$a=\left(  s,w\right)  $, we conclude that $0\leq f\left(  \left(  s,w\right)
+\right)  \leq c\left(  \left(  s,w\right)  \right)  $. Hence, $f\left(
+\left(  s,w\right)  \right)  \leq c\left(  \left(  s,w\right)  \right)  =1$
+(by the definition of $c$). This contradicts $f\left(  \left(  s,w\right)
+\right)  \geq2>1$. Thus, we have found a contradiction in Case 1.
+
+Similarly, we obtain a contradiction in Case 2 (using Proposition
+\ref{prop.hall.lem1} \textbf{(b)} instead of Proposition \ref{prop.hall.lem1}
+\textbf{(a)}).
+
+Hence, we have found a contradiction in both Cases 1 and 2. Thus, we always
+get a contradiction. This completes our proof that $M$ is a matching in $G$.
+Thus, Proposition \ref{prop.hall.lem1} \textbf{(d)} is established.
+
+\textbf{(e)} For any edge $e\in E$, we have either $f\left(
+\overrightarrow{e}\right)  =0$ or $f\left(  \overrightarrow{e}\right)
+=1$\ \ \ \ \footnote{\textit{Proof.} Let $e\in E$. Then, $\overrightarrow{e}$
+is an arc in $A$ (namely, a $G$-arc). But recall that $f$ satisfies the
+capacity constraints. Thus, $0\leq f\left(  a\right)  \leq c\left(  a\right)
+$ for each arc $a\in A$. Applying this to $a=\overrightarrow{e}$, we conclude
+that $0\leq f\left(  \overrightarrow{e}\right)  \leq c\left(
+\overrightarrow{e}\right)  $. Hence, $f\left(  \overrightarrow{e}\right)  \leq
+c\left(  \overrightarrow{e}\right)  =1$ (by the definition of $c$). Thus,
+$0\leq f\left(  \overrightarrow{e}\right)  \leq1$.
+\par
+But $f$ is an integer flow; thus, $f\left(  \overrightarrow{e}\right)  $ is an
+integer. Combining this with $0\leq f\left(  \overrightarrow{e}\right)  \leq
+1$, we conclude that $f\left(  \overrightarrow{e}\right)  \in\left\{
+0,1\right\}  $. In other words, either $f\left(  \overrightarrow{e}\right)
+=0$ or $f\left(  \overrightarrow{e}\right)  =1$. Qed.}.
+
+Observation 8 shows that the arcs $a\in A$ having source $s$ are exactly the
+arcs $\left(  s,x\right)  $ for $x\in X$, and these arcs are pairwise
+distinct. Hence,%
+\begin{align}
+\sum_{\substack{a\in A\text{ is an arc}\\\text{with source }s}}f\left(
+a\right)   &  =\sum_{x\in X}\underbrace{f\left(  \left(  s,x\right)  \right)
+}_{\substack{=\sum_{\substack{e\in E;\\x\in e}}f\left(  \overrightarrow{e}%
+\right)  \\\text{(by Proposition \ref{prop.hall.lem1} \textbf{(a)})}%
+}}=\underbrace{\sum_{x\in X}\sum_{\substack{e\in E;\\x\in e}}}_{=\sum_{e\in
+E}\sum_{\substack{x\in X;\\x\in e}}}f\left(  \overrightarrow{e}\right)
+\nonumber\\
+&  =\sum_{e\in E}\sum_{\substack{x\in X;\\x\in e}}f\left(  \overrightarrow{e}%
+\right)  . \label{pf.prop.hall.lem1.e.1}%
+\end{align}
+But each $e\in E$ satisfies
+\begin{equation}
+\sum_{\substack{x\in X;\\x\in e}}f\left(  \overrightarrow{e}\right)  =f\left(
+\overrightarrow{e}\right)  \label{pf.prop.hall.lem1.e.2}%
+\end{equation}
+\footnote{\textit{Proof of (\ref{pf.prop.hall.lem1.e.2}):} Let $e\in E$. Each
+edge of $G$ contains exactly one vertex in $X$ and exactly one vertex in $Y$
+(since $\left(  G;X,Y\right)  $ is a bipartite graph). Thus, in particular,
+each edge of $G$ contains exactly one vertex in $X$. Applying this to the edge
+$e$, we conclude that $e$ contains exactly one vertex in $X$. In other words,
+there is exactly one $x\in X$ satisfying $x\in e$. Thus, the sum
+$\sum_{\substack{x\in X;\\x\in e}}f\left(  \overrightarrow{e}\right)  $ has
+exactly one addend. Hence, this sum simplifies as follows: $\sum
+_{\substack{x\in X;\\x\in e}}f\left(  \overrightarrow{e}\right)  =f\left(
+\overrightarrow{e}\right)  $. This proves (\ref{pf.prop.hall.lem1.e.2}).}.
+Hence, (\ref{pf.prop.hall.lem1.e.1}) becomes%
+\begin{align}
+\sum_{\substack{a\in A\text{ is an arc}\\\text{with source }s}}f\left(
+a\right)   &  =\sum_{e\in E}\underbrace{\sum_{\substack{x\in X;\\x\in
+e}}f\left(  \overrightarrow{e}\right)  }_{\substack{=f\left(
+\overrightarrow{e}\right)  \\\text{(by (\ref{pf.prop.hall.lem1.e.2}))}}%
+}=\sum_{e\in E}f\left(  \overrightarrow{e}\right) \nonumber\\
+&  =\sum_{\substack{e\in E;\\f\left(  \overrightarrow{e}\right)
+=0}}\underbrace{f\left(  \overrightarrow{e}\right)  }_{=0}+\sum
+_{\substack{e\in E;\\f\left(  \overrightarrow{e}\right)  =1}%
+}\underbrace{f\left(  \overrightarrow{e}\right)  }_{=1}\nonumber\\
+&  \ \ \ \ \ \ \ \ \ \ \left(
+\begin{array}
+[c]{c}%
+\text{because for any edge }e\in E\text{, we have}\\
+\text{either }f\left(  \overrightarrow{e}\right)  =0\text{ or }f\left(
+\overrightarrow{e}\right)  =1\text{ (but not both)}%
+\end{array}
+\right) \nonumber\\
+&  =\underbrace{\sum_{\substack{e\in E;\\f\left(  \overrightarrow{e}\right)
+=0}}0}_{=0}+\sum_{\substack{e\in E;\\f\left(  \overrightarrow{e}\right)
+=1}}1=\sum_{\substack{e\in E;\\f\left(  \overrightarrow{e}\right)
+=1}}1\nonumber\\
+&  =\left\vert \underbrace{\left\{  e\in E\ \mid\ f\left(  \overrightarrow{e}%
+\right)  =1\right\}  }_{=M}\right\vert \cdot1=\left\vert M\right\vert
+\cdot1=\left\vert M\right\vert . \label{pf.prop.hall.lem1.e.4}%
+\end{align}
+
+
+On the other hand, Observation 9 shows that there are no arcs $a\in A$ having
+target $s$. Hence,
+\begin{equation}
+\sum_{\substack{a\in A\text{ is an arc}\\\text{with target }s}}f\left(
+a\right)  =\left(  \text{empty sum}\right)  =0. \label{pf.prop.hall.lem1.e.5}%
+\end{equation}
+
+
+But the definition of $\left\vert f\right\vert $ yields%
+\begin{align*}
+\left\vert f\right\vert  &  =\underbrace{f^{+}\left(  s\right)  }%
+_{\substack{=\sum_{\substack{a\in A\text{ is an arc}\\\text{with source }%
+s}}f\left(  a\right)  \\\text{(by the definition of }f^{+}\left(  s\right)
+\text{)}}}-\underbrace{f^{-}\left(  s\right)  }_{\substack{=\sum
+_{\substack{a\in A\text{ is an arc}\\\text{with target }s}}f\left(  a\right)
+\\\text{(by the definition of }f^{-}\left(  s\right)  \text{)}}}\\
+&  =\underbrace{\sum_{\substack{a\in A\text{ is an arc}\\\text{with source }%
+s}}f\left(  a\right)  }_{\substack{=\left\vert M\right\vert \\\text{(by
+(\ref{pf.prop.hall.lem1.e.4}))}}}-\underbrace{\sum_{\substack{a\in A\text{ is
+an arc}\\\text{with target }s}}f\left(  a\right)  }_{\substack{=0\\\text{(by
+(\ref{pf.prop.hall.lem1.e.5}))}}}\\
+&  =\left\vert M\right\vert -0=\left\vert M\right\vert .
+\end{align*}
+In other words, $\left\vert M\right\vert =\left\vert f\right\vert $. This
+proves Proposition \ref{prop.hall.lem1} \textbf{(e)}.
+\end{proof}
+
+\begin{noncompile}
+\begin{proof}
+[Proof of Proposition \ref{prop.hall.lem1}.](THIS\ IS\ OUTDATED!) Note that
+$f$ is a flow; thus, $f$ satisfies the capacity constraints and the
+conservation constraints.
+
+Every $\left(  x,y\right)  \in A_{G}$ satisfies $\left\{  x,y\right\}  \in
+E$\ \ \ \ \footnote{\textit{Proof.} Let $\left(  x,y\right)  \in A_{G}$. Then,
+$\left(  x,y\right)  \in A_{G}=\left\{  \overrightarrow{e}\ \mid\ e\in
+E\right\}  $. In other words, $\left(  x,y\right)  =\overrightarrow{e}$ for
+some $e\in E$. Consider this $e$.
+\par
+We know that $e$ is an edge of $G$ (since $e\in E$). Thus, exactly one
+endpoint of $e$ lies in $X$, and exactly one endpoint of $e$ lies in $Y$. Let
+$u$ be the endpoint of $e$ lying in $X$, and let $v$ be the endpoint of $e$
+lying in $Y$. The definition of $\overrightarrow{e}$ thus shows that
+$\overrightarrow{e}=\left(  u,v\right)  $. Hence, $\left(  x,y\right)
+=\overrightarrow{e}=\left(  u,v\right)  $. Therefore, $\left\{  x,y\right\}
+=\left\{  u,v\right\}  =e$ (since $u$ and $v$ are the endpoints of $e$). Thus,
+$\left\{  x,y\right\}  =e\in E$, qed.}. Thus, the set \newline$\left\{
+\left\{  x,y\right\}  \ \mid\ \left(  x,y\right)  \in A_{G};\ f\left(  \left(
+x,y\right)  \right)  =1\right\}  $ is a subset of $E$. In other words, the set
+$M$ is a subset of $E$ (since $M=\left\{  \left\{  x,y\right\}  \ \mid
+\ \left(  x,y\right)  \in A_{G};\ f\left(  \left(  x,y\right)  \right)
+=1\right\}  $).
+
+In order to prove that this set $M$ is a matching in $G$, we thus only need to
+prove that no two distinct edges in $M$ have a vertex in common.
+
+Let us assume the contrary. Thus, there exist two distinct edges $g$ and $h$
+in $M$ that have a vertex in common. Consider such $g$ and $h$.
+
+The edges $g$ and $h$ have a vertex in common. In other words, there exists a
+$w\in W$ such that $w\in g$ and $w\in h$. Consider this $w$. We have $w\in
+W=X\cup Y$ (since $\left(  G;X,Y\right)  $ is a bipartite graph); thus, we
+have either $w\in X$ or $w\in Y$. So we are in one of the following two cases:
+
+\begin{statement}
+\textit{Case 1:} We have $w\in X$.
+\end{statement}
+
+\begin{statement}
+\textit{Case 2:} We have $w\in Y$.
+\end{statement}
+
+Let us consider Case 1 first. In this case, we have $w\in X$. Thus, there is
+only one arc $a\in A$ having target $w$: namely, the $s$-arc $\left(
+s,w\right)  $ (because of how the set $A$ is defined). Hence, $f^{-}\left(
+w\right)  =f\left(  \left(  s,w\right)  \right)  \leq c\left(  \left(
+s,w\right)  \right)  $ (since $f$ satisfies the capacity constraints). But
+also, $w\in W=V\setminus\left\{  s,t\right\}  $ (since $V=W\cup\left\{
+s,t\right\}  $ and since $s,t\notin W$); therefore, $f^{-}\left(  w\right)
+=f^{+}\left(  w\right)  $ (since $f$ satisfies the conservation constraints).
+Hence, $f^{+}\left(  w\right)  =f^{-}\left(  w\right)  \leq c\left(  \left(
+s,w\right)  \right)  =1$ (by the definition of $c$).
+
+We have $X\cap Y=\varnothing$ (since $\left(  G;X,Y\right)  $ is a bipartite
+graph). Thus, from $w\in X$, we obtain $w\notin Y$.
+
+But $g\in M=\left\{  \left\{  x,y\right\}  \ \mid\ \left(  x,y\right)  \in
+A_{G};\ f\left(  \left(  x,y\right)  \right)  =1\right\}  $. In other words,
+$g=\left\{  x,y\right\}  $ for some $\left(  x,y\right)  \in A_{G}$ satisfying
+$f\left(  \left(  x,y\right)  \right)  =1$. Consider this $\left(  x,y\right)
+$. We have $\left(  x,y\right)  \in A_{G}=\left\{  \overrightarrow{e}%
+\ \mid\ e\in E\right\}  $, so that $\left(  x,y\right)  =\overrightarrow{e}$
+for some $e\in E$. Consider this $e$. Clearly, from $\overrightarrow{e}%
+=\left(  x,y\right)  $, we obtain $e=\left\{  x,y\right\}  =g$. Hence,
+$g=\left\{  x,y\right\}  $. Moreover, $x=w$\ \ \ \ 
+\end{proof}
+
+\textit{Proof.} We have $w\in g=\left\{  x,y\right\}  $. Hence, either $w=x$
+and $w=y$. Since $w=y$ is impossible (because $w\notin Y$ but $y\in Y$).
+\end{noncompile}
+
+We omit the proof of Proposition \ref{prop.hall.lem1}; it is an easy exercise
+on bookkeeping and understanding the definitions of flows and matchings.
+
+TODO: Prove the rest of Proposition \ref{prop.hall.lem1}.
+
+Proposition \ref{prop.hall.lem1} allows us to make the following definition:
+
+\begin{definition}
+We define a map%
+\begin{align*}
+\Phi:\left\{  \text{integer flows on }N\right\}   &  \rightarrow\left\{
+\text{matchings in }G\right\}  ,\\
+f  &  \mapsto\left\{  e\in E\ \mid\ f\left(  \overrightarrow{e}\right)
+=1\right\}  .
+\end{align*}
+This map is well-defined, because Proposition \ref{prop.hall.lem1}
+\textbf{(d)} shows that if $f$ is an integer flow on $N$, then $\left\{  e\in
+E\ \mid\ f\left(  \overrightarrow{e}\right)  =1\right\}  $ is a matching in
+$G$.
+\end{definition}
+
+We aim to show that this map $\Phi$ is a bijection. In order to do so, we will
+construct its inverse, which of course will be a map transforming each
+matching in $G$ into an integer flow on $N$. This requires the following
+lemma:\footnote{We are again using the Iverson bracket notation.}
+
+\begin{lemma}
+\label{lem.hall.lem2}Let $M$ be any matching in $G$. Define a map
+$f:A\rightarrow\mathbb{Q}_{+}$ by setting%
+\begin{align*}
+f\left(  a\right)   &  =%
+\begin{cases}
+\left[  \text{there is an }e\in M\text{ such that }a=\overrightarrow{e}%
+\right]  , & \text{if }a\in A_{G};\\
+\left[  x\text{ is matched in }M\right]  , & \text{if }a=\left(  s,x\right)
+\text{ for some }x\in X;\\
+\left[  y\text{ is matched in }M\right]  , & \text{if }a=\left(  y,t\right)
+\text{ for some }y\in Y
+\end{cases}
+\\
+&  \ \ \ \ \ \ \ \ \ \ \text{for each }a\in A.
+\end{align*}
+Then, $f$ is an integer flow on $N$.
+\end{lemma}
+
+Again, the proof of Lemma \ref{lem.hall.lem2} is easy (just check that the
+capacity and conservation constraints are satisfied).
+
+TODO: Prove Lemma \ref{lem.hall.lem2}.
+
+Lemma \ref{lem.hall.lem2} allows us to define the following:
+
+\begin{definition}
+We define a map
+\[
+\Psi:\left\{  \text{matchings in }G\right\}  \rightarrow\left\{  \text{integer
+flows on }N\right\}
+\]
+by the requirement that $\Psi$ map any matching $M$ in $G$ to the integer flow
+$f$ constructed in Lemma \ref{lem.hall.lem2}.
+\end{definition}
+
+\begin{proposition}
+\label{prop.hall.inverse}\textbf{(a)} The maps $\Phi$ and $\Psi$ are mutually
+inverse bijections between $\left\{  \text{integer flows on }N\right\}  $ and
+$\left\{  \text{matchings in }G\right\}  $.
+
+\textbf{(b)} For any integer flow $f$ on $N$, we have $\left\vert \Phi\left(
+f\right)  \right\vert =\left\vert f\right\vert $.
+\end{proposition}
+
+We leave the proof of Proposition \ref{prop.hall.inverse} to the reader again.
+(It is fairly simple: Part \textbf{(b)} follows from Proposition
+\ref{prop.hall.lem1} \textbf{(e)}. Part \textbf{(a)} requires proving that
+$\Phi\circ\Psi=\operatorname*{id}$ and $\Psi\circ\Phi=\operatorname*{id}$. The
+proof of $\Phi\circ\Psi=\operatorname*{id}$ is obvious; the proof of
+$\Psi\circ\Phi=\operatorname*{id}$ relies on the conservation constraints.)
+
+We now see how to find a matching in $G$ of maximum size. Indeed, we can find
+an integer flow on $N$ of maximum value (see Remark \ref{rmk.3balg} for how
+this is done). Then, the bijection $\Phi$ transforms this integer flow into a
+matching in $G$ of maximum size (because Proposition \ref{prop.hall.inverse}
+\textbf{(b)} shows that the value of an integer flow equals the size of the
+matching corresponding to this flow under the bijection $\Phi$). Hence, we
+obtain a matching in $G$ of maximum size.
+
+We are also close to proving Theorem \ref{thm.hall} now. Before we do this,
+let us prove a really simple lemma about matchings:
+
+\begin{lemma}
+\label{lem.hall.complete-mat}Let $\left(  G;X,Y\right)  $ be a bipartite
+graph. Let $M$ be a matching in $G$.
+
+\textbf{(a)} We have $\left\vert M\right\vert \leq\left\vert X\right\vert $.
+
+\textbf{(b)} If $\left\vert M\right\vert \geq\left\vert X\right\vert $, then
+the matching $M$ is $X$-complete.
+\end{lemma}
+
+\begin{proof}
+[Proof of Lemma \ref{lem.hall.complete-mat} (sketched).]Recall that $\left(
+G;X,Y\right)  $ is a bipartite graph. Hence, each edge of $G$ contains exactly
+one vertex in $X$ and exactly one vertex in $Y$. Thus, we can define a map
+$\mathbf{x}:M\rightarrow X$ that sends each edge $e\in M$ to the unique vertex
+in $X$ contained in $e$. Consider this map $\mathbf{x}$.
+
+The map $\mathbf{x}$ is injective\footnote{\textit{Proof.} Let $m$ and $n$ be
+two distinct elements of $M$. We want to prove that $\mathbf{x}\left(
+m\right)  \neq\mathbf{x}\left(  n\right)  $.
+\par
+Assume the contrary. Thus, $\mathbf{x}\left(  m\right)  =\mathbf{x}\left(
+n\right)  $. Define an $x\in X$ by $x=\mathbf{x}\left(  m\right)
+=\mathbf{x}\left(  n\right)  $. Now, $\mathbf{x}\left(  m\right)  $ is the
+unique vertex in $X$ contained in $m$ (by the definition of $\mathbf{x}$). In
+other words, $x$ is the unique vertex in $X$ contained in $m$ (since
+$x=\mathbf{x}\left(  m\right)  $). Thus, $x$ is contained in $m$. In other
+words, $x\in m$. Similarly, $x\in n$. The edges $m$ and $n$ are two distinct
+edges in $M$, and have the vertex $x$ in common (since $x\in m$ and $x\in n$).
+\par
+But $M$ is a matching. Hence, no two distinct edges in $M$ have a vertex in
+common (by the definition of a matching). This contradicts that the edges $m$
+and $n$ are two distinct edges in $M$ that have a vertex in common (namely,
+the vertex $x$). This contradiction shows that our assumption was wrong;
+hence, $\mathbf{x}\left(  m\right)  \neq\mathbf{x}\left(  n\right)  $ is
+proven.
+\par
+Now, forget that we fixed $m$ and $n$. We thus have shown that if $m$ and $n$
+are two distinct elements of $M$, then $\mathbf{x}\left(  m\right)
+\neq\mathbf{x}\left(  n\right)  $. In other words, the map $\mathbf{x}$ is
+injective.}. Hence, $\left\vert \mathbf{x}\left(  M\right)  \right\vert
+=\left\vert M\right\vert $. Thus, $\left\vert M\right\vert =\left\vert
+\mathbf{x}\left(  M\right)  \right\vert \leq\left\vert X\right\vert $ (since
+$\mathbf{x}\left(  M\right)  \subseteq X$). This proves Lemma
+\ref{lem.hall.complete-mat} \textbf{(a)}.
+
+\textbf{(b)} Assume that $\left\vert M\right\vert \geq\left\vert X\right\vert
+$. Combining this with $\left\vert M\right\vert \leq\left\vert X\right\vert $,
+we obtain $\left\vert M\right\vert =\left\vert X\right\vert $.
+
+Now, $\mathbf{x}\left(  M\right)  $ is a subset of $X$ that has the same size
+as $X$ (because $\left\vert \mathbf{x}\left(  M\right)  \right\vert
+=\left\vert M\right\vert =\left\vert X\right\vert $). But the only such subset
+is $X$ itself (since $X$ is a finite set). Thus, $\mathbf{x}\left(  M\right)
+$ must be $X$. In other words, the map $\mathbf{x}$ is surjective. This shows
+that the matching $M$ is $X$-complete\footnote{\textit{Proof.} Let $v\in X$ be
+any vertex. Then, there exists some $m\in M$ such that $v=\mathbf{x}\left(
+m\right)  $ (since the map $\mathbf{x}$ is surjective). Consider this $m$. The
+vertex $\mathbf{x}\left(  m\right)  $ is the unique vertex in $X$ contained in
+$m$ (by the definition of $\mathbf{x}$). Hence, $\mathbf{x}\left(  m\right)  $
+is contained in $m$. In other words, $\mathbf{x}\left(  m\right)  \in m$.
+Hence, $v=\mathbf{x}\left(  m\right)  \in m$. In other words, $v$ is an
+endpoint of $m$. Hence, there exists an edge $e\in M$ such that $v$ is an
+endpoint of $e$ (namely, $e=m$). In other words, the vertex $v$ is matched in
+$M$.
+\par
+Now, forget that we fixed $v$. We thus have shown that each vertex $v\in X$ is
+matched in $M$. In other words, the matching $M$ is $X$-complete (by the
+definition of \textquotedblleft$X$-complete\textquotedblright).}. This proves
+Lemma \ref{lem.hall.complete-mat} \textbf{(b)}.
+\end{proof}
+
+We can now prove Theorem \ref{thm.hall}:
+
+\begin{proof}
+[Proof of Theorem \ref{thm.hall} (sketched).]$\Longrightarrow:$ Assume that
+$G$ has an $X$-complete matching. We must prove that each subset $U$ of $X$
+satisfies $\left\vert N\left(  U\right)  \right\vert \geq\left\vert
+U\right\vert $.
+
+This is the so-called \textquotedblleft easy part\textquotedblright\ of
+Theorem \ref{thm.hall}, and can be proven without any reference to flows and
+cuts. Just fix an $X$-complete matching $M$ in $G$ (such a matching exists, by
+assumption). Let $U$ be a subset of $X$. We must prove that $\left\vert
+N\left(  U\right)  \right\vert \geq\left\vert U\right\vert $.
+
+The matching $M$ is $X$-complete; thus, each vertex $x\in X$ has an
+$M$-partner. Let $i:X\rightarrow Y$ be the map that sends each vertex $x\in X$
+to its $M$-partner. Any two distinct elements of $X$ must have distinct
+$M$-partners (because otherwise, the edges joining them to their common
+$M$-partner would be two distinct edges in $M$ that have a vertex in common;
+but this is not allowed for a matching). In other words, the map $i$ is
+injective. Hence, every subset $Z$ of $X$ satisfies $\left\vert i\left(
+Z\right)  \right\vert =\left\vert Z\right\vert $. Applying this to $Z=U$, we
+obtain $\left\vert i\left(  U\right)  \right\vert =\left\vert U\right\vert $.
+
+But each $x\in U$ satisfies $i\left(  x\right)  \in N\left(  U\right)  $
+(because the vertex $i\left(  x\right)  $ has a neighbor in $U$ (namely, the
+vertex $x$)). In other words, $i\left(  U\right)  \subseteq N\left(  U\right)
+$. Hence, $\left\vert i\left(  U\right)  \right\vert \leq\left\vert N\left(
+U\right)  \right\vert $, so that $\left\vert N\left(  U\right)  \right\vert
+\geq\left\vert i\left(  U\right)  \right\vert =\left\vert U\right\vert $.
+
+Now, forget that we fixed $U$. We thus have shown that each subset $U$ of $X$
+satisfies $\left\vert N\left(  U\right)  \right\vert \geq\left\vert
+U\right\vert $. This proves the $\Longrightarrow$ direction of Theorem
+\ref{thm.hall}.
+
+$\Longleftarrow:$ Assume that
+\begin{equation}
+\text{each subset }U\text{ of }X\text{ satisfies }\left\vert N\left(
+U\right)  \right\vert \geq\left\vert U\right\vert .
+\label{pf.thm.hall.hard.ass}%
+\end{equation}
+We must prove that $G$ has an $X$-complete matching.
+
+Consider the network $N$. It clearly has the property that $c\left(  a\right)
+\in\mathbb{N}$ for each $a\in A$ (since $c\left(  a\right)  =1$ for each $a\in
+A$). Hence, Lemma \ref{lem.3bat} shows that there exist an integer flow
+$f:A\rightarrow\mathbb{Q}_{+}$ and a subset $S$ of $V$ satisfying $s\in S$ and
+$t\notin S$ and $c\left(  S,\overline{S}\right)  =\left\vert f\right\vert $.
+Consider these $f$ and $S$.
+
+Let $U$ be the subset $X\cap S$ of $X$. Then, $N\left(  U\right)  \subseteq Y$
+(by Proposition \ref{prop.bipartite.NXY}), so that $N\left(  U\right)  \cap
+S\subseteq Y\cap S$ and thus $\left\vert N\left(  U\right)  \cap S\right\vert
+\leq\left\vert Y\cap S\right\vert $. Also, $U=X\cap S\subseteq S$.
+
+However, the set $N\left(  U\right)  $ is clearly the union of its two
+disjoint subsets $N\left(  U\right)  \cap S$ and $N\left(  U\right)  \setminus
+S$ (indeed, the former contains all the elements of $N\left(  U\right)  $ that
+belong to $S$, whereas the latter contains all those that don't). thus,%
+\[
+\left\vert N\left(  U\right)  \right\vert =\underbrace{\left\vert N\left(
+U\right)  \cap S\right\vert }_{\leq\left\vert Y\cap S\right\vert }+\left\vert
+N\left(  U\right)  \setminus S\right\vert \leq\left\vert Y\cap S\right\vert
++\left\vert N\left(  U\right)  \setminus S\right\vert .
+\]
+Hence,%
+\begin{equation}
+\left\vert Y\cap S\right\vert +\left\vert N\left(  U\right)  \setminus
+S\right\vert \geq\left\vert N\left(  U\right)  \right\vert \geq\left\vert
+U\right\vert \label{pf.thm.hall.hard.3}%
+\end{equation}
+(by (\ref{pf.thm.hall.hard.ass})).
+
+But the set $X$ is the union of its two disjoint subsets $X\cap S$ and
+$X\setminus S$. Hence,
+\[
+\left\vert X\right\vert =\left\vert \underbrace{X\cap S}_{=U}\right\vert
++\left\vert X\setminus S\right\vert =\left\vert U\right\vert +\left\vert
+X\setminus S\right\vert .
+\]
+Thus,%
+\begin{equation}
+\left\vert X\setminus S\right\vert =\left\vert X\right\vert -\left\vert
+U\right\vert . \label{pf.thm.hall.hard.4}%
+\end{equation}
+
+
+Lemma \ref{lem.hall.cPQ} (applied to $P=S$ and $Q=\overline{S}$) yields
+$c\left(  S,\overline{S}\right)  =\left\vert \left[  S,\overline{S}\right]
+\right\vert $. Thus,
+\begin{equation}
+\left\vert \left[  S,\overline{S}\right]  \right\vert =c\left(  S,\overline
+{S}\right)  =\left\vert f\right\vert . \label{pf.thm.hall.hard.5}%
+\end{equation}
+
+
+Let us now analyze the set $\left[  S,\overline{S}\right]  $. This set
+consists of all arcs $a\in A$ whose source lies in $S$ and whose target lies
+in $\overline{S}$. Recall the the digraph $\left(  V,A\right)  $ has three
+kinds of arcs: the $G$-arcs, the $s$-arcs and the $t$-arcs. Some of these arcs
+belong to $\left[  S,\overline{S}\right]  $:
+
+\begin{itemize}
+\item For every vertex $x\in X\setminus S$, the $s$-arc $\left(  s,x\right)  $
+belongs to $\left[  S,\overline{S}\right]  $\ \ \ \ \footnote{\textit{Proof.}
+Let $x\in X\setminus S$. Then, $x\in X\setminus S\subseteq X$, so that
+$\left(  s,x\right)  \in A_{s}$ (by the definition of $A_{s}$). Thus, $\left(
+s,x\right)  $ is an $s$-arc. The source of this arc lies in $S$ (since $s\in
+S$), but the target of this arc lies in $\overline{S}$ (since $x\in
+\underbrace{X}_{\subseteq V}\setminus S\subseteq V\setminus S=\overline{S}$).
+In other words, this arc $\left(  s,x\right)  $ belongs to $\left[
+S,\overline{S}\right]  $. Qed.}. Of course, these $s$-arcs $\left(
+s,x\right)  $ are distinct (since their targets $x$ are distinct). Thus, we
+have found a total of $\left\vert X\setminus S\right\vert $ different $s$-arcs
+belonging to $\left[  S,\overline{S}\right]  $ (one for each $x\in X\setminus
+S$).
+
+\item For every vertex $y\in N\left(  U\right)  \setminus S$, there is at
+least one $G$-arc with target $y$ that belongs to $\left[  S,\overline
+{S}\right]  $\ \ \ \ \footnote{\textit{Proof.} Let $y\in N\left(  U\right)
+\setminus S$. We must prove that there is at least one $G$-arc with target $y$
+that belongs to $\left[  S,\overline{S}\right]  $.
+\par
+We know that $y\in N\left(  U\right)  \setminus S\subseteq N\left(  U\right)
+$. In other words, $y$ has a neighbor in $U$ (by the definition of $N\left(
+U\right)  $). In other words, there exists some $x\in U$ such that $\left\{
+x,y\right\}  $ is an edge of $G$. Consider this $x$. Also, $y\in N\left(
+U\right)  \subseteq Y$.
+\par
+We know that $\left\{  x,y\right\}  $ is an edge of $G$. Let us denote this
+edge by $e$. Then, the unique endpoint of $e$ lying in $X$ is $x$ (since $x\in
+U\subseteq X$), whereas the unique endpoint of $e$ lying in $Y$ is $y$ (since
+$y\in Y$). Hence, the definition of $\overrightarrow{e}$ yields
+$\overrightarrow{e}=\left(  x,y\right)  $.
+\par
+Now, $e\in E$ (since $e$ is an edge of $G$), and thus $\overrightarrow{e}\in
+A_{G}$ (by the definition of $A_{G}$). Hence, $\left(  x,y\right)
+=\overrightarrow{e}\in A_{G}$. In other words, $\left(  x,y\right)  $ is a
+$G$-arc. This $G$-arc $\left(  x,y\right)  $ has target $y$ and belongs to
+$\left[  S,\overline{S}\right]  $ (since its source lies in $S$ (since $x\in
+U\subseteq S$) and its target lies in $\overline{S}$ (since $y\in
+\underbrace{N\left(  U\right)  }_{\subseteq V}\setminus S\subseteq V\setminus
+S=\overline{S}$)). Thus, there is at least one $G$-arc with target $y$ that
+belongs to $\left[  S,\overline{S}\right]  $ (namely, the $G$-arc $\left(
+x,y\right)  $). Qed.}. If we pick one such $G$-arc for each vertex $y\in
+N\left(  U\right)  \setminus S$, then we obtain a total of $\left\vert
+N\left(  U\right)  \setminus S\right\vert $ different $G$-arcs belonging to
+$\left[  S,\overline{S}\right]  $ (indeed, they are distinct because their
+targets $y$ are distinct).
+
+\item For every vertex $y\in Y\cap S$, the $t$-arc $\left(  y,t\right)  $
+belongs to $\left[  S,\overline{S}\right]  $\ \ \ \ \footnote{\textit{Proof.}
+Let $y\in Y\cap S$. Then, $y\in Y\cap S\subseteq Y$, so that $\left(
+y,t\right)  \in A_{t}$ (by the definition of $A_{t}$). Thus, $\left(
+y,t\right)  $ is a $t$-arc. The source of this arc lies in $S$ (since $y\in
+Y\cap S\subseteq S$), but the target of this arc lies in $\overline{S}$ (since
+$t\in\overline{S}$ (because $t\notin S$)). In other words, this arc $\left(
+y,t\right)  $ belongs to $\left[  S,\overline{S}\right]  $. Qed.}. Of course,
+these $t$-arcs $\left(  y,t\right)  $ are distinct (since their sources $y$
+are distinct). Thus, we have found a total of $\left\vert Y\cap S\right\vert $
+different $t$-arcs belonging to to $\left[  S,\overline{S}\right]  $ (one for
+each $y\in N\left(  U\right)  \setminus S$).
+\end{itemize}
+
+Now, recall that there is no overlap between the $G$-arcs, the $s$-arcs and
+the $t$-arcs. Hence,%
+\begin{align*}
+\left\vert \left[  S,\overline{S}\right]  \right\vert  &  =\underbrace{\left(
+\text{the number of all }G\text{-arcs belonging to }\left[  S,\overline
+{S}\right]  \right)  }_{\substack{\geq\left\vert N\left(  U\right)  \setminus
+S\right\vert \\\text{(since we have found }\left\vert N\left(  U\right)
+\setminus S\right\vert \text{ different }G\text{-arcs belonging to }\left[
+S,\overline{S}\right]  \text{)}}}\\
+&  \ \ \ \ \ \ \ \ \ \ +\underbrace{\left(  \text{the number of all
+}s\text{-arcs belonging to }\left[  S,\overline{S}\right]  \right)
+}_{\substack{\geq\left\vert X\setminus S\right\vert \\\text{(since we have
+found }\left\vert X\setminus S\right\vert \text{ different }s\text{-arcs
+belonging to }\left[  S,\overline{S}\right]  \text{)}}}\\
+&  \ \ \ \ \ \ \ \ \ \ +\underbrace{\left(  \text{the number of all
+}t\text{-arcs belonging to }\left[  S,\overline{S}\right]  \right)
+}_{\substack{\geq\left\vert Y\cap S\right\vert \\\text{(since we have found
+}\left\vert Y\cap S\right\vert \text{ different }t\text{-arcs belonging to
+}\left[  S,\overline{S}\right]  \text{)}}}\\
+&  \geq\left\vert N\left(  U\right)  \setminus S\right\vert +\left\vert
+X\setminus S\right\vert +\left\vert Y\cap S\right\vert \\
+&  =\underbrace{\left\vert Y\cap S\right\vert +\left\vert N\left(  U\right)
+\setminus S\right\vert }_{\substack{\geq\left\vert U\right\vert \\\text{(by
+(\ref{pf.thm.hall.hard.3}))}}}+\underbrace{\left\vert X\setminus S\right\vert
+}_{\substack{=\left\vert X\right\vert -\left\vert U\right\vert \\\text{(by
+(\ref{pf.thm.hall.hard.4}))}}}\\
+&  \geq\left\vert U\right\vert +\left\vert X\right\vert -\left\vert
+U\right\vert =\left\vert X\right\vert .
+\end{align*}
+Hence, (\ref{pf.thm.hall.hard.5}) yields $\left\vert f\right\vert =\left\vert
+\left[  S,\overline{S}\right]  \right\vert \geq\left\vert X\right\vert $.
+
+But let $M$ be the subset $\left\{  e\in E\ \mid\ f\left(  \overrightarrow{e}%
+\right)  =1\right\}  $ of $E$. Then, Proposition \ref{prop.hall.lem1}
+\textbf{(d)} yields that the set $M=\left\{  e\in E\ \mid\ f\left(
+\overrightarrow{e}\right)  =1\right\}  $ is a matching in $G$. Also,
+Proposition \ref{prop.hall.lem1} \textbf{(e)} shows that $\left\vert
+M\right\vert =\left\vert f\right\vert \geq\left\vert X\right\vert $. Hence,
+Lemma \ref{lem.hall.complete-mat} \textbf{(b)} yields that the matching $M$ is
+$X$-complete. Hence, $G$ has an $X$-complete matching (namely, $M$). This
+proves the $\Longleftarrow$ direction of Theorem \ref{thm.hall}. Thus, the
+proof of Theorem \ref{thm.hall} is complete.
+\end{proof}
+
+[to be continued!]
+
+\begin{thebibliography}{99999999}                                                                                         %
+
+
+\bibitem[ForFul62]{ForFul62}L. R. Ford (Jr.) and D. R. Fulkerson,
+\textit{Flows in Networks}, Princeton University Press 1962.\newline A
+preprint is freely available at
+\url{https://www.rand.org/content/dam/rand/pubs/reports/2007/R375.pdf} .
+
+\bibitem[Goeman17]{Goeman17}Michel X. Goemans, \textit{18.453 Combinatorial
+Optimization}, course at MIT, Spring 2017.\newline\url{http://math.mit.edu/~goemans/18453S17/18453.html}
+
+\bibitem[LeLeMe17]{LeLeMe17}Eric Lehman, F. Thomson Leighton, Albert R. Meyer,
+\textit{Mathematics for Computer Science}, version 15 November 2017.\newline\url{https://courses.csail.mit.edu/6.042/fall17/mcs.pdf}
+
+\bibitem[Martin17]{Martin17}Jeremy L. Martin, \textit{Lecture Notes on
+Algebraic Combinatorics}, 8 June 2017.\newline\url{http://people.ku.edu/~jlmartin/LectureNotes.pdf}
+
+\bibitem[Schrij12]{Schrij12}%
+\href{https://www.math.uni-bielefeld.de/documenta/vol-ismp/33_schrijver-alexander-tmf.pdf}{Alexander
+Schrijver, \textit{On the History of the Transportation and Maximum Flow
+Problems}, Documenta Mathematica, Extra Volume ISMP (2012), pp. 169--180.}
+
+\bibitem[Schrij17]{Schrij17}Alexander (Lex) Schrijver, \textit{A Course in
+Combinatorial Optimization}, 23 March 2017.\newline\url{https://homepages.cwi.nl/~lex/files/dict.pdf}
+
+\bibitem[Thalwi08]{Thalwi08}Timon Thalwitzer, \textit{Max-Flow Min-Cut},
+diploma thesis at Universit\"{a}t Wien.\newline\url{http://www.mat.univie.ac.at/~kratt/theses/thalwitz.pdf}
+
+\bibitem[Zwick95]{Zwick95}%
+\href{https://doi.org/10.1016/0304-3975(95)00022-O}{Uri Zwick, \textit{The
+smallest networks on which the Ford-Fulkerson maximum flow procedure may fail
+to terminate}, Theoretical Computer Science \textbf{148}, Issue 1, 21 August
+1995, pp. 165--170}.
+\end{thebibliography}
+
+
+\end{document}

@@ -2526,7 +2526,7 @@ step. Hence, Exercise \ref{exe.aco.score-vector} \textbf{(b)} is solved.
 lattice structure on minimum cuts}
 
 Let us recall some terminology from
-\href{http://www-users.math.umn.edu/~dgrinber/5707s17/5707lec16.pdf}{lecture 16}:
+\cite{lec16}:
 
 \begin{itemize}
 \item A \textit{network} consists of:
@@ -2563,7 +2563,7 @@ Let us recall some terminology from
       \end{itemize}
 \end{itemize}
 
-We also refer to lecture 16 for the definition of a flow
+We also refer to lecture 16 \cite{lec16} for the definition of a flow
 (which is not necessary for the following problem, but may
 be helpful).
 
@@ -2580,7 +2580,7 @@ Let $m$ denote the minimum possible value of
 $c \tup{S, \overline{S}}$ where $S$ ranges over the
 $s$-$t$-cutting subsets.
 (Recall that this is the maximum value of an
-$s$-$t$-flow, according to the
+flow, according to the
 maximum-flow-minimum-cut theorem.)
 
 An $s$-$t$-cutting subset $S$ is said to be
@@ -2603,8 +2603,7 @@ it appears, e.g., in \cite[Corollary 3]{PicQue80}\footnote{To
 
 In our solution of Exercise \ref{exe.flows-cuts.cut-lattice}, we shall use
 some further material from
-\href{http://www-users.math.umn.edu/~dgrinber/5707s17/5707lec16.pdf}{lecture
-16}. Namely, we shall use the concept of flows, and the following fact:
+\cite{lec16}. Namely, we shall use the concept of flows, and the following fact:
 
 \begin{lemma}
 \label{lem.flows-cuts.flow-estimate}Consider a network consisting of a digraph
@@ -2620,34 +2619,29 @@ Let $S$ be a subset of $S$ satisfying $s\in S$ and $t\notin S$.
 \textbf{(b)} We have $\left\vert f\right\vert =c\left(  S,\overline{S}\right)
 $ if and only if%
 \begin{equation}
-\left(  \text{each }u\notin S\text{ and }v\in S\text{ satisfy }f\left(
-u,v\right)  =0\right)  \label{eq.lem.flows-cuts.flow-estimate.b.1}%
+\left(  \text{each }a\in\left[  \overline{S},S\right]  \text{ satisfies
+}f\left(  a\right)  =0\right)  \label{eq.lem.flows-cuts.flow-estimate.b.1}%
 \end{equation}
 and%
 \begin{equation}
-\left(  \text{each }u\in S\text{ and }v\notin S\text{ satisfy }f\left(
-u,v\right)  =c\left(  u,v\right)  \right)  .
-\label{eq.lem.flows-cuts.flow-estimate.b.2}%
+\left(  \text{each }a\in\left[  S,\overline{S}\right]  \text{ satisfies
+}f\left(  a\right)  =c\left(  a\right)  \right)
+.\label{eq.lem.flows-cuts.flow-estimate.b.2}%
 \end{equation}
 
 \end{lemma}
 
 \begin{proof}
 [Proof of Lemma \ref{lem.flows-cuts.flow-estimate} (sketched).]\textbf{(a)}
-This is part of Prop. 2 \textbf{(c)} in
-\href{http://www-users.math.umn.edu/~dgrinber/5707s17/5707lec16.pdf}{lecture
-16}.
+This is precisely \cite[Proposition 1.7 \textbf{(c)}]{lec16}.
 
-\textbf{(b)} To prove this, trace the proof of Prop. 2 \textbf{(c)} in
-\href{http://www-users.math.umn.edu/~dgrinber/5707s17/5707lec16.pdf}{lecture
-16}, and analyze what it means that all inequalities become equalities.
+\textbf{(b)} This is precisely \cite[Proposition 1.7 \textbf{(d)}]{lec16}.
 \end{proof}
 
 \begin{proof}
 [Hints to Exercise \ref{exe.flows-cuts.cut-lattice}.]From the
-max-flow-min-cut-theorem (specifically, Thm. 3 \textbf{(a)} in
-\href{http://www-users.math.umn.edu/~dgrinber/5707s17/5707lec16.pdf}{lecture
-16}), we know that%
+max-flow-min-cut-theorem (specifically, \cite[Theorem 1.10]{lec16}), we know
+that%
 \begin{align*}
 &  \max\left\{  \left\vert f\right\vert \ \mid\ f\text{ is a flow}\right\} \\
 &  =\min\left\{  c\left(  S,\overline{S}\right)  \ \mid
@@ -2682,14 +2676,14 @@ Lemma \ref{lem.flows-cuts.flow-estimate} \textbf{(b)} (applied to $S=X$) shows
 that $\left\vert f\right\vert =c\left(  X,\overline{X}\right)  $ if and only
 if
 \begin{equation}
-\left(  \text{each }u\notin X\text{ and }v\in X\text{ satisfy }f\left(
-u,v\right)  =0\right)  \label{sol.flows-cuts.cut-lattice.X1}%
+\left(  \text{each }a\in\left[  \overline{X},X\right]  \text{ satisfies
+}f\left(  a\right)  =0\right)  \label{sol.flows-cuts.cut-lattice.X1}%
 \end{equation}
 and%
 \begin{equation}
-\left(  \text{each }u\in X\text{ and }v\notin X\text{ satisfy }f\left(
-u,v\right)  =c\left(  u,v\right)  \right)  .
-\label{sol.flows-cuts.cut-lattice.X2}%
+\left(  \text{each }a\in\left[  X,\overline{X}\right]  \text{ satisfies
+}f\left(  a\right)  =c\left(  a\right)  \right)
+.\label{sol.flows-cuts.cut-lattice.X2}%
 \end{equation}
 Therefore, (\ref{sol.flows-cuts.cut-lattice.X1}) and
 (\ref{sol.flows-cuts.cut-lattice.X2}) hold (since $\left\vert f\right\vert
@@ -2699,14 +2693,14 @@ Lemma \ref{lem.flows-cuts.flow-estimate} \textbf{(b)} (applied to $S=Y$) shows
 that $\left\vert f\right\vert =c\left(  Y,\overline{Y}\right)  $ if and only
 if
 \begin{equation}
-\left(  \text{each }u\notin Y\text{ and }v\in Y\text{ satisfy }f\left(
-u,v\right)  =0\right)  \label{sol.flows-cuts.cut-lattice.Y1}%
+\left(  \text{each }a\in\left[  \overline{Y},Y\right]  \text{ satisfies
+}f\left(  a\right)  =0\right)  \label{sol.flows-cuts.cut-lattice.Y1}%
 \end{equation}
 and%
 \begin{equation}
-\left(  \text{each }u\in Y\text{ and }v\notin Y\text{ satisfy }f\left(
-u,v\right)  =c\left(  u,v\right)  \right)  .
-\label{sol.flows-cuts.cut-lattice.Y2}%
+\left(  \text{each }a\in\left[  Y,\overline{Y}\right]  \text{ satisfies
+}f\left(  a\right)  =c\left(  a\right)  \right)
+.\label{sol.flows-cuts.cut-lattice.Y2}%
 \end{equation}
 Therefore, (\ref{sol.flows-cuts.cut-lattice.Y1}) and
 (\ref{sol.flows-cuts.cut-lattice.Y2}) hold (since $\left\vert f\right\vert
@@ -2714,38 +2708,55 @@ Therefore, (\ref{sol.flows-cuts.cut-lattice.Y1}) and
 
 Now,
 \begin{equation}
-\left(  \text{each }u\notin X\cap Y\text{ and }v\in X\cap Y\text{ satisfy
-}f\left(  u,v\right)  =0\right)  \label{sol.flows-cuts.cut-lattice.cap1}%
+\left(  \text{each }a\in\left[  \overline{X\cap Y},X\cap Y\right]  \text{
+satisfies }f\left(  a\right)  =0\right)
+\label{sol.flows-cuts.cut-lattice.cap1}%
 \end{equation}
 \footnote{\textit{Proof of (\ref{sol.flows-cuts.cut-lattice.cap1}):} Let
-$u\notin X\cap Y$ and $v\in X\cap Y$. We must show that $f\left(  u,v\right)
-=0$.
+$a\in\left[  \overline{X\cap Y},X\cap Y\right]  $. We must prove that
+$f\left(  a\right)  =0$.
 \par
-We have $v\in X\cap Y\subseteq Y$. Hence, if $u\notin Y$, then $f\left(
-u,v\right)  =0$ follows immediately from (\ref{sol.flows-cuts.cut-lattice.Y1}%
-). Thus, for the rest of this proof, we WLOG assume that $u\notin Y$ does not
-hold. Hence, $u\in Y$. Now, $u\in Y$ but $u\notin X\cap Y$. Hence, $u\in
-Y\setminus\left(  X\cap Y\right)  =Y\setminus X$, so that $u\notin X$. But
-$v\in X\cap Y\subseteq X$. Hence, (\ref{sol.flows-cuts.cut-lattice.X1}) shows
-that $f\left(  u,v\right)  =0$. This proves
+We have $a\in\left[  \overline{X\cap Y},X\cap Y\right]  $. Thus, $a=\left(
+u,v\right)  $ for some $u\notin X\cap Y$ and $v\in X\cap Y$. Consider these
+$u$ and $v$.
+\par
+We have $v\in X\cap Y\subseteq Y$. Hence, if $u\notin Y$, then $\left(
+u,v\right)  \in\left[  \overline{Y},Y\right]  $. Thus, if $u\notin Y$, then
+$a=\left(  u,v\right)  \in\left[  \overline{Y},Y\right]  $. Therefore, if
+$u\notin Y$, then (\ref{sol.flows-cuts.cut-lattice.Y1}) shows that $f\left(
+a\right)  =0$. Thus, for the rest of this proof, we WLOG assume that $u\notin
+Y$ does not hold. Hence, $u\in Y$. Now, $u\in Y$ but $u\notin X\cap Y$. Hence,
+$u\in Y\setminus\left(  X\cap Y\right)  =Y\setminus X$, so that $u\notin X$.
+But $v\in X\cap Y\subseteq X$. Hence, $\left(  u,v\right)  \in\left[
+\overline{X},X\right]  $, so that $a=\left(  u,v\right)  \in\left[
+\overline{X},X\right]  $. Thus, (\ref{sol.flows-cuts.cut-lattice.X1}) shows
+that $f\left(  a\right)  =0$. This proves
 (\ref{sol.flows-cuts.cut-lattice.cap1}).} and%
 \begin{equation}
-\left(  \text{each }u\in X\cap Y\text{ and }v\notin X\cap Y\text{ satisfy
-}f\left(  u,v\right)  =c\left(  u,v\right)  \right)
+\left(  \text{each }a\in\left[  X\cap Y,\overline{X\cap Y}\right]  \text{
+satisfies }f\left(  a\right)  =c\left(  a\right)  \right)
 \label{sol.flows-cuts.cut-lattice.cap2}%
 \end{equation}
-\footnote{\textit{Proof of (\ref{sol.flows-cuts.cut-lattice.cap2}):} Let $u\in
-X\cap Y$ and $v\notin X\cap Y$. We must show that $f\left(  u,v\right)
-=c\left(  u,v\right)  $.
+\footnote{\textit{Proof of (\ref{sol.flows-cuts.cut-lattice.cap2}):} Let
+$a\in\left[  X\cap Y,\overline{X\cap Y}\right]  $. We must prove that
+$f\left(  a\right)  =c\left(  a\right)  $.
 \par
-We have $u\in X\cap Y\subseteq Y$. Hence, if $v\notin Y$, then $f\left(
-u,v\right)  =c\left(  u,v\right)  $ follows immediately from
-(\ref{sol.flows-cuts.cut-lattice.Y2}). Thus, for the rest of this proof, we
-WLOG assume that $v\notin Y$ does not hold. Hence, $v\in Y$. Now, $v\in Y$ but
-$v\notin X\cap Y$. Hence, $v\in Y\setminus\left(  X\cap Y\right)  =Y\setminus
-X$, so that $v\notin X$. But $u\in X\cap Y\subseteq X$. Hence,
-(\ref{sol.flows-cuts.cut-lattice.X2}) shows that $f\left(  u,v\right)
-=c\left(  u,v\right)  $. This proves (\ref{sol.flows-cuts.cut-lattice.cap2}).}.
+We have $a\in\left[  X\cap Y,\overline{X\cap Y}\right]  $. Thus, $a=\left(
+u,v\right)  $ for some $u\in X\cap Y$ and $v\notin X\cap Y$. Consider these
+$u$ and $v$.
+\par
+We have $u\in X\cap Y\subseteq Y$. Hence, if $v\notin Y$, then $\left(
+u,v\right)  \in\left[  Y,\overline{Y}\right]  $. Thus, if $v\notin Y$, then
+$a=\left(  u,v\right)  \in\left[  Y,\overline{Y}\right]  $. Therefore, if
+$v\notin Y$, then $f\left(  a\right)  =c\left(  a\right)  $ follows
+immediately from (\ref{sol.flows-cuts.cut-lattice.Y2}). Thus, for the rest of
+this proof, we WLOG assume that $v\notin Y$ does not hold. Hence, $v\in Y$.
+Now, $v\in Y$ but $v\notin X\cap Y$. Hence, $v\in Y\setminus\left(  X\cap
+Y\right)  =Y\setminus X$, so that $v\notin X$. But $u\in X\cap Y\subseteq X$.
+Hence, $\left(  u,v\right)  \in\left[  X,\overline{X}\right]  $. Thus,
+$a=\left(  u,v\right)  \in\left[  X,\overline{X}\right]  $. Hence,
+(\ref{sol.flows-cuts.cut-lattice.X2}) shows that $f\left(  a\right)  =c\left(
+a\right)  $. This proves (\ref{sol.flows-cuts.cut-lattice.cap2}).}.
 
 But Lemma \ref{lem.flows-cuts.flow-estimate} \textbf{(b)} (applied to $S=X\cap
 Y$) shows that $\left\vert f\right\vert =c\left(  X\cap Y,\overline{X\cap
@@ -2759,38 +2770,55 @@ $s$-$t$-cutting subset $X\cap Y$ of $V$ is cut-minimal.
 
 Furthermore,
 \begin{equation}
-\left(  \text{each }u\notin X\cup Y\text{ and }v\in X\cup Y\text{ satisfy
-}f\left(  u,v\right)  =0\right)  \label{sol.flows-cuts.cut-lattice.cup1}%
+\left(  \text{each }a\in\left[  \overline{X\cup Y},X\cup Y\right]  \text{
+satisfies }f\left(  a\right)  =0\right)
+\label{sol.flows-cuts.cut-lattice.cup1}%
 \end{equation}
 \footnote{\textit{Proof of (\ref{sol.flows-cuts.cut-lattice.cup1}):} Let
-$u\notin X\cup Y$ and $v\in X\cup Y$. We must show that $f\left(  u,v\right)
-=0$.
+$a\in\left[  \overline{X\cup Y},X\cup Y\right]  $. We must prove that
+$f\left(  a\right)  =0$.
+\par
+We have $a\in\left[  \overline{X\cup Y},X\cup Y\right]  $. In other words,
+$a=\left(  u,v\right)  $ for some $u\notin X\cup Y$ and $v\in X\cup Y$.
+Consider these $u$ and $v$.
 \par
 From $u\notin X\cup Y$, we obtain $u\notin X$ and $u\notin Y$. Hence, if $v\in
-X$, then $f\left(  u,v\right)  =0$ follows immediately from
+X$, then $\left(  u,v\right)  \in\left[  \overline{X},X\right]  $. Thus, if
+$v\in X$, then $a=\left(  u,v\right)  \in\left[  \overline{X},X\right]  $.
+Hence, if $v\in X$, then $f\left(  a\right)  =0$ follows immediately from
 (\ref{sol.flows-cuts.cut-lattice.X1}). Thus, for the rest of this proof, we
 WLOG assume that $v\in X$ does not hold. Hence, $v\notin X$. Now, $v\in X\cup
 Y$ but $v\notin X$. Hence, $v\in\left(  X\cup Y\right)  \setminus X=Y\setminus
-X\subseteq Y$. But $u\notin Y$. Hence, (\ref{sol.flows-cuts.cut-lattice.Y1})
-shows that $f\left(  u,v\right)  =0$. This proves
+X\subseteq Y$. But $u\notin Y$. Thus, $\left(  u,v\right)  \in\left[
+\overline{Y},Y\right]  $. Therefore, $a=\left(  u,v\right)  \in\left[
+\overline{Y},Y\right]  $. Hence, (\ref{sol.flows-cuts.cut-lattice.Y1}) shows
+that $f\left(  a\right)  =0$. This proves
 (\ref{sol.flows-cuts.cut-lattice.cup1}).} and%
 \begin{equation}
-\left(  \text{each }u\in X\cup Y\text{ and }v\notin X\cup Y\text{ satisfy
-}f\left(  u,v\right)  =c\left(  u,v\right)  \right)
+\left(  \text{each }a\in\left[  X\cup Y,\overline{X\cup Y}\right]  \text{
+satisfies }f\left(  a\right)  =c\left(  a\right)  \right)
 \label{sol.flows-cuts.cut-lattice.cup2}%
 \end{equation}
-\footnote{\textit{Proof of (\ref{sol.flows-cuts.cut-lattice.cup2}):} Let $u\in
-X\cup Y$ and $v\notin X\cup Y$. We must show that $f\left(  u,v\right)
-=c\left(  u,v\right)  $.
+\footnote{\textit{Proof of (\ref{sol.flows-cuts.cut-lattice.cup2}):} Let
+$a\in\left[  X\cup Y,\overline{X\cup Y}\right]  $. We must prove that
+$f\left(  a\right)  =c\left(  a\right)  $.
+\par
+We have $a\in\left[  X\cup Y,\overline{X\cup Y}\right]  $. In other words,
+$a=\left(  u,v\right)  $ for some $u\in X\cup Y$ and $v\notin X\cup Y$.
+Consider these $u$ and $v$.
 \par
 From $v\notin X\cup Y$, we obtain $v\notin X$ and $v\notin Y$. Hence, if $u\in
-X$, then $f\left(  u,v\right)  =c\left(  u,v\right)  $ follows immediately
-from (\ref{sol.flows-cuts.cut-lattice.X2}). Thus, for the rest of this proof,
-we WLOG assume that $u\in X$ does not hold. Hence, $u\notin X$. Now, $u\in
-X\cup Y$ but $u\notin X$. Hence, $u\in\left(  X\cup Y\right)  \setminus
-X=Y\setminus X\subseteq Y$. But $v\notin Y$. Hence,
-(\ref{sol.flows-cuts.cut-lattice.Y2}) shows that $f\left(  u,v\right)
-=c\left(  u,v\right)  $. This proves (\ref{sol.flows-cuts.cut-lattice.cup2}).}.
+X$, then $\left(  u,v\right)  \in\left[  X,\overline{X}\right]  $. Thus, if
+$u\in X$, then $a=\left(  u,v\right)  \in\left[  X,\overline{X}\right]  $.
+Therefore, if $u\in X$, then $f\left(  a\right)  =c\left(  a\right)  $ follows
+immediately from (\ref{sol.flows-cuts.cut-lattice.X2}). Thus, for the rest of
+this proof, we WLOG assume that $u\in X$ does not hold. Hence, $u\notin X$.
+Now, $u\in X\cup Y$ but $u\notin X$. Hence, $u\in\left(  X\cup Y\right)
+\setminus X=Y\setminus X\subseteq Y$. But $v\notin Y$. Thus, $\left(
+u,v\right)  \in\left[  Y,\overline{Y}\right]  $. Now, $a=\left(  u,v\right)
+\in\left[  Y,\overline{Y}\right]  $. Hence,
+(\ref{sol.flows-cuts.cut-lattice.Y2}) shows that $f\left(  a\right)  =c\left(
+a\right)  $. This proves (\ref{sol.flows-cuts.cut-lattice.cup2}).}.
 
 But Lemma \ref{lem.flows-cuts.flow-estimate} \textbf{(b)} (applied to $S=X\cup
 Y$) shows that $\left\vert f\right\vert =c\left(  X\cup Y,\overline{X\cup
@@ -2836,6 +2864,11 @@ L. R. Ford, D. R. Fulkerson,
 \textit{Flows in Networks},
 Princeton University Press,
 sixth printing 1974.
+
+\bibitem[Grinbe17]{lec16}
+Darij Grinberg,
+\textit{UMN, Spring 2017, Math 5707: Lecture 16 (flows and cuts in networks)},
+\newline\url{http://www-users.math.umn.edu/~dgrinber/5707s17/5707lec16.pdf} .
 
 \bibitem[HLMPPW13]{HLMPPW13}
 Alexander E. Holroyd, Lionel Levine, Karola M\'esz\'aros,
