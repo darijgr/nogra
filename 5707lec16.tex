@@ -18,7 +18,7 @@
 \setcounter{MaxMatrixCols}{30}
 %TCIDATA{OutputFilter=latex2.dll}
 %TCIDATA{Version=5.50.0.2960}
-%TCIDATA{LastRevised=Monday, December 04, 2017 09:56:47}
+%TCIDATA{LastRevised=Monday, December 04, 2017 10:01:28}
 %TCIDATA{<META NAME="GraphicsSave" CONTENT="32">}
 %TCIDATA{<META NAME="SaveForMode" CONTENT="1">}
 %TCIDATA{BibliographyScheme=Manual}
@@ -2136,7 +2136,8 @@ $\left\vert N\left(  U\right)  \right\vert \geq\left\vert U\right\vert $.
 
 Theorem \ref{thm.hall} has applications throughout mathematics, and several
 equivalent versions; it also has fairly elementary (but tricky) proofs (see,
-e.g., \cite[\S 12.5.2]{LeLeMe17}). We shall derive it from Theorem \ref{thm.3b}.
+e.g., \cite[\S 12.5.2]{LeLeMe17}). We shall derive it from Theorem
+\ref{thm.3b}.
 
 In order to do so (and also, in order to reduce the bipartite matching problem
 to the Ford-Fulkerson algorithm), we need to construct a network from a given
@@ -3041,56 +3042,22 @@ definition of \textquotedblleft$X$-complete\textquotedblright).}. This proves
 Lemma \ref{lem.hall.complete-mat} \textbf{(b)}.
 \end{proof}
 
-We can now prove Theorem \ref{thm.hall}:
+Now, we can prove the following crucial lemma:
+
+\begin{lemma}
+\label{lem.hall.MU}Let $\left(  G;X,Y\right)  $ be a bipartite graph. Then,
+there exist a matching $M$ in $G$ and a subset $U$ of $X$ satisfying
+$\left\vert M\right\vert \geq\left\vert N\left(  U\right)  \right\vert
++\left\vert X\right\vert -\left\vert U\right\vert $.
+\end{lemma}
 
 \begin{proof}
-[Proof of Theorem \ref{thm.hall} (sketched).]$\Longrightarrow:$ Assume that
-$G$ has an $X$-complete matching. We must prove that each subset $U$ of $X$
-satisfies $\left\vert N\left(  U\right)  \right\vert \geq\left\vert
-U\right\vert $.
-
-This is the so-called \textquotedblleft easy part\textquotedblright\ of
-Theorem \ref{thm.hall}, and can be proven without any reference to flows and
-cuts. Just fix an $X$-complete matching $M$ in $G$ (such a matching exists, by
-assumption). Let $U$ be a subset of $X$. We must prove that $\left\vert
-N\left(  U\right)  \right\vert \geq\left\vert U\right\vert $.
-
-The matching $M$ is $X$-complete; thus, each vertex $x\in X$ has an
-$M$-partner. Let $i:X\rightarrow Y$ be the map that sends each vertex $x\in X$
-to its $M$-partner. Any two distinct elements of $X$ must have distinct
-$M$-partners (because otherwise, the edges joining them to their common
-$M$-partner would be two distinct edges in $M$ that have a vertex in common;
-but this is not allowed for a matching). In other words, the map $i$ is
-injective. Hence, every subset $Z$ of $X$ satisfies $\left\vert i\left(
-Z\right)  \right\vert =\left\vert Z\right\vert $. Applying this to $Z=U$, we
-obtain $\left\vert i\left(  U\right)  \right\vert =\left\vert U\right\vert $.
-
-But each $x\in U$ satisfies $i\left(  x\right)  \in N\left(  U\right)  $
-(because the vertex $i\left(  x\right)  $ has a neighbor in $U$ (namely, the
-vertex $x$)). In other words, $i\left(  U\right)  \subseteq N\left(  U\right)
-$. Hence, $\left\vert i\left(  U\right)  \right\vert \leq\left\vert N\left(
-U\right)  \right\vert $, so that $\left\vert N\left(  U\right)  \right\vert
-\geq\left\vert i\left(  U\right)  \right\vert =\left\vert U\right\vert $.
-
-Now, forget that we fixed $U$. We thus have shown that each subset $U$ of $X$
-satisfies $\left\vert N\left(  U\right)  \right\vert \geq\left\vert
-U\right\vert $. This proves the $\Longrightarrow$ direction of Theorem
-\ref{thm.hall}.
-
-$\Longleftarrow:$ Assume that
-\begin{equation}
-\text{each subset }U\text{ of }X\text{ satisfies }\left\vert N\left(
-U\right)  \right\vert \geq\left\vert U\right\vert .
-\label{pf.thm.hall.hard.ass}%
-\end{equation}
-We must prove that $G$ has an $X$-complete matching.
-
-Consider the network $N$. It clearly has the property that $c\left(  a\right)
-\in\mathbb{N}$ for each $a\in A$ (since $c\left(  a\right)  =1$ for each $a\in
-A$). Hence, Lemma \ref{lem.3bat} shows that there exist an integer flow
-$f:A\rightarrow\mathbb{Q}_{+}$ and a subset $S$ of $V$ satisfying $s\in S$ and
-$t\notin S$ and $c\left(  S,\overline{S}\right)  =\left\vert f\right\vert $.
-Consider these $f$ and $S$.
+[Proof of Lemma \ref{lem.hall.MU}.] Consider the network $N$. It clearly has
+the property that $c\left(  a\right)  \in\mathbb{N}$ for each $a\in A$ (since
+$c\left(  a\right)  =1$ for each $a\in A$). Hence, Lemma \ref{lem.3bat} shows
+that there exist an integer flow $f:A\rightarrow\mathbb{Q}_{+}$ and a subset
+$S$ of $V$ satisfying $s\in S$ and $t\notin S$ and $c\left(  S,\overline
+{S}\right)  =\left\vert f\right\vert $. Consider these $f$ and $S$.
 
 Let $U$ be the subset $X\cap S$ of $X$. Then, $N\left(  U\right)  \subseteq Y$
 (by Proposition \ref{prop.bipartite.NXY}), so that $N\left(  U\right)  \cap
@@ -3110,10 +3077,10 @@ N\left(  U\right)  \setminus S\right\vert \leq\left\vert Y\cap S\right\vert
 Hence,%
 \begin{equation}
 \left\vert Y\cap S\right\vert +\left\vert N\left(  U\right)  \setminus
-S\right\vert \geq\left\vert N\left(  U\right)  \right\vert \geq\left\vert
-U\right\vert \label{pf.thm.hall.hard.3}%
+S\right\vert \geq\left\vert N\left(  U\right)  \right\vert
+.\label{pf.thm.hall.hard.3}%
 \end{equation}
-(by (\ref{pf.thm.hall.hard.ass})).
+
 
 But the set $X$ is the union of its two disjoint subsets $X\cap S$ and
 $X\setminus S$. Hence,
@@ -3228,26 +3195,91 @@ belonging to }\left[  S,\overline{S}\right]  \text{)}}}\\
 &  \geq\left\vert N\left(  U\right)  \setminus S\right\vert +\left\vert
 X\setminus S\right\vert +\left\vert Y\cap S\right\vert \\
 &  =\underbrace{\left\vert Y\cap S\right\vert +\left\vert N\left(  U\right)
-\setminus S\right\vert }_{\substack{\geq\left\vert U\right\vert \\\text{(by
-(\ref{pf.thm.hall.hard.3}))}}}+\underbrace{\left\vert X\setminus S\right\vert
-}_{\substack{=\left\vert X\right\vert -\left\vert U\right\vert \\\text{(by
-(\ref{pf.thm.hall.hard.4}))}}}\\
-&  \geq\left\vert U\right\vert +\left\vert X\right\vert -\left\vert
-U\right\vert =\left\vert X\right\vert .
+\setminus S\right\vert }_{\substack{\geq\left\vert N\left(  U\right)
+\right\vert \\\text{(by (\ref{pf.thm.hall.hard.3}))}}}+\underbrace{\left\vert
+X\setminus S\right\vert }_{\substack{=\left\vert X\right\vert -\left\vert
+U\right\vert \\\text{(by (\ref{pf.thm.hall.hard.4}))}}}\\
+&  \geq\left\vert N\left(  U\right)  \right\vert +\left\vert X\right\vert
+-\left\vert U\right\vert .
 \end{align*}
 Hence, (\ref{pf.thm.hall.hard.5}) yields $\left\vert f\right\vert =\left\vert
-\left[  S,\overline{S}\right]  \right\vert \geq\left\vert X\right\vert $.
+\left[  S,\overline{S}\right]  \right\vert \geq\left\vert N\left(  U\right)
+\right\vert +\left\vert X\right\vert -\left\vert U\right\vert $.
 
 But let $M$ be the subset $\left\{  e\in E\ \mid\ f\left(  \overrightarrow{e}%
 \right)  =1\right\}  $ of $E$. Then, Proposition \ref{prop.hall.lem1}
 \textbf{(d)} yields that the set $M=\left\{  e\in E\ \mid\ f\left(
 \overrightarrow{e}\right)  =1\right\}  $ is a matching in $G$. Also,
-Proposition \ref{prop.hall.lem1} \textbf{(e)} shows that $\left\vert
-M\right\vert =\left\vert f\right\vert \geq\left\vert X\right\vert $. Hence,
-Lemma \ref{lem.hall.complete-mat} \textbf{(b)} yields that the matching $M$ is
-$X$-complete. Hence, $G$ has an $X$-complete matching (namely, $M$). This
-proves the $\Longleftarrow$ direction of Theorem \ref{thm.hall}. Thus, the
-proof of Theorem \ref{thm.hall} is complete.
+Proposition \ref{prop.hall.lem1} \textbf{(e)} shows that
+\[
+\left\vert M\right\vert =\left\vert f\right\vert \geq\left\vert N\left(
+U\right)  \right\vert +\left\vert X\right\vert -\left\vert U\right\vert .
+\]
+We have thus found a matching $M$ in $G$ and a subset $U$ of $X$ satisfying
+$\left\vert M\right\vert \geq\left\vert N\left(  U\right)  \right\vert
++\left\vert X\right\vert -\left\vert U\right\vert $. This proves Lemma
+\ref{lem.hall.MU}.
+\end{proof}
+
+We can now easily prove Theorem \ref{thm.hall}:
+
+\begin{proof}
+[Proof of Theorem \ref{thm.hall} (sketched).]$\Longrightarrow:$ Assume that
+$G$ has an $X$-complete matching. We must prove that each subset $U$ of $X$
+satisfies $\left\vert N\left(  U\right)  \right\vert \geq\left\vert
+U\right\vert $.
+
+This is the so-called \textquotedblleft easy part\textquotedblright\ of
+Theorem \ref{thm.hall}, and can be proven without any reference to flows and
+cuts. Just fix an $X$-complete matching $M$ in $G$ (such a matching exists, by
+assumption). Let $U$ be a subset of $X$. We must prove that $\left\vert
+N\left(  U\right)  \right\vert \geq\left\vert U\right\vert $.
+
+The matching $M$ is $X$-complete; thus, each vertex $x\in X$ has an
+$M$-partner. Let $i:X\rightarrow Y$ be the map that sends each vertex $x\in X$
+to its $M$-partner. Any two distinct elements of $X$ must have distinct
+$M$-partners (because otherwise, the edges joining them to their common
+$M$-partner would be two distinct edges in $M$ that have a vertex in common;
+but this is not allowed for a matching). In other words, the map $i$ is
+injective. Hence, every subset $Z$ of $X$ satisfies $\left\vert i\left(
+Z\right)  \right\vert =\left\vert Z\right\vert $. Applying this to $Z=U$, we
+obtain $\left\vert i\left(  U\right)  \right\vert =\left\vert U\right\vert $.
+
+But each $x\in U$ satisfies $i\left(  x\right)  \in N\left(  U\right)  $
+(because the vertex $i\left(  x\right)  $ has a neighbor in $U$ (namely, the
+vertex $x$)). In other words, $i\left(  U\right)  \subseteq N\left(  U\right)
+$. Hence, $\left\vert i\left(  U\right)  \right\vert \leq\left\vert N\left(
+U\right)  \right\vert $, so that $\left\vert N\left(  U\right)  \right\vert
+\geq\left\vert i\left(  U\right)  \right\vert =\left\vert U\right\vert $.
+
+Now, forget that we fixed $U$. We thus have shown that each subset $U$ of $X$
+satisfies $\left\vert N\left(  U\right)  \right\vert \geq\left\vert
+U\right\vert $. This proves the $\Longrightarrow$ direction of Theorem
+\ref{thm.hall}.
+
+$\Longleftarrow:$ Assume that
+\begin{equation}
+\text{each subset }U\text{ of }X\text{ satisfies }\left\vert N\left(
+U\right)  \right\vert \geq\left\vert U\right\vert .
+\label{pf.thm.hall.hard.ass}%
+\end{equation}
+We must prove that $G$ has an $X$-complete matching.
+
+Lemma \ref{lem.hall.MU} shows that there exist a matching $M$ in $G$ and a
+subset $U$ of $X$ satisfying $\left\vert M\right\vert \geq\left\vert N\left(
+U\right)  \right\vert +\left\vert X\right\vert -\left\vert U\right\vert $.
+Consider these $M$ and $U$. Then,%
+\[
+\left\vert M\right\vert \geq\underbrace{\left\vert N\left(  U\right)
+\right\vert }_{\substack{\geq\left\vert U\right\vert \\\text{(by
+(\ref{pf.thm.hall.hard.ass}))}}}+\left\vert X\right\vert -\left\vert
+U\right\vert \geq\left\vert U\right\vert +\left\vert X\right\vert -\left\vert
+U\right\vert =\left\vert X\right\vert .
+\]
+Hence, Lemma \ref{lem.hall.complete-mat} \textbf{(b)} yields that the matching
+$M$ is $X$-complete. Hence, $G$ has an $X$-complete matching (namely, $M$).
+This proves the $\Longleftarrow$ direction of Theorem \ref{thm.hall}. Thus,
+the proof of Theorem \ref{thm.hall} is complete.
 \end{proof}
 
 [to be continued!]
