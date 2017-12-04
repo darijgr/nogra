@@ -18,7 +18,7 @@
 \setcounter{MaxMatrixCols}{30}
 %TCIDATA{OutputFilter=latex2.dll}
 %TCIDATA{Version=5.50.0.2960}
-%TCIDATA{LastRevised=Monday, December 04, 2017 10:01:28}
+%TCIDATA{LastRevised=Monday, December 04, 2017 10:23:05}
 %TCIDATA{<META NAME="GraphicsSave" CONTENT="32">}
 %TCIDATA{<META NAME="SaveForMode" CONTENT="1">}
 %TCIDATA{BibliographyScheme=Manual}
@@ -1916,6 +1916,10 @@ f\right\vert =n$.
 \begin{exercise}
 State and prove analogues of the above results in which the underlying digraph
 of the network $N$ is replaced by a multidigraph.
+
+[\textbf{Hint:} There are two ways to prove these analogues. One is to modify
+the above proofs to make them support multidigraphs. Another is to reduce the
+analogues to the above results for digraphs.]
 \end{exercise}
 
 \subsection{\label{sect.hall}Application: Bipartite matching and Hall's
@@ -3282,7 +3286,213 @@ This proves the $\Longleftarrow$ direction of Theorem \ref{thm.hall}. Thus,
 the proof of Theorem \ref{thm.hall} is complete.
 \end{proof}
 
-[to be continued!]
+Lemma \ref{lem.hall.MU} puts us at a vantage point to prove not just Hall's
+marriage theorem, but also its close relative, \textit{K\"{o}nig's vertex
+cover theorem}. Before we state the latter theorem, we need to define the
+concept of a vertex cover:
+
+\begin{definition}
+Let $G=\left(  W,E\right)  $ be a simple graph. Then, a \textit{vertex cover}
+of $G$ means a subset $C$ of $W$ such that each edge $e\in E$ contains at
+least one vertex in $C$.
+\end{definition}
+
+For example, if $G=\left(  W,E\right)  $ is the simple graph%
+\begin{equation}%
+%TCIMACRO{\TeXButton{a triangle}{\xymatrix{
+%& 1 \are[dl] \are[dr] \\
+%2 \are[rr] & & 3
+%}}}%
+%BeginExpansion
+\xymatrix{
+& 1 \are[dl] \are[dr] \\
+2 \are[rr] & & 3
+}%
+%EndExpansion
+,\label{eq.hall.vertexcover.ex1}%
+\end{equation}
+then every $2$-element subset of $W$ is a vertex cover (but no smaller subset
+of $W$ is).
+
+Now, \textit{K\"{o}nig's theorem on vertex covers} states the following:
+
+\begin{theorem}
+\label{thm.hall.koenig}Let $\left(  G;X,Y\right)  $ be a bipartite graph.
+Then, the maximum size of a matching in $G$ equals the minimum size of a
+vertex cover of $G$.
+\end{theorem}
+
+Notice that the claim of Theorem \ref{thm.hall.koenig} isn't true for
+arbitrary graphs $G$; for example, if $G$ is the simple graph in
+(\ref{eq.hall.vertexcover.ex1}), then the maximum size of a matching in $G$ is
+$1$, but the minimum size of a vertex cover of $G$ is $2$. Nevertheless, the
+claim is true when $G$ is part of a bipartite graph $\left(  G;X,Y\right)  $.
+
+What is true for arbitrary graphs $G$ is the following inequality:
+
+\begin{proposition}
+\label{prop.hall.koenig.<=}Let $G$ be a simple graph. Then, the maximum size
+of a matching in $G$ is $\leq$ to the minimum size of a vertex cover of $G$.
+\end{proposition}
+
+\begin{proof}
+[Proof of Proposition \ref{prop.hall.koenig.<=}.] Let $m$ be the maximum size
+of a matching in $G$. Let $c$ be the minimum size of a vertex cover of $G$. We
+must prove that $m\leq c$.
+
+There exists a matching $M$ in $G$ such that $\left\vert M\right\vert =m$
+(since $m$ is the size of a matching in $G$). Consider this $M$.
+
+There exists a vertex cover $C$ of $G$ such that $\left\vert C\right\vert =c$
+(since $c$ is the size of a vertex cover of $G$). Consider this $C$.
+
+Write the simple graph $G$ in the form $G=\left(  W,E\right)  $. Recall that
+$C$ is a vertex cover of $G$. In other words, $C$ is a subset of $W$ such that
+each edge $e\in E$ contains at least one vertex in $C$ (by the definition of a
+\textquotedblleft vertex cover\textquotedblright).
+
+Each edge $e\in E$ contains at least one vertex in $C$. In other words, for
+each edge $e\in E$, there is at least one vertex $v\in C$ such that $v\in e$.
+In other words, for each edge $e\in E$, we have%
+\begin{equation}
+\left(  \text{the number of }v\in C\text{ such that }v\in e\right)
+\geq1.\label{pf.prop.hall.koenig.<=.>=}%
+\end{equation}
+
+
+On the other hand, $M$ is a matching in $G$. In other words, $M$ is a subset
+of $E$ such that no two distinct edges in $M$ have a vertex in common (by the
+definition of a \textquotedblleft matching\textquotedblright). No two distinct
+edges in $M$ have a vertex in common. In other words, no vertex of $G$ belongs
+to more than one edge in $M$. In other words, each vertex of $G$ lies in at
+most one edge in $M$. In other words, for each vertex $v$ of $G$, there is at
+most one edge $e\in M$ such that $v\in e$. In other words, for each vertex $v$
+of $G$, we have%
+\begin{equation}
+\left(  \text{the number of edges }e\in M\text{ such that }v\in e\right)
+\leq1.\label{pf.prop.hall.koenig.<=.<=}%
+\end{equation}
+
+
+Now,
+\begin{align*}
+& \left(  \text{the number of pairs }\left(  v,e\right)  \in C\times M\text{
+such that }v\in e\right)  \\
+& =\sum_{v\in C}\underbrace{\left(  \text{the number of edges }e\in M\text{
+such that }v\in e\right)  }_{\substack{\leq1\\\text{(by
+(\ref{pf.prop.hall.koenig.<=.<=}))}}}\leq\sum_{v\in C}1\\
+& =\left\vert C\right\vert \cdot1=\left\vert C\right\vert =c.
+\end{align*}
+Thus,%
+\begin{align*}
+c  & \geq\left(  \text{the number of pairs }\left(  v,e\right)  \in C\times
+M\text{ such that }v\in e\right)  \\
+& =\sum_{e\in M}\underbrace{\left(  \text{the number of }v\in C\text{ such
+that }v\in e\right)  }_{\substack{\geq1\\\text{(by
+(\ref{pf.prop.hall.koenig.<=.>=}))}}}\geq\sum_{e\in M}1\\
+& =\left\vert M\right\vert \cdot1=\left\vert M\right\vert =m.
+\end{align*}
+In other words, $m\leq c$. This completes our proof of Proposition
+\ref{prop.hall.koenig.<=}.
+\end{proof}
+
+
+
+\begin{proof}
+[Proof of Theorem \ref{thm.hall.koenig} (sketched).] Let $m$ be the maximum
+size of a matching in $G$. Let $c$ be the minimum size of a vertex cover of
+$G$. We must prove that $m=c$.
+
+Proposition \ref{prop.hall.koenig.<=} yields $m\leq c$.
+
+Write the simple graph $G$ in the form $G=\left(  W,E\right)  $.
+
+On the other hand, Lemma \ref{lem.hall.MU} shows that there exist a matching
+$M$ in $G$ and a subset $U$ of $X$ satisfying $\left\vert M\right\vert
+\geq\left\vert N\left(  U\right)  \right\vert +\left\vert X\right\vert
+-\left\vert U\right\vert $. Consider these $M$ and $U$.
+
+The size $\left\vert M\right\vert $ of the matching $M$ is clearly $\leq$ to
+the maximum size of a matching in $G$. In other words, $\left\vert
+M\right\vert \leq m$ (since $m$ is the maximum size of a matching in $G$).
+Thus,%
+\begin{equation}
+m\geq\left\vert M\right\vert \geq\left\vert N\left(  U\right)  \right\vert
++\left\vert X\right\vert -\left\vert U\right\vert =\left\vert N\left(
+U\right)  \right\vert +\left\vert X\right\vert -\left\vert U\right\vert
+.\label{pf.thm.hall.koenig.m>=}%
+\end{equation}
+
+
+On the other hand, let $C$ be the subset $\left(  X\setminus U\right)  \cup
+N\left(  U\right)  $ of $W$. Then, we have the following:
+
+\begin{statement}
+\textit{Observation 1:} The set $C$ is a vertex cover of $G$.
+\end{statement}
+
+[\textit{Proof of Observation 1:} Let $e\in E$ be any edge. We shall show that
+$e$ contains at least one vertex in $C$.
+
+Indeed, assume the contrary. Thus, $e$ contains no vertex in $C$.
+
+Each edge of $G$ contains exactly one vertex in $X$ and exactly one vertex in
+$Y$ (since $\left(  G;X,Y\right)  $ is a bipartite graph). Thus, in
+particular, each edge of $G$ contains exactly one vertex in $X$. Applying this
+to the edge $e$, we conclude that the edge $e$ contains exactly one vertex in
+$X$. Let $x$ be this vertex. Thus, $x\in X$, and the edge $e$ contains the
+vertex $x$. If we had $x\in C$, then $e$ would contain a vertex in $C$
+(namely, the vertex $x$), which would contradict the fact that $e$ contains no
+vertex in $c$. Hence, we cannot have $x\in C$. Thus, we have $x\notin C$.
+Hence, $x\in X\setminus C$.
+
+But $C=\left(  X\setminus U\right)  \cup N\left(  U\right)  \supseteq
+X\setminus U$, so that $X\setminus\underbrace{C}_{\supseteq\left(  X\setminus
+U\right)  }\subseteq X\setminus\left(  X\setminus U\right)  =U$ (since
+$U\subseteq X$). Hence, $x\in X\setminus C\subseteq U$.
+
+Now, let $y$ be the endpoint of the edge $e$ distinct from $x$. (This is
+well-defined, since we already know that $e$ contains $x$.) Then, $x$ and $y$
+are the two endpoints of the edge $e$. Hence, $e=\left\{  x,y\right\}  $.
+Thus, $\left\{  y,x\right\}  =\left\{  x,y\right\}  =e$ is an edge of $G$; in
+other words, $x$ is a neighbor of $y$. Hence, the vertex $y$ has a neighbor in
+$U$ (namely, the neighbor $x$). In other words, $y\in N\left(  U\right)  $ (by
+the definition of $N\left(  U\right)  $). Hence, $y\in N\left(  U\right)
+\subseteq\left(  X\setminus U\right)  \cup N\left(  U\right)  =C$. In other
+words, $y$ is a vertex in $C$. Thus, the edge $e$ contains at least one vertex
+in $C$ (namely, the vertex $y$), because $e$ contains $y$. This contradicts
+the fact that $e$ contains no vertex in $C$.
+
+This contradiction proves that our assumption was worng. Hence, we have shown
+that $e$ contains at least one vertex in $C$.
+
+Now, forget that we fixed $e$. We thus have proven that each edge $e\in E$
+contains at least one vertex in $C$. In other words, $C$ is a vertex cover of
+$G$ (by the definition of \textquotedblleft vertex cover\textquotedblright).
+This proves Observation 1.]
+
+Now, $C=\left(  X\setminus U\right)  \cup N\left(  U\right)  $, so that
+\begin{align*}
+\left\vert C\right\vert  & =\left\vert \left(  X\setminus U\right)  \cup
+N\left(  U\right)  \right\vert \leq\underbrace{\left\vert X\setminus
+U\right\vert }_{\substack{=\left\vert X\right\vert -\left\vert U\right\vert
+\\\text{(since }U\subseteq X\text{)}}}+\left\vert N\left(  U\right)
+\right\vert \\
+& \ \ \ \ \ \ \ \ \ \ \left(  \text{this is in fact an equality, but we don't
+need this}\right)  \\
+& =\left\vert N\left(  U\right)  \right\vert +\left\vert X\right\vert
+-\left\vert U\right\vert \leq m\ \ \ \ \ \ \ \ \ \ \left(  \text{by
+(\ref{pf.thm.hall.koenig.m>=})}\right)  .
+\end{align*}
+
+
+But the set $C$ is a vertex cover of $G$ (by Observation 1). Hence, its size
+$\left\vert C\right\vert $ is $\geq$ to the minimum size of a vertex cover of
+$G$. In other words, $\left\vert C\right\vert \geq c$ (since $c$ is the
+minimum size of a vertex cover of $G$). Thus, $c\leq\left\vert C\right\vert
+\leq m$. Combining this with $m\leq c$, we obtain $m=c$. This completes the
+proof of Theorem \ref{thm.hall.koenig}.
+\end{proof}
 
 \begin{thebibliography}{99999999}                                                                                         %
 
