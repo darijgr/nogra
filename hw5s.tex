@@ -156,9 +156,9 @@ See also
 \cite{hw2s}
 for various conventions and notations that are in use here.
 
-\subsection{Sandpiles: recapitulating definitions and results}
+\subsection{Sandpiles: the basic results}
 
-Let me recall the definitions of the basic concepts on chipfiring
+Let me recall the definitions of the basic concepts on chip-firing
 done in class.
 Various sources on this material are
 \cite{BjoLov92} (and, less directly, \cite{BjLoSh91}),
@@ -175,8 +175,11 @@ of these pictures, as well as
 \url{http://www.math.cornell.edu/~levine/apollonian-slides.pdf} for a
 talk with various illustrations.
 
-Let me give a brief (proof-less) survey of what we did in class (and
-a bit of what we should have done).
+Let me give a survey of the basics of the theory.
+(Due to a reliance on constructive proofs, this survey is
+unfortunately longer than I expected it to be.)
+
+\subsubsection{Configurations, $\ZZ$-configurations and toppling}
 
 We refer to \cite{hw2s} for the definition of a multidigraph, as well
 as for the definitions of walks, paths, circuits and cycles in a
@@ -190,7 +193,10 @@ if $v$ is a vertex of a multidigraph $\tup{V, A, \phi}$, then the
 \textit{indegree} $\deg^- v$ of $v$ is defined to be the number
 of all arcs $a \in A$ whose target is $v$.
 
-Fix a loopless multidigraph $D = \tup{V, A, \phi}$.
+An arc $a$ of a multidigraph is said to be a \textit{loop}
+if the source of $a$ is the target of $a$.
+
+Fix a multidigraph $D = \tup{V, A, \phi}$.
 
 \begin{definition}
 A \textit{configuration} (on $D$) means a map $f : V \to \NN$.
@@ -227,6 +233,10 @@ $f\tup{v} \geq \deg^+ v$.
 \textbf{(b)} The $\ZZ$-configuration $f$ is said to be
 \textit{stable} if no vertex $v \in V$ is active in $f$.
 \end{definition}
+
+Thus, a $\ZZ$-configuration $f : V \to \ZZ$ is stable
+if and only if each vertex $v \in V$ satisfies
+$f \tup{v} < \deg^+ v$.
 
 Notice that there are only finitely many stable configurations
 (because if $f$ is a stable configuration, then, for each
@@ -298,21 +308,72 @@ $\sum \tup{f-g} = \sum f - \sum g$.
 Also, any $N \in \ZZ$ and any $\ZZ$-configuration $f$
 satisfy $\sum \tup{Nf} = N \sum f$.
 
+\begin{proposition} \label{prop.chip.sum-greater}
+Let $f$ be a configuration.
+Let $h = \sum f$ and $w \in V$.
+Then, $f \tup{w} \leq h$.
+\end{proposition}
+
+\begin{proof}[Proof of Proposition~\ref{prop.chip.sum-greater} (sketched).]
+We have $h = \sum f = \sum_{v \in V} f \tup{v}$;
+this is a sum of nonnegative integers (since $f$ is a
+configuration).
+But a sum of nonnegative integers is always $\geq$ to
+each of its addends.
+Hence, $\sum_{v \in V} f \tup{v} \geq f \tup{w}$.
+Thus, $h = \sum_{v \in V} f \tup{v} \geq f \tup{w}$.
+This proves Proposition~\ref{prop.chip.sum-greater}.
+\end{proof}
+
+\begin{definition}
+\label{def.iverson}
+We shall use the \textit{Iverson bracket notation}:
+If $\mathcal{A}$ is any logical statement, then we define
+an integer $\ive{ \mathcal{A} } \in \set{0, 1}$ by
+\[
+\ive{ \mathcal{A} } =
+\begin{cases}
+1, & \text{if }\mathcal{A}\text{ is true};\\
+0, & \text{if }\mathcal{A}\text{ is false}
+\end{cases}
+.
+\]
+For example, $\ive{1+1=2} =1$ (since $1+1=2$ is true), whereas
+$\ive{1+1=1} =0$ (since $1+1=1$ is false).
+\end{definition}
+
+\begin{definition}
+If $v$ and $w$ are any two vertices of $D$, then
+$a_{v, w}$ shall denote the number of all arcs of $D$ having
+source $v$ and target $w$.
+This is a nonnegative integer.
+\end{definition}
+(Note that $a_{v, w}$ might be $> 1$, since $D$ is a multidigraph.
+Note also that $a_{v, v}$ might be nonzero, since loops are
+allowed.)
+
 \begin{definition}
 Let $v \in V$ be a vertex.
 Then, a $\ZZ$-configuration $\Delta v$ is defined by setting
 \[
  \tup{\Delta v} \tup{w}
- = \begin{cases}
-    \deg^+ v , & \text{if } w = v ; \\
-    - a_{v, w}, & \text{if } w \neq v
-   \end{cases}
-  \qquad \text{ for all } w \in V ,
+ = \ive{w = v} \deg^+ v - a_{v, w}
+  \qquad \text{ for all } w \in V .
 \]
-where $a_{v, w}$ denotes the number of all arcs of $D$ having
-source $v$ and target $w$.
-(Note that $a_{v, w}$ might be $> 1$, since $D$ is a multidigraph.)
 \end{definition}
+
+Let us unpack the definition of $\Delta v$ we just gave:
+It says that
+\[
+\tup{\Delta v} \tup{w} = - a_{v, w}
+\qquad \text{ for each vertex } w \in V \text{ distinct from } v
+\]
+(because if $w$ is distinct
+from $v$, then $\ive{w = v} = 0$);
+and it says that
+\[
+\tup{\Delta v} \tup{v} = \deg^+ v - a_{v, v} .
+\]
 
 \begin{definition}
 Let $v \in V$ be a vertex.
@@ -335,17 +396,97 @@ Thus, the number of chips on $v$ (weakly) decreases, while the
 number of chips on each other vertex (weakly) increases.
 Of course, the resulting $\ZZ$-configuration $f - \Delta v$ is
 not necessarily a configuration.
-(In fact, it is a configuration if and only if the vertex $v$ is
-active in $f$.)
+In fact, it is a configuration if the vertex $v$ is
+active in $f$,
+and also in some other cases:
 
-Notice that $\sum \tup{\Delta v} = 0$ for each vertex $v$.
+\begin{proposition} \label{prop.chip.fire-conf}
+Let $f : V \to \NN$ be a configuration.
+Let $v \in V$.
+
+\textbf{(a)} If the vertex $v$ is active in $f$, then
+$f - \Delta v$ is a configuration.
+
+\textbf{(b)} If $f - \Delta v$ is a configuration, and if
+$D$ has no loops with source and target $v$, then
+the vertex $v$ is active in $f$.
+\end{proposition}
+
+Note that the converse of
+Proposition~\ref{prop.chip.fire-conf} \textbf{(a)} does not
+hold when $D$ has loops with source and target $v$.
+
+\begin{proof}[Proof of Proposition~\ref{prop.chip.fire-conf} (sketched).]
+\textbf{(a)} Assume that the vertex $v$ is active in $f$.
+Thus, $f \tup{v} \geq \deg^+ v$.
+Hence,
+\[
+\tup{f - \Delta v} \tup{v}
+= \underbrace{\tup{ f \tup{v} }}_{\geq \deg^+ v}
+  - \underbrace{\tup{ \tup{\Delta v} \tup{v} }}_{= \deg^+ v - a_{v, v} }
+\geq \deg^+ v - \tup{\deg^+ v - a_{v, v}} = a_{v, v} \geq 0 .
+\]
+Also, each vertex $w \in V$ distinct from $v$ satisfies
+\[
+\tup{f - \Delta v} \tup{w}
+= f \tup{w}
+  - \underbrace{\tup{ \tup{\Delta v} \tup{w} }}_{= - a_{v, w} \leq 0 }
+\geq f \tup{w} \geq 0
+\]
+(since $f$ is a configuration).
+Combining these two inequalities, we conclude that
+$\tup{f - \Delta v} \tup{w} \geq 0$
+for each $w \in V$.
+In other words, $f - \Delta v$ is a configuration.
+This proves Proposition~\ref{prop.chip.fire-conf} \textbf{(a)}.
+
+\textbf{(b)} Assume that $f - \Delta v$ is a configuration.
+Also, assume that $D$ has no loops with source and target $v$.
+Thus, $a_{v, v} = 0$.
+Now, $\tup{f - \Delta v} \tup{v} \geq 0$ (since
+$f - \Delta v$ is a configuration), so that
+\begin{align*}
+0 &\leq \tup{f - \Delta v} \tup{v}
+= f \tup{v}
+  - \underbrace{\tup{ \tup{\Delta v} \tup{v} }}_{= \deg^+ v - a_{v, v} }
+= f \tup{v} - \tup{\deg^+ v - a_{v, v}} \\
+&= f \tup{v} - \deg^+ v + \underbrace{a_{v, v}}_{= 0}
+= f \tup{v} - \deg^+ v .
+\end{align*}
+In other words, $f \tup{v} \geq \deg^+ v$. In other words,
+the vertex $v$ is active in $f$.
+This proves Proposition~\ref{prop.chip.fire-conf} \textbf{(b)}.
+\end{proof}
+
+\begin{proposition} \label{prop.chip.sumDv=0}
+We have $\sum \tup{\Delta v} = 0$ for each vertex $v \in V$.
+\end{proposition}
+
+\begin{proof}[Proof of Proposition~\ref{prop.chip.sumDv=0} (sketched).]
+Let $v\in V$ be any vertex. Then,
+\begin{align*}
+\sum\left(  \Delta v\right)    & =\sum_{w\in V}\underbrace{\left(  \Delta
+v\right)  \left(  w\right)  }_{=\left[  w=v\right]  \deg^{+}v-a_{v,w}}%
+=\sum_{w\in V}\left(  \left[  w=v\right]  \deg^{+}v-a_{v,w}\right)  \\
+& =\underbrace{\sum_{w\in V}\left[  w=v\right]  }_{=1}\deg^{+}%
+v-\underbrace{\sum_{w\in V}a_{v,w}}_{\substack{=\left(  \text{the number of
+all arcs with source }a\right)  \\=\deg^{+}v}}\\
+& =\deg^{+}v-\deg^{+}v=0.
+\end{align*}
+This proves Proposition~\ref{prop.chip.sumDv=0}.
+\end{proof}
+
 Thus,
-$\sum \tup{f - \Delta v}
-= \sum f - \underbrace{\sum \tup{\Delta v}}_{= 0}
-= \sum f$
+\[
+\sum \tup{f - \Delta v}
+= \sum f - \underbrack{\sum \tup{\Delta v}}{= 0 \\ \text{(by Proposition~\ref{prop.chip.sumDv=0})}}
+= \sum f
+\]
 for each $\ZZ$-configuration $f : V \to \ZZ$ and each vertex $v$.
 In other words, firing a vertex $v$ does not change the degree of
 a $\ZZ$-configuration.
+
+\subsubsection{Legal and stabilizing sequences}
 
 We shall now study the effects of repeatedly firing vertices
 of $D$ (that is, firing several vertices one after the other).
@@ -363,7 +504,7 @@ however, the intermediate configurations of course do depend
 on the order.
 
 \begin{definition}
-Let $f : V \to \NN$ be a configuration.
+Let $f : V \to \ZZ$ be a $\ZZ$-configuration.
 
 Let $\tup{v_1, v_2, \ldots, v_k}$ be a sequence of vertices of
 $D$.
@@ -382,52 +523,75 @@ $f - \Delta v_1 - \Delta v_2 - \cdots - \Delta v_k$ is stable.
 What is the rationale behind the notions of ``legal'' and
 ``stabilizing''?
 A sequence of vertices provides a way to modify a
-configuration by first firing the first vertex in the sequence,
-then firing the second, and so on.
-The sequence is said to be \textit{legal} (for $f$) if the
-configuration remains a configuration throughout this ordeal
+$\ZZ$-configuration by first firing the first vertex in the
+sequence, then firing the second, and so on.
+The sequence is said to be \textit{legal} (for $f$) if only
+active vertices are being fired in this process
+(i.e., each vertex that gets fired is active at the time of
+its firing);
+thus, in particular, if $f$ was a configuration, then
+it remains a configuration throughout this process
 (i.e., at no point does a vertex have a negative number of
-chips).
+chips)\footnote{This follows from
+Proposition~\ref{prop.chip.fire-conf} \textbf{(a)}
+(applied repeatedly).
+\par
+If our multidigraph $D$ has no loops, then
+the converse is also true:
+If the configuration remains a configuration throughout the
+process, then the sequence is legal.
+(This follows from
+Proposition~\ref{prop.chip.fire-conf} \textbf{(b)}.)
+But if $D$ has loops, this is not always the case.}.
 The sequence is said to be \textit{stabilizing} (for $f$) if
 the $\ZZ$-configuration resulting from it at the very end is
 stable.
 
 We notice some obvious consequences of the definitions:
 
-\begin{itemize}
- \item If a sequence $\tup{v_1, v_2, \ldots, v_k}$ is legal
-       for a configuration $f$, then all of the
+\begin{proposition} \label{prop.chip.obvious}
+Let $f$ be a $\ZZ$-configuration.
+
+\textbf{(a)}
+ If $f$ is a configuration, and if
+       a sequence $\tup{v_1, v_2, \ldots, v_k}$ is legal
+       for $f$, then all of the
        $\ZZ$-configurations
        $f - \Delta v_1 - \Delta v_2 - \cdots - \Delta v_i$
        for $i \in \set{0, 1, \ldots, k}$ are actually
        configurations.
- \item If a sequence $\tup{v_1, v_2, \ldots, v_k}$ is legal
-       for a configuration $f$, then each prefix of this
+
+\textbf{(b)}
+ If a sequence $\tup{v_1, v_2, \ldots, v_k}$ is legal
+       for $f$, then each prefix of this
        sequence (i.e., each sequence of the form
        $\tup{v_1, v_2, \ldots, v_i}$ for some
        $i \in \set{0, 1, \ldots, k}$) is legal for $f$ as
        well.
- \item If a sequence $\tup{v_1, v_2, \ldots, v_k}$ is
-       stabilizing for a configuration $f$, then each
+
+\textbf{(c)}
+  If a sequence $\tup{v_1, v_2, \ldots, v_k}$ is
+       stabilizing for $f$, then each
        permutation of this sequence (i.e., each sequence of
        the form
        $\tup{v_{\sigma\tup{1}}, v_{\sigma\tup{2}}, \ldots,
              v_{\sigma\tup{k}}}$ for a permutation
        $\sigma$ of $\set{1, 2, \ldots, k}$) is stabilizing
        for $f$ as well.
- \item If $\tup{v_1, v_2, \ldots, v_k}$ is a legal sequence
-       for a configuration $f$, then
+
+\textbf{(d)}
+  If $\tup{v_1, v_2, \ldots, v_k}$ is a legal sequence
+       for $f$, then
        $\tup{v_1, v_2, \ldots, v_k}$ is stabilizing if and
        only if there exist no $v \in V$ such that the
        sequence $\tup{v_1, v_2, \ldots, v_k, v}$ is legal.
-\end{itemize}
+\end{proposition}
 
-
-An important property of chipfiring is the following result
+An important property of chip-firing is the following result
 (sometimes called the ``least action principle''):
 
 \begin{theorem} \label{thm.chip.lap}
-Let $f : V \to \NN$ be any configuration.
+Let $f : V \to \ZZ$ be any $\ZZ$-configuration.
 Let $\ell$ and $s$ be two sequences of vertices of $D$ such
 that $\ell$ is legal for $f$ while $s$ is stabilizing for $f$.
 Then, $\ell$ is a subpermutation of $s$.
@@ -452,6 +616,157 @@ removing some entries and permuting the remaining entries.
 (``Some'' allows for the possibility of ``zero''.)
 \end{definition}
 
+Our proof of Theorem \ref{thm.chip.lap} relies on the following
+simple facts about subpermutations (whose proofs are left
+to the reader):
+
+\begin{lemma} \label{lem.subper.simple-stuff}
+\textbf{(a)} Any permutation of a finite sequence $s$ is a
+subpermutation of $s$.
+
+\textbf{(b)} If three finite sequences $a$, $b$ and $c$ have
+the property that $a$ is a subpermutation of $b$, and that
+$b$ is a subpermutation of $c$, then
+$a$ is a subpermutation of $c$.
+
+\textbf{(c)} If $\tup{a_1, a_2, \ldots, a_N}$
+and $\tup{b_1, b_2, \ldots, b_M}$ are two finite sequences
+such that $N > 0$ and $M > 0$ and $a_1 = b_1$,
+and if the sequence $\tup{a_2, a_3, \ldots, a_N}$ is a
+subpermutation of $\tup{b_2, b_3, \ldots, b_M}$, then
+the sequence $\tup{a_1, a_2, \ldots, a_N}$ is a
+subpermutation of $\tup{b_1, b_2, \ldots, b_M}$.
+
+\textbf{(d)} If two finite sequences $a$ and $b$ are such
+that $a$ is a subpermutation of $b$ and $b$ is a subpermutation
+of $a$, then $a$ is a permutation of $b$.
+
+\textbf{(e)} Any subpermutation of a finite sequence $s$ is
+at most as long as $s$.
+\end{lemma}
+
+\begin{proof}[Proof of Theorem \ref{thm.chip.lap} (sketched).]
+We shall prove Theorem \ref{thm.chip.lap} by induction on the length of $\ell$.
+
+\textit{Induction base:} Theorem \ref{thm.chip.lap} is obvious when the length
+of $\ell$ is $0$.
+
+\textit{Induction step:} Fix a positive integer $N$. Assume (as the induction
+hypothesis) that Theorem \ref{thm.chip.lap} is true when the sequence $\ell$
+has length $N-1$. We must prove that Theorem \ref{thm.chip.lap} is true when
+the sequence $\ell$ has length $N$.
+
+So let $f$, $\ell$ and $s$ be as in Theorem \ref{thm.chip.lap}, and assume
+that $\ell$ has length $N$. We must then prove that $\ell$ is a subpermutation
+of $s$.
+
+Write the sequence $s$ in the form $s=\left(  s_{1},s_{2},\ldots,s_{M}\right)
+$.
+
+Write the sequence $\ell$ in the form $\ell=\left(  \ell_{1},\ell_{2}%
+,\ldots,\ell_{N}\right)  $ (this is possible, since $\ell$ has length $N$).
+The entry $\ell_{1}$ exists (since $N$ is positive). Clearly, the vertex
+$\ell_{1}$ is active in $f$ (because $\ell_{1}$ is the first entry of a
+sequence that is legal for $f$). In other words, $f\left(  \ell_{1}\right)
+\geq\deg^{+}\left(  \ell_{1}\right)  $.
+
+Now, we claim that $\ell_{1}\in\left\{  s_{1},s_{2},\ldots,s_{M}\right\}  $.
+Indeed, assume the contrary. Thus, $\ell_{1}\notin\left\{  s_{1},s_{2}%
+,\ldots,s_{M}\right\}  $. In other words, $\ell_{1}\neq s_{i}$ for each
+$i\in\left\{  1,2,\ldots,M\right\}  $. Hence, for each $i\in\left\{
+1,2,\ldots,M\right\}  $, the definition of $\Delta s_{i}$ yields
+\begin{equation}
+\left(  \Delta s_{i}\right)  \left(  \ell_{1}\right)  =\underbrace{\left[
+\ell_{1}=s_{i}\right]  }_{\substack{=0\\\text{(since }\ell_{1}\neq
+s_{i}\text{)}}}\deg^{+}\left(  s_{i}\right)  -\underbrace{a_{s_{i},\ell_{1}}%
+}_{\geq0}\leq0.\label{pf.thm.chip.lap.4}%
+\end{equation}
+But the sequence $\left(  s_{1},s_{2},\ldots,s_{M}\right)  =s$ is stabilizing;
+in other words, the $\ZZ$-configuration $f-\Delta s_{1}-\Delta
+s_{2}-\cdots-\Delta s_{M}$ is stable. Thus, in particular,
+\[
+\left(  f-\Delta s_{1}-\Delta s_{2}-\cdots-\Delta s_{M}\right)  \left(
+\ell_{1}\right)  <\deg^{+}\left(  \ell_{1}\right)  \leq f\left(  \ell
+_{1}\right)
+\]
+(since $f\left(  \ell_{1}\right)  \geq\deg^{+}\left(  \ell_{1}\right)  $).
+Hence,%
+\[
+f\left(  \ell_{1}\right)  >\left(  f-\Delta s_{1}-\Delta s_{2}-\cdots-\Delta
+s_{M}\right)  \left(  \ell_{1}\right)  =f\left(  \ell_{1}\right)  -\sum
+_{i=1}^{M}\underbrace{\left(  \Delta s_{i}\right)  \left(  \ell_{1}\right)
+}_{\substack{\leq0\\\text{(by (\ref{pf.thm.chip.lap.4}))}}}\geq f\left(
+\ell_{1}\right)  ,
+\]
+which is absurd. This contradiction completes our proof of $\ell_{1}%
+\in\left\{  s_{1},s_{2},\ldots,s_{M}\right\}  $.
+
+In other words, $\ell_{1}$ is an entry of the sequence $s$. Thus, there exists
+a permutation $t$ of the sequence $s$ such that $\ell_{1}$ is the
+\textbf{first} entry of $t$. Consider such a $t$. Write $t$ in the form
+$t=\left(  t_{1},t_{2},\ldots,t_{M}\right)  $. (This is possible, since $t$
+has length $M$, being a permutation of the length-$M$ sequence $s$.)
+
+We know that $\ell_{1}$ is the first entry of the sequence $t=\left(
+t_{1},t_{2},\ldots,t_{M}\right)  $. In other words, $\ell_{1}=t_{1}$. In
+particular, $M>0$.
+
+Recall that $\left(  t_{1},t_{2},\ldots,t_{M}\right)  =t$ is a permutation of
+the sequence $\left(  s_{1},s_{2},\ldots,s_{M}\right)  =s$. Thus, $f-\Delta
+t_{1}-\Delta t_{2}-\cdots-\Delta t_{M}=f-\Delta s_{1}-\Delta s_{2}%
+-\cdots-\Delta s_{M}$.
+
+We have
+\begin{align*}
+& \left(  f-\Delta\underbrace{\ell_{1}}_{=t_{1}}\right)  -\Delta t_{2}-\Delta
+t_{3}-\cdots-\Delta t_{M}\\
+& =\left(  f-\Delta t_{1}\right)  -\Delta t_{2}-\Delta t_{3}-\cdots-\Delta
+t_{M}\\
+& =f-\Delta t_{1}-\Delta t_{2}-\cdots-\Delta t_{M}=f-\Delta s_{1}-\Delta
+s_{2}-\cdots-\Delta s_{M}.
+\end{align*}
+Hence, the $\ZZ$-configuration $\left(  f-\Delta\ell_{1}\right)
+-\Delta t_{2}-\Delta t_{3}-\cdots-\Delta t_{M}$ is stable (since the
+$\ZZ$-configuration $f-\Delta s_{1}-\Delta s_{2}-\cdots-\Delta s_{M}$
+is stable). In other words, the sequence $\left(  t_{2},t_{3},\ldots
+,t_{M}\right)  $ is stabilizing for the $\ZZ$-configuration
+$f-\Delta\ell_{1}$.
+
+On the other hand, the sequence $\left(  \ell_{1},\ell_{2},\ldots,\ell
+_{N}\right)  =\ell$ is legal for $f$. Hence, for each $i\in\left\{
+2,3,\ldots,N\right\}  $, the vertex $\ell_{i}$ is active in the $\ZZ%
+$-configuration $f-\Delta\ell_{1}-\Delta\ell_{2}-\cdots-\Delta\ell_{i-1}$. In
+other words, for each $i\in\left\{  2,3,\ldots,N\right\}  $, the vertex
+$\ell_{i}$ is active in the $\ZZ$-configuration $\left(  f-\Delta
+\ell_{1}\right)  -\Delta\ell_{2}-\Delta\ell_{3}-\cdots-\Delta\ell_{i-1}$.
+Renaming $i$ as $i+1$ in this fact, we obtain the following: For each
+$i\in\left\{  1,2,\ldots,N-1\right\}  $, the vertex $\ell_{i+1}$ is active in
+the $\ZZ$-configuration $\left(  f-\Delta\ell_{1}\right)  -\Delta
+\ell_{2}-\Delta\ell_{3}-\cdots-\Delta\ell_{i}$. In other words, the sequence
+$\left(  \ell_{2},\ell_{3},\ldots,\ell_{N}\right)  $ is legal for the
+$\ZZ$-configuration $f-\Delta\ell_{1}$. Moreover, this sequence has
+length $N-1<N$.
+
+Hence, by the induction hypothesis, we can apply Theorem \ref{thm.chip.lap} to
+$f-\Delta\ell_{1}$, $\left(  \ell_{2},\ell_{3},\ldots,\ell_{N}\right)  $ and
+$\left(  t_{2},t_{3},\ldots,t_{M}\right)  $ instead of $f$, $\ell$ and $t$. We
+thus conclude that the sequence $\left(  \ell_{2},\ell_{3},\ldots,\ell
+_{N}\right)  $ is a subpermutation of $\left(  t_{2},t_{3},\ldots
+,t_{M}\right)  $. Hence, Lemma \ref{lem.subper.simple-stuff} \textbf{(c)}
+(applied to $a_{i}=\ell_{i}$ and $b_{j}=t_{j}$) shows that the sequence
+$\left(  \ell_{1},\ell_{2},\ldots,\ell_{N}\right)  $ is a subpermutation of
+$\left(  t_{1},t_{2},\ldots,t_{M}\right)  $ (since $N>0$ and $M>0$ and
+$\ell_{1}=t_{1}$). In other words, the sequence $\ell$ is a subpermutation of
+$t$ (since $\ell=\left(  \ell_{1},\ell_{2},\ldots,\ell_{N}\right)  $ and
+$t=\left(  t_{1},t_{2},\ldots,t_{M}\right)  $).
+
+But the sequence $t$ is a permutation of $s$, and thus a subpermutation of $s$
+(by Lemma \ref{lem.subper.simple-stuff} \textbf{(a)}). Hence, Lemma
+\ref{lem.subper.simple-stuff} \textbf{(b)} (applied to $a=\ell$, $b=t$ and
+$c=s$) shows that the sequence $\ell$ is a subpermutation of $t$. This
+completes the induction step. Thus, Theorem \ref{thm.chip.lap} is proven.
+\end{proof}
+
 \begin{corollary} \label{cor.chip.lap-cor}
 Let $f : V \to \NN$ be any configuration.
 Let $\ell$ and $\ell'$ be two sequences of vertices of $D$
@@ -475,7 +790,298 @@ configuration obtained from $f$ by firing
 all vertices in $\ell'$ (one after the other).
 \end{corollary}
 
-Next we state some facts about legal sequences:
+\begin{proof}[Proof of Corollary~\ref{cor.chip.lap-cor} (sketched).]
+Theorem \ref{thm.chip.lap} (applied to $\ell^{\prime}$ instead of $s$) shows
+that $\ell$ is a subpermutation of $\ell^{\prime}$. But Theorem
+\ref{thm.chip.lap} (applied to $\ell^{\prime}$ and $\ell$ instead of $\ell$
+and $s$) shows that $\ell^{\prime}$ is a subpermutation of $\ell$. Hence,
+Lemma \ref{lem.subper.simple-stuff} \textbf{(d)} (applied to $a=\ell^{\prime}$
+and $b=\ell$) shows that $\ell^{\prime}$ is a permutation of $\ell$. This
+proves part \textbf{(a)} of Corollary~\ref{cor.chip.lap-cor}. Parts
+\textbf{(b)} and \textbf{(c)} follow immediately from part \textbf{(a)}. Part
+\textbf{(d)} also follows from part \textbf{(a)}, because we know that the
+order in which we fire a sequence of vertices does not matter for the final
+result (so any permutation of a sequence yields the same configuration as the
+sequence itself).
+\end{proof}
+
+\subsubsection{Concatenation of legal sequences}
+
+For the next lemma, we need a simple piece of notation:
+
+\begin{definition} \label{def.concat}
+\textbf{(a)} If $u=\left(  u_{1},u_{2},\ldots,u_{p}\right)  $ and $v=\left(
+v_{1},v_{2},\ldots,v_{q}\right)  $ are two finite sequences, then $u\ast v$
+denote the sequence $\left(  u_{1},u_{2},\ldots,u_{p},v_{1},v_{2},\ldots
+,v_{q}\right)  $. This sequence $u\ast v$ is called the \textit{concatenation}
+of the sequences $u$ and $v$.
+
+\textbf{(b)} If $u$ is a finite sequence, and if $k\in\mathbb{N}$, then
+$u^{\ast k}$ denotes the sequence $\underbrace{u\ast u\ast\cdots\ast
+u}_{k\text{ times}}$. (This is well-defined, since the operation of
+concatenation is associative. Notice that $u^{\ast0}$ is the empty sequence
+$\left(  {}\right)  $.)
+\end{definition}
+
+\begin{lemma}
+\label{lem.chip.leg-concat1}
+Let $f : V \to \ZZ$ be a $\ZZ$-configuration.
+Let $u$ be a legal sequence for $f$.
+Let $g$ be the $\ZZ$-configuration obtained from $f$
+by firing all vertices in $u$
+(that is, $g=f-\Delta u_{1}-\Delta u_{2}-\cdots-\Delta u_{p}$, where $u$ is
+written in the form $u=\left(  u_{1},u_{2},\ldots,u_{p}\right)  $).
+Let $v$ be a legal sequence for $g$.
+Then, $u\ast v$ is a legal sequence for $f$.
+\end{lemma}
+
+\begin{proof}
+[Proof of Lemma \ref{lem.chip.leg-concat1} (sketched).] Write the sequence $u$
+in the form $u=\left(  u_{1},u_{2},\ldots,u_{p}\right)  $. Write the sequence
+$v$ in the form $v=\left(  v_{1},v_{2},\ldots,v_{q}\right)  $. Then, the
+definition of $u\ast v$ yields  $u\ast v=\left(  u_{1},u_{2},\ldots
+,u_{p},v_{1},v_{2},\ldots,v_{q}\right)  $.
+
+We want to prove that the sequence $u\ast v$ is legal for $f$. In other words,
+we want to prove that the sequence $\left(  u_{1},u_{2},\ldots,u_{p}%
+,v_{1},v_{2},\ldots,v_{q}\right)  $ is legal for $f$ (since $u\ast v=\left(
+u_{1},u_{2},\ldots,u_{p},v_{1},v_{2},\ldots,v_{q}\right)  $). In other words,
+we want to prove that if we start with the $\mathbb{Z}$-configuration $f$, and
+fire the vertices $u_{1},u_{2},\ldots,u_{p},v_{1},v_{2},\ldots,v_{q}$ one by
+one (from first to last), then each vertex we fire is active at the time of firing.
+
+This process can be subdivided into two phases: The phase where we fire the
+first $p$ vertices $u_{1},u_{2},\ldots,u_{p}$ will be called \textit{phase
+}$1$. It is followed by a phase where we fire the next $q$ vertices, which are
+$v_{1},v_{2},\ldots,v_{q}$; this latter phase will be called \textit{phase
+}$2$.
+
+We must prove that each vertex we fire in our process is active at the time of
+firing. We call this the \textit{activity claim}. This claim is obvious for
+the first $p$ vertices being fired (because these are the vertices
+$u_{1},u_{2},\ldots,u_{p}$, and we already know that the sequence $\left(
+u_{1},u_{2},\ldots,u_{p}\right)  =u$ is legal for $f$); in other words, the
+activity claim is obvious for the vertices fired in phase $1$. It thus remains
+to prove the activity claim for the vertices fired in phase $2$.
+
+In phase $1$, the $\mathbb{Z}$-configuration $f$ is transformed by firing all
+vertices in $u$ (because the vertices $u_{1},u_{2},\ldots,u_{p}$ are precisely
+the vertices in $u$). Thus, the $\mathbb{Z}$-configuration obtained at the end
+of phase $1$ is $g$ (because $g$ is \textbf{defined} as the $\mathbb{Z}%
+$-configuration obtained from $f$ by firing all vertices in $u$). In phase
+$2$, this $\mathbb{Z}$-configuration $g$ is transformed further by firing the
+vertices $v_{1},v_{2},\ldots,v_{q}$. Since the sequence $\left(  v_{1}%
+,v_{2},\ldots,v_{q}\right)  $ is legal for $g$, we thus conclude that these
+vertices are active at the time of firing (in phase $2$). Hence, the activity
+claim for the vertices fired in phase $2$ is proven. As we have explained,
+this completes our proof of Lemma \ref{lem.chip.leg-concat1}.
+\end{proof}
+
+\begin{lemma}
+\label{lem.chip.leg-concat2}Let $f:V\rightarrow\mathbb{Z}$ be a $\mathbb{Z}%
+$-configuration. Let $u=\left(  u_{1},u_{2},\ldots,u_{p}\right)  $ be a legal
+sequence for $f$ such that $\Delta u_{1}+\Delta u_{2}+\cdots+\Delta u_{p}=0$.
+Let $k\in\mathbb{N}$. Then, the sequence $u^{\ast k}$ is legal for $f$.
+\end{lemma}
+
+\begin{proof}
+[Proof of Lemma \ref{lem.chip.leg-concat2} (sketched).] We want to prove that%
+\begin{equation}
+\text{the sequence }u^{\ast k}\text{ is legal for }%
+f.\label{pf.lem.chip.leg-concat2.goal}%
+\end{equation}
+We shall prove by induction over $k$:
+
+\textit{Induction base:} The sequence $u^{\ast0}=\left(  {}\right)  $ (the
+empty sequence) is clearly legal for $f$. In other words,
+(\ref{pf.lem.chip.leg-concat2.goal}) holds for $k=0$. This completes the
+induction base.
+
+\textit{Induction step:} Let $K\in\mathbb{N}$. Assume that
+(\ref{pf.lem.chip.leg-concat2.goal}) holds for $k=K$. We must prove that
+(\ref{pf.lem.chip.leg-concat2.goal}) holds for $k=K+1$.
+
+We have assumed that (\ref{pf.lem.chip.leg-concat2.goal}) holds for $k=K$. In
+other words, the sequence $u^{\ast K}$ is legal for $f$.
+
+Let $g$ be the $\mathbb{Z}$-configuration obtained from $f$ by firing all
+vertices in $u$. Thus,
+\[
+g=f-\Delta u_{1}-\Delta u_{2}-\cdots-\Delta u_{p}=f-\underbrace{\left(  \Delta
+u_{1}+\Delta u_{2}+\cdots+\Delta u_{p}\right)  }_{=0}=f.
+\]
+Hence, the sequence $u^{\ast K}$ is legal for $g$ (since the sequence $u^{\ast
+K}$ is legal for $f$). Thus, Lemma \ref{lem.chip.leg-concat1} (applied to
+$v=u^{\ast K}$) shows that the sequence $u\ast u^{\ast K}$ is legal for $f$.
+In other words, the sequence $u^{\ast\left(  K+1\right)  }$ is legal for $f$
+(since $u^{\ast\left(  K+1\right)  }=u\ast u^{\ast K}$). In other words,
+(\ref{pf.lem.chip.leg-concat2.goal}) holds for $k=K+1$. This completes the
+induction step.
+
+Thus, (\ref{pf.lem.chip.leg-concat2.goal}) is proven. This proves Lemma
+\ref{lem.chip.leg-concat2}.
+\end{proof}
+
+\begin{lemma} \label{lem.chip.leg-repeat}
+Let $f : V \to \ZZ$ be a $\ZZ$-configuration.
+Let $\ell=\left(  \ell_{1},\ell_{2},\ldots,\ell_{k}\right)  $
+be a legal sequence for $f$.
+Let $i$ and $j$ be two elements of $\set{1, 2, \ldots, k}$ such that
+$i < j$ and
+\begin{equation}
+f-\Delta\ell_{1}-\Delta\ell_{2}-\cdots-\Delta\ell_{i}=f-\Delta\ell_{1}%
+-\Delta\ell_{2}-\cdots-\Delta\ell_{j}.\label{eq.lem.chip.leg-repeat.cond}%
+\end{equation}
+Then:
+
+\textbf{(a)} For every $r\in\mathbb{N}$, the sequence $\left(  \ell_{1}%
+,\ell_{2},\ldots,\ell_{i}\right)  \ast\left(  \ell_{i+1},\ell_{i+2}%
+,\ldots,\ell_{j}\right)  ^{\ast r}$ is legal for $f$. (This is the sequence
+which begins with $\ell_{1},\ell_{2},\ldots,\ell_{i}$ and then goes on
+repeating the $j-i$ elements $\ell_{i+1},\ell_{i+2},\ldots,\ell_{j}$ for a
+total of $r$ times.)
+
+\textbf{(b)} There exist legal sequences (for $f$) of arbitrary length.
+\end{lemma}
+
+\begin{proof}
+[Proof of Lemma \ref{lem.chip.leg-repeat} (sketched).] If we subtract
+$f-\Delta\ell_{1}-\Delta\ell_{2}-\cdots-\Delta\ell_{i}$ from both sides of
+(\ref{eq.lem.chip.leg-repeat.cond}), we obtain%
+\[
+0=-\Delta\ell_{i+1}-\Delta\ell_{i+2}-\cdots-\Delta\ell_{j}.
+\]
+Thus,%
+\begin{equation}
+\Delta\ell_{i+1}+\Delta\ell_{i+2}+\cdots+\Delta\ell_{j}%
+=0.\label{pf.lem.chip.leg-repeat.zerosum}%
+\end{equation}
+
+
+\textbf{(a)} Let $r\in\mathbb{N}$. The sequence $\left(  \ell_{1},\ell
+_{2},\ldots,\ell_{k}\right)  $ is legal for $f$. Thus, its prefix $\left(
+\ell_{1},\ell_{2},\ldots,\ell_{i}\right)  $ is also legal for $f$.
+
+Let $g$ be the $\mathbb{Z}$-configuration obtained from $f$ by firing all
+vertices in $\left(  \ell_{1},\ell_{2},\ldots,\ell_{i}\right)  $. Thus,
+$g=f-\Delta\ell_{1}-\Delta\ell_{2}-\cdots-\Delta\ell_{i}$. Then, the sequence
+$\left(  \ell_{i+1},\ell_{i+2},\ldots,\ell_{j}\right)  $ is legal for
+$g$\ \ \ \ \footnote{\textit{Proof.} We need to show that for each
+$p\in\left\{  1,2,\ldots,j-i\right\}  $, the vertex $\ell_{i+p}$ is active in
+the $\mathbb{Z}$-configuration $g-\Delta\ell_{i+1}-\Delta\ell_{i+2}%
+-\cdots-\Delta\ell_{i+p-1}$.
+\par
+So let $p\in\left\{  1,2,\ldots,j-i\right\}  $. Then, the vertex $\ell_{i+p}$
+is active in the $\mathbb{Z}$-configuration $f-\Delta\ell_{1}-\Delta\ell
+_{2}-\cdots-\Delta\ell_{i+p-1}$ (since the sequence $\left(  \ell_{1},\ell
+_{2},\ldots,\ell_{k}\right)  $ is legal for $f$). In view of%
+\begin{align*}
+f-\Delta\ell_{1}-\Delta\ell_{2}-\cdots-\Delta\ell_{i+p-1}  &
+=\underbrace{\left(  f-\Delta\ell_{1}-\Delta\ell_{2}-\cdots-\Delta\ell
+_{i}\right)  }_{=g}-\Delta\ell_{i+1}-\Delta\ell_{i+2}-\cdots-\Delta
+\ell_{i+p-1}\\
+& =g-\Delta\ell_{i+1}-\Delta\ell_{i+2}-\cdots-\Delta\ell_{i+p-1},
+\end{align*}
+this rewrites as follows: The vertex $\ell_{i+p}$ is active in the
+$\mathbb{Z}$-configuration $g-\Delta\ell_{i+1}-\Delta\ell_{i+2}-\cdots
+-\Delta\ell_{i+p-1}$. But this is precisely what we needed to show.}. Hence,
+Lemma \ref{lem.chip.leg-concat2} (applied to $g$, $j-i$, $\left(  \ell
+_{i+1},\ell_{i+2},\ldots,\ell_{j}\right)  $, $\ell_{i+h}$ and $r$ instead of
+$f$, $p$, $u$, $u_{h}$ and $r$) shows that the sequence $\left(  \ell
+_{i+1},\ell_{i+2},\ldots,\ell_{j}\right)  ^{\ast r}$ is legal for $g$ (because
+of (\ref{pf.lem.chip.leg-repeat.zerosum})). Hence, Lemma
+\ref{lem.chip.leg-concat1} (applied to $\left(  \ell_{1},\ell_{2},\ldots
+,\ell_{i}\right)  $ and $\left(  \ell_{i+1},\ell_{i+2},\ldots,\ell_{j}\right)
+^{\ast r}$ instead of $u$ and $v$) yields that $\left(  \ell_{1},\ell
+_{2},\ldots,\ell_{i}\right)  \ast\left(  \ell_{i+1},\ell_{i+2},\ldots,\ell
+_{j}\right)  ^{\ast r}$ is a legal sequence for $f$. This proves Lemma
+\ref{lem.chip.leg-repeat} \textbf{(a)}.
+
+\textbf{(b)} We must show that for each $r\in\mathbb{N}$, there exists a legal
+sequence for $f$ of length $r$.
+
+So let us fix $r\in\mathbb{N}$. From $i<j$, we obtain $j-i\geq1$. Lemma
+\ref{lem.chip.leg-repeat} \textbf{(a)} shows that the sequence $\left(
+\ell_{1},\ell_{2},\ldots,\ell_{i}\right)  \ast\left(  \ell_{i+1},\ell
+_{i+2},\ldots,\ell_{j}\right)  ^{\ast r}$ is legal for $f$. This sequence has
+length $i+r\underbrace{\left(  j-i\right)  }_{\geq1}\geq\underbrace{i}_{\geq
+0}+r\geq r$. Hence, the first $r$ entries of this sequence form a sequence of
+length $r$. This sequence is legal for $f$ (being a prefix of the legal
+sequence $\left(  \ell_{1},\ell_{2},\ldots,\ell_{i}\right)  \ast\left(
+\ell_{i+1},\ell_{i+2},\ldots,\ell_{j}\right)  ^{\ast r}$). Hence, we have
+found a legal sequence for $f$ of length $r$. This proves Lemma
+\ref{lem.chip.leg-repeat} \textbf{(b)}.
+\end{proof}
+
+\subsubsection{Bounds on legal sequences}
+
+This section is of technical nature; it will later be helpful
+in constructive proofs and algorithms.
+You should probably skip it at first read.
+
+Let us state a simple lemma for future use:
+\begin{lemma} \label{lem.chip.sum-fire}
+Let $f : V \to \ZZ$ be a $\ZZ$-configuration.
+Let $v_1, v_2, \ldots, v_N$ be any vertices of $D$.
+Then,
+\[
+\sum \tup{f - \Delta v_1 - \Delta v_2 - \cdots - \Delta v_N}
+= \sum f .
+\]
+\end{lemma}
+
+\begin{proof}[Proof of Lemma~\ref{lem.chip.sum-fire}.]
+We have
+\begin{align*}
+&  \sum\left(  f-\Delta v_{1}-\Delta v_{2}-\cdots-\Delta v_N\right)
+\\
+&  =\sum f-\sum\left(  \Delta v_{1}\right)  -\sum\left(  \Delta v
+_{2}\right)  -\cdots-\sum\left(  \Delta v_N\right)
+ =\sum f
+\end{align*}
+(since Proposition \ref{prop.chip.sumDv=0} yields
+$\sum\left(  \Delta v_{j}\right)  =0\text{ for each }j\in\left\{
+1,2,\ldots,N\right\}$).
+This proves Lemma~\ref{lem.chip.sum-fire}.
+\end{proof}
+
+Next we state some inequality-type facts about legal sequences:
+
+\begin{lemma} \label{lem.chip.leg-hineq}
+Let $f : V \to \NN$ be a configuration.
+Let $h = \sum f$.
+Let $\tup{\ell_1, \ell_2, \ldots, \ell_N}$ be a legal sequence for $f$.
+Then, $\deg^+ \tup{\ell_i} \leq h$ for each
+$i \in \set{1, 2, \ldots, N}$.
+\end{lemma}
+
+\begin{proof}[Proof of Lemma~\ref{lem.chip.leg-hineq} (sketched).]
+Fix $i\in\left\{  1,2,\ldots,N\right\}  $.
+
+The sequence $\left(  \ell_{1},\ell_{2},\ldots,\ell_{N}\right)  $ is legal for
+$f$. Thus, the vertex $\ell_{i}$ is active in the $\ZZ$-configuration
+$f-\Delta\ell_{1}-\Delta\ell_{2}-\cdots-\Delta\ell_{i-1}$ (by the definition
+of a legal sequence). In other words, $\left(  f-\Delta\ell_{1}-\Delta\ell
+_{2}-\cdots-\Delta\ell_{i-1}\right)  \left(  \ell_{i}\right)  \geq\deg
+^{+}\left(  \ell_{i}\right)  $.
+
+But the sequence $\left(  \ell_{1},\ell_{2},\ldots,\ell_{N}\right)  $ is legal
+for $f$. Thus, $f-\Delta\ell_{1}-\Delta\ell_{2}-\cdots-\Delta\ell_{i-1}$ is a
+configuration (since $f$ is a configuration). Moreover,
+Lemma~\ref{lem.chip.sum-fire} (applied to $i-1$ and $\ell_p$
+instead of $N$ and $v_p$) yields
+$\sum\left(  f-\Delta\ell_{1}-\Delta\ell_{2}-\cdots-\Delta\ell_{i-1}\right)
+= \sum f =h$.
+Hence, Proposition \ref{prop.chip.sum-greater} (applied to $f-\Delta\ell
+_{1}-\Delta\ell_{2}-\cdots-\Delta\ell_{i-1}$ and $v$ instead of $f$ and $w$)
+yields $\left(  f-\Delta\ell_{1}-\Delta\ell_{2}-\cdots-\Delta\ell
+_{i-1}\right)  \left(  v\right)  \leq h$. Hence,%
+\[
+h\geq\left(  f-\Delta\ell_{1}-\Delta\ell_{2}-\cdots-\Delta\ell_{i-1}\right)
+\geq\deg^{+}\left(  \ell_{i}\right)  .
+\]
+This proves Lemma~\ref{lem.chip.leg-hineq}.
+\end{proof}
 
 \begin{lemma} \label{lem.chip.leg-bound1}
 Let $f : V \to \NN$ be a configuration.
@@ -495,6 +1101,87 @@ If $u$ appears more than $kh$ times in the sequence $\ell$,
 then $v$ must appear at least $k$ times in the sequence $\ell$.
 \end{lemma}
 
+\begin{proof}[Proof of Lemma~\ref{lem.chip.leg-bound1} (sketched).]
+\textbf{(b)} Assume that $u$ appears more than $kh$ times in the sequence
+$\ell$. We must prove that $v$ must appear at least $k$ times in the sequence
+$\ell$.
+
+Assume the contrary. Thus, $v$ appears less than $k$ times in the sequence
+$\ell$. In other words, $v$ appears at most $k-1$ times in the sequence $\ell$.
+
+Write the sequence $\ell$ in the form $\ell=\left(  \ell_{1},\ell_{2}%
+,\ldots,\ell_{N}\right)  $. Then, $\left(  \ell_{1},\ell_{2},\ldots,\ell
+_{N}\right)  =\ell$ is a legal sequence for $f$. Hence, $f-\Delta\ell
+_{1}-\Delta\ell_{2}-\cdots-\Delta\ell_{N}$ is a configuration (since $f$ is a
+configuration). Denote this configuration by $f^{\prime}$. Thus, $f^{\prime
+}=f-\Delta\ell_{1}-\Delta\ell_{2}-\cdots-\Delta\ell_{N}$.
+
+We know that at least one arc of $D$ has source $u$ and target $v$ (namely,
+$a$). Thus, $a_{u,v}\geq1$. Thus,%
+\begin{equation}
+a_{w,v}\geq\left[  w=u\right]  \qquad\text{for each vertex }w\in V
+\label{pf.lem.chip.leg-bound1.1}%
+\end{equation}
+(because if $w\neq u$, then this is obvious, but for $w=u$ it follows from
+$a_{u,v}\geq1$).
+
+From $f^{\prime}=f-\Delta\ell_{1}-\Delta\ell_{2}-\cdots-\Delta\ell_{N}$, we
+obtain%
+\begin{align*}
+\sum f^{\prime}  &  =\sum\left(  f-\Delta\ell_{1}-\Delta\ell_{2}-\cdots
+-\Delta\ell_{N}\right) \\
+&  =\sum f\qquad\left(
+\text{by Lemma~\ref{lem.chip.sum-fire}, applied to } v_p = \ell_p
+\right) \\
+&  =h.
+\end{align*}
+Hence, Proposition \ref{prop.chip.sum-greater} (applied to $f^{\prime}$ and
+$v$ instead of $f$ and $w$) yields $f^{\prime}\left(  v\right)  \leq h$.
+
+Also, $f\left(  v\right)  \geq0$ (since $f$ is a configuration). Furthermore,
+every $i\in\left\{  1,2,\ldots,N\right\}  $ satisfies%
+\begin{align}
+\left(  \Delta\ell_{i}\right)  \left(  v\right)    & =\left[  v=\ell
+_{i}\right]  \underbrace{\deg^{+}\left(  \ell_{i}\right)  }_{\substack{\leq
+h\\\text{(by (\ref{lem.chip.leg-hineq}))}}}-\underbrace{a_{\ell_{i},v}%
+}_{\substack{\geq\left[  \ell_{i}=u\right]  \\\text{(by
+(\ref{pf.lem.chip.leg-bound1.1}))}}}\qquad \left(  \text{by the
+definition of }\Delta\ell_{i}\right)  \nonumber\\
+& \leq\left[  v=\ell_{i}\right]  h-\left[  \ell_{i}=u\right]
+.\label{pf.lem.chip.leg-bound1.3}%
+\end{align}
+
+
+But $f^{\prime}=f-\Delta\ell_{1}-\Delta\ell_{2}-\cdots-\Delta\ell_{N}$.
+Hence,
+\begin{align*}
+f^{\prime}\left(  v\right)   &  =\left(  f-\Delta\ell_{1}-\Delta\ell
+_{2}-\cdots-\Delta\ell_{N}\right)  \left(  v\right)  =\underbrace{f\left(
+v\right)  }_{\geq0}-\sum_{i=1}^{N}\left(  \Delta\ell_{i}\right)  \left(
+v\right) \\
+&\geq -\sum_{i=1}^{N}\underbrace{\left(  \Delta\ell_{i}\right)  \left(
+v\right)  }_{\substack{\leq\left[  v=\ell_{i}\right]  h-\left[  \ell
+_{i}=u\right]  \\\text{(by (\ref{pf.lem.chip.leg-bound1.3}))}}}
+ =-\sum_{i=1}^{N}\left(  \left[  v=\ell_{i}\right]  h-\left[  \ell
+_{i}=u\right]  \right)  \\
+&  =-\underbrace{\sum_{i=1}^{N}\left[  v=\ell_{i}\right]  }%
+_{\substack{=\left(  \text{the number of all }i\in\left\{  1,2,\ldots
+,N\right\}  \text{ such that }v=\ell_{i}\right)  \\\leq k-1\\\text{(since
+}v\text{ appears at most }k-1\text{ times in the sequence }\ell\text{)}}}h\\
+&  \qquad +\underbrace{\sum_{i=1}^{N}\left[  \ell_{i}=u\right]
+}_{\substack{=\left(  \text{the number of all }i\in\left\{  1,2,\ldots
+,N\right\}  \text{ such that }\ell_{i}=u\right)  \\>kh\\\text{(since }u\text{
+appears more than }kh\text{ times in the sequence }\ell\text{)}}}\\
+&  >-\left(  k-1\right)  h+kh=h.
+\end{align*}
+This contradicts $f^{\prime}\left(  v\right)  \leq h$. This contradiction
+proves that our assumption was wrong. Thus, Lemma~\ref{lem.chip.leg-bound1}
+\textbf{(b)} is proven.
+
+\textbf{(a)} Lemma~\ref{lem.chip.leg-bound1} \textbf{(a)} follows by applying
+Lemma~\ref{lem.chip.leg-bound1} \textbf{(b)} to $k=1$.
+\end{proof}
+
 \begin{lemma} \label{lem.chip.leg-bound1b}
 Let $f : V \to \NN$ be a configuration.
 Let $h = \sum f$.
@@ -503,10 +1190,53 @@ Let $\ell$ be a legal sequence for $f$.
 Let $u$ and $v$ be two vertices of $D$ such that there exists
 a path of length $d$ from $u$ to $v$.
 
-If $u$ appears at least $\dfrac{h^{d+1}-1}{h-1}$
+If $u$ appears at least $h^0 + h^1 + \cdots + h^d$
 times in the sequence $\ell$,
 then $v$ must appear at least once in the sequence $\ell$.
 \end{lemma}
+
+\begin{proof}
+[Proof of Lemma \ref{lem.chip.leg-bound1b}.] We shall prove Lemma
+\ref{lem.chip.leg-bound1b} by induction over $d$:
+
+\textit{Induction base:} If $d=0$, then $u=v$. Thus, if $d=0$, then Lemma
+\ref{lem.chip.leg-bound1b} holds for obvious reasons. This completes the
+induction base.
+
+\textit{Induction step:} Fix a positive integer $e$. Assume (as the induction
+hypothesis) that Lemma \ref{lem.chip.leg-bound1b} holds for $d=e-1$. We must
+show that Lemma \ref{lem.chip.leg-bound1b} holds for $d=e$.
+
+Let $f$, $h$, $\ell$, $u$, $v$ and $d$ be as in Lemma
+\ref{lem.chip.leg-bound1b}, and assume that $d=e$. Assume that $u$ appears at
+least $h^{0}+h^{1}+\cdots+h^{d}$ times in the sequence $\ell$. We must show
+that $v$ must appear at least once in the sequence $\ell$.
+
+There exists a path of length $d$ from $u$ to $v$. Fix such a path, and let
+$w$ be its second vertex. (This is well-defined, since this path has length
+$d=e>0$.) Then, the path can be split into a single arc from $u$ to $w$, and a
+path of length $d-1$ from $w$ to $v$. Let us denote this arc from $u$ to $w$
+by $a$. Thus, $a$ is an arc with source $u$ and target $w$.
+
+We have assumed that $u$ appears at least $h^{0}+h^{1}+\cdots+h^{d}$ times in
+the sequence $\ell$. Since%
+\begin{align*}
+h^{0}+h^{1}+\cdots+h^{d}  & =\underbrace{h^{0}}_{=1>0}+\underbrace{h^{1}%
++h^{2}+\cdots+h^{d}}_{=\left(  h^{0}+h^{1}+\cdots+h^{d-1}\right)  h}\\
+& >\left(  h^{0}+h^{1}+\cdots+h^{d-1}\right)  h,
+\end{align*}
+we thus conclude that $u$ appears more than $\left(  h^{0}+h^{1}%
++\cdots+h^{d-1}\right)  h$ times in the sequence $\ell$. Thus,
+Lemma~\ref{lem.chip.leg-bound1} \textbf{(b)} (applied to $h^{0}+h^{1}%
++\cdots+h^{d-1}$ and $w$ instead of $k$ and $v$) shows that $w$ must appear at
+least $h^{0}+h^{1}+\cdots+h^{d-1}$ times in the sequence $\ell$.
+
+But $d-1=e-1$ (since $d=e$). Hence, by the induction hypothesis, we can apply
+Lemma \ref{lem.chip.leg-bound1b} to $w$ and $d-1$ instead of $u$ and $d$
+(since there exists a path of length $d-1$ from $w$ to $v$). We thus conclude
+that $v$ must appear at least once in the sequence $\ell$. This completes the
+induction step. Thus, Lemma \ref{lem.chip.leg-bound1b} is proven.
+\end{proof}
 
 \begin{proposition} \label{prop.chip.leg-everyone-fires}
 Let $f : V \to \NN$ be a configuration.
@@ -518,29 +1248,178 @@ Let $q$ be a vertex of $D$ such that for each vertex
 $u \in V$, there exists a path from $u$ to $q$.
 
 If the length of $\ell$ is
-$> \tup{n-1} \tup{ \dfrac{h^n-1}{h-1} - 1 }$,
+$> \tup{n-1} \tup{ h^1 + h^2 + \cdots + h^{n-1} }$,
 then $q$ must appear at least once in the sequence $\ell$.
 \end{proposition}
 
-\begin{proposition} \label{prop.chip.leg-period}
+\begin{proof}
+[Proof of Proposition \ref{prop.chip.leg-everyone-fires}.] Assume that the
+length of $\ell$ is $>\left(  n-1\right)  \left(  h^{1}+h^{2}+\cdots
++h^{n-1}\right)  $. We must prove that $q$ must appear at least once in the
+sequence $\ell$.
+
+Assume the contrary. Thus, $q$ never appears in the sequence $\ell$. Hence,
+all entries of $\ell$ are elements of $V\setminus\left\{  q\right\}  $.
+
+Now, let $u\in V\setminus\left\{  q\right\}  $ be arbitrary. Then,%
+\begin{equation}
+u\text{ appears at most }h^{1}+h^{2}+\cdots+h^{n-1}\text{ times in the
+sequence }\ell.\label{pf.prop.chip.leg-everyone-fires.1}%
+\end{equation}
+
+
+[\textit{Proof of (\ref{pf.prop.chip.leg-everyone-fires.1}):} Assume the
+contrary.\footnote{Yes, this is a proof by contradiction inside a proof by
+contradiction.} Thus, $u$ appears more than $h^{1}+h^{2}+\cdots+h^{n-1}$ times
+in the sequence $\ell$. In other words, $u$ appears at least $\left(
+h^{1}+h^{2}+\cdots+h^{n-1}\right)  +1$ times in the sequence $\ell$.
+
+But $u\in V\setminus\left\{  q\right\}  \subseteq V$. Thus, there exists a
+path from $u$ to $q$ (by one of the assumptions of Proposition
+\ref{prop.chip.leg-everyone-fires}). Consider such a path $\mathbf{p}$. Let
+$d$ be the length of this path $\mathbf{p}$. The vertices of this path
+$\mathbf{p}$ are distinct (since it is a path), and belong to the $n$-element
+set $V$. Thus, this path $\mathbf{p}$ has at most $n$ vertices; in other
+words, it has length $\leq n-1$. In other words, $d\leq n-1$ (since we have
+denoted the length of the path $\mathbf{p}$ by $d$). Hence, $n-1\geq d$.
+
+But recall that $u$ appears at least $\left(  h^{1}+h^{2}+\cdots
++h^{n-1}\right)  +1$ times in the sequence $\ell$. Thus, $u$ appears at least%
+\begin{align*}
+\left(  h^{1}+h^{2}+\cdots+h^{n-1}\right)  +\underbrace{1}_{=h^{0}}  &
+=\left(  h^{1}+h^{2}+\cdots+h^{n-1}\right)  +h^{0}=h^{0}+h^{1}+\cdots
++h^{n-1}\\
+& \geq h^{0}+h^{1}+\cdots+h^{d}
+\qquad \left( \text{since } n-1 \geq d \right)
+\end{align*}
+times in the sequence $\ell$. Hence, Lemma \ref{lem.chip.leg-bound1b} (applied
+to $v=q$) yields that $q$ must appear at least once in the sequence $\ell$
+(since there exists a path of length $d$ from $u$ to $q$ (namely, the path
+$\mathbf{p}$)). This contradicts the fact that $q$ never appears in the
+sequence $\ell$. This proves (\ref{pf.prop.chip.leg-everyone-fires.1}).]
+
+Now, forget that we fixed $u$. We thus have proven
+(\ref{pf.prop.chip.leg-everyone-fires.1}) for each $u\in V\setminus\left\{
+q\right\}  $.
+
+Notice that $\left\vert V\setminus\left\{  q\right\}  \right\vert
+=\underbrace{\left\vert V\right\vert }_{=n}-1=n-1$. In other words, there are
+$n-1$ elements of $V\setminus\left\{  q\right\}  $.
+
+The sequence $\ell$ consists of elements of $V\setminus\left\{  q\right\}  $
+(since all entries of $\ell$ are elements of $V\setminus\left\{  q\right\}
+$), and contains each of these elements at most $h^{1}+h^{2}+\cdots+h^{n-1}$
+times (by (\ref{pf.prop.chip.leg-everyone-fires.1})). Hence, it has at most
+$\left(  n-1\right)  \left(  h^{1}+h^{2}+\cdots+h^{n-1}\right)  $ elements in
+total (because there are $n-1$ elements of $V\setminus\left\{  q\right\}  $).
+In other words, the length of $\ell$ is $\leq\left(  n-1\right)  \left(
+h^{1}+h^{2}+\cdots+h^{n-1}\right)  $. This contradicts the fact that the
+length of $\ell$ is $>\left(  n-1\right)  \left(  h^{1}+h^{2}+\cdots
++h^{n-1}\right)  $. This shows that our assumption was wrong; this proves
+Proposition \ref{prop.chip.leg-everyone-fires}.
+\end{proof}
+
+\begin{proposition} \label{prop.chip.leg-period-a}
 Let $f : V \to \NN$ be a configuration.
 Let $h = \sum f$.
 Let $\ell = \tup{\ell_1, \ell_2, \ldots, \ell_k}$ be a
 legal sequence for $f$.
+Let $i \in \set{0, 1, \ldots, k}$.
 Let
-$g = f - \Delta \ell_1 - \Delta \ell_2 - \cdots - \Delta \ell_k$
-be the configuration obtained from $f$ by firing the vertices in
-$\ell$ (one after the other).
+$g = f - \Delta \ell_1 - \Delta \ell_2 - \cdots - \Delta \ell_i$
+be the configuration obtained from $f$ by firing the vertices
+$\ell_1, \ell_2, \ldots, \ell_i$.
 
-\textbf{(a)} We have $g \in \set{0, 1, \ldots, h}^V$.
+Then, $g \in \set{0, 1, \ldots, h}^V$.
 (In other words, $g \tup{v} \in \set{0, 1, \ldots, h}$
 for each $v \in V$.)
+\end{proposition}
 
-\textbf{(b)} Let $n = \abs{V}$.
+\begin{proof}
+[Proof of Proposition \ref{prop.chip.leg-period-a}.] Fix $v\in V$.
+
+The sequence $\ell$ is legal for $f$. Thus, the sequence
+$\left( \ell_1, \ell_2, \ldots, \ell_i \right)$ (being a prefix of $\ell$)
+is also legal for $f$.
+Hence,
+$f-\Delta\ell_{1}-\Delta\ell_{2}-\cdots-\Delta\ell_i$ is a
+configuration (since $f$ is a configuration). In other words, $g$ is a
+configuration (since $g=f-\Delta\ell_{1}-\Delta\ell_{2}-\cdots-\Delta\ell_i
+$). Thus, $g\left(  v\right)  \geq0$.
+
+On the other hand, from $g=f-\Delta\ell_{1}-\Delta\ell_{2}-\cdots-\Delta
+\ell_i$, we obtain%
+\begin{align*}
+\sum g &  =\sum\left(  f-\Delta\ell_{1}-\Delta\ell_{2}-\cdots-\Delta\ell_i\right)  \\
+&  =\sum f\qquad\left(
+\text{by Lemma~\ref{lem.chip.sum-fire}, applied to } N = i \text{ and }
+v_p = \ell_p
+\right)  \\
+&  =h.
+\end{align*}
+Hence, Proposition \ref{prop.chip.sum-greater} (applied to $g$ and $v$ instead
+of $f$ and $w$) shows that $g\left(  v\right)  \leq h$. Combined with
+$g\left(  v\right)  \geq0$, this yields $g\left(  v\right)  \in\left\{
+0,1,\ldots,h\right\}  $.
+
+Now, forget that we fixed $v$. We thus have shown that $g\left(  v\right)
+\in\left\{  0,1,\ldots,h\right\}  $ for each $v\in V$. In other words,
+$g\in\left\{  0,1,\ldots,h\right\}  ^{V}$.
+This proves
+Proposition~\ref{prop.chip.leg-period-a}.
+\end{proof}
+
+\begin{proposition} \label{prop.chip.leg-period-b}
+Let $f : V \to \NN$ be a configuration.
+Let $h = \sum f$.
+Let $n = \abs{V}$.
+Let $\ell$ be a legal sequence for $f$.
 If the sequence $\ell$ has length
 $\geq \tup{h+1}^n$, then there exist legal sequences (for $f$)
 of arbitrary length.
 \end{proposition}
+
+\begin{proof}
+[Proof of Proposition \ref{prop.chip.leg-period-b}.] Assume that the sequence
+$\ell$ has length $\geq\left(  h+1\right)  ^{n}$. We must prove that there
+exist legal sequences (for $f$) of arbitrary length.
+
+Write the sequence $\ell$ in the form
+$\ell = \tup{\ell_1, \ell_2, \ldots, \ell_k}$.
+Thus, $k\geq\left(  h+1\right)  ^{n}$ (since
+$\ell$ has length $\geq\left(  h+1\right)  ^{n}$).
+
+For each $i\in\left\{  0,1,\ldots,k\right\}  $, we have $f-\Delta\ell
+_{1}-\Delta\ell_{2}-\cdots-\Delta\ell_{i}\in\left\{  0,1,\ldots,h\right\}
+^{V}$ (by Proposition \ref{prop.chip.leg-period-a}, applied to $g=f-\Delta
+\ell_{1}-\Delta\ell_{2}-\cdots-\Delta\ell_{i}$). In other words, all the $k+1$
+configurations $f-\Delta\ell_{1}-\Delta\ell_{2}-\cdots-\Delta\ell_{i}$ (with
+$i\in\left\{  0,1,\ldots,k\right\}  $) belong to the set $\left\{
+0,1,\ldots,h\right\}  ^{V}$. But the set $\left\{  0,1,\ldots,h\right\}  ^{V}$
+has exactly $\left(  h+1\right)  ^{n}$ elements\footnote{since%
+\[
+\left\vert \left\{  0,1,\ldots,h\right\}  ^{V}\right\vert =\left\vert \left\{
+0,1,\ldots,h\right\}  \right\vert ^{\left\vert V\right\vert }=\left(
+h+1\right)  ^{n}\ \ \ \ \ \ \ \ \ \ \left(  \text{because }\left\vert \left\{
+0,1,\ldots,h\right\}  \right\vert =h+1\text{ and }\left\vert V\right\vert
+=n\right)
+\]
+}. Since $k+1>k\geq\left(  h+1\right)  ^{n}$, we thus conclude (by the
+pigeonhole principle) that two of the $k+1$ configurations $f-\Delta\ell
+_{1}-\Delta\ell_{2}-\cdots-\Delta\ell_{i}$ (with $i\in\left\{  0,1,\ldots
+,k\right\}  $) must be equal (because all these $k+1$ configurations belong to
+$\left\{  0,1,\ldots,h\right\}  ^{V}$). In other words, there exist two
+elements $i$ and $j$ of $\left\{  0,1,\ldots,k\right\}  $ satisfying $i<j$ and%
+\[
+f-\Delta\ell_{1}-\Delta\ell_{2}-\cdots-\Delta\ell_{i}=f-\Delta\ell_{1}%
+-\Delta\ell_{2}-\cdots-\Delta\ell_{j}.
+\]
+Consider these $i$ and $j$. Then, Lemma \ref{lem.chip.leg-repeat} \textbf{(b)}
+yields that there exist legal sequences (for $f$) of arbitrary length. This
+proves Proposition \ref{prop.chip.leg-period-b}.
+\end{proof}
+
+\subsubsection{Finitary and infinitary configurations, and stabilization}
 
 \begin{definition}
 Let $f : V \to \NN$ be a configuration.
@@ -573,18 +1452,101 @@ Then, exactly one of the following two statements holds:
 \end{itemize}
 \end{theorem}
 
+\begin{proof}[Proof of Theorem~\ref{thm.chip.dichotomy}.]
+Set $h=\sum f$ and $n=\left\vert V\right\vert $.
+
+Consider the following simple algorithm:
+
+\begin{itemize}
+\item Start with the configuration $f$.
+
+\item Search for an active vertex. If you find one, fire it. Keep doing so
+until you \textbf{either} can no longer find an active vertex \textbf{or} you
+have fired $\left(  h+1\right)  ^{n}$ many vertices\footnote{Of course, many
+of these vertices will be equal.}.
+
+\item Say you are in \textit{Case 1} if you have stopped because you could no
+longer find an active vertex. Say you are in \textit{Case 2} if you have
+stopped because you have fired $\left(  h+1\right)  ^{n}$ many vertices.
+\end{itemize}
+
+Now, let us consider Case 1 first. In this case, you have stopped because you
+could no longer find an active vertex. Thus, you have arrived at a stable
+configuration. Let $s$ be the sequence of vertices you have fired during the
+algorithm (from first to last). Then, the sequence $s$ is legal (because you
+have only fired active vertices) and stabilizing (since you have arrived at a
+stable configuration). Thus, there exists a sequence of vertices that is both
+legal and stabilizing for $f$ (namely, $s$). In particular, there exists a
+sequence of vertices that is stabilizing for $f$. In other words, $f$ is
+finitary. Thus, $f$ is not infinitary. Hence, Statement 2 cannot hold.
+
+Furthermore, Corollary~\ref{cor.chip.lap-cor} \textbf{(a)} shows that every
+sequence of vertices that is both legal and stabilizing is a permutation of
+$s$. In other words, all such sequences are permutations of $s$.
+
+Finally, Theorem \ref{thm.chip.lap} shows that all legal sequences (for $f$)
+are subpermutations of $s$ (since $s$ is stabilizing), and therefore in
+particular are at most as long as $s$ (since a subpermutation of $s$ is always
+at most as long as $s$).
+
+Hence, Statement 1 holds. Thus, exactly one of the two Statements 1 and 2
+holds (namely, Statement 1, but not Statement 2).
+Theorem~\ref{thm.chip.dichotomy} is thus proven in Case 1.
+
+Let us now consider Case 2. In this case, you have stopped because you have
+fired $\left(  h+1\right)  ^{n}$ many vertices. Let $\ell$ be the sequence of
+vertices you have fired during the algorithm (from first to last). Then, the
+sequence $\ell$ is legal (because you have only fired active vertices) and has
+length $\left(  h+1\right)  ^{n}$ (since you have fired $\left(  h+1\right)
+^{n}$ many vertices). Hence, Proposition \ref{prop.chip.leg-period-b} shows
+that there exist legal sequences (for $f$) of arbitrary length. Thus, there
+exists no stabilizing sequence for $f$\ \ \ \ \footnote{\textit{Proof.} Let
+$s$ be a stabilizing sequence for $f$. Then, there exists a legal sequence
+$\ell$ for $f$ that is longer than $s$ (since there exist legal sequences (for
+$f$) of arbitrary length). Consider such an $\ell$. But Theorem
+\ref{thm.chip.lap} shows that $\ell$ is a subpermutation of $s$. Hence, $\ell$
+is at most as long as $s$ (since a subpermutation of $s$ is always at most as
+long as $s$). This contradicts the fact that $\ell$ is longer than $s$.
+\par
+Now, forget that we fixed $s$. We thus have found a contradiction for each
+stabilizing sequence $s$ for $f$. Thus, there exists no stabilizing sequence
+for $f$.}. Also, the configuration $f$ is infinitary (since there exists no
+stabilizing sequence for $f$). In other words, $f$ is not finitary. Therefore,
+Statement 1 does not hold.
+
+Each legal sequence for $f$ can be extended to a longer legal
+sequence\footnote{\textit{Proof.} Let $\ell$ be a legal sequence for $f$. We
+must prove that $\ell$ can be extended to a longer legal sequence.
+\par
+The sequence $\ell$ is not stabilizing (since there exists no stabilizing
+sequence for $f$). Thus, if we start with $f$ and fire all vertices of $\ell$,
+we end up with a configuration $f^{\prime}$ that is not stable. Hence, the
+configuration $f^{\prime}$ has at least one active vertex; consider such a
+vertex, and denote it by $v$. Append the vertex $v$ to the end of the sequence
+$\ell$, and denote the resulting sequence by $\ell^{\prime}$. Then,
+$\ell^{\prime}$ is a legal sequence for $f$ (since $v$ is an active vertex in
+$f^{\prime}$). Thus, $\ell$ can be extended to a longer legal sequence
+(namely, to $\ell^{\prime}$). Qed.}. Thus, Statement 2 holds. Thus, exactly
+one of the two Statements 1 and 2 holds (namely, Statement 2, but not
+Statement 1). Theorem~\ref{thm.chip.dichotomy} is thus proven in Case 2.
+
+We have now proven Theorem~\ref{thm.chip.dichotomy} in both Cases 1 and 2.
+Hence, Theorem~\ref{thm.chip.dichotomy} is always proven.
+\end{proof}
+
 How do we actually tell whether a given configuration $f$
 is finitary or infinitary?
-Proposition~\ref{prop.chip.leg-period} \textbf{(b)} suggests
-an algorithm:
+We simply follow the algorithm given in the proof of
+Proposition~\ref{prop.chip.leg-period-b}:
 Keep firing active vertices over and over until either no
 more active vertices remain, or you have fired at least
-$\tup{h+1}^n$ many times.
+$\tup{h+1}^n$ many times
+(where $h = \sum f$ and $n = \abs{V}$).
 In the former case, $f$ is finitary (and the sequence
 of vertices you have fired is a legal stabilizing sequence
 for $f$).
 In the latter case, $f$ is infinitary (by
-Proposition~\ref{prop.chip.leg-period} \textbf{(b)},
+Proposition~\ref{prop.chip.leg-period-b},
 since the sequence of vertices you have fired is a
 legal sequence of length $\geq \tup{h+1}^n$).
 Needless to say, this algorithm is extremely slow and
@@ -597,31 +1559,77 @@ cases; this is a subject of ongoing research.
 
 There are also criteria which, in certain cases, guarantee
 that a configuration is finitary or infinitary.
-For example, it is not hard to show that if $f$ is a
-configuration with $\sum f > \abs{A} - \abs{V}$,
-then $f$ is infinitary\footnote{The proof is easy:
-Let $f$ be a configuration with
-$\sum f > \abs{A} - \abs{V}$.
-Thus, $\sum_{v \in V} f \tup{v} = \sum f > \abs{A} - \abs{V}
-= \sum_{v \in V} \tup{\deg^+ v - 1}$.
+For example, the following is not hard to show:
+
+\begin{proposition} \label{prop.chip.infinitary-by-pigeon}
+Let $f : V \to \NN$ be a
+configuration with $\sum f > \abs{A} - \abs{V}$.
+Then, $f$ is infinitary.
+\end{proposition}
+
+\begin{proof}[Proof of Proposition~\ref{prop.chip.infinitary-by-pigeon}.]
+Let $s$ be a sequence of vertices that is stabilizing for $f$.
+We shall derive a contradiction.
+
+Let $g$ be the configuration obtained from $f$ by
+firing the vertices in $s$.
+Thus, $g$ is stable (since $s$ is stabilizing for $f$).
+In other words, there are no active vertices in $g$.
+
+Write the sequence $s$ in the form
+$s = \tup{s_1, s_2, \ldots, s_N}$.
+Then, $g = f - \Delta s_1 - \Delta s_2 - \cdots - \Delta s_N$
+(since $g$ is obtained from $f$ by firing the sequences in $s$).
+Hence,
+$\sum g
+= \sum \tup{f - \Delta s_1 - \Delta s_2 - \cdots - \Delta s_N}
+= \sum f$
+(by Lemma~\ref{lem.chip.sum-fire}, applied to $v_i = s_i$).
+
+A well-known fact
+(shown, e.g., during \cite[solution to Exercise 4]{hw2s})
+says that
+$\sum_{v \in V} \deg^+ v = \abs{A}$.
+Thus,
+\[
+\sum_{v \in V} \tup{\deg^+ v - 1}
+= \underbrace{\sum_{v \in V} \deg^+ v}_{= \abs{A}}
+- \underbrace{\sum_{v \in V} 1}_{= \abs{V}}
+= \abs{A} - \abs{V}.
+\]
+But the definition of $\sum g$ yields
+\begin{equation}
+\sum_{v \in V} g \tup{v} = \sum g = \sum f
+> \abs{A} - \abs{V}
+= \sum_{v \in V} \tup{\deg^+ v - 1}
+\label{pf.prop.chip.infinitary-by-pigeon.2}
+\end{equation}
 Hence, there exists at least one $v \in V$ satisfying
-$f \tup{v} > \deg^+ v - 1$.
+$g \tup{v} > \deg^+ v - 1$
+(because otherwise, each $v \in V$ would satisfy
+$g \tup{v} \leq \deg^+ v - 1$,
+so that
+we would get 
+$\sum_{v \in V} \underbrace{g \tup{v}}_{\leq \deg^+ v - 1}
+\leq \sum_{v \in V} \tup{\deg^+ v - 1}$,
+which would contradict
+\eqref{pf.prop.chip.infinitary-by-pigeon.2}).
 In other words, there exists at least one $v \in V$ satisfying
-$f \tup{v} \geq \deg^+ v$.
+$g \tup{v} \geq \deg^+ v$
+(since $g \tup{v}$ and $\deg^+ v$ are integers).
 In other words, there exists at least one active vertex
-$v \in V$ in $f$.
-Choose such an active vertex and fire it.
-The resulting configuration $f'$ satisfies
-$\sum f' = \sum f > \abs{A} - \abs{V}$,
-so the very same argument can be applied to $f'$ instead
-of $f$, and shows that there exists at least one active
-vertex $v' \in V$ in $f'$.
-Choose such an active vertex and fire it.
-Keep doing so.
-You can thus keep firing active vertices for
-as long as you wish.
-That is, $f$ has legal sequences of arbitrary length.
-Hence, $f$ is infinitary.}.
+$v \in V$ in $g$.
+This contradicts the fact that there are no active vertices in $g$.
+
+Now, forget that we fixed $s$.
+We thus have obtained a contradiction
+whenever $s$ is a sequence of vertices that is stabilizing for $f$.
+Hence, there exists no sequence of vertices that is stabilizing
+for $f$.
+In other words, $f$ is infinitary.
+This proves Proposition~\ref{prop.chip.infinitary-by-pigeon}.
+\end{proof}
+
 Conversely, the results of
 Exercise~\ref{exe.chip.adj-cycles} can be viewed as
 bounds on $\sum f$ that guarantee that $f$ must be
@@ -642,13 +1650,28 @@ Corollary~\ref{cor.chip.lap-cor} \textbf{(d)}.)
 The stabilization of $f$ is denoted by $f^\circ$.
 \end{definition}
 
+\subsubsection{$q$-stabilization}
+
 Something similar holds if we forbid firing a specific
 vertex:
 
 \begin{definition}
 Let $q \in V$.
+Let $f : V \to \ZZ$ be a $\ZZ$-configuration.
 
-Let $f : V \to \NN$ be a configuration.
+The $\ZZ$-configuration $f$ is said to be
+\textit{$q$-stable} if no vertex $v \in V$ except
+(possibly) $q$ is active in $f$.
+\end{definition}
+
+So the vertex $q$ may and may not be active in a
+$q$-stable configuration; but no other vertex is allowed
+to be active.
+
+\begin{definition}
+Let $q \in V$.
+
+Let $f : V \to \ZZ$ be a $\ZZ$-configuration.
 
 Let $\tup{v_1, v_2, \ldots, v_k}$ be a sequence of vertices of
 $D$.
@@ -659,8 +1682,8 @@ contain the vertex $q$.
 
 \textbf{(b)} The sequence $\tup{v_1, v_2, \ldots, v_k}$ is said
 to be \textit{$q$-stabilizing} for $f$ if the $\ZZ$-configuration
-$f - \Delta v_1 - \Delta v_2 - \cdots - \Delta v_k$ has no
-active vertices except (possibly) $q$.
+$f - \Delta v_1 - \Delta v_2 - \cdots - \Delta v_k$ is
+$q$-stable (i.e., has no active vertices except (possibly) $q$).
 \end{definition}
 
 We can now define ``$q$-finitary'' and ``$q$-infinitary''
@@ -676,7 +1699,7 @@ Let us state this as its own result:
 Let $f : V \to \NN$ be a configuration.
 Let $q \in V$.
 Assume that for each vertex $u \in V$, there exists a path
-$u \to q$.
+from $u$ to $q$.
 Then, there exists a sequence $s$ of vertices that is both
 $q$-legal and $q$-stabilizing for $f$.
 All such sequences are permutations of $s$.
@@ -684,11 +1707,127 @@ All $q$-legal sequences (for $f$) are subpermutations
 of $s$, and in particular are at most as long as $s$.
 \end{theorem}
 
+Before we can prove this, let us state the analogue of
+Theorem~\ref{thm.chip.lap} for $q$-legal and
+$q$-stabilizing sequences:
+
+\begin{theorem} \label{thm.chip.lap-q}
+Let $f : V \to \ZZ$ be any $\ZZ$-configuration.
+Let $q \in V$.
+Let $\ell$ and $s$ be two sequences of vertices of $D$ such
+that $\ell$ is $q$-legal for $f$ while $s$ is
+$q$-stabilizing for $f$.
+Then, $\ell$ is a subpermutation of $s$.
+\end{theorem}
+
+\begin{proof}[Proof of Theorem~\ref{thm.chip.lap-q}.]
+This proof is completely analogous to the proof
+of Theorem~\ref{thm.chip.lap} above.
+(Of course, you should use that none of the $\ell_i$
+and $s_j$ can be equal to $q$.)
+\end{proof}
+
+We also get an analogue of Corollary~\ref{cor.chip.lap-cor}:
+
+\begin{corollary} \label{cor.chip.lap-cor-q}
+Let $f : V \to \NN$ be any configuration.
+Let $q \in V$.
+Let $\ell$ and $\ell'$ be two sequences of vertices of $D$
+that are both $q$-legal and $q$-stabilizing for $f$.
+Then:
+
+\textbf{(a)} The sequence $\ell'$ is a permutation of $\ell$.
+
+In particular:
+
+\textbf{(b)} The sequences $\ell$ and $\ell'$ have the
+same length.
+
+\textbf{(c)} For each $t \in V$, the number of times $t$
+appears in $\ell'$ equals the number of times $t$ appears in
+$\ell$.
+
+\textbf{(d)} The configuration obtained from $f$ by firing
+all vertices in $\ell$ (one after the other) equals the
+configuration obtained from $f$ by firing
+all vertices in $\ell'$ (one after the other).
+\end{corollary}
+
+\begin{proof}[Proof of Corollary~\ref{cor.chip.lap-cor-q}.]
+This proof is completely analogous to the proof
+of Corollary~\ref{cor.chip.lap-cor} above.
+(Of course, Theorem~\ref{thm.chip.lap-q} needs to be used
+now instead of Theorem~\ref{thm.chip.lap}.)
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm.chip.dichotomy-q}.]
+This is somewhat similar to how we proved Theorem \ref{thm.chip.dichotomy},
+but there will be a twist.
+
+Set $h=\sum f$ and $n=\left\vert V\right\vert $.
+
+Consider the following simple algorithm:
+
+\begin{itemize}
+\item Start with the configuration $f$.
+
+\item Search for an active vertex distinct from $q$. If you find one, fire it.
+Keep doing so until you \textbf{either} can no longer find an active vertex
+distinct from $q$ \textbf{or} you have fired $\left(  n-1\right)  \left(
+h^{1}+h^{2}+\cdots+h^{n-1}\right)  $ many vertices\footnote{Of course, many of
+these vertices will be equal.}.
+
+\item Say you are in \textit{Case 1} if you have stopped because you could no
+longer find an active vertex distinct from $q$. Say you are in \textit{Case 2}
+if you have stopped because you have fired $\left(  n-1\right)  \left(
+h^{1}+h^{2}+\cdots+h^{n-1}\right)  $ many vertices.
+\end{itemize}
+
+Now, let us consider Case 1 first. In this case, you have stopped because you
+could no longer find an active vertex distinct from $q$. Thus, you have
+arrived at a $q$-stable configuration. Let $s$ be the sequence of vertices you
+have fired during the algorithm (from first to last). Then, the sequence $s$
+is $q$-legal (because you have only fired active vertices distinct from $q$)
+and $q$-stabilizing (since you have arrived at a $q$-stable configuration).
+Thus, there exists a sequence of vertices that is both $q$-legal and
+$q$-stabilizing for $f$ (namely, $s$). Hence,
+Corollary~\ref{cor.chip.lap-cor-q} \textbf{(a)} shows that every sequence of
+vertices that is both $q$-legal and $q$-stabilizing is a permutation of $s$.
+In other words, all such sequences are permutations of $s$.
+
+Finally, Theorem \ref{thm.chip.lap-q} shows that all $q$-legal sequences (for
+$f$) are subpermutations of $s$ (since $s$ is $q$-stabilizing), and therefore
+in particular are at most as long as $s$ (since a subpermutation of $s$ is
+always at most as long as $s$). Theorem~\ref{thm.chip.dichotomy-q} is thus
+proven in Case 1.
+
+Let us now consider Case 2. In this case, you have stopped because you have
+fired $\left(  n-1\right)  \left(  h^{1}+h^{2}+\cdots+h^{n-1}\right)  $ many
+vertices. Let $\ell$ be the sequence of vertices you have fired during the
+algorithm (from first to last). Then, the sequence $\ell$ is legal (because
+you have only fired active vertices) and has length $\left(  n-1\right)
+\left(  h^{1}+h^{2}+\cdots+h^{n-1}\right)  $ (since you have fired $\left(
+n-1\right)  \left(  h^{1}+h^{2}+\cdots+h^{n-1}\right)  $ many vertices).
+Also, the sequence $\ell$ does not contain the vertex $q$ (since you have only
+fired vertices distinct from $q$).
+
+The length of the sequence $\ell$ is $\left(  n-1\right)  \left(  h^{1}%
++h^{2}+\cdots+h^{n-1}\right)  +1>\left(  n-1\right)  \left(  h^{1}%
++h^{2}+\cdots+h^{n-1}\right)  $. Hence, Proposition
+\ref{prop.chip.leg-everyone-fires} shows that $q$ must appear at least once in
+the sequence $\ell$. This contradicts the fact that the sequence $\ell$ does
+not contain the vertex $q$. This contradiction shows that Case 2 cannot
+happen. Thus, the only possible case is Case 1.
+
+But we have proven Theorem~\ref{thm.chip.dichotomy-q} in Case 1. Thus,
+Theorem~\ref{thm.chip.dichotomy-q} always holds.
+\end{proof}
+
 \begin{definition}
 Let $f : V \to \NN$ be a configuration.
 Let $q \in V$.
 Assume that for each vertex $u \in V$, there exists a path
-$u \to q$.
+from $u$ to $q$.
 Then, Theorem~\ref{thm.chip.dichotomy-q} shows that
 there exists a sequence $s$ of vertices that is both
 $q$-legal and $q$-stabilizing for $f$.
@@ -706,14 +1845,14 @@ for $q$-legal and $q$-stabilizing sequences.)
 bounds for legal sequences}
 
 The following exercise improves on the bound given in
-Proposition~\ref{prop.chip.leg-period} \textbf{(b)} and
+Proposition~\ref{prop.chip.leg-period-b} and
 also on the one given in
 Proposition~\ref{prop.chip.leg-everyone-fires}\footnote{To
   see that Exercise~\ref{exe.chip.better-bounds} \textbf{(b)}
   improves on the bound given in
   Proposition~\ref{prop.chip.leg-everyone-fires},
   we need to check that
-  $\tup{n-1} \tup{ \dfrac{h^n-1}{h-1} - 1} + 1
+  $\tup{n-1} \tup{ h^1 + h^2 + \cdots + h^{n-1} } + 1
   \geq \dbinom{n+h-1}{n-1}$.
   This is easy for $n \leq 1$ (in fact, the case
   $n = 0$ is impossible due to the existence of a
@@ -721,7 +1860,7 @@ Proposition~\ref{prop.chip.leg-everyone-fires}\footnote{To
   case).
   In the remaining case $n \geq 2$,
   the stronger inequality
-  $\dfrac{h^n-1}{h-1} - 1 + 1
+  $1 + h^1 + h^2 + \cdots + h^{n-1}
   \geq \dbinom{n+h-1}{n-1}$
   can be proven by a simple induction
   over $n$.}.
@@ -729,7 +1868,7 @@ I don't know whether the improved bounds can be further
 improved.
 
 \begin{exercise} \label{exe.chip.better-bounds}
-Fix a loopless multidigraph $D = \tup{V, A, \phi}$.
+Fix a multidigraph $D = \tup{V, A, \phi}$.
 Let $f : V \to \NN$ be a configuration.
 Let $h = \sum f$.
 Let $n = \abs{V}$.
@@ -750,7 +1889,7 @@ Then, $q$ must appear at least once in the sequence $\ell$.
 
 [\textbf{Hint:}
 For \textbf{(a)}, apply the same pigeonhole-principle argument
-as for Proposition~\ref{prop.chip.leg-period} \textbf{(b)}.]
+as for Proposition~\ref{prop.chip.leg-period-b}.]
 \end{exercise}
 
 In the solution of Exercise \ref{exe.chip.better-bounds}, the following
@@ -775,7 +1914,7 @@ $n = 0$ is trivial).
 
 \begin{proof}
 [Hints to Exercise \ref{exe.chip.better-bounds}.]For each $i\in\left\{
-0,1,\ldots,k\right\}  $, the $\mathbb{Z}$-configuration $f-\Delta\ell
+0,1,\ldots,k\right\}  $, the $\ZZ$-configuration $f-\Delta\ell
 _{1}-\Delta\ell_{2}-\cdots-\Delta\ell_{i}$ is a configuration (since the
 sequence $\left(  \ell_{1},\ell_{2},\ldots,\ell_{k}\right)  $ is legal for
 $f$). Moreover, each of the $k+1$ configurations $f-\Delta\ell_{1}-\Delta
@@ -822,7 +1961,7 @@ Hence,%
 }h\text{ chips}\right\}  \right\vert \\
 &  =\left\vert \left\{  \left(  a_{1},a_{2},\ldots,a_{n}\right)  \in
 \mathbb{N}^{n}\ \mid\ a_{1}+a_{2}+\cdots+a_{n}=h\right\}  \right\vert \\
-&  =\dbinom{n+h-1}{n-1}\ \ \ \ \ \ \ \ \ \ \left(  \text{by Proposition
+&  =\dbinom{n+h-1}{n-1}\qquad \left(  \text{by Proposition
 \ref{prop.multichoose}}\right)  .
 \end{align*}
 In other words, there exist precisely $\dbinom{n+h-1}{n-1}$ configurations
@@ -837,40 +1976,24 @@ f-\Delta\ell_{1}-\Delta\ell_{2}-\cdots-\Delta\ell_{i}=f-\Delta\ell_{1}%
 -\Delta\ell_{2}-\cdots-\Delta\ell_{j}. \label{sol.chip.better-bounds.ivsj}%
 \end{equation}
 Consider these $i$ and $j$.
+Hence, Lemma~\ref{lem.chip.leg-repeat} \textbf{(a)} shows that
+there exist legal sequences (for $f$) of arbitrary length.
+This solves Exercise \ref{exe.chip.better-bounds} \textbf{(a)}.
 
-The equality (\ref{sol.chip.better-bounds.ivsj}) means that the result of
-firing the vertices $\ell_{1},\ell_{2},\ldots,\ell_{i}$ in the configuration
-$f$ is the same as the result of firing the vertices $\ell_{1},\ell_{2}%
-,\ldots,\ell_{j}$ in the configuration $f$. Thus, after having firing the
-vertices $\ell_{1},\ell_{2},\ldots,\ell_{i}$ in the configuration $f$,
-additionally firing the vertices $\ell_{i+1},\ell_{i+2},\ldots,\ell_{j}$ does
-not change the configuration. Therefore, we can fire these vertices
-$\ell_{i+1},\ell_{i+2},\ldots,\ell_{j}$ over and over again, periodically
-coming back to the same configuration and never \textquotedblleft getting into
-debt\textquotedblright\ (i.e., after each firing we still have a
-configuration). Thus, for every $k\in\mathbb{N}$, the sequence%
-\begin{equation}
-\left(  \ell_{1},\ell_{2},\ldots,\ell_{i},\underbrace{\ell_{i+1},\ell
-_{i+2},\ldots,\ell_{j}}_{\text{repeated }k\text{ times}}\right)
-\label{sol.chip.better-bound.recurseq}%
-\end{equation}
-is legal for $f$. Therefore, for each $k\in\mathbb{N}$, there exists a legal
-sequence (for $f$): Namely, we construct such a sequence by taking the first
-$k$ entries of the legal sequence $\left(  \ell_{1},\ell_{2},\ldots,\ell
-_{i},\underbrace{\ell_{i+1},\ell_{i+2},\ldots,\ell_{j}}_{\text{repeated
-}k\text{ times}}\right)  $. Thus, we have shown that there exist legal
-sequences (for $f$) of arbitrary length. This solves Exercise
-\ref{exe.chip.better-bounds} \textbf{(a)}.
-
-\textbf{(b)} Let $\ell^{\prime}$ be the legal sequence
-(\ref{sol.chip.better-bound.recurseq}) defined for $k=\left(  n-1\right)
-\left(  \dfrac{h^{n}-1}{h-1}-1\right)  +1$. Then, the length of $\ell^{\prime
-}$ is%
+\textbf{(b)} Define an $r \in \NN$ by
+$r = \tup{n - 1} \tup{ h^1 + h^2 + \cdots + h^{n-1} } + 1$.
+Let $\ell^{\prime}$ be the sequence
+$\left(  \ell_{1}%
+,\ell_{2},\ldots,\ell_{i}\right)  \ast\left(  \ell_{i+1},\ell_{i+2}%
+,\ldots,\ell_{j}\right)  ^{\ast r}$.
+Lemma~\ref{lem.chip.leg-repeat} \textbf{(b)} thus shows that
+this sequence $\ell^\prime$ is legal for $f$.
+But the length of this sequence $\ell^{\prime}$ is
 \begin{align*}
-\underbrace{i}_{\geq0}+k\underbrace{\left(  j-i\right)  }_{\substack{\geq
+\underbrace{i}_{\geq0}+r\underbrace{\left(  j-i\right)  }_{\substack{\geq
 1\\\text{(since }i<j\text{)}}}  &  \geq0+k\cdot1=k=\left(  n-1\right)  \left(
-\dfrac{h^{n}-1}{h-1}-1\right)  +1\\
-&  >\left(  n-1\right)  \left(  \dfrac{h^{n}-1}{h-1}-1\right)  .
+h^1 + h^2 + \cdots + h^{n-1} \right)  +1\\
+&  >\left(  n-1\right)  \left(  h^1 + h^2 + \cdots + h^{n-1} \right)  .
 \end{align*}
 Hence, Proposition \ref{prop.chip.leg-everyone-fires} (applied to
 $\ell^{\prime}$ instead of $\ell$) yields that $q$ must appear at least once
@@ -983,19 +2106,17 @@ $\ell_{2}$ transforms $k_{2}$ into $k_{3}$. Consider this $\ell_{2}$.
 
 Write the sequences $\ell_{1}$ and $\ell_{2}$ as $\ell_{1}=\left(  v_{1}%
 ,v_{2},\ldots,v_{p}\right)  $ and $\ell_{2}=\left(  w_{1},w_{2},\ldots
-,w_{q}\right)  $. Let $\ell$ be the sequence $\left(  v_{1},v_{2},\ldots
-,v_{p},w_{1},w_{2},\ldots,w_{q}\right)  $. (This is called the concatenation
-of the sequences $\ell_{1}$ and $\ell_{2}$.) Then, firing all vertices in
+,w_{q}\right)  $. Let $\ell$ be the sequence $\ell_1 \ast \ell_2
+= \left(  v_{1},v_{2},\ldots ,v_{p},w_{1},w_{2},\ldots,w_{q}\right)  $.
+(We are using the notation from Definition~\ref{def.concat} here.)
+Then, firing all vertices in
 $\ell$ transforms $k_{1}$ into $k_{3}$ (because the first $p$ firings
 transform $k_{1}$ into $k_{2}$, and from there on the remaining $q$ firings
-take us to $k_{3}$). Moreover, all the $\mathbb{Z}$-configurations obtained
-during this firing process are configurations\footnote{In fact, all the
-$\mathbb{Z}$-configurations obtained during the first $p$ firings are
-configurations (because $\left(  v_{1},v_{2},\ldots,v_{p}\right)  =\ell_{1}$
-is a legal sequence for $k_{1}$), and all the $\mathbb{Z}$-configurations
-obtained during the remaining $q$ firings are configurations as well (since
-$\left(  w_{1},w_{2},\ldots,w_{q}\right)  =\ell_{2}$ is a legal sequence for
-$k_{2}$).}. Thus, the sequence $\ell$ is legal for $k_{1}$.
+take us to $k_{3}$). Moreover, this sequence
+$\ell = \ell_1 \ast \ell_2$ is legal for $k_1$
+(by Lemma~\ref{lem.chip.leg-concat1}, applied to
+$k_1$, $\ell_1$, $k_2$ and $\ell_2$
+instead of $f$, $u$, $g$ and $v$).
 
 We thus have found a legal sequence $\ell$ for $k_{1}$ such that firing all
 vertices in $\ell$ (one after the other) transforms $k_{1}$ into $k_{3}$.
@@ -1201,8 +2322,7 @@ $\operatorname{t}\tup{a}$ for the target of an arc
 $a \in A$.
 
 \begin{exercise} \label{exe.chip.adj-cycles}
-Assume that the multidigraph $D$ is strongly connected
-and satisfies $\abs{V} > 1$.
+Assume that the multidigraph $D$ is strongly connected.
 Let $f : V \to \NN$ be an infinitary configuration.
 
 \textbf{(a)} Prove that $D$ cannot have more than
@@ -1274,7 +2394,7 @@ The configuration
 $f$ is infinitary. Thus, there exist arbitrarily long legal sequences for $f$.
 In particular, there exists a legal sequence $\ell=\left(  \ell_{1},\ell
 _{2},\ldots,\ell_{k}\right)  $ for $f$ of length $k>\left(  n-1\right)
-\left(  \dfrac{h^{n}-1}{h-1}-1\right)  $. Consider this $\ell$.
+\left( h^1 + h^2 + \cdots + h^{n-1} \right)  $. Consider this $\ell$.
 
 Each vertex of $D$ appears at least once in the sequence $\ell$%
 \ \ \ \ \footnote{\textit{Proof.} Let $q$ be a vertex of $D$. We must show
@@ -1290,7 +2410,9 @@ $\ \ \ \ \footnote{\textit{Proof.} Let $c$ be a cycle of $D$. We must then
 show that $c$ is non-void in $f^{\prime}$.
 \par
 For each $i\in\left\{  0,1,\ldots,k\right\}  $, we define $f_{i}$ to be the
-configuration obtained from $f$ by firing the vertices $\ell_{1},\ell
+configuration
+$f - \Delta \ell_1 - \Delta \ell_2 - \cdots - \Delta \ell_i$
+obtained from $f$ by firing the vertices $\ell_{1},\ell
 _{2},\ldots,\ell_{i}$ (in this order). (This is indeed a configuration, since
 the sequence $\ell$ is legal.) Thus, $f_{0}\overset{\ast}{\rightarrow}%
 f_{1}\overset{\ast}{\rightarrow}\cdots\overset{\ast}{\rightarrow}f_{k}$.
@@ -1302,12 +2424,22 @@ sequence $\ell$ (since each vertex of $D$ appears at least once in the
 sequence $\ell$). In other words, there exists some $i\in\left\{
 1,2,\ldots,k\right\}  $ satisfying $\ell_{i}=v$. Consider this $i$.
 \par
-The vertex $\ell_{i}$ is active in the configuration $f_{i-1}$ (because the
-configuration $f_{i}$ is obtained by firing $\ell_{i}$ from the configuration
-$f_{i-1}$). In other words, $f_{i-1}\left(  \ell_{i}\right)  \geq\deg
-^{-}\left(  \ell_{i}\right)  \geq1$ (since $D$ is strongly connected, but
-$\left\vert V\right\vert >1$). In other words, $f_{i-1}\left(  v\right)
-\geq1$ (since $\ell_{i}=v$). Thus, the cycle $c$ is non-void in $f_{i-1}$. But
+The vertex $v$ lies on the cycle $c$, and thus there exists at
+least one arc with source $v$ (namely, the arc of the cycle $c$
+emanating from $v$). In other words, $\deg^+ v \geq 1$.
+\par
+The
+sequence $\left( \ell_1, \ell_2, \ldots, \ell_k \right)$ is legal for $f$.
+Thus,
+the vertex $\ell_{i}$ is active in the configuration
+$f - \Delta \ell_1 - \Delta \ell_2 - \cdots - \Delta \ell_{i-1}
+= f_{i-1}$ (since this is how $f_{i-1}$ is defined).
+In other words, $f_{i-1}\left(  \ell_{i}\right)  \geq
+\deg^+\left(  \ell_{i}\right)$.
+In other words, $f_{i-1}\left(  v\right) \geq \deg^+ \tup{v}$
+(since $\ell_{i}=v$). Hence, $f_{i-1} \tup{v} \geq \deg^+ \tup{v}
+\geq 1$.
+Thus, the cycle $c$ is non-void in $f_{i-1}$. But
 $f_{i-1}\overset{\ast}{\rightarrow}f_{k}$ (since $f_{0}\overset{\ast
 }{\rightarrow}f_{1}\overset{\ast}{\rightarrow}\cdots\overset{\ast
 }{\rightarrow}f_{k}$, and since the relation $\overset{\ast}{\rightarrow}$ is
@@ -1347,18 +2479,18 @@ We first need to prepare by introducing notations and showing lemmas.
 We begin by introducing some notations:
 
 \begin{definition}
-Let $f:V\rightarrow\mathbb{Z}$ and $g:V\rightarrow\mathbb{Z}$ be two
-$\mathbb{Z}$-configurations on a loopless multidigraph $D=\left(
-V,A,\phi\right)  $. Then, we say that $f\geq g$ if and only if each $v\in V$
-satisfies $f\left(  v\right)  \geq g\left(  v\right)  $.
+Let $f : V \to \ZZ$ and $g : V \to \ZZ$ be two
+$\ZZ$-configurations on a multidigraph $D = \tup{V, A, \phi}$.
+Then, we say that $f\geq g$ if and only if each $v \in V$
+satisfies $f \tup{v} \geq g \tup{v}$.
 \end{definition}
 
-Thus, a $\mathbb{Z}$-configuration $f:V\rightarrow\mathbb{Z}$ is a
-configuration if and only if $f\geq0$ (where $0$ means the \textquotedblleft
-zero configuration\textquotedblright\ $0:V\rightarrow\mathbb{Z}$).
+Thus, a $\ZZ$-configuration $f : V \to \ZZ$ is a
+configuration if and only if $f \geq 0$ (where $0$ means the
+``zero configuration'' $0 : V \to \ZZ$).
 
 \begin{definition}
-Let $v\in V$ be a vertex of a loopless multidigraph $D=\left(  V,A,\phi
+Let $v\in V$ be a vertex of a multidigraph $D=\left(  V,A,\phi
 \right)  $. Then, a configuration $\delta_{v}:V\rightarrow\mathbb{N}$ is
 defined by setting
 \[
@@ -1373,25 +2505,25 @@ defined by setting
 $v$ and no further chips.)
 \end{definition}
 
-Thus, each $\mathbb{Z}$-configuration $f:V\rightarrow\mathbb{Z}$ satisfies
+Thus, each $\ZZ$-configuration $f:V\rightarrow\ZZ$ satisfies
 $f=\sum_{v\in V}f\left(  v\right)  \delta_{v}$. Notice that $\sum\delta_{v}=1$
 for each $v\in V$.
 
 \begin{definition}
-\label{def.chip.adj-cycles.K-captured}Consider a loopless multidigraph
+\label{def.chip.adj-cycles.K-captured}Consider a multidigraph
 $D=\left(  V,A,\phi\right)  $.
 
 \textbf{(a)} If $c$ is a cycle of $D$, then $\operatorname*{V}\left(
 c\right)  $ shall mean the set of all vertices on $c$.
 
-\textbf{(b)} Let $K$ be a set of cycles of $D$. Let $f:V\rightarrow\mathbb{Z}$
-be a $\mathbb{Z}$-configuration on $D$. We say that $f$ is $K$%
+\textbf{(b)} Let $K$ be a set of cycles of $D$. Let $f:V\rightarrow\ZZ$
+be a $\ZZ$-configuration on $D$. We say that $f$ is $K$%
 \textit{-captured} if and only if we can choose a vertex $v_{c}\in
 \operatorname*{V}\left(  c\right)  $ for each cycle $c\in K$ such that
-$f\geq\sum_{c\in K}\delta_{v_{c}}$.
+$f\geq\sum_{c\in K}\delta_{v_c}$.
 \end{definition}
 
-The notion of \textquotedblleft$K$-captured\textquotedblright\ $\mathbb{Z}%
+The notion of \textquotedblleft$K$-captured\textquotedblright\ $\ZZ%
 $-configurations is somewhat subtle. Intuitively speaking, a $\mathbb{Z}%
 $-configuration $f$ is $K$-captured if and only if (pretending that the chips
 in $f$ are distinguishable) we can assign to each cycle $c\in K$ a specific
@@ -1410,7 +2542,7 @@ $f:V\rightarrow\mathbb{Z}$ is $\varnothing$-captured if and only if $f$ is a con
 
 \begin{lemma}
 \label{lem.chip.adj-cycles.capture-size}Let $f:V\rightarrow\mathbb{Z}$ be a
-configuration on a loopless multidigraph $D=\left(  V,A,\phi\right)  $. Let
+configuration on a multidigraph $D=\left(  V,A,\phi\right)  $. Let
 $K\subseteq C$ be such that $f$ is $K$-captured. Then, $\sum f\geq\left\vert
 K\right\vert $.
 \end{lemma}
@@ -1439,7 +2571,7 @@ The following lemma will be crucial:
 
 \begin{lemma}
 \label{lem.chip.adj-cycles.capture}Let $f:V\rightarrow\mathbb{Z}$ be a
-configuration on a loopless multidigraph $D=\left(  V,A,\phi\right)  $. Let
+configuration on a multidigraph $D=\left(  V,A,\phi\right)  $. Let
 $w\in V$ be a vertex such that $w$ is active in $f$. Let $C$ be a set of
 arc-disjoint cycles of $D$. Let $C_{w}=\left\{  c\in C\ \mid\ w\in
 \operatorname*{V}\left(  c\right)  \right\}  $. Let $K\subseteq C$ be such
@@ -1448,22 +2580,13 @@ C_{w}$-captured.
 \end{lemma}
 
 \begin{proof}
-[Proof of Lemma \ref{lem.chip.adj-cycles.capture}.] We know that $f$ is
+[Proof of Lemma \ref{lem.chip.adj-cycles.capture}.]We know that $f$ is
 $K$-captured. In other words, we can choose a vertex $v_{c}\in
 \operatorname*{V}\left(  c\right)  $ for each cycle $c\in K$ such that
 $f\geq\sum_{c\in K}\delta_{v_{c}}$. Consider these vertices $v_{c}$.
 
 Notice that $K\cup C_{w}\subseteq C$ (since $K\subseteq C$ and $C_{w}\subseteq
 C$).
-
-\begin{noncompile}
-Let $L=\left\{  c\in K\ \mid\ v_{c}\neq w\right\}  $ and $M=\left\{  c\in
-K\ \mid\ v_{c}=w\right\}  $. Notice that $M\subseteq C_{w}$%
-\ \ \ \ \footnote{\textit{Proof.} Let $c\in M$. Thus, $v_{c}=w$ (by the
-definition of $M$) and thus $w=v_{c}\in\operatorname*{V}\left(  c\right)  $.
-Hence, $c\in C_{w}$ (by the definition of $C_{w}$). Since we have proven this
-for each $c\in M$, we thus conclude that $M\subseteq C_{w}$.}.
-\end{noncompile}
 
 For each $c\in K\cup C_{w}$, we define a vertex $u_{c}\in\operatorname*{V}%
 \left(  c\right)  $ by%
@@ -1482,22 +2605,13 @@ $\operatorname*{V}\left(  c\right)  $ whenever $w\notin\operatorname*{V}%
 $w\notin\operatorname*{V}\left(  c\right)  $. Then, $c\notin C_{w}$ (by the
 definition of $C_{w}$). Combining this with $c\in K\cup C_{w}$, we obtain
 $c\in\left(  K\cup C_{w}\right)  \setminus C_{w}\subseteq K$. Hence, $v_{c}$
-is a well-defined element of $\operatorname*{V}\left(  c\right)  $.}.) Notice
-that%
-\begin{equation}
-w\neq u_{c}\ \ \ \ \ \ \ \ \ \ \text{for each }c\in K\cup C_{w}%
-\label{pf.lem.chip.adj-cycles.capture.ucneq}%
-\end{equation}
-(because if we had $w=u_{c}$, then we would have $w=u_{c}\in\operatorname*{V}%
-\left(  c\right)  $, whence the definition of $u_{c}$ would yield
-$u_{c}=\left(  \text{the vertex succeeding }w\text{ on the cycle }c\right)
-\neq w=u_{c}$, which is absurd).
+is a well-defined element of $\operatorname*{V}\left(  c\right)  $.}.)
 
 Now, we claim that%
 \begin{equation}
 \left(  f-\Delta w\right)  \left(  p\right)  \geq\left(  \sum_{c\in K\cup
-C_{w}}\delta_{u_{c}}\right)  \left(  p\right)  \ \ \ \ \ \ \ \ \ \ \text{for
-every }p\in V.\label{pf.lem.chip.adj-cycles.capture.ineq}%
+C_{w}}\delta_{u_{c}}\right)  \left(  p\right)  \qquad\text{for every }p\in
+V.\label{pf.lem.chip.adj-cycles.capture.ineq}%
 \end{equation}
 
 
@@ -1506,7 +2620,7 @@ We must prove the inequality (\ref{pf.lem.chip.adj-cycles.capture.ineq}).
 
 Notice that%
 \begin{align}
-\left(  \sum_{c\in K\cup C_{w}}\delta_{u_{c}}\right)  \left(  p\right)    &
+\left(  \sum_{c\in K\cup C_{w}}\delta_{u_{c}}\right)  \left(  p\right)   &
 =\sum_{c\in K\cup C_{w}}\underbrace{\delta_{u_{c}}\left(  p\right)  }_{=%
 \begin{cases}
 1, & \text{if }p=u_{c};\\
@@ -1518,51 +2632,61 @@ Notice that%
 0, & \text{if }p\neq u_{c}%
 \end{cases}
 \nonumber\\
-& =\left\vert \left\{  c\in K\cup C_{w}\ \mid\ p=u_{c}\right\}  \right\vert
+&  =\left\vert \left\{  c\in K\cup C_{w}\ \mid\ p=u_{c}\right\}  \right\vert
 .\label{pf.lem.chip.adj-cycles.capture.ineq.rhs}%
 \end{align}
 
 
+The definition of $\Delta w$ yields
+\begin{equation}
+\left(  \Delta w\right)  \left(  p\right)  =\left[  p=w\right]  \deg
+^{+}w-a_{w,p}.\label{pf.lem.chip.adj-cycles.capture.ineq.Deltawp}%
+\end{equation}
+
+
+Let $Q=\left\{  c\in K\setminus C_{w}\ \mid\ p=v_{c}\right\}  $. Then, it is
+not hard to see that%
+\begin{equation}
+f\left(  p\right)  -\left[  p=w\right]  \deg^{+}w\geq\left\vert Q\right\vert
+\label{pf.lem.chip.adj-cycles.capture.ineq.c2.1b}%
+\end{equation}
+\footnote{\textit{Proof of (\ref{pf.lem.chip.adj-cycles.capture.ineq.c2.1b}):}
 We are in one of the following two cases:
-
-\begin{statement}
+\par
 \textit{Case 1:} We have $p=w$.
-\end{statement}
-
-\begin{statement}
+\par
 \textit{Case 2:} We have $p\neq w$.
-\end{statement}
-
-First, let us consider Case 1. In this case, we have $p=w$.
-
-\begin{noncompile}
-Hence, $\left(  \Delta w\right)  \left(  p\right)  =\left(  \Delta w\right)
-\left(  w\right)  =\deg^+ w$ (by the definition of $\Delta w$).
-\end{noncompile}
-
-Now, (\ref{pf.lem.chip.adj-cycles.capture.ineq.rhs}) becomes
+\par
+First, let us consider Case 1. In this case, we have $p=w$. Recall that $w$ is
+active in $f$. Thus, $f\left(  w\right)  \geq\deg^{+}w$.
+\par
+But there is no $c\in K\setminus C_{w}$ satisfying $p=v_{c}$. (In fact, if
+such a $c$ would exist, then it would satisfy $w=p=v_{c}\in\operatorname*{V}%
+\left(  c\right)  $, which (in view of $c\in K\setminus C_{w}\subseteq
+K\subseteq C$) would yield $c\in C_{w}$ (by the definition of $C_{w}$), which
+would contradict $c\in K\setminus C_{w}$.)
+\par
+Now, $Q=\left\{  c\in K\setminus C_{w}\ \mid\ p=v_{c}\right\}  =\varnothing$
+(since there is no $c\in K\setminus C_{w}$ satisfying $p=v_{c}$). Hence,
+$\left\vert Q\right\vert =\left\vert \varnothing\right\vert =0$. Now,%
 \begin{align*}
-\left(  \sum_{c\in K\cup C_{w}}\delta_{u_{c}}\right)  \left(  p\right)    &
-=\left\vert \left\{  c\in K\cup C_{w}\ \mid\ \underbrace{p}_{=w}%
-=u_{c}\right\}  \right\vert =\left\vert \underbrace{\left\{  c\in K\cup
-C_{w}\ \mid\ w=u_{c}\right\}  }_{\substack{=\varnothing\\\text{(by
-(\ref{pf.lem.chip.adj-cycles.capture.ucneq}))}}}\right\vert \\
-& =\left\vert \varnothing\right\vert =0.
+f\left(  \underbrace{p}_{=w}\right)  -\underbrace{\left[  p=w\right]
+}_{\substack{=1\\\text{(since }p=w\text{)}}}\deg^{+}w  & =f\left(  w\right)
+-\deg^{+}w\geq0\ \ \ \ \ \ \ \ \ \ \left(  \text{since }f\left(  w\right)
+\geq\deg^{+}w\right)  \\
+& =\left\vert Q\right\vert .
 \end{align*}
-But the vertex $w$ is active in $f$. Hence, $\left(  f-\Delta w\right)
-\left(  w\right)  \geq0$. Hence, $\left(  f-\Delta w\right)  \left(
-\underbrace{p}_{=w}\right)  =\left(  f-\Delta w\right)  \left(  w\right)
-\geq0=\left(  \sum_{c\in K\cup C_{w}}\delta_{u_{c}}\right)  \left(  p\right)
-$. Thus, (\ref{pf.lem.chip.adj-cycles.capture.ineq}) is proven in Case 1.
-
-Let us now consider Case 2. In this case, we have $p\neq w$. Hence, the
-definition of $\Delta w$ yields $\left(  \Delta w\right)  \left(  p\right)
-=-a_{w,p}$, where $a_{w,p}$ denotes the number of all arcs of $D$ having
-source $w$ and target $p$.
-
+Thus, (\ref{pf.lem.chip.adj-cycles.capture.ineq.c2.1b}) is proven in Case 1.
+\par
+Let us now consider Case 2. In this case, we have $p\neq w$. But $Q=\left\{
+c\in\underbrace{K\setminus C_{w}}_{\subseteq K}\ \mid\ p=v_{c}\right\}
+\subseteq\left\{  c\in K\ \mid\ p=v_{c}\right\}  $, so that $\left\vert
+Q\right\vert \leq\left\vert \left\{  c\in K\ \mid\ p=v_{c}\right\}
+\right\vert $.
+\par
 Recall that $f\geq\sum_{c\in K}\delta_{v_{c}}$. Hence,%
-\begin{align}
-f\left(  p\right)    & \geq\left(  \sum_{c\in K}\delta_{v_{c}}\right)  \left(
+\begin{align*}
+f\left(  p\right)   &  \geq\left(  \sum_{c\in K}\delta_{v_{c}}\right)  \left(
 p\right)  =\sum_{c\in K}\underbrace{\delta_{v_{c}}\left(  p\right)  }_{=%
 \begin{cases}
 1, & \text{if }p=v_{c};\\
@@ -1573,19 +2697,23 @@ p\right)  =\sum_{c\in K}\underbrace{\delta_{v_{c}}\left(  p\right)  }_{=%
 1, & \text{if }p=v_{c};\\
 0, & \text{if }p\neq v_{c}%
 \end{cases}
-\nonumber\\
-& =\left\vert \left\{  c\in K\ \mid\ p=v_{c}\right\}  \right\vert
-.\label{pf.lem.chip.adj-cycles.capture.ineq.c2.1}%
-\end{align}
-
-
-Let $Q=\left\{  c\in K\ \mid\ p=v_{c}\right\}  $. Thus,
-(\ref{pf.lem.chip.adj-cycles.capture.ineq.c2.1}) rewrites as
-\begin{equation}
-f\left(  p\right)  \geq\left\vert Q\right\vert
-.\label{pf.lem.chip.adj-cycles.capture.ineq.c2.1b}%
-\end{equation}
-
+\\
+&  =\left\vert \left\{  c\in K\ \mid\ p=v_{c}\right\}  \right\vert
+\geq\left\vert Q\right\vert \ \ \ \ \ \ \ \ \ \ \left(  \text{since
+}\left\vert Q\right\vert \leq\left\vert \left\{  c\in K\ \mid\ p=v_{c}%
+\right\}  \right\vert \right)  .
+\end{align*}
+Now,%
+\[
+f\left(  p\right)  -\underbrace{\left[  p=w\right]  }%
+_{\substack{=0\\\text{(since }p\neq w\text{)}}}\deg^{+}w=f\left(  p\right)
+\geq\left\vert Q\right\vert .
+\]
+Thus, (\ref{pf.lem.chip.adj-cycles.capture.ineq.c2.1b}) is proven in Case 2.
+\par
+Hence, we have proven (\ref{pf.lem.chip.adj-cycles.capture.ineq.c2.1b}) in
+both possible cases 1 and 2. This completes the proof of
+(\ref{pf.lem.chip.adj-cycles.capture.ineq.c2.1b}).}.
 
 On the other hand, let $R=\left\{  c\in K\cup C_{w}\ \mid\ p=u_{c}\right\}
 \setminus Q$. Then, the sets $Q$ and $R$ are disjoint, and satisfy $\left\{
@@ -1620,16 +2748,16 @@ satisfying $p=u_{c}$ and $c\notin Q$ (by
 Assume (for the sake of contradiction) that $w\notin\operatorname*{V}\left(
 c\right)  $. Hence, $c\notin C_{w}$ (by the definition of $C_{w}$, since $c\in
 K\cup C_{w}\subseteq C$). Combining this with $c\in K\cup C_{w}$, we obtain
-$c\in\left(  K\cup C_{w}\right)  \setminus C_{w}\subseteq K$.
+$c\in\left(  K\cup C_{w}\right)  \setminus C_{w}=K\setminus C_{w}$.
 \par
 But the definition of $u_{c}$ yields $u_{c}=v_{c}$ (since $w\notin%
-\operatorname*{V}\left(  c\right)  $). Thus, $p=u_{c}=v_{c}$. Thus, $c\in K$
-and $p=v_{c}$. Hence, $c\in Q$ (by the definition of $Q$). This contradicts
-$c\notin Q$. This contradiction shows that our assumption (that $w\notin%
-\operatorname*{V}\left(  c\right)  $) was false. Hence, we must have
-$w\in\operatorname*{V}\left(  c\right)  $. In other words, the vertex $w$ lies
-on the cycle $c$. Thus, the arc with source $w$ that belongs to the cycle $c$
-is well-defined.
+\operatorname*{V}\left(  c\right)  $). Thus, $p=u_{c}=v_{c}$. Thus, $c\in
+K\setminus C_{w}$ and $p=v_{c}$. Hence, $c\in Q$ (by the definition of $Q$).
+This contradicts $c\notin Q$. This contradiction shows that our assumption
+(that $w\notin\operatorname*{V}\left(  c\right)  $) was false. Hence, we must
+have $w\in\operatorname*{V}\left(  c\right)  $. In other words, the vertex $w$
+lies on the cycle $c$. Thus, the arc with source $w$ that belongs to the cycle
+$c$ is well-defined.
 \par
 It remains to prove that this arc is an element of $\left\{  \text{arcs of
 }D\text{ having source }w\text{ and target }p\right\}  $. In other words, it
@@ -1642,9 +2770,9 @@ thus yields $u_{c}=\left(  \text{the vertex succeeding }w\text{ on the cycle
 the cycle }c\right)  $. Therefore, the arc with source $w$ that belongs to the
 cycle $c$ has target $p$. This completes our proof.}. Hence, the map%
 \begin{align*}
-R  & \rightarrow\left\{  \text{arcs of }D\text{ having source }w\text{ and
+R &  \rightarrow\left\{  \text{arcs of }D\text{ having source }w\text{ and
 target }p\right\}  ,\\
-c  & \mapsto\left(  \text{the arc with source }w\text{ that belongs to the
+c &  \mapsto\left(  \text{the arc with source }w\text{ that belongs to the
 cycle }c\right)
 \end{align*}
 is well-defined. This map is furthermore injective\footnote{\textit{Proof.}
@@ -1655,34 +2783,30 @@ source }w\text{ and target }p\right\}  \right\vert =a_{w,p}%
 \]
 (by the definition of $a_{w,p}$). Thus,
 (\ref{pf.lem.chip.adj-cycles.capture.ineq.c2.4}) becomes%
-\[
-\left\vert \left\{  c\in K\cup C_{w}\ \mid\ p=u_{c}\right\}  \right\vert
+\begin{align*}
+\left\vert \left\{  c\in K\cup C_{w}\ \mid\ p=u_{c}\right\}  \right\vert  &
 \leq\underbrace{\left\vert Q\right\vert }_{\substack{\leq f\left(  p\right)
-\\\text{(by (\ref{pf.lem.chip.adj-cycles.capture.ineq.c2.1b}))}}%
-}+\underbrace{\left\vert R\right\vert }_{\leq a_{w,p}}\leq f\left(  p\right)
-+a_{w,p}.
-\]
+-\left[  p=w\right]  \deg^{+}w\\\text{(by
+(\ref{pf.lem.chip.adj-cycles.capture.ineq.c2.1b}))}}}+\underbrace{\left\vert
+R\right\vert }_{\leq a_{w,p}}\leq f\left(  p\right)  -\left[  p=w\right]
+\deg^{+}w+a_{w,p}\\
+& =f\left(  p\right)  -\underbrace{\left(  \left[  p=w\right]  \deg
+^{+}w-a_{w,p}\right)  }_{\substack{=\left(  \Delta w\right)  \left(  p\right)
+\\\text{(by (\ref{pf.lem.chip.adj-cycles.capture.ineq.Deltawp}))}}}=f\left(
+p\right)  -\left(  \Delta w\right)  \left(  p\right)  \\
+& =\left(  f-\Delta w\right)  \left(  p\right)  .
+\end{align*}
 Hence,%
 \[
-f\left(  p\right)  +a_{w,p}\geq\left\vert \left\{  c\in K\cup C_{w}%
-\ \mid\ p=u_{c}\right\}  \right\vert =\left(  \sum_{c\in K\cup C_{w}}%
-\delta_{u_{c}}\right)  \left(  p\right)
+\left(  f-\Delta w\right)  \left(  p\right)  \geq\left\vert \left\{  c\in
+K\cup C_{w}\ \mid\ p=u_{c}\right\}  \right\vert =\left(  \sum_{c\in K\cup
+C_{w}}\delta_{u_{c}}\right)  \left(  p\right)
 \]
-(by (\ref{pf.lem.chip.adj-cycles.capture.ineq.rhs})). Since%
-\[
-\left(  f-\Delta w\right)  \left(  p\right)  =f\left(  p\right)
--\underbrace{\left(  \Delta w\right)  \left(  p\right)  }_{=-a_{w,p}}=f\left(
-p\right)  +a_{w,p},
-\]
-this rewrites as $\left(  f-\Delta w\right)  \left(  p\right)  \geq\left(
-\sum_{c\in K\cup C_{w}}\delta_{u_{c}}\right)  \left(  p\right)  $. Thus,
-(\ref{pf.lem.chip.adj-cycles.capture.ineq}) is proven in Case 2.
-
-We have now proven (\ref{pf.lem.chip.adj-cycles.capture.ineq}) in each of the
-two Cases 1 and 2. Hence, (\ref{pf.lem.chip.adj-cycles.capture.ineq}) always holds.]
+(by (\ref{pf.lem.chip.adj-cycles.capture.ineq.rhs})). Hence,
+(\ref{pf.lem.chip.adj-cycles.capture.ineq}) is proven.]
 
 From (\ref{pf.lem.chip.adj-cycles.capture.ineq}), we obtain $f-\Delta
-w\geq\sum_{c\in K\cup C_{w}}\delta_{u_{c}}$. 
+w\geq\sum_{c\in K\cup C_{w}}\delta_{u_{c}}$.
 
 Thus, the configuration $f-\Delta w$ is $K\cup C_{w}$-captured (since
 $u_{c}\in\operatorname*{V}\left(  c\right)  $ for each $c\in K\cup C_{w}$).
@@ -1691,7 +2815,7 @@ This proves Lemma \ref{lem.chip.adj-cycles.capture}.
 
 \begin{corollary}
 \label{cor.chip.adj-cycles.captures}Let $f:V\rightarrow\mathbb{Z}$ be a
-configuration on a loopless multidigraph $D=\left(  V,A,\phi\right)  $. Let
+configuration on a multidigraph $D=\left(  V,A,\phi\right)  $. Let
 $\left(  \ell_{1},\ell_{2},\ldots,\ell_{k}\right)  $ be a legal sequence for
 $f$. Let $C$ be a set of arc-disjoint cycles of $D$. Let $C_{w}=\left\{  c\in
 C\ \mid\ w\in\operatorname*{V}\left(  c\right)  \right\}  $ for each $w\in
@@ -1758,6 +2882,11 @@ other words, there exists a set $C$ of arc-disjoint cycles of $D$ such that
 $\left\vert C\right\vert >\sum f$. Consider this $C$.
 
 Set $h=\sum f$. Thus, $\left\vert C\right\vert >\sum f=h$.
+
+Set $n = \abs{V}$. From $\abs{C} > h \geq 0$, we conclude that the
+set $C$ is nonempty, so that $D$ has at least one cycle.
+Thus, $D$ has at least one vertex.
+In other words, $n > 0$.
 
 Let $C_{w}=\left\{  c\in C\ \mid\ w\in\operatorname*{V}\left(  c\right)
 \right\}  $ for each $w\in V$.
@@ -1978,19 +3107,15 @@ it by $\ell_{2}$.
 
 Write the sequences $\ell_{1}$ and $\ell_{2}$ as $\ell_{1}=\left(  v_{1}%
 ,v_{2},\ldots,v_{p}\right)  $ and $\ell_{2}=\left(  w_{1},w_{2},\ldots
-,w_{q}\right)  $. Let $\ell$ be the sequence $\left(  v_{1},v_{2},\ldots
-,v_{p},w_{1},w_{2},\ldots,w_{q}\right)  $. (This is called the concatenation
-of the sequences $\ell_{1}$ and $\ell_{2}$.) Then, consider the process of
-firing all vertices in $\ell$ (one after the other) in $c$. All the
-$\mathbb{Z}$-configurations obtained during this firing process are
-configurations\footnote{In fact, all the $\mathbb{Z}$-configurations obtained
-during the first $p$ firings are configurations (because $\left(  v_{1}%
-,v_{2},\ldots,v_{p}\right)  =\ell_{1}$ is a legal sequence for $c$), and all
-the $\mathbb{Z}$-configurations obtained during the remaining $q$ firings are
-configurations as well (since the first $p$ firings have turned the
-configuration $c$ into $d$, but $\left(  w_{1},w_{2},\ldots,w_{q}\right)
-=\ell_{2}$ is a legal sequence for $d$).}. Thus, the sequence $\ell$ is legal
-for $c$. Moreover, the length of $\ell$ is $\underbrace{p}_{\geq0}+q\geq
+,w_{q}\right)  $. Let $\ell$ be the sequence $\ell_1 \ast \ell_2
+= \left(  v_{1},v_{2},\ldots ,v_{p},w_{1},w_{2},\ldots,w_{q}\right)  $.
+(We are using the notation from Definition~\ref{def.concat} here.)
+This sequence
+$\ell = \ell_1 \ast \ell_2$ is legal for $c$
+(by Lemma~\ref{lem.chip.leg-concat1}, applied to
+$c$, $\ell_1$, $d$ and $\ell_2$
+instead of $f$, $u$, $g$ and $v$).
+Moreover, the length of $\ell$ is $\underbrace{p}_{\geq0}+q\geq
 q=\left(  \text{the length of }\ell_{2}\right)  \geq N$ (since $\ell_{2}$ has
 length $\geq N$). Thus, there exists a legal sequence for $c$ having length
 $\geq N$ (namely, $\ell$).
@@ -2265,10 +3390,10 @@ Now, forget that we fixed $f^{\prime}$. We thus have proven that each
 configuration $f^{\prime}$ obtained from the configuration $f$ by firing a
 legal sequence of vertices satisfies
 \begin{align*}
-f^{\prime}\left(  v\right)   &  =0\ \ \ \ \ \ \ \ \ \ \text{for each }%
-v\in\mathbb{Z}^{2}\setminus T,\ \ \ \ \ \ \ \ \ \ \text{and}\\
+f^{\prime}\left(  v\right)   &  =0\qquad \text{for each }%
+v\in\mathbb{Z}^{2}\setminus T,\qquad \text{and}\\
 f^{\prime}\left(  v\right)   &  \in\left\{  0,1,\ldots,h\right\}
-\ \ \ \ \ \ \ \ \ \ \text{for each }v\in T.
+\qquad \text{for each }v\in T.
 \end{align*}
 Thus, all the configurations $f^{\prime}$ obtained from the configuration $f$ by
 firing a legal sequence of vertices can be regarded as maps from $T$ to
@@ -2518,7 +3643,7 @@ Now, (\ref{sol.aco.score-vector.b.deg+deg1}) yields%
 \[
 \deg_{\left(  V,E,\phi_{2}\right)  }^{+}w=\deg_{G}w=\deg_{\left(  V,E,\phi
 _{2}\right)  }^{-}w+\deg_{\left(  V,E,\phi_{2}\right)  }^{+}%
-w\ \ \ \ \ \ \ \ \ \ \left(  \text{by (\ref{sol.aco.score-vector.b.deg+deg2}%
+w\qquad \left(  \text{by (\ref{sol.aco.score-vector.b.deg+deg2}%
 )}\right)  .
 \]
 Subtracting $\deg_{\left(  V,E,\phi_{2}\right)  }^{+}w$ from both sides of
@@ -2582,7 +3707,7 @@ Similarly, $\deg_{\left(  V^{\prime},E^{\prime},\phi_{2}^{\prime}\right)
 \begin{align*}
 \deg_{\left(  V^{\prime},E^{\prime},\phi_{1}^{\prime}\right)  }^{+}v  &
 =\deg_{\left(  V,E,\phi_{1}\right)  }^{+}v=\deg_{\left(  V,E,\phi_{2}\right)
-}^{+}v\ \ \ \ \ \ \ \ \ \ \left(  \text{by (\ref{sol.aco.score-vector.b.1}%
+}^{+}v\qquad \left(  \text{by (\ref{sol.aco.score-vector.b.1}%
 )}\right) \\
 &  =\deg_{\left(  V^{\prime},E^{\prime},\phi_{2}^{\prime}\right)  }^{+}v,
 \end{align*}
@@ -2738,14 +3863,14 @@ This is precisely \cite[Proposition 1.7 \textbf{(c)}]{lec16}.
 max-flow-min-cut-theorem (specifically, \cite[Theorem 1.10]{lec16}), we know
 that%
 \begin{align*}
-&  \max\left\{  \left\vert f\right\vert \ \mid\ f\text{ is a flow}\right\} \\
+ \max\left\{  \left\vert f\right\vert \ \mid\ f\text{ is a flow}\right\}
 &  =\min\left\{  c\left(  S,\overline{S}\right)  \ \mid
 \ \underbrace{S\subseteq V\text{; }s\in S\text{; }t\notin S}%
 _{\Longleftrightarrow\ \left(  S\text{ is an }s\text{-}t\text{-cutting subset
 of }V\right)  }\right\} \\
 &  =\min\left\{  c\left(  S,\overline{S}\right)  \ \mid\ S\text{ is an
 }s\text{-}t\text{-cutting subset of }V\right\} \\
-&  =m\ \ \ \ \ \ \ \ \ \ \left(  \text{by the definition of }m\right)  .
+&  =m\qquad \left(  \text{by the definition of }m\right)  .
 \end{align*}
 Hence, there exists a flow $f$ with $\left\vert f\right\vert =m$. Consider
 such an $f$.

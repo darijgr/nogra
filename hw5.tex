@@ -470,6 +470,9 @@ a path of length $d$ from $u$ to $v$.
 If $u$ appears at least $\dfrac{h^{d+1}-1}{h-1}$
 times in the sequence $\ell$,
 then $v$ must appear at least once in the sequence $\ell$.
+
+(The fraction $\dfrac{h^{d+1}-1}{h-1}$ should be interpreted
+as $d+1$ when $h = 1$.)
 \end{lemma}
 
 \begin{proposition} \label{prop.chip.leg-everyone-fires}
@@ -484,6 +487,9 @@ $u \in V$, there exists a path from $u$ to $q$.
 If the length of $\ell$ is
 $> \tup{n-1} \tup{ \dfrac{h^n-1}{h-1} - 1 }$,
 then $q$ must appear at least once in the sequence $\ell$.
+
+(The fraction $\dfrac{h^n-1}{h-1}$ should be interpreted
+as $n$ when $h = 1$.)
 \end{proposition}
 
 \begin{proposition} \label{prop.chip.leg-period}
@@ -744,8 +750,7 @@ $\operatorname{t}\tup{a}$ for the target of an arc
 $a \in A$.
 
 \begin{exercise} \label{exe.chip.adj-cycles}
-Assume that the multidigraph $D$ is strongly connected
-and satisfies $\abs{V} > 1$.
+Assume that the multidigraph $D$ is strongly connected.
 Let $f : V \to \NN$ be an infinitary configuration.
 
 \textbf{(a)} Prove that $D$ cannot have more than
