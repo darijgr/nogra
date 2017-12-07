@@ -2561,6 +2561,108 @@ Pictures for these examples.
 
 \subsubsection{\label{subsect.intro.djun}Disjoint unions}
 
+Another basic operation that we might want to do with graphs is
+taking \textit{disjoint unions}.
+The idea behind disjoint unions is simple:
+Take two simple graphs and place them ``alongside each other'',
+without creating any new edges.
+For example, the disjoint union of the two simple graphs
+\begin{equation}
+\xymatrix{
+1 \are[r] \are[rd] & 2 \are[d] \\
+& 3
+}
+\qquad \text{ and } \qquad
+\xymatrix{
+2 \are[r] \are[d] & 8 \are[d] \\
+4 \are[r] & 6
+}
+\label{eq.djun.example.1.two-graphs}
+\end{equation}
+should be something like
+\begin{equation}
+\xymatrix{
+1 \are[r] \are[rd] & 2 \are[d] & 2 \are[r] \are[d] & 8 \are[d] \\
+& 3 & 4 \are[r] & 6
+} .
+\label{eq.djun.example.1.wrong}
+\end{equation}
+However, \eqref{eq.djun.example.1.wrong} does not represent a
+valid graph, because a graph cannot have two vertices with the
+same ``name'' (or, more precisely: there are two
+``vertices $2$'' in \eqref{eq.djun.example.1.wrong},
+which belong to different edges; but this makes no sense
+in a graph).
+So we have to rename the vertices of our original two graphs
+in order to ensure that there is no overlap between them.
+For example, we could rename each vertex $v$ of the first graph
+as $\tup{0, v}$, and each vertex $w$ of the second graph as
+$\tup{1, w}$;
+the disjoint union would then be
+\begin{equation}
+\xymatrix{
+\tup{0,1} \are[r] \are[rd] & \tup{0,2} \are[d] & \tup{1,2} \are[r] \are[d] & \tup{1,8} \are[d] \\
+& \tup{0,3} & \tup{1,4} \are[r] & \tup{1,6}
+} ,
+\label{eq.djun.example.1.right}
+\end{equation}
+which is a perfectly well-defined simple graph with $7$
+vertices.
+
+This is indeed how we shall define the disjoint union of two
+simple graphs.
+The formal definition is as follows:
+
+\begin{definition} \label{def.djun.simple}
+Let $G = \tup{V, E}$ and $H = \tup{W, F}$ be two simple graphs.
+The \textit{disjoint union} of $G$ and $H$ is defined to be
+the simple graph $\tup{X, R}$, where
+\begin{align*}
+X &= \set{ \tup{0, v} \mid v \in V } \cup \set{ \tup{1, w} \mid w \in W }
+\qquad \text{ and} \\
+R &= \set{ \set{\tup{0, v_1}, \tup{0, v_2}} \mid \set{v_1, v_2} \in E }
+     \cup
+	 \set{ \set{\tup{1, w_1}, \tup{1, w_2}} \mid \set{w_1, w_2} \in F } .
+\end{align*}
+(Informally speaking, $X$ is the set consisting of all vertices
+$v$ of $G$ renamed as $\tup{0, v}$ and all vertices $w$ of $H$
+renamed as $\tup{1, w}$, whereas $R$ is the set of all edges
+of $G$ ``transplanted'' onto $X$ (that is, an edge $\set{v_1, v_2}$
+becomes $\set{\tup{0, v_1}, \tup{0, v_2}}$) and all edges of $H$
+``transplanted'' onto $X$.
+
+We denote the disjoint union $\tup{X, R}$ of $G$ and $H$ as
+$G \sqcup H$.
+\end{definition}
+
+For example, if $G$ and $H$ are the two simple graphs
+in \eqref{eq.djun.example.1.two-graphs} (in this order),
+then their disjoint union $G \sqcup H$ is the simple graph
+in \eqref{eq.djun.example.1.right}.
+
+\begin{proposition}
+\label{prop.djun.simple.exists}
+Let $G$ and $H$ be two simple graphs.
+
+\textbf{(a)}
+Then, the disjoint union $G \sqcup H$ of $G$ and $H$ is a
+well-defined simple graph and satisfies
+$\abs{\verts{G \sqcup H}} = \abs{\verts{G}} + \abs{\verts{H}}$
+and
+$\abs{\edges{G \sqcup H}} = \abs{\edges{G}} + \abs{\edges{H}}$.
+
+\textbf{(b)}
+The simple graphs $G \sqcup H$ and $H \sqcup G$ are
+isomorphic.
+\end{proposition}
+
+Notice that the simple graphs
+$G \sqcup H$ and $H \sqcup G$ in
+Proposition~\ref{prop.djun.simple.exists} \textbf{(b)}
+are generally not identical; the vertices of the form
+$\tup{0, v}$ in the former correspond to the vertices
+$\tup{1, v}$ in the latter.
+
 \begin{todo}
 Disjoint union of several graphs.
 \end{todo}
