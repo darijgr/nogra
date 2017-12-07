@@ -398,7 +398,7 @@ conclude that $v$ has more than
 $\sum_{i=1}^k p_i \deg v
 = \underbrace{\tup{p_1+p_2+\ldots+p_k}}_{\geq 1} \deg v
 \geq \deg v$ neighbors in total; but this is absurd)\footnote{You can
-even find an $i$ such that \textbf{more than} $p_i \deg v$ among the
+even find an $i$ such that \textbf{fewer than} $p_i \deg v$ among the
 neighbors of $v$ have the color $i$. But that's not necessary for
 us.}. Fix such an $i$,
 and replace the color $f \tup{v}$ of $v$ by this $i$.
@@ -1364,7 +1364,7 @@ we have
 We shall prove \eqref{pf.thm.mt1.d+d+d.gene.indproof.1} by induction
 over $j$.
 
-\textit{Induction base:} The equality
+\textit{Induction base:} The inequality
 \eqref{pf.thm.mt1.d+d+d.gene.indproof.1} holds for
 $j = 0$\ \ \ \ \footnote{\textit{Proof.} We have
 $d \tup{\underbrace{a_{2\cdot 0+1}}_{= a_1}, a_1}
@@ -1376,8 +1376,8 @@ $\underbrace{2 \cdot 0 n'}_{= 0}
 $\sum_{i=1}^{2\cdot 0} d \tup{a_i, a_{i+1}}
 = \tup{\text{empty sum}} = 0
 \leq 0 = 2 \cdot 0 n' - d \tup{a_{2\cdot 0+1}, a_1}$.
-In other words, the equality
-\eqref{pf.thm.mt1.d+d+d.gene.indproof.1} holds for $n = 0$.}.
+In other words, the inequality
+\eqref{pf.thm.mt1.d+d+d.gene.indproof.1} holds for $j = 0$.}.
 Hence, the induction base is complete.
 
 \textit{Induction step:} Fix a positive $J \in \NN$ satisfying
@@ -1439,7 +1439,7 @@ Now,
 &\leq 2\tup{J-1} n' - d \tup{a_1, a_{2J-1}}
         + d \tup{a_1, a_{2J-1}} + d \tup{a_1, a_{2J}}
         + d \tup{a_{2J}, a_{2J+1}} \\
-&\leq 2\tup{J-1} n'
+&= 2\tup{J-1} n'
         + \underbrack{d \tup{a_1, a_{2J}} + d \tup{a_{2J}, a_{2J+1}}}
                      {\leq 2 n' - d \tup{a_{2J+1}, a_1} } \\
 &\leq \underbrace{2\tup{J-1} n' + 2n'}_{= 2J n'}

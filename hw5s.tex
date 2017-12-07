@@ -13,6 +13,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{needspace}
 \usepackage{tabls}
+\usepackage{epigraph}
 \newcounter{exer}
 \theoremstyle{definition}
 \newtheorem{theo}{Theorem}[section]
@@ -134,8 +135,12 @@
 \begin{center}
 \textbf{Math 5707 Spring 2017 (Darij Grinberg): homework set 5}
 
-\textbf{Solution sketches (DRAFT).}
+\textbf{Solution sketches.}
+
+\textbf{extended and generalized version, with an introduction to sandpile theory (\today).}
 \end{center}
+
+\epigraph{This tale grew in the telling.}{J. R. R. Tolkien}
 
 \tableofcontents
 
@@ -148,6 +153,7 @@ and also the
 for relevant material.
 See also
 \href{http://www-users.math.umn.edu/~dgrinber/5707s17/hw2s.pdf}{the solutions to homework set 2}
+\cite{hw2s}
 for various conventions and notations that are in use here.
 
 \subsection{Sandpiles: recapitulating definitions and results}
@@ -171,6 +177,18 @@ talk with various illustrations.
 
 Let me give a brief (proof-less) survey of what we did in class (and
 a bit of what we should have done).
+
+We refer to \cite{hw2s} for the definition of a multidigraph, as well
+as for the definitions of walks, paths, circuits and cycles in a
+multidigraph.
+
+If $v$ is a vertex of a multidigraph $\tup{V, A, \phi}$, then the
+\textit{outdegree} $\deg^+ v$ of $v$ is defined to be the number
+of all arcs $a \in A$ whose source is $v$.
+Similarly,
+if $v$ is a vertex of a multidigraph $\tup{V, A, \phi}$, then the
+\textit{indegree} $\deg^- v$ of $v$ is defined to be the number
+of all arcs $a \in A$ whose target is $v$.
 
 Fix a loopless multidigraph $D = \tup{V, A, \phi}$.
 
@@ -210,7 +228,7 @@ $f\tup{v} \geq \deg^+ v$.
 \textit{stable} if no vertex $v \in V$ is active in $f$.
 \end{definition}
 
-Notice that there are only finitely many stable configuration
+Notice that there are only finitely many stable configurations
 (because if $f$ is a stable configuration, then, for each
 $v \in V$, the stability of $f$ implies $f \tup{v} \leq \deg^+ v$,
 whereas the fact that $f$ is a configuration implies
@@ -218,7 +236,7 @@ $f \tup{v} \geq 0$; but these two inequalities combined
 leave only finitely many possible values for $f \tup{v}$).
 
 \begin{definition} \label{def.chip.add-configs}
-The set $\ZZ^V$ of all $\ZZ$-configuration can be equipped with
+The set $\ZZ^V$ of all $\ZZ$-configurations can be equipped with
 operations of addition and subtraction, defined as follows:
 
 \begin{itemize}
@@ -274,6 +292,12 @@ This integer $\sum f$ is called the \textit{degree} of $f$.
 If $f$ is a configuration, then $\sum f$ is the total
 number of chips in $f$.
 
+It is easy to see that any two $\ZZ$-configurations $f$ and
+$g$ satisfy $\sum \tup{f+g} = \sum f + \sum g$ and
+$\sum \tup{f-g} = \sum f - \sum g$.
+Also, any $N \in \ZZ$ and any $\ZZ$-configuration $f$
+satisfy $\sum \tup{Nf} = N \sum f$.
+
 \begin{definition}
 Let $v \in V$ be a vertex.
 Then, a $\ZZ$-configuration $\Delta v$ is defined by setting
@@ -322,6 +346,21 @@ $\sum \tup{f - \Delta v}
 for each $\ZZ$-configuration $f : V \to \ZZ$ and each vertex $v$.
 In other words, firing a vertex $v$ does not change the degree of
 a $\ZZ$-configuration.
+
+We shall now study the effects of repeatedly firing vertices
+of $D$ (that is, firing several vertices one after the other).
+If $v_1, v_2, \ldots, v_k$ are finitely many elements of $V$,
+and if $f : V \to \ZZ$ is any $\ZZ$-configuration,
+then firing the vertices $v_1, v_2, \ldots, v_k$
+(one after the other, in this order) results in the
+$\ZZ$-configuration
+$f - \Delta v_1 - \Delta v_2 - \cdots - \Delta v_k$.
+This shows, in particular, that the order in which we fire
+the vertices does not matter for the final result
+(i.e., firing them in any other order would yield the same
+resulting $\ZZ$-configuration);
+however, the intermediate configurations of course do depend
+on the order.
 
 \begin{definition}
 Let $f : V \to \NN$ be a configuration.
@@ -375,7 +414,7 @@ We notice some obvious consequences of the definitions:
        $\tup{v_{\sigma\tup{1}}, v_{\sigma\tup{2}}, \ldots,
              v_{\sigma\tup{k}}}$ for a permutation
        $\sigma$ of $\set{1, 2, \ldots, k}$) is stabilizing
-       as well.
+       for $f$ as well.
  \item If $\tup{v_1, v_2, \ldots, v_k}$ is a legal sequence
        for a configuration $f$, then
        $\tup{v_1, v_2, \ldots, v_k}$ is stabilizing if and
@@ -534,6 +573,60 @@ Then, exactly one of the following two statements holds:
 \end{itemize}
 \end{theorem}
 
+How do we actually tell whether a given configuration $f$
+is finitary or infinitary?
+Proposition~\ref{prop.chip.leg-period} \textbf{(b)} suggests
+an algorithm:
+Keep firing active vertices over and over until either no
+more active vertices remain, or you have fired at least
+$\tup{h+1}^n$ many times.
+In the former case, $f$ is finitary (and the sequence
+of vertices you have fired is a legal stabilizing sequence
+for $f$).
+In the latter case, $f$ is infinitary (by
+Proposition~\ref{prop.chip.leg-period} \textbf{(b)},
+since the sequence of vertices you have fired is a
+legal sequence of length $\geq \tup{h+1}^n$).
+Needless to say, this algorithm is extremely slow and
+inefficient in practice, but to some extent this slowness
+is unavoidable:
+A finitary configuration may require a huge number of firings
+before it stabilizes.
+Nevertheless, there are faster algorithms in many particular
+cases; this is a subject of ongoing research.
+
+There are also criteria which, in certain cases, guarantee
+that a configuration is finitary or infinitary.
+For example, it is not hard to show that if $f$ is a
+configuration with $\sum f > \abs{A} - \abs{V}$,
+then $f$ is infinitary\footnote{The proof is easy:
+Let $f$ be a configuration with
+$\sum f > \abs{A} - \abs{V}$.
+Thus, $\sum_{v \in V} f \tup{v} = \sum f > \abs{A} - \abs{V}
+= \sum_{v \in V} \tup{\deg^+ v - 1}$.
+Hence, there exists at least one $v \in V$ satisfying
+$f \tup{v} > \deg^+ v - 1$.
+In other words, there exists at least one $v \in V$ satisfying
+$f \tup{v} \geq \deg^+ v$.
+In other words, there exists at least one active vertex
+$v \in V$ in $f$.
+Choose such an active vertex and fire it.
+The resulting configuration $f'$ satisfies
+$\sum f' = \sum f > \abs{A} - \abs{V}$,
+so the very same argument can be applied to $f'$ instead
+of $f$, and shows that there exists at least one active
+vertex $v' \in V$ in $f'$.
+Choose such an active vertex and fire it.
+Keep doing so.
+You can thus keep firing active vertices for
+as long as you wish.
+That is, $f$ has legal sequences of arbitrary length.
+Hence, $f$ is infinitary.}.
+Conversely, the results of
+Exercise~\ref{exe.chip.adj-cycles} can be viewed as
+bounds on $\sum f$ that guarantee that $f$ must be
+finitary.
+
 \begin{definition} \label{def.chip.stabilization}
 Let $f : V \to \NN$ be a finitary configuration.
 Then, Statement 1 in Theorem~\ref{thm.chip.dichotomy} must
@@ -676,6 +769,8 @@ nonnegative integers satisfying $a_{1}+a_{2}+\cdots+a_{n}=h$ is $\dbinom
 for a proof of this fact (in the language of monomials). Or see \cite[\S 1.2]%
 {Stanle11} (search for \textquotedblleft weak composition\textquotedblright%
 \ and read the first paragraph that comes up).
+Or see \cite[Proposition 13.3]{Galvin} (in the case $n > 0$; but the case
+$n = 0$ is trivial).
 \end{proof}
 
 \begin{proof}
@@ -703,27 +798,27 @@ There exist precisely $\dbinom{n+h-1}{n-1}$ configurations having exactly $h$
 chips\footnote{\textit{Proof.} Recall that $\mathbb{N}$ denotes the set of
 nonnegative integers.
 \par
-Let $v_{1},v_{2},\ldots,v_{n}$ be the vertices of $G$ (listed with no
+Let $v_{1},v_{2},\ldots,v_{n}$ be the vertices of $D$ (listed with no
 repetitions). Then, there is a bijection%
 \begin{align*}
-\left\{  \text{configurations on }G\right\}   &  \rightarrow\mathbb{N}^{n},\\
+\left\{  \text{configurations on }D\right\}   &  \rightarrow\mathbb{N}^{n},\\
 f  &  \mapsto\left(  f\left(  v_{1}\right)  ,f\left(  v_{2}\right)
 ,\ldots,f\left(  v_{n}\right)  \right)  .
 \end{align*}
 This bijection restricts to a bijection%
 \begin{align*}
-\left\{  \text{configurations on }G\text{ having exactly }h\text{
+\left\{  \text{configurations on }D\text{ having exactly }h\text{
 chips}\right\}   &  \rightarrow\left\{  \left(  a_{1},a_{2},\ldots
 ,a_{n}\right)  \in\mathbb{N}^{n}\ \mid\ a_{1}+a_{2}+\cdots+a_{n}=h\right\}
 ,\\
 f  &  \mapsto\left(  f\left(  v_{1}\right)  ,f\left(  v_{2}\right)
 ,\ldots,f\left(  v_{n}\right)  \right)
 \end{align*}
-(since the number of chips in a configuration $f$ on $G$ is $\sum f=f\left(
+(since the number of chips in a configuration $f$ on $D$ is $\sum f=f\left(
 v_{1}\right)  +f\left(  v_{2}\right)  +\cdots+f\left(  v_{n}\right)  $).
 Hence,%
 \begin{align*}
-&  \left\vert \left\{  \text{configurations on }G\text{ having exactly
+&  \left\vert \left\{  \text{configurations on }D\text{ having exactly
 }h\text{ chips}\right\}  \right\vert \\
 &  =\left\vert \left\{  \left(  a_{1},a_{2},\ldots,a_{n}\right)  \in
 \mathbb{N}^{n}\ \mid\ a_{1}+a_{2}+\cdots+a_{n}=h\right\}  \right\vert \\
@@ -1442,10 +1537,10 @@ First, let us consider Case 1. In this case, we have $p=w$.
 
 \begin{noncompile}
 Hence, $\left(  \Delta w\right)  \left(  p\right)  =\left(  \Delta w\right)
-\left(  w\right)  =\deg^{+}w$ (by the definition of $\Delta w$).
+\left(  w\right)  =\deg^+ w$ (by the definition of $\Delta w$).
 \end{noncompile}
 
-On the other hand, (\ref{pf.lem.chip.adj-cycles.capture.ineq}) becomes%
+Now, (\ref{pf.lem.chip.adj-cycles.capture.ineq.rhs}) becomes
 \begin{align*}
 \left(  \sum_{c\in K\cup C_{w}}\delta_{u_{c}}\right)  \left(  p\right)    &
 =\left\vert \left\{  c\in K\cup C_{w}\ \mid\ \underbrace{p}_{=w}%
@@ -1708,7 +1803,7 @@ $-captured. In other words, the configuration $f-\Delta\ell_{1}-\Delta\ell
 _{2}-\cdots-\Delta\ell_{k}$ is $C$-captured (since $\varnothing\cup
 C_{\ell_{1}}\cup C_{\ell_{2}}\cup\cdots\cup C_{\ell_{k}}=C_{\ell_{1}}\cup
 C_{\ell_{2}}\cup\cdots\cup C_{\ell_{k}}=C$). Hence, Lemma
-\ref{lem.chip.adj-cycles.capture} (applied to $f-\Delta\ell_{1}-\Delta\ell
+\ref{lem.chip.adj-cycles.capture-size} (applied to $f-\Delta\ell_{1}-\Delta\ell
 _{2}-\cdots-\Delta\ell_{k}$ and $C$ instead of $f$ and $K$) yields%
 \[
 \sum\left(  f-\Delta\ell_{1}-\Delta\ell_{2}-\cdots-\Delta\ell_{k}\right)
@@ -1818,11 +1913,11 @@ $c+d$ into a stable $\mathbb{Z}$-configuration $z$ (since $s$ is stabilizing).
 Consider this $z$.
 
 The $\mathbb{Z}$-configuration $z$ is stable. In other words, no vertex of $V$
-is active in $z$. In other words, $z\left(  v\right)  <\deg^{-}v$ for each
-$v\in V$. Hence,%
+is active in $z$. In other words, $z\left(  v\right)  <\deg^+ v$ for each
+$v\in V$. Hence,
 \[
 \left(  z-d\right)  \left(  v\right)  =z\left(  v\right)
--\underbrace{d\left(  v\right)  }_{\geq0}\leq z\left(  v\right)  <\deg^{-}v
+-\underbrace{d\left(  v\right)  }_{\geq0}\leq z\left(  v\right)  < \deg^+ v
 \]
 for each $v\in V$. In other words, no vertex of $V$ is active in $z-d$. In
 other words, the $\mathbb{Z}$-configuration $z-d$ is stable.
@@ -2144,7 +2239,7 @@ such that }d\left(  v,w\right)  \leq4h\right\}  .
 We call this set $T$ the $4h$\textit{-neighborhood of }$S_{f}$. This set $T$
 is finite (since $S_{f}$ is finite).
 
-Let $f^{\prime}$ be a configuration obtained from a configuration $f$ by
+Let $f^{\prime}$ be a configuration obtained from the configuration $f$ by
 firing a legal sequence of vertices. Let $v\in S_{f^{\prime}}$. Then,
 Observation 2 (applied to $g=f$ and $g^{\prime}=f^{\prime}$) shows that there
 exists a vertex $w\in S_{f}$ and a walk $p$ from $w$ to $v$ such that each
@@ -2167,15 +2262,15 @@ Moreover, $f^{\prime}\left(  v\right)  \in\left\{  0,1,\ldots,h\right\}  $ for
 each $v\in T$ (since $f^{\prime}\left(  v\right)  \leq\sum f^{\prime}=h$).
 
 Now, forget that we fixed $f^{\prime}$. We thus have proven that each
-configuration $f^{\prime}$ obtained from a configuration $f$ by firing a legal
-sequence of vertices satisfies%
+configuration $f^{\prime}$ obtained from the configuration $f$ by firing a
+legal sequence of vertices satisfies
 \begin{align*}
 f^{\prime}\left(  v\right)   &  =0\ \ \ \ \ \ \ \ \ \ \text{for each }%
 v\in\mathbb{Z}^{2}\setminus T,\ \ \ \ \ \ \ \ \ \ \text{and}\\
 f^{\prime}\left(  v\right)   &  \in\left\{  0,1,\ldots,h\right\}
 \ \ \ \ \ \ \ \ \ \ \text{for each }v\in T.
 \end{align*}
-Thus, all the configurations $f^{\prime}$ obtained from a configuration $f$ by
+Thus, all the configurations $f^{\prime}$ obtained from the configuration $f$ by
 firing a legal sequence of vertices can be regarded as maps from $T$ to
 $\left\{  0,1,\ldots,h\right\}  $. Of course, there are only finitely many
 such maps; thus, there are only finitely many configurations that can be
@@ -2579,7 +2674,7 @@ $S$ of $V$ satisfying $s \in S$ and $t \notin S$.
 Let $m$ denote the minimum possible value of
 $c \tup{S, \overline{S}}$ where $S$ ranges over the
 $s$-$t$-cutting subsets.
-(Recall that this is the maximum value of an
+(Recall that this is the maximum value of a
 flow, according to the
 maximum-flow-minimum-cut theorem.)
 
@@ -2611,18 +2706,18 @@ $\left(  V,A\right)  $, a source $s\in V$ and a sink $t\in V$, and a capacity
 function $c:A\rightarrow\mathbb{Q}_{+}$ such that $s\neq t$. Let $f$ be a flow
 on this network.
 
-Let $S$ be a subset of $S$ satisfying $s\in S$ and $t\notin S$.
+Let $S$ be a subset of $V$ satisfying $s\in S$ and $t\notin S$.
 
 \textbf{(a)} We have $\left\vert f\right\vert \leq c\left(  S,\overline
 {S}\right)  $.
 
 \textbf{(b)} We have $\left\vert f\right\vert =c\left(  S,\overline{S}\right)
-$ if and only if%
+$ if and only if
 \begin{equation}
 \left(  \text{each }a\in\left[  \overline{S},S\right]  \text{ satisfies
-}f\left(  a\right)  =0\right)  \label{eq.lem.flows-cuts.flow-estimate.b.1}%
+}f\left(  a\right)  =0\right)  \label{eq.lem.flows-cuts.flow-estimate.b.1}
 \end{equation}
-and%
+and
 \begin{equation}
 \left(  \text{each }a\in\left[  S,\overline{S}\right]  \text{ satisfies
 }f\left(  a\right)  =c\left(  a\right)  \right)
@@ -2865,7 +2960,16 @@ L. R. Ford, D. R. Fulkerson,
 Princeton University Press,
 sixth printing 1974.
 
-\bibitem[Grinbe17]{lec16}
+\bibitem[Galvin17]{Galvin}David Galvin, \textit{Basic discrete mathematics}, 30
+November 2017.\newline
+\url{http://www-users.math.umn.edu/~dgrinber/comb/60610lectures2017-Galvin.pdf}
+
+\bibitem[Grinbe17a]{hw2s}
+Darij Grinberg,
+\textit{UMN, Spring 2017, Math 5707: homework set \#2 with solutions},
+\newline\url{http://www-users.math.umn.edu/~dgrinber/5707s17/hw2s.pdf} .
+
+\bibitem[Grinbe17b]{lec16}
 Darij Grinberg,
 \textit{UMN, Spring 2017, Math 5707: Lecture 16 (flows and cuts in networks)},
 \newline\url{http://www-users.math.umn.edu/~dgrinber/5707s17/5707lec16.pdf} .

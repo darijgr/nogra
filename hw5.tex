@@ -213,7 +213,7 @@ $f\tup{v} \geq \deg^+ v$.
 \textit{stable} if no vertex $v \in V$ is active in $f$.
 \end{definition}
 
-Notice that there are only finitely many stable configuration
+Notice that there are only finitely many stable configurations
 (because if $f$ is a stable configuration, then, for each
 $v \in V$, the stability of $f$ implies $f \tup{v} \leq \deg^+ v$,
 whereas the fact that $f$ is a configuration implies
@@ -221,7 +221,7 @@ $f \tup{v} \geq 0$; but these two inequalities combined
 leave only finitely many possible values for $f \tup{v}$).
 
 \begin{definition} \label{def.chip.add-configs}
-The set $\ZZ^V$ of all $\ZZ$-configuration can be equipped with
+The set $\ZZ^V$ of all $\ZZ$-configurations can be equipped with
 operations of addition and subtraction, defined as follows:
 
 \begin{itemize}
@@ -378,7 +378,7 @@ We notice some obvious consequences of the definitions:
        $\tup{v_{\sigma\tup{1}}, v_{\sigma\tup{2}}, \ldots,
              v_{\sigma\tup{k}}}$ for a permutation
        $\sigma$ of $\set{1, 2, \ldots, k}$) is stabilizing
-       as well.
+       for $f$ as well.
  \item If $\tup{v_1, v_2, \ldots, v_k}$ is a legal sequence
        for a configuration $f$, then
        $\tup{v_1, v_2, \ldots, v_k}$ is stabilizing if and
@@ -1038,7 +1038,7 @@ Let us recall some terminology from
       \item two distinct vertices $s \in V$ and $t \in V$,
             called the \textit{source} and the \textit{sink},
             respectively (although we do not require $s$ to
-            have indegree $0$ or $t$ to have outdegree $1$);
+            have indegree $0$ or $t$ to have outdegree $0$);
       \item a function $c : A \to \QQ_+$, called the
             \textit{capacity function}.
             (Here, $\QQ_+$ means the set
@@ -1082,8 +1082,8 @@ $S$ of $V$ satisfying $s \in S$ and $t \notin S$.
 Let $m$ denote the minimum possible value of
 $c \tup{S, \overline{S}}$ where $S$ ranges over the
 $s$-$t$-cutting subsets.
-(Recall that this is the maximum value of an
-$s$-$t$-flow, according to the
+(Recall that this is the maximum value of a
+flow, according to the
 maximum-flow-minimum-cut theorem.)
 
 An $s$-$t$-cutting subset $S$ is said to be
