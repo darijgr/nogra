@@ -1579,7 +1579,7 @@ In other words, there are no active vertices in $g$.
 Write the sequence $s$ in the form
 $s = \tup{s_1, s_2, \ldots, s_N}$.
 Then, $g = f - \Delta s_1 - \Delta s_2 - \cdots - \Delta s_N$
-(since $g$ is obtained from $f$ by firing the sequences in $s$).
+(since $g$ is obtained from $f$ by firing the vertices in $s$).
 Hence,
 $\sum g
 = \sum \tup{f - \Delta s_1 - \Delta s_2 - \cdots - \Delta s_N}
@@ -1601,7 +1601,7 @@ But the definition of $\sum g$ yields
 \begin{equation}
 \sum_{v \in V} g \tup{v} = \sum g = \sum f
 > \abs{A} - \abs{V}
-= \sum_{v \in V} \tup{\deg^+ v - 1}
+= \sum_{v \in V} \tup{\deg^+ v - 1} .
 \label{pf.prop.chip.infinitary-by-pigeon.2}
 \end{equation}
 Hence, there exists at least one $v \in V$ satisfying
@@ -1774,13 +1774,13 @@ Consider the following simple algorithm:
 \item Search for an active vertex distinct from $q$. If you find one, fire it.
 Keep doing so until you \textbf{either} can no longer find an active vertex
 distinct from $q$ \textbf{or} you have fired $\left(  n-1\right)  \left(
-h^{1}+h^{2}+\cdots+h^{n-1}\right)  $ many vertices\footnote{Of course, many of
+h^{1}+h^{2}+\cdots+h^{n-1}\right) +1 $ many vertices\footnote{Of course, many of
 these vertices will be equal.}.
 
 \item Say you are in \textit{Case 1} if you have stopped because you could no
 longer find an active vertex distinct from $q$. Say you are in \textit{Case 2}
 if you have stopped because you have fired $\left(  n-1\right)  \left(
-h^{1}+h^{2}+\cdots+h^{n-1}\right)  $ many vertices.
+h^{1}+h^{2}+\cdots+h^{n-1}\right) +1 $ many vertices.
 \end{itemize}
 
 Now, let us consider Case 1 first. In this case, you have stopped because you
@@ -1802,16 +1802,17 @@ always at most as long as $s$). Theorem~\ref{thm.chip.dichotomy-q} is thus
 proven in Case 1.
 
 Let us now consider Case 2. In this case, you have stopped because you have
-fired $\left(  n-1\right)  \left(  h^{1}+h^{2}+\cdots+h^{n-1}\right)  $ many
+fired $\left(  n-1\right)  \left(  h^{1}+h^{2}+\cdots+h^{n-1}\right) +1 $ many
 vertices. Let $\ell$ be the sequence of vertices you have fired during the
 algorithm (from first to last). Then, the sequence $\ell$ is legal (because
 you have only fired active vertices) and has length $\left(  n-1\right)
-\left(  h^{1}+h^{2}+\cdots+h^{n-1}\right)  $ (since you have fired $\left(
-n-1\right)  \left(  h^{1}+h^{2}+\cdots+h^{n-1}\right)  $ many vertices).
+\left(  h^{1}+h^{2}+\cdots+h^{n-1}\right) +1 $ (since you have fired $\left(
+n-1\right)  \left(  h^{1}+h^{2}+\cdots+h^{n-1}\right) +1 $ many vertices).
 Also, the sequence $\ell$ does not contain the vertex $q$ (since you have only
 fired vertices distinct from $q$).
 
-The length of the sequence $\ell$ is $\left(  n-1\right)  \left(  h^{1}%
+The length of the sequence $\ell$ is \newline
+$\left(  n-1\right)  \left(  h^{1}%
 +h^{2}+\cdots+h^{n-1}\right)  +1>\left(  n-1\right)  \left(  h^{1}%
 +h^{2}+\cdots+h^{n-1}\right)  $. Hence, Proposition
 \ref{prop.chip.leg-everyone-fires} shows that $q$ must appear at least once in
@@ -2542,7 +2543,7 @@ $f:V\rightarrow\mathbb{Z}$ is $\varnothing$-captured if and only if $f$ is a con
 
 \begin{lemma}
 \label{lem.chip.adj-cycles.capture-size}Let $f:V\rightarrow\mathbb{Z}$ be a
-configuration on a multidigraph $D=\left(  V,A,\phi\right)  $. Let
+$\ZZ$-configuration on a multidigraph $D=\left(  V,A,\phi\right)  $. Let
 $K\subseteq C$ be such that $f$ is $K$-captured. Then, $\sum f\geq\left\vert
 K\right\vert $.
 \end{lemma}
@@ -2571,12 +2572,12 @@ The following lemma will be crucial:
 
 \begin{lemma}
 \label{lem.chip.adj-cycles.capture}Let $f:V\rightarrow\mathbb{Z}$ be a
-configuration on a multidigraph $D=\left(  V,A,\phi\right)  $. Let
+$\ZZ$-configuration on a multidigraph $D=\left(  V,A,\phi\right)  $. Let
 $w\in V$ be a vertex such that $w$ is active in $f$. Let $C$ be a set of
 arc-disjoint cycles of $D$. Let $C_{w}=\left\{  c\in C\ \mid\ w\in
 \operatorname*{V}\left(  c\right)  \right\}  $. Let $K\subseteq C$ be such
-that $f$ is $K$-captured. Then, the configuration $f-\Delta w$ is $K\cup
-C_{w}$-captured.
+that $f$ is $K$-captured.
+Then, the $\ZZ$-configuration $f-\Delta w$ is $K\cup C_{w}$-captured.
 \end{lemma}
 
 \begin{proof}
@@ -2766,7 +2767,9 @@ has source $w$, we thus only need to show that it has target $p$.
 \par
 We have $w\in\operatorname*{V}\left(  c\right)  $. The definition of $u_{c}$
 thus yields $u_{c}=\left(  \text{the vertex succeeding }w\text{ on the cycle
-}c\right)  $. Hence, $p=u_{c}=\left(  \text{the vertex succeeding }w\text{ on
+}c\right)  $.
+\par
+Hence, $p=u_{c}=\left(  \text{the vertex succeeding }w\text{ on
 the cycle }c\right)  $. Therefore, the arc with source $w$ that belongs to the
 cycle $c$ has target $p$. This completes our proof.}. Hence, the map%
 \begin{align*}
@@ -2808,19 +2811,20 @@ C_{w}}\delta_{u_{c}}\right)  \left(  p\right)
 From (\ref{pf.lem.chip.adj-cycles.capture.ineq}), we obtain $f-\Delta
 w\geq\sum_{c\in K\cup C_{w}}\delta_{u_{c}}$.
 
-Thus, the configuration $f-\Delta w$ is $K\cup C_{w}$-captured (since
+Thus, the $\ZZ$-configuration $f-\Delta w$ is $K\cup C_{w}$-captured (since
 $u_{c}\in\operatorname*{V}\left(  c\right)  $ for each $c\in K\cup C_{w}$).
 This proves Lemma \ref{lem.chip.adj-cycles.capture}.
 \end{proof}
 
 \begin{corollary}
-\label{cor.chip.adj-cycles.captures}Let $f:V\rightarrow\mathbb{Z}$ be a
-configuration on a multidigraph $D=\left(  V,A,\phi\right)  $. Let
+\label{cor.chip.adj-cycles.captures}
+Let $f:V\rightarrow\mathbb{Z}$ be a
+$\ZZ$-configuration on a multidigraph $D=\left(  V,A,\phi\right)  $. Let
 $\left(  \ell_{1},\ell_{2},\ldots,\ell_{k}\right)  $ be a legal sequence for
 $f$. Let $C$ be a set of arc-disjoint cycles of $D$. Let $C_{w}=\left\{  c\in
 C\ \mid\ w\in\operatorname*{V}\left(  c\right)  \right\}  $ for each $w\in
 V$.  Let $K\subseteq C$ be such that $f$ is $K$-captured. Then, the
-configuration $f-\Delta\ell_{1}-\Delta\ell_{2}-\cdots-\Delta\ell_{k}$ is
+$\ZZ$-configuration $f-\Delta\ell_{1}-\Delta\ell_{2}-\cdots-\Delta\ell_{k}$ is
 $K\cup C_{\ell_{1}}\cup C_{\ell_{2}}\cup\cdots\cup C_{\ell_{k}}$-captured.
 \end{corollary}
 
@@ -2828,7 +2832,7 @@ $K\cup C_{\ell_{1}}\cup C_{\ell_{2}}\cup\cdots\cup C_{\ell_{k}}$-captured.
 [Proof of Corollary \ref{cor.chip.adj-cycles.captures}.] We will show that for
 each $i\in\left\{  0,1,\ldots,k\right\}  $,
 \begin{equation}
-\text{the configuration }f-\Delta\ell_{1}-\Delta\ell_{2}-\cdots-\Delta\ell
+\text{the } \ZZ\text{-configuration }f-\Delta\ell_{1}-\Delta\ell_{2}-\cdots-\Delta\ell
 _{i}\text{ is }K\cup C_{\ell_{1}}\cup C_{\ell_{2}}\cup\cdots\cup C_{\ell_{i}%
 }\text{-captured.}\label{pf.cor.chip.adj-cycles.captures.i}%
 \end{equation}
@@ -2838,7 +2842,7 @@ _{i}\text{ is }K\cup C_{\ell_{1}}\cup C_{\ell_{2}}\cup\cdots\cup C_{\ell_{i}%
 (\ref{pf.cor.chip.adj-cycles.captures.i}) by induction over $i$:
 
 \textit{Induction base:} If $i=0$, then
-(\ref{pf.cor.chip.adj-cycles.captures.i}) simply states that the configuration
+(\ref{pf.cor.chip.adj-cycles.captures.i}) simply states that the $\ZZ$-configuration
 $f$ is $K$-captured. This is true, because it was an assumption. This
 completes the induction base.
 
@@ -2850,22 +2854,22 @@ $i=j$.
 We have assumed that (\ref{pf.cor.chip.adj-cycles.captures.i}) holds for
 $i=j-1$. In other words,
 \[
-\text{the configuration }f-\Delta\ell_{1}-\Delta\ell_{2}-\cdots-\Delta
+\text{the }\ZZ\text{-configuration }f-\Delta\ell_{1}-\Delta\ell_{2}-\cdots-\Delta
 \ell_{j-1}\text{ is }K\cup C_{\ell_{1}}\cup C_{\ell_{2}}\cup\cdots\cup
 C_{\ell_{j-1}}\text{-captured.}%
 \]
-But the vertex $\ell_{j}$ is active in the configuration $f-\Delta\ell
+But the vertex $\ell_{j}$ is active in the $\ZZ$-configuration $f-\Delta\ell
 _{1}-\Delta\ell_{2}-\cdots-\Delta\ell_{j-1}$ (since the sequence $\left(
 \ell_{1},\ell_{2},\ldots,\ell_{k}\right)  $ is legal for $f$). Hence, Lemma
 \ref{lem.chip.adj-cycles.capture} (applied to $f-\Delta\ell_{1}-\Delta\ell
 _{2}-\cdots-\Delta\ell_{j-1}$, $\ell_{j}$ and $K\cup C_{\ell_{1}}\cup
 C_{\ell_{2}}\cup\cdots\cup C_{\ell_{j-1}}$ instead of $f$, $w$ and $K$) shows
-that the configuration $\left(  f-\Delta\ell_{1}-\Delta\ell_{2}-\cdots
+that the $\ZZ$-configuration $\left(  f-\Delta\ell_{1}-\Delta\ell_{2}-\cdots
 -\Delta\ell_{j-1}\right)  -\Delta\ell_{j}$ is $\left(  K\cup C_{\ell_{1}}\cup
 C_{\ell_{2}}\cup\cdots\cup C_{\ell_{j-1}}\right)  \cup C_{\ell_{j}}%
 $-captured\footnote{since $K\cup C_{\ell_{1}}\cup C_{\ell_{2}}\cup\cdots\cup
 C_{\ell_{j-1}}\subseteq C$ (since both $K$ and each $C_{w}$ are subsets of
-$C$)}. In other words, the configuration $f-\Delta\ell_{1}-\Delta\ell
+$C$)}. In other words, the $\ZZ$-configuration $f-\Delta\ell_{1}-\Delta\ell
 _{2}-\cdots-\Delta\ell_{j}$ is $K\cup C_{\ell_{1}}\cup C_{\ell_{2}}\cup
 \cdots\cup C_{\ell_{j}}$-captured. In other words,
 (\ref{pf.cor.chip.adj-cycles.captures.i}) holds for $i=j$. This completes the
@@ -2926,9 +2930,9 @@ C_{\ell_{k}}=C$.}.
 But the configuration $f$ is $\varnothing$-captured (since any configuration
 is $\varnothing$-captured). Hence, Corollary
 \ref{cor.chip.adj-cycles.captures} (applied to $K=\varnothing$) shows that the
-configuration $f-\Delta\ell_{1}-\Delta\ell_{2}-\cdots-\Delta\ell_{k}$ is
+$\ZZ$-configuration $f-\Delta\ell_{1}-\Delta\ell_{2}-\cdots-\Delta\ell_{k}$ is
 $\varnothing\cup C_{\ell_{1}}\cup C_{\ell_{2}}\cup\cdots\cup C_{\ell_{k}}%
-$-captured. In other words, the configuration $f-\Delta\ell_{1}-\Delta\ell
+$-captured. In other words, the $\ZZ$-configuration $f-\Delta\ell_{1}-\Delta\ell
 _{2}-\cdots-\Delta\ell_{k}$ is $C$-captured (since $\varnothing\cup
 C_{\ell_{1}}\cup C_{\ell_{2}}\cup\cdots\cup C_{\ell_{k}}=C_{\ell_{1}}\cup
 C_{\ell_{2}}\cup\cdots\cup C_{\ell_{k}}=C$). Hence, Lemma
