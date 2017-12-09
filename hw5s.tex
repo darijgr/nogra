@@ -488,6 +488,9 @@ a $\ZZ$-configuration.
 
 \subsubsection{Legal and stabilizing sequences}
 
+The word ``sequence'' shall always mean ``finite sequence''
+(which is the same as ``finite list'' or ``tuple'').
+
 We shall now study the effects of repeatedly firing vertices
 of $D$ (that is, firing several vertices one after the other).
 If $v_1, v_2, \ldots, v_k$ are finitely many elements of $V$,
@@ -738,7 +741,11 @@ _{N}\right)  =\ell$ is legal for $f$. Hence, for each $i\in\left\{
 $-configuration $f-\Delta\ell_{1}-\Delta\ell_{2}-\cdots-\Delta\ell_{i-1}$. In
 other words, for each $i\in\left\{  2,3,\ldots,N\right\}  $, the vertex
 $\ell_{i}$ is active in the $\ZZ$-configuration $\left(  f-\Delta
-\ell_{1}\right)  -\Delta\ell_{2}-\Delta\ell_{3}-\cdots-\Delta\ell_{i-1}$.
+\ell_{1}\right)  -\Delta\ell_{2}-\Delta\ell_{3}-\cdots-\Delta\ell_{i-1}$
+(since
+$f-\Delta\ell_{1}-\Delta\ell_{2}-\cdots-\Delta\ell_{i-1}
+= \left(  f-\Delta
+\ell_{1}\right)  -\Delta\ell_{2}-\Delta\ell_{3}-\cdots-\Delta\ell_{i-1}$).
 Renaming $i$ as $i+1$ in this fact, we obtain the following: For each
 $i\in\left\{  1,2,\ldots,N-1\right\}  $, the vertex $\ell_{i+1}$ is active in
 the $\ZZ$-configuration $\left(  f-\Delta\ell_{1}\right)  -\Delta
@@ -763,7 +770,7 @@ $t=\left(  t_{1},t_{2},\ldots,t_{M}\right)  $).
 But the sequence $t$ is a permutation of $s$, and thus a subpermutation of $s$
 (by Lemma \ref{lem.subper.simple-stuff} \textbf{(a)}). Hence, Lemma
 \ref{lem.subper.simple-stuff} \textbf{(b)} (applied to $a=\ell$, $b=t$ and
-$c=s$) shows that the sequence $\ell$ is a subpermutation of $t$. This
+$c=s$) shows that the sequence $\ell$ is a subpermutation of $s$. This
 completes the induction step. Thus, Theorem \ref{thm.chip.lap} is proven.
 \end{proof}
 
@@ -987,7 +994,7 @@ $\mathbb{Z}$-configuration $g-\Delta\ell_{i+1}-\Delta\ell_{i+2}-\cdots
 -\Delta\ell_{i+p-1}$. But this is precisely what we needed to show.}. Hence,
 Lemma \ref{lem.chip.leg-concat2} (applied to $g$, $j-i$, $\left(  \ell
 _{i+1},\ell_{i+2},\ldots,\ell_{j}\right)  $, $\ell_{i+h}$ and $r$ instead of
-$f$, $p$, $u$, $u_{h}$ and $r$) shows that the sequence $\left(  \ell
+$f$, $p$, $u$, $u_{h}$ and $k$) shows that the sequence $\left(  \ell
 _{i+1},\ell_{i+2},\ldots,\ell_{j}\right)  ^{\ast r}$ is legal for $g$ (because
 of (\ref{pf.lem.chip.leg-repeat.zerosum})). Hence, Lemma
 \ref{lem.chip.leg-concat1} (applied to $\left(  \ell_{1},\ell_{2},\ldots
@@ -1073,11 +1080,12 @@ instead of $N$ and $v_p$) yields
 $\sum\left(  f-\Delta\ell_{1}-\Delta\ell_{2}-\cdots-\Delta\ell_{i-1}\right)
 = \sum f =h$.
 Hence, Proposition \ref{prop.chip.sum-greater} (applied to $f-\Delta\ell
-_{1}-\Delta\ell_{2}-\cdots-\Delta\ell_{i-1}$ and $v$ instead of $f$ and $w$)
+_{1}-\Delta\ell_{2}-\cdots-\Delta\ell_{i-1}$ and $\ell_i$ instead of $f$ and $w$)
 yields $\left(  f-\Delta\ell_{1}-\Delta\ell_{2}-\cdots-\Delta\ell
-_{i-1}\right)  \left(  v\right)  \leq h$. Hence,%
+_{i-1}\right)  \left( \ell_i \right)  \leq h$. Hence,%
 \[
 h\geq\left(  f-\Delta\ell_{1}-\Delta\ell_{2}-\cdots-\Delta\ell_{i-1}\right)
+\tup{ \ell_i }
 \geq\deg^{+}\left(  \ell_{i}\right)  .
 \]
 This proves Lemma~\ref{lem.chip.leg-hineq}.
@@ -1116,7 +1124,7 @@ _{1}-\Delta\ell_{2}-\cdots-\Delta\ell_{N}$ is a configuration (since $f$ is a
 configuration). Denote this configuration by $f^{\prime}$. Thus, $f^{\prime
 }=f-\Delta\ell_{1}-\Delta\ell_{2}-\cdots-\Delta\ell_{N}$.
 
-We know that at least one arc of $D$ has source $u$ and target $v$ (namely,
+At least one arc of $D$ has source $u$ and target $v$ (namely,
 $a$). Thus, $a_{u,v}\geq1$. Thus,%
 \begin{equation}
 a_{w,v}\geq\left[  w=u\right]  \qquad\text{for each vertex }w\in V
@@ -1143,7 +1151,7 @@ every $i\in\left\{  1,2,\ldots,N\right\}  $ satisfies%
 \begin{align}
 \left(  \Delta\ell_{i}\right)  \left(  v\right)    & =\left[  v=\ell
 _{i}\right]  \underbrace{\deg^{+}\left(  \ell_{i}\right)  }_{\substack{\leq
-h\\\text{(by (\ref{lem.chip.leg-hineq}))}}}-\underbrace{a_{\ell_{i},v}%
+h\\\text{(by Lemma \ref{lem.chip.leg-hineq})}}}-\underbrace{a_{\ell_{i},v}%
 }_{\substack{\geq\left[  \ell_{i}=u\right]  \\\text{(by
 (\ref{pf.lem.chip.leg-bound1.1}))}}}\qquad \left(  \text{by the
 definition of }\Delta\ell_{i}\right)  \nonumber\\
@@ -1162,7 +1170,7 @@ v\right) \\
 &\geq -\sum_{i=1}^{N}\underbrace{\left(  \Delta\ell_{i}\right)  \left(
 v\right)  }_{\substack{\leq\left[  v=\ell_{i}\right]  h-\left[  \ell
 _{i}=u\right]  \\\text{(by (\ref{pf.lem.chip.leg-bound1.3}))}}}
- =-\sum_{i=1}^{N}\left(  \left[  v=\ell_{i}\right]  h-\left[  \ell
+ \geq -\sum_{i=1}^{N}\left(  \left[  v=\ell_{i}\right]  h-\left[  \ell
 _{i}=u\right]  \right)  \\
 &  =-\underbrace{\sum_{i=1}^{N}\left[  v=\ell_{i}\right]  }%
 _{\substack{=\left(  \text{the number of all }i\in\left\{  1,2,\ldots
@@ -1222,8 +1230,8 @@ We have assumed that $u$ appears at least $h^{0}+h^{1}+\cdots+h^{d}$ times in
 the sequence $\ell$. Since%
 \begin{align*}
 h^{0}+h^{1}+\cdots+h^{d}  & =\underbrace{h^{0}}_{=1>0}+\underbrace{h^{1}%
-+h^{2}+\cdots+h^{d}}_{=\left(  h^{0}+h^{1}+\cdots+h^{d-1}\right)  h}\\
-& >\left(  h^{0}+h^{1}+\cdots+h^{d-1}\right)  h,
++h^{2}+\cdots+h^{d}}_{=\left(  h^{0}+h^{1}+\cdots+h^{d-1}\right)  h}
+>\left(  h^{0}+h^{1}+\cdots+h^{d-1}\right)  h,
 \end{align*}
 we thus conclude that $u$ appears more than $\left(  h^{0}+h^{1}%
 +\cdots+h^{d-1}\right)  h$ times in the sequence $\ell$. Thus,
@@ -1510,8 +1518,8 @@ long as $s$). This contradicts the fact that $\ell$ is longer than $s$.
 \par
 Now, forget that we fixed $s$. We thus have found a contradiction for each
 stabilizing sequence $s$ for $f$. Thus, there exists no stabilizing sequence
-for $f$.}. Also, the configuration $f$ is infinitary (since there exists no
-stabilizing sequence for $f$). In other words, $f$ is not finitary. Therefore,
+for $f$.}. Hence, the configuration $f$ is infinitary.
+In other words, $f$ is not finitary. Therefore,
 Statement 1 does not hold.
 
 Each legal sequence for $f$ can be extended to a longer legal
@@ -1539,7 +1547,7 @@ is finitary or infinitary?
 We simply follow the algorithm given in the proof of
 Proposition~\ref{prop.chip.leg-period-b}:
 Keep firing active vertices over and over until either no
-more active vertices remain, or you have fired at least
+more active vertices remain, or you have fired
 $\tup{h+1}^n$ many times
 (where $h = \sum f$ and $n = \abs{V}$).
 In the former case, $f$ is finitary (and the sequence
@@ -1724,7 +1732,7 @@ Then, $\ell$ is a subpermutation of $s$.
 This proof is completely analogous to the proof
 of Theorem~\ref{thm.chip.lap} above.
 (Of course, you should use that none of the $\ell_i$
-and $s_j$ can be equal to $q$.)
+can be equal to $q$.)
 \end{proof}
 
 We also get an analogue of Corollary~\ref{cor.chip.lap-cor}:
@@ -2305,7 +2313,7 @@ z_{k-2}$. In other words, $f_{k}\underset{q}{\overset{\ast}{\rightarrow}%
 }\left(  2,2,2,4k-6\right)  $ (since $z_{0}=\left(  k-0,k-0,k-0,k+3\cdot
 0\right)  =\left(  k,k,k,k\right)  =f_{k}$ and $z_{k-2}=\left(  k-\left(
 k-2\right)  ,k-\left(  k-2\right)  ,k-\left(  k-2\right)  ,k+3\left(
-k-2\right)  \right)  =\left(  2,2,2,4k-6\right)  $)). Since the configuration
+k-2\right)  \right)  =\left(  2,2,2,4k-6\right)  $). Since the configuration
 $\left(  2,2,2,4k-6\right)  $ is $q$-stable, this shows that $\left(
 2,2,2,4k-6\right)  $ is the $q$-stabilization of $f_{k}$.
 \end{proof}
