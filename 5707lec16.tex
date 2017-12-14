@@ -18,7 +18,7 @@
 \setcounter{MaxMatrixCols}{30}
 %TCIDATA{OutputFilter=latex2.dll}
 %TCIDATA{Version=5.50.0.2960}
-%TCIDATA{LastRevised=Monday, December 04, 2017 10:23:05}
+%TCIDATA{LastRevised=Wednesday, December 13, 2017 18:06:09}
 %TCIDATA{<META NAME="GraphicsSave" CONTENT="32">}
 %TCIDATA{<META NAME="SaveForMode" CONTENT="1">}
 %TCIDATA{BibliographyScheme=Manual}
@@ -2560,8 +2560,9 @@ arcs $\left(  s,x\right)  $ for $x\in X$, and these arcs are pairwise distinct.
 
 [\textit{Proof of Observation 8:} We have $s\notin W$ and thus $s\notin X$
 (since $X\subseteq W$). Hence, there are no $G$-arcs having source $s$ (since
-all $G$-arcs have source lying in $X$). Also, $s\notin Y$. Thus, there are no
-$t$-arcs having source $s$ (since all $t$-arcs have source lying in $Y$).
+all $G$-arcs have source lying in $X$). Also, $s\notin W$ and thus $s\notin Y$
+(since $Y\subseteq W$). Thus, there are no $t$-arcs having source $s$ (since
+all $t$-arcs have source lying in $Y$).
 
 Recall that there are three types of arcs $a\in A$: the $G$-arcs, the $s$-arcs
 and the $t$-arcs. Among these three types, only $s$-arcs can have source $s$
@@ -2585,7 +2586,7 @@ proves Observation 8.]
 
 [\textit{Proof of Observation 9:} We have $s\notin W$ and thus $s\notin X$
 (since $X\subseteq W$). Hence, there are no $s$-arcs having target $s$ (since
-all $G$-arcs have target lying in $X$). Also, $s\notin W$ and thus $s\notin Y$
+all $s$-arcs have target lying in $X$). Also, $s\notin W$ and thus $s\notin Y$
 (since $Y\subseteq W$). Hence, there are no $G$-arcs having target $s$ (since
 all $G$-arcs have target lying in $Y$). Finally, $s\neq t$. Thus, there are no
 $t$-arcs having target $s$ (since all $t$-arcs have target $t\neq s$).
@@ -3056,7 +3057,7 @@ $\left\vert M\right\vert \geq\left\vert N\left(  U\right)  \right\vert
 \end{lemma}
 
 \begin{proof}
-[Proof of Lemma \ref{lem.hall.MU}.] Consider the network $N$. It clearly has
+[Proof of Lemma \ref{lem.hall.MU}.]Consider the network $N$. It clearly has
 the property that $c\left(  a\right)  \in\mathbb{N}$ for each $a\in A$ (since
 $c\left(  a\right)  =1$ for each $a\in A$). Hence, Lemma \ref{lem.3bat} shows
 that there exist an integer flow $f:A\rightarrow\mathbb{Q}_{+}$ and a subset
@@ -3081,8 +3082,8 @@ N\left(  U\right)  \setminus S\right\vert \leq\left\vert Y\cap S\right\vert
 Hence,%
 \begin{equation}
 \left\vert Y\cap S\right\vert +\left\vert N\left(  U\right)  \setminus
-S\right\vert \geq\left\vert N\left(  U\right)  \right\vert
-.\label{pf.thm.hall.hard.3}%
+S\right\vert \geq\left\vert N\left(  U\right)  \right\vert .
+\label{pf.thm.hall.hard.3}%
 \end{equation}
 
 
@@ -3309,7 +3310,7 @@ For example, if $G=\left(  W,E\right)  $ is the simple graph%
 2 \are[rr] & & 3
 }%
 %EndExpansion
-,\label{eq.hall.vertexcover.ex1}%
+, \label{eq.hall.vertexcover.ex1}%
 \end{equation}
 then every $2$-element subset of $W$ is a vertex cover (but no smaller subset
 of $W$ is).
@@ -3336,7 +3337,7 @@ of a matching in $G$ is $\leq$ to the minimum size of a vertex cover of $G$.
 \end{proposition}
 
 \begin{proof}
-[Proof of Proposition \ref{prop.hall.koenig.<=}.] Let $m$ be the maximum size
+[Proof of Proposition \ref{prop.hall.koenig.<=}.]Let $m$ be the maximum size
 of a matching in $G$. Let $c$ be the minimum size of a vertex cover of $G$. We
 must prove that $m\leq c$.
 
@@ -3355,8 +3356,8 @@ Each edge $e\in E$ contains at least one vertex in $C$. In other words, for
 each edge $e\in E$, there is at least one vertex $v\in C$ such that $v\in e$.
 In other words, for each edge $e\in E$, we have%
 \begin{equation}
-\left(  \text{the number of }v\in C\text{ such that }v\in e\right)
-\geq1.\label{pf.prop.hall.koenig.<=.>=}%
+\left(  \text{the number of }v\in C\text{ such that }v\in e\right)  \geq1.
+\label{pf.prop.hall.koenig.<=.>=}%
 \end{equation}
 
 
@@ -3370,36 +3371,34 @@ most one edge $e\in M$ such that $v\in e$. In other words, for each vertex $v$
 of $G$, we have%
 \begin{equation}
 \left(  \text{the number of edges }e\in M\text{ such that }v\in e\right)
-\leq1.\label{pf.prop.hall.koenig.<=.<=}%
+\leq1. \label{pf.prop.hall.koenig.<=.<=}%
 \end{equation}
 
 
 Now,
 \begin{align*}
-& \left(  \text{the number of pairs }\left(  v,e\right)  \in C\times M\text{
-such that }v\in e\right)  \\
-& =\sum_{v\in C}\underbrace{\left(  \text{the number of edges }e\in M\text{
+&  \left(  \text{the number of pairs }\left(  v,e\right)  \in C\times M\text{
+such that }v\in e\right) \\
+&  =\sum_{v\in C}\underbrace{\left(  \text{the number of edges }e\in M\text{
 such that }v\in e\right)  }_{\substack{\leq1\\\text{(by
 (\ref{pf.prop.hall.koenig.<=.<=}))}}}\leq\sum_{v\in C}1\\
-& =\left\vert C\right\vert \cdot1=\left\vert C\right\vert =c.
+&  =\left\vert C\right\vert \cdot1=\left\vert C\right\vert =c.
 \end{align*}
 Thus,%
 \begin{align*}
-c  & \geq\left(  \text{the number of pairs }\left(  v,e\right)  \in C\times
-M\text{ such that }v\in e\right)  \\
-& =\sum_{e\in M}\underbrace{\left(  \text{the number of }v\in C\text{ such
+c  &  \geq\left(  \text{the number of pairs }\left(  v,e\right)  \in C\times
+M\text{ such that }v\in e\right) \\
+&  =\sum_{e\in M}\underbrace{\left(  \text{the number of }v\in C\text{ such
 that }v\in e\right)  }_{\substack{\geq1\\\text{(by
 (\ref{pf.prop.hall.koenig.<=.>=}))}}}\geq\sum_{e\in M}1\\
-& =\left\vert M\right\vert \cdot1=\left\vert M\right\vert =m.
+&  =\left\vert M\right\vert \cdot1=\left\vert M\right\vert =m.
 \end{align*}
 In other words, $m\leq c$. This completes our proof of Proposition
 \ref{prop.hall.koenig.<=}.
 \end{proof}
 
-
-
 \begin{proof}
-[Proof of Theorem \ref{thm.hall.koenig} (sketched).] Let $m$ be the maximum
+[Proof of Theorem \ref{thm.hall.koenig} (sketched).]Let $m$ be the maximum
 size of a matching in $G$. Let $c$ be the minimum size of a vertex cover of
 $G$. We must prove that $m=c$.
 
@@ -3418,8 +3417,7 @@ M\right\vert \leq m$ (since $m$ is the maximum size of a matching in $G$).
 Thus,%
 \begin{equation}
 m\geq\left\vert M\right\vert \geq\left\vert N\left(  U\right)  \right\vert
-+\left\vert X\right\vert -\left\vert U\right\vert =\left\vert N\left(
-U\right)  \right\vert +\left\vert X\right\vert -\left\vert U\right\vert
++\left\vert X\right\vert -\left\vert U\right\vert
 .\label{pf.thm.hall.koenig.m>=}%
 \end{equation}
 
@@ -3443,13 +3441,13 @@ to the edge $e$, we conclude that the edge $e$ contains exactly one vertex in
 $X$. Let $x$ be this vertex. Thus, $x\in X$, and the edge $e$ contains the
 vertex $x$. If we had $x\in C$, then $e$ would contain a vertex in $C$
 (namely, the vertex $x$), which would contradict the fact that $e$ contains no
-vertex in $c$. Hence, we cannot have $x\in C$. Thus, we have $x\notin C$.
+vertex in $C$. Hence, we cannot have $x\in C$. Thus, we have $x\notin C$.
 Hence, $x\in X\setminus C$.
 
 But $C=\left(  X\setminus U\right)  \cup N\left(  U\right)  \supseteq
-X\setminus U$, so that $X\setminus\underbrace{C}_{\supseteq\left(  X\setminus
-U\right)  }\subseteq X\setminus\left(  X\setminus U\right)  =U$ (since
-$U\subseteq X$). Hence, $x\in X\setminus C\subseteq U$.
+X\setminus U$, so that $X\setminus\underbrace{C}_{\supseteq X\setminus
+U}\subseteq X\setminus\left(  X\setminus U\right)  =U$ (since $U\subseteq X$).
+Hence, $x\in X\setminus C\subseteq U$.
 
 Now, let $y$ be the endpoint of the edge $e$ distinct from $x$. (This is
 well-defined, since we already know that $e$ contains $x$.) Then, $x$ and $y$
@@ -3463,7 +3461,7 @@ words, $y$ is a vertex in $C$. Thus, the edge $e$ contains at least one vertex
 in $C$ (namely, the vertex $y$), because $e$ contains $y$. This contradicts
 the fact that $e$ contains no vertex in $C$.
 
-This contradiction proves that our assumption was worng. Hence, we have shown
+This contradiction proves that our assumption was wrong. Hence, we have shown
 that $e$ contains at least one vertex in $C$.
 
 Now, forget that we fixed $e$. We thus have proven that each edge $e\in E$
@@ -3473,16 +3471,17 @@ This proves Observation 1.]
 
 Now, $C=\left(  X\setminus U\right)  \cup N\left(  U\right)  $, so that
 \begin{align*}
-\left\vert C\right\vert  & =\left\vert \left(  X\setminus U\right)  \cup
+\left\vert C\right\vert  &  =\left\vert \left(  X\setminus U\right)  \cup
 N\left(  U\right)  \right\vert \leq\underbrace{\left\vert X\setminus
 U\right\vert }_{\substack{=\left\vert X\right\vert -\left\vert U\right\vert
 \\\text{(since }U\subseteq X\text{)}}}+\left\vert N\left(  U\right)
 \right\vert \\
-& \ \ \ \ \ \ \ \ \ \ \left(  \text{this is in fact an equality, but we don't
+&  \ \ \ \ \ \ \ \ \ \ \left(  \text{this is in fact an equality, but we don't
 need this}\right)  \\
-& =\left\vert N\left(  U\right)  \right\vert +\left\vert X\right\vert
--\left\vert U\right\vert \leq m\ \ \ \ \ \ \ \ \ \ \left(  \text{by
-(\ref{pf.thm.hall.koenig.m>=})}\right)  .
+&  =\left\vert X\right\vert -\left\vert U\right\vert +\left\vert N\left(
+U\right)  \right\vert =\left\vert N\left(  U\right)  \right\vert +\left\vert
+X\right\vert -\left\vert U\right\vert \leq m\ \ \ \ \ \ \ \ \ \ \left(
+\text{by (\ref{pf.thm.hall.koenig.m>=})}\right)  .
 \end{align*}
 
 
