@@ -681,9 +681,11 @@ Namely:
        each day he picks up his most preferable
        \textbf{contract}, and then he proposes to the woman
        involved with this specific contract);
- \item each woman should dismiss all but the best contracts
-       proposed to her by her suitors (as opposed to dismissing
-       the suitors themselves);
+ \item every afternoon,
+       each woman should dismiss all contracts that her
+       suitors are currently proposing her,
+       except for the best (from her perspective) of these contracts
+       (as opposed to dismissing the suitors themselves);
  \item a man whose contract gets dismissed crosses off this
        contract (rather than the woman who dismissed him) from
        his list,
@@ -799,7 +801,7 @@ But first, let me give the motivation behind this solution:
       paths $p_i$ and $q_j$ have no arcs in common, but she would be
       less happy this way. \par
       Everyone ranks their potential spouses by these preferences, and
-      we seek a stable marriage.
+      we seek a stable matching.
       When man $i$ and woman $j$ marry, we set
       $\sigma \tup{i} = j$, and thus a bijection
       $\sigma : \set{1, 2, \ldots, k} \to \set{1, 2, \ldots, k}$
@@ -915,7 +917,7 @@ For each $i \in \set{1, 2, \ldots, k}$, we define a path $s_i$
 from $u$ to $w$ as follows:
 \begin{itemize}
 \item Let the woman involved in the contract $m_i$ (that is, the
-      woman married off to $i$ in the stable matching $K$) be
+      woman married off to man $i$ in the stable matching $K$) be
       woman $j$.
 \item If the contract $m_i$ is \textbf{not} a dummy contract,
       then $m_i = c_a$ for some arc $a$.
@@ -1118,11 +1120,11 @@ Hence, the paths $p_i$ and $p_x$ have no arcs in common (since
 $i$ and $x$ are distinct).
 Hence, $b$ cannot be an arc of $p_i$ and an arc of $p_x$ at the
 same time.
-Therefore, Case 2 is impossible.
+Therefore, Case 1 is impossible.
 Similarly, Case 4 is impossible (here, we use the fact that $j$
 and $y$ are distinct).
-Thus, only Case 1 and Case 3 remain to be discussed.
-But clearly, Statement O4.1 holds in Case 1, whereas
+Thus, only Case 2 and Case 3 remain to be discussed.
+But clearly, Statement O4.1 holds in Case 2, whereas
 Statement O4.2 holds in Case 3.
 Thus, one of the two Statements always holds.
 This proves Observation 4.
