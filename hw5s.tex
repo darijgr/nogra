@@ -1844,9 +1844,7 @@ The \textit{$q$-stabilization} of $f$ means
 the configuration obtained from $f$ by firing
 all vertices in $s$ (one after the other).
 (This does not depend on the choice of $s$, because of
-the analogue of
-Corollary~\ref{cor.chip.lap-cor} \textbf{(d)}
-for $q$-legal and $q$-stabilizing sequences.)
+Corollary~\ref{cor.chip.lap-cor-q} \textbf{(d)}.)
 \end{definition}
 
 
@@ -1917,8 +1915,8 @@ nonnegative integers satisfying $a_{1}+a_{2}+\cdots+a_{n}=h$ is $\dbinom
 for a proof of this fact (in the language of monomials). Or see \cite[\S 1.2]%
 {Stanle11} (search for \textquotedblleft weak composition\textquotedblright%
 \ and read the first paragraph that comes up).
-Or see \cite[Proposition 13.3]{Galvin} (in the case $n > 0$; but the case
-$n = 0$ is trivial).
+Or see \cite[Proposition 13.3]{Galvin} (in the case $h > 0$; but the case
+$h = 0$ is trivial).
 \end{proof}
 
 \begin{proof}
@@ -2000,7 +1998,7 @@ this sequence $\ell^\prime$ is legal for $f$.
 But the length of this sequence $\ell^{\prime}$ is
 \begin{align*}
 \underbrace{i}_{\geq0}+r\underbrace{\left(  j-i\right)  }_{\substack{\geq
-1\\\text{(since }i<j\text{)}}}  &  \geq0+k\cdot1=k=\left(  n-1\right)  \left(
+1\\\text{(since }i<j\text{)}}}  &  \geq0+r\cdot1=r=\left(  n-1\right)  \left(
 h^1 + h^2 + \cdots + h^{n-1} \right)  +1\\
 &  >\left(  n-1\right)  \left(  h^1 + h^2 + \cdots + h^{n-1} \right)  .
 \end{align*}
@@ -2013,16 +2011,20 @@ $\ell$). This solves Exercise \ref{exe.chip.better-bounds} \textbf{(b)}.
 
 \subsection{Exercise \ref{exe.chip.examples}: examples of chip-firing}
 
+We identify each simple digraph $\tup{V, A}$ with the multidigraph
+$\tup{V, A, \iota}$, where $\iota$ is the map $V \to A \times A$ that
+sends each arc $a \in A$ to itself.
+
 \Needspace{15cm}
 \begin{exercise} \label{exe.chip.examples}
-\textbf{(a)} Let $D$ be the following digraph:
+\textbf{(a)} Let $D$ be the following simple digraph:
 \[
 \xymatrix{
  u \ar[r] & v \ar[r] & q
 }
 \]
 (i.e., the digraph $D$ with three vertices
-$u, v, q$ and two arcs $uv, vq$.)
+$u, v, q$ and two arcs $uv, vq$).
 
 Let $k$ be a positive integer.
 Consider the configuration $g_k$ on $D$ which has $k$ chips at $u$
@@ -2030,7 +2032,7 @@ and $0$ chips at each other vertex.
 
 Find the $q$-stabilization of $g_k$.
 
-\textbf{(b)} Let $D$ be the following digraph:
+\textbf{(b)} Let $D$ be the following simple digraph:
 \[
 \xymatrix{
  u \are[r] & v \ar[r] & q
@@ -2047,7 +2049,7 @@ and $0$ chips at each other vertex.
 
 Find the $q$-stabilization of $g_k$.
 
-\textbf{(c)} Let $D$ be the following digraph:
+\textbf{(c)} Let $D$ be the following simple digraph:
 \[
 \xymatrix{
  & v \are[dl] \are[dr] \ar[dd] \\
@@ -2063,8 +2065,8 @@ $uv, vu, vw, wv, wu, uw, uq, vq, wq$.)
 
 Let $k \geq 2$ be an integer.
 Consider the configuration $f_k$ on $D$ which has $k$ chips at each
-vertex (i.e., which has $f_k \tup{v} = k$ for each
-$v \in \set{u, v, w, q}$).
+vertex (i.e., which has $f_k \tup{v'} = k$ for each
+$v' \in \set{u, v, w, q}$).
 
 Find the $q$-stabilization of $f_k$.
 \end{exercise}
@@ -2323,12 +2325,12 @@ on the degree of an infinitary configuration}
 
 \subsubsection{The exercise}
 
-We shall use the notation
-$\operatorname{s}\tup{a}$ for the source of an arc
-$a \in A$.
-We shall also the notation
-$\operatorname{t}\tup{a}$ for the target of an arc
-$a \in A$.
+% We shall use the notation
+% $\operatorname{s}\tup{a}$ for the source of an arc
+% $a \in A$.
+% We shall also the notation
+% $\operatorname{t}\tup{a}$ for the target of an arc
+% $a \in A$.
 
 \begin{exercise} \label{exe.chip.adj-cycles}
 Assume that the multidigraph $D$ is strongly connected.
@@ -3763,7 +3765,7 @@ Let us recall some terminology from
 \begin{itemize}
 \item A \textit{network} consists of:
       \begin{itemize}
-      \item a digraph $\tup{V, A}$;
+      \item a simple digraph $\tup{V, A}$;
       \item two distinct vertices $s \in V$ and $t \in V$,
             called the \textit{source} and the \textit{sink},
             respectively (although we do not require $s$ to
@@ -3800,7 +3802,7 @@ We also refer to lecture 16 \cite{lec16} for the definition of a flow
 be helpful).
 
 \begin{exercise} \label{exe.flows-cuts.cut-lattice}
-Consider a network consisting of a digraph
+Consider a network consisting of a simple digraph
 $\tup{V, A}$, a source $s \in V$ and a sink $t \in V$,
 and a capacity function $c : A \to \QQ_+$
 such that $s \neq t$.
@@ -3838,7 +3840,8 @@ some further material from
 \cite{lec16}. Namely, we shall use the concept of flows, and the following fact:
 
 \begin{lemma}
-\label{lem.flows-cuts.flow-estimate}Consider a network consisting of a digraph
+\label{lem.flows-cuts.flow-estimate}Consider a network consisting of a
+simple digraph
 $\left(  V,A\right)  $, a source $s\in V$ and a sink $t\in V$, and a capacity
 function $c:A\rightarrow\mathbb{Q}_{+}$ such that $s\neq t$. Let $f$ be a flow
 on this network.
@@ -4097,8 +4100,8 @@ L. R. Ford, D. R. Fulkerson,
 Princeton University Press,
 sixth printing 1974.
 
-\bibitem[Galvin17]{Galvin}David Galvin, \textit{Basic discrete mathematics}, 30
-November 2017.\newline
+\bibitem[Galvin17]{Galvin}David Galvin, \textit{Basic discrete mathematics}, 13
+December 2017.\newline
 \url{http://www-users.math.umn.edu/~dgrinber/comb/60610lectures2017-Galvin.pdf}
 
 \bibitem[Grinbe17a]{hw2s}
