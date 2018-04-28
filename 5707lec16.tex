@@ -18,7 +18,7 @@
 \setcounter{MaxMatrixCols}{30}
 %TCIDATA{OutputFilter=latex2.dll}
 %TCIDATA{Version=5.50.0.2960}
-%TCIDATA{LastRevised=Friday, April 27, 2018 10:36:50}
+%TCIDATA{LastRevised=Friday, April 27, 2018 22:36:27}
 %TCIDATA{<META NAME="GraphicsSave" CONTENT="32">}
 %TCIDATA{<META NAME="SaveForMode" CONTENT="1">}
 %TCIDATA{BibliographyScheme=Manual}
@@ -1554,7 +1554,7 @@ c\left(  a\right)  $ (by the capacity constraints)). By the definition of
 $A_{f}$, we thus have $a\in A_{f}$. Thus, $\left(  u,v\right)  =a\in A_{f}$.
 Therefore, (\ref{pf.lem.4.b.2}) yields $v\in S$. This contradicts
 $v\in\overline{S}$. This contradiction shows that our assumption was false.
-Hence, $f\left(  a\right)  = c \left( a\right) $ holds, and
+Hence, $f\left(  a\right)  = c \left(  a\right)  $ holds, and
 (\ref{pf.lem.4.b.4}) is proven.]
 
 Now, the definition of $f\left(  \overline{S},S\right)  $ yields $f\left(
@@ -2484,7 +2484,7 @@ $x$ are exactly the arcs $\overrightarrow{e}$ for $e\in E$ satisfying $x\in e$.
 $s\notin W$). Thus, $x\neq s$. Hence, there are no $s$-arcs having source $x$
 (since all $s$-arcs have source $s\neq x$). Also, $x\notin Y$ (since $x\in
 X\subseteq V\setminus Y$). Thus, there are no $t$-arcs having source $x$
-(since all $s$-arcs have source lying in $Y$).
+(since all $t$-arcs have source lying in $Y$).
 
 Recall that there are three types of arcs $a\in A$: the $G$-arcs, the $s$-arcs
 and the $t$-arcs. Among these three types, only $G$-arcs can have source $x$
@@ -2675,7 +2675,7 @@ following two cases:
 \end{statement}
 
 Let us consider Case 1. In this case, we have $w\in X$. Proposition
-\ref{prop.hall.lem1} \textbf{(a)} (applied to $w=x$) thus yields%
+\ref{prop.hall.lem1} \textbf{(a)} (applied to $x=w$) thus yields%
 \begin{align*}
 f\left(  \left(  s,w\right)  \right)   &  =\sum_{\substack{e\in E;\\w\in
 e}}f\left(  \overrightarrow{e}\right)  =\underbrace{f\left(
@@ -3074,7 +3074,7 @@ S\subseteq Y\cap S$ and thus $\left\vert N\left(  U\right)  \cap S\right\vert
 However, the set $N\left(  U\right)  $ is clearly the union of its two
 disjoint subsets $N\left(  U\right)  \cap S$ and $N\left(  U\right)  \setminus
 S$ (indeed, the former contains all the elements of $N\left(  U\right)  $ that
-belong to $S$, whereas the latter contains all those that don't). thus,%
+belong to $S$, whereas the latter contains all those that don't). Thus,%
 \[
 \left\vert N\left(  U\right)  \right\vert =\underbrace{\left\vert N\left(
 U\right)  \cap S\right\vert }_{\leq\left\vert Y\cap S\right\vert }+\left\vert
@@ -3114,7 +3114,7 @@ $c\left(  S,\overline{S}\right)  =\left\vert \left[  S,\overline{S}\right]
 
 Let us now analyze the set $\left[  S,\overline{S}\right]  $. This set
 consists of all arcs $a\in A$ whose source lies in $S$ and whose target lies
-in $\overline{S}$. Recall the the digraph $\left(  V,A\right)  $ has three
+in $\overline{S}$. Recall that the digraph $\left(  V,A\right)  $ has three
 kinds of arcs: the $G$-arcs, the $s$-arcs and the $t$-arcs. Some of these arcs
 belong to $\left[  S,\overline{S}\right]  $:
 
@@ -3177,7 +3177,7 @@ y,t\right)  $ belongs to $\left[  S,\overline{S}\right]  $. Qed.}. Of course,
 these $t$-arcs $\left(  y,t\right)  $ are distinct (since their sources $y$
 are distinct). Thus, we have found a total of $\left\vert Y\cap S\right\vert $
 different $t$-arcs belonging to to $\left[  S,\overline{S}\right]  $ (one for
-each $y\in N\left(  U\right)  \setminus S$).
+each $y\in Y\cap S$).
 \end{itemize}
 
 Now, recall that there is no overlap between the $G$-arcs, the $s$-arcs and
