@@ -2554,8 +2554,8 @@ $f:V\rightarrow\mathbb{Z}$ is $\varnothing$-captured if and only if $f$ is a con
 \begin{lemma}
 \label{lem.chip.adj-cycles.capture-size}Let $f:V\rightarrow\mathbb{Z}$ be a
 $\ZZ$-configuration on a multidigraph $D=\left(  V,A,\phi\right)  $. Let
-$K\subseteq C$ be such that $f$ is $K$-captured. Then, $\sum f\geq\left\vert
-K\right\vert $.
+$K$ be a set of cycles of $D$ such that $f$ is $K$-captured.
+Then, $\sum f\geq\left\vert K\right\vert $.
 \end{lemma}
 
 \begin{proof}
@@ -3373,7 +3373,7 @@ $v$ such that each edge of $p$ is non-void in $g^{\prime}$.
 Now, let $h=\sum f$. Define a subset $T$ of $\mathbb{Z}^{2}$ by%
 \[
 T=\left\{  v\in\mathbb{Z}^{2}\ \mid\ \text{there exists some }w\in S_{f}\text{
-such that }d\left(  v,w\right)  \leq4h\right\}  .
+such that }d\left( w, v \right)  \leq4h\right\}  .
 \]
 We call this set $T$ the $4h$\textit{-neighborhood of }$S_{f}$. This set $T$
 is finite (since $S_{f}$ is finite).
@@ -3390,13 +3390,13 @@ each chip makes only $4$ edges non-void, and there can be overlap). Thus, the
 path $p$ cannot have more than $4h$ edges (since each edge of $p$ is non-void
 in $f^{\prime}$). In other words, the length of the path $p$ is $\leq4h$.
 Thus, there exists a path of length $\leq4h$ from $w$ to $v$ (namely, the path
-$p$). Hence, $d\left(  w,v\right)  \leq4h$. In other words,
-$d \tup{v, w} \leq 4h$.
+$p$). Hence, $d\left(  w,v\right)  \leq4h$.
 Hence, $v\in T$ (by the definition of $T$, because $w\in S_{f}$).
 
 Now, forget that we fixed $v$. We thus have shown that $v\in T$ for each $v\in
 S_{f^{\prime}}$. In other words, $S_{f^{\prime}}\subseteq T$. Hence,
-$f^{\prime}\left(  v\right)  =0$ for each $v\in\mathbb{Z}^{2}\setminus T$.
+$f^{\prime}\left(  v\right)  =0$ for each $v\in\mathbb{Z}^{2}\setminus T$
+(because of the definition of $S_{f^{\prime}}$).
 Moreover, $f^{\prime}\left(  v\right)  \in\left\{  0,1,\ldots,h\right\}  $ for
 each $v\in T$ (since $f^{\prime}\left(  v\right)  \leq\sum f^{\prime}=h$).
 
@@ -3434,7 +3434,7 @@ In particular, it increases. This solves Exercise \ref{exe.chip.Z2}
 a legal sequence for $f$. Then, for each $i\in\left\{  0,1,\ldots,k\right\}
 $, the $\mathbb{Z}$-configuration $f-\Delta\ell_{1}-\Delta\ell_{2}%
 -\cdots-\Delta\ell_{i}$ is a configuration; denote this configuration by
-$f_{i}$. For each $i\in\left\{  1,2,\ldots,k\right\}  $, the configuration
+$f_{i}$. For each $i\in\left\{  0,1,\ldots,k\right\}  $, the configuration
 $f_{i}$ is obtained from $f$ by firing a legal sequence of vertices.
 
 But each $p\in\left\{  1,2,\ldots,k\right\}  $ satisfies
@@ -3455,7 +3455,7 @@ i,j\right)  \right)  \cdot\left(  i+j\right)  ^{2}\right)  _{p\in\left\{
 is strictly increasing. Hence, its entries are distinct. Thus, the
 configurations $f_{0},f_{1},\ldots,f_{k}$ are distinct.
 
-Recall that for each $i\in\left\{  1,2,\ldots,k\right\}  $, the configuration
+Recall that for each $i\in\left\{  0,1,\ldots,k\right\}  $, the configuration
 $f_{i}$ is obtained from $f$ by firing a legal sequence of vertices. But
 Exercise \ref{exe.chip.Z2} \textbf{(b)} shows that the total number of such
 configurations is finite. Hence, if $k$ is large enough, then two of the
@@ -3755,6 +3755,12 @@ Thus, we have proven that Exercise \ref{exe.aco.score-vector} \textbf{(b)}
 also holds whenever $\left\vert V\right\vert =N$. This completes the induction
 step. Hence, Exercise \ref{exe.aco.score-vector} \textbf{(b)} is solved.
 \end{proof}
+
+[\textit{Remark:}
+Exercise \ref{exe.aco.score-vector} \textbf{(b)} remains valid
+even if we don't require the orientation $\phi_2$ to be acyclic.
+The above solution to this exercise still works in this
+generality (mutatis mutandis).]
 
 \subsection{Exercise \ref{exe.flows-cuts.cut-lattice}: the
 lattice structure on minimum cuts}
@@ -4085,7 +4091,7 @@ Europ. J. Comb. 12 (1991), pp. 283--291.
 \bibitem[CorPet16]{CorPet16}
 Scott Corry, David Perkinson,
 \textit{Divisors and Sandpiles},
-draft of 20 November 2016.
+draft of 28 January 2018.
 \newline\url{http://people.reed.edu/~davidp/divisors_and_sandpiles/}
 
 \bibitem[Ellenb15]{Ellenb15}
