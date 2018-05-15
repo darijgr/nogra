@@ -137,12 +137,12 @@
 \begin{center}
 \textbf{Math 5707 Spring 2017 (Darij Grinberg): homework set 3}
 
-\textbf{due: Wed, 8 Mar 2017, in class} or by email
-(\texttt{dgrinber@umn.edu}) before class
+%\textbf{due: Wed, 8 Mar 2017, in class} or by email
+%(\texttt{dgrinber@umn.edu}) before class
 
 \textbf{Please hand in solutions to FIVE of the 8 problems.}
-{\color{red}
-(If you hand in more, the grader will choose five to grade.)}
+%{\color{red}
+%(If you hand in more, the grader will choose five to grade.)}
 \end{center}
 
 See the
@@ -281,14 +281,14 @@ the resulting multigraph has a Hamiltonian cycle.
 
 If $u$ and $v$ are two vertices of a digraph $G$, then
 $d \tup{u, v}$ denotes the \textit{distance} from $u$ to $v$. This
-is defined to be the length of the shortest path from $u$ to $v$ if
+is defined to be the minimum length of a path from $u$ to $v$ if
 such a path exists; otherwise it is defined to be the symbol $\infty$.
 Notice that $d \tup{u, v}$ is not usually the same as $d \tup{v, u}$
 (unlike for simple graphs).
 
 \begin{exercise} \label{exe.hw3.d+d+d.directed}
 Let $a$, $b$ and $c$ be three vertices of a strongly connected
-digraph $G = \tup{V, A}$ such that $\abs{V} > 4$.
+digraph $G = \tup{V, A}$ such that $\abs{V} \geq 4$.
 
 \textbf{(a)} Prove that
 $d \tup{b, c} + d \tup{c, a} + d \tup{a, b} \leq 3 \abs{V} - 4$.
