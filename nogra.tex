@@ -3364,7 +3364,7 @@ $u = x$, $v = y$ and $w = z$) shows that
 \begin{align*}
 \tup{a_0, a_1, \ldots, a_k, b_1, b_2, \ldots, b_\ell}
 &= \tup{a_0, a_1, \ldots, a_{k-1}, b_0, b_1, \ldots, b_\ell} \\
-&= \tup{a_0, a_1, \ldots, a_{k-1}, v, b_1, b_2, \ldots, b_\ell}
+&= \tup{a_0, a_1, \ldots, a_{k-1}, y, b_1, b_2, \ldots, b_\ell}
 \end{align*}
 is a walk from $x$ to $z$. Thus, there exists a walk from $x$ to $z$
 in $G$ (namely, the walk we have just constructed). In other words,
@@ -3670,9 +3670,8 @@ that start at $v$).
 \begin{example}
 \textbf{(a)} Let $G = \tup{V, E}$ be the simple graph defined in
 Example \ref{exa.simple.R33} \textbf{(a)}.
-Then, we know that (from
-Example~\ref{exa.intro.equivalence-from-graph.1}) that
-$u \simeq_G v$ for any two vertices $u$ and $v$ of $G$.
+Then, we know (from Example~\ref{exa.intro.equivalence-from-graph.1})
+that $u \simeq_G v$ for any two vertices $u$ and $v$ of $G$.
 Hence, for each $v \in V$, we have
 $\conncomp v
 = \set{ u \in V \ \mid \  \underbrack{u \simeq_G v}
