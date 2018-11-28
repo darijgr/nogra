@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Math 5707, Spring 2017, Darij Grinberg @ UMN</title>
+  </head>
+  <body>
+    <p><b>Math 5707, Spring 2017</b></p>
+    <p><a href="..">Darij Grinberg</a> (203B Vincent Hall).<br>
+       <!-- Office hours: Monday 15:00--16:00, Tuesday 12:00--13:00, Thursday 10:00--11:00. --> </p><hr>
+    <p><a href="syll.pdf">Syllabus</a>.</p>
+    <p><a href="nogra.pdf">Lecture notes (unfinished!)</a>. (Also, <a href="https://github.com/darijgr/nogra">source code of the lecture notes</a>, for those interested.)<br>
+       Make sure to <b>refresh your browser</b> when you access these notes! Otherwise, you might be looking at an outdated (cached) version.</p>
+    <p>Please mail dgrinber@umn.edu for questions and comments.</p>
+    <hr>
+    <p><b>Handwritten notes:</b></p>
+    <p>Since the LaTeXed notes seem to be coming into existence far slower than the class is going, I'll upload handwritten notes as well. These correspond more directly to what is on the blackboard, and lack some of the polish and completeness of the final lecture notes.
+    <p><a href="5707lec5.pdf">Lecture 5</a> (Hamiltonian paths and cycles).</p>
+    <p>Lecture 6 (digraphs, multigraphs, Eulerian paths and circuits, multidigraphs, criteria for Eulerian etc.): coming soon. [<a href="5707lec6a.pdf">Part 1 of the notes</a>.]
+        <ul>
+        <li>See Section 0.1 of <a href="hw2s.pdf">homework set 2 solutions</a> for various notations around multigraphs and digraphs (particularly, the meanings of walks, path and cycles).</li>
+        <li>Section 5.2 of <a href="https://www.whitman.edu/mathematics/cgt_online/cgt.pdf">David Guichard's <i>An Introduction to Combinatorics and Graph Theory</i></a> deals with Eulerian walks and Eulerian circuits (although it calls them Eulerian paths and Eulerian cycles, respectively, conflicting with our notation).</li>
+        <li>Another proof of the Euler-Hierholzer theorem (every connected multigraph whose vertices all have even degrees must have an Eulerian circuit) can be found in Problem 10.7 of <a href="https://courses.csail.mit.edu/6.042/spring17/mcs.pdf">Lehman-Leighton-Meyer</a> (the numbering might change; search for "Euler tour" to find the problem); note that he calls Eulerian circuits "Euler tours".</li>
+        <li>See also <a href="https://www.math.ku.edu/~jmartin/courses/math105-F11/Lectures/chapter5-part2.pdf">Jeremy Martin's slides</a> for examples and a different algorithm for finding Eulerian walks and circuits.</li>
+        <li>A strongly connected digraph has an Eulerian circuit if and only if each vertex v satisfies deg<sup>+</sup> v = deg<sup>-</sup> v. This is proven similarly to the Euler-Hierholzer theorem.</li>
+        </ul>
+    <p><a href="5707lec7.pdf">Lecture 7</a> (Hamiltonian paths in tournaments).</p>
+    <p><a href="5707lec8.pdf">Lecture 8</a> (determinants, and proof of Vandermonde using tournaments).</p>
+    <p><a href="5707lec9.pdf">Lecture 9</a> (trees and spanning trees).</p>
+    <p><a href="5707lec10.pdf">Lecture 10a</a> (centers of a tree; oriented spanning trees).</p>
+    <p>Lecture 10b (BEST theorem): See Chapter 10 of <a href="http://www-math.mit.edu/~rstan/algcomb/">Richard Stanley's <i>Algebraic Combinatorics</i></a>, and my <a href="http://www.cip.ifi.lmu.de/~grinberg/algebra/stanley-ac-errata-1.pdf">unofficial errata</a> (note the corrected definition of an oriented tree). Notice that Stanley's notation differs from mine in some points (e.g., his "edges" are my "arcs", his "Eulerian tours" are my "Eulerian circuits", and his "outdeg" is my "deg<sup>+</sup>").
+    </p>
+    <p><a href="5707lec11.pdf">Lecture 11</a> (lower bound on independent set size, and 2-colorings).</p>
+    <p>Lecture 12 (matrix-tree theorem) by Travis Scrimshaw: compare
+        <ul>
+        <li><a href="http://www.math.ucsd.edu/~jverstra/264A-LECTUREJ.pdf">notes by Jacques Verstraete</a>;</li>
+        <li>Chapter 10 of <a href="http://www-math.mit.edu/~rstan/algcomb/">Richard Stanley's <i>Algebraic Combinatorics</i></a> (with my <a href="http://www.cip.ifi.lmu.de/~grinberg/algebra/stanley-ac-errata-1.pdf">unofficial errata</a>);</li>
+        <li><a href="http://www-users.math.umn.edu/~musiker/4707/Matrices.pdf">notes by Gregg Musiker on the undirected-graph case</a>.</li>
+        </ul>
+    <p>Lecture 13 (Cayley's formula; bipartite graphs; matchings; Hall's theorem):
+        <ul>
+        <li><a href="http://www.austinmohr.com/15spring4980/paper%20final%20draft.pdf">Frankie Smith's final paper</a> derives Cayley's formula similarly to how I did it (in its Section 3.1 -- but beware that he only states the matrix-tree theorem for undirected graphs!);</li>
+        <li>further proofs of Cayley's formula (not part of lectures) appear in the Appendix to Chapter 9 of <a href="http://www-math.mit.edu/~rstan/algcomb/">Richard Stanley's <i>Algebraic Combinatorics</i></a>;</li>
+        <li>for much more about counting trees, see <a href="http://www.math.ucla.edu/~pak/hidden/papers/Moon-counting_labelled_trees.pdf">Moon's booklet</a> (not needed for hw/exams);</li>
+        <li>for bipartite graphs, see Section 12.2 and 12.5 in <a href="https://courses.csail.mit.edu/6.042/spring17/mcs.pdf">Lehman-Leighton-Meyer</a>.</li>
+        </ul>
+    <p>Lecture 14 (K&ouml;nig's theorem; systems of distinct representatives; Birkhoff-van-Neumann theorem):
+        <ul>
+        <li><a href="https://en.wikipedia.org/wiki/K%C5%91nig's_theorem_(graph_theory)">K&ouml;nig's theorem</a> but with a different proof;</li>
+        <li>another source for K&ouml;nig's theorem is Chapter 10 of <a href="https://cthomson.ca/dl/latest/math239.pdf">Chris Thomson's <i>MATH 239: Introduction to Combinatorics</i> notes</a>, which provides the same proof as Wikipedia (and derives Hall's theorem from K&ouml;nig's -- i.e., the opposite direction from what we did in class);</li>
+        <li><a href="http://www.math.cornell.edu/~levine/18.312/alg-comb-lecture-17.pdf">scribe notes from a class by Lionel Levine</a> provide the proof of K&ouml;nig's theorem that we did in class, along with Hall's theorem on systems of distinct representatives;</li>
+        <li>see Section 8.1 of <a href="https://cameroncounts.files.wordpress.com/2013/11/comb.pdf">P. J. Cameron's <i>Notes on Combinatorics</i></a> for Hall's theorem on systems of distinct representatives (but beware: instead of deriving it from Hall's theorem on matchings, he simply proves it from scratch); Section 8.3 provides a neat application to Sudoku;</li>
+        <li><a href="http://planetmath.org/proofofbirkhoffvonneumanntheorem">proof</a> of <a href="http://planetmath.org/birkhoffvonneumanntheorem">Birkhoff-von Neumann theorem</a> (not needed in hw/exams).</li>
+        </ul>
+    <p>Lecture 15 (Menger's theorem and rederiving K&ouml;nig and Hall from it; Tutte's theorem without proof; Ore-Ryser without proof):
+        <ul>
+        <li>Section 4.1 of <a href="http://homepages.cwi.nl/~lex/files/dict.pdf">Alexander Schrijver's <i>A Course in Combinatorial Optimization</i></a> is what I followed in class for stating and proving the directed versions of Menger's theorem;</li>
+        <li>K&ouml;nig's theorem is easily derived from Menger's theorem (no good source yet, but it's really easy: just direct all edges of a bipartite graph (G; X, Y) from their X-vertex to the Y-vertex, and apply Menger's theorem to the sets X and Y);</li>
+        <li>I mentioned Tutte's theorem on non-bipartite matching without proof; see Michel Goemans's notes (<a href="http://math.mit.edu/~goemans/18453S17/matching-notes.pdf">chapter 1</a> and <a href="http://math.mit.edu/~goemans/18453S17/matching-nonbip-notes.pdf">chapter 2</a>) for a proper treatment with proofs;</li>
+        <li>for the Ore-Ryser theorem, the best source I have is a <a href="http://mathoverflow.net/a/65224/">MathOverflow post by Fedor Petrov</a> giving a laconic guide to the proof.</li>
+        </ul>
+        Note that in Lecture 15, only Menger's theorem is hw/exam material.
+    <p><a href="5707lec16.pdf">Lecture 16</a> (network flows) (see also <a href="5707lec16.tex">the sourcecode of these notes</a>, and <a href="5707lec16old.pdf">an old, handwritten version</a>):
+        <ul>
+        <li><a href="http://people.ku.edu/~jlmartin/LectureNotes.pdf">Jeremy L. Martin's <i>Lecture Notes on Algebraic Combinatorics</i></a>, in its Section 8.2, handles all I'm doing in class rather neatly.</li>
+        <li>For further material and real-life applications (mostly to industrial planning), see Chapter 4 of <a href="http://homepages.cwi.nl/~lex/files/dict.pdf">Lex Schrijver's <i>A Course in Combinatorial Optimization</i></a> (just updated with corrected typos and improved exposition, as of 23 March 2017).</li>
+        <li><a href="http://www.unet.univie.ac.at/~a0103857/Papers/Timon%20Thalwitzer%20-%20Max%20Flow.pdf">Timon Thalwitzer's diploma thesis <i>Max-Flow Min-Cut</i></a> appears to be a highly thorough and systematic treatment of various versions of max-flow/min-cut (I personally haven't read it).</li>
+        </ul>
+    <p>Lecture 17 (more on network flows):
+        <ul>
+        <li>Hall's theorem and the generalization to m disjoint matchings.</li>
+        <li>Acyclicity and partitionability of flows.</li>
+        <li>Menger's theorem follows from max-flow/min-cut. And conversely (for integers).</li>
+        <li>Mentions of further results (faster algorithms, circulations, etc. -- a teaser of the rest of Chapter 4 of <a href="http://homepages.cwi.nl/~lex/files/dict.pdf">Lex Schrijver's <i>A Course in Combinatorial Optimization</i></a>).</li>
+        </ul>
+    <p>Lecture 18 (Gallai-Milgram and stable matchings):
+        <ul>
+        <li>Gallai-Milgram theorem (Theorem 2.5.1 in <a href="http://students.imsa.edu/~tliu/Math/GraphTheoryIII.pdf">Diestel, <i>Graph Theory</i>, 3rd edition 2005</a>).</li>
+        <li>The K&ouml;nig theorem (on matchings and vertex covers) and the Redei theorem (each nonempty tournament has a Hamiltonian path) follow from Gallai-Milgram.</li>
+        <li>Stable matchings (Section 6.4 in <a href="https://courses.csail.mit.edu/6.042/spring17/mcs.pdf">Lehman, Leighton, Meyer, <i>Mathematics for Computer Science</i></a>).</li>
+        </ul>
+    <p>Lecture 19 (stable matchings continued, and Pfaffians):
+        <ul>
+        <li>How the "Mating Ritual" (the algorithm solving the Stable matching problem) fares if you allow polygamy (= college admissions problem = hospital residence problem), if you allow indifference (i.e., the rankings can have ties), and if you allow the "staying single" preference (i.e., remaining unmatched is preferred to some spouses).</li>
+        <li>Definition and basic properties of <a href="https://en.wikipedia.org/wiki/Pfaffian">Pfaffians</a> (unlike the Wikipedia, I am using crossing numbers instead of permutation signs); outline of the proof of det A = (Pf A)<sup>2</sup>. Other than that, the closest a textbook comes to my notation is Section 12.12 of Nicholas Loehr, <i>Bijective Combinatorics</i>. See also <a href="https://esc.fnwi.uva.nl/thesis/centraal/files/f887198315.pdf">Jeanette Nguyen, <i>Perfect Matchings and Pfaffian Orientation</i></a> and <a href="http://math.mit.edu/~goemans/18438S14/lec4-algmat.pdf">scribe notes from a class by Michel Goemans</a> (warning: both have been written by undergraduates).</li>
+        </ul>
+    <p>Lecture 20 (Pfaffians continued, hw4, a bit of sandpiles):
+        <ul>
+        <li>Pfaffians: the identity Pf (B<sup>T</sup> A B) = det B &bullet; Pf A for any skew-symmetric n&times;n-matrix A and any n&times;n-matrix B.</li>
+        <li>Pfaffians: if A is an n&times;n-matrix, then the 2n&times;2n-matrix which (written as a 2&times;2-block matrix) has blocks 0, A (first row), -A<sup>T</sup>, 0 (second row) has Pfaffian equal to det A.</li>
+        <li>Homework 4: solutions and common mistakes.</li>
+        <li>Sandpiles: just an introductory example. If you are curious, here is relevant literature:
+        <ul>
+            <li><a href="http://www.cs.elte.hu/~lovasz/morepapers/chips.pdf">A. Bjorner, L. Lovasz, P. W. Shor, <i>Chip-firing games on graphs</i></a>.</li>
+            <li><a href="http://www.cs.elte.hu/~lovasz/morepapers/abacus.pdf">A. Bjorner, L. Lovasz, <i>Chip-firing games on directed graphs</i></a>.</li>
+            <li><a href="https://arxiv.org/abs/0801.3306v4">Alexander E. Holroyd, Lionel Levine, Karola Meszaros, Yuval Peres, James Propp, David B. Wilson, <i>Chip-Firing and Rotor-Routing on Directed Graphs</i></a>.</li>
+        </ul>
+        </li>
+        </ul>
+    <p>Lecture 21 (sandpiles):
+        <ul>
+        <li>Sandpiles: basics on the sinkless case:
+        <ul>
+            <li>Definitions (chip configuration, firing, Z-configuration, legal, stabilizing, finitary, infinitary).</li>
+            <li>Any legal sequence for a configuration f is a subpermutation of any stabilizing sequence for f. ("Subpermutation" means "subsequence of a permutation".)</li>
+            <li>A configuration is either finitary (i.e., has a legal stabilizing sequence, and all such sequences are permutations of each other; moreover, each legal sequence can be extended to a legal stabilizing sequence) or infinitary (i.e., it has no stabilizing sequences, but there are legal sequences of any length). See Lemma 2.2 (part 1) in <a href="https://arxiv.org/abs/0801.3306v4">Alexander E. Holroyd, Lionel Levine, Karola Meszaros, Yuval Peres, James Propp, David B. Wilson, <i>Chip-Firing and Rotor-Routing on Directed Graphs</i></a>.</li>
+            <li>If the total number of chips is &gt; |A|-|V|, then the configuration is infinitary.</li>
+            <li>If the total number of chips is h, then f is infinitary if and only if there exists a legal sequence of length (h+1)<sup>|V|</sup>.</li>
+        </ul>
+        </li>
+        </ul>
+    <hr>
+    <p><b>Homework and other problems:</b></p>
+    <p><a href="hw0s.pdf">Homework set 0</a>: a sample problem, with detailed solution to illustrate some ideas. <a href="hw0s.tex">The LaTeX sourcecode</a> for use as a template for writing your own solutions.
+    <p><a href="hw1.pdf">Homework set 1</a> (due 1 Feb 2017, in class). <a href="hw1s-ogden.pdf">Solutions by Jacob Ogden</a>; <a href="hw1s-go.pdf">solutions by Lauren Go</a>; <a href="hw1s-rancourt.pdf">solutions by Nicholas Rancourt</a>. Thanks to all three of you! <a href="hw1comments.txt">A few comments.</a>
+    <p><a href="hw2.pdf">Homework set 2</a> (due 15 Feb 2017, in class, <b>please only submit 5 of the 7 problems</b>). <a href="hw2s.pdf">Solutions</a>. Also, <a href="hw2s-rancourt.pdf">solutions by Nicholas Rancourt to problems 1ab, 2, 4, 5, 7</a>.
+    <p><a href="mt1.pdf">Midterm 1</a> (due 27 Feb 2017, in class). <a href="mt1s.pdf">Hints to the problems</a> (draft, probably to be improved). <a href="mt1-avg.txt">Statistics</a>.
+    <p><a href="hw3.pdf">Homework set 3</a> (due 8 Mar 2017, in class, <b>please only submit 5 of the 8 problems</b>). <a href="hw3s.pdf">Solutions to Exercises 1, 2, 3, 4, 5, 7, 8</a>. Also, <a href="hw3s-ogden.pdf">solutions to Exercises 1, 2, 4, 5, 6(b) by Jacob Ogden</a> (rather terse but really nice).
+    <p><a href="hw4.pdf">Homework set 4</a> (due 29 Mar 2017, in class, <b>please only submit 5 of the 7 problems</b>). <a href="hw4s-ogden.pdf">Solutions to Exercises 3, 4, 5, 6 by Jacob Ogden</a>. For exercise 7, see Corollary 10.9 in L. R. Ford (Jr.) and D. R. Fulkerson, <i>Flows in Networks</i>, 1962 (<a href="https://www.rand.org/content/dam/rand/pubs/reports/2007/R375.pdf">a preprint is freely available</a>).
+    <p><a href="mt2.pdf">Midterm 2</a> (due 5 Apr 2017, in class). <a href="mt2s.pdf">Solution sketches to all exercises.</a> Also, <a href="mt2s-rancourt.pdf">Solutions to Exercises 1, 2, 3, 4, 5, 6, 7a by Nicholas Rancourt</a>, and <a href="mt2s-pevzner.pdf">Solutions to Exercises 1, 2, 4, 5, 6, 7 by Sasha Pevzner</a>. <a href="mt2comments.txt">A few comments.</a> <a href="mt2-avg.txt">Statistics</a>.
+    <p><a href="hw5.pdf">Homework set 5</a> (due 26 Apr 2017, in class, <b>please only submit 4 of the 7 problems</b>). <a href="hw5s.pdf">Solution sketches/hints</a> (hastily written; my apologies for the errors to be expected). <a href="hw5s-rancourt.pdf">Solutions to Exercises 1, 3a, 6, 7 by Nicholas Rancourt</a>.
+    <p><a href="mt3.pdf">Midterm 3</a> (due 3 May 2017, in class). <a href="mt3s-rancourt.pdf">Solutions by Nicholas Rancourt</a> (note that 2 and 4 (b) can be done more easily). <a href="mt3s-ogden.pdf">Solutions to Exercises 1, 2, 4, 5, 6 by Jacob Ogden</a>. <a href="mt3-avg.txt">Statistics</a>.
+    <p><a href="quiv.pdf">An exercise on source and sink mutations of acyclic quivers</a> (<a href="quiv.tex">LaTeX sourcecode</a>).
+    <hr>
+    <p><small>The views and opinions expressed in this page are strictly those of the page author. The contents of this page have not been reviewed or approved by the University of Minnesota.</small></p>
+  </body>
+</html>
