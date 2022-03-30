@@ -206,7 +206,7 @@ fundamental results about signs of permutations can be found in
 \cite[\S 8.1]{LaNaSc16}. These results appear with proofs in
 \cite[Chapter 6.B]{Day-proofs}. For an even more detailed treatment
 (also including proofs),
-see \cite[\S 4.1--4.3]{detnotes}. Some of the most important
+see \cite[\S 5.1--5.3]{detnotes}. Some of the most important
 properties of signs of permutations are also proven in
 \cite[Appendix B]{Strick13}, which also gives one of the best
 introductions to determinants I have seen in the literature.
@@ -437,7 +437,10 @@ of $V$ and $E$ when given a graph $\tup{V, E}$:
 \begin{definition} \label{def.intro.simple.VE}
 Let $G = \tup{V, E}$ be a simple graph.
 
-\textbf{(a)} The set $V$ is called the \textit{vertex set} of $G$;
+\begin{enumerate}
+
+\item[\textbf{(a)}]
+The set $V$ is called the \textit{vertex set} of $G$;
 it is denoted by $\verts{G}$. (Notice that the letter
 ``$\operatorname{V}$'' in ``$\verts{G}$'' is upright, as opposed to
 the letter ``$V$'' in ``$\tup{V, E}$'', which is italic.
@@ -451,7 +454,8 @@ graph, then $\verts{H}$ is $W$, not $V$.)
 The elements of $V$ are called the \textit{vertices} (or the
 \textit{nodes}) of $G$.
 
-\textbf{(b)} The set $E$ is called the \textit{edge set} of $G$; it
+\item[\textbf{(b)}]
+The set $E$ is called the \textit{edge set} of $G$; it
 is denoted by $\edges{G}$. (Again, the letter ``$\operatorname{E}$''
 in ``$\edges{G}$'' is upright, and stands for a different thing than
 the ``$E$''.)
@@ -465,7 +469,7 @@ $uv = vu$.
 Notice that each simple graph $G$ satisfies
 $G = \tup{\verts{G}, \edges{G}}$.
 
-\textbf{(c)} Two vertices $u$ and $v$ of $G$ are said to be
+\item[\textbf{(c)}] Two vertices $u$ and $v$ of $G$ are said to be
 \textit{adjacent} (or \textit{connected by an edge}) if $uv \in E$
 (that is, if $uv$ is an edge of $G$). In this case, the edge $uv$ is
 said to \textit{connect} $u$ and $v$; the vertices $u$ and $v$ are
@@ -483,14 +487,17 @@ Similarly, we say that a vertex $u$ of $G$ is \textit{non-adjacent to}
 a vertex $v$ of $G$ if the vertices $u$ and $v$ are non-adjacent
 (i.e., if $uv \notin E$).
 
-\textbf{(d)} Let $v$ be a vertex of $G$ (that is, $v \in V$). Then,
-the \textit{neighbors} of $v$ are the vertices $u$ of $G$ that
+\item[\textbf{(d)}] Let $v$ be a vertex of $G$ (that is, $v \in V$).
+Then, the \textit{neighbors} of $v$ are the vertices $u$ of $G$ that
 satisfy $vu \in E$.
 In other words, the \textit{neighbors} of $v$ are the vertices of
 $G$ that are adjacent to $v$.
 (Of course, these neighbors depend on both $v$ and
 $G$. When $G$ is not clear from the context, we shall call them the
 ``neighbors of $v$ in $G$'' instead of just ``neighbors of $v$''.)
+
+\end{enumerate}
+
 \end{definition}
 
 Of course, the relation of adjacency is symmetric\footnote{This means
@@ -579,7 +586,10 @@ Various examples of graphs being drawn are given below.)
 \begin{example} \label{exa.intro.draw}
 Let us draw some simple graphs.
 
-\textbf{(a)} The simple graph $\tup{\set{1,2,3}, \set{12, 23}}$ (where
+\begin{enumerate}
+
+\item[\textbf{(a)}]
+The simple graph $\tup{\set{1,2,3}, \set{12, 23}}$ (where
 we are again using the shorthand notation $uv$ for $\set{u,v}$) can be
 drawn as follows:
 \[
@@ -631,7 +641,7 @@ as follows:
 This last drawing is, of course, needlessly complicated for such a
 graph, but it is perfectly legitimate.
 
-\textbf{(b)} Let $U$, $E$ and $G$ be as in
+\item[\textbf{(b)}] Let $U$, $E$ and $G$ be as in
 Example~\ref{exa.intro.simple.VE}. Here is one way to draw the graph
 $G$:
 \begin{align*}
@@ -693,7 +703,7 @@ even three curves. (The answer is ``both'': they represent all four
 edges $24$, $35$, $25$ and $34$. But this is not clear from the
 drawing.)
 
-\textbf{(c)} Let us draw one further graph: the simple graph
+\item[\textbf{(c)}] Let us draw one further graph: the simple graph
 $\tup{\set{1, 2, 3, 4, 5}, \powset[2]{\set{1, 2, 3, 4, 5}}}$. This is
 the simple graph whose vertices are $1, 2, 3, 4, 5$, and whose edges
 are all possible two-element sets consisting of its vertices (i.e.,
@@ -740,6 +750,9 @@ treatments of the topological technicalities.
 (If you are willing to take certain intuitively obvious
 topological facts about curves for granted, you can also read the
 chapters about planar graphs appearing in most books on graph theory.)
+
+\end{enumerate}
+
 \end{example}
 
 \begin{remark}
@@ -805,7 +818,7 @@ follows the old paradigm of restating facts about graphs in terms of
 people and friendship.
 
 \begin{example} \label{exa.simple.R33}
-Let us show three examples of graphs $G$ to which
+Let us show four examples of graphs $G$ to which
 Proposition~\ref{prop.simple.R33} applies, as well as an example to
 which it does not (because it fails to satisfy the condition
 $\abs{\verts{G}} \geq 6$):
@@ -842,7 +855,11 @@ See Exercise~\ref{exa.simple.R33.two} \textbf{(a)} below.
 \item[\textbf{(b)}] Let $G$ be the simple graph $\tup{V, E}$, where
 \begin{align*}
 V &= \set{-2, -1, 0, 1, 2, 3} \qquad \text{and} \\
-E &= \set{\set{u,v} \in \powset[2]{V} \mid u \not\equiv v \mod 3} .
+E &= \left\{\set{u,v} \in \powset[2]{V} \mid
+           u \not\equiv v \mod 3, \right. \\
+  & \qquad \qquad \qquad \qquad \qquad
+        \left. \text{and exactly one of $u$ and $v$ is positive}
+                \right\} .
 \end{align*}
 (This graph can be drawn as follows:
 \begin{align*}
@@ -852,7 +869,7 @@ E &= \set{\set{u,v} \in \powset[2]{V} \mid u \not\equiv v \mod 3} .
 } .
 \end{align*}
 )
-This graph satisfies Statement 1 of Proposition~\ref{prop.simple.R33}
+This graph satisfies Statement 2 of Proposition~\ref{prop.simple.R33}
 for $a=1$, $b=2$ and $c=3$. (Again, other choices of $a$, $b$ and $c$
 are also possible.)
 
@@ -877,6 +894,26 @@ for $a=1$, $b=2$ and $c=3$. It also satisfies Statement 2 of
 Proposition~\ref{prop.simple.R33} for $a=2$, $b=4$ and $c=6$.
 
 \item[\textbf{(d)}] Let $G$ be the graph $\tup{V, E}$, where
+\begin{align*}
+V &= \set{1, 2, 3, 4, 5, 6} \qquad \text{and} \\
+E &= \set{\set{1,2}, \set{2,3}, \set{3,4}, \set{4,5}, \set{5,6},
+          \set{6,1}, \set{1,3}, \set{4,6}} .
+\end{align*}
+(This graph can be drawn in such a way as to look like a hexagon with
+two extra diagonals:
+\begin{align*}
+\xymatrix{
+& 1 \are[r] \are[rrd] & 2 \are[rd] \\
+6 \are[ru] \are[rrd] & & & 3 \are[ld] \\
+& 5 \are[lu] & 4 \are[l]
+} .
+\end{align*}
+)
+This graph no longer satisfies Statement 2 of
+Proposition~\ref{prop.simple.R33}, but it satisfies Statement 1
+for $a=1$, $b=2$ and $c=3$.
+
+\item[\textbf{(e)}] Let $G$ be the graph $\tup{V, E}$, where
 \begin{align*}
 V &= \set{1, 2, 3, 4, 5} \qquad \text{and} \\
 E &= \set{\set{1,2}, \set{2,3}, \set{3,4}, \set{4,5}, \set{5,1}} .
@@ -1087,7 +1124,7 @@ $s=3$, this is impossible, because the number $6$ in
 Proposition~\ref{prop.simple.R33} cannot be made
 smaller\footnote{Indeed, there is a graph with $5$ vertices (namely,
 the graph $G$ constructed in
-Example~\ref{exa.simple.R33} \textbf{(d)}) that
+Example~\ref{exa.simple.R33} \textbf{(e)}) that
 satisfies neither Statement 1 nor Statement 2.}. However, for some
 other values of $r$ and $s$, the value $\dbinom{r+s-2}{r-1}$ can be
 improved. (For example, for $r=4$ and $s=4$, the best possible value
@@ -1143,17 +1180,22 @@ distinct vertices $a$, $b$ and $c$ of $G$ such that none of $ab$, $bc$
 and $ca$ is an edge of $G$. A \textit{triangle-or-anti-triangle} in
 $G$ is a set that is either a triangle or an anti-triangle.
 (Of the three words I have just introduced, only ``triangle'' is
-standard.) 
+standard.)
 
-\textbf{(a)} Assume that $\abs{\verts{G}}\geq 6$.
+\begin{enumerate}
+
+\item[\textbf{(a)}] Assume that $\abs{\verts{G}}\geq 6$.
 Prove that $G$ has at least two
 triangle-or-anti-triangles. (For comparison:
 Proposition~\ref{prop.simple.R33} shows that $G$ has at least one
 triangle-or-anti-triangle.)
 
-\textbf{(b)} Assume that $\abs{\verts{G}} = m+6$ for some
+\item[\textbf{(b)}] Assume that $\abs{\verts{G}} = m+6$ for some
 $m \in \NN$. Prove that $G$ has at least $m+1$
 triangle-or-anti-triangles.
+
+\end{enumerate}
+
 \end{exercise}
 
 \subsection{\label{sect.intro.deg}Degrees}
@@ -1810,8 +1852,10 @@ it is worth giving this relation a rigorous definition and a name:
 \begin{definition} \label{def.intro.iso}
 Let $G$ and $H$ be two simple graphs.
 
-\textbf{(a)} A \textit{graph isomorphism} from $G$ to $H$ means a
-bijection $\phi : \verts{G} \to \verts{H}$ such that for every two
+\begin{enumerate}
+
+\item[\textbf{(a)}] A \textit{graph isomorphism} from $G$ to $H$ means
+a bijection $\phi : \verts{G} \to \verts{H}$ such that for every two
 vertices $u$ and $v$ of $G$, the following logical equivalence holds:
 \begin{equation}
 \left( uv \in \edges{G} \right)
@@ -1828,10 +1872,13 @@ When it is clear what we mean, we shall abbreviate
 ``graph isomorphism $G \to H$'' for ``graph isomorphism from $G$ to
 $H$''.
 
-\textbf{(b)} If there exists a graph isomorphism from $G$ to $H$, then
-we say the graphs $G$ and $H$ are \textit{isomorphic}, and
+\item[\textbf{(b)}] If there exists a graph isomorphism from $G$ to
+$H$, then we say the graphs $G$ and $H$ are \textit{isomorphic}, and
 we write $G \cong H$. Sometimes, the relation $G \cong H$ itself will
 be called an ``isomorphism'' (although it is not a map).
+
+\end{enumerate}
+
 \end{definition}
 
 Given this definition, we can now rigorously state the relation
@@ -1853,7 +1900,7 @@ V &= \set{1, 2, 3, 4, 5} \qquad \text{and} \\
 E &= \set{\set{1,2}, \set{2,3}, \set{3,4}, \set{4,5}, \set{5,1}} .
 \end{align*}
 (This graph has already been introduced in
-Example~\ref{exa.simple.R33} \textbf{(d)}. It can be drawn to look
+Example~\ref{exa.simple.R33} \textbf{(e)}. It can be drawn to look
 like a pentagon.)
 
 Consider furthermore the graph $H = \tup{V, F}$, where $V$ is as
@@ -1895,7 +1942,7 @@ follows:
 }
 \end{align*}
 and overlaying this with the drawing of $G$ made in
-Example~\ref{exa.simple.R33} \textbf{(d)}.
+Example~\ref{exa.simple.R33} \textbf{(e)}.
 (Of course, such drawings are not always easy to find: For example,
 our first drawing of $H$ in Example~\ref{exa.intro.iso.pentagon}
 looked completely different from our drawing of $G$.)
@@ -1987,11 +2034,16 @@ names of vertices. For example, the following holds:
 Let $G$ and $H$ be two simple graphs. Let $\phi$ be a graph
 isomorphism from $G$ to $H$.
 
-\textbf{(a)} For every $v \in \verts{G}$, we have
+\begin{enumerate}
+
+\item[\textbf{(a)}] For every $v \in \verts{G}$, we have
 $\deg_G v = \deg_H \tup{\phi\tup{v}}$.
 
-\textbf{(b)} We have
+\item[\textbf{(b)}] We have
 $\abs{\edges{H}} = \abs{\edges{G}}$.
+
+\end{enumerate}
+
 \end{proposition}
 
 \begin{proof}[Proof of Proposition \ref{prop.intro.iso.degrees}.]
@@ -2061,6 +2113,7 @@ Hence,
 = \deg_G v .
 \end{align*}
 This proves Proposition~\ref{prop.intro.iso.degrees} \textbf{(a)}.
+\medskip
 
 \textbf{(b)}
 Define a map $\phi' : \edges{G} \to \edges{H}$ as follows:
@@ -2204,7 +2257,9 @@ isomorphic to it).
 \end{definition}
 
 \begin{example}
-\textbf{(a)}
+\begin{enumerate}
+
+\item[\textbf{(a)}]
 Here is a drawing of the complete graph on the finite set
 $\set{0, 3, 6}$:
 \begin{align*}
@@ -2215,12 +2270,14 @@ $\set{0, 3, 6}$:
 \end{align*}
 Of course, many other drawings are possible.
 
-\textbf{(b)}
+\item[\textbf{(b)}]
 The complete graph on the set $\set{1, 2, 3, 4, 5}$ is the graph
 $\tup{\set{1, 2, 3, 4, 5}, \powset[2]{\set{1, 2, 3, 4, 5}}}$, which
 we have drawn in Example~\ref{exa.intro.draw} \textbf{(c)}.
 We are calling this graph $K_5$
 now, according to Definition~\ref{def.intro.complete-graph}.
+
+\end{enumerate}
 \end{example}
 
 Note that a simple graph $G = \tup{V, E}$ is a $K_n$ (i.e., is
@@ -2495,24 +2552,36 @@ satisfy $\abs{i-j} \leq k$. Hence:
 
 \subsubsection{Subgraphs}
 
+If we are given a graph $G$, we can construct a smaller graph
+$H$ by picking some of the vertices of $G$ and some of the
+edges that connect these vertices, and forgetting the rest.
+Such smaller graphs are known as \textit{subgraphs} of $G$.
+Here is the formal definition:
+
 \begin{definition} \label{def.intro.subgraph}
 Let $G = \tup{V, E}$ be a simple graph.
 
-\textbf{(a)} A \textit{subgraph} of $G$ means a simple graph of the
-form $H = \tup{W, F}$ with $W \subseteq V$ and $F \subseteq E$. In
-other words, a \textit{subgraph} of $G$ means a simple graph whose
+\begin{enumerate}
+
+\item[\textbf{(a)}] A \textit{subgraph} of $G$ means a simple graph
+of the form $H = \tup{W, F}$ with $W \subseteq V$ and
+$F \subseteq E$.
+In other words, a \textit{subgraph} of $G$ means a simple graph whose
 vertices are vertices of $G$ and whose edges are edges of $G$.
 
-\textbf{(b)} Let $S$ be a subset of $V$. The \textit{induced subgraph
-of $G$ on the set $S$} denotes the subgraph
+\item[\textbf{(b)}] Let $S$ be a subset of $V$. The
+\textit{induced subgraph of $G$ on the set $S$} denotes the subgraph
 $\tup{S, E \cap \powset[2]{S}}$ of $G$. In other words, it denotes
 the subgraph of $G$ whose vertices are the elements of $S$, and whose
 edges are precisely those edges of $G$ that connect two vertices in
 $S$.
 
-\textbf{(c)} An \textit{induced subgraph} of $G$ means a subgraph of
-$G$ that is the induced subgraph of $G$ on $S$ for some subset $S$ of
-$V$.
+\item[\textbf{(c)}] An \textit{induced subgraph} of $G$ means a
+subgraph of $G$ that is the induced subgraph of $G$ on $S$ for some
+subset $S$ of $V$.
+
+\end{enumerate}
+
 \end{definition}
 
 The definition of an induced subgraph readily leads to the following
@@ -2535,24 +2604,29 @@ left to the reader.
 \begin{example} \label{exa.intro.subgraph}
 Let $n > 1$ be an integer.
 
-\textbf{(a)} The path graph $P_n$ (defined in
+\begin{enumerate}
+
+\item[\textbf{(a)}] The path graph $P_n$ (defined in
 Definition~\ref{def.intro.path-graph}) is a subgraph of the cycle
 graph $C_n$ (defined in Definition~\ref{def.intro.cycle-graph}),
 since all vertices of $P_n$ are vertices of $C_n$ and since all edges
-of $P_n$ are edges of $C_n$. But if $n > 2$, then
+of $P_n$ are edges of $C_n$. However, if $n > 2$, then
 $P_n$ is not an \textbf{induced} subgraph of $C_n$,
 because not every edge $uv$ of $C_n$ whose
 endpoints $u$ and $v$ both are vertices of $P_n$ is an edge of $P_n$.
 (In fact, the edge $n1$ of $C_n$ is not an edge of $P_n$, although
 both its endpoints $n$ and $1$ are vertices of $P_n$.)
 
-\textbf{(b)} The path graph $P_{n-1}$ is an induced subgraph of $P_n$
-(namely, the induced subgraph of $P_n$ on the set
+\item[\textbf{(b)}] The path graph $P_{n-1}$ is an induced subgraph
+of $P_n$ (namely, the induced subgraph of $P_n$ on the set
 $\set{1, 2, \ldots, n-1}$).
 
-\textbf{(c)} Assume that $n > 3$. Then, $C_{n-1}$ is not a subgraph of
-$C_n$. Indeed, the edge $\tup{n-1}1$ of $C_{n-1}$ is not an edge of
-$C_n$.
+\item[\textbf{(c)}] Assume that $n > 3$. Then, $C_{n-1}$ is not a
+subgraph of $C_n$. Indeed, the edge $\tup{n-1}1$ of $C_{n-1}$ is
+not an edge of $C_n$.
+
+\end{enumerate}
+
 \end{example}
 
 \begin{todo}
@@ -2644,16 +2718,21 @@ in \eqref{eq.djun.example.1.right}.
 \label{prop.djun.simple.exists}
 Let $G$ and $H$ be two simple graphs.
 
-\textbf{(a)}
+\begin{enumerate}
+
+\item[\textbf{(a)}]
 Then, the disjoint union $G \sqcup H$ of $G$ and $H$ is a
 well-defined simple graph and satisfies
 $\abs{\verts{G \sqcup H}} = \abs{\verts{G}} + \abs{\verts{H}}$
 and
 $\abs{\edges{G \sqcup H}} = \abs{\edges{G}} + \abs{\edges{H}}$.
 
-\textbf{(b)}
+\item[\textbf{(b)}]
 The simple graphs $G \sqcup H$ and $H \sqcup G$ are
 isomorphic.
+
+\end{enumerate}
+
 \end{proposition}
 
 Notice that the simple graphs
@@ -2684,16 +2763,18 @@ these notions. Let us now introduce them.
 \begin{definition} \label{def.intro.walks}
 Let $G$ be a simple graph.
 
-\textbf{(a)} A \textit{walk} (in $G$) means a finite sequence
-$\tup{v_0, v_1, \ldots, v_k}$ of vertices of $G$ (with $k \geq 0$)
-such that all of
+\begin{enumerate}
+
+\item[\textbf{(a)}] A \textit{walk} (in $G$) means a finite
+sequence $\tup{v_0, v_1, \ldots, v_k}$ of vertices of $G$
+(with $k \geq 0$) such that all of
 $v_0 v_1, v_1 v_2, \ldots, v_{k-1} v_k$ are edges of $G$. (We allow
 $k$ to be $0$, in which case the condition that
 ``$v_0 v_1, v_1 v_2, \ldots, v_{k-1} v_k$ are edges of $G$'' is
 vacuously true.)
 
-\textbf{(b)} If $\mathbf{w} = \tup{v_0, v_1, \ldots, v_k}$ is a walk
-in $G$, then:
+\item[\textbf{(b)}] If $\mathbf{w} = \tup{v_0, v_1, \ldots, v_k}$
+is a walk in $G$, then:
 
 \begin{itemize}
 \item The \textit{vertices of $\mathbf{w}$} are defined to be
@@ -2713,16 +2794,19 @@ $\mathbf{w}$. We say that the walk $\mathbf{w}$ \textit{ends} at
 $v_k$.
 \end{itemize}
 
-\textbf{(c)} A \textit{path} (in $G$) means a walk (in $G$) whose
-vertices are distinct. (In other words, a \textit{path} in $G$ means
-a walk $\tup{v_0, v_1, \ldots, v_k}$ in $G$ such that
+\item[\textbf{(c)}] A \textit{path} (in $G$) means a walk (in $G$)
+whose vertices are distinct. (In other words, a \textit{path} in
+$G$ means a walk $\tup{v_0, v_1, \ldots, v_k}$ in $G$ such that
 $v_0, v_1, \ldots, v_k$ are distinct.)
 
-\textbf{(e)} Let $p$ and $q$ be two vertices of $G$. A
+\item[\textbf{(e)}] Let $p$ and $q$ be two vertices of $G$. A
 \textit{walk from $p$ to $q$} (in $G$) means a walk (in $G$) whose
 starting point is $p$ and whose ending point is $q$. A
 \textit{path from $p$ to $q$} (in $G$) means a path (in $G$) whose
 starting point is $p$ and whose ending point is $q$.
+
+\end{enumerate}
+
 \end{definition}
 
 \begin{example} \label{exa.intro.walks}
@@ -3800,7 +3884,7 @@ V &= \set{1, 2, 3, 4, 5} \qquad \text{and} \\
 E &= \set{\set{1,2}, \set{2,3}, \set{3,4}, \set{4,5}, \set{5,1}} .
 \end{align*}
 (This graph has already been introduced in
-Example~\ref{exa.simple.R33} \textbf{(d)}. It can be drawn to look
+Example~\ref{exa.simple.R33} \textbf{(e)}. It can be drawn to look
 like a pentagon.)
 
 The subset $\set{1, 3}$ of $V$ is dominating (for $G$). (This can be
