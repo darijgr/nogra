@@ -13,6 +13,7 @@
 \DTMlangsetup[en-GB]{ord=raise,monthyearsep={,\space}}
 \usepackage[sc]{mathpazo}
 \usepackage[T1]{fontenc}
+\usepackage{tikz}
 \usepackage{needspace}
 \usepackage{tabls}
 %TCIDATA{OutputFilter=latex2.dll}
@@ -26,6 +27,8 @@
 %BeginMSIPreambleData
 \providecommand{\U}[1]{\protect\rule{.1in}{.1in}}
 %EndMSIPreambleData
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{chains}
 \theoremstyle{definition}
 \newtheorem{theo}{Theorem}[subsection]
 \newenvironment{theorem}[1][]
@@ -664,6 +667,7 @@ By appropriately repositioning the points corresponding to the five
 vertices of $G$, we can actually get rid of all intersections; namely,
 we can draw the graph $G$ as follows:
 \begin{align*}
+\phantom{a} \\ %empty space to keep the graph from bleeding into the text
 \xymatrix{
 & 2 \are[rr] \are@/^4pc/[rrrd] \are[rdd] & & 3 \are[rd] \are[ldd] \\
 & & & & 4 \are[lld] \\
@@ -724,6 +728,7 @@ But sometimes, you might want to draw it differently, to minimize the
 number of intersecting curves. Here is a drawing with fewer
 intersections:
 \begin{align*}
+\phantom{a} \\ %empty space to keep the graph from bleeding into the text
 \xymatrix{
 & 2 \are[rr] \are@/^4pc/[rrrd] \are@/_6pc/[rrdd] \are[dd] & & 3 \are[rd] \are[lldd] \are[dd] \\
 & & & & 4 \are[llld] \\
@@ -754,6 +759,23 @@ chapters about planar graphs appearing in most books on graph theory.)
 \end{enumerate}
 
 \end{example}
+
+We note that some authors prefer to put the labels on the nodes
+in little circles when drawing a graph. For example, the graph
+from Example~\ref{exa.intro.draw} \textbf{(a)} then looks as
+follows:
+\[
+\begin{tikzpicture}
+\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+\node(A) at (0,0) {$1$};
+\node(B) at (2,0) {$2$};
+\node(C) at (4,0) {$3$};
+\end{scope}
+\begin{scope}[every edge/.style={draw=black,very thick}]
+\path[-] (B) edge (A) (B) edge (C);
+\end{scope}
+\end{tikzpicture}
+\]
 
 \begin{remark}
 When drawing a simple graph $G$, we have so far labelled the points
@@ -1119,20 +1141,43 @@ recover Proposition~\ref{prop.simple.R33}.
 One might wonder whether the number $\dbinom{r+s-2}{r-1}$ in
 Proposition~\ref{prop.simple.Rrs} can be improved -- i.e., whether we
 can replace it by a smaller number without making
-Proposition~\ref{prop.simple.Rrs} false. In the case of $r=3$ and
-$s=3$, this is impossible, because the number $6$ in
-Proposition~\ref{prop.simple.R33} cannot be made
+Proposition~\ref{prop.simple.Rrs} false.
+In the case of $r=3$ and $s=3$, this is impossible, because the
+number $6$ in Proposition~\ref{prop.simple.R33} cannot be made
 smaller\footnote{Indeed, there is a graph with $5$ vertices (namely,
 the graph $G$ constructed in
 Example~\ref{exa.simple.R33} \textbf{(e)}) that
-satisfies neither Statement 1 nor Statement 2.}. However, for some
-other values of $r$ and $s$, the value $\dbinom{r+s-2}{r-1}$ can be
-improved. (For example, for $r=4$ and $s=4$, the best possible value
-is $18$ rather than $\dbinom{4+4-2}{4-1}=20$.) The smallest possible
-value is called the \textit{Ramsey number} $R\tup{r,s}$, and
-finding it is a hard computational challenge; for small values of $r$
-and $s$ it has been found using a computer, but $R\tup{5,5}$ is still
-unknown.
+satisfies neither Statement 1 nor Statement 2.}.
+However, for some other values of $r$ and $s$, the value
+$\dbinom{r+s-2}{r-1}$ can be improved.
+(For example, for $r=4$ and $s=4$, the best possible value
+is $18$ rather than $\dbinom{4+4-2}{4-1}=20$.)
+The smallest possible value that could stand in place of
+$\dbinom{r+s-2}{r-1}$ in Proposition~\ref{prop.simple.Rrs}
+is called the \textit{Ramsey number}
+$R\tup{r,s}$; thus, we have just showed that $R\tup{3,3} = 6$.
+Finding $R\tup{r,s}$ for higher values of $r$ and $s$ is a
+hard computational challenge; here are some values that have been
+found with the help of computers:
+\begin{align*}
+R\tup{3,4} = 9; \qquad
+R\tup{3,5} = 14; \qquad
+R\tup{3,6} = 18; \qquad
+R\tup{3,7} = 23; \\
+R\tup{3,8} = 28; \qquad
+R\tup{3,9} = 36; \qquad
+R\tup{4,4} = 18; \qquad
+R\tup{4,5} = 25.
+\end{align*}
+(We are only considering the cases $r \leq s$, since
+it is easy to see that $R\tup{r,s} = R\tup{s,r}$ for all
+$r$ and $s$. Also, the trivial values
+$R\tup{1,s} = 1$ and $R\tup{2,s} = s+1$ for $s \geq 2$
+are omitted.)
+The Ramsey number $R\tup{5,5}$ is still unknown
+(although it is known that $43 \leq R\tup{5,5} \leq 48$).
+See \cite{Radzis21} for more about the current state of
+affairs in computing Ramsey numbers.
 
 Proposition~\ref{prop.simple.Rrs} can be further generalized to a
 result called \textit{Ramsey's theorem}. The idea behind the
@@ -1503,7 +1548,8 @@ N
 &= \sum_{e \in E}
    \underbrace{\left(\text{the number of all } v \in V
                  \text{ satisfying } v \in e\right)}_{= 2}
-= \sum_{e \in E} 2 = \abs{E} \cdot 2
+\\
+&= \sum_{e \in E} 2 = \abs{E} \cdot 2
 \label{pf.prop.intro.2n.2}
 \end{align}
 (because the sum $\sum_{e \in E} 2$ consists of $\abs{E}$ addends,
@@ -2449,6 +2495,7 @@ line.
 Here are some further examples of simple graphs, mostly to illustrate
 certain ideas.
 
+\Needspace{8pc}
 \begin{example} \label{exa.intro.discon-graph}
 Let $n \in \NN$. Let $G$ be the graph $\tup{V, E}$, where
 $V = \set{1, 2, \ldots, n}$ and
@@ -2457,20 +2504,25 @@ $E = \set{ \set{i, j} \in \powset[2]{V} \ \mid
 For example, if $n = 8$, then $G$ can be drawn as follows:
 \begin{align*}
 \xymatrix{
-1 \are@/_2pc/[rr] \are[r] & 4 \are[r] & 7 \\
-2 \are@/_2pc/[rr] \are[r] & 5 \are[r] & 8 \\
+1 \are@/_2pc/[rr] \are[r] & 4 \are[r] & 7
+& &
+2 \are@/_2pc/[rr] \are[r] & 5 \are[r] & 8
+& &
 3 \are[r] & 6
-} .
+} . \\
+\phantom{a} % extra space to prevent the pictures from bleeding into the text
 \end{align*}
 If $n = 9$, then $G$ can be drawn as follows:
 \begin{align*}
 \xymatrix{
-1 \are@/_2pc/[rr] \are[r] & 4 \are[r] & 7 \\
-2 \are@/_2pc/[rr] \are[r] & 5 \are[r] & 8 \\
+1 \are@/_2pc/[rr] \are[r] & 4 \are[r] & 7
+& &
+2 \are@/_2pc/[rr] \are[r] & 5 \are[r] & 8
+& &
 3 \are@/_2pc/[rr] \are[r] & 6 \are[r] & 9
 } .
 \end{align*}
-\vspace{0.6pc}
+\phantom{a} % extra space to prevent the pictures from bleeding into the text
 \par
 In both cases, we notice that the graph is ``disconnected'': It
 really consists of three smaller graphs, with no edges connecting one
@@ -2670,13 +2722,13 @@ in a graph).
 So we have to rename the vertices of our original two graphs
 in order to ensure that there is no overlap between them.
 For example, we could rename each vertex $v$ of the first graph
-as $\tup{0, v}$, and each vertex $w$ of the second graph as
-$\tup{1, w}$;
+as $\tup{1, v}$, and each vertex $w$ of the second graph as
+$\tup{2, w}$;
 the disjoint union would then be
 \begin{equation}
 \xymatrix{
-\tup{0,1} \are[r] \are[rd] & \tup{0,2} \are[d] & \tup{1,2} \are[r] \are[d] & \tup{1,8} \are[d] \\
-& \tup{0,3} & \tup{1,4} \are[r] & \tup{1,6}
+\tup{1,1} \are[r] \are[rd] & \tup{1,2} \are[d] & \tup{2,2} \are[r] \are[d] & \tup{2,8} \are[d] \\
+& \tup{1,3} & \tup{2,4} \are[r] & \tup{2,6}
 } ,
 \label{eq.djun.example.1.right}
 \end{equation}
@@ -2692,17 +2744,17 @@ Let $G = \tup{V, E}$ and $H = \tup{W, F}$ be two simple graphs.
 The \textit{disjoint union} of $G$ and $H$ is defined to be
 the simple graph $\tup{X, R}$, where
 \begin{align*}
-X &= \set{ \tup{0, v} \mid v \in V } \cup \set{ \tup{1, w} \mid w \in W }
+X &= \set{ \tup{1, v} \mid v \in V } \cup \set{ \tup{2, w} \mid w \in W }
 \qquad \text{ and} \\
-R &= \set{ \set{\tup{0, v_1}, \tup{0, v_2}} \mid \set{v_1, v_2} \in E }
+R &= \set{ \set{\tup{1, v_1}, \tup{1, v_2}} \mid \set{v_1, v_2} \in E }
      \cup
-	 \set{ \set{\tup{1, w_1}, \tup{1, w_2}} \mid \set{w_1, w_2} \in F } .
+	 \set{ \set{\tup{2, w_1}, \tup{2, w_2}} \mid \set{w_1, w_2} \in F } .
 \end{align*}
 (Informally speaking, $X$ is the set consisting of all vertices
-$v$ of $G$ renamed as $\tup{0, v}$ and all vertices $w$ of $H$
-renamed as $\tup{1, w}$, whereas $R$ is the set of all edges
+$v$ of $G$ renamed as $\tup{1, v}$ and all vertices $w$ of $H$
+renamed as $\tup{2, w}$, whereas $R$ is the set of all edges
 of $G$ ``transplanted'' onto $X$ (that is, an edge $\set{v_1, v_2}$
-becomes $\set{\tup{0, v_1}, \tup{0, v_2}}$) and all edges of $H$
+becomes $\set{\tup{1, v_1}, \tup{1, v_2}}$) and all edges of $H$
 ``transplanted'' onto $X$.)
 
 We denote the disjoint union $\tup{X, R}$ of $G$ and $H$ as
@@ -2739,18 +2791,198 @@ Notice that the simple graphs
 $G \sqcup H$ and $H \sqcup G$ in
 Proposition~\ref{prop.djun.simple.exists} \textbf{(b)}
 are generally not identical; the vertices of the form
-$\tup{0, v}$ in the former correspond to the vertices
-$\tup{1, v}$ in the latter.
+$\tup{1, v}$ in the former correspond to the vertices
+$\tup{2, v}$ in the latter.
 
-\begin{todo}
-Disjoint union of several graphs.
-\end{todo}
+\begin{example}
+Let $G$ be the graph
+\[
+\tup{ \set{1, 2, 3, 4, 5}, \set{13, 24, 45, 25} }.
+\]
+This can be drawn as follows:
+\begin{align*}
+\xymatrix{
+& 3 \are[dl] & & 2 \are[rd] \are[ldd] \\
+1 & & & & 4 \are[lld] \\
+& & 5
+} \ .
+\end{align*}
+This picture shows that the graph is ``built from two
+disjoint pieces'': One consisting of the vertices $1$
+and $3$, and another consisting of the vertices $2$, $4$
+and $5$. No edge connects a vertex in one piece with
+a vertex in the other.
+Formally, this is saying that our graph $G$ is
+isomorphic to the disjoint union $H \sqcup K$ of the
+graph $H = \tup{ \set{1, 3}, \set{13} }$ and the graph
+$K = \tup{ \set{2, 4, 5}, \set{24, 45, 25} }$.
+To wit, the disjoint union $H \sqcup K$ can be drawn
+as follows:
+\begin{align*}
+\xymatrix{
+& \tup{1,3} \are[dl] & & \tup{2,2} \are[rd] \are[ldd] \\
+\tup{1,1} & & & & \tup{2,4} \are[lld] \\
+& & \tup{2,5}
+} \ .
+\end{align*}
+The map that sends each vertex $\tup{i, v}$ of $H \sqcup K$
+to the vertex $v$ of $G$ is a graph isomorphism.
+\end{example}
 
-\begin{todo}
-Example of being isomorphic to such a disjoint union:
-re-use Example~\ref{exa.intro.discon-graph}.
-\end{todo}
+We can extend Definition~\ref{def.djun.simple} to define
+a disjoint union of several graphs:
 
+\begin{definition} \label{def.djun-k.simple}
+Let $k$ be a nonnegative integer.
+For each $i \in \set{1, 2, \ldots, k}$, let
+$G_i = \tup{V_i, E_i}$ be a simple graph.
+The \textit{disjoint union} of these $k$ simple graphs
+$G_1, G_2, \ldots, G_k$ is defined to be
+the simple graph $\tup{X, R}$, where
+\begin{align*}
+X &= \set{ \tup{i, v} \mid i \in \set{1, 2, \ldots, k}
+                           \text{ and } v \in V_i }
+\qquad \text{ and} \\
+R &= \set{ \set{\tup{i, v_1}, \tup{i, v_2}} \mid
+               i \in \set{1, 2, \ldots, k}
+                           \text{ and } \set{v_1, v_2} \in E_i } .
+\end{align*}
+(Informally speaking, $X$ is the set consisting of all vertices
+$v_i$ of all graphs $G_i$ renamed as $\tup{i, v_i}$, whereas
+$R$ is the set of all edges of all graphs $G_i$ ``transplanted''
+onto $X$ (that is, an edge $\set{v_1, v_2}$ of a graph $G_i$
+becomes $\set{\tup{i, v_1}, \tup{i, v_2}}$).)
+
+We denote the disjoint union $\tup{X, R}$ of
+$G_1, G_2, \ldots, G_k$ as
+$G_1 \sqcup G_2 \sqcup \cdots \sqcup G_k$.
+\end{definition}
+
+It is easy to see that Definition~\ref{def.djun.simple} is
+the particular case of Definition~\ref{def.djun-k.simple}
+for $k = 2$.
+
+\Needspace{15pc}
+\begin{example}
+Let $G_1$, $G_2$ and $G_3$ be the simple graphs
+\begin{align*}
+G_1 &= \set{ \set{1, 2}, \set{12} }, \\
+G_2 &= \set{ \set{1, 2}, \set{12} }, \\
+G_3 &= \set{ \set{1, 2, 3, 4}, \set{12, 23, 34, 13, 14} }.
+\end{align*}
+(Yes, $G_1$ is equal to $G_2$, but this does not matter.)
+Here are their drawings:
+\begin{align*}
+G_1 &= \xymatrix{
+1 \are[r] & 2
+}
+\qquad ; \qquad
+G_2 &= \xymatrix{
+1 \are[r] & 2
+}
+\qquad ; \qquad
+G_3 &= \xymatrix{
+1 \are[r] \are[d] \are[dr] & 2 \are[dl] \\
+3 \are[r] & 4
+}
+\qquad .
+\end{align*}
+Then, the disjoint union $G_1 \sqcup G_2 \sqcup G_3$ is the
+following graph:
+\[
+\xymatrix{
+\tup{1,1} \are[r] & \tup{1,2} & &
+\tup{2,1} \are[r] & \tup{2,2} & &
+\tup{3,1} \are[r] \are[d] \are[dr] & \tup{3,2} \are[dl] \\
+& & & & & & \tup{3,3} \are[r] & \tup{3,4}
+}
+.
+\]
+\end{example}
+
+Here are some further examples of simple graphs, mostly to illustrate
+certain ideas.
+
+\begin{example}
+Recall the graph $G$ from Exercise~\ref{exa.intro.discon-graph},
+where $n = 8$. As we recall, $G$ looks as follows:
+\begin{align*}
+\xymatrix{
+1 \are@/_2pc/[rr] \are[r] & 4 \are[r] & 7
+& &
+2 \are@/_2pc/[rr] \are[r] & 5 \are[r] & 8
+& &
+3 \are[r] & 6
+} . \\
+\phantom{a} % extra space to prevent the pictures from bleeding into the text
+\end{align*}
+As we already noticed, this graph consists of three disjoint
+pieces. These three pieces are the graphs
+\begin{align*}
+& \xymatrix{
+G_1 = & 1 \are@/_2pc/[rr] \are[r] & 4 \are[r] & 7\ ;
+& &
+G_2 = & 2 \are@/_2pc/[rr] \are[r] & 5 \are[r] & 8\ ;
+} \\
+& \phantom{\int} % extra space to prevent the pictures from bleeding into the text
+\\
+& \xymatrix{
+G_3 = & 3 \are[r] & 6
+} .
+\end{align*}
+Formally speaking, $G$ is isomorphic to the disjoint union
+$G_1 \sqcup G_2 \sqcup G_3$. Namely, the map from
+$\verts{G_1 \sqcup G_2 \sqcup G_3}$ to $\verts{G}$ that
+sends each $\tup{i, v}$ to $v$ is a graph isomorphism.
+\end{example}
+
+The disjoint union operation on graphs is associative up
+to isomorphism, in the following sense:
+
+\begin{proposition}
+\label{prop.djun.ass}
+Let $G_1$, $G_2$ and $G_3$ be three simple graphs. Then,
+the three graphs
+$\tup{G_1 \sqcup G_2} \sqcup G_3$ and
+$G_1 \sqcup \tup{G_2 \sqcup G_3}$ and
+$G_1 \sqcup G_2 \sqcup G_3$ are isomorphic.
+Specifically:
+
+\begin{enumerate}
+
+\item[\textbf{(a)}]
+The map from $\verts{\tup{G_1 \sqcup G_2} \sqcup G_3}$
+to $\verts{G_1 \sqcup G_2 \sqcup G_3}$ that sends each
+$\tup{1, \tup{1, v}}$ to $\tup{1, v}$,
+sends each $\tup{1, \tup{2, v}}$ to $\tup{2, v}$,
+and sends each $\tup{2, v}$ to $\tup{3, v}$
+is a graph isomorphism.
+
+\item[\textbf{(b)}]
+The map from $\verts{G_1 \sqcup \tup{G_2 \sqcup G_3}}$
+to $\verts{G_1 \sqcup G_2 \sqcup G_3}$ that sends each
+$\tup{1, v}$ to $\tup{1, v}$,
+sends each $\tup{2, \tup{1, v}}$ to $\tup{2, v}$,
+and sends each $\tup{2, \tup{2, v}}$ to $\tup{3, v}$
+is a graph isomorphism.
+
+\end{enumerate}
+
+\end{proposition}
+
+The proof of this proposition is a straightforward
+matter of checking the definition of a graph isomorphism;
+intuitively, the proposition is already obvious enough:
+All three graphs $\tup{G_1 \sqcup G_2} \sqcup G_3$ and
+$G_1 \sqcup \tup{G_2 \sqcup G_3}$ and
+$G_1 \sqcup G_2 \sqcup G_3$ are obtained by
+putting the original three graphs $G_1$, $G_2$ and
+$G_3$ alongside each other; they differ only in how
+the vertices are relabeled.
+
+There are generalizations of Proposition~\ref{prop.djun.ass}
+for disjoint unions of more than three graphs. The reader
+won't have much trouble stating and proving these.
 
 \subsection{\label{sect.intro.walks}Walks and paths}
 
@@ -2959,14 +3191,18 @@ Let $G$ be a simple graph. Let $u$ and $v$ be two vertices of $G$.
 Let $\mathbf{a} = \tup{a_0, a_1, \ldots, a_k}$ be a walk from $u$ to
 $v$.
 
-\textbf{(a)} The list $\tup{a_k, a_{k-1}, \ldots, a_0}$ is a walk
-from $v$ to $u$.
+\begin{enumerate}
+
+\item[\textbf{(a)}] The list $\tup{a_k, a_{k-1}, \ldots, a_0}$ is
+a walk from $v$ to $u$.
 
 This list shall be denoted by $\rev \mathbf{a}$, and called the
 \textit{reversal} of $\mathbf{a}$.
 
-\textbf{(b)} If the list $\mathbf{a}$ is a path, then
+\item[\textbf{(b)}] If the list $\mathbf{a}$ is a path, then
 $\rev \mathbf{a}$ is a path as well.
+
+\end{enumerate}
 \end{proposition}
 
 \begin{proof}[Proof of Proposition~\ref{prop.walks.rev}.]
@@ -3752,8 +3988,11 @@ reachable from $v$ by walks (i.e., that are ending points of walks
 that start at $v$).
 
 \begin{example}
-\textbf{(a)} Let $G = \tup{V, E}$ be the simple graph defined in
-Example \ref{exa.simple.R33} \textbf{(a)}.
+
+\begin{enumerate}
+
+\item[\textbf{(a)}] Let $G = \tup{V, E}$ be the simple graph defined
+in Example \ref{exa.simple.R33} \textbf{(a)}.
 Then, we know (from Example~\ref{exa.intro.equivalence-from-graph.1})
 that $u \simeq_G v$ for any two vertices $u$ and $v$ of $G$.
 Hence, for each $v \in V$, we have
@@ -3765,7 +4004,7 @@ In other words, the connected component of any vertex $v$
 of $G$ is the whole set $V$.
 Thus, $G$ has only one connected component -- namely, $V$.
 
-\textbf{(b)} Let $n \in \NN$ be such that $n \geq 3$.
+\item[\textbf{(b)}] Let $n \in \NN$ be such that $n \geq 3$.
 Let $G = \tup{V, E}$ be the simple graph defined in
 Example \ref{exa.intro.discon-graph}.
 Then, two vertices $u$ and $v$ of $G$ satisfy
@@ -3793,6 +4032,9 @@ If we have $n < 3$ instead, then some of these
 connected components are missing (e.g., for $n = 2$,
 there is no $\conncomp 3$, and $G$ has only $2$
 connected components).
+
+\end{enumerate}
+
 \end{example}
 
 \begin{todo}
@@ -6351,6 +6593,13 @@ for a preliminary version.
 \bibitem[Pretzel]{Pretzel}Oliver Pretzel,
 \textit{On reorienting graphs by pushing down maximal vertices},
 Order, 1986, Volume 3, Issue 2, pp. 135--153.
+
+\bibitem[Radzis21]{Radzis21}
+Stanis\l aw Radziszowski,
+\textit{Small Ramsey Numbers},
+The Electronic Journal of Combinatorics,
+Dynamic Surveys \#21. \newline
+\url{https://doi.org/10.37236/21}
 
 \bibitem[RaWiRa]{RaWi-Ramsey}RationalWiki,
 \textit{Ramsey theory},
