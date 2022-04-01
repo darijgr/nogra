@@ -2956,7 +2956,9 @@ to $\verts{G_1 \sqcup G_2 \sqcup G_3}$ that sends each
 $\tup{1, \tup{1, v}}$ to $\tup{1, v}$,
 sends each $\tup{1, \tup{2, v}}$ to $\tup{2, v}$,
 and sends each $\tup{2, v}$ to $\tup{3, v}$
-is a graph isomorphism.
+is a graph isomorphism from
+$\tup{G_1 \sqcup G_2} \sqcup G_3$ to
+$G_1 \sqcup G_2 \sqcup G_3$.
 
 \item[\textbf{(b)}]
 The map from $\verts{G_1 \sqcup \tup{G_2 \sqcup G_3}}$
@@ -2964,7 +2966,9 @@ to $\verts{G_1 \sqcup G_2 \sqcup G_3}$ that sends each
 $\tup{1, v}$ to $\tup{1, v}$,
 sends each $\tup{2, \tup{1, v}}$ to $\tup{2, v}$,
 and sends each $\tup{2, \tup{2, v}}$ to $\tup{3, v}$
-is a graph isomorphism.
+is a graph isomorphism from
+$G_1 \sqcup \tup{G_2 \sqcup G_3}$ to
+$G_1 \sqcup G_2 \sqcup G_3$.
 
 \end{enumerate}
 
@@ -3053,6 +3057,15 @@ its starting point is $1$, and its ending point is $2$). It is not a
 path (since $1$, $3$, $4$, $5$, $6$, $1$, $3$ and $2$ are not
 distinct). The length of this walk is $7$.
 % It is not a circuit, and thus not a cycle.
+Let us visualize this walk by marking all the edges that it uses with
+double arrows:
+\begin{align*}
+\xymatrix{
+& 1 \are[r] \ar@{=>}[rrd] \ar@/_2pc/@{=>}[rrd] & 2 \\
+6 \ar@{=>}[ru] & & & 3 \ar@{=>}[ld] \ar@/_1pc/@{=>}[lu] \\
+& 5 \ar@{=>}[lu] & 4 \ar@{=>}[l]
+} .
+\end{align*}
 
 \item The sequence $\tup{1, 2, 4, 3}$ of vertices of $G$ is not a walk
 (in fact, $12$ and $43$ are edges of $G$, but $24$ is not). Hence, it
@@ -3077,10 +3090,6 @@ to $4$) and a path as well. The length of this path is $1$.
 \end{itemize}
 \end{example}
 
-\begin{todo}
-Pictures for this example.
-\end{todo}
-
 \begin{exercise} \label{exe.intro.path.edges-dist}
 Let $G$ be a simple graph. Let $\mathbf{w}$ be a path in $G$.
 Prove that the edges of $\mathbf{w}$ are distinct. (This may look
@@ -3090,18 +3099,25 @@ rigorous proof!)
 
 \subsubsection{Composing and reverting walks}
 
-Let us discuss a few basic properties of paths. First of all, if $v$
-is an vertex of a simple graph $G$, then the one-element list
-$\tup{v}$ is a path (in $G$) from $v$ to $v$. This path has length
-$0$. Hence, there exists a path (of length $0$) from each vertex to
-itself. Furthermore, if $\tup{v_0, v_1, \ldots, v_k}$ is a walk in a
+Let us discuss a few basic properties of walks and paths.
+First of all, if $v$ is a vertex of a simple graph $G$, then the
+one-element list $\tup{v}$ is a path (in $G$) from $v$ to $v$.
+This path has length $0$.
+Hence, there exists a path (of length $0$) from each vertex to
+itself.
+Furthermore, if $\tup{v_0, v_1, \ldots, v_k}$ is a walk in a
 simple graph $G$, and if $p$ and $q$ are two elements of
-$\set{0, 1, \ldots, k}$ satisfying $p \leq k$, then
-$\tup{v_p, v_{p+1}, \ldots, v_q}$ also is a walk in $G$. The same
-statement holds if the word ``walk'' is replaced by ``path'' both
-times. Simple facts like this will be used without further mention.
+$\set{0, 1, \ldots, k}$ satisfying $p \leq q$, then
+$\tup{v_p, v_{p+1}, \ldots, v_q}$ also is a walk in $G$.
+The same statement holds if the word ``walk'' is replaced by
+``path'' both times.
+Simple facts like this will be used without further mention.
+
 Let us now pass to a few facts which are less obvious (although
-intuitively clear):
+intuitively clear).
+The first says that we can ``splice'' two walks together if
+the ending point of the first is the starting point of the
+second:
 
 \begin{proposition} \label{prop.walks.concat}
 Let $G$ be a simple graph. Let $u$, $v$ and $w$ be three vertices of
@@ -3186,10 +3202,15 @@ Thus, all three Claims are proven. Together, they yield
 Proposition~\ref{prop.walks.concat}.
 \end{proof}
 
+The next easy property of walks is that a walk can be reversed
+(i.e., walked backwards from its ending point to its starting
+point), and moreover, if the walk is a path, then its reversal
+is a path too:
+
 \begin{proposition} \label{prop.walks.rev}
 Let $G$ be a simple graph. Let $u$ and $v$ be two vertices of $G$.
 Let $\mathbf{a} = \tup{a_0, a_1, \ldots, a_k}$ be a walk from $u$ to
-$v$.
+$v$. Then:
 
 \begin{enumerate}
 
@@ -3585,6 +3606,16 @@ then we have to construct a walk from $u$ to $v$ for each pair
 $\tup{u, v}$ of vertices of $G$.
 However, there is a simpler way to prove this -- see
 Example~\ref{exa.intro.equivalence-from-graph.2} below.
+\end{example}
+
+\begin{example} \label{exa.intro.equivalence-from-graph.3}
+Let $G$ be the simple graph defined in
+Example \ref{exa.intro.discon-graph} for $n = 8$.
+Then, we have $1 \simeq_G 4$ and $1 \simeq_G 7$, but we don't
+have $1 \simeq_G 3$.
+It is easy to see that the relation $\simeq_G$ for the graph
+$G$ is exactly the relation $\overset{3}{\equiv}$ (restricted
+to the set $\set{1, 2, \ldots, n}$).
 \end{example}
 
 The binary relation $\simeq_G$ we just defined is of fundamental
