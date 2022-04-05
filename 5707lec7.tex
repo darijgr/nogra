@@ -1,0 +1,2784 @@
+\documentclass[numbers=enddot,12pt,final,onecolumn,notitlepage]{scrartcl}%
+\usepackage[headsepline,footsepline,manualmark]{scrlayer-scrpage}
+\usepackage[all,cmtip]{xy}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{framed}
+\usepackage{comment}
+\usepackage{color}
+\usepackage{hyperref}
+\usepackage[sc]{mathpazo}
+\usepackage[T1]{fontenc}
+\usepackage{tikz}
+\usepackage{needspace}
+\usepackage{tabls}
+\usepackage{wasysym}
+%TCIDATA{OutputFilter=latex2.dll}
+%TCIDATA{Version=5.50.0.2960}
+%TCIDATA{LastRevised=Tuesday, April 05, 2022 21:38:43}
+%TCIDATA{SuppressPackageManagement}
+%TCIDATA{<META NAME="GraphicsSave" CONTENT="32">}
+%TCIDATA{<META NAME="SaveForMode" CONTENT="1">}
+%TCIDATA{BibliographyScheme=Manual}
+%TCIDATA{Language=American English}
+%BeginMSIPreambleData
+\providecommand{\U}[1]{\protect\rule{.1in}{.1in}}
+%EndMSIPreambleData
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{chains}
+\newcounter{exer}
+\numberwithin{exer}{subsection}
+\theoremstyle{definition}
+\newtheorem{theo}{Theorem}[subsection]
+\newenvironment{theorem}[1][]
+{\begin{theo}[#1]\begin{leftbar}}
+{\end{leftbar}\end{theo}}
+\newtheorem{lem}[theo]{Lemma}
+\newenvironment{lemma}[1][]
+{\begin{lem}[#1]\begin{leftbar}}
+{\end{leftbar}\end{lem}}
+\newtheorem{prop}[theo]{Proposition}
+\newenvironment{proposition}[1][]
+{\begin{prop}[#1]\begin{leftbar}}
+{\end{leftbar}\end{prop}}
+\newtheorem{defi}[theo]{Definition}
+\newenvironment{definition}[1][]
+{\begin{defi}[#1]\begin{leftbar}}
+{\end{leftbar}\end{defi}}
+\newtheorem{remk}[theo]{Remark}
+\newenvironment{remark}[1][]
+{\begin{remk}[#1]\begin{leftbar}}
+{\end{leftbar}\end{remk}}
+\newtheorem{coro}[theo]{Corollary}
+\newenvironment{corollary}[1][]
+{\begin{coro}[#1]\begin{leftbar}}
+{\end{leftbar}\end{coro}}
+\newtheorem{conv}[theo]{Convention}
+\newenvironment{convention}[1][]
+{\begin{conv}[#1]\begin{leftbar}}
+{\end{leftbar}\end{conv}}
+\newtheorem{quest}[theo]{Question}
+\newenvironment{question}[1][]
+{\begin{quest}[#1]\begin{leftbar}}
+{\end{leftbar}\end{quest}}
+\newtheorem{warn}[theo]{Warning}
+\newenvironment{conclusion}[1][]
+{\begin{warn}[#1]\begin{leftbar}}
+{\end{leftbar}\end{warn}}
+\newtheorem{conj}[theo]{Conjecture}
+\newenvironment{conjecture}[1][]
+{\begin{conj}[#1]\begin{leftbar}}
+{\end{leftbar}\end{conj}}
+\newtheorem{exam}[theo]{Example}
+\newenvironment{example}[1][]
+{\begin{exam}[#1]\begin{leftbar}}
+{\end{leftbar}\end{exam}}
+\newtheorem{exmp}[exer]{Exercise}
+\newenvironment{exercise}[1][]
+{\begin{exmp}[#1]\begin{leftbar}}
+{\end{leftbar}\end{exmp}}
+\newenvironment{statement}{\begin{quote}}{\end{quote}}
+\newenvironment{fineprint}{\begin{small}}{\end{small}}
+\iffalse
+\newenvironment{proof}[1][Proof]{\noindent\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+\newenvironment{question}[1][Question]{\noindent\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+\newenvironment{teachingnote}[1][Teaching note]{\noindent\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+\fi
+\let\sumnonlimits\sum
+\let\prodnonlimits\prod
+\let\cupnonlimits\bigcup
+\let\capnonlimits\bigcap
+\renewcommand{\sum}{\sumnonlimits\limits}
+\renewcommand{\prod}{\prodnonlimits\limits}
+\renewcommand{\bigcup}{\cupnonlimits\limits}
+\renewcommand{\bigcap}{\capnonlimits\limits}
+\setlength\tablinesep{3pt}
+\setlength\arraylinesep{3pt}
+\setlength\extrarulesep{3pt}
+\voffset=0cm
+\hoffset=-0.7cm
+\setlength\textheight{22.5cm}
+\setlength\textwidth{15.5cm}
+\newcommand\arxiv[1]{\href{http://www.arxiv.org/abs/#1}{\texttt{arXiv:#1}}}
+\newenvironment{verlong}{}{}
+\newenvironment{vershort}{}{}
+\newenvironment{noncompile}{}{}
+\newenvironment{teachingnote}{}{}
+\excludecomment{verlong}
+\includecomment{vershort}
+\excludecomment{noncompile}
+\excludecomment{teachingnote}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\KK}{\mathbb{K}}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\lcm}{\operatorname{lcm}}
+\newcommand{\rev}{\operatorname{rev}}
+\newcommand{\powset}[2][]{\ifthenelse{\equal{#2}{}}{\mathcal{P}\left(#1\right)}{\mathcal{P}_{#1}\left(#2\right)}}
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\tup}[1]{\left( #1 \right)}
+\newcommand{\ive}[1]{\left[ #1 \right]}
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+\newcommand{\lf}[2]{#1^{\underline{#2}}}
+\newcommand{\underbrack}[2]{\underbrace{#1}_{\substack{#2}}}
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}}
+\newcommand{\nnn}{\nonumber\\}
+\newcommand{\sslash}{\mathbin{/\mkern-6mu/}}
+\ihead{Math 5707 Spring 2017 (Darij Grinberg): Lecture 7}
+\ohead{page \thepage}
+\cfoot{}
+\begin{document}
+
+\title{UMN, Spring 2017, Math 5707: Lecture 7 (Hamiltonian paths in digraphs)}
+\author{Darij Grinberg}
+\date{digitized and updated version,
+%TCIMACRO{\TeXButton{TeX field}{\today}}%
+%BeginExpansion
+\today
+%EndExpansion
+}
+\maketitle
+\tableofcontents
+
+\section{Hamiltonian paths in simple digraphs}
+
+\subsection{Introduction}
+
+We shall now study some questions on Hamiltonian paths in digraphs, proving
+(in particular) R\'{e}dei's theorem on Hamiltonian paths in tournaments.
+
+We let $\mathbb{N}$ denote the set $\left\{  0,1,2,\ldots\right\}  $ of all
+nonnegative integers.
+
+We recall some basic notions from graph theory:
+
+\begin{definition}
+\label{def.digraph.sim-dig}A \emph{simple digraph} is a pair $\left(
+V,A\right)  $, where $V$ is a finite set, and where $A$ is a subset of
+$V\times V$.
+
+If $D=\left(  V,A\right)  $ is a simple digraph, then the elements of $V$ are
+called the \emph{vertices} of $D$, while the elements of $A$ are called the
+\emph{arcs} (or \emph{directed edges}) of $D$.
+
+We shall visually represent a simple digraph $D=\left(  V,A\right)  $ by a
+picture in which each vertex $v\in V$ is represented by a node (usually a
+circle with the name of $v$ written in it), and each arc $a=\left(
+v,w\right)  $ is represented as an arrow from the node representing the vertex
+$v$ to the node representing the vertex $w$.
+\end{definition}
+
+\begin{example}
+\label{ex.digraph.sim-dig.ex1}\ \ 
+
+\begin{enumerate}
+\item[\textbf{(a)}] The simple digraph%
+\begin{equation}
+\left(  \left\{  1,2,3,4\right\}  ,\ \ \left\{  \left(  1,2\right)  ,\left(
+1,3\right)  ,\left(  1,4\right)  ,\left(  2,2\right)  ,\left(  3,3\right)
+,\left(  4,1\right)  ,\left(  4,2\right)  \right\}  \right)
+\label{eq.ex.digraph.sim-dig.ex1.a}%
+\end{equation}
+has vertices $1,2,3,4$ and arcs $\left(  1,2\right)  ,\left(  1,3\right)
+,\left(  1,4\right)  ,\left(  2,2\right)  ,\left(  3,3\right)  ,\left(
+4,1\right)  ,\left(  4,2\right)  $. It can be represented by the picture%
+\[%
+%TCIMACRO{\TeXButton{tikz 4-digraph}{\begin{tikzpicture}
+%\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+%\node(A) at (0,0) {$1$};
+%\node(B) at (2,0) {$2$};
+%\node(C) at (0,-2) {$3$};
+%\node(D) at (2,-2) {$4$};
+%\end{scope}
+%\begin{scope}[every edge/.style={draw=black,very thick}]
+%\path[->] (A) edge (B);
+%\path[->] (A) edge (C);
+%\path[->] (D) edge (B);
+%\path[->] (A) edge[bend right=20] (D);
+%\path[->] (D) edge[bend right=20] (A);
+%\path[->] (B) edge[loop right] (B);
+%\path[->] (C) edge[loop left] (C);
+%\end{scope}
+%\end{tikzpicture}}}%
+%BeginExpansion
+\begin{tikzpicture}
+\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+\node(A) at (0,0) {$1$};
+\node(B) at (2,0) {$2$};
+\node(C) at (0,-2) {$3$};
+\node(D) at (2,-2) {$4$};
+\end{scope}
+\begin{scope}[every edge/.style={draw=black,very thick}]
+\path[->] (A) edge (B);
+\path[->] (A) edge (C);
+\path[->] (D) edge (B);
+\path[->] (A) edge[bend right=20] (D);
+\path[->] (D) edge[bend right=20] (A);
+\path[->] (B) edge[loop right] (B);
+\path[->] (C) edge[loop left] (C);
+\end{scope}
+\end{tikzpicture}%
+%EndExpansion
+\ \ ,
+\]
+but also by the picture%
+\[%
+%TCIMACRO{\TeXButton{tikz 4-digraph}{\begin{tikzpicture}
+%\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+%\node(A) at (0,0) {$1$};
+%\node(B) at (0,-2) {$2$};
+%\node(C) at (2,0) {$3$};
+%\node(D) at (2,-2) {$4$};
+%\end{scope}
+%\begin{scope}[every edge/.style={draw=black,very thick}]
+%\path[->] (A) edge (B);
+%\path[->] (A) edge (C);
+%\path[->] (D) edge (B);
+%\path[->] (A) edge[bend right=20] (D);
+%\path[->] (D) edge[bend right=20] (A);
+%\path[->] (B) edge[loop left] (B);
+%\path[->] (C) edge[loop right] (C);
+%\end{scope}
+%\end{tikzpicture}}}%
+%BeginExpansion
+\begin{tikzpicture}
+\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+\node(A) at (0,0) {$1$};
+\node(B) at (0,-2) {$2$};
+\node(C) at (2,0) {$3$};
+\node(D) at (2,-2) {$4$};
+\end{scope}
+\begin{scope}[every edge/.style={draw=black,very thick}]
+\path[->] (A) edge (B);
+\path[->] (A) edge (C);
+\path[->] (D) edge (B);
+\path[->] (A) edge[bend right=20] (D);
+\path[->] (D) edge[bend right=20] (A);
+\path[->] (B) edge[loop left] (B);
+\path[->] (C) edge[loop right] (C);
+\end{scope}
+\end{tikzpicture}%
+%EndExpansion
+\]
+and many others.
+
+\item[\textbf{(b)}] The simple digraph%
+\begin{equation}
+\left(  \left\{  1,2,3,4\right\}  ,\ \ \left\{  \left\{  1,3\right\}  ,\left(
+2,1\right)  ,\left(  2,3\right)  ,\left(  3,3\right)  \right\}  \right)
+\label{eq.ex.digraph.sim-dig.ex1.b}%
+\end{equation}
+can be represented by the picture%
+\[%
+%TCIMACRO{\TeXButton{tikz 4-digraph}{\begin{tikzpicture}
+%\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+%\node(A) at (0,0) {$1$};
+%\node(B) at (2,0) {$2$};
+%\node(C) at (0,-2) {$3$};
+%\node(D) at (2,-2) {$4$};
+%\end{scope}
+%\begin{scope}[every edge/.style={draw=black,very thick}]
+%\path[->] (B) edge (A);
+%\path[->] (A) edge (C);
+%\path[->] (B) edge (C);
+%\path[->] (C) edge[loop left] (C);
+%\end{scope}
+%\end{tikzpicture}}}%
+%BeginExpansion
+\begin{tikzpicture}
+\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+\node(A) at (0,0) {$1$};
+\node(B) at (2,0) {$2$};
+\node(C) at (0,-2) {$3$};
+\node(D) at (2,-2) {$4$};
+\end{scope}
+\begin{scope}[every edge/.style={draw=black,very thick}]
+\path[->] (B) edge (A);
+\path[->] (A) edge (C);
+\path[->] (B) edge (C);
+\path[->] (C) edge[loop left] (C);
+\end{scope}
+\end{tikzpicture}%
+%EndExpansion
+\ \ .
+\]
+
+\end{enumerate}
+\end{example}
+
+Simple digraphs are one of the most primitive notions of directed graphs (in
+particular, they do not allow multiple arcs); but they are exactly what we
+need for the following considerations. Thus, we shall simply call them
+\textquotedblleft digraphs\textquotedblright:
+
+\begin{convention}
+For the total of this lecture, we shall use the word \textquotedblleft%
+\emph{digraph}\textquotedblright\ as a shorthand for \textquotedblleft simple
+digraph\textquotedblright.
+\end{convention}
+
+A few more notations will be useful:
+
+\begin{definition}
+\label{def.digraph.notations}Let $D=\left(  V,A\right)  $ be a digraph.
+
+\begin{enumerate}
+\item[\textbf{(a)}] If $a=\left(  v,w\right)  \in A$ is an arc of $D$, then
+the vertex $v$ is called the \emph{source} of $a$, while the vertex $w$ is
+called the \emph{target} of $a$.
+
+\item[\textbf{(b)}] We shall use the shorthand notation \textquotedblleft%
+$vw$\textquotedblright\ for any pair $\left(  v,w\right)  \in V\times V$
+(thus, in particular, for any arc of $D$). Do not confuse this notation with
+the product of two numbers or a two-digit number.
+
+\item[\textbf{(c)}] A \emph{loop} means an arc of the form $vv$ for some $v\in
+V$. In other words, a \emph{loop} means an arc whose source is also its target.
+\end{enumerate}
+\end{definition}
+
+\subsection{Hamiltonian paths (\textquotedblleft hamps\textquotedblright)}
+
+We recall the classical concepts of walks and paths in digraphs:
+
+\begin{definition}
+Let $D=\left(  V,A\right)  $ be a digraph.
+
+\begin{enumerate}
+\item[\textbf{(a)}] A \emph{walk} of $D$ means a list of the form $\left(
+v_{0},v_{1},\ldots,v_{k}\right)  $ (with $k\geq0$), where $v_{0},v_{1}%
+,\ldots,v_{k}$ are vertices of $D$ with the property that each $i\in\left\{
+0,1,\ldots,k-1\right\}  $ satisfies $v_{i}v_{i+1}\in A$ (that is, all of the
+pairs $v_{0}v_{1},\ v_{1}v_{2},\ \ldots,\ v_{k-1}v_{k}$ are arcs of $D$).
+
+\item[\textbf{(b)}] A \emph{path} of $D$ means a walk $\left(  v_{0}%
+,v_{1},\ldots,v_{k}\right)  $ of $D$ such that the vertices $v_{0}%
+,v_{1},\ldots,v_{k}$ are distinct.
+
+\item[\textbf{(c)}] A walk $\left(  v_{0},v_{1},\ldots,v_{k}\right)  $ is said
+to \emph{contain} a vertex $v\in V$ if and only if $v\in\left\{  v_{0}%
+,v_{1},\ldots,v_{k}\right\}  $.
+
+\item[\textbf{(d)}] If $\mathbf{w}=\left(  v_{0},v_{1},\ldots,v_{k}\right)  $
+is a walk of $D$, then the arcs $v_{0}v_{1},\ v_{1}v_{2},\ \ldots
+,\ v_{k-1}v_{k}$ are called the \emph{arcs} of $\mathbf{w}$.
+
+\item[\textbf{(e)}] Let $u$ and $v$ be two vertices of $D$. A \emph{walk from
+}$u$ \emph{to }$v$ means a walk $\left(  v_{0},v_{1},\ldots,v_{k}\right)  $ of
+$D$ satisfying $v_{0}=u$ and $v_{k}=v$.
+\end{enumerate}
+\end{definition}
+
+For example, in the digraph given in (\ref{eq.ex.digraph.sim-dig.ex1.a}), the
+$3$-tuple $\left(  4,2,2\right)  $ is a walk (since $42$ and $22$ are arcs)
+but not a path (since the vertices $4,2,2$ are not distinct), whereas the
+$3$-tuple $\left(  4,1,2\right)  $ is a walk and a path.
+
+Sometimes we say \textquotedblleft walk in $D$\textquotedblright\ instead of
+\textquotedblleft walk of $D$\textquotedblright\ when $D$ is a digraph; this
+language is synonymous.
+
+We can now define a special kind of paths:
+
+\begin{definition}
+Let $D=\left(  V,A\right)  $ be a digraph.
+
+A \emph{Hamiltonian path} of $D$ means a path of $D$ that contains each vertex
+of $D$.
+
+In other words, a \emph{Hamiltonian path} of $D$ means a path $\left(
+v_{0},v_{1},\ldots,v_{k}\right)  $ of $D$ such that $V=\left\{  v_{0}%
+,v_{1},\ldots,v_{k}\right\}  $.
+
+We shall abbreviate \textquotedblleft Hamiltonian path\textquotedblright\ as
+\textquotedblleft\emph{hamp}\textquotedblright.
+\end{definition}
+
+For example, the digraph%
+\[%
+%TCIMACRO{\TeXButton{tikz 4-digraph}{\begin{tikzpicture}
+%\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+%\node(A) at (0,0) {$1$};
+%\node(B) at (2,0) {$2$};
+%\node(C) at (0,-2) {$3$};
+%\node(D) at (2,-2) {$4$};
+%\end{scope}
+%\begin{scope}[every edge/.style={draw=black,very thick}]
+%\path[->] (B) edge (A);
+%\path[->] (C) edge (A);
+%\path[->] (B) edge (D);
+%\path[->] (D) edge (C);
+%\path[->] (C) edge[bend left=20] (B);
+%\path[->] (B) edge[bend left=10] (C);
+%\path[->] (A) edge[loop left] (A);
+%\end{scope}
+%\end{tikzpicture}}}%
+%BeginExpansion
+\begin{tikzpicture}
+\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+\node(A) at (0,0) {$1$};
+\node(B) at (2,0) {$2$};
+\node(C) at (0,-2) {$3$};
+\node(D) at (2,-2) {$4$};
+\end{scope}
+\begin{scope}[every edge/.style={draw=black,very thick}]
+\path[->] (B) edge (A);
+\path[->] (C) edge (A);
+\path[->] (B) edge (D);
+\path[->] (D) edge (C);
+\path[->] (C) edge[bend left=20] (B);
+\path[->] (B) edge[bend left=10] (C);
+\path[->] (A) edge[loop left] (A);
+\end{scope}
+\end{tikzpicture}%
+%EndExpansion
+\]
+has a hamp $\left(  4,3,2,1\right)  $, whereas the digraphs given in
+(\ref{eq.ex.digraph.sim-dig.ex1.b}) and in (\ref{eq.ex.digraph.sim-dig.ex1.a})
+have no hamps.
+
+\subsection{The reverse and complement digraphs}
+
+\begin{definition}
+Let $D=\left(  V,A\right)  $ be a digraph. Then:
+
+\begin{enumerate}
+\item[\textbf{(a)}] The elements of $\left(  V\times V\right)  \setminus A$
+(that is, the pairs $\left(  i,j\right)  \in V\times V$ that are not arcs of
+$D$) will be called the \emph{non-arcs} of $D$.
+
+\item[\textbf{(b)}] The \emph{reversal} of a pair $\left(  i,j\right)  \in
+V\times V$ is defined to be the pair $\left(  j,i\right)  $.
+
+\item[\textbf{(c)}] Furthermore, $D^{\operatorname*{rev}}$ is defined as the
+digraph $\left(  V,A^{\operatorname*{rev}}\right)  $, where%
+\[
+A^{\operatorname*{rev}}=\left\{  \left(  j,i\right)  \ \mid\ \left(
+i,j\right)  \in A\right\}  .
+\]
+That is, $D^{\operatorname*{rev}}$ is the digraph $D$ with all its arcs
+reversed (meaning that each arc is replaced by its reversal; in other words,
+sources become targets, and targets become sources). We call
+$D^{\operatorname*{rev}}$ the \emph{reversal} of the digraph $D$.
+
+\item[\textbf{(d)}] Furthermore, $\overline{D}$ is defined as the digraph
+$\left(  V,\overline{A}\right)  $, where%
+\[
+\overline{A}=\left(  V\times V\right)  \setminus A.
+\]
+That is, $\overline{D}$ is the digraph $D$ with all its arcs removed and all
+its non-arcs added in as arcs. We call $\overline{D}$ the \emph{complement} of
+the digraph $D$.
+\end{enumerate}
+\end{definition}
+
+\begin{example}
+Let
+\[
+D=%
+%TCIMACRO{\TeXButton{tikz 4-digraph}{\begin{tikzpicture}
+%\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+%\node(A) at (0,0) {$1$};
+%\node(B) at (2,0) {$2$};
+%\node(C) at (0,-2) {$3$};
+%\node(D) at (2,-2) {$4$};
+%\end{scope}
+%\begin{scope}[every edge/.style={draw=black,very thick}]
+%\path[->] (A) edge (B);
+%\path[->] (A) edge (C);
+%\path[->] (D) edge (B);
+%\path[->] (A) edge[bend right=20] (D);
+%\path[->] (D) edge[bend right=20] (A);
+%\path[->] (B) edge[loop right] (B);
+%\path[->] (C) edge[loop left] (C);
+%\end{scope}
+%\end{tikzpicture}}}%
+%BeginExpansion
+\begin{tikzpicture}
+\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+\node(A) at (0,0) {$1$};
+\node(B) at (2,0) {$2$};
+\node(C) at (0,-2) {$3$};
+\node(D) at (2,-2) {$4$};
+\end{scope}
+\begin{scope}[every edge/.style={draw=black,very thick}]
+\path[->] (A) edge (B);
+\path[->] (A) edge (C);
+\path[->] (D) edge (B);
+\path[->] (A) edge[bend right=20] (D);
+\path[->] (D) edge[bend right=20] (A);
+\path[->] (B) edge[loop right] (B);
+\path[->] (C) edge[loop left] (C);
+\end{scope}
+\end{tikzpicture}%
+%EndExpansion
+.
+\]
+(Formally speaking, we mean \textquotedblleft Let $D$ be the digraph
+represented by this picture\textquotedblright; rigorously, this digraph is
+given by (\ref{eq.ex.digraph.sim-dig.ex1.a}).)
+
+Then,%
+\[
+D^{\operatorname*{rev}}=%
+%TCIMACRO{\TeXButton{tikz 4-digraph}{\begin{tikzpicture}
+%\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+%\node(A) at (0,0) {$1$};
+%\node(B) at (2,0) {$2$};
+%\node(C) at (0,-2) {$3$};
+%\node(D) at (2,-2) {$4$};
+%\end{scope}
+%\begin{scope}[every edge/.style={draw=black,very thick}]
+%\path[->] (B) edge (A);
+%\path[->] (C) edge (A);
+%\path[->] (B) edge (D);
+%\path[->] (A) edge[bend left=20] (D);
+%\path[->] (D) edge[bend left=20] (A);
+%\path[->] (B) edge[loop right] (B);
+%\path[->] (C) edge[loop left] (C);
+%\end{scope}
+%\end{tikzpicture}}}%
+%BeginExpansion
+\begin{tikzpicture}
+\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+\node(A) at (0,0) {$1$};
+\node(B) at (2,0) {$2$};
+\node(C) at (0,-2) {$3$};
+\node(D) at (2,-2) {$4$};
+\end{scope}
+\begin{scope}[every edge/.style={draw=black,very thick}]
+\path[->] (B) edge (A);
+\path[->] (C) edge (A);
+\path[->] (B) edge (D);
+\path[->] (A) edge[bend left=20] (D);
+\path[->] (D) edge[bend left=20] (A);
+\path[->] (B) edge[loop right] (B);
+\path[->] (C) edge[loop left] (C);
+\end{scope}
+\end{tikzpicture}%
+%EndExpansion
+\ \ \ \ \ \ \ \ \ \ \text{and}\ \ \ \ \ \ \ \ \ \ \overline{D}=%
+%TCIMACRO{\TeXButton{tikz 4-digraph}{\begin{tikzpicture}
+%\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+%\node(A) at (0,0) {$1$};
+%\node(B) at (2,0) {$2$};
+%\node(C) at (0,-2) {$3$};
+%\node(D) at (2,-2) {$4$};
+%\end{scope}
+%\begin{scope}[every edge/.style={draw=black,very thick}]
+%\path[->] (B) edge (A);
+%\path[->] (C) edge (A);
+%\path[->] (B) edge (D);
+%\path[->] (C) edge[bend left=10] (D);
+%\path[->] (D) edge[bend left=20] (C);
+%\path[->] (C) edge[bend left=20] (B);
+%\path[->] (B) edge[bend left=10] (C);
+%\path[->] (D) edge[loop right] (D);
+%\path[->] (A) edge[loop left] (A);
+%\end{scope}
+%\end{tikzpicture}}}%
+%BeginExpansion
+\begin{tikzpicture}
+\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+\node(A) at (0,0) {$1$};
+\node(B) at (2,0) {$2$};
+\node(C) at (0,-2) {$3$};
+\node(D) at (2,-2) {$4$};
+\end{scope}
+\begin{scope}[every edge/.style={draw=black,very thick}]
+\path[->] (B) edge (A);
+\path[->] (C) edge (A);
+\path[->] (B) edge (D);
+\path[->] (C) edge[bend left=10] (D);
+\path[->] (D) edge[bend left=20] (C);
+\path[->] (C) edge[bend left=20] (B);
+\path[->] (B) edge[bend left=10] (C);
+\path[->] (D) edge[loop right] (D);
+\path[->] (A) edge[loop left] (A);
+\end{scope}
+\end{tikzpicture}%
+%EndExpansion
+\ \ .
+\]
+
+\end{example}
+
+\begin{convention}
+In the following, the symbol \textquotedblleft$\#$\textquotedblright\ stands
+for the word \textquotedblleft number\textquotedblright\ (as in
+\textquotedblleft the number of\textquotedblright). For example,
+\[
+\left(  \#\text{ of subsets of }\left\{  1,2,3\right\}  \right)  =2^{3}=8.
+\]
+
+\end{convention}
+
+We will be interested in the $\#$ of hamps of a digraph. In particular, we
+will ask ourselves when a digraph has a hamp at all. We begin with a simple case:
+
+\begin{proposition}
+\label{prop.hamp.123n}Let $n\in\mathbb{N}$. Let $V$ be the set $\left\{
+1,2,\ldots,n\right\}  $. Let $A$ be the set%
+\begin{align*}
+\left\{  \left(  i,j\right)  \in V\times V\ \mid\ i<j\right\}   &
+=\{12,\ 13,\ 14,\ \ldots,\ 1n,\\
+&  \ \ \ \ \ \ \ \ \ \ \ \ \ 23,\ 24,\ \ldots,\ 2n,\\
+&  \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ldots\\
+&  \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \left(  n-1\right)  n\}
+\end{align*}
+(where we are again using the notation $ij$ for the pair $\left(  i,j\right)
+$). Let $D$ be the digraph $\left(  V,A\right)  $. Then,%
+\[
+\left(  \#\text{ of hamps of }D\right)  =1.
+\]
+
+\end{proposition}
+
+Before we prove this easy fact, let us show an example: When $n=4$, the
+digraph $D$ in Proposition \ref{prop.hamp.123n} takes the following form:%
+\[%
+%TCIMACRO{\TeXButton{tikz 4-digraph}{\begin{tikzpicture}
+%\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+%\node(A) at (0,0) {$1$};
+%\node(B) at (2,0) {$2$};
+%\node(C) at (0,-2) {$3$};
+%\node(D) at (2,-2) {$4$};
+%\end{scope}
+%\begin{scope}[every edge/.style={draw=black,very thick}]
+%\path
+%[->] (A) edge (B) (B) edge (C) (C) edge (D) (A) edge (C) (B) edge (D) (A) edge (D);
+%\end{scope}
+%\end{tikzpicture}}}%
+%BeginExpansion
+\begin{tikzpicture}
+\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+\node(A) at (0,0) {$1$};
+\node(B) at (2,0) {$2$};
+\node(C) at (0,-2) {$3$};
+\node(D) at (2,-2) {$4$};
+\end{scope}
+\begin{scope}[every edge/.style={draw=black,very thick}]
+\path
+[->] (A) edge (B) (B) edge (C) (C) edge (D) (A) edge (C) (B) edge (D) (A) edge (D);
+\end{scope}
+\end{tikzpicture}%
+%EndExpansion
+\]
+and has the unique hamp $\left(  1,2,3,4\right)  $.
+
+\begin{proof}
+[Proof of Proposition \ref{prop.hamp.123n}.]We must prove that the digraph $D$
+has a unique hamp. Clearly, $\left(  1,2,\ldots,n\right)  $ is a hamp of $D$;
+thus, it remains to show that this hamp is the only hamp of $D$. In other
+words, we need to prove that any hamp of $D$ equals $\left(  1,2,\ldots
+,n\right)  $.
+
+Let $\sigma$ be a hamp of $D$. Thus, $\sigma$ is a path of $D$ that contains
+each vertex of $D$ (by the definition of a \textquotedblleft
+hamp\textquotedblright). Hence, $\sigma$ contains each vertex of $D$ exactly
+once (because if the list $\sigma$ contained a vertex more than once, then it
+would not be a path). In other words, $\sigma$ is a list of all vertices of
+$D$, listed without multiplicities (since $\sigma$ clearly is a list of
+vertices of $D$). In other words, $\sigma$ is a list of all elements of $V$,
+listed without multiplicities (since the vertices of $D$ are the elements of
+$V$). Since $V=\left\{  1,2,\ldots,n\right\}  $, this entails that $\sigma$ is
+a list of the numbers $1,2,\ldots,n$ in some order, without multiplicities. In
+particular, $\sigma$ is an $n$-tuple. Write $\sigma$ as $\sigma=\left(
+\sigma_{1},\sigma_{2},\ldots,\sigma_{n}\right)  $.
+
+Therefore, $\sigma_{1}\sigma_{2},\ \sigma_{2}\sigma_{3},\ \ldots
+,\ \sigma_{n-1}\sigma_{n}$ are arcs of $D$ (since $\sigma$ is a path of $D$).
+However, the definition of $A$ shows that any arc $ij$ of $D$ satisfies $i<j$.
+Therefore, since we know that $\sigma_{1}\sigma_{2},\ \sigma_{2}\sigma
+_{3},\ \ldots,\ \sigma_{n-1}\sigma_{n}$ are arcs of $D$, we conclude that
+$\sigma_{1}<\sigma_{2}<\cdots<\sigma_{n}$. In other words, the list $\sigma$
+is strictly increasing.
+
+But we know that $\sigma$ is a list of the numbers $1,2,\ldots,n$ in some
+order. Hence, $\sigma$ is a strictly increasing list of the numbers
+$1,2,\ldots,n$ in some order. But the only such list is $\left(
+1,2,\ldots,n\right)  $. Hence, we must have $\sigma=\left(  1,2,\ldots
+,n\right)  $.
+
+Forget that we fixed $\sigma$. We thus have shown that any hamp $\sigma$ of
+$D$ satisfies $\sigma=\left(  1,2,\ldots,n\right)  $. In other words, any hamp
+of $D$ equals $\left(  1,2,\ldots,n\right)  $. This proves Proposition
+\ref{prop.hamp.123n}.
+\end{proof}
+
+What happens to the $\#$ of hamps of a digraph when we reverse all arcs of the
+digraph? The answer is simple:
+
+\begin{proposition}
+\label{prop.hamp.Drev}Let $D$ be a digraph. Then,%
+\[
+\left(  \#\text{ of hamps of }D^{\operatorname*{rev}}\right)  =\left(
+\#\text{ of hamps of }D\right)  .
+\]
+
+\end{proposition}
+
+\begin{proof}
+The hamps of $D^{\operatorname*{rev}}$ are just the hamps of $D$, walked
+backwards. In more detail: If $\left(  v_{0},v_{1},\ldots,v_{k}\right)  $ is a
+hamp of $D$, then $\left(  v_{k},v_{k-1},\ldots,v_{0}\right)  $ is a hamp of
+$D^{\operatorname*{rev}}$, and vice versa. Thus, we have a bijection%
+\begin{align*}
+\left\{  \text{hamps of }D\right\}   &  \rightarrow\left\{  \text{hamps of
+}D^{\operatorname*{rev}}\right\}  ,\\
+\left(  v_{0},v_{1},\ldots,v_{k}\right)   &  \mapsto\left(  v_{k}%
+,v_{k-1},\ldots,v_{0}\right)  .
+\end{align*}
+This entails that $\left\vert \left\{  \text{hamps of }D\right\}  \right\vert
+=\left\vert \left\{  \text{hamps of }D^{\operatorname*{rev}}\right\}
+\right\vert $. In other words, we have $\left(  \#\text{ of hamps of
+}D\right)  =\left(  \#\text{ of hamps of }D^{\operatorname*{rev}}\right)  $.
+Thus, Proposition \ref{prop.hamp.Drev} is proved.
+\end{proof}
+
+A more interesting question is what happens to the $\#$ of hamps of a digraph
+$D$ when we pass to the complement $\overline{D}$. This $\#$ can change, but
+surprisingly, its change is not completely arbitrary. The following result is
+due to Berge (\cite[\S 10.1, Theorem 1]{Berge91}, \cite[Problem 7.7, directed
+case]{Tomesc85}):
+
+\begin{theorem}
+[Berge]\label{thm.hamp.Dbar}Let $D$ be a digraph. Then,%
+\[
+\left(  \#\text{ of hamps of }\overline{D}\right)  \equiv\left(  \#\text{ of
+hamps of }D\right)  \operatorname{mod}2.
+\]
+
+\end{theorem}
+
+\begin{example}
+\label{exa.hamp.comp}Let $D$ be the following digraph:%
+\[
+D=\ \
+%TCIMACRO{\TeXButton{tikz 3-digraph}{\begin{tikzpicture}
+%\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+%\node(A) at (0,0) {$1$};
+%\node(B) at (2,0) {$2$};
+%\node(C) at (4,0) {$3$};
+%\end{scope}
+%\begin{scope}[every edge/.style={draw=black,very thick}]
+%\path[->] (B) edge (C);
+%\path[->] (A) edge[bend left=20] (B);
+%\path[->] (B) edge[bend left=20] (A);
+%\path[->] (C) edge[bend right=40] (A);
+%\end{scope}
+%\end{tikzpicture}}}%
+%BeginExpansion
+\begin{tikzpicture}
+\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+\node(A) at (0,0) {$1$};
+\node(B) at (2,0) {$2$};
+\node(C) at (4,0) {$3$};
+\end{scope}
+\begin{scope}[every edge/.style={draw=black,very thick}]
+\path[->] (B) edge (C);
+\path[->] (A) edge[bend left=20] (B);
+\path[->] (B) edge[bend left=20] (A);
+\path[->] (C) edge[bend right=40] (A);
+\end{scope}
+\end{tikzpicture}%
+%EndExpansion
+\ \ .
+\]
+This digraph has $3$ hamps: $\left(  1,2,3\right)  $ and $\left(
+2,3,1\right)  $ and $\left(  3,1,2\right)  $.
+
+Its complement $\overline{D}$ looks as follows:%
+\[
+\overline{D}=\ \
+%TCIMACRO{\TeXButton{tikz 3-digraph}{\begin{tikzpicture}
+%\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+%\node(A) at (0,0) {$1$};
+%\node(B) at (2,0) {$2$};
+%\node(C) at (4,0) {$3$};
+%\end{scope}
+%\begin{scope}[every edge/.style={draw=black,very thick}]
+%\path[->] (A) edge[loop left] (A);
+%\path[->] (B) edge[loop left] (B);
+%\path[->] (C) edge[loop right] (C);
+%\path[->] (C) edge (B);
+%\path[->] (A) edge[bend left=30] (C);
+%\end{scope}
+%\end{tikzpicture}}}%
+%BeginExpansion
+\begin{tikzpicture}
+\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+\node(A) at (0,0) {$1$};
+\node(B) at (2,0) {$2$};
+\node(C) at (4,0) {$3$};
+\end{scope}
+\begin{scope}[every edge/.style={draw=black,very thick}]
+\path[->] (A) edge[loop left] (A);
+\path[->] (B) edge[loop left] (B);
+\path[->] (C) edge[loop right] (C);
+\path[->] (C) edge (B);
+\path[->] (A) edge[bend left=30] (C);
+\end{scope}
+\end{tikzpicture}%
+%EndExpansion
+\ \ .
+\]
+It has only $1$ hamp: $\left(  1,3,2\right)  $.
+
+Thus, in this case, Theorem \ref{thm.hamp.Dbar} says that $1\equiv
+3\operatorname{mod}2$.
+\end{example}
+
+\begin{proof}
+[Proof of Theorem \ref{thm.hamp.Dbar}.](We follow \cite[\S 10.1, Theorem
+1]{Berge91}.)
+
+Write the digraph $D$ as $D=\left(  V,A\right)  $ (so that $V$ is its set of
+vertices, and $A$ is its set of arcs). We WLOG assume that $V\neq\varnothing$,
+since otherwise the claim is obvious.
+
+Set $n=\left\vert V\right\vert $. A $V$\emph{-listing} will mean a list of
+elements of $V$ that contains each element of $V$ exactly once. (Thus, each
+$V$-listing is an $n$-tuple, and there are exactly $n!$ many $V$-listings.)
+Note that a $V$-listing is the same as a hamp of the digraph $\left(
+V,V\times V\right)  $ (since any pair of two elements of $V$ is an arc of this
+digraph). Any hamp of $D$ or of $\overline{D}$ is a $V$-listing, but not every
+$V$-listing is a hamp of $D$ or of $\overline{D}$.
+
+If $\sigma=\left(  \sigma_{1},\sigma_{2},\ldots,\sigma_{n}\right)  $ is a
+$V$-listing, then we define a set%
+\[
+P\left(  \sigma\right)  :=\left\{  \sigma_{1}\sigma_{2},\ \ \sigma_{2}%
+\sigma_{3},\ \ \sigma_{3}\sigma_{4},\ \ \ldots,\ \ \sigma_{n-1}\sigma
+_{n}\right\}  .
+\]
+(Recall that we are using Definition \ref{def.digraph.notations} \textbf{(b)},
+so $\sigma_{i}\sigma_{i+1}$ means the pair $\left(  \sigma_{i},\sigma
+_{i+1}\right)  $.) Note that $P\left(  \sigma\right)  $ is the set of all arcs
+of $\sigma$ (when $\sigma$ is viewed as a hamp of the digraph $\left(
+V,V\times V\right)  $). If $\sigma=\left(  \sigma_{1},\sigma_{2},\ldots
+,\sigma_{n}\right)  $ is a $V$-listing, then the arcs \newline$\sigma
+_{1}\sigma_{2},\ \ \sigma_{2}\sigma_{3},\ \ \sigma_{3}\sigma_{4}%
+,\ \ \ldots,\ \ \sigma_{n-1}\sigma_{n}$ are distinct (since their sources
+$\sigma_{1},\sigma_{2},\ldots,\sigma_{n-1}$ are distinct), and thus $P\left(
+\sigma\right)  $ is an $\left(  n-1\right)  $-element set.
+
+We make four simple observations:
+
+\begin{statement}
+\textit{Observation 0:} If $\sigma$ is a hamp of $D$, then $P\left(
+\sigma\right)  $ is a subset of $A$.
+\end{statement}
+
+[\textit{Proof of Observation 0:} Let $\sigma$ be a hamp of $D$. Then,
+$\sigma$ is a path of $D$. Hence, each of the pairs $\sigma_{1}\sigma
+_{2},\ \ \sigma_{2}\sigma_{3},\ \ \sigma_{3}\sigma_{4},\ \ \ldots
+,\ \ \sigma_{n-1}\sigma_{n}$ is an arc of $D$ and thus belongs to $A$. In
+other words, $\left\{  \sigma_{1}\sigma_{2},\ \ \sigma_{2}\sigma
+_{3},\ \ \sigma_{3}\sigma_{4},\ \ \ldots,\ \ \sigma_{n-1}\sigma_{n}\right\}  $
+is a subset of $A$. In other words, $P\left(  \sigma\right)  $ is a subset of
+$A$ (since $P\left(  \sigma\right)  =\left\{  \sigma_{1}\sigma_{2}%
+,\ \ \sigma_{2}\sigma_{3},\ \ \sigma_{3}\sigma_{4},\ \ \ldots,\ \ \sigma
+_{n-1}\sigma_{n}\right\}  $). This proves Observation 0.]
+
+\begin{statement}
+\textit{Observation 1:} We can reconstruct a $V$-listing $\sigma$ from the set
+$P\left(  \sigma\right)  $ (that is, the map $\sigma\mapsto P\left(
+\sigma\right)  $ that sends each $V$-listing $\sigma$ to the set $P\left(
+\sigma\right)  $ is injective).
+\end{statement}
+
+[\textit{Proof of Observation 1:} Let $\sigma=\left(  \sigma_{1},\sigma
+_{2},\ldots,\sigma_{n}\right)  $ be a $V$-listing. Thus, $\left(  \sigma
+_{1},\sigma_{2},\ldots,\sigma_{n}\right)  $ is a list of elements of $V$ that
+contains each element of $V$ exactly once. Hence, the $n$ elements $\sigma
+_{1},\sigma_{2},\ldots,\sigma_{n}$ are distinct and we have $V=\left\{
+\sigma_{1},\sigma_{2},\ldots,\sigma_{n}\right\}  $. Therefore, $\sigma_{1}$ is
+the unique vertex of $D$ distinct from $\sigma_{2},\sigma_{3},\ldots
+,\sigma_{n}$.
+
+The set $P\left(  \sigma\right)  $ consists of the pairs $\sigma_{1}\sigma
+_{2},\ \ \sigma_{2}\sigma_{3},\ \ \sigma_{3}\sigma_{4},\ \ \ldots
+,\ \ \sigma_{n-1}\sigma_{n}$ (by the definition of $P\left(  \sigma\right)
+$). The second entries of these pairs are $\sigma_{2},\sigma_{3},\ldots
+,\sigma_{n}$. Hence, $\sigma_{1}$ is the unique vertex of $D$ that does not
+appear as a second entry of any pair in $P\left(  \sigma\right)  $ (since
+$\sigma_{1}$ is the unique vertex of $D$ distinct from $\sigma_{2},\sigma
+_{3},\ldots,\sigma_{n}$). Thus, $\sigma_{1}$ can be recovered from $P\left(
+\sigma\right)  $. Furthermore, $\sigma_{2}$ is the unique vertex of $D$ such
+that $\sigma_{1}\sigma_{2}\in P\left(  \sigma\right)  $ (since $\sigma
+_{1},\sigma_{2},\ldots,\sigma_{n}$ are distinct); thus, $\sigma_{2}$ can be
+recovered from $P\left(  \sigma\right)  $ as well (once $\sigma_{1}$ is
+known). Furthermore, $\sigma_{3}$ is the unique vertex of $D$ such that
+$\sigma_{2}\sigma_{3}\in P\left(  \sigma\right)  $ (since $\sigma_{1}%
+,\sigma_{2},\ldots,\sigma_{n}$ are distinct); thus, $\sigma_{3}$ can be
+recovered from $P\left(  \sigma\right)  $ as well (once $\sigma_{2}$ is
+known). Proceeding likewise, we can (successively) recover $\sigma_{1}%
+,\sigma_{2},\ldots,\sigma_{n}$. Thus, we can recover the whole $V$-listing
+$\sigma$ from $P\left(  \sigma\right)  $. This proves Observation 1.]
+
+\begin{statement}
+\textit{Observation 2:} Let $\sigma$ be a $V$-listing. Then, $\sigma$ is a
+hamp of $D$ if and only if $P\left(  \sigma\right)  \subseteq A$.
+\end{statement}
+
+[\textit{Proof of Observation 2:} We have the following chain of logical
+equivalences:%
+\begin{align*}
+&  \ \left(  \sigma\text{ is a hamp of }D\right) \\
+&  \Longleftrightarrow\ \left(  \sigma\text{ is a path of }D\right)
+\ \ \ \ \ \ \ \ \ \ \left(  \text{since }\sigma\text{ contains each vertex of
+}D\right) \\
+&  \Longleftrightarrow\ \left(  \sigma\text{ is a walk of }D\right)
+\ \ \ \ \ \ \ \ \ \ \left(  \text{since the vertices in }\sigma\text{ are
+distinct}\right) \\
+&  \Longleftrightarrow\ \left(  \sigma_{1}\sigma_{2},\ \ \sigma_{2}\sigma
+_{3},\ \ \sigma_{3}\sigma_{4},\ \ \ldots,\ \ \sigma_{n-1}\sigma_{n}\text{ are
+arcs of }D\right) \\
+&  \Longleftrightarrow\ \left(  \sigma_{1}\sigma_{2},\ \ \sigma_{2}\sigma
+_{3},\ \ \sigma_{3}\sigma_{4},\ \ \ldots,\ \ \sigma_{n-1}\sigma_{n}\text{
+belong to }A\right) \\
+&  \Longleftrightarrow\ \left(  \left\{  \sigma_{1}\sigma_{2},\ \ \sigma
+_{2}\sigma_{3},\ \ \sigma_{3}\sigma_{4},\ \ \ldots,\ \ \sigma_{n-1}\sigma
+_{n}\right\}  \subseteq A\right) \\
+&  \Longleftrightarrow\ \left(  P\left(  \sigma\right)  \subseteq A\right)
+\ \ \ \ \ \ \ \ \ \ \left(  \text{since }P\left(  \sigma\right)  =\left\{
+\sigma_{1}\sigma_{2},\ \ \sigma_{2}\sigma_{3},\ \ \sigma_{3}\sigma
+_{4},\ \ \ldots,\ \ \sigma_{n-1}\sigma_{n}\right\}  \right)  .
+\end{align*}
+This proves Observation 2.]
+
+\begin{statement}
+\textit{Observation 3:} Let $\sigma$ be a $V$-listing. Then, $\sigma$ is a
+hamp of $\overline{D}$ if and only if $P\left(  \sigma\right)  \subseteq
+\left(  V\times V\right)  \setminus A$.
+\end{statement}
+
+[\textit{Proof of Observation 3:} This is proved by the same argument as
+Observation 2, but with $D$ and $A$ replaced by $\overline{D}$ and $\left(
+V\times V\right)  \setminus A$ (since $\left(  V\times V\right)  \setminus A$
+is the set of all arcs of $\overline{D}$).] \medskip
+
+Now, let $N$ be the number of pairs $\left(  \sigma,B\right)  $ where $\sigma$
+is a $V$-listing and $B$ is a subset of $A$ satisfying $B\subseteq P\left(
+\sigma\right)  $. Then,%
+\begin{equation}
+N=\sum_{\sigma\text{ is a }V\text{-listing}}N_{\sigma},
+\label{pf.thm.hamp.Dbar.3}%
+\end{equation}
+where
+\[
+N_{\sigma}:=\left(  \#\text{ of subsets }B\text{ of }A\text{ satisfying
+}B\subseteq P\left(  \sigma\right)  \right)  .
+\]
+But we also have%
+\begin{equation}
+N=\sum_{B\text{ is a subset of }A}N^{B}, \label{pf.thm.hamp.Dbar.4}%
+\end{equation}
+where%
+\[
+N^{B}:=\left(  \#\text{ of }V\text{-listings }\sigma\text{ such that
+}B\subseteq P\left(  \sigma\right)  \right)  .
+\]
+(The \textquotedblleft$B$\textquotedblright\ in \textquotedblleft$N^{B}%
+$\textquotedblright\ is not an exponent but just a superscript.)
+
+Let us now relate these two sums to hamps. We begin with the sum in
+(\ref{pf.thm.hamp.Dbar.3}). We shall use the \emph{Iverson bracket notation}
+-- i.e., the notation $\left[  \mathcal{A}\right]  $ for the truth value of a
+statement $\mathcal{A}$. (This truth value is defined to be $1$ if
+$\mathcal{A}$ is true, and to be $0$ if $\mathcal{A}$ is false.) Clearly, if
+$\mathcal{A}$ and $\mathcal{B}$ are two equivalent statements, then $\left[
+\mathcal{A}\right]  =\left[  \mathcal{B}\right]  $. We will use this fact
+without explicit mention. Also, if $S$ is a set, and if $\mathcal{A}\left(
+s\right)  $ is a statement for each $s\in S$, then
+\begin{equation}
+\sum_{s\in S}\left[  \mathcal{A}\left(  s\right)  \right]  =\left(  \#\text{
+of elements }s\in S\text{ satisfying }\mathcal{A}\left(  s\right)  \right)  .
+\label{pf.thm.hamp.Dbar.rcall}%
+\end{equation}
+Also, it is easy to see that%
+\begin{equation}
+2^{m}\equiv\left[  m=0\right]  \operatorname{mod}2 \label{pf.thm.hamp.Dbar.2m}%
+\end{equation}
+for each $m\in\mathbb{N}$.
+
+For any $V$-listing $\sigma$, we have%
+\begin{align}
+N_{\sigma}  &  =\left(  \#\text{ of subsets }B\text{ of }A\text{ satisfying
+}B\subseteq P\left(  \sigma\right)  \right) \nonumber\\
+&  =\left(  \#\text{ of subsets of }A\cap\left(  P\left(  \sigma\right)
+\right)  \right) \nonumber\\
+&  \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \left(
+\begin{array}
+[c]{c}%
+\text{since a subset }B\text{ of }A\text{ satisfying }B\subseteq P\left(
+\sigma\right) \\
+\text{is the same thing as a subset of }A\cap\left(  P\left(  \sigma\right)
+\right)
+\end{array}
+\right) \nonumber\\
+&  =2^{\left\vert A\cap\left(  P\left(  \sigma\right)  \right)  \right\vert
+}\nonumber\\
+&  \equiv\left[  \left\vert A\cap\left(  P\left(  \sigma\right)  \right)
+\right\vert =0\right]  \ \ \ \ \ \ \ \ \ \ \left(  \text{by
+(\ref{pf.thm.hamp.Dbar.2m})}\right) \nonumber\\
+&  =\left[  A\cap\left(  P\left(  \sigma\right)  \right)  =\varnothing\right]
+\nonumber\\
+&  =\left[  P\left(  \sigma\right)  \subseteq\left(  V\times V\right)
+\setminus A\right]  \ \ \ \ \ \ \ \ \ \ \left(  \text{since }P\left(
+\sigma\right)  \text{ is a subset of }V\times V\right) \nonumber\\
+&  =\left[  \sigma\text{ is a hamp of }\overline{D}\right]  \operatorname{mod}%
+2 \label{pf.thm.hamp.Dbar.Nsig=1}%
+\end{align}
+(by Observation 3 above). Hence, (\ref{pf.thm.hamp.Dbar.3}) becomes%
+\begin{align}
+N  &  =\sum_{\sigma\text{ is a }V\text{-listing}}\ \ \underbrace{N_{\sigma}%
+}_{\substack{\equiv\left[  \sigma\text{ is a hamp of }\overline{D}\right]
+\ \ \operatorname{mod}2\\\text{(by (\ref{pf.thm.hamp.Dbar.Nsig=1}))}%
+}}\nonumber\\
+&  \equiv\sum_{\sigma\text{ is a }V\text{-listing}}\left[  \sigma\text{ is a
+hamp of }\overline{D}\right] \nonumber\\
+&  =\left(  \#\text{ of }V\text{-listings }\sigma\text{ such that }%
+\sigma\text{ is a hamp of }\overline{D}\right)  \ \ \ \ \ \ \ \ \ \ \left(
+\text{by (\ref{pf.thm.hamp.Dbar.rcall})}\right) \nonumber\\
+&  =\left(  \#\text{ of hamps of }\overline{D}\right)  \operatorname{mod}2
+\label{pf.thm.hamp.Dbr.5}%
+\end{align}
+(because each hamp of $\overline{D}$ is a $V$-listing).
+
+Now, let us study the numbers $N^{B}$ more closely. Fix a subset $B$ of $A$.
+Then,%
+\[
+N^{B}=\left(  \#\text{ of }V\text{-listings }\sigma\text{ such that
+}B\subseteq P\left(  \sigma\right)  \right)  .
+\]
+When is this $\#$ odd?
+
+To find out, let us define another word: A \emph{path cover} of $V$ shall mean
+a set of paths in the digraph $\left(  V,V\times V\right)  $ (not $\left(
+V,A\right)  $) such that each vertex $v\in V$ is contained in \textbf{exactly}
+one of these paths. (Recall that a path is allowed to consist of a single
+vertex, but cannot have $0$ vertices.)
+
+For example, if $V=\left\{  1,2,3,4,5,6,7\right\}  $, then
+\[
+\left\{  \left(  1,3,5\right)  ,\ \ \left(  2\right)  ,\ \ \left(  6\right)
+,\ \ \left(  7,4\right)  \right\}
+\]
+is a path cover of $V$, and so is
+\[
+\left\{  \left(  1\right)  ,\ \ \left(  2\right)  ,\ \ \left(
+3,4,6,5,7\right)  \right\}  ,
+\]
+and so is%
+\[
+\left\{  \left(  1\right)  ,\ \ \left(  2\right)  ,\ \ \left(  3\right)
+,\ \ \left(  4\right)  ,\ \ \left(  5\right)  ,\ \ \left(  6\right)
+,\ \ \left(  7\right)  \right\}
+\]
+(in this path cover, each vertex belongs to its own path), and so is%
+\[
+\left\{  \left(  1,2,3,4,5,6,7\right)  \right\}
+\]
+(a path cover consisting of just a single path). We can visualize these path
+covers by drawing the paths in the obvious manner (i.e., we represent each
+element of $V$ as a node, and we draw arrows for the arcs of each path in our
+path cover). Thus, the four above-listed examples of path covers look as
+follows:%
+\[%
+%TCIMACRO{\TeXButton{tikz path cover on 7 vertices}{\begin{tikzpicture}
+%\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+%\node(A) at (0,0) {$1$};
+%\node(B) at (2,0) {$3$};
+%\node(C) at (4,0) {$5$};
+%\node(D) at (6,0) {$2$};
+%\node(E) at (8,0) {$6$};
+%\node(F) at (10,0) {$7$};
+%\node(G) at (12,0) {$4$};
+%\end{scope}
+%\begin{scope}[every edge/.style={draw=black,very thick}]
+%\path[->] (A) edge (B) (B) edge (C) (F) edge (G);
+%\end{scope}
+%\end{tikzpicture}}}%
+%BeginExpansion
+\begin{tikzpicture}
+\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+\node(A) at (0,0) {$1$};
+\node(B) at (2,0) {$3$};
+\node(C) at (4,0) {$5$};
+\node(D) at (6,0) {$2$};
+\node(E) at (8,0) {$6$};
+\node(F) at (10,0) {$7$};
+\node(G) at (12,0) {$4$};
+\end{scope}
+\begin{scope}[every edge/.style={draw=black,very thick}]
+\path[->] (A) edge (B) (B) edge (C) (F) edge (G);
+\end{scope}
+\end{tikzpicture}%
+%EndExpansion
+\]
+and%
+\[%
+%TCIMACRO{\TeXButton{tikz path cover on 7 vertices}{\begin{tikzpicture}
+%\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+%\node(A) at (0,0) {$1$};
+%\node(B) at (2,0) {$2$};
+%\node(C) at (4,0) {$3$};
+%\node(D) at (6,0) {$4$};
+%\node(E) at (8,0) {$6$};
+%\node(F) at (10,0) {$5$};
+%\node(G) at (12,0) {$7$};
+%\end{scope}
+%\begin{scope}[every edge/.style={draw=black,very thick}]
+%\path[->] (C) edge (D) (D) edge (E) (E) edge (F) (F) edge (G);
+%\end{scope}
+%\end{tikzpicture}}}%
+%BeginExpansion
+\begin{tikzpicture}
+\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+\node(A) at (0,0) {$1$};
+\node(B) at (2,0) {$2$};
+\node(C) at (4,0) {$3$};
+\node(D) at (6,0) {$4$};
+\node(E) at (8,0) {$6$};
+\node(F) at (10,0) {$5$};
+\node(G) at (12,0) {$7$};
+\end{scope}
+\begin{scope}[every edge/.style={draw=black,very thick}]
+\path[->] (C) edge (D) (D) edge (E) (E) edge (F) (F) edge (G);
+\end{scope}
+\end{tikzpicture}%
+%EndExpansion
+\]
+and%
+\[%
+%TCIMACRO{\TeXButton{tikz path cover on 7 vertices}{\begin{tikzpicture}
+%\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+%\node(A) at (0,0) {$1$};
+%\node(B) at (2,0) {$2$};
+%\node(C) at (4,0) {$3$};
+%\node(D) at (6,0) {$4$};
+%\node(E) at (8,0) {$6$};
+%\node(F) at (10,0) {$5$};
+%\node(G) at (12,0) {$7$};
+%\end{scope}
+%\end{tikzpicture}}}%
+%BeginExpansion
+\begin{tikzpicture}
+\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+\node(A) at (0,0) {$1$};
+\node(B) at (2,0) {$2$};
+\node(C) at (4,0) {$3$};
+\node(D) at (6,0) {$4$};
+\node(E) at (8,0) {$6$};
+\node(F) at (10,0) {$5$};
+\node(G) at (12,0) {$7$};
+\end{scope}
+\end{tikzpicture}%
+%EndExpansion
+\]
+and%
+\[%
+%TCIMACRO{\TeXButton{tikz path cover on 7 vertices}{\begin{tikzpicture}
+%\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+%\node(A) at (0,0) {$1$};
+%\node(B) at (2,0) {$2$};
+%\node(C) at (4,0) {$3$};
+%\node(D) at (6,0) {$4$};
+%\node(E) at (8,0) {$5$};
+%\node(F) at (10,0) {$6$};
+%\node(G) at (12,0) {$7$};
+%\end{scope}
+%\begin{scope}[every edge/.style={draw=black,very thick}]
+%\path
+%[->] (A) edge (B) (B) edge (C) (C) edge (D) (D) edge (E) (E) edge (F) (F) edge (G);
+%\end{scope}
+%\end{tikzpicture}}}%
+%BeginExpansion
+\begin{tikzpicture}
+\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+\node(A) at (0,0) {$1$};
+\node(B) at (2,0) {$2$};
+\node(C) at (4,0) {$3$};
+\node(D) at (6,0) {$4$};
+\node(E) at (8,0) {$5$};
+\node(F) at (10,0) {$6$};
+\node(G) at (12,0) {$7$};
+\end{scope}
+\begin{scope}[every edge/.style={draw=black,very thick}]
+\path
+[->] (A) edge (B) (B) edge (C) (C) edge (D) (D) edge (E) (E) edge (F) (F) edge (G);
+\end{scope}
+\end{tikzpicture}%
+%EndExpansion
+\ \ .
+\]
+
+
+Note that the notion of a path cover of $V$ depends only on $V$, not on $A$.
+
+If $C$ is a path cover of $V$, then the paths that belong to $C$ will be
+called the $C$\emph{-paths}. For example, if $C=\left\{  \left(  1\right)
+,\ \ \left(  2\right)  ,\ \ \left(  3,4,6,5,7\right)  \right\}  $, then the
+$C$-paths are $\left(  1\right)  $, $\left(  2\right)  $ and $\left(
+3,4,6,5,7\right)  $.
+
+If $C$ is a path cover of $V$, then we let $\operatorname*{Arcs}C$ denote the
+set of arcs of all $C$-paths. In other words, we let%
+\[
+\operatorname*{Arcs}C:=\bigcup_{\left(  a_{1},a_{2},\ldots,a_{k}\right)
+\text{ is a }C\text{-path}}\left\{  a_{1}a_{2},\ a_{2}a_{3},\ \ldots
+,\ a_{k-1}a_{k}\right\}  .
+\]
+We call this set $\operatorname*{Arcs}C$ the \emph{arc set} of $C$. For
+example, the four above-listed examples of path covers have arc sets%
+\begin{align*}
+&  \left\{  13,\ 35,\ 74\right\}  ,\\
+&  \left\{  34,\ 46,\ 65,\ 57\right\}  ,\\
+&  \varnothing,\\
+&  \left\{  12,\ 23,\ 34,\ 45,\ 56,\ 67\right\}  ,
+\end{align*}
+respectively.
+
+Now, assume that $N^{B}$ is odd. Thus, $N^{B}\neq0$, so that there exists
+\textbf{some} $V$-listing $\sigma$ such that $B\subseteq P\left(
+\sigma\right)  $ (since $N^{B}$ is the $\#$ of such $V$-listings). From this,
+we can easily see that there exists a path cover $C$ of $V$ such that
+$B=\operatorname*{Arcs}C$.
+
+[\textit{Proof:} We have just shown that there exists \textbf{some}
+$V$-listing $\sigma$ such that $B\subseteq P\left(  \sigma\right)  $. Consider
+this $\sigma$, and write it as $\sigma=\left(  \sigma_{1},\sigma_{2}%
+,\ldots,\sigma_{n}\right)  $. Note that $\sigma$ is a hamp of the digraph
+$\left(  V,V\times V\right)  $ (since $\sigma$ is a $V$-listing). The set
+$P\left(  \sigma\right)  $ is the set of arcs of this hamp.
+
+However, if we remove an arc from a path, then this path breaks into two
+smaller paths\footnote{For instance, removing the arc $34$ from the path
+$\left(  1,2,3,4,5\right)  $ breaks it into the two smaller paths $\left(
+1,2,3\right)  $ and $\left(  4,5\right)  $.}. Thus, if we remove several arcs
+from a path, then this path breaks into several smaller paths. Hence, in
+particular, if we remove some arcs from a hamp of $\left(  V,V\times V\right)
+$, then this hamp breaks into several smaller paths, and the latter paths form
+a path cover of $V$ (because each $v\in V$ is contained in exactly one of
+them)\footnote{For instance, if we remove the arcs $23$ and $34$ from the hamp
+$\left(  1,2,3,4,5,6\right)  $ (assuming that $V=\left\{  1,2,3,4,5,6\right\}
+$), then this hamp breaks into three paths $\left(  1,2\right)  $, $\left(
+3\right)  $ and $\left(  4,5,6\right)  $, which form the path cover $\left\{
+\left(  1,2\right)  ,\ \left(  3\right)  ,\ \left(  4,5,6\right)  \right\}  $
+of $V$.}. In other words, if we remove some arcs from a hamp $\tau$ of
+$\left(  V,V\times V\right)  $, then the set of all remaining arcs of $\tau$
+is the arc set of a path cover of $V$.\ \ \ \ \footnote{We can even describe
+the latter path cover explicitly: Let $\tau=\left(  \tau_{1},\tau_{2}%
+,\ldots,\tau_{n}\right)  $ be a hamp of $\left(  V,V\times V\right)  $, and
+let us remove the arcs
+\[
+\tau_{i_{1}}\tau_{i_{1}+1},\ \ \tau_{i_{2}}\tau_{i_{2}+1},\ \ \ldots
+,\ \ \tau_{i_{p}}\tau_{i_{p}+1}%
+\]
+from $\tau$, where $i_{1},i_{2},\ldots,i_{p}$ are some elements of $\left\{
+1,2,\ldots,n-1\right\}  $ satisfying $i_{1}<i_{2}<\cdots<i_{p}$. Then, the
+hamp $\tau$ breaks into the $p+1$ smaller paths%
+\begin{align*}
+&  \left(  \tau_{1},\tau_{2},\ldots,\tau_{i_{1}}\right)  ,\\
+&  \left(  \tau_{i_{1}+1},\tau_{i_{1}+2},\ldots,\tau_{i_{2}}\right)  ,\\
+&  \left(  \tau_{i_{2}+1},\tau_{i_{2}+2},\ldots,\tau_{i_{3}}\right)  ,\\
+&  \ldots,\\
+&  \left(  \tau_{i_{p}+1},\tau_{i_{p}+2},\ldots,\tau_{n}\right)  ,
+\end{align*}
+and these $p+1$ smaller paths form a path cover of $V$. The set of all
+remaining arcs of $\tau$ is the arc set of this path cover.}
+
+Applying this to $\tau=\sigma$, we conclude that if we remove some arcs from
+$\sigma$, then the set of all remaining arcs of $\sigma$ is the arc set of a
+path cover of $V$. In other words, any subset of $P\left(  \sigma\right)  $ is
+the arc set of a path cover of $V$ (since any subset of $P\left(
+\sigma\right)  $ can be obtained by removing some arcs from $\sigma$). Thus,
+$B$ is the arc set of a path cover of $V$ (since $B$ is a subset of $P\left(
+\sigma\right)  $).\ \ \ \ \footnote{For example, if $\sigma=\left(
+1,2,3,4,5,6\right)  $ and $B=\left\{  12,\ 45,\ 56\right\}  $, then $B$ is
+obtained by removing the arcs $23$ and $34$ from the hamp $\sigma$, and thus
+$B$ is the arc set of the path cover $\left\{  \left(  1,2\right)  ,\ \left(
+3\right)  ,\ \left(  4,5,6\right)  \right\}  $.} In other words, there exists
+a path cover $C$ of $V$ such that $B=\operatorname*{Arcs}C$.] \medskip
+
+So we have shown that there exists a path cover $C$ of $V$ such that
+$B=\operatorname*{Arcs}C$. Consider this $C$.
+
+Let $r$ be the number of $C$-paths. Thus, $C$ consists of $r$ paths, and each
+vertex $v\in V$ is contained in exactly one of these $r$ paths. Note that
+there exists at least one $C$-path (since $V\neq\varnothing$, but each vertex
+$v\in V$ must be contained in a $C$-path). In other words, $r\geq1$.
+
+Now, what are the $V$-listings $\sigma$ that satisfy $B\subseteq P\left(
+\sigma\right)  $ ? These are the $V$-listings $\sigma$ that satisfy
+$\operatorname*{Arcs}C\subseteq P\left(  \sigma\right)  $ (since
+$B=\operatorname*{Arcs}C$). In other words, these are the $V$-listings
+$\sigma$ with the property that each arc of each $C$-path is also an arc of
+$\sigma$ (since $\operatorname*{Arcs}C$ is the set of all arcs of all
+$C$-paths, whereas $P\left(  \sigma\right)  $ is the set of all arcs of
+$\sigma$). In other words, these are the $V$-listings $\sigma$ with the
+property that if a vertex $a$ is followed by a vertex $b$ on some $C$-path,
+then $a$ is also followed by $b$ in the $V$-listing $\sigma$. Hence, each
+$C$-path must appear as a contiguous block on such a $V$-listing $\sigma$,
+with its vertices appearing in the same order in $\sigma$ as they do on the
+$C$-path. Therefore, each $V$-listing $\sigma$ that satisfies $B\subseteq
+P\left(  \sigma\right)  $ can be constructed as follows:
+
+\begin{enumerate}
+\item Start with the empty list $\left(  {}\right)  $.
+
+\item Pick some $C$-path, and append all its vertices (in the order in which
+they appear on this $C$-path) to the end of the list.
+
+\item Then, pick another $C$-path, and do the same for its vertices.
+
+\item Then, pick another $C$-path, and do the same for its vertices.
+
+\item And so on, until all $C$-paths have been listed.
+\end{enumerate}
+
+In other words, each $V$-listing $\sigma$ that satisfies $B\subseteq P\left(
+\sigma\right)  $ can be obtained by
+concatenating\footnote{\emph{Concatenating} several lists $\mathbf{a}%
+_{1},\mathbf{a}_{2},\ldots,\mathbf{a}_{k}$ means combining them into a single
+list, which begins with the entries of $\mathbf{a}_{1}$ (in the order in which
+they appear in $\mathbf{a}_{1}$), continues with the entries of $\mathbf{a}%
+_{2}$ (in the order in which they appear in $\mathbf{a}_{2}$), and so on. For
+instance, concatenating three lists $\left(  a_{1},a_{2},a_{3}\right)  $,
+$\left(  b_{1},b_{2}\right)  $ and $\left(  c_{1},c_{2},c_{3}\right)  $ yields
+the list $\left(  a_{1},a_{2},a_{3},b_{1},b_{2},c_{1},c_{2},c_{3}\right)  $.
+Since the $C$-paths are lists (of vertices), we can concatenate them.} the
+$C$-paths in some order\footnote{For an example, let us assume that
+$V=\left\{  1,2,3,4,5,6\right\}  $ and $P=\left\{  \left(  1,3,2\right)
+,\ \ \left(  4\right)  ,\ \ \left(  6,5\right)  \right\}  $, so that $r=3$.
+The path cover $P$ looks as follows:%
+\[%
+%TCIMACRO{\TeXButton{tikz path cover on 6 vertices}{\begin{tikzpicture}
+%\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+%\node(A) at (0,0) {$1$};
+%\node(B) at (2,0) {$3$};
+%\node(C) at (4,0) {$2$};
+%\node(D) at (6,0) {$4$};
+%\node(E) at (8,0) {$6$};
+%\node(F) at (10,0) {$5$};
+%\end{scope}
+%\begin{scope}[every edge/.style={draw=black,very thick}]
+%\path[->] (A) edge (B) (B) edge (C) (E) edge (F);
+%\end{scope}
+%\end{tikzpicture}}}%
+%BeginExpansion
+\begin{tikzpicture}
+\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+\node(A) at (0,0) {$1$};
+\node(B) at (2,0) {$3$};
+\node(C) at (4,0) {$2$};
+\node(D) at (6,0) {$4$};
+\node(E) at (8,0) {$6$};
+\node(F) at (10,0) {$5$};
+\end{scope}
+\begin{scope}[every edge/.style={draw=black,very thick}]
+\path[->] (A) edge (B) (B) edge (C) (E) edge (F);
+\end{scope}
+\end{tikzpicture}%
+%EndExpansion
+\ \ .
+\]
+Then, the $V$-listings $\sigma$ that satisfy $B\subseteq P\left(
+\sigma\right)  $ are%
+\begin{align*}
+&  \left(  1,3,2,4,6,5\right)  ,\ \ \ \ \ \ \ \ \ \ \left(
+1,3,2,6,5,4\right)  ,\ \ \ \ \ \ \ \ \ \ \left(  4,1,3,2,6,5\right)  ,\\
+&  \left(  4,6,5,1,3,2\right)  ,\ \ \ \ \ \ \ \ \ \ \left(
+6,5,1,3,2,4\right)  ,\ \ \ \ \ \ \ \ \ \ \left(  6,5,4,1,3,2\right)  .
+\end{align*}
+Here is how they look like (the dashed arrows connect different $C$-paths):%
+\begin{align*}
+&
+%TCIMACRO{\TeXButton{tikz path cover on 6 vertices}{\begin{tikzpicture}
+%\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+%\node(A) at (0,0) {$1$};
+%\node(B) at (2,0) {$3$};
+%\node(C) at (4,0) {$2$};
+%\node(D) at (6,0) {$4$};
+%\node(E) at (8,0) {$6$};
+%\node(F) at (10,0) {$5$};
+%\end{scope}
+%\begin{scope}[every edge/.style={draw=black,very thick}]
+%\path[->] (A) edge (B) (B) edge (C) (E) edge (F);
+%\path[->,dashed] (C) edge[bend left] (D) (D) edge[bend left] (E);
+%\end{scope}
+%\end{tikzpicture}}}%
+%BeginExpansion
+\begin{tikzpicture}
+\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+\node(A) at (0,0) {$1$};
+\node(B) at (2,0) {$3$};
+\node(C) at (4,0) {$2$};
+\node(D) at (6,0) {$4$};
+\node(E) at (8,0) {$6$};
+\node(F) at (10,0) {$5$};
+\end{scope}
+\begin{scope}[every edge/.style={draw=black,very thick}]
+\path[->] (A) edge (B) (B) edge (C) (E) edge (F);
+\path[->,dashed] (C) edge[bend left] (D) (D) edge[bend left] (E);
+\end{scope}
+\end{tikzpicture}%
+%EndExpansion
+\ \ ;\\
+& \\
+&
+%TCIMACRO{\TeXButton{tikz path cover on 6 vertices}{\begin{tikzpicture}
+%\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+%\node(A) at (0,0) {$1$};
+%\node(B) at (2,0) {$3$};
+%\node(C) at (4,0) {$2$};
+%\node(D) at (6,0) {$4$};
+%\node(E) at (8,0) {$6$};
+%\node(F) at (10,0) {$5$};
+%\end{scope}
+%\begin{scope}[every edge/.style={draw=black,very thick}]
+%\path[->] (A) edge (B) (B) edge (C) (E) edge (F);
+%\path[->,dashed] (C) edge[bend left] (E) (F) edge[bend left] (D);
+%\end{scope}
+%\end{tikzpicture}}}%
+%BeginExpansion
+\begin{tikzpicture}
+\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+\node(A) at (0,0) {$1$};
+\node(B) at (2,0) {$3$};
+\node(C) at (4,0) {$2$};
+\node(D) at (6,0) {$4$};
+\node(E) at (8,0) {$6$};
+\node(F) at (10,0) {$5$};
+\end{scope}
+\begin{scope}[every edge/.style={draw=black,very thick}]
+\path[->] (A) edge (B) (B) edge (C) (E) edge (F);
+\path[->,dashed] (C) edge[bend left] (E) (F) edge[bend left] (D);
+\end{scope}
+\end{tikzpicture}%
+%EndExpansion
+\ \ ;\\
+& \\
+&
+%TCIMACRO{\TeXButton{tikz path cover on 6 vertices}{\begin{tikzpicture}
+%\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+%\node(A) at (0,0) {$1$};
+%\node(B) at (2,0) {$3$};
+%\node(C) at (4,0) {$2$};
+%\node(D) at (6,0) {$4$};
+%\node(E) at (8,0) {$6$};
+%\node(F) at (10,0) {$5$};
+%\end{scope}
+%\begin{scope}[every edge/.style={draw=black,very thick}]
+%\path[->] (A) edge (B) (B) edge (C) (E) edge (F);
+%\path[->,dashed] (D) edge[bend left] (A) (C) edge[bend left] (E);
+%\end{scope}
+%\end{tikzpicture}}}%
+%BeginExpansion
+\begin{tikzpicture}
+\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+\node(A) at (0,0) {$1$};
+\node(B) at (2,0) {$3$};
+\node(C) at (4,0) {$2$};
+\node(D) at (6,0) {$4$};
+\node(E) at (8,0) {$6$};
+\node(F) at (10,0) {$5$};
+\end{scope}
+\begin{scope}[every edge/.style={draw=black,very thick}]
+\path[->] (A) edge (B) (B) edge (C) (E) edge (F);
+\path[->,dashed] (D) edge[bend left] (A) (C) edge[bend left] (E);
+\end{scope}
+\end{tikzpicture}%
+%EndExpansion
+\ \ ;\\
+& \\
+&
+%TCIMACRO{\TeXButton{tikz path cover on 6 vertices}{\begin{tikzpicture}
+%\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+%\node(A) at (0,0) {$1$};
+%\node(B) at (2,0) {$3$};
+%\node(C) at (4,0) {$2$};
+%\node(D) at (6,0) {$4$};
+%\node(E) at (8,0) {$6$};
+%\node(F) at (10,0) {$5$};
+%\end{scope}
+%\begin{scope}[every edge/.style={draw=black,very thick}]
+%\path[->] (A) edge (B) (B) edge (C) (E) edge (F);
+%\path[->,dashed] (D) edge[bend left] (E) (F) edge[bend left] (A);
+%\end{scope}
+%\end{tikzpicture}}}%
+%BeginExpansion
+\begin{tikzpicture}
+\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+\node(A) at (0,0) {$1$};
+\node(B) at (2,0) {$3$};
+\node(C) at (4,0) {$2$};
+\node(D) at (6,0) {$4$};
+\node(E) at (8,0) {$6$};
+\node(F) at (10,0) {$5$};
+\end{scope}
+\begin{scope}[every edge/.style={draw=black,very thick}]
+\path[->] (A) edge (B) (B) edge (C) (E) edge (F);
+\path[->,dashed] (D) edge[bend left] (E) (F) edge[bend left] (A);
+\end{scope}
+\end{tikzpicture}%
+%EndExpansion
+\ \ ;\\
+& \\
+&
+%TCIMACRO{\TeXButton{tikz path cover on 6 vertices}{\begin{tikzpicture}
+%\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+%\node(A) at (0,0) {$1$};
+%\node(B) at (2,0) {$3$};
+%\node(C) at (4,0) {$2$};
+%\node(D) at (6,0) {$4$};
+%\node(E) at (8,0) {$6$};
+%\node(F) at (10,0) {$5$};
+%\end{scope}
+%\begin{scope}[every edge/.style={draw=black,very thick}]
+%\path[->] (A) edge (B) (B) edge (C) (E) edge (F);
+%\path[->,dashed] (F) edge[bend left] (A) (C) edge[bend left] (D);
+%\end{scope}
+%\end{tikzpicture}}}%
+%BeginExpansion
+\begin{tikzpicture}
+\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+\node(A) at (0,0) {$1$};
+\node(B) at (2,0) {$3$};
+\node(C) at (4,0) {$2$};
+\node(D) at (6,0) {$4$};
+\node(E) at (8,0) {$6$};
+\node(F) at (10,0) {$5$};
+\end{scope}
+\begin{scope}[every edge/.style={draw=black,very thick}]
+\path[->] (A) edge (B) (B) edge (C) (E) edge (F);
+\path[->,dashed] (F) edge[bend left] (A) (C) edge[bend left] (D);
+\end{scope}
+\end{tikzpicture}%
+%EndExpansion
+\ \ ;\\
+& \\
+&
+%TCIMACRO{\TeXButton{tikz path cover on 6 vertices}{\begin{tikzpicture}
+%\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+%\node(A) at (0,0) {$1$};
+%\node(B) at (2,0) {$3$};
+%\node(C) at (4,0) {$2$};
+%\node(D) at (6,0) {$4$};
+%\node(E) at (8,0) {$6$};
+%\node(F) at (10,0) {$5$};
+%\end{scope}
+%\begin{scope}[every edge/.style={draw=black,very thick}]
+%\path[->] (A) edge (B) (B) edge (C) (E) edge (F);
+%\path[->,dashed] (F) edge[bend left] (D) (D) edge[bend left] (A);
+%\end{scope}
+%\end{tikzpicture}}}%
+%BeginExpansion
+\begin{tikzpicture}
+\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+\node(A) at (0,0) {$1$};
+\node(B) at (2,0) {$3$};
+\node(C) at (4,0) {$2$};
+\node(D) at (6,0) {$4$};
+\node(E) at (8,0) {$6$};
+\node(F) at (10,0) {$5$};
+\end{scope}
+\begin{scope}[every edge/.style={draw=black,very thick}]
+\path[->] (A) edge (B) (B) edge (C) (E) edge (F);
+\path[->,dashed] (F) edge[bend left] (D) (D) edge[bend left] (A);
+\end{scope}
+\end{tikzpicture}%
+%EndExpansion
+\ \ .
+\end{align*}
+}. The only freedom we have is to choose this order. For this, we have $r!$
+options (since the number of $C$-paths is $r$). Each of these $r!$ options
+yields a different $V$-listing (because the $C$-paths are nonempty and have no
+vertex in common).
+
+Thus, $N^{B}=r!$ (since $N^{B}$ is the $\#$ of $V$-listings $\sigma$ such that
+$B\subseteq P\left(  \sigma\right)  $). Since $N^{B}$ is odd, we thus see that
+$r!$ is odd. However, a factorial $m!$ is always even for $m>1$; therefore, we
+must have $r\leq1$ (since $r!$ is odd). Combining this with $r\geq1$, we
+obtain $r=1$. In other words, there is only one $C$-path. This $C$-path must
+contain each $v\in V$ (because $C$ is a path cover of $V$, and thus each $v\in
+V$ is contained in a $C$-path), and thus is a hamp of the digraph $\left(
+V,V\times V\right)  $. Let $\tau$ be this hamp. Thus, $\tau$ is the only
+$C$-path; in other words, $C=\left\{  \tau\right\}  $. Hence,
+$\operatorname*{Arcs}C$ is the set of arcs of the path $\tau$. In other words,
+$\operatorname*{Arcs}C=P\left(  \tau\right)  $. Thus, $B=\operatorname*{Arcs}%
+C=P\left(  \tau\right)  $, so that $P\left(  \tau\right)  =B\subseteq A$
+(since $B$ is a subset of $A$); in other words, each arc of $\tau$ belongs to
+$A$. Hence, $\tau$ is a path of $D$. Therefore, $\tau$ is a hamp of $D$ (since
+$\tau$ is a hamp of $\left(  V,V\times V\right)  $).
+
+Now, forget that we assumed that $N^{B}$ is odd. We thus have shown that%
+\begin{equation}
+\text{if }N^{B}\text{ is odd, then }B=P\left(  \tau\right)  \text{ for some
+hamp }\tau\text{ of }D. \label{pf.thm.hamp.Dbar.6}%
+\end{equation}
+
+
+The converse of this statement holds as well:%
+\begin{equation}
+\text{if }B=P\left(  \tau\right)  \text{ for some hamp }\tau\text{ of
+}D\text{, then }N^{B}\text{ is odd} \label{pf.thm.hamp.Dbar.7}%
+\end{equation}
+(and actually $N^{B}$ equals $1$ in this case).
+
+[\textit{Proof of (\ref{pf.thm.hamp.Dbar.7}):} Assume that $B=P\left(
+\tau\right)  $ for some hamp $\tau$ of $D$. Consider this $\tau$. Thus, $\tau$
+is a $V$-listing $\sigma$ such that $B\subseteq P\left(  \sigma\right)  $.
+Furthermore, it is easy to see that $\tau$ is the \textbf{only} such
+$V$-listing\footnote{\textit{Proof.} Let $\sigma$ be a $V$-listing such that
+$B\subseteq P\left(  \sigma\right)  $. We must show that $\sigma=\tau$.
+\par
+From $B=P\left(  \tau\right)  $, we obtain $P\left(  \tau\right)  =B\subseteq
+P\left(  \sigma\right)  $. However, the sets $P\left(  \sigma\right)  $ and
+$P\left(  \tau\right)  $ are two finite sets of the same size (since they are
+both $\left(  n-1\right)  $-element sets). Thus, if one of them is a subset of
+the other, then they must be equal. Hence, from $P\left(  \tau\right)
+\subseteq P\left(  \sigma\right)  $, we obtain $P\left(  \tau\right)
+=P\left(  \sigma\right)  $. Using Observation 1, we thus conclude that
+$\tau=\sigma$. Hence, $\sigma=\tau$, qed.}. Therefore, there is exactly $1$
+such $V$-listing. In other words, the $\#$ of such $V$-listings is $1$. In
+other words, $N^{B}$ is $1$ (since $N^{B}$ is this $\#$). Hence, $N^{B}$ is
+odd. This proves (\ref{pf.thm.hamp.Dbar.7}).] \medskip
+
+Combining (\ref{pf.thm.hamp.Dbar.6}) with (\ref{pf.thm.hamp.Dbar.7}), we
+obtain the following: The number $N^{B}$ is odd if and only if $B=P\left(
+\tau\right)  $ for some hamp $\tau$ of $D$. Therefore,%
+\[
+\left[  N^{B}\text{ is odd}\right]  =\left[  B=P\left(  \tau\right)  \text{
+for some hamp }\tau\text{ of }D\right]  .
+\]
+However, it is easy to see that $m\equiv\left[  m\text{ is odd}\right]
+\operatorname{mod}2$ for each integer $m$. Thus,%
+\begin{align}
+N^{B}  &  \equiv\left[  N^{B}\text{ is odd}\right] \nonumber\\
+&  =\left[  B=P\left(  \tau\right)  \text{ for some hamp }\tau\text{ of
+}D\right]  \operatorname{mod}2. \label{pf.thm.hamp.Dbar.8}%
+\end{align}
+
+
+Forget that we fixed $B$. We thus have proved the congruence
+(\ref{pf.thm.hamp.Dbar.8}) for each subset $B$ of $A$. Hence,
+(\ref{pf.thm.hamp.Dbar.4}) becomes%
+\begin{align*}
+N  &  =\sum_{B\text{ is a subset of }A}\ \ \underbrace{N^{B}}%
+_{\substack{\equiv\left[  B=P\left(  \tau\right)  \text{ for some hamp }%
+\tau\text{ of }D\right]  \operatorname{mod}2\\\text{(by
+(\ref{pf.thm.hamp.Dbar.8}))}}}\\
+&  \equiv\sum_{B\text{ is a subset of }A}\left[  B=P\left(  \tau\right)
+\text{ for some hamp }\tau\text{ of }D\right] \\
+&  =\left(  \#\text{ of subsets }B\text{ of }A\text{ such that }B=P\left(
+\tau\right)  \text{ for some hamp }\tau\text{ of }D\right)
+\ \ \ \ \ \ \ \ \ \ \left(  \text{by (\ref{pf.thm.hamp.Dbar.rcall})}\right) \\
+&  =\left(  \#\text{ of sets of the form }P\left(  \tau\right)  \text{ for
+some hamp }\tau\text{ of }D\right) \\
+&  \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \left(
+\begin{array}
+[c]{c}%
+\text{since each set of the form }P\left(  \tau\right)  \text{ for some hamp
+}\tau\text{ of }D\\
+\text{is a subset of }A\text{ (by Observation 0, applied to }\sigma
+=\tau\text{)}%
+\end{array}
+\right) \\
+&  =\left(  \#\text{ of hamps }\tau\text{ of }D\right)  \operatorname{mod}2
+\end{align*}
+(because Observation 1 shows that different hamps $\tau$ yield different sets
+$P\left(  \tau\right)  $). Therefore,%
+\[
+\left(  \#\text{ of hamps }\tau\text{ of }D\right)  \equiv N\equiv\left(
+\#\text{ of hamps of }\overline{D}\right)  \operatorname{mod}2
+\]
+(by (\ref{pf.thm.hamp.Dbr.5})). Thus,%
+\[
+\left(  \#\text{ of hamps of }\overline{D}\right)  \equiv\left(  \#\text{ of
+hamps }\tau\text{ of }D\right)  =\left(  \#\text{ of hamps of }D\right)
+\operatorname{mod}2.
+\]
+This proves Theorem \ref{thm.hamp.Dbar}.
+\end{proof}
+
+\subsection{Tournaments}
+
+We now define two more restrictive classes of digraphs:
+
+\begin{definition}
+A digraph $D$ is said to be \emph{loopless} if it has no loops (i.e., it has
+no arcs of the form $\left(  v,v\right)  $).
+\end{definition}
+
+\begin{definition}
+\label{def.tourn.tourn}A \emph{tournament} is defined to be a loopless digraph
+$D$ that satisfies the following axiom:
+
+\emph{Tournament axiom:} For any two distinct vertices $u$ and $v$ of $D$,
+\textbf{exactly} one of the two pairs $\left(  u,v\right)  $ and $\left(
+v,u\right)  $ is an arc of $D$.
+\end{definition}
+
+\begin{example}
+The following digraph is a tournament:%
+\[%
+%TCIMACRO{\TeXButton{tikz 3-digraph}{\begin{tikzpicture}
+%\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+%\node(A) at (0:1.5) {$1$};
+%\node(B) at (120:1.5) {$2$};
+%\node(C) at (240:1.5) {$3$};
+%\end{scope}
+%\begin{scope}[every edge/.style={draw=black,very thick}]
+%\path[->] (A) edge (B) (B) edge (C) (A) edge (C);
+%\end{scope}
+%\end{tikzpicture}}}%
+%BeginExpansion
+\begin{tikzpicture}
+\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+\node(A) at (0:1.5) {$1$};
+\node(B) at (120:1.5) {$2$};
+\node(C) at (240:1.5) {$3$};
+\end{scope}
+\begin{scope}[every edge/.style={draw=black,very thick}]
+\path[->] (A) edge (B) (B) edge (C) (A) edge (C);
+\end{scope}
+\end{tikzpicture}%
+%EndExpansion
+\ \ .
+\]
+The following digraph is a tournament as well:%
+\[%
+%TCIMACRO{\TeXButton{tikz 3-digraph}{\begin{tikzpicture}
+%\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+%\node(A) at (0:1.5) {$1$};
+%\node(B) at (120:1.5) {$2$};
+%\node(C) at (240:1.5) {$3$};
+%\end{scope}
+%\begin{scope}[every edge/.style={draw=black,very thick}]
+%\path[->] (A) edge (B) (B) edge (C) (C) edge (A);
+%\end{scope}
+%\end{tikzpicture}}}%
+%BeginExpansion
+\begin{tikzpicture}
+\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+\node(A) at (0:1.5) {$1$};
+\node(B) at (120:1.5) {$2$};
+\node(C) at (240:1.5) {$3$};
+\end{scope}
+\begin{scope}[every edge/.style={draw=black,very thick}]
+\path[->] (A) edge (B) (B) edge (C) (C) edge (A);
+\end{scope}
+\end{tikzpicture}%
+%EndExpansion
+\ \ .
+\]
+However, the following digraph is not a tournament:%
+\[%
+%TCIMACRO{\TeXButton{tikz 3-digraph}{\begin{tikzpicture}
+%\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+%\node(A) at (0:1.5) {$1$};
+%\node(B) at (120:1.5) {$2$};
+%\node(C) at (240:1.5) {$3$};
+%\end{scope}
+%\begin{scope}[every edge/.style={draw=black,very thick}]
+%\path[->] (A) edge (B) (B) edge (C);
+%\end{scope}
+%\end{tikzpicture}}}%
+%BeginExpansion
+\begin{tikzpicture}
+\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+\node(A) at (0:1.5) {$1$};
+\node(B) at (120:1.5) {$2$};
+\node(C) at (240:1.5) {$3$};
+\end{scope}
+\begin{scope}[every edge/.style={draw=black,very thick}]
+\path[->] (A) edge (B) (B) edge (C);
+\end{scope}
+\end{tikzpicture}%
+%EndExpansion
+\ \ ,
+\]
+because the tournament axiom is not satisfied for $u=1$ and $v=3$ (since
+neither $\left(  1,3\right)  $ nor $\left(  3,1\right)  $ is an arc of the
+digraph). Nor is the following digraph a tournament:%
+\[%
+%TCIMACRO{\TeXButton{tikz 3-digraph}{\begin{tikzpicture}
+%\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+%\node(A) at (0:1.5) {$1$};
+%\node(B) at (120:1.5) {$2$};
+%\node(C) at (240:1.5) {$3$};
+%\end{scope}
+%\begin{scope}[every edge/.style={draw=black,very thick}]
+%\path[->] (B) edge (C);
+%\path[->] (A) edge[bend left=20] (B);
+%\path[->] (B) edge[bend left=20] (A);
+%\path[->] (C) edge[bend left=10] (A);
+%\end{scope}
+%\end{tikzpicture}}}%
+%BeginExpansion
+\begin{tikzpicture}
+\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+\node(A) at (0:1.5) {$1$};
+\node(B) at (120:1.5) {$2$};
+\node(C) at (240:1.5) {$3$};
+\end{scope}
+\begin{scope}[every edge/.style={draw=black,very thick}]
+\path[->] (B) edge (C);
+\path[->] (A) edge[bend left=20] (B);
+\path[->] (B) edge[bend left=20] (A);
+\path[->] (C) edge[bend left=10] (A);
+\end{scope}
+\end{tikzpicture}%
+%EndExpansion
+\ \ ,
+\]
+because the tournament axiom is not satisfied for $u=1$ and $v=2$ (since both
+$\left(  1,2\right)  $ and $\left(  2,1\right)  $ are arcs of the digraph).
+Finally, the digraph
+\[%
+%TCIMACRO{\TeXButton{tikz 3-digraph}{\begin{tikzpicture}
+%\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+%\node(A) at (0:1.5) {$1$};
+%\node(B) at (120:1.5) {$2$};
+%\node(C) at (240:1.5) {$3$};
+%\end{scope}
+%\begin{scope}[every edge/.style={draw=black,very thick}]
+%\path[->] (A) edge (B) (B) edge (C) (A) edge (C);
+%\path[->] (A) edge[loop right] (A);
+%\end{scope}
+%\end{tikzpicture}}}%
+%BeginExpansion
+\begin{tikzpicture}
+\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+\node(A) at (0:1.5) {$1$};
+\node(B) at (120:1.5) {$2$};
+\node(C) at (240:1.5) {$3$};
+\end{scope}
+\begin{scope}[every edge/.style={draw=black,very thick}]
+\path[->] (A) edge (B) (B) edge (C) (A) edge (C);
+\path[->] (A) edge[loop right] (A);
+\end{scope}
+\end{tikzpicture}%
+%EndExpansion
+\]
+is not a tournament either, since it is not loopless (having the loop $\left(
+1,1\right)  $).
+
+The digraph $D$ in Proposition \ref{prop.hamp.123n} always is a tournament.
+\end{example}
+
+A tournament can be viewed as a model for the outcome of a round-robin
+tournament between a number of contestants (assuming that each contest ends in
+a victory by one of the contestants). The vertices are the contestants, and
+the arcs encode the winner of each contest (namely, if contestant $u$ wins
+against contestant $v$, then we encode it as an arc $\left(  u,v\right)  $).
+This is the reason for the name \textquotedblleft tournament\textquotedblright.
+
+Here is a quick consequence of the definition of a tournament:
+
+\begin{proposition}
+\label{prop.tourn.rev-bar}Let $D$ be a tournament. Then, the arcs of
+$\overline{D}$ that are not loops are precisely the arcs of
+$D^{\operatorname*{rev}}$.
+\end{proposition}
+
+\begin{proof}
+The definition of $D^{\operatorname*{rev}}$ shows that the arcs of
+$D^{\operatorname*{rev}}$ are precisely the reversals of the arcs of $D$.
+
+The definition of $\overline{D}$ shows that the arcs of $\overline{D}$ are
+precisely the non-arcs of $D$.
+
+The digraph $D$ is a tournament. Thus, $D$ is loopless (by the definition of a
+tournament), i.e., has no loops. In other words, none of the arcs of $D$ is a
+loop. Hence, none of the reversals of the arcs of $D$ is a loop either (since
+the reversal of an arc $a$ is a loop only when $a$ itself is a loop). In other
+words, none of the arcs of $D^{\operatorname*{rev}}$ is a loop (since the arcs
+of $D^{\operatorname*{rev}}$ are precisely the reversals of the arcs of $D$).
+
+For any two distinct vertices $u$ and $v$ of $D$, we have the following chain
+of logical equivalences:%
+\begin{align*}
+&  \ \left(  \left(  u,v\right)  \text{ is an arc of }\overline{D}\right) \\
+&  \Longleftrightarrow\ \left(  \left(  u,v\right)  \text{ is a non-arc of
+}D\right)  \ \ \ \ \ \ \ \ \ \ \left(
+\begin{array}
+[c]{c}%
+\text{since the arcs of }\overline{D}\text{ are precisely}\\
+\text{the non-arcs of }D
+\end{array}
+\right) \\
+&  \Longleftrightarrow\ \left(  \left(  u,v\right)  \text{ is not an arc of
+}D\right)  \ \ \ \ \ \ \ \ \ \ \left(  \text{by the definition of a
+\textquotedblleft non-arc\textquotedblright}\right) \\
+&  \Longleftrightarrow\ \left(  \left(  v,u\right)  \text{ is an arc of
+}D\right)  \ \ \ \ \ \ \ \ \ \ \left(
+\begin{array}
+[c]{c}%
+\text{since the tournament axiom tells us that}\\
+\text{\textbf{exactly} one of the two}\\
+\text{pairs }\left(  u,v\right)  \text{ and }\left(  v,u\right)  \text{ is an
+arc of }D
+\end{array}
+\right) \\
+&  \Longleftrightarrow\ \left(  \left(  u,v\right)  \text{ is an arc of
+}D^{\operatorname*{rev}}\right)  \ \ \ \ \ \ \ \ \ \ \left(
+\begin{array}
+[c]{c}%
+\text{since the arcs of }D^{\operatorname*{rev}}\text{ are precisely}\\
+\text{the reversals of the arcs of }D
+\end{array}
+\right)  .
+\end{align*}
+Thus, the arcs of $\overline{D}$ that are not loops are precisely the arcs of
+$D^{\operatorname*{rev}}$ that are not loops. Since none of the arcs of
+$D^{\operatorname*{rev}}$ is a loop, we can simplify this as follows: The arcs
+of $\overline{D}$ that are not loops are precisely the arcs of
+$D^{\operatorname*{rev}}$. This proves the Proposition
+\ref{prop.tourn.rev-bar}.
+\end{proof}
+
+We note that Proposition \ref{prop.tourn.rev-bar} also has a converse (which
+we shall not use and thus won't prove either):
+
+\begin{proposition}
+Let $D$ be a loopless digraph. Then, $D$ is a tournament if and only if the
+arcs of $\overline{D}$ that are not loops are precisely the arcs of
+$D^{\operatorname*{rev}}$.
+\end{proposition}
+
+Here are three other obvious properties of tournaments:
+
+\begin{proposition}
+Let $D$ be a tournament. Then, $D^{\operatorname*{rev}}$ is a tournament as well.
+\end{proposition}
+
+\begin{proposition}
+\label{prop.tourn.rev-arc}Let $D=\left(  V,A\right)  $ be a tournament, and
+let $vw\in A$ be an arc of $D$. Let $D^{\prime}$ be the digraph obtained from
+$D$ by reversing the arc $vw$ (that is, replacing it by $wv$). (In other
+words, let $D^{\prime}=\left(  V,\ \ \left(  A\setminus\left\{  vw\right\}
+\right)  \cup\left\{  wv\right\}  \right)  $.) Then, $D^{\prime}$ is again a tournament.
+\end{proposition}
+
+\begin{proposition}
+Let $D$ be a tournament with $n$ vertices. Then, $D$ has exactly $\dbinom
+{n}{2}$ many arcs.
+\end{proposition}
+
+With so many arcs, one might hope that a tournament has better chances than a
+random digraph to have a hamp (Hamiltonian path). And indeed:
+
+\begin{theorem}
+[R\'{e}dei's Little Theorem]\label{thm.tourn.hamp}Any tournament has a hamp.
+Here, we agree to consider the empty list $\left(  {}\right)  $ as a hamp of
+the empty tournament with $0$ vertices.
+\end{theorem}
+
+We will now briefly outline a quick proof of this theorem, but it is not
+strictly needed since we will later prove a much stronger result (Theorem
+\ref{thm.tourn.redei}) from which Theorem \ref{thm.tourn.hamp} will also follow.
+
+\begin{proof}
+[Proof of Theorem \ref{thm.tourn.hamp} (sketched).]We shall prove this by
+strong induction on the number of vertices of the tournament. Thus, we fix a
+tournament $D=\left(  V,A\right)  $, and assume that all tournaments with
+fewer vertices than $D$ have hamps. Now we want to find a hamp of $D$.
+
+If $V$ is empty, then $\left(  {}\right)  $ is a hamp (according to our
+agreement). Hence, we WLOG assume that $V$ is not empty. Choose any $v\in V$.
+Let%
+\[
+X:=\left\{  u\in V\ \mid\ uv\in A\right\}  \ \ \ \ \ \ \ \ \ \ \text{and}%
+\ \ \ \ \ \ \ \ \ \ Y:=\left\{  u\in V\ \mid\ vu\in A\right\}  .
+\]
+By the definition of a tournament, the sets $X$, $Y$ and $\left\{  v\right\}
+$ are disjoint, and their union is $V$. Hence, the two sets $X$ and $Y$ have
+smaller size than $V$.
+
+Now, consider the two tournaments $\left(  X,\ A\cap\left(  X\times X\right)
+\right)  $ and $\left(  Y,\ A\cap\left(  Y\times Y\right)  \right)  $. These
+two tournaments have fewer vertices than $D$ (since the two sets $X$ and $Y$
+have smaller size than $V$), and thus have hamps (by the induction
+hypothesis). Let $\left(  x_{1},x_{2},\ldots,x_{a}\right)  $ and $\left(
+y_{1},y_{2},\ldots,y_{b}\right)  $ be these hamps (these can be empty lists if
+$X$ or $Y$ is empty). Then, it is easy to see that $\left(  x_{1},x_{2}%
+,\ldots,x_{a},u,y_{1},y_{2},\ldots,y_{b}\right)  $ is a hamp of $D$. Thus, $D$
+has a hamp. This completes the induction step, and thus Theorem
+\ref{thm.tourn.hamp} is proved.
+\end{proof}
+
+\subsection{Hamiltonian cycles in tournaments}
+
+Encouraged by Theorem \ref{thm.tourn.hamp}, we can ask a stronger question: Is
+it true that any tournament has a Hamiltonian \textbf{cycle}? Let us first
+define this concept:
+
+\begin{definition}
+Let $D=\left(  V,A\right)  $ be a digraph.
+
+\begin{enumerate}
+\item[\textbf{(a)}] A \emph{closed walk} of $D$ means a walk $\left(
+v_{0},v_{1},\ldots,v_{k}\right)  $ of $D$ satisfying $v_{k}=v_{0}$.
+
+\item[\textbf{(b)}] A \emph{cycle} of $D$ means a closed walk $\left(
+v_{0},v_{1},\ldots,v_{k}\right)  $ of $D$ such that $k\geq1$ and such that the
+vertices $v_{0},v_{1},\ldots,v_{k-1}$ are distinct.
+
+\item[\textbf{(c)}] A \emph{Hamiltonian cycle} of $D$ means a cycle of $D$
+that contains each vertex of $D$.
+
+In other words, a \emph{Hamiltonian cycle} of $D$ means a cycle $\left(
+v_{0},v_{1},\ldots,v_{k}\right)  $ of $D$ such that $V=\left\{  v_{0}%
+,v_{1},\ldots,v_{k}\right\}  $.
+\end{enumerate}
+\end{definition}
+
+For example, in the digraph $D$ constructed in Example \ref{exa.hamp.comp},
+the $3$-tuple $\left(  1,2,1\right)  $ is a cycle (but not a Hamiltonian one,
+since it fails to contain the vertex $3$), and the $4$-tuple $\left(
+2,3,1,2\right)  $ is a Hamiltonian cycle.
+
+Now, it is clear that not every tournament has a Hamiltonian cycle; for
+example, the tournament $%
+%TCIMACRO{\TeXButton{tikz 3-digraph}{\begin{tikzpicture}
+%\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+%\node(A) at (0,0) {$1$};
+%\node(B) at (2,0) {$2$};
+%\end{scope}
+%\begin{scope}[every edge/.style={draw=black,very thick}]
+%\path[->] (A) edge (B);
+%\end{scope}
+%\end{tikzpicture}}}%
+%BeginExpansion
+\begin{tikzpicture}
+\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+\node(A) at (0,0) {$1$};
+\node(B) at (2,0) {$2$};
+\end{scope}
+\begin{scope}[every edge/.style={draw=black,very thick}]
+\path[->] (A) edge (B);
+\end{scope}
+\end{tikzpicture}%
+%EndExpansion
+$ has none. One reason for this is obvious:
+
+\begin{definition}
+Let $D=\left(  V,A\right)  $ be a digraph with at least one vertex. We say
+that the digraph $D$ is \emph{strongly connected} if for every two vertices
+$u$ and $v$ in $V$, there exists a walk from $u$ to $v$ in $D$.
+\end{definition}
+
+\begin{example}
+The digraph%
+\[%
+%TCIMACRO{\TeXButton{tikz 5-digraph}{\begin{tikzpicture}
+%\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+%\node(A) at (0,0) {$2$};
+%\node(B) at (2,0) {$3$};
+%\node(C) at (0,-2) {$4$};
+%\node(D) at (2,-2) {$5$};
+%\node(E) at (-3, -1) {$1$};
+%\end{scope}
+%\begin{scope}[every edge/.style={draw=black,very thick}]
+%\path
+%[->] (E) edge (A) (A) edge (B) (B) edge (D) (A) edge (C) (C) edge (D) (D) edge[bend left=50] (E);
+%\end{scope}
+%\end{tikzpicture}}}%
+%BeginExpansion
+\begin{tikzpicture}
+\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+\node(A) at (0,0) {$2$};
+\node(B) at (2,0) {$3$};
+\node(C) at (0,-2) {$4$};
+\node(D) at (2,-2) {$5$};
+\node(E) at (-3, -1) {$1$};
+\end{scope}
+\begin{scope}[every edge/.style={draw=black,very thick}]
+\path
+[->] (E) edge (A) (A) edge (B) (B) edge (D) (A) edge (C) (C) edge (D) (D) edge[bend left=50] (E);
+\end{scope}
+\end{tikzpicture}%
+%EndExpansion
+\]
+is strongly connected, whereas the digraph%
+\[%
+%TCIMACRO{\TeXButton{tikz 4-digraph}{\begin{tikzpicture}
+%\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+%\node(A) at (0,0) {$1$};
+%\node(B) at (2,0) {$2$};
+%\node(C) at (4,0) {$3$};
+%\node(D) at (6,0) {$4$};
+%\end{scope}
+%\begin{scope}[every edge/.style={draw=black,very thick}]
+%\path[->] (A) edge (B);
+%\path[->] (B) edge[bend left=20] (C);
+%\path[->] (C) edge[bend left=20] (B);
+%\path[->] (C) edge[bend left=20] (D);
+%\path[->] (D) edge[bend left=20] (C);
+%\end{scope}
+%\end{tikzpicture}}}%
+%BeginExpansion
+\begin{tikzpicture}
+\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+\node(A) at (0,0) {$1$};
+\node(B) at (2,0) {$2$};
+\node(C) at (4,0) {$3$};
+\node(D) at (6,0) {$4$};
+\end{scope}
+\begin{scope}[every edge/.style={draw=black,very thick}]
+\path[->] (A) edge (B);
+\path[->] (B) edge[bend left=20] (C);
+\path[->] (C) edge[bend left=20] (B);
+\path[->] (C) edge[bend left=20] (D);
+\path[->] (D) edge[bend left=20] (C);
+\end{scope}
+\end{tikzpicture}%
+%EndExpansion
+\]
+is not (for example, it has no walk from $2$ to $1$).
+\end{example}
+
+\begin{proposition}
+\label{prop.hamc.stronc}Let $D$ be a digraph. If $D$ has a Hamiltonian cycle,
+then $D$ is strongly connected.
+\end{proposition}
+
+\begin{proof}
+[Proof (sketched).]Assume that $D$ has a Hamiltonian cycle. Then, for any two
+vertices $u$ and $v$ of $D$, we can obtain a walk from $u$ to $v$ by walking
+along this cycle. Thus, $D$ is strongly connected.
+\end{proof}
+
+Proposition \ref{prop.hamc.stronc} gives only a necessary, not a sufficient
+condition for the existence of a Hamiltonian cycle. However, it turns out that
+it is also sufficient when the digraph is a tournament with at least two vertices:
+
+\begin{theorem}
+\label{thm.hamc.camion}Let $D$ be a strongly connected tournament with at
+least two vertices. Then, $D$ has a Hamiltonian cycle.
+\end{theorem}
+
+Before we prove this, we show a simple proposition about strongly connected digraphs:
+
+\begin{proposition}
+\label{prop.stronc.cycle}Let $D=\left(  V,A\right)  $ be a strongly connected
+digraph. Then:
+
+\begin{enumerate}
+\item[\textbf{(a)}] If $V$ has at least two vertices, then $D$ has a cycle.
+
+\item[\textbf{(b)}] Each arc $a\in A$ is contained in at least one cycle of
+$D$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+[Proof of Proposition \ref{prop.stronc.cycle} (sketched).]\textbf{(b)} Let
+$a=uv\in A$ be an arc. Then, there is a walk from $v$ to $u$ in $D$ (since $D$
+is strongly connected). Hence, there is a path from $v$ to $u$ in $D$ as well
+(by the \textquotedblleft if there is a walk, then there is a
+path\textquotedblright\ theorem\footnote{We have previously stated this
+theorem for undirected graphs, but it exists in the same form (and with the
+same proof) for digraphs.}). Pick such a path and combine it with the arc $a$
+to get a cycle that contains the arc $a$. Thus, Proposition
+\ref{prop.stronc.cycle} \textbf{(b)} is proved. \medskip
+
+\textbf{(a)} Assume that $V$ has at least two vertices. Thus, $V$ has two
+distinct vertices $u$ and $v$. Consider these $u$ and $v$. Then, there is a
+walk from $v$ to $u$ in $D$ (since $D$ is strongly connected). This walk must
+have at least one arc (since $u$ and $v$ are distinct). Hence, $D$ has an arc.
+From Proposition \ref{prop.stronc.cycle} \textbf{(b)}, we conclude that this
+arc is contained in at least one cycle of $D$. Hence, $D$ has a cycle. This
+proves Proposition \ref{prop.stronc.cycle} \textbf{(a)}.
+\end{proof}
+
+We are now ready to prove Theorem \ref{thm.hamc.camion}:
+
+\begin{proof}
+[Proof of Theorem \ref{thm.hamc.camion}.](We are following \cite[\S 10.2,
+Theorem 4]{Berge91}.)
+
+Write $D$ as $\left(  V,A\right)  $. Proposition \ref{prop.stronc.cycle}
+\textbf{(a)} shows that $D$ has a cycle. Thus, $D$ has a cycle of maximum
+length\footnote{The \emph{length} of a walk $\left(  v_{0},v_{1},\ldots
+,v_{k}\right)  $ is defined to be the number $k$.} (since the total set of
+cycles of $D$ is finite\footnote{This is because a cycle cannot have length
+$>\left\vert V\right\vert $.}). Let%
+\[
+\mathbf{c}=\left(  v_{0},v_{1},\ldots,v_{k}\right)
+\ \ \ \ \ \ \ \ \ \ \left(  \text{with }v_{k}=v_{0}\right)
+\]
+be a cycle (of $D$) having maximum length. We claim that $\mathbf{c}$ is a
+Hamiltonian cycle.
+
+To prove this, we assume the contrary. Thus, $\mathbf{c}$ does not contain
+some vertex of $D$. Our goal is to obtain a contradiction by finding a cycle
+that is longer than $\mathbf{c}$.
+
+Let $C=\left\{  v_{0},v_{1},\ldots,v_{k}\right\}  $ be the set of all vertices
+of the cycle $\mathbf{c}$. Thus, $C$ is a proper subset of $V$ (since
+$\mathbf{c}$ does not contain some vertex of $D$). Hence, $V\setminus
+C\neq\varnothing$.
+
+The vertices $w\in V\setminus C$ are precisely the vertices not contained in
+the cycle $\mathbf{c}$. Thus, they are distinct from each of $v_{0}%
+,v_{1},\ldots,v_{k}$. Hence, for each vertex $w\in V\setminus C$, exactly one
+of the pairs $wv_{0}$ and $v_{0}w$ must belong to $A$ (by the tournament
+axiom). In other words, the set $V\setminus C$ is the union of its two subsets%
+\begin{align*}
+X  &  :=\left\{  w\in V\setminus C\ \mid\ wv_{0}\in A\right\}
+\ \ \ \ \ \ \ \ \ \ \text{and}\\
+Y  &  :=\left\{  w\in V\setminus C\ \mid\ v_{0}w\in A\right\}  ,
+\end{align*}
+and furthermore these two subsets $X$ and $Y$ are disjoint. Thus, $X\cup
+Y=V\setminus C$ and $X\cap Y=\varnothing$.
+
+We shall now prove the following:
+
+\begin{statement}
+\textit{Observation 1:} Let $w\in X$. Then, $wv_{i}\in A$ for each
+$i\in\left\{  0,1,\ldots,k\right\}  $.
+\end{statement}
+
+[\textit{Proof of Observation 1:} The claim we must prove is \textquotedblleft%
+$wv_{i}\in A$ for each $i\in\left\{  0,1,\ldots,k\right\}  $\textquotedblright%
+. Substituting $k-i$ for $i$ in this claim, we can restate it as
+\textquotedblleft$wv_{k-i}\in A$ for each $i\in\left\{  0,1,\ldots,k\right\}
+$\textquotedblright.
+
+We shall prove this restated claim by induction on $i$:
+
+\textit{Induction base:} From $w\in X$, we immediately obtain $wv_{0}\in A$.
+In view of $v_{k-0}=v_{k}=v_{0}$, we can rewrite this as $wv_{k-0}\in A$.
+Hence, the claim \textquotedblleft$wv_{k-i}\in A$ for each $i\in\left\{
+0,1,\ldots,k\right\}  $\textquotedblright\ holds for $i=0$.
+
+\textit{Induction step:} Let $j\in\left\{  1,2,\ldots,k\right\}  $. Assume
+that $wv_{k-\left(  j-1\right)  }\in A$. We must show that $wv_{k-j}\in A$.
+
+Assume the contrary. Thus, $wv_{k-j}\notin A$.
+
+Let $r=k-j$; thus, $r\in\left\{  0,1,\ldots,k-1\right\}  $. Also,
+$wv_{r}=wv_{k-j}\notin A$. We have $w\neq v_{r}$ (since $w\in X\subseteq X\cup
+Y=V\setminus C$). Thus, by the tournament axiom, we see that exactly one of
+the pairs $wv_{r}$ and $v_{r}w$ must belong to $A$. Hence, $v_{r}w\in A$
+(since $wv_{r}\notin A$).
+
+Also, from $r=k-j$, we obtain $r+1=k-j+1=k-\left(  j-1\right)  $, so that
+$wv_{r+1}=wv_{k-\left(  j-1\right)  }\in A$. Hence, we can \textquotedblleft
+detour\textquotedblright\ our cycle $\mathbf{c}$ to pass through $w$,
+obtaining a longer cycle $\left(  v_{0},v_{1},\ldots,v_{r},w,v_{r+1}%
+,v_{r+2},\ldots,v_{k}\right)  $ (because $v_{r}w\in A$ and $wv_{r+1}\in A$).
+However, this contradicts the fact that $\mathbf{c}$ is a cycle having
+\textbf{maximum length}. This contradiction shows that our assumption was
+wrong; hence, we have shown that $wv_{k-j}\in A$. This completes the induction
+step; thus, we have proved Observation 1.]
+
+\begin{statement}
+\textit{Observation 2:} Let $w\in Y$. Then, $v_{i}w\in A$ for each
+$i\in\left\{  0,1,\ldots,k\right\}  $.
+\end{statement}
+
+[\textit{Proof of Observation 2:} We shall prove this by induction on $i$:
+
+\textit{Induction base:} From $w\in Y$, we immediately obtain $v_{0}w\in A$.
+Hence, Observation 2 is proved for $i=0$.
+
+\textit{Induction step:} Let $j\in\left\{  1,2,\ldots,k\right\}  $. Assume
+that $v_{j-1}w\in A$. We must show that $v_{j}w\in A$.
+
+Assume the contrary. Thus, $v_{j}w\notin A$. However, $w\neq v_{j}$ (since
+$w\in Y\subseteq X\cup Y=V\setminus C$). Thus, by the tournament axiom, we see
+that exactly one of the pairs $wv_{j}$ and $v_{j}w$ must belong to $A$. Hence,
+$wv_{j}\in A$ (since $v_{j}w\notin A$). Hence, we can \textquotedblleft
+detour\textquotedblright\ our cycle $\mathbf{c}$ to pass through $w$,
+obtaining a longer cycle $\left(  v_{0},v_{1},\ldots,v_{j-1},w,v_{j}%
+,v_{j+1},\ldots,v_{k}\right)  $ (because $v_{j-1}w\in A$ and $wv_{j}\in A$).
+However, this contradicts the fact that $\mathbf{c}$ is a cycle having
+\textbf{maximum length}. This contradiction shows that our assumption was
+wrong; hence, we have shown that $v_{j}w\in A$. This completes the induction
+step; thus, we have proved Observation 2.]
+
+\begin{statement}
+\textit{Observation 3:} Let $w\in X$ and $z\in C$. Then, $zw\notin A$.
+\end{statement}
+
+[\textit{Proof of Observation 3:} We have $z\in C=\left\{  v_{0},v_{1}%
+,\ldots,v_{k}\right\}  $, so that $z=v_{i}$ for some $i\in\left\{
+0,1,\ldots,k\right\}  $. Consider this $i$. Observation 1 yields $wv_{i}\in A$
+(since $w\in X$). In other words, $wz\in A$ (since $z=v_{i}$). However, $w\neq
+z$ (since $w\in X\subseteq X\cup Y=V\setminus C$ and $z\in C$). Thus, by the
+tournament axiom, exactly one of the two pairs $wz$ and $zw$ must belong to
+$A$. Hence, from $wz\in A$, we obtain $zw\notin A$. This proves Observation 3.]
+
+\begin{statement}
+\textit{Observation 4:} Let $w\in Y$ and $z\in C$. Then, $wz\notin A$.
+\end{statement}
+
+[\textit{Proof of Observation 4:} We have $z\in C=\left\{  v_{0},v_{1}%
+,\ldots,v_{k}\right\}  $, so that $z=v_{i}$ for some $i\in\left\{
+0,1,\ldots,k\right\}  $. Consider this $i$. Observation 2 yields $v_{i}w\in A$
+(since $w\in Y$). In other words, $zw\in A$ (since $z=v_{i}$). However, $w\neq
+z$ (since $w\in Y\subseteq X\cup Y=V\setminus C$ and $z\in C$). Thus, by the
+tournament axiom, exactly one of the two pairs $wz$ and $zw$ must belong to
+$A$. Hence, from $zw\in A$, we obtain $wz\notin A$. This proves Observation 4.]
+
+\begin{statement}
+\textit{Observation 5:} We have $X\neq\varnothing$.
+\end{statement}
+
+[\textit{Proof of Observation 5:} There exists some vertex $q\in V\setminus C$
+(since $V\setminus C\neq\varnothing$). Consider this $q$. Since $D$ is
+strongly connected, there exists a walk from $q$ to $v_{0}$. This walk must
+cross from the set $V\setminus C$ into the set $C$ at some point\footnote{By
+this we mean the following: One of the arcs of this walk must have its source
+in $V\setminus C$ and its target in $C$.} (since $q\in V\setminus C$ whereas
+$v_{0}\in C$). Hence, there exists an arc $wz$ whose source $w$ belongs to
+$V\setminus C$ and whose target $z$ belongs to $C$. Consider this arc. Thus,
+$w\in V\setminus C$ and $z\in C$ and $wz\in A$. If we had $w\in Y$, then
+Observation 4 would yield $wz\notin A$, which would contradict $wz\in A$.
+Hence, we cannot have $w\in Y$. Thus, $w\notin Y$. However, $w\in V\setminus
+C=X\cup Y$. Combining this with $w\notin Y$, we obtain $w\in\left(  X\cup
+Y\right)  \setminus Y\subseteq X$. Hence, $X\neq\varnothing$. Thus,
+Observation 5 is proved.]
+
+\begin{statement}
+\textit{Observation 6:} We have $Y\neq\varnothing$.
+\end{statement}
+
+[\textit{Proof of Observation 6:} This is very similar to the proof of
+Observation 5 above:
+
+There exists some vertex $q\in V\setminus C$ (since $V\setminus C\neq
+\varnothing$). Consider this $q$. Since $D$ is strongly connected, there
+exists a walk from $v_{0}$ to $q$. This walk must cross from the set $C$ into
+the set $V\setminus C$ at some point (since $v_{0}\in C$ whereas $q\in
+V\setminus C$). Hence, there exists an arc $zw$ whose source $z$ belongs to
+$C$ and whose target $w$ belongs to $V\setminus C$. Consider this arc. Thus,
+$z\in C$ and $w\in V\setminus C$ and $zw\in A$. If we had $w\in X$, then
+Observation 3 would yield $zw\notin A$, which would contradict $zw\in A$.
+Hence, we cannot have $w\in X$. Thus, $w\notin X$. However, $w\in V\setminus
+C=X\cup Y$. Combining this with $w\notin X$, we obtain $w\in\left(  X\cup
+Y\right)  \setminus X\subseteq Y$. Hence, $Y\neq\varnothing$. Thus,
+Observation 6 is proved.]
+
+\begin{statement}
+\textit{Observation 7:} There exists an arc $yx\in A$ with $y\in Y$ and $x\in
+X$.
+\end{statement}
+
+[\textit{Proof of Observation 7:} There exists at least one vertex $u\in X$
+(by Observation 5) and at least one vertex $v\in Y$ (by Observation 6).
+Consider these $u$ and $v$. From $u\in X$, we obtain $u\notin Y$ (since $X\cap
+Y=\varnothing$) and thus $u\in V\setminus Y$. Since $D$ is strongly connected,
+there exists a walk from $v$ to $u$. This walk must cross from the set $Y$
+into the set $V\setminus Y$ at some point (since $v\in Y$ and $u\in V\setminus
+Y$). Hence, there exists an arc $yx\in A$ whose source $y$ belongs to $Y$ and
+whose target $x$ belongs to $V\setminus Y$. Consider this arc $yx$. Thus,
+$y\in Y$ and $x\in V\setminus Y$ and $yx\in A$. If we had $x\in C$, then
+Observation 4 (applied to $w=y$ and $z=x$) would yield $yx\notin A$, which
+would contradict $yx\in A$. Hence, we cannot have $x\in C$. Thus, $x\notin C$,
+so that $x\in V\setminus C=X\cup Y$. Since we also have $x\notin Y$ (because
+$x\in V\setminus Y$), we thus conclude that $x\in\left(  X\cup Y\right)
+\setminus Y\subseteq X$. Hence, we have found an arc $yx\in A$ with $y\in Y$
+and $x\in X$. This proves Observation 7.] \medskip
+
+We are almost done now. Observation 7 shows that there exists an arc $yx\in A$
+with $y\in Y$ and $x\in X$. Consider this arc. Observation 1 (applied to $w=x$
+and $i=1$) yields $xv_{1}\in A$. Observation 2 (applied to $w=y$ and $i=0$)
+yields $v_{0}y\in A$. Thus, we can \textquotedblleft detour\textquotedblright%
+\ our cycle $\mathbf{c}$ to pass through $y$ and $x$, obtaining a longer cycle
+$\left(  v_{0},y,x,v_{1},v_{2},v_{3},\ldots,v_{k}\right)  $ (because
+$v_{0}y\in A$ and $yx\in A$ and $xv_{1}\in A$). However, this contradicts the
+fact that $\mathbf{c}$ is a cycle having \textbf{maximum length}. This
+contradiction finishes our proof that $\mathbf{c}$ is a Hamiltonian cycle.
+Thus, Theorem \ref{thm.hamc.camion} follows.
+\end{proof}
+
+\subsection{R\'{e}dei's theorem}
+
+We now come to the highlight of this lecture, a result of L. R\'{e}dei from
+1933 (\cite[\S I]{Redei33}):
+
+\begin{theorem}
+[R\'{e}dei's Strong Theorem]\label{thm.tourn.redei}Let $D$ be a tournament.
+Then, $\left(  \#\text{ of hamps of }D\right)  $ is odd. Here, we agree to
+consider the empty list $\left(  {}\right)  $ as a hamp of the empty
+tournament with $0$ vertices.
+\end{theorem}
+
+Theorem \ref{thm.tourn.redei} clearly implies Theorem \ref{thm.tourn.hamp}
+(because if the $\#$ of hamps of $D$ is odd, then this $\#$ is clearly
+nonzero, and therefore $D$ has a hamp). However, Theorem \ref{thm.tourn.redei}
+is much harder to prove than Theorem \ref{thm.tourn.hamp}. The proof we shall
+give below is not R\'{e}dei's original proof (which relied on subtle
+manipulation of determinants\footnote{An English translation of this proof can
+be found in Moon's booklet \cite[proof of Theorem 14]{Moon13}.}), but rather
+Berge's proof from \cite[\S 10.2, Theorem 6]{Berge91} (which also appears in
+\cite[solution to problem 7.8]{Tomesc85}).\footnote{Another proof appears in
+\cite[Corollaire 5.1]{Lass02}.} We have already done most of the hard work
+when we proved Theorem \ref{thm.hamp.Dbar}, which will come useful in the
+proof; but we will need one more lemma:
+
+\begin{lemma}
+\label{lem.tourn.reverse}Let $D=\left(  V,A\right)  $ be a tournament, and let
+$vw\in A$ be an arc of $D$. Let $D^{\prime}$ be the digraph obtained from $D$
+by reversing the arc $vw$ (that is, replacing it by $wv$). (In other words,
+let $D^{\prime}=\left(  V,\ \ \left(  A\setminus\left\{  vw\right\}  \right)
+\cup\left\{  wv\right\}  \right)  $.) Then,%
+\[
+\left(  \#\text{ of hamps of }D\right)  \equiv\left(  \#\text{ of hamps of
+}D^{\prime}\right)  \operatorname{mod}2.
+\]
+
+\end{lemma}
+
+\begin{proof}
+[Proof of Lemma \ref{lem.tourn.reverse}.](We follow \cite[\S 10.2,\ Theorem
+6]{Berge91}.)
+
+The digraph $D$ is a tournament, thus loopless. Hence, the arc $vw$ is not a
+loop. In other words, $v\neq w$. Hence, the tournament axiom entails that
+exactly one of the two pairs $vw$ and $wv$ is an arc of $D$. Hence, $wv$ is
+not an arc of $D$ (since $vw$ is an arc of $D$).
+
+Define two further digraphs $D_{0}$ and $D_{2}$ by%
+\[
+D_{0}:=\left(  \text{the digraph }D\text{ with the arc }vw\text{
+removed}\right)  =\left(  V,\ A\setminus\left\{  vw\right\}  \right)
+\]
+and%
+\[
+D_{2}:=\left(  \text{the digraph }D\text{ with the arc }wv\text{
+added}\right)  =\left(  V,\ A\cup\left\{  wv\right\}  \right)  .
+\]
+Note that neither $D_{0}$ nor $D_{2}$ is a tournament.
+
+The digraph $D_{0}$ is the digraph $D$ with the arc $vw$ removed. Hence, the
+digraph $\overline{D_{0}}$ is the digraph $\overline{D}$ with the arc $vw$ added.
+
+The digraph $D_{2}$ is the digraph $D$ with the arc $wv$ added. Hence, the
+digraph $\left(  D_{2}\right)  ^{\operatorname*{rev}}$ is the digraph
+$D^{\operatorname*{rev}}$ with the arc $vw$ added.
+
+Here are visualizations of the four digraphs $D$, $D^{\prime}$, $D_{0}$ and
+$D_{2}$ (we are only showing the arcs between the vertices $v$ and $w$, since
+all other arcs are exactly the same in all four digraphs):%
+\begin{align*}
+&
+%TCIMACRO{\TeXButton{tikz two vertices}{\begin{tikzpicture}
+%\draw(1,0) circle (1.6);
+%\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+%\node(v) at (0,0) {$v$};
+%\node(w) at (2,0) {$w$};
+%\end{scope}
+%\begin{scope}[every edge/.style={draw=black,very thick}]
+%\path[->] (v) edge[bend right=20] (w);
+%\end{scope}
+%\node(D) at (-1.1, 0) {$D : $};
+%\end{tikzpicture}}}%
+%BeginExpansion
+\begin{tikzpicture}
+\draw(1,0) circle (1.6);
+\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+\node(v) at (0,0) {$v$};
+\node(w) at (2,0) {$w$};
+\end{scope}
+\begin{scope}[every edge/.style={draw=black,very thick}]
+\path[->] (v) edge[bend right=20] (w);
+\end{scope}
+\node(D) at (-1.1, 0) {$D : $};
+\end{tikzpicture}%
+%EndExpansion
+;\ \ \ \ \ \ \ \ \ \
+%TCIMACRO{\TeXButton{tikz two vertices}{\begin{tikzpicture}
+%\draw(1,0) circle (1.6);
+%\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+%\node(v) at (0,0) {$v$};
+%\node(w) at (2,0) {$w$};
+%\end{scope}
+%\begin{scope}[every edge/.style={draw=black,very thick}]
+%\path[->] (w) edge[bend right=20] (v);
+%\end{scope}
+%\node(D) at (-1.1, 0) {$D' : $};
+%\end{tikzpicture}}}%
+%BeginExpansion
+\begin{tikzpicture}
+\draw(1,0) circle (1.6);
+\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+\node(v) at (0,0) {$v$};
+\node(w) at (2,0) {$w$};
+\end{scope}
+\begin{scope}[every edge/.style={draw=black,very thick}]
+\path[->] (w) edge[bend right=20] (v);
+\end{scope}
+\node(D) at (-1.1, 0) {$D' : $};
+\end{tikzpicture}%
+%EndExpansion
+;\\
+&
+%TCIMACRO{\TeXButton{tikz two vertices}{\begin{tikzpicture}
+%\draw(1,0) circle (1.6);
+%\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+%\node(v) at (0,0) {$v$};
+%\node(w) at (2,0) {$w$};
+%\end{scope}
+%\node(D) at (-1.1, 0) {$D_0 : $};
+%\end{tikzpicture}}}%
+%BeginExpansion
+\begin{tikzpicture}
+\draw(1,0) circle (1.6);
+\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+\node(v) at (0,0) {$v$};
+\node(w) at (2,0) {$w$};
+\end{scope}
+\node(D) at (-1.1, 0) {$D_0 : $};
+\end{tikzpicture}%
+%EndExpansion
+;\ \ \ \ \ \ \ \ \ \
+%TCIMACRO{\TeXButton{tikz two vertices}{\begin{tikzpicture}
+%\draw(1,0) circle (1.6);
+%\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+%\node(v) at (0,0) {$v$};
+%\node(w) at (2,0) {$w$};
+%\end{scope}
+%\begin{scope}[every edge/.style={draw=black,very thick}]
+%\path[->] (v) edge[bend right=20] (w);
+%\path[->] (w) edge[bend right=20] (v);
+%\end{scope}
+%\node(D) at (-1.1, 0) {$D_2 : $};
+%\end{tikzpicture}}}%
+%BeginExpansion
+\begin{tikzpicture}
+\draw(1,0) circle (1.6);
+\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+\node(v) at (0,0) {$v$};
+\node(w) at (2,0) {$w$};
+\end{scope}
+\begin{scope}[every edge/.style={draw=black,very thick}]
+\path[->] (v) edge[bend right=20] (w);
+\path[->] (w) edge[bend right=20] (v);
+\end{scope}
+\node(D) at (-1.1, 0) {$D_2 : $};
+\end{tikzpicture}%
+%EndExpansion
+.
+\end{align*}
+
+
+We shall use the following notation: If two digraphs $E_{1}$ and $E_{2}$ with
+the same set of vertices have the same arcs except possibly the loops (i.e.,
+if the arcs of $E_{1}$ that are not loops are precisely the arcs of $E_{2}$
+that are not loops), then we shall write $E_{1}\overset{\circ}{=}E_{2}$. In
+other words, two digraphs $E_{1}$ and $E_{2}$ satisfy $E_{1}\overset{\circ
+}{=}E_{2}$ if and only if they are \textquotedblleft equal up to
+loops\textquotedblright\ (i.e., they have the same vertices and the same arcs
+except possibly for the loops). In other words, two digraphs $E_{1}$ and
+$E_{2}$ satisfy $E_{1}\overset{\circ}{=}E_{2}$ if and only if one can be
+obtained from the other by adding and removing loops.
+
+It is clear that if $\mathbf{p}$ is a path of a digraph, then none of the arcs
+of $\mathbf{p}$ is a loop (because the vertices of a path have to be distinct,
+but a loop would contribute two equal vertices to $\mathbf{p}$). In other
+words, a loop cannot be an arc of any path. Thus, if we add or remove a loop
+to a digraph, then the paths of the digraph do not change; in particular, the
+hamps of the digraph do not change. Hence, if $E_{1}$ and $E_{2}$ are two
+digraphs satisfying $E_{1}\overset{\circ}{=}E_{2}$, then%
+\begin{equation}
+\left(  \#\text{ of hamps of }E_{1}\right)  =\left(  \#\text{ of hamps of
+}E_{2}\right)  . \label{pf.lem.tourn.reverse.E1E2}%
+\end{equation}
+
+
+However, $D$ is a tournament; thus, Proposition \ref{prop.tourn.rev-bar}
+yields that the arcs of $\overline{D}$ that are not loops are precisely the
+arcs of $D^{\operatorname*{rev}}$. Hence, $\overline{D}\overset{\circ
+}{=}D^{\operatorname*{rev}}$ (but we don't generally have $\overline
+{D}=D^{\operatorname*{rev}}$, since the digraph $\overline{D}$ has loops
+whereas the digraph $D^{\operatorname*{rev}}$ does not). This entails
+$\overline{D_{0}}\overset{\circ}{=}\left(  D_{2}\right)  ^{\operatorname*{rev}%
+}$ (because the digraph $\overline{D_{0}}$ is the digraph $\overline{D}$ with
+the arc $vw$ added, whereas the digraph $\left(  D_{2}\right)
+^{\operatorname*{rev}}$ is the digraph $D^{\operatorname*{rev}}$ with the arc
+$vw$ added). Therefore, (\ref{pf.lem.tourn.reverse.E1E2}) (applied to
+$E_{1}=\overline{D_{0}}$ and $E_{2}=\left(  D_{2}\right)
+^{\operatorname*{rev}}$) yields%
+\[
+\left(  \#\text{ of hamps of }\overline{D_{0}}\right)  =\left(  \#\text{ of
+hamps of }\left(  D_{2}\right)  ^{\operatorname*{rev}}\right)  =\left(
+\#\text{ of hamps of }D_{2}\right)
+\]
+(by Proposition \ref{prop.hamp.Drev}, applied to $D_{2}$ instead of $D$).
+Hence,%
+\begin{align}
+\left(  \#\text{ of hamps of }D_{2}\right)   &  =\left(  \#\text{ of hamps of
+}\overline{D_{0}}\right) \nonumber\\
+&  \equiv\left(  \#\text{ of hamps of }D_{0}\right)  \operatorname{mod}2
+\label{pf.lem.tourn.reverse.mod2}%
+\end{align}
+(by Theorem \ref{thm.hamp.Dbar}, applied to $D_{0}$ instead of $D$).
+
+However, recall that $D_{2}$ is the digraph $D$ with the arc $wv$ added (and
+this arc $wv$ is not an arc of $D$). Hence, the hamps of $D$ are exactly the
+hamps of $D_{2}$ that do not use\footnote{A walk $\mathbf{w}$ is said to
+\emph{use} an arc $a$ if $a$ is an arc of $\mathbf{w}$.} the arc $wv$.
+Therefore,%
+\begin{align}
+&  \left(  \#\text{ of hamps of }D\right) \nonumber\\
+&  =\left(  \#\text{ of hamps of }D_{2}\text{ that do not use the arc
+}wv\right) \nonumber\\
+&  =\left(  \#\text{ of hamps of }D_{2}\right) \nonumber\\
+&  \ \ \ \ \ \ \ \ \ \ -\left(  \#\text{ of hamps of }D_{2}\text{ that use the
+arc }wv\right)  . \label{pf.lem.tourn.reverse.eq1}%
+\end{align}
+
+
+However, the digraph $D_{2}$ is the digraph $D^{\prime}$ with the arc $vw$
+added (this follows by comparing the definitions of $D_{2}$ and $D^{\prime}$).
+Thus, the digraph $D^{\prime}$ is the digraph $D_{2}$ with the arc $vw$
+removed (since $vw$ is not an arc of $D^{\prime}$). Thus, the hamps of
+$D^{\prime}$ are exactly the hamps of $D_{2}$ that do not use the arc $vw$. In
+particular, any hamp of $D^{\prime}$ is a hamp of $D_{2}$. Therefore, any hamp
+of $D^{\prime}$ that uses the arc $wv$ is a hamp of $D_{2}$ that uses the arc
+$wv$.
+
+On the other hand, a path of $D_{2}$ cannot use both arcs $vw$ and $wv$
+simultaneously\footnote{since the vertices of a path must be distinct, but
+having both $vw$ and $wv$ as arcs would cause at least one of the vertices $v$
+and $w$ to appear twice}. Thus, any path of $D_{2}$ that uses the arc $wv$
+cannot use the arc $vw$. Hence, in particular, any hamp of $D_{2}$ that uses
+the arc $wv$ cannot use the arc $vw$, and thus must be a hamp of $D^{\prime}$
+(since the hamps of $D^{\prime}$ are exactly the hamps of $D_{2}$ that do not
+use the arc $vw$). Thus, any hamp of $D_{2}$ that uses the arc of $wv$ is a
+hamp of $D^{\prime}$ that uses the arc $wv$. Conversely, as we have already
+shown, any hamp of $D^{\prime}$ that uses the arc $wv$ is a hamp of $D_{2}$
+that uses the arc $wv$. Combining the results of the previous two sentences,
+we see that the hamps of $D_{2}$ that use the arc $wv$ are precisely the hamps
+of $D^{\prime}$ that use the arc $wv$. Hence,%
+\begin{align}
+&  \left(  \#\text{ of hamps of }D_{2}\text{ that use the arc }wv\right)
+\nonumber\\
+&  =\left(  \#\text{ of hamps of }D^{\prime}\text{ that use the arc
+}wv\right)  . \label{pf.lem.tourn.reverse.eq2}%
+\end{align}
+
+
+The digraph $D_{0}$ is the digraph $D^{\prime}$ with the arc $wv$ removed
+(this follows by comparing the definitions of $D_{0}$ and $D^{\prime}$).
+Hence, the hamps of $D_{0}$ are precisely the hamps of $D^{\prime}$ that do
+not use the arc $wv$. Therefore,%
+\begin{align}
+&  \left(  \#\text{ of hamps of }D_{0}\right) \nonumber\\
+&  =\left(  \#\text{ of hamps of }D^{\prime}\text{ that do not use the arc
+}wv\right) \nonumber\\
+&  =\left(  \#\text{ of hamps of }D^{\prime}\right) \nonumber\\
+&  \ \ \ \ \ \ \ \ \ \ -\left(  \#\text{ of hamps of }D^{\prime}\text{ that
+use the arc }wv\right)  . \label{pf.lem.tourn.reverse.eq3}%
+\end{align}
+
+
+Now, (\ref{pf.lem.tourn.reverse.eq1}) becomes
+\begin{align*}
+&  \left(  \#\text{ of hamps of }D\right) \\
+&  =\underbrace{\left(  \#\text{ of hamps of }D_{2}\right)  }%
+_{\substack{\equiv\left(  \#\text{ of hamps of }D_{0}\right)
+\operatorname{mod}2\\\text{(by (\ref{pf.lem.tourn.reverse.mod2}))}%
+}}-\underbrace{\left(  \#\text{ of hamps of }D_{2}\text{ that use the arc
+}wv\right)  }_{\substack{=\left(  \#\text{ of hamps of }D^{\prime}\text{ that
+use the arc }wv\right)  \\\text{(by (\ref{pf.lem.tourn.reverse.eq2}))}}}\\
+&  \equiv\left(  \#\text{ of hamps of }D_{0}\right)  -\left(  \#\text{ of
+hamps of }D^{\prime}\text{ that use the arc }wv\right) \\
+&  \equiv\left(  \#\text{ of hamps of }D_{0}\right)  +\left(  \#\text{ of
+hamps of }D^{\prime}\text{ that use the arc }wv\right) \\
+&  \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \left(  \text{since }x-y\equiv
+x+y\operatorname{mod}2\text{ for any two integers }x\text{ and }y\right) \\
+&  =\left(  \#\text{ of hamps of }D^{\prime}\right)  \operatorname{mod}%
+2\ \ \ \ \ \ \ \ \ \ \left(  \text{by (\ref{pf.lem.tourn.reverse.eq3}%
+)}\right)  .
+\end{align*}
+This proves Lemma \ref{lem.tourn.reverse}.
+\end{proof}
+
+At last, we are now ready to prove R\'{e}dei's Strong Theorem:
+
+\begin{proof}
+[Proof of Theorem \ref{thm.tourn.redei}.]Write the digraph $D$ as $D=\left(
+V,A\right)  $. We WLOG assume that $V=\left\{  1,2,\ldots,n\right\}  $ for
+some $n\in\mathbb{N}$ (indeed, we can always achieve this by renaming the
+vertices of $D$).
+
+We want to show that $\left(  \#\text{ of hamps of }D\right)  $ is odd. Lemma
+\ref{lem.tourn.reverse} shows that if we reverse any arc of $D$ (that is, if
+we pick some arc $vw$ of $D$ and replace it by the arc $wv$), then the number
+$\left(  \#\text{ of hamps of }D\right)  $ remains unchanged modulo $2$ (that
+is, it stays even if it was even, and stays odd if it was odd). Thus, of
+course, the same holds if we reverse \textbf{several} arcs of $D$ (because we
+can perform these reversals one by one, and our digraph remains a tournament
+throughout the process\footnote{Here we are using Proposition
+\ref{prop.tourn.rev-arc}.}). Since we are only interested in this number
+modulo $2$ (after all, we are trying to show that it is odd), we can therefore
+WLOG assume that%
+\begin{align*}
+A=\left\{  \left(  i,j\right)  \in V\times V\ \mid\ i<j\right\}   &
+=\{12,\ 13,\ 14,\ \ldots,\ 1n,\\
+&  \ \ \ \ \ \ \ \ \ \ \ \ \ 23,\ 24,\ \ldots,\ 2n,\\
+&  \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ldots\\
+&  \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \left(  n-1\right)  n\}
+\end{align*}
+(because we can always achieve this situation by reversing each arc $ij$ of
+$D$ that satisfies $i>j$). Assume this. Then, Proposition \ref{prop.hamp.123n}
+yields%
+\[
+\left(  \#\text{ of hamps of }D\right)  =1.
+\]
+Thus, $\left(  \#\text{ of hamps of }D\right)  $ is odd. This proves Theorem
+\ref{thm.tourn.redei}.
+\end{proof}
+
+One might wonder whether Theorem \ref{thm.tourn.redei} has a converse: Does
+every odd positive integer equal the $\#$ of hamps of some tournament?
+Surprisingly, the answer is \textquotedblleft no\textquotedblright: Using some
+computer-assisted brute force, it has been proved that there is no tournament
+that has exactly $7$ hamps. It is furthermore conjectured that there is no
+tournament that has exactly $21$ hamps. Each other odd number between $1$ and
+$80555$ has been verified to appear as $\#$ of hamps of some tournament. See
+\cite{MO232751} for more about this peculiar question.
+
+\begin{thebibliography}{99999999}                                                                                         %
+
+
+\bibitem[Berge91]{Berge91}Claude Berge, \textit{Graphs}, North-Holland
+Mathematical Library \textbf{6.1}, 3rd edition, North-Holland 1991.
+
+\bibitem[Lass02]{Lass02}%
+\href{https://doi.org/10.1016/S0196-8858(02)00010-6}{Bodo Lass,
+\textit{Variations sur le th\`{e}me E+E=XY}, Advances in Applied Mathematics
+\textbf{29}, Issue 2, 2 August 2002, pp. 215--242}.
+
+\bibitem[MO232751]{MO232751}bof and Gordon Royle, \textit{MathOverflow
+question \#232751 (\textquotedblleft The number of Hamiltonian paths in a
+tournament\textquotedblright)}.\newline\url{https://mathoverflow.net/questions/232751/the-number-of-hamiltonian-paths-in-a-tournament}
+
+\bibitem[Moon13]{Moon13}John W. Moon, \textit{Topics on Tournaments}, Project
+Gutenberg EBook, 5 June 2013.\newline\url{https://www.gutenberg.org/ebooks/42833}
+
+\bibitem[Redei33]{Redei33}%
+\href{http://acta.bibl.u-szeged.hu/13432/}{L\'{a}szl\'{o} R\'{e}dei,
+\textit{Ein kombinatorischer Satz}, Acta Litteraria Szeged \textbf{7} (1934),
+pp. 39--43}.
+
+\bibitem[Tomesc85]{Tomesc85}Ioan Tomescu, \textit{Problems in Combinatorics
+and Graph Theory}, Wiley 1985.
+\end{thebibliography}
+
+
+\end{document}
