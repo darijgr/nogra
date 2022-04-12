@@ -18,8 +18,8 @@
     <p>Lecture 6 (digraphs, multigraphs, Eulerian paths and circuits, multidigraphs, criteria for Eulerian etc.): coming soon. [<a href="5707lec6a.pdf">Part 1 of the notes</a>.]
         <ul>
         <li>See Section 0.1 of <a href="hw2s.pdf">homework set 2 solutions</a> for various notations around multigraphs and digraphs (particularly, the meanings of walks, path and cycles).</li>
-        <li>Section 5.2 of <a href="https://www.whitman.edu/mathematics/cgt_online/cgt.pdf">David Guichard's <i>An Introduction to Combinatorics and Graph Theory</i></a> deals with Eulerian walks and Eulerian circuits (although it calls them Eulerian paths and Eulerian cycles, respectively, conflicting with our notation).</li>
-        <li>Another proof of the Euler-Hierholzer theorem (every connected multigraph whose vertices all have even degrees must have an Eulerian circuit) can be found in Problem 10.7 of <a href="https://courses.csail.mit.edu/6.042/spring17/mcs.pdf">Lehman-Leighton-Meyer</a> (the numbering might change; search for "Euler tour" to find the problem); note that he calls Eulerian circuits "Euler tours".</li>
+        <li>Section 5.2 of <a href="https://www.whitman.edu/mathematics/cgt_online/cgt.pdf">David Guichard's <i>An Introduction to Combinatorics and Graph Theory</i></a> deals with Eulerian walks and Eulerian circuits (although it calls them Euler walks and Euler circuits, respectively).</li>
+        <li>Another proof of the Euler-Hierholzer theorem (every connected multigraph whose vertices all have even degrees must have an Eulerian circuit) can be found in Problem 10.7 of <a href="https://courses.csail.mit.edu/6.042/spring18/mcs.pdf">Lehman-Leighton-Meyer</a>; note that he calls Eulerian circuits "Euler tours".</li>
         <li>See also <a href="https://www.math.ku.edu/~jmartin/courses/math105-F11/Lectures/chapter5-part2.pdf">Jeremy Martin's slides</a> for examples and a different algorithm for finding Eulerian walks and circuits.</li>
         <li>A strongly connected digraph has an Eulerian circuit if and only if each vertex v satisfies deg<sup>+</sup> v = deg<sup>-</sup> v. This is proven similarly to the Euler-Hierholzer theorem.</li>
         </ul>
@@ -39,15 +39,15 @@
     <p>Lecture 13 (Cayley's formula; bipartite graphs; matchings; Hall's theorem):
         <ul>
         <li><a href="http://www.austinmohr.com/15spring4980/paper%20final%20draft.pdf">Frankie Smith's final paper</a> derives Cayley's formula similarly to how I did it (in its Section 3.1 -- but beware that he only states the matrix-tree theorem for undirected graphs!);</li>
-        <li>further proofs of Cayley's formula (not part of lectures) appear in the Appendix to Chapter 9 of <a href="http://www-math.mit.edu/~rstan/algcomb/">Richard Stanley's <i>Algebraic Combinatorics</i></a>;</li>
+        <li>further proofs of Cayley's formula appear in the Appendix to Chapter 9 of <a href="http://www-math.mit.edu/~rstan/algcomb/">Richard Stanley's <i>Algebraic Combinatorics</i></a>;</li>
         <li>for much more about counting trees, see <a href="http://www.math.ucla.edu/~pak/hidden/papers/Moon-counting_labelled_trees.pdf">Moon's booklet</a> (not needed for hw/exams);</li>
-        <li>for bipartite graphs, see Section 12.2 and 12.5 in <a href="https://courses.csail.mit.edu/6.042/spring17/mcs.pdf">Lehman-Leighton-Meyer</a>.</li>
+        <li>for bipartite graphs, see Section 12.2 and 12.5 in <a href="https://courses.csail.mit.edu/6.042/spring18/mcs.pdf">Lehman-Leighton-Meyer</a>.</li>
         </ul>
     <p>Lecture 14 (K&ouml;nig's theorem; systems of distinct representatives; Birkhoff-van-Neumann theorem):
         <ul>
         <li><a href="https://en.wikipedia.org/wiki/K%C5%91nig's_theorem_(graph_theory)">K&ouml;nig's theorem</a> but with a different proof;</li>
         <li>another source for K&ouml;nig's theorem is Chapter 10 of <a href="https://cthomson.ca/dl/latest/math239.pdf">Chris Thomson's <i>MATH 239: Introduction to Combinatorics</i> notes</a>, which provides the same proof as Wikipedia (and derives Hall's theorem from K&ouml;nig's -- i.e., the opposite direction from what we did in class);</li>
-        <li><a href="http://www.math.cornell.edu/~levine/18.312/alg-comb-lecture-17.pdf">scribe notes from a class by Lionel Levine</a> provide the proof of K&ouml;nig's theorem that we did in class, along with Hall's theorem on systems of distinct representatives;</li>
+        <li><a href="http://pi.math.cornell.edu/~levine/18.312/alg-comb-lecture-17.pdf">scribe notes from a class by Lionel Levine</a> provide the proof of K&ouml;nig's theorem that we did in class, along with Hall's theorem on systems of distinct representatives;</li>
         <li>see Section 8.1 of <a href="https://cameroncounts.files.wordpress.com/2013/11/comb.pdf">P. J. Cameron's <i>Notes on Combinatorics</i></a> for Hall's theorem on systems of distinct representatives (but beware: instead of deriving it from Hall's theorem on matchings, he simply proves it from scratch); Section 8.3 provides a neat application to Sudoku;</li>
         <li><a href="http://planetmath.org/proofofbirkhoffvonneumanntheorem">proof</a> of <a href="http://planetmath.org/birkhoffvonneumanntheorem">Birkhoff-von Neumann theorem</a> (not needed in hw/exams).</li>
         </ul>
@@ -61,9 +61,9 @@
         Note that in Lecture 15, only Menger's theorem is hw/exam material.
     <p><a href="5707lec16.pdf">Lecture 16</a> (network flows) (see also <a href="5707lec16.tex">the sourcecode of these notes</a>, and <a href="5707lec16old.pdf">an old, handwritten version</a>):
         <ul>
-        <li><a href="http://people.ku.edu/~jlmartin/LectureNotes.pdf">Jeremy L. Martin's <i>Lecture Notes on Algebraic Combinatorics</i></a>, in its Section 8.2, handles all I'm doing in class rather neatly.</li>
+        <li><a href="https://jlmartin.ku.edu/LectureNotes.pdf">Jeremy L. Martin's <i>Lecture Notes on Algebraic Combinatorics</i></a>, in its Section 11.1, handles all I'm doing in class rather neatly.</li>
         <li>For further material and real-life applications (mostly to industrial planning), see Chapter 4 of <a href="http://homepages.cwi.nl/~lex/files/dict.pdf">Lex Schrijver's <i>A Course in Combinatorial Optimization</i></a> (just updated with corrected typos and improved exposition, as of 23 March 2017).</li>
-        <li><a href="http://www.unet.univie.ac.at/~a0103857/Papers/Timon%20Thalwitzer%20-%20Max%20Flow.pdf">Timon Thalwitzer's diploma thesis <i>Max-Flow Min-Cut</i></a> appears to be a highly thorough and systematic treatment of various versions of max-flow/min-cut (I personally haven't read it).</li>
+        <li><a href="https://www.mat.univie.ac.at/~kratt/theses/thalwitz.pdf">Timon Thalwitzer's diploma thesis <i>Max-Flow Min-Cut</i></a> appears to be a highly thorough and systematic treatment of various versions of max-flow/min-cut (I personally haven't read it).</li>
         </ul>
     <p>Lecture 17 (more on network flows):
         <ul>
@@ -74,9 +74,9 @@
         </ul>
     <p>Lecture 18 (Gallai-Milgram and stable matchings):
         <ul>
-        <li>Gallai-Milgram theorem (Theorem 2.5.1 in <a href="http://students.imsa.edu/~tliu/Math/GraphTheoryIII.pdf">Diestel, <i>Graph Theory</i>, 3rd edition 2005</a>).</li>
+        <li>Gallai-Milgram theorem (Theorem 2.5.1 in <a href="https://web.archive.org/web/20150608113038/http://students.imsa.edu/~tliu/Math/GraphTheoryIII.pdf">Diestel, <i>Graph Theory</i>, 3rd edition 2005</a>).</li>
         <li>The K&ouml;nig theorem (on matchings and vertex covers) and the Redei theorem (each nonempty tournament has a Hamiltonian path) follow from Gallai-Milgram.</li>
-        <li>Stable matchings (Section 6.4 in <a href="https://courses.csail.mit.edu/6.042/spring17/mcs.pdf">Lehman, Leighton, Meyer, <i>Mathematics for Computer Science</i></a>).</li>
+        <li>Stable matchings (Section 6.4 in <a href="https://courses.csail.mit.edu/6.042/spring18/mcs.pdf">Lehman, Leighton, Meyer, <i>Mathematics for Computer Science</i></a>).</li>
         </ul>
     <p>Lecture 19 (stable matchings continued, and Pfaffians):
         <ul>
