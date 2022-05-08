@@ -1,0 +1,3204 @@
+\documentclass[numbers=enddot,12pt,final,onecolumn,notitlepage]{scrartcl}%
+\usepackage[headsepline,footsepline,manualmark]{scrlayer-scrpage}
+\usepackage[all,cmtip]{xy}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{framed}
+\usepackage{comment}
+\usepackage{color}
+\usepackage{hyperref}
+\usepackage[sc]{mathpazo}
+\usepackage[T1]{fontenc}
+\usepackage{tikz}
+\usepackage{needspace}
+\usepackage{tabls}
+\usepackage{wasysym}
+%TCIDATA{OutputFilter=latex2.dll}
+%TCIDATA{Version=5.50.0.2960}
+%TCIDATA{LastRevised=Tuesday, May 10, 2022 13:24:39}
+%TCIDATA{SuppressPackageManagement}
+%TCIDATA{<META NAME="GraphicsSave" CONTENT="32">}
+%TCIDATA{<META NAME="SaveForMode" CONTENT="1">}
+%TCIDATA{BibliographyScheme=Manual}
+%TCIDATA{Language=American English}
+%BeginMSIPreambleData
+\providecommand{\U}[1]{\protect\rule{.1in}{.1in}}
+%EndMSIPreambleData
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{chains}
+\newcounter{exer}
+\numberwithin{exer}{subsection}
+\theoremstyle{definition}
+\newtheorem{theo}{Theorem}[subsection]
+\newenvironment{theorem}[1][]
+{\begin{theo}[#1]\begin{leftbar}}
+{\end{leftbar}\end{theo}}
+\newtheorem{lem}[theo]{Lemma}
+\newenvironment{lemma}[1][]
+{\begin{lem}[#1]\begin{leftbar}}
+{\end{leftbar}\end{lem}}
+\newtheorem{prop}[theo]{Proposition}
+\newenvironment{proposition}[1][]
+{\begin{prop}[#1]\begin{leftbar}}
+{\end{leftbar}\end{prop}}
+\newtheorem{defi}[theo]{Definition}
+\newenvironment{definition}[1][]
+{\begin{defi}[#1]\begin{leftbar}}
+{\end{leftbar}\end{defi}}
+\newtheorem{remk}[theo]{Remark}
+\newenvironment{remark}[1][]
+{\begin{remk}[#1]\begin{leftbar}}
+{\end{leftbar}\end{remk}}
+\newtheorem{coro}[theo]{Corollary}
+\newenvironment{corollary}[1][]
+{\begin{coro}[#1]\begin{leftbar}}
+{\end{leftbar}\end{coro}}
+\newtheorem{conv}[theo]{Convention}
+\newenvironment{convention}[1][]
+{\begin{conv}[#1]\begin{leftbar}}
+{\end{leftbar}\end{conv}}
+\newtheorem{quest}[theo]{Question}
+\newenvironment{question}[1][]
+{\begin{quest}[#1]\begin{leftbar}}
+{\end{leftbar}\end{quest}}
+\newtheorem{warn}[theo]{Warning}
+\newenvironment{conclusion}[1][]
+{\begin{warn}[#1]\begin{leftbar}}
+{\end{leftbar}\end{warn}}
+\newtheorem{conj}[theo]{Conjecture}
+\newenvironment{conjecture}[1][]
+{\begin{conj}[#1]\begin{leftbar}}
+{\end{leftbar}\end{conj}}
+\newtheorem{exam}[theo]{Example}
+\newenvironment{example}[1][]
+{\begin{exam}[#1]\begin{leftbar}}
+{\end{leftbar}\end{exam}}
+\newtheorem{exmp}[exer]{Exercise}
+\newenvironment{exercise}[1][]
+{\begin{exmp}[#1]\begin{leftbar}}
+{\end{leftbar}\end{exmp}}
+\newenvironment{statement}{\begin{quote}}{\end{quote}}
+\newenvironment{fineprint}{\begin{small}}{\end{small}}
+\iffalse
+\newenvironment{proof}[1][Proof]{\noindent\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+\newenvironment{question}[1][Question]{\noindent\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+\newenvironment{teachingnote}[1][Teaching note]{\noindent\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+\fi
+\let\sumnonlimits\sum
+\let\prodnonlimits\prod
+\let\cupnonlimits\bigcup
+\let\capnonlimits\bigcap
+\renewcommand{\sum}{\sumnonlimits\limits}
+\renewcommand{\prod}{\prodnonlimits\limits}
+\renewcommand{\bigcup}{\cupnonlimits\limits}
+\renewcommand{\bigcap}{\capnonlimits\limits}
+\setlength\tablinesep{3pt}
+\setlength\arraylinesep{3pt}
+\setlength\extrarulesep{3pt}
+\voffset=0cm
+\hoffset=-0.7cm
+\setlength\textheight{22.5cm}
+\setlength\textwidth{15.5cm}
+\newcommand\arxiv[1]{\href{http://www.arxiv.org/abs/#1}{\texttt{arXiv:#1}}}
+\newenvironment{verlong}{}{}
+\newenvironment{vershort}{}{}
+\newenvironment{noncompile}{}{}
+\newenvironment{teachingnote}{}{}
+\excludecomment{verlong}
+\includecomment{vershort}
+\excludecomment{noncompile}
+\excludecomment{teachingnote}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\KK}{\mathbb{K}}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\lcm}{\operatorname{lcm}}
+\newcommand{\rev}{\operatorname{rev}}
+\newcommand{\powset}[2][]{\ifthenelse{\equal{#2}{}}{\mathcal{P}\left(#1\right)}{\mathcal{P}_{#1}\left(#2\right)}}
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\tup}[1]{\left( #1 \right)}
+\newcommand{\ive}[1]{\left[ #1 \right]}
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+\newcommand{\lf}[2]{#1^{\underline{#2}}}
+\newcommand{\underbrack}[2]{\underbrace{#1}_{\substack{#2}}}
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}}
+\newcommand{\nnn}{\nonumber\\}
+\newcommand{\sslash}{\mathbin{/\mkern-6mu/}}
+\ihead{Math 5707 Spring 2017 (Darij Grinberg): Lecture 8}
+\ohead{page \thepage}
+\cfoot{}
+\begin{document}
+
+\title{UMN, Spring 2017, Math 5707: Lecture 8 (Vandermonde determinant using tournaments)}
+\author{Darij Grinberg}
+\date{digitized and improved version,
+%TCIMACRO{\TeXButton{TeX field}{\today}}%
+%BeginExpansion
+\today
+%EndExpansion
+}
+\maketitle
+\tableofcontents
+
+\section{Tournaments and the Vandermonde determinant}
+
+The goal of this lecture is to demonstrate a curious application of digraphs:
+a combinatorial proof of the Vandermonde determinant identity. This proof --
+which was found by Gessel in 1979 -- is neither the simplest nor the shortest
+proof (several others can be found in \cite[\S 6.7]{detnotes} and in most
+textbooks on linear algebra), but it illustrates several techniques in
+enumerative combinatorics and in the application of combinatorics to other fields.
+
+\subsection{$3$-cycles in tournaments}
+
+We shall use the notations introduced in \cite[\S 1.1 and \S 1.4]{lec7}. In
+particular, we use the word \textquotedblleft\emph{digraph}\textquotedblright%
+\ as shorthand for \textquotedblleft simple digraph\textquotedblright. When
+$i$ and $j$ are two vertices of a digraph, we sometimes use the notation $ij$
+for the pair $\left(  i,j\right)  $. We recall that a \emph{tournament} is a
+loopless simple digraph $D$ that satisfies the \emph{tournament axiom}: For
+any two distinct vertices $u$ and $v$ of $D$, \textbf{exactly} one of the two
+pairs $\left(  u,v\right)  =uv$ and $\left(  v,u\right)  =vu$ is an arc of $D$.
+
+We shall focus on counting certain triples of vertices, which we will refer to
+as \textquotedblleft$3$-cycles\textquotedblright:
+
+\begin{definition}
+Let $D=\left(  V,A\right)  $ be a simple digraph. A $3$\emph{-cycle} of $D$
+shall mean a triple $\left(  u,v,w\right)  $ of distinct vertices $u,v,w\in V$
+satisfying $uv,vw,wu\in A$.
+\end{definition}
+
+\begin{example}
+\label{exa.digr.3-cycs.1}Consider the following digraph:%
+\[%
+%TCIMACRO{\TeXButton{tikz 5-vertex tournament}{\begin{tikzpicture}[scale=1.2]
+%\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+%\node(1) at (0*360/5 : 2) {$1$};
+%\node(2) at (1*360/5 : 2) {$2$};
+%\node(3) at (2*360/5 : 2) {$3$};
+%\node(4) at (3*360/5 : 2) {$4$};
+%\node(5) at (4*360/5 : 2) {$5$};
+%\end{scope}
+%\begin{scope}[every edge/.style={draw=black,very thick}, every loop/.style={}]
+%\path[->] (1) edge (2) edge (4) edge (5);
+%\path[->] (2) edge (5);
+%\path[->] (3) edge (1) edge (2);
+%\path[->] (4) edge (2) edge (3) edge (5);
+%\path[->] (5) edge (3);
+%\end{scope}
+%\end{tikzpicture}}}%
+%BeginExpansion
+\begin{tikzpicture}[scale=1.2]
+\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+\node(1) at (0*360/5 : 2) {$1$};
+\node(2) at (1*360/5 : 2) {$2$};
+\node(3) at (2*360/5 : 2) {$3$};
+\node(4) at (3*360/5 : 2) {$4$};
+\node(5) at (4*360/5 : 2) {$5$};
+\end{scope}
+\begin{scope}[every edge/.style={draw=black,very thick}, every loop/.style={}]
+\path[->] (1) edge (2) edge (4) edge (5);
+\path[->] (2) edge (5);
+\path[->] (3) edge (1) edge (2);
+\path[->] (4) edge (2) edge (3) edge (5);
+\path[->] (5) edge (3);
+\end{scope}
+\end{tikzpicture}%
+%EndExpansion
+\ \ .
+\]
+This digraph has nine $3$-cycles:%
+\begin{align*}
+&  \left(  1,4,3\right)  ,\ \ \ \ \ \ \ \ \ \ \left(  1,5,3\right)
+,\ \ \ \ \ \ \ \ \ \ \left(  2,5,3\right)  ,\ \ \ \ \ \ \ \ \ \ \left(
+3,1,4\right)  ,\ \ \ \ \ \ \ \ \ \ \left(  3,1,5\right)  ,\\
+&  \left(  3,2,5\right)  ,\ \ \ \ \ \ \ \ \ \ \left(  4,3,1\right)
+,\ \ \ \ \ \ \ \ \ \ \left(  5,3,1\right)  ,\ \ \ \ \ \ \ \ \ \ \left(
+5,3,2\right)  .
+\end{align*}
+(We do not count the two $3$-cycles $\left(  1,4,3\right)  $ and $\left(
+4,3,1\right)  $ as identical, even though they are just cyclic rotations of
+one another.) On the other hand, the triple $\left(  1,2,3\right)  $ is not a
+$3$-cycle (since $23$ is not an arc). The triple $\left(  1,3,4\right)  $ is
+not a $3$-cycle either (since none of $13$, $34$ and $41$ is an arc).
+\end{example}
+
+We note that our notion of $3$-cycles is essentially equivalent to the notion
+of cycles\footnote{See \cite[Definition 1.5.1 \textbf{(b)}]{lec7} for the
+definition of our notion of cycles.} of length $3$. Indeed, if $\left(
+u,v,w\right)  $ is a $3$-cycle of a simple digraph $D$, then $\left(
+u,v,w,u\right)  $ is a cycle of length $3$. Conversely, if $\left(
+u,v,w,u\right)  $ is a cycle of length $3$, then $\left(  u,v,w\right)  $ is a
+$3$-cycle.
+
+\begin{definition}
+Let $D=\left(  V,A\right)  $ be a digraph, and let $\left(  u,v\right)  $ be
+an arc of $D$. To \emph{reverse} this arc $\left(  u,v\right)  $ means to
+replace this arc $\left(  u,v\right)  $ by $\left(  v,u\right)  $ in the arc
+set of $D$. The result of this operation is a new digraph $\left(
+V,\ \ \left(  A\setminus\left\{  uv\right\}  \right)  \cup\left\{  vu\right\}
+\right)  $.
+\end{definition}
+
+We note that if $D$ is a tournament, then the new digraph $\left(
+V,\ \ \left(  A\setminus\left\{  uv\right\}  \right)  \cup\left\{  vu\right\}
+\right)  $ obtained by reversing the arc $\left(  u,v\right)  $ will again be
+a tournament.
+
+\begin{convention}
+In the following, the symbol \textquotedblleft$\#$\textquotedblright\ stands
+for the word \textquotedblleft number\textquotedblright\ (as in
+\textquotedblleft the number of\textquotedblright). For example,
+\[
+\left(  \#\text{ of subsets of }\left\{  1,2,3\right\}  \right)  =2^{3}=8.
+\]
+
+\end{convention}
+
+\begin{proposition}
+\label{prop.tour-vand.1}Let $D$ be a tournament. Let $\left(  u,v,w\right)  $
+be a $3$-cycle of $D$. Let $D^{\prime}$ be the tournament obtained from $D$ by
+reversing the arcs $uv$, $vw$ and $wu$ (this means replacing them by $vu$,
+$wv$ and $uw$). Then,%
+\[
+\left(  \#\text{ of }3\text{-cycles of }D^{\prime}\right)  =\left(  \#\text{
+of }3\text{-cycles of }D\right)  .
+\]
+
+\end{proposition}
+
+Here is an illustration for Proposition \ref{prop.tour-vand.1} showing $D$ on
+the left and $D^{\prime}$ on the right (the arcs $uv$, $vw$ and $wu$ of $D$
+are painted blue; the arcs $vu$, $wv$ and $uw$ of $D^{\prime}$ are painted
+red; all other arcs are the same in $D$ and in $D^{\prime}$):%
+\[%
+\begin{tabular}
+[c]{|c|c|}\hline
+$%
+%TCIMACRO{\TeXButton{tikz D}{\begin{tikzpicture}
+%\draw[draw=black] (-2.5, -3) rectangle (3, 3);
+%\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+%\node(u) at (0:1.5) {$u$};
+%\node(v) at (120:1.5) {$v$};
+%\node(w) at (240:1.5) {$w$};
+%\end{scope}
+%\node(u1) at (35:2.5) {};
+%\node(u2) at (15:3) {};
+%\node(u3) at (-5:3) {};
+%\node(v1) at (155:2.5) {};
+%\node(v2) at (125:3) {};
+%\node(v3) at (105:3) {};
+%\node(w1) at (260:3) {};
+%\node(w2) at (220:3) {};
+%\begin{scope}[every edge/.style={draw=blue,line width=1.7pt}]
+%\path[->] (u) edge (v) (v) edge (w) (w) edge (u);
+%\end{scope}
+%\begin{scope}[every edge/.style={draw=black,dashed,very thick}]
+%\path[->] (u) edge (u1) edge (u2) (u3) edge (u);
+%\path[->] (v) edge (v1) edge (v2) edge (v3);
+%\path[->] (w2) edge (w) (w1) edge (w);
+%\end{scope}
+%\end{tikzpicture}}}%
+%BeginExpansion
+\begin{tikzpicture}
+\draw[draw=black] (-2.5, -3) rectangle (3, 3);
+\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+\node(u) at (0:1.5) {$u$};
+\node(v) at (120:1.5) {$v$};
+\node(w) at (240:1.5) {$w$};
+\end{scope}
+\node(u1) at (35:2.5) {};
+\node(u2) at (15:3) {};
+\node(u3) at (-5:3) {};
+\node(v1) at (155:2.5) {};
+\node(v2) at (125:3) {};
+\node(v3) at (105:3) {};
+\node(w1) at (260:3) {};
+\node(w2) at (220:3) {};
+\begin{scope}[every edge/.style={draw=blue,line width=1.7pt}]
+\path[->] (u) edge (v) (v) edge (w) (w) edge (u);
+\end{scope}
+\begin{scope}[every edge/.style={draw=black,dashed,very thick}]
+\path[->] (u) edge (u1) edge (u2) (u3) edge (u);
+\path[->] (v) edge (v1) edge (v2) edge (v3);
+\path[->] (w2) edge (w) (w1) edge (w);
+\end{scope}
+\end{tikzpicture}%
+%EndExpansion
+$ & $%
+%TCIMACRO{\TeXButton{tikz Dprime}{\begin{tikzpicture}
+%\draw[draw=black] (-2.5, -3) rectangle (3, 3);
+%\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+%\node(u) at (0:1.5) {$u$};
+%\node(v) at (120:1.5) {$v$};
+%\node(w) at (240:1.5) {$w$};
+%\end{scope}
+%\node(u1) at (35:2.5) {};
+%\node(u2) at (15:3) {};
+%\node(u3) at (-5:3) {};
+%\node(v1) at (155:2.5) {};
+%\node(v2) at (125:3) {};
+%\node(v3) at (105:3) {};
+%\node(w1) at (260:3) {};
+%\node(w2) at (220:3) {};
+%\begin{scope}[every edge/.style={draw=red,line width=1.7pt}]
+%\path[->] (u) edge (w) (w) edge (v) (v) edge (u);
+%\end{scope}
+%\begin{scope}[every edge/.style={draw=black,dashed,very thick}]
+%\path[->] (u) edge (u1) edge (u2) (u3) edge (u);
+%\path[->] (v) edge (v1) edge (v2) edge (v3);
+%\path[->] (w2) edge (w) (w1) edge (w);
+%\end{scope}
+%\end{tikzpicture}}}%
+%BeginExpansion
+\begin{tikzpicture}
+\draw[draw=black] (-2.5, -3) rectangle (3, 3);
+\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+\node(u) at (0:1.5) {$u$};
+\node(v) at (120:1.5) {$v$};
+\node(w) at (240:1.5) {$w$};
+\end{scope}
+\node(u1) at (35:2.5) {};
+\node(u2) at (15:3) {};
+\node(u3) at (-5:3) {};
+\node(v1) at (155:2.5) {};
+\node(v2) at (125:3) {};
+\node(v3) at (105:3) {};
+\node(w1) at (260:3) {};
+\node(w2) at (220:3) {};
+\begin{scope}[every edge/.style={draw=red,line width=1.7pt}]
+\path[->] (u) edge (w) (w) edge (v) (v) edge (u);
+\end{scope}
+\begin{scope}[every edge/.style={draw=black,dashed,very thick}]
+\path[->] (u) edge (u1) edge (u2) (u3) edge (u);
+\path[->] (v) edge (v1) edge (v2) edge (v3);
+\path[->] (w2) edge (w) (w1) edge (w);
+\end{scope}
+\end{tikzpicture}%
+%EndExpansion
+$\\
+$D$ & $D^{\prime}$\\\hline
+\end{tabular}
+\ \ \ \ \ .
+\]
+
+
+We shall give two proofs of Proposition \ref{prop.tour-vand.1}. The first
+relies on the notion of indegrees, which we shall now recall along with that
+of outdegrees:
+
+\begin{definition}
+\label{def.digr.indeg}Let $D=\left(  V,A\right)  $ be a digraph. Let $v\in V$
+be any vertex. Then:
+
+\begin{enumerate}
+\item[\textbf{(a)}] The \emph{outdegree} of $v$ denotes the number of arcs of
+$D$ whose source is $v$. This outdegree is denoted $\deg^{+}v$.
+
+\item[\textbf{(b)}] The \emph{indegree} of $v$ denotes the number of arcs of
+$D$ whose target is $v$. This indegree is denoted $\deg^{-}v$.
+\end{enumerate}
+\end{definition}
+
+For instance, if $D$ is the digraph in Example \ref{exa.digr.3-cycs.1}, then
+$\deg^{+}2=1$ and $\deg^{-}2=3$.
+
+We also recall the following fact (Exercise 5 on homework set \#2; see
+\cite{hw2s} for a solution):
+
+\begin{proposition}
+\label{prop.hw2e5b}Let $D=\left(  V,A\right)  $ be a tournament. Set
+$n=\left\vert V\right\vert $ and $m=\sum_{v\in V}\dbinom{\deg^{-}v}{2}$. Then:
+
+\begin{enumerate}
+\item[\textbf{(a)}] We have $m=\sum_{v\in V}\dbinom{\deg^{+}v}{2}$.
+
+\item[\textbf{(b)}] The number of $3$-cycles in $D$ is $3\left(  \dbinom{n}%
+{3}-m\right)  $.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+[First proof of Proposition \ref{prop.tour-vand.1}.]Proposition
+\ref{prop.hw2e5b} \textbf{(b)} yields that the $\#$ of $3$-cycles in $D$ is
+$3\left(  \dbinom{n}{3}-m\right)  $, where $m=\sum_{v\in V}\dbinom{\deg^{-}%
+v}{2}$. Thus, the $\#$ of $3$-cycles of $D$ depends only on $V$ and the
+indegrees $\deg^{-}v$ of the vertices $v\in V$. But these indegrees do not
+change when we reverse the arcs $uv$, $vw$ and $wu$ (since each of the
+vertices $u$, $v$ and $w$ loses one incoming arc\footnote{An \textquotedblleft
+incoming arc\textquotedblright\ of a vertex $r\in V$ means an arc whose target
+is $r$. The number of such arcs is the indegree $\deg^{-}r$ of $r$.} and gains
+another). Hence, the $\#$ of $3$-cycles, too, does not change when we reverse
+these arcs. This proves Proposition \ref{prop.tour-vand.1}.
+\end{proof}
+
+\begin{noncompile}
+
+
+\begin{proof}
+For each subset $W$ of $V$, we let $D\mid_{W}$ denote the digraph%
+\[
+\left(  W,\ \ A\cap\left(  W\times W\right)  \right)  .
+\]
+This is the digraph whose vertices are the elements of $W$ and whose arcs are
+those arcs of $D$ whose sources and targets belong to $W$. This digraph
+$D\mid_{W}$ is called the \emph{induced subdigraph of }$D$ on the set $W$. It
+is easy to see that $D\mid_{W}$ is a tournament (since $D$ is a tournament).
+
+It is easy to prove Proposition \ref{prop.tour-vand.1} in the case when
+$\left\vert V\right\vert \leq4$ (since there are only finitely many cases to
+check). Hence, for each $x\in V$, we have%
+\begin{align*}
+&  \left(  \#\text{ of }3\text{-cycles of }D^{\prime}\text{ whose vertices
+belong to }\left\{  u,v,w,x\right\}  \right) \\
+&  =\left(  \#\text{ of }3\text{-cycles of }D\text{ whose vertices belong to
+}\left\{  u,v,w,x\right\}  \right)
+\end{align*}
+(because this is what we obtain if we apply Proposition \ref{prop.tour-vand.1}
+to the induced subdigraph $D\mid_{\left\{  u,v,w,x\right\}  }$ instead of $D$).
+\end{proof}
+\end{noncompile}
+
+\begin{proof}
+[Second proof of Proposition \ref{prop.tour-vand.1}.]Write the digraph $D$ in
+the form $D=\left(  V,A\right)  $.
+
+The $3$-cycles of $D$ can be classified into the following three types:
+
+\begin{itemize}
+\item \textbf{Type 1:} those $3$-cycles that contain \textbf{at most one} of
+the vertices $u$, $v$ and $w$.
+
+\item \textbf{Type 2:} those $3$-cycles that contain \textbf{precisely two} of
+the vertices $u$, $v$ and $w$.
+
+\item \textbf{Type 3:} those $3$-cycles that contain \textbf{all three} of the
+vertices $u$, $v$ and $w$.
+\end{itemize}
+
+The $3$-cycles of Type 2 can be classified further: Any $3$-cycle of Type 2
+contains precisely two of the vertices $u$, $v$ and $w$ and one further
+vertex. If this further vertex is $x$, then we call this $3$-cycle a
+\textquotedblleft$3$-cycle of Type 2$_{x}$\textquotedblright. Thus, a
+$3$-cycle of Type 2$_{x}$ (for a vertex $x\in V\setminus\left\{
+u,v,w\right\}  $) means a $3$-cycle that contains the vertex $x$ and precisely
+two of the vertices $u$, $v$ and $w$.
+
+The $3$-cycles of $D^{\prime}$ can be classified in the exact same way.
+
+Now, when we reverse the arcs $uv$, $vw$ and $wu$ of the digraph $D$, all
+$3$-cycles of Type 1 are preserved, and no new $3$-cycles of Type 1 are
+created. Thus,%
+\begin{align}
+&  \left(  \#\text{ of }3\text{-cycles of }D^{\prime}\text{ of Type 1}\right)
+\nonumber\\
+&  =\left(  \#\text{ of }3\text{-cycles of }D\text{ of Type 1}\right)  .
+\label{pf.prop.tour-vand.1.2nd.type1}%
+\end{align}
+
+
+Furthermore, for each $x\in V\setminus\left\{  u,v,w\right\}  $, we have%
+\begin{align}
+&  \left(  \#\text{ of }3\text{-cycles of }D^{\prime}\text{ of Type 2}%
+_{x}\right) \nonumber\\
+&  =\left(  \#\text{ of }3\text{-cycles of }D\text{ of Type 2}_{x}\right)  .
+\label{pf.prop.tour-vand.1.2nd.type2x}%
+\end{align}
+
+
+[\textit{Proof of (\ref{pf.prop.tour-vand.1.2nd.type2x}):} Let $x\in
+V\setminus\left\{  u,v,w\right\}  $. We must prove that the two numbers
+\[
+\left(  \#\text{ of }3\text{-cycles of }D^{\prime}\text{ of Type 2}%
+_{x}\right)  \ \ \ \ \ \ \ \ \ \ \text{and}\ \ \ \ \ \ \ \ \ \ \left(
+\#\text{ of }3\text{-cycles of }D\text{ of Type 2}_{x}\right)
+\]
+are equal. These numbers depend only on the presence or absence of the pairs
+$\left(  x,u\right)  $, $\left(  x,v\right)  $, $\left(  x,w\right)  $,
+$\left(  u,x\right)  $, $\left(  v,x\right)  $ and $\left(  w,x\right)  $ in
+the set $A$ (since a $3$-cycle of Type 2$_{x}$ must consist entirely of
+vertices from the set $\left\{  u,v,w,x\right\}  $, and thus its existence or
+non-existence depends only on the arcs that join the four vertices in this
+set); thus, we only have finitely many cases to check. Moreover, since $D$ is
+a tournament, it suffices to know which of the three pairs $\left(
+x,u\right)  $, $\left(  x,v\right)  $ and $\left(  x,w\right)  $ belong to
+$A$, because the tournament axiom shows that (e.g.) the pair $\left(
+u,x\right)  $ belongs to $A$ if and only if the pair $\left(  x,u\right)  $
+does not. Thus, we have eight cases left to consider:
+
+\textit{Case 1:} We have $\left(  x,u\right)  \in A$ and $\left(  x,v\right)
+\in A$ and $\left(  x,w\right)  \in A$ (and thus $\left(  u,x\right)  \notin
+A$ and $\left(  v,x\right)  \notin A$ and $\left(  w,x\right)  \notin A$).
+
+\textit{Case 2:} We have $\left(  x,u\right)  \in A$ and $\left(  x,v\right)
+\in A$ and $\left(  x,w\right)  \notin A$ (and thus $\left(  u,x\right)
+\notin A$ and $\left(  v,x\right)  \notin A$ and $\left(  w,x\right)  \in A$).
+
+\textit{Case 3:} We have $\left(  x,u\right)  \in A$ and $\left(  x,v\right)
+\notin A$ and $\left(  x,w\right)  \in A$ (and thus $\left(  u,x\right)
+\notin A$ and $\left(  v,x\right)  \in A$ and $\left(  w,x\right)  \notin A$).
+
+\textit{Case 4:} We have $\left(  x,u\right)  \in A$ and $\left(  x,v\right)
+\notin A$ and $\left(  x,w\right)  \notin A$ (and thus $\left(  u,x\right)
+\notin A$ and $\left(  v,x\right)  \in A$ and $\left(  w,x\right)  \in A$).
+
+\textit{Case 5:} We have $\left(  x,u\right)  \notin A$ and $\left(
+x,v\right)  \in A$ and $\left(  x,w\right)  \in A$ (and thus $\left(
+u,x\right)  \in A$ and $\left(  v,x\right)  \notin A$ and $\left(  w,x\right)
+\notin A$).
+
+\textit{Case 6:} We have $\left(  x,u\right)  \notin A$ and $\left(
+x,v\right)  \in A$ and $\left(  x,w\right)  \notin A$ (and thus $\left(
+u,x\right)  \in A$ and $\left(  v,x\right)  \notin A$ and $\left(  w,x\right)
+\in A$).
+
+\textit{Case 7:} We have $\left(  x,u\right)  \notin A$ and $\left(
+x,v\right)  \notin A$ and $\left(  x,w\right)  \in A$ (and thus $\left(
+u,x\right)  \in A$ and $\left(  v,x\right)  \in A$ and $\left(  w,x\right)
+\notin A$).
+
+\textit{Case 8:} We have $\left(  x,u\right)  \notin A$ and $\left(
+x,v\right)  \notin A$ and $\left(  x,w\right)  \notin A$ (and thus $\left(
+u,x\right)  \in A$ and $\left(  v,x\right)  \in A$ and $\left(  w,x\right)
+\in A$).
+
+All eight cases are straightforward. For example, in Case 5, the relevant
+parts of the digraphs $D$ and $D^{\prime}$ (that is, the vertices $u,v,w,x$
+and the arcs that join them) look as follows:%
+\[%
+\begin{tabular}
+[c]{|c|c|}\hline
+$%
+%TCIMACRO{\TeXButton{tikz D}{\begin{tikzpicture}
+%\draw[draw=black] (-2.3, -3) rectangle (3.2, 3);
+%\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+%\node(u) at (0:2.5) {$u$};
+%\node(v) at (120:2.5) {$v$};
+%\node(w) at (240:2.5) {$w$};
+%\node(x) at (0,0) {$x$};
+%\end{scope}
+%\begin{scope}[every edge/.style={draw=blue,line width=1.7pt}]
+%\path[->] (u) edge (v) (v) edge (w) (w) edge (u);
+%\end{scope}
+%\begin{scope}[every edge/.style={draw=black,very thick}]
+%\path[->] (u) edge (x) (x) edge (v) (x) edge (w);
+%\end{scope}
+%\end{tikzpicture}}}%
+%BeginExpansion
+\begin{tikzpicture}
+\draw[draw=black] (-2.3, -3) rectangle (3.2, 3);
+\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+\node(u) at (0:2.5) {$u$};
+\node(v) at (120:2.5) {$v$};
+\node(w) at (240:2.5) {$w$};
+\node(x) at (0,0) {$x$};
+\end{scope}
+\begin{scope}[every edge/.style={draw=blue,line width=1.7pt}]
+\path[->] (u) edge (v) (v) edge (w) (w) edge (u);
+\end{scope}
+\begin{scope}[every edge/.style={draw=black,very thick}]
+\path[->] (u) edge (x) (x) edge (v) (x) edge (w);
+\end{scope}
+\end{tikzpicture}%
+%EndExpansion
+$ & $%
+%TCIMACRO{\TeXButton{tikz Dprime}{\begin{tikzpicture}
+%\draw[draw=black] (-2.3, -3) rectangle (3.2, 3);
+%\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+%\node(u) at (0:2.5) {$u$};
+%\node(v) at (120:2.5) {$v$};
+%\node(w) at (240:2.5) {$w$};
+%\node(x) at (0,0) {$x$};
+%\end{scope}
+%\begin{scope}[every edge/.style={draw=red,line width=1.7pt}]
+%\path[->] (u) edge (w) (w) edge (v) (v) edge (u);
+%\end{scope}
+%\begin{scope}[every edge/.style={draw=black,very thick}]
+%\path[->] (u) edge (x) (x) edge (v) (x) edge (w);
+%\end{scope}
+%\end{tikzpicture}}}%
+%BeginExpansion
+\begin{tikzpicture}
+\draw[draw=black] (-2.3, -3) rectangle (3.2, 3);
+\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+\node(u) at (0:2.5) {$u$};
+\node(v) at (120:2.5) {$v$};
+\node(w) at (240:2.5) {$w$};
+\node(x) at (0,0) {$x$};
+\end{scope}
+\begin{scope}[every edge/.style={draw=red,line width=1.7pt}]
+\path[->] (u) edge (w) (w) edge (v) (v) edge (u);
+\end{scope}
+\begin{scope}[every edge/.style={draw=black,very thick}]
+\path[->] (u) edge (x) (x) edge (v) (x) edge (w);
+\end{scope}
+\end{tikzpicture}%
+%EndExpansion
+$\\
+$D$ & $D^{\prime}$\\\hline
+\end{tabular}
+\ \ \ \ \ \ .
+\]
+In this case, the $3$-cycles of $D^{\prime}$ of Type 2$_{x}$ are $\left(
+x,v,u\right)  $, $\left(  v,u,x\right)  $ and $\left(  u,x,v\right)  $ (this
+is, of course, essentially just one $3$-cycle and its cyclic rotations),
+whereas the $3$-cycles of $D$ of Type 2$_{x}$ are $\left(  x,w,u\right)  $,
+$\left(  w,u,x\right)  $ and $\left(  u,x,w\right)  $. The number of the
+former equals the number of the latter (namely, both numbers are $3$). This
+proves (\ref{pf.prop.tour-vand.1.2nd.type2x}) in Case 5. A similar argument
+works in each of the other seven cases. Thus,
+(\ref{pf.prop.tour-vand.1.2nd.type2x}) is proved.] \medskip
+
+Finally, the only $3$-cycles of $D^{\prime}$ of Type 3 are $\left(
+u,w,v\right)  $, $\left(  w,v,u\right)  $ and $\left(  v,u,w\right)  $,
+whereas those of $D$ are $\left(  u,v,w\right)  $, $\left(  v,w,u\right)  $
+and $\left(  w,u,v\right)  $. Thus, we have%
+\begin{align}
+&  \left(  \#\text{ of }3\text{-cycles of }D^{\prime}\text{ of Type 3}\right)
+\nonumber\\
+&  =\left(  \#\text{ of }3\text{-cycles of }D\text{ of Type 3}\right)
+\label{pf.prop.tour-vand.1.2nd.type3}%
+\end{align}
+(since both of these numbers equal $3$).
+
+Now, recall that each $3$-cycle of $D$ has exactly one of the three Types 1, 2
+and 3; moreover, if it has Type 2, then it has Type 2$_{x}$ for a unique $x\in
+V\setminus\left\{  u,v,w\right\}  $. Thus,%
+\begin{align}
+&  \left(  \#\text{ of }3\text{-cycles of }D\right) \nonumber\\
+&  =\left(  \#\text{ of }3\text{-cycles of }D\text{ of Type 1}\right)
++\sum_{x\in V\setminus\left\{  u,v,w\right\}  }\left(  \#\text{ of
+}3\text{-cycles of }D\text{ of Type 2}_{x}\right) \nonumber\\
+&  \ \ \ \ \ \ \ \ \ \ +\left(  \#\text{ of }3\text{-cycles of }D\text{ of
+Type 3}\right)  . \label{pf.prop.tour-vand.1.2nd.4}%
+\end{align}
+The same argument can be made for $D^{\prime}$ instead of $D$, and thus we
+obtain%
+\begin{align}
+&  \left(  \#\text{ of }3\text{-cycles of }D^{\prime}\right) \nonumber\\
+&  =\left(  \#\text{ of }3\text{-cycles of }D^{\prime}\text{ of Type
+1}\right)  +\sum_{x\in V\setminus\left\{  u,v,w\right\}  }\left(  \#\text{ of
+}3\text{-cycles of }D^{\prime}\text{ of Type 2}_{x}\right) \nonumber\\
+&  \ \ \ \ \ \ \ \ \ \ +\left(  \#\text{ of }3\text{-cycles of }D^{\prime
+}\text{ of Type 3}\right)  . \label{pf.prop.tour-vand.1.2nd.5}%
+\end{align}
+The equalities (\ref{pf.prop.tour-vand.1.2nd.type1}),
+(\ref{pf.prop.tour-vand.1.2nd.type2x}) and
+(\ref{pf.prop.tour-vand.1.2nd.type3}) show that the right hand side of
+(\ref{pf.prop.tour-vand.1.2nd.5}) equals the right hand side of
+(\ref{pf.prop.tour-vand.1.2nd.4}). Hence, the left hand side of
+(\ref{pf.prop.tour-vand.1.2nd.5}) equals the left hand side of
+(\ref{pf.prop.tour-vand.1.2nd.4}). In other words, we have%
+\[
+\left(  \#\text{ of }3\text{-cycles of }D^{\prime}\right)  =\left(  \#\text{
+of }3\text{-cycles of }D\right)  .
+\]
+This proves Proposition \ref{prop.tour-vand.1} again.
+\end{proof}
+
+\subsection{Reminders on permutations}
+
+Now, let us recall the definitions and a few basic properties of permutations
+and symmetric groups:
+
+\begin{definition}
+A \emph{permutation} of a set $X$ means a bijection from $X$ to $X$.
+\end{definition}
+
+\begin{definition}
+For each $n\in\mathbb{N}$, we let $S_{n}$ denote the set of all permutations
+of $\left\{  1,2,\ldots,n\right\}  $. Note that $\left\vert S_{n}\right\vert
+=n!$.
+\end{definition}
+
+There are several ways to represent (i.e., write down) a permutation
+$\sigma\in S_{n}$ for a given $n\in\mathbb{N}$:
+
+\begin{itemize}
+\item \emph{One-line notation:} We can represent $\sigma$ by the $n$-tuple
+$\left[  \sigma\left(  1\right)  ,\sigma\left(  2\right)  ,\ldots
+,\sigma\left(  n\right)  \right]  $ of all its values. (Note that we would
+normally use parentheses rather than square brackets here, but it is a habit
+of combinatorialists to use square brackets in this specific situation.)
+
+\item \emph{Two-line notation:} We can represent $\sigma$ by the $2\times
+n$-table $\left(
+\begin{array}
+[c]{cccc}%
+1 & 2 & \cdots & n\\
+\sigma\left(  1\right)  & \sigma\left(  2\right)  & \cdots & \sigma\left(
+n\right)
+\end{array}
+\right)  $.
+
+\item \emph{Cycle digraph:} We can represent $\sigma$ by the digraph%
+\[
+\left(  \left\{  1,2,\ldots,n\right\}  ,\ \left\{  \left(  i,\sigma\left(
+i\right)  \right)  \ \mid\ i\in\left\{  1,2,\ldots,n\right\}  \right\}
+\right)  .
+\]
+This is the digraph whose vertices are $1,2,\ldots,n$, and whose arcs are the
+pairs $\left(  i,\sigma\left(  i\right)  \right)  $ for all $i\in\left\{
+1,2,\ldots,n\right\}  $. This digraph is called the \emph{cycle digraph} of
+$\sigma$.
+\end{itemize}
+
+\begin{example}
+\label{exa.perm.6}Let $\sigma$ be the permutation of $\left\{
+1,2,3,4,5,6\right\}  $ that sends%
+\[
+1\mapsto3,\ \ \ \ \ \ \ \ \ \ 2\mapsto2,\ \ \ \ \ \ \ \ \ \ 3\mapsto
+6,\ \ \ \ \ \ \ \ \ \ 4\mapsto5,\ \ \ \ \ \ \ \ \ \ 5\mapsto
+4,\ \ \ \ \ \ \ \ \ \ 6\mapsto1.
+\]
+Then:
+
+\begin{itemize}
+\item The one-line notation for $\sigma$ is $\left[  3,2,6,5,4,1\right]  $.
+(Some combinatorialists would drop the brackets and commas, and shorten this
+to $326541$; but we have no need for this much shorthand.)
+
+\item The two-line notation for $\sigma$ is $\left(
+\begin{array}
+[c]{cccccc}%
+1 & 2 & 3 & 4 & 5 & 6\\
+3 & 2 & 6 & 5 & 4 & 1
+\end{array}
+\right)  $.
+
+\item The cycle digraph of $\sigma$ is%
+\[%
+%TCIMACRO{\TeXButton{tikz cycle digraph}{\begin{tikzpicture}[scale=1.2]
+%\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+%\node(1) at (0:1.5) {$1$};
+%\node(3) at (120:1.5) {$3$};
+%\node(6) at (240:1.5) {$6$};
+%\node(4) at (2.8, -1) {$4$};
+%\node(5) at (4.2, -1) {$5$};
+%\node(2) at (3.5, 0.5) {$2$};
+%\end{scope}
+%\begin{scope}[every edge/.style={draw=black,very thick}, every loop/.style={}]
+%\path[->] (1) edge (3) (3) edge (6) (6) edge (1);
+%\path[->] (4) edge[bend left=20] (5) (5) edge[bend left=20] (4);
+%\path[->] (2) edge[loop above] (2);
+%\end{scope}
+%\end{tikzpicture}}}%
+%BeginExpansion
+\begin{tikzpicture}[scale=1.2]
+\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+\node(1) at (0:1.5) {$1$};
+\node(3) at (120:1.5) {$3$};
+\node(6) at (240:1.5) {$6$};
+\node(4) at (2.8, -1) {$4$};
+\node(5) at (4.2, -1) {$5$};
+\node(2) at (3.5, 0.5) {$2$};
+\end{scope}
+\begin{scope}[every edge/.style={draw=black,very thick}, every loop/.style={}]
+\path[->] (1) edge (3) (3) edge (6) (6) edge (1);
+\path[->] (4) edge[bend left=20] (5) (5) edge[bend left=20] (4);
+\path[->] (2) edge[loop above] (2);
+\end{scope}
+\end{tikzpicture}%
+%EndExpansion
+\ \ .
+\]
+
+\end{itemize}
+\end{example}
+
+\begin{remark}
+Let $n\in\mathbb{N}$, and let $\sigma\in S_{n}$. Then, the cycle digraph of
+$\sigma$ has the property that each vertex $v$ satisfies%
+\[
+\deg^{-}v=1\ \ \ \ \ \ \ \ \ \ \text{and}\ \ \ \ \ \ \ \ \ \ \deg^{+}v=1.
+\]
+From this fact, it follows easily that this digraph is a disjoint union of
+cycles (including cycles of length $1$). This is easily seen to be equivalent
+to the classical result that the permutation $\sigma$ can be uniquely written
+as a composition of disjoint cycles. We will not need this fact, but we found
+it worth mentioning; details can be found in \cite[proof of Theorem
+5.5.2]{lecs}.
+\end{remark}
+
+For the theory of determinants, the most important feature of a permutation is
+its sign. Let us recall its definition:
+
+\begin{definition}
+Let $n\in\mathbb{N}$, and let $\sigma\in S_{n}$.
+
+\begin{enumerate}
+\item[\textbf{(a)}] An \emph{inversion} of $\sigma$ means a pair $\left(
+i,j\right)  $ of integers $i$ and $j$ such that%
+\[
+1\leq i<j\leq n\ \ \ \ \ \ \ \ \ \ \text{and}\ \ \ \ \ \ \ \ \ \ \sigma\left(
+i\right)  >\sigma\left(  j\right)  .
+\]
+
+
+\item[\textbf{(b)}] The \emph{length} of $\sigma$ is defined to be the number
+of inversions of $\sigma$. It is denoted by $\ell\left(  \sigma\right)  $.
+
+\item[\textbf{(c)}] The \emph{sign} of $\sigma$ is defined to be the number
+$\left(  -1\right)  ^{\ell\left(  \sigma\right)  }$. It is denoted by $\left(
+-1\right)  ^{\sigma}$ or $\operatorname*{sign}\sigma$ or $\operatorname*{sgn}%
+\sigma$ or $\varepsilon\left(  \sigma\right)  $. (We will use the notation
+$\operatorname*{sign}\sigma$.)
+\end{enumerate}
+\end{definition}
+
+For example, the permutation $\sigma\in S_{6}$ from Example \ref{exa.perm.6}
+has inversions $\left(  1,2\right)  $, $\left(  1,6\right)  $, $\left(
+2,6\right)  $, $\left(  3,4\right)  $, $\left(  3,5\right)  $, $\left(
+3,6\right)  $, $\left(  4,5\right)  $, $\left(  4,6\right)  $ and $\left(
+5,6\right)  $, and thus has length $\ell\left(  \sigma\right)  =9$ and sign
+$\operatorname*{sign}\sigma=\left(  -1\right)  ^{\ell\left(  \sigma\right)
+}=\left(  -1\right)  ^{9}=-1$.
+
+Here are some well-known properties of signs and lengths:
+
+\begin{proposition}
+\label{prop.perms.sign.var}Let $n\in\mathbb{N}$.
+
+\begin{enumerate}
+\item[\textbf{(a)}] For any $\sigma\in S_{n}$, we have $\operatorname*{sign}%
+\sigma\in\left\{  1,-1\right\}  $.
+
+\item[\textbf{(b)}] The identity permutation $\operatorname*{id}\in S_{n}$ has
+sign $\operatorname*{sign}\left(  \operatorname*{id}\right)  =1$.
+
+\item[\textbf{(c)}] If $\tau\in S_{n}$ is any transposition, then
+$\operatorname*{sign}\tau=-1$.
+
+\item[\textbf{(d)}] For any two permutations $\sigma,\tau\in S_{n}$, we have
+$\operatorname*{sign}\left(  \sigma\circ\tau\right)  =\operatorname*{sign}%
+\sigma\cdot\operatorname*{sign}\tau$.
+
+\item[\textbf{(e)}] For any $\sigma\in S_{n}$, we have $\operatorname*{sign}%
+\left(  \sigma^{-1}\right)  =\operatorname*{sign}\sigma$.
+
+\item[\textbf{(f)}] If the cycle digraph of $\sigma$ has $r$ cycles (counted
+up to rotation -- so that, e.g., the cycle digraph in Example \ref{exa.perm.6}
+has $3$ cycles), then $\operatorname*{sign}\sigma=\left(  -1\right)  ^{n-r}$.
+
+\item[\textbf{(g)}] We have $\operatorname*{sign}\sigma=\prod_{1\leq i<j\leq
+n}\dfrac{\sigma\left(  i\right)  -\sigma\left(  j\right)  }{i-j}$.
+
+\item[\textbf{(h)}] If you write down the one-line notation for $\sigma$, and
+sort it into increasing order by repeatedly swapping adjacent entries (this
+way of sorting a tuple is called \textquotedblleft
+bubblesort\textquotedblright, or more precisely, is a more general version of
+bubblesort), then $\ell\left(  \sigma\right)  $ is the smallest possible
+number of swaps you will need. (Actually, it is the exact number of swaps you
+will need if you don't waste time by swapping pairs of entries that already
+are in increasing order.)
+\end{enumerate}
+\end{proposition}
+
+Proofs of the claims of Proposition \ref{prop.perms.sign.var} can be found in
+\cite[\S 5.1--\S 5.3]{detnotes}, \cite{Conrad}, \cite[Chapter 6.B]{Day16},
+\cite[Appendix B]{Strick20} and various other sources (including most serious
+texts on linear algebra or introductory abstract algebra). We will not need
+them here, however.
+
+\subsection{Determinants}
+
+Using the notion of signs, we now recall the definition of a determinant:
+
+\begin{definition}
+\label{def.det.det}Let $A$ be an $n\times n$-matrix (say, with real entries --
+more generally, it can have entries from an arbitrary commutative ring).
+
+For all $i,j\in\left\{  1,2,\ldots,n\right\}  $, we let $a_{i,j}$ be the
+$\left(  i,j\right)  $-th entry of $A$ (that is, the entry of $A$ in the
+$i$-th row and the $j$-th column).
+
+Then, the \emph{determinant} of $A$ is the number $\det A$ defined by%
+\begin{equation}
+\det A:=\sum_{\sigma\in S_{n}}\operatorname*{sign}\sigma\cdot\prod_{i=1}%
+^{n}a_{i,\sigma\left(  i\right)  }. \label{eq.def.det.det.eq}%
+\end{equation}
+
+\end{definition}
+
+The formula (\ref{eq.def.det.det.eq}) is known as the \emph{Leibniz formula}.
+Among many equivalent definitions of the determinant, it is the most explicit one.
+
+\subsection{The Vandermonde determinant}
+
+We can now state the theorem we shall apply our graph-theoretical machinery to:
+
+\begin{theorem}
+[Vandermonde determinant]\label{thm.det.vander}Let $n\in\mathbb{N}$.
+
+Let $x_{1},x_{2},\ldots,x_{n}$ be $n$ numbers (or, more generally, $n$
+elements of a commutative ring).
+
+Let $V$ be the $n\times n$-matrix whose $\left(  i,j\right)  $-th entry is
+$x_{j}^{i-1}$ for all $i,j\in\left\{  1,2,\ldots,n\right\}  $. That is, let
+\[
+V:=\left(
+\begin{array}
+[c]{ccccc}%
+1 & 1 & 1 & \cdots & 1\\
+x_{1} & x_{2} & x_{3} & \cdots & x_{n}\\
+x_{1}^{2} & x_{2}^{2} & x_{3}^{2} & \cdots & x_{n}^{2}\\
+\vdots & \vdots & \vdots & \ddots & \vdots\\
+x_{1}^{n-1} & x_{2}^{n-1} & x_{3}^{n-1} & \cdots & x_{n}^{n-1}%
+\end{array}
+\right)  .
+\]
+
+
+Then,%
+\begin{equation}
+\det V=\prod_{1\leq i<j\leq n}\left(  x_{j}-x_{i}\right)  .
+\label{eq.thm.det.vander.eq}%
+\end{equation}
+
+\end{theorem}
+
+This theorem is one of several equivalent versions of the \textquotedblleft
+Vandermonde determinant\textquotedblright. Some algebraic proofs can be found
+in \cite[\S 6.7]{detnotes} and in \cite[Theorem 6.4.31]{lecs}. We shall here
+give a combinatorial proof using tournaments. (This proof is a mild variation
+of the proof found by Ira Gessel, published in \cite{Gessel79}.)
+
+\subsection{Tournaments on $\left\{  1,2,\ldots,n\right\}  $}
+
+\begin{definition}
+The \emph{vertex set} of a digraph $D=\left(  V,A\right)  $ is defined to be
+the set $V$. This is the set of vertices of $D$.
+\end{definition}
+
+\begin{convention}
+We fix $n\in\mathbb{N}$, and we also fix $n$ numbers $x_{1},x_{2},\ldots
+,x_{n}$.
+
+We let $\mathcal{T}$ be the set of all tournaments with vertex set $\left\{
+1,2,\ldots,n\right\}  $.
+\end{convention}
+
+Thus, a tournament $D\in\mathcal{T}$ has vertices $1,2,\ldots,n$. We introduce
+another convenient notion:
+
+\begin{definition}
+Let $i$ and $j$ be two elements of $\left\{  1,2,\ldots,n\right\}  $. If
+$i<j$, then the pair $\left(  i,j\right)  $ is said to be \emph{increasing}.
+If $i>j$, then the pair $\left(  i,j\right)  $ is said to be \emph{decreasing}.
+\end{definition}
+
+Thus, for each increasing pair $\left(  i,j\right)  $, there is a
+corresponding decreasing pair $\left(  j,i\right)  $. There are exactly
+$n\left(  n-1\right)  /2$ many increasing pairs:%
+\[%
+\begin{array}
+[c]{cccc}%
+\left(  1,2\right)  , & \left(  1,3\right)  , & \ldots, & \left(  1,n\right)
+,\\
+& \left(  2,3\right)  , & \ldots, & \left(  2,n\right)  ,\\
+&  & \ddots & \vdots\\
+&  &  & \left(  n-1,n\right)  .
+\end{array}
+\]
+
+
+\Needspace{35pc}
+
+\begin{example}
+\label{exa.tour1n.3}The following table shows all eight tournaments
+$D\in\mathcal{T}$ in the case when $n=3$ (where we are drawing all increasing
+arcs in blue and all decreasing arcs in red):%
+\[%
+\begin{tabular}
+[c]{|c|c|c}\hline
+$%
+%TCIMACRO{\TeXButton{tikz tournament}{\begin{tikzpicture}
+%\draw[draw=black] (-2, -1.4) rectangle (2, 2.2);
+%\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+%\node(1) at (90:1.5) {$1$};
+%\node(2) at (210:1.5) {$2$};
+%\node(3) at (330:1.5) {$3$};
+%\end{scope}
+%\node(u1) at (0, -1.8) {$\left\{\right\}$};
+%\begin{scope}[every edge/.style={draw=red,very thick}]
+%\path[->] (2) edge (1) (3) edge (1) (3) edge (2);
+%\end{scope}
+%\end{tikzpicture}}}%
+%BeginExpansion
+\begin{tikzpicture}
+\draw[draw=black] (-2, -1.4) rectangle (2, 2.2);
+\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+\node(1) at (90:1.5) {$1$};
+\node(2) at (210:1.5) {$2$};
+\node(3) at (330:1.5) {$3$};
+\end{scope}
+\node(u1) at (0, -1.8) {$\left\{\right\}$};
+\begin{scope}[every edge/.style={draw=red,very thick}]
+\path[->] (2) edge (1) (3) edge (1) (3) edge (2);
+\end{scope}
+\end{tikzpicture}%
+%EndExpansion
+$ & $%
+%TCIMACRO{\TeXButton{tikz tournament}{\begin{tikzpicture}
+%\draw[draw=black] (-2, -1.4) rectangle (2, 2.2);
+%\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+%\node(1) at (90:1.5) {$1$};
+%\node(2) at (210:1.5) {$2$};
+%\node(3) at (330:1.5) {$3$};
+%\end{scope}
+%\node(u1) at (0, -1.8) {$\left\{\left(1,2\right)\right\}$};
+%\begin{scope}[every edge/.style={draw=red,very thick}]
+%\path[->] (3) edge (1) (3) edge (2);
+%\end{scope}
+%\begin{scope}[every edge/.style={draw=blue,very thick}]
+%\path[->] (1) edge (2);
+%\end{scope}
+%\end{tikzpicture}}}%
+%BeginExpansion
+\begin{tikzpicture}
+\draw[draw=black] (-2, -1.4) rectangle (2, 2.2);
+\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+\node(1) at (90:1.5) {$1$};
+\node(2) at (210:1.5) {$2$};
+\node(3) at (330:1.5) {$3$};
+\end{scope}
+\node(u1) at (0, -1.8) {$\left\{\left(1,2\right)\right\}$};
+\begin{scope}[every edge/.style={draw=red,very thick}]
+\path[->] (3) edge (1) (3) edge (2);
+\end{scope}
+\begin{scope}[every edge/.style={draw=blue,very thick}]
+\path[->] (1) edge (2);
+\end{scope}
+\end{tikzpicture}%
+%EndExpansion
+$ & \multicolumn{1}{|c|}{$%
+%TCIMACRO{\TeXButton{tikz tournament}{\begin{tikzpicture}
+%\draw[draw=black] (-2, -1.4) rectangle (2, 2.2);
+%\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+%\node(1) at (90:1.5) {$1$};
+%\node(2) at (210:1.5) {$2$};
+%\node(3) at (330:1.5) {$3$};
+%\end{scope}
+%\node(u1) at (0, -1.8) {$\left\{\left(1,3\right)\right\}$};
+%\begin{scope}[every edge/.style={draw=red,very thick}]
+%\path[->] (2) edge (1) (3) edge (2);
+%\end{scope}
+%\begin{scope}[every edge/.style={draw=blue,very thick}]
+%\path[->] (1) edge (3);
+%\end{scope}
+%\end{tikzpicture}}}%
+%BeginExpansion
+\begin{tikzpicture}
+\draw[draw=black] (-2, -1.4) rectangle (2, 2.2);
+\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+\node(1) at (90:1.5) {$1$};
+\node(2) at (210:1.5) {$2$};
+\node(3) at (330:1.5) {$3$};
+\end{scope}
+\node(u1) at (0, -1.8) {$\left\{\left(1,3\right)\right\}$};
+\begin{scope}[every edge/.style={draw=red,very thick}]
+\path[->] (2) edge (1) (3) edge (2);
+\end{scope}
+\begin{scope}[every edge/.style={draw=blue,very thick}]
+\path[->] (1) edge (3);
+\end{scope}
+\end{tikzpicture}%
+%EndExpansion
+$}\\\hline
+$%
+%TCIMACRO{\TeXButton{tikz tournament}{\begin{tikzpicture}
+%\draw[draw=black] (-2, -1.4) rectangle (2, 2.2);
+%\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+%\node(1) at (90:1.5) {$1$};
+%\node(2) at (210:1.5) {$2$};
+%\node(3) at (330:1.5) {$3$};
+%\end{scope}
+%\node(u1) at (0, -1.8) {$\left\{\left(2,3\right)\right\}$};
+%\begin{scope}[every edge/.style={draw=red,very thick}]
+%\path[->] (2) edge (1) (3) edge (1);
+%\end{scope}
+%\begin{scope}[every edge/.style={draw=blue,very thick}]
+%\path[->] (2) edge (3);
+%\end{scope}
+%\end{tikzpicture}}}%
+%BeginExpansion
+\begin{tikzpicture}
+\draw[draw=black] (-2, -1.4) rectangle (2, 2.2);
+\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+\node(1) at (90:1.5) {$1$};
+\node(2) at (210:1.5) {$2$};
+\node(3) at (330:1.5) {$3$};
+\end{scope}
+\node(u1) at (0, -1.8) {$\left\{\left(2,3\right)\right\}$};
+\begin{scope}[every edge/.style={draw=red,very thick}]
+\path[->] (2) edge (1) (3) edge (1);
+\end{scope}
+\begin{scope}[every edge/.style={draw=blue,very thick}]
+\path[->] (2) edge (3);
+\end{scope}
+\end{tikzpicture}%
+%EndExpansion
+$ & $%
+%TCIMACRO{\TeXButton{tikz tournament}{\begin{tikzpicture}
+%\draw[draw=black] (-2, -1.4) rectangle (2, 2.2);
+%\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+%\node(1) at (90:1.5) {$1$};
+%\node(2) at (210:1.5) {$2$};
+%\node(3) at (330:1.5) {$3$};
+%\end{scope}
+%\node(u1) at (0, -1.8) {$\left\{\left(1,2\right),\left(1,3\right)\right\}$};
+%\begin{scope}[every edge/.style={draw=red,very thick}]
+%\path[->] (3) edge (2);
+%\end{scope}
+%\begin{scope}[every edge/.style={draw=blue,very thick}]
+%\path[->] (1) edge (2) (1) edge (3);
+%\end{scope}
+%\end{tikzpicture}}}%
+%BeginExpansion
+\begin{tikzpicture}
+\draw[draw=black] (-2, -1.4) rectangle (2, 2.2);
+\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+\node(1) at (90:1.5) {$1$};
+\node(2) at (210:1.5) {$2$};
+\node(3) at (330:1.5) {$3$};
+\end{scope}
+\node(u1) at (0, -1.8) {$\left\{\left(1,2\right),\left(1,3\right)\right\}$};
+\begin{scope}[every edge/.style={draw=red,very thick}]
+\path[->] (3) edge (2);
+\end{scope}
+\begin{scope}[every edge/.style={draw=blue,very thick}]
+\path[->] (1) edge (2) (1) edge (3);
+\end{scope}
+\end{tikzpicture}%
+%EndExpansion
+$ & \multicolumn{1}{|c|}{$%
+%TCIMACRO{\TeXButton{tikz tournament}{\begin{tikzpicture}
+%\draw[draw=black] (-2, -1.4) rectangle (2, 2.2);
+%\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+%\node(1) at (90:1.5) {$1$};
+%\node(2) at (210:1.5) {$2$};
+%\node(3) at (330:1.5) {$3$};
+%\end{scope}
+%\node(u1) at (0, -1.8) {$\left\{\left(1,2\right),\left(2,3\right)\right\}$};
+%\begin{scope}[every edge/.style={draw=red,very thick}]
+%\path[->] (3) edge (1);
+%\end{scope}
+%\begin{scope}[every edge/.style={draw=blue,very thick}]
+%\path[->] (1) edge (2) (2) edge (3);
+%\end{scope}
+%\end{tikzpicture}}}%
+%BeginExpansion
+\begin{tikzpicture}
+\draw[draw=black] (-2, -1.4) rectangle (2, 2.2);
+\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+\node(1) at (90:1.5) {$1$};
+\node(2) at (210:1.5) {$2$};
+\node(3) at (330:1.5) {$3$};
+\end{scope}
+\node(u1) at (0, -1.8) {$\left\{\left(1,2\right),\left(2,3\right)\right\}$};
+\begin{scope}[every edge/.style={draw=red,very thick}]
+\path[->] (3) edge (1);
+\end{scope}
+\begin{scope}[every edge/.style={draw=blue,very thick}]
+\path[->] (1) edge (2) (2) edge (3);
+\end{scope}
+\end{tikzpicture}%
+%EndExpansion
+$}\\\hline
+$%
+%TCIMACRO{\TeXButton{tikz tournament}{\begin{tikzpicture}
+%\draw[draw=black] (-2, -1.4) rectangle (2, 2.2);
+%\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+%\node(1) at (90:1.5) {$1$};
+%\node(2) at (210:1.5) {$2$};
+%\node(3) at (330:1.5) {$3$};
+%\end{scope}
+%\node(u1) at (0, -1.8) {$\left\{\left(1,3\right),\left(2,3\right)\right\}$};
+%\begin{scope}[every edge/.style={draw=red,very thick}]
+%\path[->] (2) edge (1);
+%\end{scope}
+%\begin{scope}[every edge/.style={draw=blue,very thick}]
+%\path[->] (1) edge (3) (2) edge (3);
+%\end{scope}
+%\end{tikzpicture}}}%
+%BeginExpansion
+\begin{tikzpicture}
+\draw[draw=black] (-2, -1.4) rectangle (2, 2.2);
+\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+\node(1) at (90:1.5) {$1$};
+\node(2) at (210:1.5) {$2$};
+\node(3) at (330:1.5) {$3$};
+\end{scope}
+\node(u1) at (0, -1.8) {$\left\{\left(1,3\right),\left(2,3\right)\right\}$};
+\begin{scope}[every edge/.style={draw=red,very thick}]
+\path[->] (2) edge (1);
+\end{scope}
+\begin{scope}[every edge/.style={draw=blue,very thick}]
+\path[->] (1) edge (3) (2) edge (3);
+\end{scope}
+\end{tikzpicture}%
+%EndExpansion
+$ & $%
+%TCIMACRO{\TeXButton{tikz tournament}{\begin{tikzpicture}
+%\draw[draw=black] (-2, -1.4) rectangle (2, 2.2);
+%\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+%\node(1) at (90:1.5) {$1$};
+%\node(2) at (210:1.5) {$2$};
+%\node(3) at (330:1.5) {$3$};
+%\end{scope}
+%\node(u1) at (0, -1.8) {$\left\{\left(1,2\right),\left(1,3\right
+%),\left(2,3\right)\right\}$};
+%\begin{scope}[every edge/.style={draw=red,very thick}]
+%\path[->] (1) edge (2) (1) edge (3) (2) edge (3);
+%\end{scope}
+%\end{tikzpicture}}}%
+%BeginExpansion
+\begin{tikzpicture}
+\draw[draw=black] (-2, -1.4) rectangle (2, 2.2);
+\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+\node(1) at (90:1.5) {$1$};
+\node(2) at (210:1.5) {$2$};
+\node(3) at (330:1.5) {$3$};
+\end{scope}
+\node(u1) at (0, -1.8) {$\left\{\left(1,2\right),\left(1,3\right
+),\left(2,3\right)\right\}$};
+\begin{scope}[every edge/.style={draw=red,very thick}]
+\path[->] (1) edge (2) (1) edge (3) (2) edge (3);
+\end{scope}
+\end{tikzpicture}%
+%EndExpansion
+$ & \\\cline{1-2}%
+\end{tabular}
+\
+\]
+Underneath each tournament, we have written down the set of all increasing
+arcs of this tournament.
+\end{example}
+
+Now, let $D\in\mathcal{T}$ be a tournament. Then, $D$ is loopless (by
+definition), so that each of its arcs is either increasing or decreasing.
+Moreover, the tournament axiom shows that for any increasing pair $\left(
+i,j\right)  $, exactly one of the two pairs $\left(  i,j\right)  $ and
+$\left(  j,i\right)  $ is an arc of $D$. In other words, an increasing pair
+$\left(  i,j\right)  $ is an arc of $D$ if and only if the corresponding
+decreasing pair $\left(  j,i\right)  $ is not. Thus, $D$ is uniquely
+determined if we know which increasing pairs are arcs of $D$.
+
+Forget that we fixed $D$. We thus have shown that a tournament $D\in
+\mathcal{T}$ is uniquely determined if we know which increasing pairs are arcs
+of $D$. In other words, a tournament $D\in\mathcal{T}$ is uniquely determined
+by the set of all increasing arcs of $D$. Moreover, for any set $S$ of
+increasing pairs, there is a unique tournament $D\in\mathcal{T}$ such that $S$
+is the set of all increasing arcs of $D$. Thus, the map%
+\begin{align*}
+\mathcal{T}  &  \rightarrow\left\{  \text{all sets of increasing
+pairs}\right\}  ,\\
+D  &  \mapsto\left\{  \text{all increasing arcs of }D\right\}
+\end{align*}
+is a bijection from the set $\mathcal{T}$ to the set of all sets of increasing
+pairs. The bijection principle\footnote{The \emph{bijection principle} says
+that if $f:X\rightarrow Y$ is a bijection from a set $X$ to a set $Y$, then
+$\left\vert X\right\vert =\left\vert Y\right\vert $.} therefore yields%
+\[
+\left\vert \mathcal{T}\right\vert =\left\vert \left\{  \text{all sets of
+increasing pairs}\right\}  \right\vert =2^{n\left(  n-1\right)  /2}%
+\]
+(since there are exactly $n\left(  n-1\right)  /2$ many increasing pairs).
+
+\begin{convention}
+We shall use the \emph{Iverson bracket notation}: If $\mathcal{A}$ is any
+logical statement, then $\left[  \mathcal{A}\right]  $ will mean the number $%
+\begin{cases}
+1, & \text{if }\mathcal{A}\text{ is true;}\\
+0, & \text{if }\mathcal{A}\text{ is false.}%
+\end{cases}
+$
+
+For instance, $\left[  2+2=4\right]  =1$ and $\left[  2+2=5\right]  =0$.
+
+The number $\left[  \mathcal{A}\right]  $ is called the \emph{truth value} of
+the statement $\mathcal{A}$.
+\end{convention}
+
+\begin{definition}
+\label{def.tour1n.wD}Let $D\in\mathcal{T}$ be a tournament. Then:
+
+\begin{enumerate}
+\item[\textbf{(a)}] The \emph{sign} of $D$ is defined to be the integer%
+\begin{equation}
+\operatorname*{sign}D:=\prod_{\substack{\left(  i,j\right)  \text{ is
+an}\\\text{arc of }D}}\left(  -1\right)  ^{\left[  i>j\right]  }\in\left\{
+1,-1\right\}  .\label{eq.def.tour1n.wD.sign}%
+\end{equation}
+
+
+\item[\textbf{(b)}] The \emph{x-weight} of $D$ is defined to be the number%
+\begin{equation}
+w\left(  D\right)  :=\prod_{\substack{\left(  i,j\right)  \text{ is
+an}\\\text{arc of }D}}\left(  \left(  -1\right)  ^{\left[  i>j\right]  }%
+x_{j}\right)  . \label{eq.def.tour1n.wD.eq}%
+\end{equation}
+
+\end{enumerate}
+\end{definition}
+
+\begin{example}
+For $n=3$, the tournament%
+\[
+\left(  \left\{  1,2,3\right\}  ,\ \left\{  \left(  2,1\right)  ,\ \left(
+2,3\right)  ,\ \left(  3,1\right)  \right\}  \right)
+\]
+can be drawn as follows:%
+\[%
+%TCIMACRO{\TeXButton{tikz tournament}{\begin{tikzpicture}
+%\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+%\node(1) at (90:1.5) {$1$};
+%\node(2) at (210:1.5) {$2$};
+%\node(3) at (330:1.5) {$3$};
+%\end{scope}
+%\begin{scope}[every edge/.style={draw=red,very thick}]
+%\path[->] (2) edge (1) (3) edge (1);
+%\end{scope}
+%\begin{scope}[every edge/.style={draw=blue,very thick}]
+%\path[->] (2) edge (3);
+%\end{scope}
+%\end{tikzpicture}}}%
+%BeginExpansion
+\begin{tikzpicture}
+\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+\node(1) at (90:1.5) {$1$};
+\node(2) at (210:1.5) {$2$};
+\node(3) at (330:1.5) {$3$};
+\end{scope}
+\begin{scope}[every edge/.style={draw=red,very thick}]
+\path[->] (2) edge (1) (3) edge (1);
+\end{scope}
+\begin{scope}[every edge/.style={draw=blue,very thick}]
+\path[->] (2) edge (3);
+\end{scope}
+\end{tikzpicture}%
+%EndExpansion
+\ \ .
+\]
+Its sign is
+\[
+\underbrace{\left(  -1\right)  ^{\left[  2>1\right]  }}_{=\left(  -1\right)
+^{1}=-1}\cdot\underbrace{\left(  -1\right)  ^{\left[  2>3\right]  }}_{=\left(
+-1\right)  ^{0}=1}\cdot\underbrace{\left(  -1\right)  ^{\left[  3>1\right]  }%
+}_{=\left(  -1\right)  ^{1}=-1}=\left(  -1\right)  \cdot1\cdot\left(
+-1\right)  =1.
+\]
+Its x-weight is%
+\[
+\underbrace{\left(  -1\right)  ^{\left[  2>1\right]  }}_{=\left(  -1\right)
+^{1}=-1}x_{1}\cdot\underbrace{\left(  -1\right)  ^{\left[  2>3\right]  }%
+}_{=\left(  -1\right)  ^{0}=1}x_{3}\cdot\underbrace{\left(  -1\right)
+^{\left[  3>1\right]  }}_{=\left(  -1\right)  ^{1}=-1}x_{1}=\left(  -1\right)
+x_{1}\cdot1x_{3}\cdot\left(  -1\right)  x_{1}=x_{1}^{2}x_{3}.
+\]
+
+\end{example}
+
+\Needspace{35pc}
+
+\begin{example}
+For $n=3$, here are all the tournaments $D\in\mathcal{T}$ listed along with
+their x-weights $w\left(  D\right)  $:%
+\[%
+\begin{tabular}
+[c]{|c|c|c}\hline
+$%
+%TCIMACRO{\TeXButton{tikz tournament}{\begin{tikzpicture}
+%\draw[draw=black] (-2, -1.4) rectangle (2, 2.2);
+%\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+%\node(1) at (90:1.5) {$1$};
+%\node(2) at (210:1.5) {$2$};
+%\node(3) at (330:1.5) {$3$};
+%\end{scope}
+%\node(u1) at (0, -1.8) {$- x_1^2 x_2$};
+%\begin{scope}[every edge/.style={draw=red,very thick}]
+%\path[->] (2) edge (1) (3) edge (1) (3) edge (2);
+%\end{scope}
+%\end{tikzpicture}}}%
+%BeginExpansion
+\begin{tikzpicture}
+\draw[draw=black] (-2, -1.4) rectangle (2, 2.2);
+\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+\node(1) at (90:1.5) {$1$};
+\node(2) at (210:1.5) {$2$};
+\node(3) at (330:1.5) {$3$};
+\end{scope}
+\node(u1) at (0, -1.8) {$- x_1^2 x_2$};
+\begin{scope}[every edge/.style={draw=red,very thick}]
+\path[->] (2) edge (1) (3) edge (1) (3) edge (2);
+\end{scope}
+\end{tikzpicture}%
+%EndExpansion
+$ & $%
+%TCIMACRO{\TeXButton{tikz tournament}{\begin{tikzpicture}
+%\draw[draw=black] (-2, -1.4) rectangle (2, 2.2);
+%\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+%\node(1) at (90:1.5) {$1$};
+%\node(2) at (210:1.5) {$2$};
+%\node(3) at (330:1.5) {$3$};
+%\end{scope}
+%\node(u1) at (0, -1.8) {$x_1 x_2^2$};
+%\begin{scope}[every edge/.style={draw=red,very thick}]
+%\path[->] (3) edge (1) (3) edge (2);
+%\end{scope}
+%\begin{scope}[every edge/.style={draw=blue,very thick}]
+%\path[->] (1) edge (2);
+%\end{scope}
+%\end{tikzpicture}}}%
+%BeginExpansion
+\begin{tikzpicture}
+\draw[draw=black] (-2, -1.4) rectangle (2, 2.2);
+\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+\node(1) at (90:1.5) {$1$};
+\node(2) at (210:1.5) {$2$};
+\node(3) at (330:1.5) {$3$};
+\end{scope}
+\node(u1) at (0, -1.8) {$x_1 x_2^2$};
+\begin{scope}[every edge/.style={draw=red,very thick}]
+\path[->] (3) edge (1) (3) edge (2);
+\end{scope}
+\begin{scope}[every edge/.style={draw=blue,very thick}]
+\path[->] (1) edge (2);
+\end{scope}
+\end{tikzpicture}%
+%EndExpansion
+$ & \multicolumn{1}{|c|}{$%
+%TCIMACRO{\TeXButton{tikz tournament}{\begin{tikzpicture}
+%\draw[draw=black] (-2, -1.4) rectangle (2, 2.2);
+%\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+%\node(1) at (90:1.5) {$1$};
+%\node(2) at (210:1.5) {$2$};
+%\node(3) at (330:1.5) {$3$};
+%\end{scope}
+%\node(u1) at (0, -1.8) {$x_1 x_2 x_3$};
+%\begin{scope}[every edge/.style={draw=red,very thick}]
+%\path[->] (2) edge (1) (3) edge (2);
+%\end{scope}
+%\begin{scope}[every edge/.style={draw=blue,very thick}]
+%\path[->] (1) edge (3);
+%\end{scope}
+%\end{tikzpicture}}}%
+%BeginExpansion
+\begin{tikzpicture}
+\draw[draw=black] (-2, -1.4) rectangle (2, 2.2);
+\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+\node(1) at (90:1.5) {$1$};
+\node(2) at (210:1.5) {$2$};
+\node(3) at (330:1.5) {$3$};
+\end{scope}
+\node(u1) at (0, -1.8) {$x_1 x_2 x_3$};
+\begin{scope}[every edge/.style={draw=red,very thick}]
+\path[->] (2) edge (1) (3) edge (2);
+\end{scope}
+\begin{scope}[every edge/.style={draw=blue,very thick}]
+\path[->] (1) edge (3);
+\end{scope}
+\end{tikzpicture}%
+%EndExpansion
+$}\\\hline
+$%
+%TCIMACRO{\TeXButton{tikz tournament}{\begin{tikzpicture}
+%\draw[draw=black] (-2, -1.4) rectangle (2, 2.2);
+%\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+%\node(1) at (90:1.5) {$1$};
+%\node(2) at (210:1.5) {$2$};
+%\node(3) at (330:1.5) {$3$};
+%\end{scope}
+%\node(u1) at (0, -1.8) {$x_1^2 x_3$};
+%\begin{scope}[every edge/.style={draw=red,very thick}]
+%\path[->] (2) edge (1) (3) edge (1);
+%\end{scope}
+%\begin{scope}[every edge/.style={draw=blue,very thick}]
+%\path[->] (2) edge (3);
+%\end{scope}
+%\end{tikzpicture}}}%
+%BeginExpansion
+\begin{tikzpicture}
+\draw[draw=black] (-2, -1.4) rectangle (2, 2.2);
+\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+\node(1) at (90:1.5) {$1$};
+\node(2) at (210:1.5) {$2$};
+\node(3) at (330:1.5) {$3$};
+\end{scope}
+\node(u1) at (0, -1.8) {$x_1^2 x_3$};
+\begin{scope}[every edge/.style={draw=red,very thick}]
+\path[->] (2) edge (1) (3) edge (1);
+\end{scope}
+\begin{scope}[every edge/.style={draw=blue,very thick}]
+\path[->] (2) edge (3);
+\end{scope}
+\end{tikzpicture}%
+%EndExpansion
+$ & $%
+%TCIMACRO{\TeXButton{tikz tournament}{\begin{tikzpicture}
+%\draw[draw=black] (-2, -1.4) rectangle (2, 2.2);
+%\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+%\node(1) at (90:1.5) {$1$};
+%\node(2) at (210:1.5) {$2$};
+%\node(3) at (330:1.5) {$3$};
+%\end{scope}
+%\node(u1) at (0, -1.8) {$- x_2^2 x_3$};
+%\begin{scope}[every edge/.style={draw=red,very thick}]
+%\path[->] (3) edge (2);
+%\end{scope}
+%\begin{scope}[every edge/.style={draw=blue,very thick}]
+%\path[->] (1) edge (2) (1) edge (3);
+%\end{scope}
+%\end{tikzpicture}}}%
+%BeginExpansion
+\begin{tikzpicture}
+\draw[draw=black] (-2, -1.4) rectangle (2, 2.2);
+\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+\node(1) at (90:1.5) {$1$};
+\node(2) at (210:1.5) {$2$};
+\node(3) at (330:1.5) {$3$};
+\end{scope}
+\node(u1) at (0, -1.8) {$- x_2^2 x_3$};
+\begin{scope}[every edge/.style={draw=red,very thick}]
+\path[->] (3) edge (2);
+\end{scope}
+\begin{scope}[every edge/.style={draw=blue,very thick}]
+\path[->] (1) edge (2) (1) edge (3);
+\end{scope}
+\end{tikzpicture}%
+%EndExpansion
+$ & \multicolumn{1}{|c|}{$%
+%TCIMACRO{\TeXButton{tikz tournament}{\begin{tikzpicture}
+%\draw[draw=black] (-2, -1.4) rectangle (2, 2.2);
+%\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+%\node(1) at (90:1.5) {$1$};
+%\node(2) at (210:1.5) {$2$};
+%\node(3) at (330:1.5) {$3$};
+%\end{scope}
+%\node(u1) at (0, -1.8) {$- x_1 x_2 x_3$};
+%\begin{scope}[every edge/.style={draw=red,very thick}]
+%\path[->] (3) edge (1);
+%\end{scope}
+%\begin{scope}[every edge/.style={draw=blue,very thick}]
+%\path[->] (1) edge (2) (2) edge (3);
+%\end{scope}
+%\end{tikzpicture}}}%
+%BeginExpansion
+\begin{tikzpicture}
+\draw[draw=black] (-2, -1.4) rectangle (2, 2.2);
+\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+\node(1) at (90:1.5) {$1$};
+\node(2) at (210:1.5) {$2$};
+\node(3) at (330:1.5) {$3$};
+\end{scope}
+\node(u1) at (0, -1.8) {$- x_1 x_2 x_3$};
+\begin{scope}[every edge/.style={draw=red,very thick}]
+\path[->] (3) edge (1);
+\end{scope}
+\begin{scope}[every edge/.style={draw=blue,very thick}]
+\path[->] (1) edge (2) (2) edge (3);
+\end{scope}
+\end{tikzpicture}%
+%EndExpansion
+$}\\\hline
+$%
+%TCIMACRO{\TeXButton{tikz tournament}{\begin{tikzpicture}
+%\draw[draw=black] (-2, -1.4) rectangle (2, 2.2);
+%\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+%\node(1) at (90:1.5) {$1$};
+%\node(2) at (210:1.5) {$2$};
+%\node(3) at (330:1.5) {$3$};
+%\end{scope}
+%\node(u1) at (0, -1.8) {$- x_1 x_3^2$};
+%\begin{scope}[every edge/.style={draw=red,very thick}]
+%\path[->] (2) edge (1);
+%\end{scope}
+%\begin{scope}[every edge/.style={draw=blue,very thick}]
+%\path[->] (1) edge (3) (2) edge (3);
+%\end{scope}
+%\end{tikzpicture}}}%
+%BeginExpansion
+\begin{tikzpicture}
+\draw[draw=black] (-2, -1.4) rectangle (2, 2.2);
+\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+\node(1) at (90:1.5) {$1$};
+\node(2) at (210:1.5) {$2$};
+\node(3) at (330:1.5) {$3$};
+\end{scope}
+\node(u1) at (0, -1.8) {$- x_1 x_3^2$};
+\begin{scope}[every edge/.style={draw=red,very thick}]
+\path[->] (2) edge (1);
+\end{scope}
+\begin{scope}[every edge/.style={draw=blue,very thick}]
+\path[->] (1) edge (3) (2) edge (3);
+\end{scope}
+\end{tikzpicture}%
+%EndExpansion
+$ & $%
+%TCIMACRO{\TeXButton{tikz tournament}{\begin{tikzpicture}
+%\draw[draw=black] (-2, -1.4) rectangle (2, 2.2);
+%\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+%\node(1) at (90:1.5) {$1$};
+%\node(2) at (210:1.5) {$2$};
+%\node(3) at (330:1.5) {$3$};
+%\end{scope}
+%\node(u1) at (0, -1.8) {$x_2 x_3^2$};
+%\begin{scope}[every edge/.style={draw=red,very thick}]
+%\path[->] (1) edge (2) (1) edge (3) (2) edge (3);
+%\end{scope}
+%\end{tikzpicture}}}%
+%BeginExpansion
+\begin{tikzpicture}
+\draw[draw=black] (-2, -1.4) rectangle (2, 2.2);
+\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+\node(1) at (90:1.5) {$1$};
+\node(2) at (210:1.5) {$2$};
+\node(3) at (330:1.5) {$3$};
+\end{scope}
+\node(u1) at (0, -1.8) {$x_2 x_3^2$};
+\begin{scope}[every edge/.style={draw=red,very thick}]
+\path[->] (1) edge (2) (1) edge (3) (2) edge (3);
+\end{scope}
+\end{tikzpicture}%
+%EndExpansion
+$ & \\\cline{1-2}%
+\end{tabular}
+\
+\]
+
+\end{example}
+
+The equality (\ref{eq.def.tour1n.wD.sign}) can be rewritten as follows:
+
+\begin{proposition}
+\label{prop.tour1n.sign1}Let $D\in\mathcal{T}$ be a tournament. Then,%
+\[
+\operatorname*{sign}D=\left(  -1\right)  ^{\left(  \#\text{ of decreasing arcs
+of }D\right)  }.
+\]
+
+\end{proposition}
+
+\begin{proof}
+Let us simplify the product $\prod_{\substack{\left(  i,j\right)  \text{ is
+an}\\\text{arc of }D}}\left(  -1\right)  ^{\left[  i>j\right]  }$. The factor
+$\left(  -1\right)  ^{\left[  i>j\right]  }$ of this product equals $1$ if the
+arc $\left(  i,j\right)  $ is increasing (because in this case, we have $i<j$,
+and thus $\left[  i>j\right]  =0$, and therefore $\left(  -1\right)  ^{\left[
+i>j\right]  }=\left(  -1\right)  ^{0}=1$), and equals $-1$ if the arc $\left(
+i,j\right)  $ is decreasing (because in this case, we have $i>j$, and thus
+$\left[  i>j\right]  =1$, and therefore $\left(  -1\right)  ^{\left[
+i>j\right]  }=\left(  -1\right)  ^{1}=-1$). Since any arc $\left(  i,j\right)
+$ of $D$ is either increasing or decreasing (but cannot be both at the same
+time), we thus conclude that%
+\begin{align*}
+\prod_{\substack{\left(  i,j\right)  \text{ is an}\\\text{arc of }D}}\left(
+-1\right)  ^{\left[  i>j\right]  }  &  =\underbrace{\left(  \prod
+_{\substack{\left(  i,j\right)  \text{ is an}\\\text{increasing}\\\text{arc of
+}D}}1\right)  }_{=1}\cdot\underbrace{\left(  \prod_{\substack{\left(
+i,j\right)  \text{ is a}\\\text{decreasing}\\\text{arc of }D}}\left(
+-1\right)  \right)  }_{=\left(  -1\right)  ^{\left(  \#\text{ of decreasing
+arcs of }D\right)  }}\\
+&  =\left(  -1\right)  ^{\left(  \#\text{ of decreasing arcs of }D\right)  }.
+\end{align*}
+Hence, (\ref{eq.def.tour1n.wD.sign}) becomes%
+\[
+\operatorname*{sign}D=\prod_{\substack{\left(  i,j\right)  \text{ is
+an}\\\text{arc of }D}}\left(  -1\right)  ^{\left[  i>j\right]  }=\left(
+-1\right)  ^{\left(  \#\text{ of decreasing arcs of }D\right)  }.
+\]
+This proves Proposition \ref{prop.tour1n.sign1}.
+\end{proof}
+
+The equality (\ref{eq.def.tour1n.wD.eq}) can be rewritten as follows:
+
+\begin{proposition}
+\label{prop.tour1n.wD1}Let $D\in\mathcal{T}$ be a tournament. Then,%
+\[
+w\left(  D\right)  =\left(  \operatorname*{sign}D\right)  \cdot\prod_{j=1}%
+^{n}x_{j}^{\deg^{-}j},
+\]
+where $\deg^{-}j$ denotes the indegree of $j$ as a vertex of $D$.
+\end{proposition}
+
+\begin{proof}
+From (\ref{eq.def.tour1n.wD.eq}), we obtain%
+\[
+w\left(  D\right)  =\prod_{\substack{\left(  i,j\right)  \text{ is
+an}\\\text{arc of }D}}\left(  \left(  -1\right)  ^{\left[  i>j\right]  }%
+x_{j}\right)  =\left(  \prod_{\substack{\left(  i,j\right)  \text{ is
+an}\\\text{arc of }D}}\left(  -1\right)  ^{\left[  i>j\right]  }\right)
+\left(  \prod_{\substack{\left(  i,j\right)  \text{ is an}\\\text{arc of }%
+D}}x_{j}\right)  .
+\]
+
+
+Now, let us consider the product $\prod_{\substack{\left(  i,j\right)  \text{
+is an}\\\text{arc of }D}}x_{j}$. How often does the factor $x_{j}$ (for a
+given $j\in\left\{  1,2,\ldots,n\right\}  $) appear in this product? It
+appears once for each arc of $D$ whose target is $j$. Thus, in total, it
+appears $\deg^{-}j$ many times (since $\deg^{-}j$ is the $\#$ of arcs of $D$
+whose target is $j$). Hence, the product $\prod_{\substack{\left(  i,j\right)
+\text{ is an}\\\text{arc of }D}}x_{j}$ contains each $x_{j}$ exactly $\deg
+^{-}j$ many times (and contains no further factors). Consequently,%
+\begin{equation}
+\prod_{\substack{\left(  i,j\right)  \text{ is an}\\\text{arc of }D}%
+}x_{j}=\prod_{j=1}^{n}x_{j}^{\deg^{-}j}. \label{pf.prop.tour1n.wD1.mon}%
+\end{equation}
+
+
+Now,%
+\[
+w\left(  D\right)  =\underbrace{\left(  \prod_{\substack{\left(  i,j\right)
+\text{ is an}\\\text{arc of }D}}\left(  -1\right)  ^{\left[  i>j\right]
+}\right)  }_{\substack{=\operatorname*{sign}D\\\text{(by
+(\ref{eq.def.tour1n.wD.sign}))}}}\underbrace{\left(  \prod_{\substack{\left(
+i,j\right)  \text{ is an}\\\text{arc of }D}}x_{j}\right)  }_{\substack{=\prod
+_{j=1}^{n}x_{j}^{\deg^{-}j}\\\text{(by (\ref{pf.prop.tour1n.wD1.mon}))}%
+}}=\left(  \operatorname*{sign}D\right)  \cdot\prod_{j=1}^{n}x_{j}^{\deg^{-}%
+j}.
+\]
+This proves Proposition \ref{prop.tour1n.wD1}.
+\end{proof}
+
+On the other hand, the x-weights of the tournaments $D\in\mathcal{T}$ are
+precisely the terms that appear in the expansion of the product $\prod_{1\leq
+i<j\leq n}\left(  x_{j}-x_{i}\right)  $:
+
+\begin{proposition}
+\label{prop.tour1n.prodxjxi}We have%
+\[
+\prod_{1\leq i<j\leq n}\left(  x_{j}-x_{i}\right)  =\sum_{D\in\mathcal{T}%
+}w\left(  D\right)  .
+\]
+
+\end{proposition}
+
+We shall derive this proposition from the following more general formula:
+
+\begin{lemma}
+\label{lem.tour1n.prody}For each pair $\left(  i,j\right)  \in\left\{
+1,2,\ldots,n\right\}  ^{2}$, let $y_{\left(  i,j\right)  }$ be a number. Then,%
+\[
+\prod_{1\leq i<j\leq n}\left(  y_{\left(  i,j\right)  }+y_{\left(  j,i\right)
+}\right)  =\sum_{D\in\mathcal{T}}\ \ \prod_{\substack{a\text{ is
+an}\\\text{arc of }D}}y_{a}.
+\]
+
+\end{lemma}
+
+\begin{proof}
+[Proof of Lemma \ref{lem.tour1n.prody}.]The idea is to expand the product
+$\prod_{1\leq i<j\leq n}\left(  y_{\left(  i,j\right)  }+y_{\left(
+j,i\right)  }\right)  $ (which has $n\left(  n-1\right)  /2$ many factors)
+into a huge sum (a sum of $2^{n\left(  n-1\right)  /2}$ many addends), and to
+match up the resulting addends with the tournaments $D\in\mathcal{T}$.
+
+Before we explain this in the general case, let us first explore the case
+$n=3$ as an example. In this case, we have%
+\begin{align*}
+&  \prod_{1\leq i<j\leq n}\left(  y_{\left(  i,j\right)  }+y_{\left(
+j,i\right)  }\right) \\
+&  =\prod_{1\leq i<j\leq3}\left(  y_{\left(  i,j\right)  }+y_{\left(
+j,i\right)  }\right) \\
+&  =\left(  y_{\left(  1,2\right)  }+y_{\left(  2,1\right)  }\right)  \left(
+y_{\left(  1,3\right)  }+y_{\left(  3,1\right)  }\right)  \left(  y_{\left(
+2,3\right)  }+y_{\left(  3,2\right)  }\right) \\
+&  =y_{\left(  1,2\right)  }y_{\left(  1,3\right)  }y_{\left(  2,3\right)
+}+y_{\left(  1,2\right)  }y_{\left(  1,3\right)  }y_{\left(  3,2\right)
+}+y_{\left(  1,2\right)  }y_{\left(  3,1\right)  }y_{\left(  2,3\right)
+}+y_{\left(  1,2\right)  }y_{\left(  3,1\right)  }y_{\left(  3,2\right)  }\\
+&  \ \ \ \ \ \ \ \ \ \ +y_{\left(  2,1\right)  }y_{\left(  1,3\right)
+}y_{\left(  2,3\right)  }+y_{\left(  2,1\right)  }y_{\left(  1,3\right)
+}y_{\left(  3,2\right)  }+y_{\left(  2,1\right)  }y_{\left(  3,1\right)
+}y_{\left(  2,3\right)  }+y_{\left(  2,1\right)  }y_{\left(  3,1\right)
+}y_{\left(  3,2\right)  }.
+\end{align*}
+The right hand side of this is a sum of $8$ addends, and each of these addends
+has the form $\prod_{\substack{a\text{ is an}\\\text{arc of }D}}y_{a}$ for
+some tournament $D\in\mathcal{T}$. For example, the addend $y_{\left(
+2,1\right)  }y_{\left(  1,3\right)  }y_{\left(  3,2\right)  }$ comes from the
+tournament $D\in\mathcal{T}$ whose arcs are $\left(  2,1\right)  $, $\left(
+1,3\right)  $ and $\left(  3,2\right)  $.
+
+\begin{fineprint}
+Here is the argument in the general case:
+
+We first recall that if $F$ is any finite set, and if $\left(  a_{f}\right)
+_{f\in F}$ and $\left(  b_{f}\right)  _{f\in F}$ are two families of numbers,
+then%
+\[
+\prod_{f\in F}\left(  a_{f}+b_{f}\right)  =\sum_{S\text{ is a subset of }%
+F}\ \ \prod_{f\in F}%
+\begin{cases}
+a_{f}, & \text{if }f\in S;\\
+b_{f}, & \text{if }f\notin S.
+\end{cases}
+\]
+Applying this fact to $F=\left\{  \text{increasing pairs}\right\}  $ and
+$a_{\left(  i,j\right)  }=y_{\left(  i,j\right)  }$ and $b_{\left(
+i,j\right)  }=y_{\left(  j,i\right)  }$, we obtain%
+\begin{align*}
+&  \prod_{\left(  i,j\right)  \in\left\{  \text{increasing pairs}\right\}
+}\left(  y_{\left(  i,j\right)  }+y_{\left(  j,i\right)  }\right) \\
+&  =\sum_{\substack{S\text{ is a set of}\\\text{increasing pairs}}%
+}\ \ \prod_{\left(  i,j\right)  \in\left\{  \text{increasing pairs}\right\}  }%
+\begin{cases}
+y_{\left(  i,j\right)  }, & \text{if }\left(  i,j\right)  \in S;\\
+y_{\left(  j,i\right)  }, & \text{if }\left(  i,j\right)  \notin S.
+\end{cases}
+\end{align*}
+Recalling the definition of an increasing pair, we can rewrite this as
+follows:%
+\begin{align}
+&  \prod_{1\leq i<j\leq n}\left(  y_{\left(  i,j\right)  }+y_{\left(
+j,i\right)  }\right) \nonumber\\
+&  =\sum_{\substack{S\text{ is a set of}\\\text{increasing pairs}}%
+}\ \ \prod_{1\leq i<j\leq n}%
+\begin{cases}
+y_{\left(  i,j\right)  }, & \text{if }\left(  i,j\right)  \in S;\\
+y_{\left(  j,i\right)  }, & \text{if }\left(  i,j\right)  \notin S.
+\end{cases}
+\label{pf.lem.tour1n.prody.3}%
+\end{align}
+
+
+In the discussion following Example \ref{exa.tour1n.3}, we have found a
+bijection from the set $\mathcal{T}$ to the set of all sets of increasing
+pairs. Specifically, this bijection sends each tournament $D\in\mathcal{T}$ to
+the set of all increasing arcs of $D$. Let us denote this bijection by $\Phi$.
+Let us now substitute $\Phi\left(  D\right)  $ for $S$ in the sum on the right
+hand side of (\ref{pf.lem.tour1n.prody.3}). We thus obtain%
+\begin{align*}
+&  \sum_{\substack{S\text{ is a set of}\\\text{increasing pairs}}%
+}\ \ \prod_{1\leq i<j\leq n}%
+\begin{cases}
+y_{\left(  i,j\right)  }, & \text{if }\left(  i,j\right)  \in S;\\
+y_{\left(  j,i\right)  }, & \text{if }\left(  i,j\right)  \notin S
+\end{cases}
+\\
+&  =\sum_{D\in\mathcal{T}}\ \ \prod_{1\leq i<j\leq n}%
+\begin{cases}
+y_{\left(  i,j\right)  }, & \text{if }\left(  i,j\right)  \in\Phi\left(
+D\right)  ;\\
+y_{\left(  j,i\right)  }, & \text{if }\left(  i,j\right)  \notin\Phi\left(
+D\right)  .
+\end{cases}
+\end{align*}
+Hence, we can rewrite (\ref{pf.lem.tour1n.prody.3}) as%
+\begin{align}
+&  \prod_{1\leq i<j\leq n}\left(  y_{\left(  i,j\right)  }+y_{\left(
+j,i\right)  }\right) \nonumber\\
+&  =\sum_{D\in\mathcal{T}}\ \ \prod_{1\leq i<j\leq n}%
+\begin{cases}
+y_{\left(  i,j\right)  }, & \text{if }\left(  i,j\right)  \in\Phi\left(
+D\right)  ;\\
+y_{\left(  j,i\right)  }, & \text{if }\left(  i,j\right)  \notin\Phi\left(
+D\right)  .
+\end{cases}
+\label{pf.lem.tour1n.prody.4}%
+\end{align}
+
+
+Now, let $D\in\mathcal{T}$ be a tournament. Recall that $\Phi\left(  D\right)
+$ is the set of all increasing arcs of $D$ (by the definition of $\Phi$).
+Thus,
+\[
+\prod_{\substack{1\leq i<j\leq n;\\\left(  i,j\right)  \in\Phi\left(
+D\right)  }}y_{\left(  i,j\right)  }=\prod_{\substack{1\leq i<j\leq
+n;\\\left(  i,j\right)  \text{ is an increasing arc of }D}}y_{\left(
+i,j\right)  }=\prod_{\left(  i,j\right)  \text{ is an increasing arc of }%
+D}y_{\left(  i,j\right)  }%
+\]
+(since each increasing arc $\left(  i,j\right)  $ of $D$ automatically
+satisfies $1\leq i<j\leq n$).
+
+Recall again that $\Phi\left(  D\right)  $ is the set of all increasing arcs
+of $D$. Thus,%
+\[
+\prod_{\substack{1\leq i<j\leq n;\\\left(  i,j\right)  \notin\Phi\left(
+D\right)  }}y_{\left(  j,i\right)  }=\prod_{\substack{1\leq i<j\leq
+n;\\\left(  i,j\right)  \text{ is not an increasing arc of }D}}y_{\left(
+j,i\right)  }=\prod_{\substack{1\leq i<j\leq n;\\\left(  i,j\right)  \text{ is
+not an arc of }D}}y_{\left(  j,i\right)  }%
+\]
+(here, we have dropped the \textquotedblleft increasing\textquotedblright%
+\ condition under the product sign, since any arc $\left(  i,j\right)  $
+satisfying $1\leq i<j\leq n$ is automatically increasing). However, if $i$ and
+$j$ are two integers satisfying $1\leq i<j\leq n$, then the condition
+\textquotedblleft$\left(  i,j\right)  $ is not an arc of $D$\textquotedblright%
+\ is equivalent to the condition \textquotedblleft$\left(  j,i\right)  $ is an
+arc of $D$\textquotedblright\ (by the tournament axiom, since the vertices $i$
+and $j$ of $D$ are distinct\footnote{because $i<j$}). Hence, we can replace
+the condition \textquotedblleft$\left(  i,j\right)  $ is not an arc of
+$D$\textquotedblright\ under the summation sign $\prod_{\substack{1\leq
+i<j\leq n;\\\left(  i,j\right)  \text{ is not an arc of }D}}$ by the
+equivalent condition \textquotedblleft$\left(  j,i\right)  $ is an arc of
+$D$\textquotedblright. We thus obtain%
+\begin{align*}
+\prod_{\substack{1\leq i<j\leq n;\\\left(  i,j\right)  \text{ is not an arc of
+}D}}y_{\left(  j,i\right)  }  &  =\prod_{\substack{1\leq i<j\leq n;\\\left(
+j,i\right)  \text{ is an arc of }D}}y_{\left(  j,i\right)  }\\
+&  =\prod_{\substack{1\leq j<i\leq n;\\\left(  i,j\right)  \text{ is an arc of
+}D}}y_{\left(  i,j\right)  }\ \ \ \ \ \ \ \ \ \ \left(
+\begin{array}
+[c]{c}%
+\text{here, we have renamed the}\\
+\text{index }\left(  i,j\right)  \text{ as }\left(  j,i\right)
+\end{array}
+\right) \\
+&  =\prod_{\substack{\left(  i,j\right)  \text{ is an arc of }D;\\j<i}%
+}y_{\left(  i,j\right)  }=\prod_{\left(  i,j\right)  \text{ is a decreasing
+arc of }D}y_{\left(  i,j\right)  }%
+\end{align*}
+(because an arc $\left(  i,j\right)  $ of $D$ satisfying $j<i$ is the same as
+a decreasing arc of $D$). Now,%
+\begin{align}
+&  \prod_{1\leq i<j\leq n}%
+\begin{cases}
+y_{\left(  i,j\right)  }, & \text{if }\left(  i,j\right)  \in\Phi\left(
+D\right)  ;\\
+y_{\left(  j,i\right)  }, & \text{if }\left(  i,j\right)  \notin\Phi\left(
+D\right)
+\end{cases}
+\nonumber\\
+&  =\underbrace{\left(  \prod_{\substack{1\leq i<j\leq n;\\\left(  i,j\right)
+\in\Phi\left(  D\right)  }}y_{\left(  i,j\right)  }\right)  }_{=\prod_{\left(
+i,j\right)  \text{ is an increasing arc of }D}y_{\left(  i,j\right)  }}%
+\cdot\underbrace{\left(  \prod_{\substack{1\leq i<j\leq n;\\\left(
+i,j\right)  \notin\Phi\left(  D\right)  }}y_{\left(  j,i\right)  }\right)
+}_{\substack{=\prod_{\substack{1\leq i<j\leq n;\\\left(  i,j\right)  \text{ is
+not an arc of }D}}y_{\left(  j,i\right)  }\\=\prod_{\left(  i,j\right)  \text{
+is a decreasing arc of }D}y_{\left(  i,j\right)  }}}\nonumber\\
+&  =\left(  \prod_{\left(  i,j\right)  \text{ is an increasing arc of }%
+D}y_{\left(  i,j\right)  }\right)  \cdot\left(  \prod_{\left(  i,j\right)
+\text{ is a decreasing arc of }D}y_{\left(  i,j\right)  }\right) \nonumber\\
+&  =\prod_{\left(  i,j\right)  \text{ is an arc of }D}y_{\left(  i,j\right)  }
+\label{pf.lem.tour1n.prody.7}%
+\end{align}
+(since any arc $\left(  i,j\right)  $ of $D$ is either increasing or
+decreasing, but cannot be both at the same time).
+
+Forget that we fixed $D$. We thus have proved (\ref{pf.lem.tour1n.prody.7})
+for each $D\in\mathcal{T}$. Thus, (\ref{pf.lem.tour1n.prody.4}) becomes%
+\begin{align*}
+\prod_{1\leq i<j\leq n}\left(  y_{\left(  i,j\right)  }+y_{\left(  j,i\right)
+}\right)   &  =\sum_{D\in\mathcal{T}}\ \ \underbrace{\prod_{1\leq i<j\leq n}%
+\begin{cases}
+y_{\left(  i,j\right)  }, & \text{if }\left(  i,j\right)  \in\Phi\left(
+D\right)  ;\\
+y_{\left(  j,i\right)  }, & \text{if }\left(  i,j\right)  \notin\Phi\left(
+D\right)
+\end{cases}
+}_{\substack{=\prod_{\left(  i,j\right)  \text{ is an arc of }D}y_{\left(
+i,j\right)  }\\\text{(by (\ref{pf.lem.tour1n.prody.7}))}}}\\
+&  =\sum_{D\in\mathcal{T}}\ \ \underbrace{\prod_{\left(  i,j\right)  \text{ is
+an arc of }D}y_{\left(  i,j\right)  }}_{=\prod_{\substack{a\text{ is
+an}\\\text{arc of }D}}y_{a}}=\sum_{D\in\mathcal{T}}\ \ \prod
+_{\substack{a\text{ is an}\\\text{arc of }D}}y_{a}.
+\end{align*}
+This proves Lemma \ref{lem.tour1n.prody}.
+\end{fineprint}
+\end{proof}
+
+\begin{proof}
+[Proof of Proposition \ref{prop.tour1n.prodxjxi}.]For each pair $\left(
+i,j\right)  \in\left\{  1,2,\ldots,n\right\}  ^{2}$, we define a number%
+\[
+y_{\left(  i,j\right)  }:=\left(  -1\right)  ^{\left[  i>j\right]  }x_{j}.
+\]
+Then, Lemma \ref{lem.tour1n.prody} yields%
+\begin{equation}
+\prod_{1\leq i<j\leq n}\left(  y_{\left(  i,j\right)  }+y_{\left(  j,i\right)
+}\right)  =\sum_{D\in\mathcal{T}}\ \ \prod_{\substack{a\text{ is
+an}\\\text{arc of }D}}y_{a}. \label{pf.prop.tour1n.prodxjxi.1}%
+\end{equation}
+
+
+However, if $\left(  i,j\right)  $ is a pair of integers satisfying $1\leq
+i<j\leq n$, then
+\begin{align*}
+y_{\left(  i,j\right)  }+y_{\left(  j,i\right)  }  &  =\left(  -1\right)
+^{\left[  i>j\right]  }x_{j}+\left(  -1\right)  ^{\left[  j>i\right]  }%
+x_{i}\ \ \ \ \ \ \ \ \ \ \left(  \text{by the definition of }y_{\left(
+i,j\right)  }\text{ and of }y_{\left(  j,i\right)  }\right) \\
+&  =\left(  -1\right)  ^{0}x_{j}+\left(  -1\right)  ^{1}x_{i}%
+\ \ \ \ \ \ \ \ \ \ \left(
+\begin{array}
+[c]{c}%
+\text{since }\left[  i>j\right]  =0\text{ (because we don't}\\
+\text{have }i>j\text{ (since }i<j\text{)) and }\left[  j>i\right]  =1\\
+\text{(since }j>i\text{ (because }i<j\text{))}%
+\end{array}
+\right) \\
+&  =1x_{j}+\left(  -1\right)  x_{i}=x_{j}-x_{i}.
+\end{align*}
+Thus, we can rewrite (\ref{pf.prop.tour1n.prodxjxi.1}) as%
+\begin{align*}
+\prod_{1\leq i<j\leq n}\left(  x_{j}-x_{i}\right)   &  =\sum_{D\in\mathcal{T}%
+}\ \ \underbrace{\prod_{\substack{a\text{ is an}\\\text{arc of }D}}y_{a}%
+}_{=\prod_{\substack{\left(  i,j\right)  \text{ is an}\\\text{arc of }%
+D}}y_{\left(  i,j\right)  }}=\sum_{D\in\mathcal{T}}\ \ \prod
+_{\substack{\left(  i,j\right)  \text{ is an}\\\text{arc of }D}%
+}\underbrace{y_{\left(  i,j\right)  }}_{\substack{=\left(  -1\right)
+^{\left[  i>j\right]  }x_{j}\\\text{(by the definition}\\\text{of }y_{\left(
+i,j\right)  }\text{)}}}\\
+&  \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \left(
+\begin{array}
+[c]{c}%
+\text{here, we have renamed the index }a\\
+\text{as }\left(  i,j\right)  \text{ in the product}%
+\end{array}
+\right) \\
+&  =\sum_{D\in\mathcal{T}}\ \ \underbrace{\prod_{\substack{\left(  i,j\right)
+\text{ is an}\\\text{arc of }D}}\left(  \left(  -1\right)  ^{\left[
+i>j\right]  }x_{j}\right)  }_{\substack{=w\left(  D\right)  \\\text{(by
+(\ref{eq.def.tour1n.wD.eq}))}}}=\sum_{D\in\mathcal{T}}w\left(  D\right)  .
+\end{align*}
+This proves Proposition \ref{prop.tour1n.prodxjxi}.
+\end{proof}
+
+\subsection{Tournaments with no $3$-cycles}
+
+Recall that our goal is to prove the equality (\ref{eq.thm.det.vander.eq}).
+Proposition \ref{prop.tour1n.prodxjxi} interprets the right hand side of this
+equality in terms of tournaments. We shall next find a similar interpretation
+for its left hand side.
+
+To this purpose, we shall study the tournaments $D\in\mathcal{T}$ that have no
+$3$-cycles. As we will soon see, they have a rather specific form:
+
+\begin{definition}
+\label{def.Tsig.def}Let $\sigma\in S_{n}$ be a permutation. Then, we define a
+digraph $T_{\sigma}$ by%
+\[
+T_{\sigma}:=\left(  \left\{  1,2,\ldots,n\right\}  ,\ \left\{  \left(
+\sigma\left(  i\right)  ,\ \sigma\left(  j\right)  \right)  \ \mid\ i\text{
+and }j\text{ are integers with }1\leq i<j\leq n\right\}  \right)  .
+\]
+Thus, the vertices of the digraph $T_{\sigma}$ are $1,2,\ldots,n$, and its
+arcs are the pairs $\left(  \sigma\left(  i\right)  ,\ \sigma\left(  j\right)
+\right)  $, where $i$ and $j$ range over integers satisfying $1\leq i<j\leq n$.
+\end{definition}
+
+\begin{example}
+If $n=6$, and if $\sigma\in S_{6}$ is the permutation from Example
+\ref{exa.perm.6}, then $T_{\sigma}$ is the following digraph (again, we draw
+the increasing arcs blue and the decreasing arcs red):%
+\[%
+%TCIMACRO{\TeXButton{tikz tournament}{\begin{tikzpicture}
+%\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+%\node(1) at (0:1.5) {$1$};
+%\node(2) at (60:1.5) {$2$};
+%\node(3) at (120:1.5) {$3$};
+%\node(4) at (180:1.5) {$4$};
+%\node(5) at (240:1.5) {$5$};
+%\node(6) at (300:1.5) {$6$};
+%\end{scope}
+%\begin{scope}[every edge/.style={draw=red,very thick}]
+%\path[->] (3) edge (2) edge (1);
+%\path[->] (2) edge (1);
+%\path[->] (6) edge (5) edge (4) edge (1);
+%\path[->] (5) edge (4) edge (1);
+%\path[->] (4) edge (1);
+%\end{scope}
+%\begin{scope}[every edge/.style={draw=blue,very thick}]
+%\path[->] (3) edge (6) edge (5) edge (4);
+%\path[->] (2) edge (6) edge (5) edge (4);
+%\end{scope}
+%\end{tikzpicture}}}%
+%BeginExpansion
+\begin{tikzpicture}
+\begin{scope}[every node/.style={circle,thick,draw=green!60!black}]
+\node(1) at (0:1.5) {$1$};
+\node(2) at (60:1.5) {$2$};
+\node(3) at (120:1.5) {$3$};
+\node(4) at (180:1.5) {$4$};
+\node(5) at (240:1.5) {$5$};
+\node(6) at (300:1.5) {$6$};
+\end{scope}
+\begin{scope}[every edge/.style={draw=red,very thick}]
+\path[->] (3) edge (2) edge (1);
+\path[->] (2) edge (1);
+\path[->] (6) edge (5) edge (4) edge (1);
+\path[->] (5) edge (4) edge (1);
+\path[->] (4) edge (1);
+\end{scope}
+\begin{scope}[every edge/.style={draw=blue,very thick}]
+\path[->] (3) edge (6) edge (5) edge (4);
+\path[->] (2) edge (6) edge (5) edge (4);
+\end{scope}
+\end{tikzpicture}%
+%EndExpansion
+\]
+
+\end{example}
+
+The usefulness of these digraphs $T_{\sigma}$ for us is due to the following theorem:
+
+\begin{theorem}
+\label{thm.Tsig.props}\ \ 
+
+\begin{enumerate}
+\item[\textbf{(a)}] For each permutation $\sigma\in S_{n}$, the digraph
+$T_{\sigma}$ is a tournament in $\mathcal{T}$ and has no $3$-cycles.
+
+\item[\textbf{(b)}] The tournaments $D\in\mathcal{T}$ that have no $3$-cycles
+are precisely the digraphs of the form $T_{\sigma}$ with $\sigma\in S_{n}$.
+
+\item[\textbf{(c)}] If $\sigma$ and $\tau$ are two distinct permutations in
+$S_{n}$, then the digraphs $T_{\sigma}$ and $T_{\tau}$ are distinct. (In other
+words, any permutation $\sigma\in S_{n}$ can be uniquely reconstructed from
+$T_{\sigma}$.)
+
+\item[\textbf{(d)}] Let $\sigma\in S_{n}$. Then,%
+\begin{equation}
+\operatorname*{sign}\left(  T_{\sigma}\right)  =\operatorname*{sign}%
+\sigma\label{eq.thm.Tsig.props.d.sign}%
+\end{equation}
+and%
+\begin{equation}
+w\left(  T_{\sigma}\right)  =\operatorname*{sign}\sigma\cdot\prod_{i=1}%
+^{n}x_{\sigma\left(  i\right)  }^{i-1}. \label{eq.thm.Tsig.props.d.w}%
+\end{equation}
+Also, each vertex $v$ of $T_{\sigma}$ has indegree%
+\begin{equation}
+\deg^{-}v=\sigma^{-1}\left(  v\right)  -1. \label{eq.thm.Tsig.props.d.deg-}%
+\end{equation}
+
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+[Proof of Theorem \ref{thm.Tsig.props}.]\textbf{(a)} Let $\sigma\in S_{n}$ be
+a permutation. The arcs of the digraph $T_{\sigma}$ are the pairs $\left(
+\sigma\left(  i\right)  ,\ \sigma\left(  j\right)  \right)  $, where $i$ and
+$j$ range over integers satisfying $1\leq i<j\leq n$. Such an arc $\left(
+\sigma\left(  i\right)  ,\ \sigma\left(  j\right)  \right)  $ cannot be a loop
+(since $i<j$ entails $i\neq j$ and therefore $\sigma\left(  i\right)
+\neq\sigma\left(  j\right)  $\ \ \ \ \footnote{because $\sigma$ is
+injective}). Hence, the digraph $T_{\sigma}$ is loopless.
+
+For any pair $\left(  u,v\right)  \in\left\{  1,2,\ldots,n\right\}  ^{2}$, we
+have the following equivalence:%
+\begin{equation}
+\left(  \left(  u,v\right)  \text{ is an arc of }T_{\sigma}\right)
+\Longleftrightarrow\left(  \sigma^{-1}\left(  u\right)  <\sigma^{-1}\left(
+v\right)  \right)  . \label{pf.thm.Tsig.props.equivalence}%
+\end{equation}
+
+
+\begin{fineprint}
+[\textit{Proof of (\ref{pf.thm.Tsig.props.equivalence}):} Let $\left(
+u,v\right)  \in\left\{  1,2,\ldots,n\right\}  ^{2}$ be a pair. We must prove
+the equivalence (\ref{pf.thm.Tsig.props.equivalence}). We shall prove its
+\textquotedblleft$\Longrightarrow$\textquotedblright\ and \textquotedblleft%
+$\Longleftarrow$\textquotedblright\ directions separately:
+
+$\Longrightarrow:$ Assume that $\left(  u,v\right)  $ is an arc of $T_{\sigma
+}$. We must prove that $\sigma^{-1}\left(  u\right)  <\sigma^{-1}\left(
+v\right)  $.
+
+The arcs of the digraph $T_{\sigma}$ are the pairs $\left(  \sigma\left(
+i\right)  ,\ \sigma\left(  j\right)  \right)  $, where $i$ and $j$ range over
+integers satisfying $1\leq i<j\leq n$. Hence, $\left(  u,v\right)  $ is such a
+pair (since $\left(  u,v\right)  $ is an arc of $T_{\sigma}$). In other words,
+$\left(  u,v\right)  =\left(  \sigma\left(  i\right)  ,\sigma\left(  j\right)
+\right)  $ for some integers $i$ and $j$ satisfying $1\leq i<j\leq n$.
+Consider these $i$ and $j$. From $\left(  u,v\right)  =\left(  \sigma\left(
+i\right)  ,\sigma\left(  j\right)  \right)  $, we obtain $u=\sigma\left(
+i\right)  $ and $v=\sigma\left(  j\right)  $. Thus, $i=\sigma^{-1}\left(
+u\right)  $ and $j=\sigma^{-1}\left(  v\right)  $. Hence, the inequality $i<j$
+(which we know to be true) can be rewritten as $\sigma^{-1}\left(  u\right)
+<\sigma^{-1}\left(  v\right)  $. Thus, $\sigma^{-1}\left(  u\right)
+<\sigma^{-1}\left(  v\right)  $ is true. This proves the \textquotedblleft%
+$\Longrightarrow$\textquotedblright\ direction of the equivalence
+(\ref{pf.thm.Tsig.props.equivalence}).
+
+$\Longleftarrow:$ Assume that $\sigma^{-1}\left(  u\right)  <\sigma
+^{-1}\left(  v\right)  $. We must prove that $\left(  u,v\right)  $ is an arc
+of $T_{\sigma}$.
+
+The arcs of the digraph $T_{\sigma}$ are the pairs $\left(  \sigma\left(
+i\right)  ,\ \sigma\left(  j\right)  \right)  $, where $i$ and $j$ range over
+integers satisfying $1\leq i<j\leq n$. Thus, in particular, one of these arcs
+is $\left(  \sigma\left(  \sigma^{-1}\left(  u\right)  \right)  ,\ \sigma
+\left(  \sigma^{-1}\left(  v\right)  \right)  \right)  $ (obtained by setting
+$i=\sigma^{-1}\left(  u\right)  $ and $j=\sigma^{-1}\left(  v\right)  $),
+since $\sigma^{-1}\left(  u\right)  $ and $\sigma^{-1}\left(  v\right)  $ are
+two integers satisfying $1\leq\sigma^{-1}\left(  u\right)  <\sigma^{-1}\left(
+v\right)  \leq n$. In other words, one of these arcs is $\left(  u,v\right)  $
+(since $\sigma\left(  \sigma^{-1}\left(  u\right)  \right)  =u$ and
+$\sigma\left(  \sigma^{-1}\left(  v\right)  \right)  =v$). Thus, $\left(
+u,v\right)  $ is an arc of $T_{\sigma}$. This proves the \textquotedblleft%
+$\Longleftarrow$\textquotedblright\ direction of the equivalence
+(\ref{pf.thm.Tsig.props.equivalence}).
+
+Thus, the proof of the equivalence (\ref{pf.thm.Tsig.props.equivalence}) is
+complete.] \medskip
+\end{fineprint}
+
+Now, it is easy to see that this digraph $T_{\sigma}$ is a tournament.
+
+\begin{fineprint}
+[\textit{Proof:} Since we know that $T_{\sigma}$ is loopless, we only need to
+verify the tournament axiom. In other words, we need to show that for any two
+distinct vertices $u$ and $v$ of $T_{\sigma}$, \textbf{exactly} one of the two
+pairs $\left(  u,v\right)  $ and $\left(  v,u\right)  $ is an arc of
+$T_{\sigma}$.
+
+Let $u$ and $v$ be two distinct vertices of $T_{\sigma}$. Thus, $u$ and $v$
+are two distinct elements of $\left\{  1,2,\ldots,n\right\}  $. We must show
+that \textbf{exactly} one of the two pairs $\left(  u,v\right)  $ and $\left(
+v,u\right)  $ is an arc of $T_{\sigma}$.
+
+We WLOG assume that $\sigma^{-1}\left(  u\right)  \leq\sigma^{-1}\left(
+v\right)  $ (since otherwise, we can swap $u$ with $v$). Combining this with
+$\sigma^{-1}\left(  u\right)  \neq\sigma^{-1}\left(  v\right)  $ (this follows
+from $u\neq v$), we obtain $\sigma^{-1}\left(  u\right)  <\sigma^{-1}\left(
+v\right)  $. Thus, $\left(  u,v\right)  $ is an arc of $T_{\sigma}$ (by
+(\ref{pf.thm.Tsig.props.equivalence})). Moreover, we do \textbf{not} have
+$\sigma^{-1}\left(  v\right)  <\sigma^{-1}\left(  u\right)  $ (since this
+would contradict $\sigma^{-1}\left(  u\right)  <\sigma^{-1}\left(  v\right)
+$). However, from (\ref{pf.thm.Tsig.props.equivalence}) (applied to $\left(
+v,u\right)  $ instead of $\left(  u,v\right)  $), we obtain the equivalence%
+\[
+\left(  \left(  v,u\right)  \text{ is an arc of }T_{\sigma}\right)
+\Longleftrightarrow\left(  \sigma^{-1}\left(  v\right)  <\sigma^{-1}\left(
+u\right)  \right)  .
+\]
+Thus, $\left(  v,u\right)  $ is not an arc of $T_{\sigma}$ (since we do
+\textbf{not} have $\sigma^{-1}\left(  v\right)  <\sigma^{-1}\left(  u\right)
+$).
+
+We now know that $\left(  u,v\right)  $ is an arc of $T_{\sigma}$, but
+$\left(  v,u\right)  $ is not. Therefore, \textbf{exactly} one of the two
+pairs $\left(  u,v\right)  $ and $\left(  v,u\right)  $ is an arc of
+$T_{\sigma}$. This completes the proof of the tournament axiom for $T_{\sigma
+}$. Hence, $T_{\sigma}$ is a tournament.] \medskip
+\end{fineprint}
+
+Since $T_{\sigma}$ is a tournament with vertex set $\left\{  1,2,\ldots
+,n\right\}  $, we have $T_{\sigma}\in\mathcal{T}$. It remains to show that
+$T_{\sigma}$ has no $3$-cycles.
+
+Indeed, assume the contrary. Thus, $T_{\sigma}$ has a $3$-cycle $\left(
+u,v,w\right)  $. Consider this $\left(  u,v,w\right)  $. Since $\left(
+u,v,w\right)  $ is a $3$-cycle, all three pairs $uv$, $vw$ and $wu$ are arcs
+of $T_{\sigma}$. In particular, $uv$ is an arc of $T_{\sigma}$. In other
+words, $\left(  u,v\right)  $ is an arc of $T_{\sigma}$. By
+(\ref{pf.thm.Tsig.props.equivalence}), we thus conclude that $\sigma
+^{-1}\left(  u\right)  <\sigma^{-1}\left(  v\right)  $. Similarly,
+$\sigma^{-1}\left(  v\right)  <\sigma^{-1}\left(  w\right)  $ and $\sigma
+^{-1}\left(  w\right)  <\sigma^{-1}\left(  u\right)  $. Therefore,
+$\sigma^{-1}\left(  u\right)  <\sigma^{-1}\left(  v\right)  <\sigma
+^{-1}\left(  w\right)  <\sigma^{-1}\left(  u\right)  $, which is absurd. This
+contradiction shows that our assumption was wrong. Hence, we have shown that
+$T_{\sigma}$ has no $3$-cycles. This completes the proof of Theorem
+\ref{thm.Tsig.props} \textbf{(a)}. \medskip
+
+\textbf{(b)} Theorem \ref{thm.Tsig.props} \textbf{(a)} tells us that each
+digraph of the form $T_{\sigma}$ with $\sigma\in S_{n}$ is a tournament
+$D\in\mathcal{T}$ that has no $3$-cycles. It thus remains to prove the
+converse: i.e., that each tournament $D\in\mathcal{T}$ that has no $3$-cycles
+is a digraph of the form $T_{\sigma}$ with $\sigma\in S_{n}$.
+
+So let $D\in\mathcal{T}$ be a tournament that has no $3$-cycles. We must find
+a permutation $\sigma\in S_{n}$ such that $D=T_{\sigma}$.
+
+We first show the following:
+
+\begin{statement}
+\textit{Claim 1:} Let $u$ and $v$ be two distinct vertices of $D$ such that
+$\deg^{-}v\leq\deg^{-}u$. Then, $vu$ is an arc of $D$.
+\end{statement}
+
+[\textit{Proof of Claim 1:} Assume the contrary. Thus, $vu$ is not an arc of
+$D$.
+
+The tournament axiom shows that exactly one of the two pairs $uv$ and $vu$ is
+an arc of $D$. Hence, $uv$ is an arc of $D$ (since $vu$ is not an arc of $D$).
+
+Let $X$ be the set of all vertices $z$ of $D$ for which $zu$ is an arc of $D$.
+Thus, the vertices in $X$ are in 1-to-1 correspondence with the arcs of $D$
+that have target $u$. Hence, $\left\vert X\right\vert $ equals the number of
+such arcs. But the latter number is $\deg^{-}u$ (by the definition of
+indegrees). Hence, we have shown that $\left\vert X\right\vert =\deg^{-}u$.
+
+Let $Y$ be the set of all vertices $z$ of $D$ for which $zv$ is an arc of $D$.
+Then, $\left\vert Y\right\vert =\deg^{-}v$ (indeed, we can show this in the
+same way as we showed $\left\vert X\right\vert =\deg^{-}u$).
+
+The digraph $D$ is loopless (since it is a tournament); thus, $uu$ is not an
+arc of $D$. In other words, we have $u\notin X$ (by the definition of $X$).
+However, we have $u\in Y$ (since $uv$ is an arc of $D$). Hence, $X\neq Y$
+(because if we had $X=Y$, then $u\notin X=Y$ would contradict $u\in Y$).
+
+Now, $\left\vert Y\right\vert =\deg^{-}v\leq\deg^{-}u$, so that $\deg^{-}%
+u\geq\left\vert Y\right\vert $. Thus, $\left\vert X\right\vert =\deg^{-}%
+u\geq\left\vert Y\right\vert $. However, if $X$ was a subset of $Y$, then $X$
+would be a \textbf{proper} subset of $Y$ (since $X\neq Y$), which would entail
+$\left\vert X\right\vert <\left\vert Y\right\vert $; but this would contradict
+$\left\vert X\right\vert \geq\left\vert Y\right\vert $. Thus, $X$ is not a
+subset of $Y$. Hence, there exists a vertex $w\in X$ such that $w\notin Y$.
+Consider this $w$.
+
+Since $w\in X$, the pair $wu$ is an arc of $D$ (by the definition of $X$). As
+a consequence, $w\neq u$ (since $uu$ is not an arc of $D$) and $w\neq v$
+(since $vu$ is not an arc of $D$). Combining this with $u\neq v$, we see that
+the three vertices $u$, $v$ and $w$ are distinct.
+
+Since $w\notin Y$, the pair $wv$ is not an arc of $D$. However, $w\neq v$;
+thus, the tournament axiom shows that exactly one of the two pairs $wv$ and
+$vw$ is an arc of $D$. Since $wv$ is not an arc of $D$, we thus conclude that
+$vw$ is an arc of $D$.
+
+We now know that $u$, $v$ and $w$ are three distinct vertices of $D$ and that
+$uv$, $vw$ and $wu$ are arcs of $D$. In other words, $\left(  u,v,w\right)  $
+is a $3$-cycle. But this contradicts the fact that $D$ has no $3$-cycles. This
+contradiction shows that our assumption was false; hence, Claim 1 is proven.]
+\medskip
+
+Pick a permutation $\tau\in S_{n}$ of $\left\{  1,2,\ldots,n\right\}  $ that
+sorts the vertices of $D$ in the order of increasing outdegree -- i.e., that
+satisfies%
+\begin{equation}
+\deg^{-}\left(  \tau\left(  1\right)  \right)  \leq\deg^{-}\left(  \tau\left(
+2\right)  \right)  \leq\cdots\leq\deg^{-}\left(  \tau\left(  n\right)
+\right)  . \label{pf.thm.Tsig.props.b.chain}%
+\end{equation}
+(Such a permutation $\tau$ exists, since we can sort any $n$ numbers in
+increasing order.) We shall show that $D=T_{\tau}$.
+
+Indeed, the digraphs $D$ and $T_{\tau}$ have the same vertex set (namely,
+$\left\{  1,2,\ldots,n\right\}  $); thus, we only need to show that they have
+the same arcs. To do so, we will first show the following two claims:
+
+\begin{statement}
+\textit{Claim 2:} Any arc of $T_{\tau}$ is an arc of $D$.
+\end{statement}
+
+[\textit{Proof of Claim 2:} Let $\left(  v,u\right)  $ be an arc of $T_{\tau}%
+$. We must prove that $\left(  v,u\right)  $ is an arc of $D$.
+
+However, the arcs of the digraph $T_{\tau}$ are the pairs $\left(  \tau\left(
+i\right)  ,\ \tau\left(  j\right)  \right)  $, where $i$ and $j$ range over
+integers satisfying $1\leq i<j\leq n$ (by the definition of $T_{\tau}$).
+Hence, $\left(  v,u\right)  $ is such a pair (since $\left(  v,u\right)  $ is
+an arc of $T_{\tau}$). In other words, $\left(  v,u\right)  =\left(
+\tau\left(  i\right)  ,\tau\left(  j\right)  \right)  $ for some two integers
+$i$ and $j$ satisfying $1\leq i<j\leq n$. Consider these $i$ and $j$. From
+$\left(  v,u\right)  =\left(  \tau\left(  i\right)  ,\tau\left(  j\right)
+\right)  $, we obtain $v=\tau\left(  i\right)  $ and $u=\tau\left(  j\right)
+$. From $i<j$, we obtain $\deg^{-}\left(  \tau\left(  i\right)  \right)
+\leq\deg^{-}\left(  \tau\left(  j\right)  \right)  $ (by
+(\ref{pf.thm.Tsig.props.b.chain})). In other words, $\deg^{-}v\leq\deg^{-}u$
+(since $v=\tau\left(  i\right)  $ and $u=\tau\left(  j\right)  $). Moreover,
+the vertices $i$ and $j$ are distinct (since $i<j$); thus, the vertices
+$\tau\left(  i\right)  $ and $\tau\left(  j\right)  $ are distinct as well
+(since $\tau$ is injective). In other words, $v$ and $u$ are distinct (since
+$v=\tau\left(  i\right)  $ and $u=\tau\left(  j\right)  $). In other words,
+$u$ and $v$ are distinct. Hence, Claim 1 yields that $vu$ is an arc of $D$. In
+other words, $\left(  v,u\right)  $ is an arc of $D$. This completes the proof
+of Claim 2.]
+
+\begin{statement}
+\textit{Claim 3:} Any arc of $D$ is an arc of $T_{\tau}$.
+\end{statement}
+
+[\textit{Proof of Claim 3:} Let $\left(  u,v\right)  $ be an arc of $D$. We
+must prove that $\left(  u,v\right)  $ is an arc of $T_{\tau}$.
+
+Assume the contrary. Thus, $\left(  u,v\right)  $ is not an arc of $T_{\tau}$.
+
+The digraph $D$ is loopless (since it is a tournament). Thus, its arc $\left(
+u,v\right)  $ cannot be a loop. In other words, $u$ and $v$ are distinct.
+Hence, exactly one of the two pairs $\left(  u,v\right)  $ and $\left(
+v,u\right)  $ is an arc of $D$ (by the tournament axiom, since $D$ is a
+tournament). Therefore, the pair $\left(  v,u\right)  $ is not an arc of $D$
+(since $\left(  u,v\right)  $ is an arc of $D$).
+
+However, $T_{\tau}$ is a tournament (by Theorem \ref{thm.Tsig.props}
+\textbf{(a)}, applied to $\sigma=\tau$), and $u$ and $v$ are two distinct
+vertices. Hence, exactly one of the two pairs $\left(  u,v\right)  $ and
+$\left(  v,u\right)  $ is an arc of $T_{\tau}$ (by the tournament axiom).
+Therefore, $\left(  v,u\right)  $ is an arc of $T_{\tau}$ (because $\left(
+u,v\right)  $ is not an arc of $T_{\tau}$). By Claim 2, this entails that
+$\left(  v,u\right)  $ is an arc of $D$. But this contradicts the fact that
+$\left(  v,u\right)  $ is not an arc of $D$. This contradiction shows that our
+assumption was false. Hence, $\left(  u,v\right)  $ is an arc of $T_{\tau}$.
+This proves Claim 3.] \medskip
+
+Claim 2 and Claim 3 (combined) yield that the arcs of $D$ are precisely the
+arcs of $T_{\tau}$. In other words, the digraphs $D$ and $T_{\tau}$ have the
+same arcs. Since they also have the same vertex set, we thus conclude that
+they are equal. In other words, $D=T_{\tau}$. Hence, $D$ is a digraph of the
+form $T_{\sigma}$ with $\sigma\in S_{n}$ (namely, $\sigma=\tau$).
+
+Forget that we fixed $D$. We thus have shown that each tournament
+$D\in\mathcal{T}$ that has no $3$-cycles is a digraph of the form $T_{\sigma}$
+with $\sigma\in S_{n}$. This completes the proof of Theorem
+\ref{thm.Tsig.props} \textbf{(b)}. \medskip
+
+\textbf{(d)} Let $\sigma\in S_{n}$. Let $v$ be a vertex of $T_{\sigma}$. Thus,
+$v\in\left\{  1,2,\ldots,n\right\}  $.
+
+Set $k:=\sigma^{-1}\left(  v\right)  $. By the definition of an indegree, we
+have%
+\begin{align*}
+&  \deg^{-}v\\
+&  =\left(  \#\text{ of arcs of }T_{\sigma}\text{ whose target is }v\right) \\
+&  =\left(  \#\text{ of arcs of }T_{\sigma}\text{ that have the form }\left(
+u,v\right)  \text{ for some }u\in\left\{  1,2,\ldots,n\right\}  \right) \\
+&  \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \left(
+\begin{array}
+[c]{c}%
+\text{since an arc of }T_{\sigma}\text{ whose target is }v\text{ is the same
+as an}\\
+\text{arc of }T_{\sigma}\text{ that has the form }\left(  u,v\right)  \text{
+for some }u\in\left\{  1,2,\ldots,n\right\}
+\end{array}
+\right) \\
+&  =\left(  \#\text{ of }u\in\left\{  1,2,\ldots,n\right\}  \text{ such that
+}\left(  u,v\right)  \text{ is an arc of }T_{\sigma}\right) \\
+&  =\left(  \#\text{ of }u\in\left\{  1,2,\ldots,n\right\}  \text{ such that
+}\sigma^{-1}\left(  u\right)  <\sigma^{-1}\left(  v\right)  \right) \\
+&  \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \left(
+\begin{array}
+[c]{c}%
+\text{here, we have replaced the condition \textquotedblleft}\left(
+u,v\right)  \text{ is an arc of }T_{\sigma}\text{\textquotedblright}\\
+\text{by the equivalent condition \textquotedblleft}\sigma^{-1}\left(
+u\right)  <\sigma^{-1}\left(  v\right)  \text{\textquotedblright}\\
+\text{(the equivalence follows from (\ref{pf.thm.Tsig.props.equivalence}))}%
+\end{array}
+\right) \\
+&  =\left(  \#\text{ of }u\in\left\{  1,2,\ldots,n\right\}  \text{ such that
+}\sigma^{-1}\left(  u\right)  <k\right)  \ \ \ \ \ \ \ \ \ \ \left(
+\text{since }\sigma^{-1}\left(  v\right)  =k\right) \\
+&  =\left(  \#\text{ of }j\in\left\{  1,2,\ldots,n\right\}  \text{ such that
+}j<k\right) \\
+&  \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \left(
+\begin{array}
+[c]{c}%
+\text{here, we have substituted }j\text{ for }\sigma^{-1}\left(  u\right)
+\text{, since the}\\
+\text{map }\sigma^{-1}:\left\{  1,2,\ldots,n\right\}  \rightarrow\left\{
+1,2,\ldots,n\right\}  \text{ is a bijection}%
+\end{array}
+\right) \\
+&  =k-1
+\end{align*}
+(since the numbers $j\in\left\{  1,2,\ldots,n\right\}  $ such that $j<k$ are
+precisely the numbers $1,2,\ldots,k-1$, and thus there are $k-1$ of them). In
+view of $k=\sigma^{-1}\left(  v\right)  $, this rewrites as $\deg^{-}%
+v=\sigma^{-1}\left(  v\right)  -1$. This proves
+(\ref{eq.thm.Tsig.props.d.deg-}).
+
+Forget that we fixed $v$. We thus have proved (\ref{eq.thm.Tsig.props.d.deg-})
+for each vertex $v$ of $T_{\sigma}$.
+
+Next, we shall prove (\ref{eq.thm.Tsig.props.d.sign}). Indeed, the definition
+of $\operatorname*{sign}\left(  T_{\sigma}\right)  $ yields%
+\[
+\operatorname*{sign}\left(  T_{\sigma}\right)  =\prod_{\substack{\left(
+i,j\right)  \text{ is an}\\\text{arc of }T_{\sigma}}}\left(  -1\right)
+^{\left[  i>j\right]  }=\prod_{\substack{\left(  u,v\right)  \text{ is
+an}\\\text{arc of }T_{\sigma}}}\left(  -1\right)  ^{\left[  u>v\right]  }%
+\]
+(here, we have renamed the index $\left(  i,j\right)  $ as $\left(
+u,v\right)  $ in the product). However, the arcs of $T_{\sigma}$ are the pairs
+$\left(  \sigma\left(  i\right)  ,\ \sigma\left(  j\right)  \right)  $, where
+$i$ and $j$ range over integers satisfying $1\leq i<j\leq n$ (by the
+definition of $T_{\sigma}$). Thus, we can rewrite the product $\prod
+_{\substack{\left(  u,v\right)  \text{ is an}\\\text{arc of }T_{\sigma}%
+}}\left(  -1\right)  ^{\left[  u>v\right]  }$ as follows:%
+\[
+\prod_{\substack{\left(  u,v\right)  \text{ is an}\\\text{arc of }T_{\sigma}%
+}}\left(  -1\right)  ^{\left[  u>v\right]  }=\prod_{1\leq i<j\leq n}\left(
+-1\right)  ^{\left[  \sigma\left(  i\right)  >\sigma\left(  j\right)  \right]
+}%
+\]
+(here, we have tacitly used the fact that the pairs $\left(  \sigma\left(
+i\right)  ,\ \sigma\left(  j\right)  \right)  $ for all pairs of integers
+$\left(  i,j\right)  $ satisfying $1\leq i<j\leq n$ are distinct\footnote{This
+is clear because $\sigma$ is injective.}, and therefore each arc of
+$T_{\sigma}$ can be written in the form $\left(  \sigma\left(  i\right)
+,\ \sigma\left(  j\right)  \right)  $ for a \textbf{unique} pair $\left(
+i,j\right)  $). Hence,%
+\begin{align*}
+\operatorname*{sign}\left(  T_{\sigma}\right)   &  =\prod_{\substack{\left(
+u,v\right)  \text{ is an}\\\text{arc of }T_{\sigma}}}\left(  -1\right)
+^{\left[  u>v\right]  }=\prod_{1\leq i<j\leq n}\left(  -1\right)  ^{\left[
+\sigma\left(  i\right)  >\sigma\left(  j\right)  \right]  }\\
+&  =\left(  \prod_{\substack{1\leq i<j\leq n;\\\sigma\left(  i\right)
+>\sigma\left(  j\right)  }}\left(  -1\right)  ^{\left[  \sigma\left(
+i\right)  >\sigma\left(  j\right)  \right]  }\right)  \cdot\left(
+\prod_{\substack{1\leq i<j\leq n;\\\text{\textbf{not} }\sigma\left(  i\right)
+>\sigma\left(  j\right)  }}\left(  -1\right)  ^{\left[  \sigma\left(
+i\right)  >\sigma\left(  j\right)  \right]  }\right)
+\end{align*}
+(since each pair $\left(  i,j\right)  $ in our product either satisfies
+$\sigma\left(  i\right)  >\sigma\left(  j\right)  $ or doesn't). In view of
+\begin{align*}
+&  \prod_{\substack{1\leq i<j\leq n;\\\sigma\left(  i\right)  >\sigma\left(
+j\right)  }}\underbrace{\left(  -1\right)  ^{\left[  \sigma\left(  i\right)
+>\sigma\left(  j\right)  \right]  }}_{\substack{=\left(  -1\right)
+^{1}\\\text{(since }\sigma\left(  i\right)  >\sigma\left(  j\right)
+\\\text{and thus }\left[  \sigma\left(  i\right)  >\sigma\left(  j\right)
+\right]  =1\text{)}}}\\
+&  =\prod_{\substack{1\leq i<j\leq n;\\\sigma\left(  i\right)  >\sigma\left(
+j\right)  }}\underbrace{\left(  -1\right)  ^{1}}_{=-1}=\prod_{\substack{1\leq
+i<j\leq n;\\\sigma\left(  i\right)  >\sigma\left(  j\right)  }}\left(
+-1\right) \\
+&  =\left(  -1\right)  ^{\left(  \#\text{ of pairs }\left(  i,j\right)  \text{
+of integers satisfying }1\leq i<j\leq n\text{ and }\sigma\left(  i\right)
+>\sigma\left(  j\right)  \right)  }\\
+&  =\left(  -1\right)  ^{\left(  \#\text{ of inversions of }\sigma\right)
+}\ \ \ \ \ \ \ \ \ \ \left(
+\begin{array}
+[c]{c}%
+\text{since the pairs }\left(  i,j\right)  \text{ of integers}\\
+\text{satisfying }1\leq i<j\leq n\text{ and }\sigma\left(  i\right)
+>\sigma\left(  j\right) \\
+\text{are known as the inversions of }\sigma
+\end{array}
+\right) \\
+&  =\left(  -1\right)  ^{\ell\left(  \sigma\right)  }%
+\ \ \ \ \ \ \ \ \ \ \left(  \text{since the }\#\text{ of inversions of }%
+\sigma\text{ is called }\ell\left(  \sigma\right)  \right) \\
+&  =\operatorname*{sign}\sigma\ \ \ \ \ \ \ \ \ \ \left(  \text{because
+}\operatorname*{sign}\sigma\text{ is defined to be }\left(  -1\right)
+^{\ell\left(  \sigma\right)  }\right)
+\end{align*}
+and%
+\[
+\prod_{\substack{1\leq i<j\leq n;\\\text{\textbf{not} }\sigma\left(  i\right)
+>\sigma\left(  j\right)  }}\underbrace{\left(  -1\right)  ^{\left[
+\sigma\left(  i\right)  >\sigma\left(  j\right)  \right]  }}%
+_{\substack{=\left(  -1\right)  ^{0}\\\text{(since we don't}\\\text{have
+}\sigma\left(  i\right)  >\sigma\left(  j\right)  \text{, and thus}\\\text{we
+have }\left[  \sigma\left(  i\right)  >\sigma\left(  j\right)  \right]
+=0\text{)}}}=\prod_{\substack{1\leq i<j\leq n;\\\text{\textbf{not} }%
+\sigma\left(  i\right)  >\sigma\left(  j\right)  }}\underbrace{\left(
+-1\right)  ^{0}}_{=1}=1,
+\]
+we can simplify this to%
+\[
+\operatorname*{sign}\left(  T_{\sigma}\right)  =\underbrace{\left(
+\prod_{\substack{1\leq i<j\leq n;\\\sigma\left(  i\right)  >\sigma\left(
+j\right)  }}\left(  -1\right)  ^{\left[  \sigma\left(  i\right)
+>\sigma\left(  j\right)  \right]  }\right)  }_{=\operatorname*{sign}\sigma
+}\cdot\underbrace{\left(  \prod_{\substack{1\leq i<j\leq
+n;\\\text{\textbf{not} }\sigma\left(  i\right)  >\sigma\left(  j\right)
+}}\left(  -1\right)  ^{\left[  \sigma\left(  i\right)  >\sigma\left(
+j\right)  \right]  }\right)  }_{=1}=\operatorname*{sign}\sigma.
+\]
+This proves (\ref{eq.thm.Tsig.props.d.sign}).
+
+It remains to prove (\ref{eq.thm.Tsig.props.d.w}). We first consider the
+product $\prod_{j=1}^{n}x_{j}^{\deg^{-}j}$, where $\deg^{-}j$ denotes the
+indegree of $j$ as a vertex of $T_{\sigma}$. We can substitute $\sigma\left(
+i\right)  $ for $j$ in this product (since $\sigma$ is a bijection from
+$\left\{  1,2,\ldots,n\right\}  $ to $\left\{  1,2,\ldots,n\right\}  $). Thus,
+we obtain%
+\begin{equation}
+\prod_{j=1}^{n}x_{j}^{\deg^{-}j}=\prod_{i=1}^{n}x_{\sigma\left(  i\right)
+}^{\deg^{-}\left(  \sigma\left(  i\right)  \right)  }. \label{pf.thm.Tsig.d.6}%
+\end{equation}
+However, each $i\in\left\{  1,2,\ldots,n\right\}  $ satisfies%
+\begin{align*}
+\deg^{-}\left(  \sigma\left(  i\right)  \right)   &  =\underbrace{\sigma
+^{-1}\left(  \sigma\left(  i\right)  \right)  }_{=i}%
+-1\ \ \ \ \ \ \ \ \ \ \left(  \text{by (\ref{eq.thm.Tsig.props.d.deg-}),
+applied to }v=\sigma\left(  i\right)  \right) \\
+&  =i-1.
+\end{align*}
+In view of this, we can rewrite (\ref{pf.thm.Tsig.d.6}) as
+\begin{equation}
+\prod_{j=1}^{n}x_{j}^{\deg^{-}j}=\prod_{i=1}^{n}x_{\sigma\left(  i\right)
+}^{i-1}. \label{pf.thm.Tsig.d.7}%
+\end{equation}
+
+
+Now, Proposition \ref{prop.tour1n.wD1} (applied to $D=T_{\sigma}$) yields%
+\[
+w\left(  T_{\sigma}\right)  =\underbrace{\left(  \operatorname*{sign}\left(
+T_{\sigma}\right)  \right)  }_{\substack{=\operatorname*{sign}\sigma
+\\\text{(by (\ref{eq.thm.Tsig.props.d.sign}))}}}\cdot\underbrace{\prod
+_{j=1}^{n}x_{j}^{\deg^{-}j}}_{\substack{=\prod_{i=1}^{n}x_{\sigma\left(
+i\right)  }^{i-1}\\\text{(by (\ref{pf.thm.Tsig.d.7}))}}}=\operatorname*{sign}%
+\sigma\cdot\prod_{i=1}^{n}x_{\sigma\left(  i\right)  }^{i-1},
+\]
+and thus (\ref{eq.thm.Tsig.props.d.w}) is proven. This completes the proof of
+Theorem \ref{thm.Tsig.props} \textbf{(d)}. \medskip
+
+\textbf{(c)} Let $\sigma$ and $\tau$ be two distinct permutations in $S_{n}$.
+We must prove that the digraphs $T_{\sigma}$ and $T_{\tau}$ are distinct.
+
+Assume the contrary. Thus, $T_{\sigma}=T_{\tau}$. Hence, for each
+$v\in\left\{  1,2,\ldots,n\right\}  $, the indegree of $v$ as a vertex of
+$T_{\sigma}$ equals the indegree of $v$ as a vertex of $T_{\tau}$. Thus, we
+can allow ourselves to denote both of these indegrees by $\deg^{-}v$. From
+(\ref{eq.thm.Tsig.props.d.deg-}), we know that $\deg^{-}v=\sigma^{-1}\left(
+v\right)  -1$. Similarly, $\deg^{-}v=\tau^{-1}\left(  v\right)  -1$. Comparing
+these two equalities, we find $\sigma^{-1}\left(  v\right)  -1=\tau
+^{-1}\left(  v\right)  -1$. Hence, $\sigma^{-1}\left(  v\right)  =\tau
+^{-1}\left(  v\right)  $.
+
+Forget that we fixed $v$. We thus have shown that $\sigma^{-1}\left(
+v\right)  =\tau^{-1}\left(  v\right)  $ for each $v\in\left\{  1,2,\ldots
+,n\right\}  $. In other words, $\sigma^{-1}=\tau^{-1}$. Hence, $\sigma=\tau$.
+This contradicts the fact that $\sigma$ and $\tau$ are distinct. This
+contradiction shows that our assumption was false. Thus, Theorem
+\ref{thm.Tsig.props} \textbf{(c)} is proved.
+\end{proof}
+
+\begin{remark}
+One alternative way to prove Theorem \ref{thm.Tsig.props} \textbf{(b)} uses
+the fact (known as R\'{e}dei's Little Theorem) that any tournament has a
+Hamiltonian path (see, e.g., \cite[Theorem 1.4.9]{lec7} for a proof). Indeed,
+once this fact is known, we can pick a Hamiltonian path $\left(  \tau\left(
+1\right)  ,\tau\left(  2\right)  ,\ldots,\tau\left(  n\right)  \right)  $ of
+$D$, and argue (by strong induction on $j-i$) that each pair $\left(
+\tau\left(  i\right)  ,\tau\left(  j\right)  \right)  $ with $i<j$ must be an
+arc of $D$. But the above proof is more elementary.
+\end{remark}
+
+\begin{remark}
+It can be shown that for a tournament $D\in\mathcal{T}$, the following four
+statements are equivalent:
+
+\begin{enumerate}
+\item The tournament $D$ has no $3$-cycles.
+
+\item The tournament $D$ has no cycles of length $3$.
+
+\item The tournament $D$ has no cycles (of any length).
+
+\item The tournament $D$ has the form $T_{\sigma}$ for some $\sigma\in S_{n}$.
+\end{enumerate}
+
+Indeed, the equivalence 1$\Longleftrightarrow$4 is furnished by Theorem
+\ref{thm.Tsig.props} \textbf{(b)}, whereas the implications 4$\Longrightarrow
+$3$\Longrightarrow$2$\Longrightarrow$1 are easy to check.
+
+A tournament $D$ satisfying the four equivalent statements 1, 2, 3, 4 is said
+to be \emph{nontransitive}.
+\end{remark}
+
+We can now represent the left hand side of (\ref{eq.thm.det.vander.eq}) as a
+sum that looks enticingly like the right hand side in Proposition
+\ref{prop.tour1n.prodxjxi}:
+
+\begin{proposition}
+\label{prop.Tsig.Vassum}Define the $n\times n$-matrix $V$ as in Theorem
+\ref{thm.det.vander}. Then,%
+\[
+\det V=\sum_{\substack{D\in\mathcal{T};\\D\text{ has no }3\text{-cycles}%
+}}w\left(  D\right)  .
+\]
+
+\end{proposition}
+
+\begin{proof}
+The $\left(  i,j\right)  $-th entry of the matrix $V$ is $x_{j}^{i-1}$ for all
+$i,j\in\left\{  1,2,\ldots,n\right\}  $. Thus, the definition of a determinant
+yields%
+\begin{equation}
+\det V=\sum_{\sigma\in S_{n}}\underbrace{\operatorname*{sign}\sigma\cdot
+\prod_{i=1}^{n}x_{\sigma\left(  i\right)  }^{i-1}}_{\substack{=w\left(
+T_{\sigma}\right)  \\\text{(by (\ref{eq.thm.Tsig.props.d.w}))}}}=\sum
+_{\sigma\in S_{n}}w\left(  T_{\sigma}\right)  . \label{pf.prop.Tsig.Vassum.1}%
+\end{equation}
+
+
+However, Theorem \ref{thm.Tsig.props} \textbf{(b)} yields that the tournaments
+$D\in\mathcal{T}$ that have no $3$-cycles are precisely the digraphs of the
+form $T_{\sigma}$ with $\sigma\in S_{n}$. Furthermore, Theorem
+\ref{thm.Tsig.props} \textbf{(c)} yields that each such tournament can be
+written as $T_{\sigma}$ for a \textbf{unique} permutation $\sigma\in S_{n}$
+(since distinct permutations $\sigma$ lead to distinct tournaments $T_{\sigma
+}$). Thus,%
+\[
+\sum_{\substack{D\in\mathcal{T};\\D\text{ has no }3\text{-cycles}}}w\left(
+D\right)  =\sum_{\sigma\in S_{n}}w\left(  T_{\sigma}\right)  .
+\]
+Comparing this with (\ref{pf.prop.Tsig.Vassum.1}), we obtain $\det
+V=\sum_{\substack{D\in\mathcal{T};\\D\text{ has no }3\text{-cycles}}}w\left(
+D\right)  $. This proves Proposition \ref{prop.Tsig.Vassum}.
+\end{proof}
+
+\subsection{The numbers $w_{0},w_{1},w_{2},\ldots$}
+
+Our goal is to prove that the left hand sides in Proposition
+\ref{prop.Tsig.Vassum} and in Proposition \ref{prop.tour1n.prodxjxi} are
+equal. To that purpose, we shall show that the right hand sides are equal.
+These right hand sides are already very similar:%
+\[
+\sum_{\substack{D\in\mathcal{T};\\D\text{ has no }3\text{-cycles}}}w\left(
+D\right)  \ \ \ \ \ \ \ \ \ \ \text{versus}\ \ \ \ \ \ \ \ \ \ \sum
+_{D\in\mathcal{T}}w\left(  D\right)  .
+\]
+Yet, they at least look different: The latter is a sum containing a lot of
+addends that the former does not.
+
+We shall reconcile this difference by showing that all these addends (i.e.,
+all the addends corresponding to tournaments $D\in\mathcal{T}$ that have at
+least one $3$-cycle) cancel each other out. This will be achieved by reversing
+the arcs of a cycle; Proposition \ref{prop.tour-vand.1} will come rather handy here.
+
+First, we introduce some notations:
+
+\begin{convention}
+For each $k\in\mathbb{N}$, we let
+\[
+w_{k}:=\sum_{\substack{D\in\mathcal{T};\\D\text{ has }k\text{ many
+}3\text{-cycles}}}w\left(  D\right)  .
+\]
+(Here, \textquotedblleft$k$ many\textquotedblright\ means \textquotedblleft
+exactly $k$ many\textquotedblright.)
+\end{convention}
+
+Thus,
+\begin{equation}
+\sum_{D\in\mathcal{T}}w\left(  D\right)  =w_{0}+w_{1}+w_{2}+\cdots
+\label{eq.w.sum}%
+\end{equation}
+(this infinite sum is well-defined, since all sufficiently large
+$k\in\mathbb{N}$ satisfy $w_{k}=0$).\ \ \ \ \footnote{Note that, because of
+the way we defined $3$-cycles, the $\#$ of $3$-cycles in a tournament $D$ is
+always a multiple of $3$, since each $3$-cycle $\left(  u,v,w\right)  $ leads
+to two other $3$-cycles $\left(  v,w,u\right)  $ and $\left(  w,u,v\right)  $.
+So we have $w_{k}=0$ for all $k\in\mathbb{N}$ that are not multiples of $3$.}
+Proposition \ref{prop.Tsig.Vassum} says that%
+\begin{align}
+\det V  &  =\sum_{\substack{D\in\mathcal{T};\\D\text{ has no }3\text{-cycles}%
+}}w\left(  D\right)  =\sum_{\substack{D\in\mathcal{T};\\D\text{ has }0\text{
+many }3\text{-cycles}}}w\left(  D\right) \nonumber\\
+&  =w_{0} \label{eq.prop.Tsig.Vassum.w0}%
+\end{align}
+(by the definition of $w_{0}$). If we can now show that all integers $k>0$
+satisfy $w_{k}=0$, then we will see that the right hand sides of
+(\ref{eq.prop.Tsig.Vassum.w0}) and (\ref{eq.w.sum}) are equal, and thus we
+will obtain%
+\[
+\det V=\sum_{D\in\mathcal{T}}w\left(  D\right)  =\prod_{1\leq i<j\leq
+n}\left(  x_{j}-x_{i}\right)  \ \ \ \ \ \ \ \ \ \ \left(  \text{by Proposition
+\ref{prop.tour1n.prodxjxi}}\right)  ;
+\]
+this will prove Theorem \ref{thm.det.vander}.
+
+\subsection{The great cancelling}
+
+So how do we prove that all $k>0$ satisfy $w_{k}=0$ ? We begin with lemmas:
+
+\begin{lemma}
+\label{lem.cancel.sign}Let $D\in\mathcal{T}$ be a tournament. Let $\left(
+u,v,w\right)  $ be a $3$-cycle of $D$. Let $D^{\prime}$ be the digraph
+obtained from $D$ by reversing the arcs $uv$, $vw$ and $wu$ (this means
+replacing them by $vu$, $wv$ and $uw$). Then, $D^{\prime}$ is again a
+tournament in $\mathcal{T}$, and satisfies%
+\[
+\operatorname*{sign}\left(  D^{\prime}\right)  =-\operatorname*{sign}D.
+\]
+
+\end{lemma}
+
+\begin{proof}
+Clearly, $D^{\prime}$ is again a tournament (since reversing an arc in a
+tournament yields a tournament). It remains to prove that
+$\operatorname*{sign}\left(  D^{\prime}\right)  =-\operatorname*{sign}D$.
+
+The pairs $uv$, $vw$ and $wu$ are arcs of $D$ (since $\left(  u,v,w\right)  $
+is a $3$-cycle of $D$). Hence, none of the pairs $vu$, $wv$ and $uw$ is an arc
+of $D$ (by the tournament axiom, since $D$ is a tournament).
+
+We know that the digraph $D^{\prime}$ is obtained from $D$ by reversing the
+arcs $uv$, $vw$ and $wu$. Let us refer to all the other arcs of $D$ as
+\emph{inert}.
+
+Thus, the arcs of $D$ are $uv$, $vw$, $wu$ and all the inert arcs of $D$.
+Therefore, the arcs of $D^{\prime}$ are $vu$, $wv$, $uw$ and all the inert
+arcs of $D$ (since $D^{\prime}$ is obtained from $D$ by reversing the arcs
+$uv$, $vw$ and $wu$). Note that none of the arcs $vu$, $wv$ and $uw$ appears
+among the inert arcs of $D$, since none of the pairs $vu$, $wv$ and $uw$ is an
+arc of $D$.
+
+Now, the definition of $\operatorname*{sign}D$ yields%
+\[
+\operatorname*{sign}D=\prod_{\substack{\left(  i,j\right)  \text{ is
+an}\\\text{arc of }D}}\left(  -1\right)  ^{\left[  i>j\right]  }=\left(
+-1\right)  ^{\left[  u>v\right]  }\cdot\left(  -1\right)  ^{\left[
+v>w\right]  }\cdot\left(  -1\right)  ^{\left[  w>u\right]  }\cdot
+\prod_{\substack{\left(  i,j\right)  \text{ is an}\\\text{inert arc of }%
+D}}\left(  -1\right)  ^{\left[  i>j\right]  }%
+\]
+(since the arcs of $D$ are $uv$, $vw$, $wu$ and all the inert arcs). The
+definition of $\operatorname*{sign}\left(  D^{\prime}\right)  $ yields
+\[
+\operatorname*{sign}\left(  D^{\prime}\right)  =\prod_{\substack{\left(
+i,j\right)  \text{ is an}\\\text{arc of }D^{\prime}}}\left(  -1\right)
+^{\left[  i>j\right]  }=\left(  -1\right)  ^{\left[  v>u\right]  }\cdot\left(
+-1\right)  ^{\left[  w>v\right]  }\cdot\left(  -1\right)  ^{\left[
+u>w\right]  }\cdot\prod_{\substack{\left(  i,j\right)  \text{ is
+an}\\\text{inert arc of }D}}\left(  -1\right)  ^{\left[  i>j\right]  }%
+\]
+(since the arcs of $D^{\prime}$ are $vu$, $wv$, $uw$ and all the inert arcs of
+$D$).
+
+However, the vertices $u$ and $v$ are distinct (since $\left(  u,v,w\right)  $
+is a $3$-cycle). Thus, exactly one of the two inequalities $u>v$ and $v>u$
+holds. In other words, exactly one of the two truth values $\left[
+u>v\right]  $ and $\left[  v>u\right]  $ equals $1$, while the other equals
+$0$. Hence, exactly one of the two numbers $\left(  -1\right)  ^{\left[
+u>v\right]  }$ and $\left(  -1\right)  ^{\left[  v>u\right]  }$ equals $-1$,
+while the other equals $1$. Therefore, these two numbers differ in sign but
+have the same magnitude. Consequently,%
+\[
+\left(  -1\right)  ^{\left[  u>v\right]  }=-\left(  -1\right)  ^{\left[
+v>u\right]  }.
+\]
+Similarly, $\left(  -1\right)  ^{\left[  v>w\right]  }=-\left(  -1\right)
+^{\left[  w>v\right]  }$ and $\left(  -1\right)  ^{\left[  w>u\right]
+}=-\left(  -1\right)  ^{\left[  u>w\right]  }$. Now, our above formula for
+$\operatorname*{sign}D$ becomes%
+\begin{align*}
+\operatorname*{sign}D &  =\underbrace{\left(  -1\right)  ^{\left[  u>v\right]
+}}_{=-\left(  -1\right)  ^{\left[  v>u\right]  }}\cdot\underbrace{\left(
+-1\right)  ^{\left[  v>w\right]  }}_{=-\left(  -1\right)  ^{\left[
+w>v\right]  }}\cdot\underbrace{\left(  -1\right)  ^{\left[  w>u\right]  }%
+}_{=-\left(  -1\right)  ^{\left[  u>w\right]  }}\cdot\prod_{\substack{\left(
+i,j\right)  \text{ is an}\\\text{inert arc of }D}}\left(  -1\right)  ^{\left[
+i>j\right]  }\\
+&  =-\underbrace{\left(  -1\right)  ^{\left[  v>u\right]  }\cdot\left(
+-1\right)  ^{\left[  w>v\right]  }\cdot\left(  -1\right)  ^{\left[
+u>w\right]  }\cdot\prod_{\substack{\left(  i,j\right)  \text{ is
+an}\\\text{inert arc of }D}}\left(  -1\right)  ^{\left[  i>j\right]  }%
+}_{\substack{=\operatorname*{sign}\left(  D^{\prime}\right)  \\\text{(by our
+above formula for }\operatorname*{sign}\left(  D^{\prime}\right)  \text{)}%
+}}=-\operatorname*{sign}\left(  D^{\prime}\right)  .
+\end{align*}
+In other words, $\operatorname*{sign}\left(  D^{\prime}\right)
+=-\operatorname*{sign}D$. This completes the proof of Lemma
+\ref{lem.cancel.sign}.
+\end{proof}
+
+\begin{lemma}
+\label{lem.cancel.1}Let $k$ be a positive integer. Let $\left(  d_{1}%
+,d_{2},\ldots,d_{n}\right)  \in\mathbb{N}^{n}$ be any $n$-tuple of nonnegative
+integers. Then,%
+\[
+\sum_{\substack{D\in\mathcal{T};\\D\text{ has }k\text{ many }3\text{-cycles}%
+;\\\deg^{-}i=d_{i}\text{ for each }i}}\operatorname*{sign}D=0.
+\]
+(Here, $\deg^{-}i$ means the indegree of the vertex $i$ in the digraph $D$.
+Also, \textquotedblleft for each $i$\textquotedblright\ means
+\textquotedblleft for each $i\in\left\{  1,2,\ldots,n\right\}  $%
+\textquotedblright.)
+\end{lemma}
+
+\begin{proof}
+A \emph{flippy pair} shall mean a pair $\left(  D,\alpha\right)  $, where
+
+\begin{itemize}
+\item $D\in\mathcal{T}$ is a tournament having $k$ many $3$-cycles and
+satisfying $\deg^{-}i=d_{i}$ for each $i$;
+
+\item $\alpha$ is a $3$-cycle of $D$.
+\end{itemize}
+
+If $\left(  D,\alpha\right)  $ is a flippy pair, then we define a new flippy
+pair $\operatorname*{flip}\left(  D,\alpha\right)  $ as follows:
+
+\begin{itemize}
+\item Let $\left(  u,v,w\right)  $ be the $3$-cycle $\alpha$.
+
+\item We obtain a new digraph $D^{\prime}$ from $D$ by reversing the arcs
+$uv$, $vw$ and $wu$ (this means replacing them by $vu$, $wv$ and $uw$). Note
+that this digraph $D^{\prime}$ is again a tournament in $\mathcal{T}$, and
+again has $k$ many $3$-cycles (because Proposition \ref{prop.tour-vand.1}
+shows that $\left(  \#\text{ of }3\text{-cycles of }D^{\prime}\right)
+=\left(  \#\text{ of }3\text{-cycles of }D\right)  =k$). This tournament
+$D^{\prime}$ furthermore satisfies the equalities $\deg^{-}i=d_{i}$ for each
+$i$ (since $D$ satisfies these equalities, and since the indegrees of the
+vertices have not changed from $D$ to $D^{\prime}$\ \ \ \ \footnote{because
+each of the three vertices $u$, $v$ and $w$ lost one incoming arc and gained
+another when we reversed the arcs $uv$, $vw$ and $wu$}).
+
+\item We let $\alpha^{\prime}$ be the $3$-cycle $\left(  u,w,v\right)  $ of
+$D^{\prime}$. (This is indeed a $3$-cycle of $D^{\prime}$, due to the
+construction of $D^{\prime}$.)
+
+\item We let $\operatorname*{flip}\left(  D,\alpha\right)  $ be the flippy
+pair $\left(  D^{\prime},\alpha^{\prime}\right)  $. (This is indeed a flippy
+pair, because we have seen that $D^{\prime}$ is a tournament in $\mathcal{T}$
+having $k$ many $3$-cycles and satisfying $\deg^{-}i=d_{i}$ for each $i$, and
+that $\alpha^{\prime}$ is a $3$-cycle of $D^{\prime}$.)
+\end{itemize}
+
+Thus, we have defined a map $\operatorname*{flip}$ that sends flippy pairs to
+flippy pairs. It is easy to see that this map is its own inverse: That is, if
+$\left(  D,\alpha\right)  $ is a flippy pair, and if $\left(  D^{\prime
+},\alpha^{\prime}\right)  =\operatorname*{flip}\left(  D,\alpha\right)  $,
+then $\left(  D,\alpha\right)  =\operatorname*{flip}\left(  D^{\prime}%
+,\alpha^{\prime}\right)  $ (because $D^{\prime}$ is obtained from $D$ by
+reversing the arcs $uv$, $vw$ and $wu$, and thus $D$ can be recovered from
+$D^{\prime}$ by reversing the arcs $uw$, $wv$ and $vu$).
+
+Furthermore, the map $\operatorname*{flip}$ changes the sign of a tournament:
+That is, if $\left(  D,\alpha\right)  $ is a flippy pair, and if $\left(
+D^{\prime},\alpha^{\prime}\right)  =\operatorname*{flip}\left(  D,\alpha
+\right)  $, then
+\begin{equation}
+\operatorname*{sign}\left(  D^{\prime}\right)  =-\operatorname*{sign}D.
+\label{pf.lem.cancel.1.sign}%
+\end{equation}
+
+
+[\textit{Proof of (\ref{pf.lem.cancel.1.sign}):} Let $\left(  D,\alpha\right)
+$ be a flippy pair. Let $\left(  D^{\prime},\alpha^{\prime}\right)
+=\operatorname*{flip}\left(  D,\alpha\right)  $. By the definition of the map
+$\operatorname*{flip}$, we know that the digraph $D^{\prime}$ is obtained from
+$D$ by reversing the arcs $uv$, $vw$ and $wu$, where $\left(  u,v,w\right)  $
+is the $3$-cycle $\alpha$. Thus, Lemma \ref{lem.cancel.sign} yields
+$\operatorname*{sign}\left(  D^{\prime}\right)  =-\operatorname*{sign}D$. This
+proves (\ref{pf.lem.cancel.1.sign}).] \medskip
+
+Thus, if $\left(  D,\alpha\right)  $ is a flippy pair satisfying
+$\operatorname*{sign}D=1$, and if $\left(  D^{\prime},\alpha^{\prime}\right)
+=\operatorname*{flip}\left(  D,\alpha\right)  $, then $\left(  D^{\prime
+},\alpha^{\prime}\right)  $ is a flippy pair satisfying $\operatorname*{sign}%
+\left(  D^{\prime}\right)  =-1$ (because (\ref{pf.lem.cancel.1.sign}) yields
+$\operatorname*{sign}\left(  D^{\prime}\right)
+=-\underbrace{\operatorname*{sign}D}_{=1}=-1$). Hence, we obtain a map
+\begin{align*}
+&  \text{from the set }\left\{  \text{flippy pairs }\left(  D,\alpha\right)
+\text{ satisfying }\operatorname*{sign}D=1\right\}  \\
+&  \text{to the set }\left\{  \text{flippy pairs }\left(  D,\alpha\right)
+\text{ satisfying }\operatorname*{sign}D=-1\right\}  ,
+\end{align*}
+which sends each flippy pair $\left(  D,\alpha\right)  $ to
+$\operatorname*{flip}\left(  D,\alpha\right)  $. Similarly, we obtain a map
+\begin{align*}
+&  \text{from the set }\left\{  \text{flippy pairs }\left(  D,\alpha\right)
+\text{ satisfying }\operatorname*{sign}D=-1\right\}  \\
+&  \text{to the set }\left\{  \text{flippy pairs }\left(  D,\alpha\right)
+\text{ satisfying }\operatorname*{sign}D=1\right\}  ,
+\end{align*}
+which sends each flippy pair $\left(  D,\alpha\right)  $ to
+$\operatorname*{flip}\left(  D,\alpha\right)  $. These two maps are mutually
+inverse (since the map $\operatorname*{flip}$ is its own inverse), and thus
+are bijections. Hence, the bijection principle yields that%
+\begin{align*}
+&  \left\vert \left\{  \text{flippy pairs }\left(  D,\alpha\right)  \text{
+satisfying }\operatorname*{sign}D=1\right\}  \right\vert \\
+&  =\left\vert \left\{  \text{flippy pairs }\left(  D,\alpha\right)  \text{
+satisfying }\operatorname*{sign}D=-1\right\}  \right\vert .
+\end{align*}
+In other words, there are as many flippy pairs $\left(  D,\alpha\right)  $
+satisfying $\operatorname*{sign}D=1$ as there are flippy pairs $\left(
+D,\alpha\right)  $ satisfying $\operatorname*{sign}D=-1$. Hence, in the sum%
+\[
+\sum_{\left(  D,\alpha\right)  \text{ is a flippy pair}}\operatorname*{sign}D,
+\]
+the addends equal to $1$ and the addends equal to $-1$ are equinumerous, and
+consequently these addends cancel each other out. The sum therefore equals $0$
+(since each addend of this sum is either a $1$ or a $-1$). In other words,%
+\begin{equation}
+\sum_{\left(  D,\alpha\right)  \text{ is a flippy pair}}\operatorname*{sign}%
+D=0.\label{pf.lem.cancel.1.sum-flips}%
+\end{equation}
+
+
+However, recall that the $D$ in a flippy pair $\left(  D,\alpha\right)  $ has
+to be a tournament in $\mathcal{T}$ having $k$ many $3$-cycles and satisfying
+$\deg^{-}i=d_{i}$ for each $i$, whereas the $\alpha$ has to be a $3$-cycle of
+$D$. Thus, the summation sign $\sum_{\left(  D,\alpha\right)  \text{ is a
+flippy pair}}$ can be rewritten as follows:%
+\[
+\sum_{\left(  D,\alpha\right)  \text{ is a flippy pair}}=\sum_{\substack{D\in
+\mathcal{T};\\D\text{ has }k\text{ many }3\text{-cycles};\\\deg^{-}%
+i=d_{i}\text{ for each }i}}\ \ \sum_{\alpha\text{ is a }3\text{-cycle of }D}.
+\]
+Thus,%
+\begin{align*}
+\sum_{\left(  D,\alpha\right)  \text{ is a flippy pair}}\operatorname*{sign}D
+&  =\sum_{\substack{D\in\mathcal{T};\\D\text{ has }k\text{ many }%
+3\text{-cycles};\\\deg^{-}i=d_{i}\text{ for each }i}}\ \ \underbrace{\sum
+_{\alpha\text{ is a }3\text{-cycle of }D}\operatorname*{sign}D}_{=\left(
+\#\text{ of }3\text{-cycles of }D\right)  \cdot\operatorname*{sign}D}\\
+&  =\sum_{\substack{D\in\mathcal{T};\\D\text{ has }k\text{ many }%
+3\text{-cycles};\\\deg^{-}i=d_{i}\text{ for each }i}}\underbrace{\left(
+\#\text{ of }3\text{-cycles of }D\right)  }_{\substack{=k\\\text{(since
+}D\text{ has }k\text{ many }3\text{-cycles)}}}\cdot\operatorname*{sign}D\\
+&  =\sum_{\substack{D\in\mathcal{T};\\D\text{ has }k\text{ many }%
+3\text{-cycles};\\\deg^{-}i=d_{i}\text{ for each }i}}k\cdot
+\operatorname*{sign}D=k\sum_{\substack{D\in\mathcal{T};\\D\text{ has }k\text{
+many }3\text{-cycles};\\\deg^{-}i=d_{i}\text{ for each }i}%
+}\operatorname*{sign}D.
+\end{align*}
+Therefore, (\ref{pf.lem.cancel.1.sum-flips}) can be rewritten as%
+\[
+k\sum_{\substack{D\in\mathcal{T};\\D\text{ has }k\text{ many }3\text{-cycles}%
+;\\\deg^{-}i=d_{i}\text{ for each }i}}\operatorname*{sign}D=0.
+\]
+We can divide this equality by $k$ (since $k$ is positive), and obtain
+\[
+\sum_{\substack{D\in\mathcal{T};\\D\text{ has }k\text{ many }3\text{-cycles}%
+;\\\deg^{-}i=d_{i}\text{ for each }i}}\operatorname*{sign}D=0.
+\]
+This proves Lemma \ref{lem.cancel.1}.
+\end{proof}
+
+\begin{lemma}
+\label{lem.cancel.2}Let $k$ be a positive integer. Let $\left(  d_{1}%
+,d_{2},\ldots,d_{n}\right)  \in\mathbb{N}^{n}$ be any $n$-tuple of nonnegative
+integers. Then,%
+\[
+\sum_{\substack{D\in\mathcal{T};\\D\text{ has }k\text{ many }3\text{-cycles}%
+;\\\deg^{-}i=d_{i}\text{ for each }i}}w\left(  D\right)  =0.
+\]
+(Here, $\deg^{-}i$ means the indegree of the vertex $i$ in the digraph $D$.
+Also, \textquotedblleft for each $i$\textquotedblright\ means
+\textquotedblleft for each $i\in\left\{  1,2,\ldots,n\right\}  $%
+\textquotedblright.)
+\end{lemma}
+
+\begin{proof}
+We have%
+\begin{align*}
+& \sum_{\substack{D\in\mathcal{T};\\D\text{ has }k\text{ many }3\text{-cycles}%
+;\\\deg^{-}i=d_{i}\text{ for each }i}}\underbrace{w\left(  D\right)
+}_{\substack{=\left(  \operatorname*{sign}D\right)  \cdot\prod_{j=1}^{n}%
+x_{j}^{\deg^{-}j}\\\text{(by Proposition \ref{prop.tour1n.wD1})}}}\\
+& =\sum_{\substack{D\in\mathcal{T};\\D\text{ has }k\text{ many }%
+3\text{-cycles};\\\deg^{-}i=d_{i}\text{ for each }i}}\left(
+\operatorname*{sign}D\right)  \cdot\prod_{j=1}^{n}\underbrace{x_{j}^{\deg
+^{-}j}}_{\substack{=x_{j}^{d_{j}}\\\text{(since }\deg^{-}j=d_{j}%
+\\\text{(because }\deg^{-}i=d_{i}\text{ for each }i\text{))}}}\\
+& =\sum_{\substack{D\in\mathcal{T};\\D\text{ has }k\text{ many }%
+3\text{-cycles};\\\deg^{-}i=d_{i}\text{ for each }i}}\left(
+\operatorname*{sign}D\right)  \cdot\prod_{j=1}^{n}x_{j}^{d_{j}}=\left(
+\prod_{j=1}^{n}x_{j}^{d_{j}}\right)  \underbrace{\sum_{\substack{D\in
+\mathcal{T};\\D\text{ has }k\text{ many }3\text{-cycles};\\\deg^{-}%
+i=d_{i}\text{ for each }i}}\operatorname*{sign}D}_{\substack{=0\\\text{(by
+Lemma \ref{lem.cancel.1})}}}\\
+& =0.
+\end{align*}
+This proves Lemma \ref{lem.cancel.2}.
+\end{proof}
+
+\begin{lemma}
+\label{lem.cancel.wk=0}Let $k$ be a positive integer. Then, $w_{k}=0$.
+\end{lemma}
+
+\begin{proof}
+The definition of $w_{k}$ yields%
+\begin{align*}
+w_{k} &  =\sum_{\substack{D\in\mathcal{T};\\D\text{ has }k\text{ many
+}3\text{-cycles}}}w\left(  D\right)  \\
+&  =\sum_{\left(  d_{1},d_{2},\ldots,d_{n}\right)  \in\mathbb{N}^{n}%
+}\ \ \underbrace{\sum_{\substack{D\in\mathcal{T};\\D\text{ has }k\text{ many
+}3\text{-cycles};\\\deg^{-}i=d_{i}\text{ for each }i}}w\left(  D\right)
+}_{\substack{=0\\\text{(by Lemma \ref{lem.cancel.2})}}}\\
+&  \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \left(
+\begin{array}
+[c]{c}%
+\text{here, we have split up the sum according}\\
+\text{to the }n\text{-tuple }\left(  \deg^{-}1,\deg^{-}2,\ldots,\deg
+^{-}n\right)
+\end{array}
+\right)  \\
+&  =0.
+\end{align*}
+This proves Lemma \ref{lem.cancel.wk=0}.
+\end{proof}
+
+\subsection{The finish line}
+
+Proving Theorem \ref{thm.det.vander} is now a matter of combining what we know:
+
+\begin{proof}
+[Proof of Theorem \ref{thm.det.vander}.]Proposition \ref{prop.tour1n.prodxjxi}
+yields%
+\begin{align*}
+\prod_{1\leq i<j\leq n}\left(  x_{j}-x_{i}\right)   &  =\sum_{D\in\mathcal{T}%
+}w\left(  D\right)  =w_{0}+w_{1}+w_{2}+\cdots\ \ \ \ \ \ \ \ \ \ \left(
+\text{by (\ref{eq.w.sum})}\right)  \\
+&  =\sum_{k\in\mathbb{N}}w_{k}=w_{0}+\sum_{k>0}\underbrace{w_{k}%
+}_{\substack{=0\\\text{(by Lemma \ref{lem.cancel.wk=0})}}}=w_{0}%
++\underbrace{\sum_{k>0}0}_{=0}=w_{0}=\det V
+\end{align*}
+(by (\ref{eq.prop.Tsig.Vassum.w0})). Thus follows Theorem \ref{thm.det.vander}.
+\end{proof}
+
+Here ends our scenic route to the Vandermonde determinant. A different
+combinatorial proof -- also using tournaments -- is sketched in
+\cite[Exercises 2.4.1--2.4.6]{Bresso99}. Yet another (not using tournaments)
+appears in \cite{BenDre07}. Moreover, several variants of the Vandermonde
+determinant (type-B, type-C and type-D versions, for those who know the lingo
+of Coxeter groups) have been proved using tournaments by Bressoud
+\cite{Bresso87}.
+
+\begin{thebibliography}{99999999}                                                                                         %
+
+
+\bibitem[BenDre07]{BenDre07}%
+\href{https://scholarship.claremont.edu/hmc_fac_pub/524/}{Arthur T. Benjamin,
+Gregory P. Dresden, \textit{A Combinatorial Proof of Vandermonde's
+Determinant}, American Mathematical Monthly \textbf{114} (April 2007), pp.
+338--341.}
+
+\bibitem[Bresso87]{Bresso87}%
+\href{https://doi.org/10.1016/S0195-6698(87)80028-8}{D. M. Bressoud,
+\textit{Colored Tournaments and Weyl's Denominator Formula}, Europ. J.
+Combinatorics \textbf{8} (1987), pp. 245--255}.
+
+\bibitem[Bresso99]{Bresso99}%
+\href{https://doi.org/10.1017/CBO9780511613449}{David M. Bressoud,
+\textit{Proofs and Confirmations: The Story of the Alternating Sign Matrix
+Conjecture}, Cambridge University Press 1999.} See
+\url{https://www.macalester.edu/~bressoud/books/PnC/PnCcorrect.html} for errata.
+
+\bibitem[Conrad]{Conrad}Keith Conrad, \textit{The sign of a permutation}, 17
+March 2022.\newline\url{https://kconrad.math.uconn.edu/blurbs/grouptheory/sign.pdf}
+
+\bibitem[Day16]{Day16}Martin V. Day, \textit{An Introduction to Proofs and the
+Mathematical Vernacular}, 7 December 2016. \newline\url{https://web.archive.org/web/20180712152432/https://www.math.vt.edu/people/day/ProofsBook/IPaMV.pdf}
+
+\bibitem[Gessel79]{Gessel79}\href{https://doi.org/10.1002/jgt.3190030315}{Ira
+Gessel, \textit{Tournaments and Vandermonde's Determinant}, Journal of Graph
+Theory \textbf{3} (1979), pp. 305--307}.
+
+\bibitem[Grinbe15]{detnotes}Darij Grinberg, \textit{Notes on the combinatorial
+fundamentals of algebra}, 25 May 2021.\newline%
+\url{http://www.cip.ifi.lmu.de/~grinberg/primes2015/sols.pdf} \newline The
+numbering of theorems and formulas in this link might shift when the project
+gets updated; for a \textquotedblleft frozen\textquotedblright\ version whose
+numbering is guaranteed to match that in the citations above, see
+\url{https://github.com/darijgr/detnotes/releases/tag/2019-01-10} or
+\href{https://arxiv.org/abs/2008.09862v2}{arXiv:2008.09862v2}.
+
+\bibitem[Grinbe21]{lecs}Darij Grinberg, \textit{An Introduction to Algebraic
+Combinatorics [Math 701, Spring 2021 lecture notes]}, January 3, 2022.\newline\url{https://www.cip.ifi.lmu.de/~grinberg/t/21s/lecs.pdf}
+
+\bibitem[hw2s]{hw2s}Darij Grinberg, \textit{Math 5707 Spring 2017: homework
+set 2 with solutions},
+\url{https://www.cip.ifi.lmu.de/~grinberg/t/17s/hw2s.pdf} .
+
+\bibitem[lec7]{lec7}Darij Grinberg, \textit{UMN, Spring 2017, Math 5707:
+Lecture 7 (Hamiltonian paths in digraphs)}, 5 April 2022.\newline\url{https://www.cip.ifi.lmu.de/~grinberg/t/17s/5707lec7.pdf}
+
+\bibitem[Strick20]{Strick20}Neil Strickland, \textit{MAS334 Combinatorics},
+lecture notes and solutions, 6 December 2020.\newline\url{http://neil-strickland.staff.shef.ac.uk/courses/MAS334/}
+\end{thebibliography}
+
+
+\end{document}
