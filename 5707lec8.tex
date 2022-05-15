@@ -16,7 +16,7 @@
 \usepackage{wasysym}
 %TCIDATA{OutputFilter=latex2.dll}
 %TCIDATA{Version=5.50.0.2960}
-%TCIDATA{LastRevised=Tuesday, May 10, 2022 13:24:39}
+%TCIDATA{LastRevised=Saturday, May 14, 2022 22:13:05}
 %TCIDATA{SuppressPackageManagement}
 %TCIDATA{<META NAME="GraphicsSave" CONTENT="32">}
 %TCIDATA{<META NAME="SaveForMode" CONTENT="1">}
@@ -1334,7 +1334,7 @@ the statement $\mathcal{A}$.
 \begin{equation}
 \operatorname*{sign}D:=\prod_{\substack{\left(  i,j\right)  \text{ is
 an}\\\text{arc of }D}}\left(  -1\right)  ^{\left[  i>j\right]  }\in\left\{
-1,-1\right\}  .\label{eq.def.tour1n.wD.sign}%
+1,-1\right\}  . \label{eq.def.tour1n.wD.sign}%
 \end{equation}
 
 
@@ -1649,7 +1649,7 @@ $ & $%
 %\node(3) at (330:1.5) {$3$};
 %\end{scope}
 %\node(u1) at (0, -1.8) {$x_2 x_3^2$};
-%\begin{scope}[every edge/.style={draw=red,very thick}]
+%\begin{scope}[every edge/.style={draw=blue,very thick}]
 %\path[->] (1) edge (2) (1) edge (3) (2) edge (3);
 %\end{scope}
 %\end{tikzpicture}}}%
@@ -1662,14 +1662,14 @@ $ & $%
 \node(3) at (330:1.5) {$3$};
 \end{scope}
 \node(u1) at (0, -1.8) {$x_2 x_3^2$};
-\begin{scope}[every edge/.style={draw=red,very thick}]
+\begin{scope}[every edge/.style={draw=blue,very thick}]
 \path[->] (1) edge (2) (1) edge (3) (2) edge (3);
 \end{scope}
 \end{tikzpicture}%
 %EndExpansion
 $ & \\\cline{1-2}%
 \end{tabular}
-\
+\ \
 \]
 
 \end{example}
@@ -2870,13 +2870,13 @@ Similarly, $\left(  -1\right)  ^{\left[  v>w\right]  }=-\left(  -1\right)
 }=-\left(  -1\right)  ^{\left[  u>w\right]  }$. Now, our above formula for
 $\operatorname*{sign}D$ becomes%
 \begin{align*}
-\operatorname*{sign}D &  =\underbrace{\left(  -1\right)  ^{\left[  u>v\right]
-}}_{=-\left(  -1\right)  ^{\left[  v>u\right]  }}\cdot\underbrace{\left(
--1\right)  ^{\left[  v>w\right]  }}_{=-\left(  -1\right)  ^{\left[
-w>v\right]  }}\cdot\underbrace{\left(  -1\right)  ^{\left[  w>u\right]  }%
-}_{=-\left(  -1\right)  ^{\left[  u>w\right]  }}\cdot\prod_{\substack{\left(
-i,j\right)  \text{ is an}\\\text{inert arc of }D}}\left(  -1\right)  ^{\left[
-i>j\right]  }\\
+\operatorname*{sign}D  &  =\underbrace{\left(  -1\right)  ^{\left[
+u>v\right]  }}_{=-\left(  -1\right)  ^{\left[  v>u\right]  }}\cdot
+\underbrace{\left(  -1\right)  ^{\left[  v>w\right]  }}_{=-\left(  -1\right)
+^{\left[  w>v\right]  }}\cdot\underbrace{\left(  -1\right)  ^{\left[
+w>u\right]  }}_{=-\left(  -1\right)  ^{\left[  u>w\right]  }}\cdot
+\prod_{\substack{\left(  i,j\right)  \text{ is an}\\\text{inert arc of }%
+D}}\left(  -1\right)  ^{\left[  i>j\right]  }\\
 &  =-\underbrace{\left(  -1\right)  ^{\left[  v>u\right]  }\cdot\left(
 -1\right)  ^{\left[  w>v\right]  }\cdot\left(  -1\right)  ^{\left[
 u>w\right]  }\cdot\prod_{\substack{\left(  i,j\right)  \text{ is
@@ -2980,7 +2980,7 @@ $\operatorname*{sign}\left(  D^{\prime}\right)
 =-\underbrace{\operatorname*{sign}D}_{=1}=-1$). Hence, we obtain a map
 \begin{align*}
 &  \text{from the set }\left\{  \text{flippy pairs }\left(  D,\alpha\right)
-\text{ satisfying }\operatorname*{sign}D=1\right\}  \\
+\text{ satisfying }\operatorname*{sign}D=1\right\} \\
 &  \text{to the set }\left\{  \text{flippy pairs }\left(  D,\alpha\right)
 \text{ satisfying }\operatorname*{sign}D=-1\right\}  ,
 \end{align*}
@@ -2988,7 +2988,7 @@ which sends each flippy pair $\left(  D,\alpha\right)  $ to
 $\operatorname*{flip}\left(  D,\alpha\right)  $. Similarly, we obtain a map
 \begin{align*}
 &  \text{from the set }\left\{  \text{flippy pairs }\left(  D,\alpha\right)
-\text{ satisfying }\operatorname*{sign}D=-1\right\}  \\
+\text{ satisfying }\operatorname*{sign}D=-1\right\} \\
 &  \text{to the set }\left\{  \text{flippy pairs }\left(  D,\alpha\right)
 \text{ satisfying }\operatorname*{sign}D=1\right\}  ,
 \end{align*}
@@ -3006,14 +3006,15 @@ In other words, there are as many flippy pairs $\left(  D,\alpha\right)  $
 satisfying $\operatorname*{sign}D=1$ as there are flippy pairs $\left(
 D,\alpha\right)  $ satisfying $\operatorname*{sign}D=-1$. Hence, in the sum%
 \[
-\sum_{\left(  D,\alpha\right)  \text{ is a flippy pair}}\operatorname*{sign}D,
+\sum_{\left(  D,\alpha\right)  \text{ is a flippy pair}}\operatorname*{sign}%
+D,
 \]
 the addends equal to $1$ and the addends equal to $-1$ are equinumerous, and
 consequently these addends cancel each other out. The sum therefore equals $0$
 (since each addend of this sum is either a $1$ or a $-1$). In other words,%
 \begin{equation}
 \sum_{\left(  D,\alpha\right)  \text{ is a flippy pair}}\operatorname*{sign}%
-D=0.\label{pf.lem.cancel.1.sum-flips}%
+D=0. \label{pf.lem.cancel.1.sum-flips}%
 \end{equation}
 
 
@@ -3074,23 +3075,23 @@ Also, \textquotedblleft for each $i$\textquotedblright\ means
 \begin{proof}
 We have%
 \begin{align*}
-& \sum_{\substack{D\in\mathcal{T};\\D\text{ has }k\text{ many }3\text{-cycles}%
-;\\\deg^{-}i=d_{i}\text{ for each }i}}\underbrace{w\left(  D\right)
-}_{\substack{=\left(  \operatorname*{sign}D\right)  \cdot\prod_{j=1}^{n}%
-x_{j}^{\deg^{-}j}\\\text{(by Proposition \ref{prop.tour1n.wD1})}}}\\
-& =\sum_{\substack{D\in\mathcal{T};\\D\text{ has }k\text{ many }%
+&  \sum_{\substack{D\in\mathcal{T};\\D\text{ has }k\text{ many }%
+3\text{-cycles};\\\deg^{-}i=d_{i}\text{ for each }i}}\underbrace{w\left(
+D\right)  }_{\substack{=\left(  \operatorname*{sign}D\right)  \cdot\prod
+_{j=1}^{n}x_{j}^{\deg^{-}j}\\\text{(by Proposition \ref{prop.tour1n.wD1})}}}\\
+&  =\sum_{\substack{D\in\mathcal{T};\\D\text{ has }k\text{ many }%
 3\text{-cycles};\\\deg^{-}i=d_{i}\text{ for each }i}}\left(
 \operatorname*{sign}D\right)  \cdot\prod_{j=1}^{n}\underbrace{x_{j}^{\deg
 ^{-}j}}_{\substack{=x_{j}^{d_{j}}\\\text{(since }\deg^{-}j=d_{j}%
 \\\text{(because }\deg^{-}i=d_{i}\text{ for each }i\text{))}}}\\
-& =\sum_{\substack{D\in\mathcal{T};\\D\text{ has }k\text{ many }%
+&  =\sum_{\substack{D\in\mathcal{T};\\D\text{ has }k\text{ many }%
 3\text{-cycles};\\\deg^{-}i=d_{i}\text{ for each }i}}\left(
 \operatorname*{sign}D\right)  \cdot\prod_{j=1}^{n}x_{j}^{d_{j}}=\left(
 \prod_{j=1}^{n}x_{j}^{d_{j}}\right)  \underbrace{\sum_{\substack{D\in
 \mathcal{T};\\D\text{ has }k\text{ many }3\text{-cycles};\\\deg^{-}%
 i=d_{i}\text{ for each }i}}\operatorname*{sign}D}_{\substack{=0\\\text{(by
 Lemma \ref{lem.cancel.1})}}}\\
-& =0.
+&  =0.
 \end{align*}
 This proves Lemma \ref{lem.cancel.2}.
 \end{proof}
@@ -3102,8 +3103,8 @@ This proves Lemma \ref{lem.cancel.2}.
 \begin{proof}
 The definition of $w_{k}$ yields%
 \begin{align*}
-w_{k} &  =\sum_{\substack{D\in\mathcal{T};\\D\text{ has }k\text{ many
-}3\text{-cycles}}}w\left(  D\right)  \\
+w_{k}  &  =\sum_{\substack{D\in\mathcal{T};\\D\text{ has }k\text{ many
+}3\text{-cycles}}}w\left(  D\right) \\
 &  =\sum_{\left(  d_{1},d_{2},\ldots,d_{n}\right)  \in\mathbb{N}^{n}%
 }\ \ \underbrace{\sum_{\substack{D\in\mathcal{T};\\D\text{ has }k\text{ many
 }3\text{-cycles};\\\deg^{-}i=d_{i}\text{ for each }i}}w\left(  D\right)
@@ -3115,7 +3116,7 @@ w_{k} &  =\sum_{\substack{D\in\mathcal{T};\\D\text{ has }k\text{ many
 \text{to the }n\text{-tuple }\left(  \deg^{-}1,\deg^{-}2,\ldots,\deg
 ^{-}n\right)
 \end{array}
-\right)  \\
+\right) \\
 &  =0.
 \end{align*}
 This proves Lemma \ref{lem.cancel.wk=0}.
@@ -3131,7 +3132,7 @@ yields%
 \begin{align*}
 \prod_{1\leq i<j\leq n}\left(  x_{j}-x_{i}\right)   &  =\sum_{D\in\mathcal{T}%
 }w\left(  D\right)  =w_{0}+w_{1}+w_{2}+\cdots\ \ \ \ \ \ \ \ \ \ \left(
-\text{by (\ref{eq.w.sum})}\right)  \\
+\text{by (\ref{eq.w.sum})}\right) \\
 &  =\sum_{k\in\mathbb{N}}w_{k}=w_{0}+\sum_{k>0}\underbrace{w_{k}%
 }_{\substack{=0\\\text{(by Lemma \ref{lem.cancel.wk=0})}}}=w_{0}%
 +\underbrace{\sum_{k>0}0}_{=0}=w_{0}=\det V
