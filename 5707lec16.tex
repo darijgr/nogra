@@ -18,7 +18,7 @@
 \setcounter{MaxMatrixCols}{30}
 %TCIDATA{OutputFilter=latex2.dll}
 %TCIDATA{Version=5.50.0.2960}
-%TCIDATA{LastRevised=Friday, April 27, 2018 22:38:28}
+%TCIDATA{LastRevised=Friday, May 27, 2022 09:11:59}
 %TCIDATA{<META NAME="GraphicsSave" CONTENT="32">}
 %TCIDATA{<META NAME="SaveForMode" CONTENT="1">}
 %TCIDATA{BibliographyScheme=Manual}
@@ -2018,7 +2018,7 @@ whereas the bipartite graph $\left(  G;\left\{  2,4,6\right\}  ,\left\{
 
 
 The concept of a bipartite graph can be extended from simple graphs to
-multigraphs, but we will not have much use for this extension here.
+multigraphs, but we will not discuss this extension here.
 
 \begin{definition}
 Let $G=\left(  W,E\right)  $ be a simple graph. A \textit{matching} in $G$
@@ -2118,11 +2118,11 @@ other words, $\left\{  p,q\right\}  $ is an edge of $G$.
 
 But $\left(  G;X,Y\right)  $ is a bipartite graph. Hence, each edge of $G$
 contains exactly one vertex in $X$ and exactly one vertex in $Y$. Thus, in
-particular, each edge of $G$ contains a vertex in $Y$. Applying this to
-$\left\{  p,q\right\}  $, we conclude that $\left\{  p,q\right\}  $ contains a
-vertex in $Y$. In other words, one of the two vertices $p$ and $q$ lies in
-$Y$. This vertex cannot be $q$ (since $q\notin Y$), and thus must be $p$.
-Hence, $p$ lies in $Y$. In other words, $p\in Y$.
+particular, each edge of $G$ contains a vertex in $Y$. Applying this to the
+edge $\left\{  p,q\right\}  $, we conclude that $\left\{  p,q\right\}  $
+contains a vertex in $Y$. In other words, one of the two vertices $p$ and $q$
+lies in $Y$. This vertex cannot be $q$ (since $q\notin Y$), and thus must be
+$p$. Hence, $p$ lies in $Y$. In other words, $p\in Y$.
 
 Now, forget that we fixed $p$. We have thus shown that $p\in Y$ for each $p\in
 N\left(  U\right)  $. In other words, $N\left(  U\right)  \subseteq Y$. This
@@ -2141,8 +2141,8 @@ $\left\vert N\left(  U\right)  \right\vert \geq\left\vert U\right\vert $.
 
 Theorem \ref{thm.hall} has applications throughout mathematics, and several
 equivalent versions; it also has fairly elementary (but tricky) proofs (see,
-e.g., \cite[\S 12.5.2]{LeLeMe17}). We shall derive it from Theorem
-\ref{thm.3b}.
+e.g., \cite[\S 12.5.2]{LeLeMe17} or \cite[Theorem 3.9]{Harju14}). We shall
+derive it from Theorem \ref{thm.3b}.
 
 In order to do so (and also, in order to reduce the bipartite matching problem
 to the Ford-Fulkerson algorithm), we need to construct a network from a given
@@ -3243,7 +3243,7 @@ assumption). Let $U$ be a subset of $X$. We must prove that $\left\vert
 N\left(  U\right)  \right\vert \geq\left\vert U\right\vert $.
 
 The matching $M$ is $X$-complete; thus, each vertex $x\in X$ has an
-$M$-partner. Let $i:X\rightarrow Y$ be the map that sends each vertex $x\in X$
+$M$-partner. Let $i:X\rightarrow W$ be the map that sends each vertex $x\in X$
 to its $M$-partner. Any two distinct elements of $X$ must have distinct
 $M$-partners (because otherwise, the edges joining them to their common
 $M$-partner would be two distinct edges in $M$ that have a vertex in common;
@@ -3506,8 +3506,11 @@ preprint is freely available at
 \bibitem[Goeman17]{Goeman17}Michel X. Goemans, \textit{18.453 Combinatorial
 Optimization}, course at MIT, Spring 2017.\newline\url{http://math.mit.edu/~goemans/18453S17/18453.html}
 
+\bibitem[Harju14]{Harju14}Tero Harju, \textit{Lecture notes on Graph Theory},
+24 April 2014.\newline\url{https://users.utu.fi/harju/graphtheory/graphtheory.pdf}
+
 \bibitem[LeLeMe17]{LeLeMe17}Eric Lehman, F. Thomson Leighton, Albert R. Meyer,
-\textit{Mathematics for Computer Science}, version 15 November 2017.\newline\url{https://courses.csail.mit.edu/6.042/fall17/mcs.pdf}
+\textit{Mathematics for Computer Science}, version 6 June 2018.\newline\url{https://courses.csail.mit.edu/6.042/spring18/mcs.pdf}
 
 \bibitem[Martin17]{Martin17}Jeremy L. Martin, \textit{Lecture Notes on
 Algebraic Combinatorics}, 8 June 2017.\newline\url{http://people.ku.edu/~jlmartin/LectureNotes.pdf}
