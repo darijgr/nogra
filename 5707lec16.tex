@@ -18,7 +18,7 @@
 \setcounter{MaxMatrixCols}{30}
 %TCIDATA{OutputFilter=latex2.dll}
 %TCIDATA{Version=5.50.0.2960}
-%TCIDATA{LastRevised=Friday, May 27, 2022 09:11:59}
+%TCIDATA{LastRevised=Friday, April 24, 2026 16:36:40}
 %TCIDATA{<META NAME="GraphicsSave" CONTENT="32">}
 %TCIDATA{<META NAME="SaveForMode" CONTENT="1">}
 %TCIDATA{BibliographyScheme=Manual}
@@ -142,13 +142,13 @@
 
 We shall now study the basics of the theory of network flows. We will barely
 scratch the surface; for a more comprehensive survey, see Schrijver's
-\cite[Chapter 4]{Schrij17}. Also, \cite[\S 8.2]{Martin17} gives a neat
+\cite[Chapter 4]{Schrij17}. Also, \cite[\S 11.2]{Martin17} gives a neat
 introduction, and \cite{ForFul62} is the classical text on the subject. Also,
 \cite{Thalwi08} appears to be a thorough treatment of the subject with lots of
 technical details. See also the \textquotedblleft Lecture notes on maximum
 flows and minimum cut problems\textquotedblright\ in \cite{Goeman17}.
 
-We shall mostly follow \cite[\S 8.2]{Martin17}. In particular, we will only
+We shall mostly follow \cite[\S 11.2]{Martin17}. In particular, we will only
 use elementary methods. More advanced disciplines (such as linear optimization
 and polyhedral geometry) offer alternative points of view on the theory of
 network flows; we shall ignore these. We shall also ignore real-life
@@ -682,7 +682,7 @@ S,\overline{S}\right)  $ becomes an equality if and only if both
 (\ref{eq.prop.2.d.b.1}) and (\ref{eq.prop.2.d.b.2}) hold. In other words,
 $\left\vert f\right\vert =c\left(  S,\overline{S}\right)  $ if and only if
 both (\ref{eq.prop.2.d.b.1}) and (\ref{eq.prop.2.d.b.2}) hold. This proves
-Proposition \ref{def.flow.def} \textbf{(d)}.
+Proposition \ref{prop.2} \textbf{(d)}.
 \end{proof}
 
 \begin{remark}
@@ -820,7 +820,7 @@ flow}\right\} \\
 S;\ t\notin S\right\}  .
 \end{align*}
 In particular, the left-hand side of this equation is well-defined (i.e.,
-there exists a flow $f$ for which $\left\vert f\right\vert $ is maximum).
+there exists an integer flow $f$ for which $\left\vert f\right\vert $ is maximum).
 \end{theorem}
 
 Finally, a third variant (which we shall not prove) makes the same statement
@@ -955,7 +955,7 @@ Let $f:A\rightarrow\mathbb{Q}_{+}$ be a flow.
 a flow $f^{\prime}$ with a larger value than $f$.
 
 \textbf{(b)} If the digraph $D_{f}$ has no path from $s$ to $t$, then there
-exists a subset $S$ of $V$ satisfying $s\in V$ and $t\notin V$ and $c\left(
+exists a subset $S$ of $V$ satisfying $s\in S$ and $t\notin S$ and $c\left(
 S,\overline{S}\right)  =\left\vert f\right\vert $.
 \end{lemma}
 
@@ -1078,8 +1078,8 @@ $b^{-1}\in A$).
 \end{itemize}
 
 (Such a coloring can always be found: Indeed, every arc $b\in P$ that does not
-belong to $A^{-1}$ must be colored blue; every arc $b\in P$ that does not
-belong to $A$ must be colored red; every arc $b\in P$ that belongs to both $A$
+belong to $A^{-1}$ must be colored red; every arc $b\in P$ that does not
+belong to $A$ must be colored blue; every arc $b\in P$ that belongs to both $A$
 and $A^{-1}$ can be colored either red or blue.)
 
 Define a map $g:A\rightarrow\mathbb{Q}$ by setting%
@@ -1196,16 +1196,16 @@ must prove that $g\left(  d\right)  =0$.
 \par
 Assume the contrary. Thus, $g\left(  d\right)  \neq0$. According to the
 definition of $g$, we thus conclude that we have either $\left(  d\in P\text{
-and }d\text{ is red}\right)  $ or $\left(  d^{-1}\in P\text{ and }d\text{ is
-blue}\right)  $.
+and }d\text{ is red}\right)  $ or $\left(  d^{-1}\in P\text{ and }d^{-1}
+\text{ is blue}\right)  $.
 \par
 If $\left(  d\in P\text{ and }d\text{ is red}\right)  $, then $d$ is either
 $x$ or $y$ (since $d\in P$, but the only arcs in $P$ having source or target
 $v$ are $x$ and $y$), which yields that $d$ must be blue (since both $x$ and
 $y$ are blue), contradicting the fact that $d$ is red.
 \par
-If $\left(  d^{-1}\in P\text{ and }d\text{ is blue}\right)  $, then $d^{-1}$
-is either $x$ or $y$ (since $d\in P$, but the only arcs in $P$ having source
+If $\left(  d^{-1}\in P\text{ and }d^{-1}\text{ is blue}\right)  $, then $d^{-1}$
+is either $x$ or $y$ (since $d^{-1}\in P$, but the only arcs in $P$ having source
 or target $v$ are $x$ and $y$), which yields that $d$ is either $x^{-1}$ or
 $y^{-1}$, contradicting the fact that $d$ is distinct from both $x^{-1}$ and
 $y^{-1}$.
@@ -1475,8 +1475,8 @@ other words, it has a larger value than $f$. Thus, there is a flow $f^{\prime
 \ref{lem.4} \textbf{(a)}.
 
 \textbf{(b)} Assume that the digraph $D_{f}$ has no path from $s$ to $t$. We
-must prove that there exists a subset $S$ of $V$ satisfying $s\in V$ and
-$t\notin V$ and $c\left(  S,\overline{S}\right)  =\left\vert f\right\vert $.
+must prove that there exists a subset $S$ of $V$ satisfying $s\in S$ and
+$t\notin S$ and $c\left(  S,\overline{S}\right)  =\left\vert f\right\vert $.
 
 Indeed, define a subset $S$ of $V$ by%
 \[
@@ -1494,7 +1494,8 @@ definition of $S$).
 Furthermore, the digraph $D_{f}$ has no path from $s$ to $t$ (by assumption).
 In other words, $t\notin S$ (by the definition of $S$).
 
-It thus remains to show that $c\left(  S,\overline{S}\right)  =f$.
+It thus remains to show that $c\left(  S,\overline{S}\right)  =
+\left\vert f\right\vert$.
 
 Let us first observe that%
 \begin{equation}
@@ -1592,7 +1593,7 @@ Let $f:A\rightarrow\mathbb{Q}_{+}$ be an integer flow. Then,
 an integer flow $f^{\prime}$ with a larger value than $f$.
 
 \textbf{(b)} If the digraph $D_{f}$ has no path from $s$ to $t$, then there
-exists a subset $S$ of $V$ satisfying $s\in V$ and $t\notin V$ and $c\left(
+exists a subset $S$ of $V$ satisfying $s\in S$ and $t\notin S$ and $c\left(
 S,\overline{S}\right)  =\left\vert f\right\vert $.
 \end{lemma}
 
@@ -1676,7 +1677,7 @@ than it had before.)
 
 \item Now, the digraph $D_{f}$ has no path from $s$ to $t$. Therefore, Lemma
 \ref{lem.4int} \textbf{(b)} shows that there exists a subset $S$ of $V$
-satisfying $s\in V$ and $t\notin V$ and $c\left(  S,\overline{S}\right)
+satisfying $s\in S$ and $t\notin S$ and $c\left(  S,\overline{S}\right)
 =\left\vert f\right\vert $. Consider this $S$. (Again, the actual construction
 of $S$ is hidden in the proof of Lemma \ref{lem.4int} \textbf{(b)}.)
 
@@ -2270,7 +2271,7 @@ s \ar[ru] \ar[r] \ar[rd] & 2 \ar[ru] \ar[rdd] & 5 \ar[r] & t \\
 .
 \]
 This $9$-vertex digraph will be the underlying digraph of our network $N$. The
-source and the target of $N$ shall be $s$ and $t$, respectively. The capacity
+source and the sink of $N$ shall be $s$ and $t$, respectively. The capacity
 function $c$ is determined by setting $c\left(  a\right)  =1$ for each arc of
 the network.
 
@@ -3512,8 +3513,8 @@ Optimization}, course at MIT, Spring 2017.\newline\url{http://math.mit.edu/~goem
 \bibitem[LeLeMe17]{LeLeMe17}Eric Lehman, F. Thomson Leighton, Albert R. Meyer,
 \textit{Mathematics for Computer Science}, version 6 June 2018.\newline\url{https://courses.csail.mit.edu/6.042/spring18/mcs.pdf}
 
-\bibitem[Martin17]{Martin17}Jeremy L. Martin, \textit{Lecture Notes on
-Algebraic Combinatorics}, 8 June 2017.\newline\url{http://people.ku.edu/~jlmartin/LectureNotes.pdf}
+\bibitem[Martin18]{Martin17}Jeremy L. Martin, \textit{Lecture Notes on
+Algebraic Combinatorics}, 28 November 2018.\newline\url{https://web.archive.org/web/20190110212210/http://jlmartin.faculty.ku.edu/~jlmartin/LectureNotes.pdf}
 
 \bibitem[Schrij12]{Schrij12}%
 \href{https://www.math.uni-bielefeld.de/documenta/vol-ismp/33_schrijver-alexander-tmf.pdf}{Alexander

@@ -2012,7 +2012,7 @@ $\ell$). This solves Exercise \ref{exe.chip.better-bounds} \textbf{(b)}.
 \subsection{Exercise \ref{exe.chip.examples}: examples of chip-firing}
 
 We identify each simple digraph $\tup{V, A}$ with the multidigraph
-$\tup{V, A, \iota}$, where $\iota$ is the map $V \to A \times A$ that
+$\tup{V, A, \iota}$, where $\iota$ is the map $A \to V \times V$ that
 sends each arc $a \in A$ to itself.
 
 \Needspace{15cm}
@@ -2387,7 +2387,10 @@ v\right)  \geq1$ (since $c$ is non-void in $g$). Consider this $v$. Now:
 
 \begin{itemize}
 \item If $w=v$, then the vertex that follows $v$ on the cycle $c$ gains at
-least one chip when we fire $w$; thus, the cycle $c$ remains non-void in this case.
+least one chip when we fire $w$ (unless the cycle $c$ has length $1$,
+in which case this vertex is $v$ itself, but in that case it at least
+regains the chip that it fired);
+thus, the cycle $c$ remains non-void in this case.
 
 \item If $w\neq v$, then the vertex $v$ does not lose any chips when we fire
 $w$; thus, the cycle $c$ remains non-void in this case as well.

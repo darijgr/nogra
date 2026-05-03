@@ -16,7 +16,7 @@
 \usepackage{wasysym}
 %TCIDATA{OutputFilter=latex2.dll}
 %TCIDATA{Version=5.50.0.2960}
-%TCIDATA{LastRevised=Saturday, May 14, 2022 18:58:31}
+%TCIDATA{LastRevised=Friday, April 24, 2026 16:33:31}
 %TCIDATA{SuppressPackageManagement}
 %TCIDATA{<META NAME="GraphicsSave" CONTENT="32">}
 %TCIDATA{<META NAME="SaveForMode" CONTENT="1">}
@@ -269,7 +269,7 @@ and many others.
 
 \item[\textbf{(b)}] The simple digraph%
 \begin{equation}
-\left(  \left\{  1,2,3,4\right\}  ,\ \ \left\{  \left\{  1,3\right\}  ,\left(
+\left(  \left\{  1,2,3,4\right\}  ,\ \ \left\{  \left(  1,3\right)  ,\left(
 2,1\right)  ,\left(  2,3\right)  ,\left(  3,3\right)  \right\}  \right)
 \label{eq.ex.digraph.sim-dig.ex1.b}%
 \end{equation}
@@ -1048,7 +1048,7 @@ hamp of }\overline{D}\right] \nonumber\\
 \sigma\text{ is a hamp of }\overline{D}\right)  \ \ \ \ \ \ \ \ \ \ \left(
 \text{by (\ref{pf.thm.hamp.Dbar.rcall})}\right) \nonumber\\
 &  =\left(  \#\text{ of hamps of }\overline{D}\right)  \operatorname{mod}2
-\label{pf.thm.hamp.Dbr.5}%
+\label{pf.thm.hamp.Dbar.5}%
 \end{align}
 (because each hamp of $\overline{D}$ is a $V$-listing).
 
@@ -1700,7 +1700,7 @@ $P\left(  \tau\right)  $). Therefore,%
 \left(  \#\text{ of hamps }\tau\text{ of }D\right)  \equiv N\equiv\left(
 \#\text{ of hamps of }\overline{D}\right)  \operatorname{mod}2
 \]
-(by (\ref{pf.thm.hamp.Dbr.5})). Thus,%
+(by (\ref{pf.thm.hamp.Dbar.5})). Thus,%
 \[
 \left(  \#\text{ of hamps of }\overline{D}\right)  \equiv\left(  \#\text{ of
 hamps }\tau\text{ of }D\right)  =\left(  \#\text{ of hamps of }D\right)
@@ -2011,7 +2011,7 @@ have smaller size than $V$), and thus have hamps (by the induction
 hypothesis). Let $\left(  x_{1},x_{2},\ldots,x_{a}\right)  $ and $\left(
 y_{1},y_{2},\ldots,y_{b}\right)  $ be these hamps (these can be empty lists if
 $X$ or $Y$ is empty). Then, it is easy to see that $\left(  x_{1},x_{2}%
-,\ldots,x_{a},u,y_{1},y_{2},\ldots,y_{b}\right)  $ is a hamp of $D$. Thus, $D$
+,\ldots,x_{a},v,y_{1},y_{2},\ldots,y_{b}\right)  $ is a hamp of $D$. Thus, $D$
 has a hamp. This completes the induction step, and thus Theorem
 \ref{thm.tourn.hamp} is proved.
 \end{proof}
@@ -2424,10 +2424,10 @@ give below is not R\'{e}dei's original proof (which relied on subtle
 manipulation of determinants\footnote{An English translation of this proof can
 be found in Moon's booklet \cite[proof of Theorem 14]{Moon13}.}), but rather
 Berge's proof from \cite[\S 10.2, Theorem 6]{Berge91} (which also appears in
-\cite[solution to problem 7.8]{Tomesc85}).\footnote{Another proof appears in
-\cite[Corollaire 5.1]{Lass02}.} We have already done most of the hard work
-when we proved Theorem \ref{thm.hamp.Dbar}, which will come useful in the
-proof; but we will need one more lemma:
+\cite[solution to problem 7.8]{Tomesc85}).\footnote{Other proofs appear in
+\cite[Corollaire 5.1]{Lass02}, \cite{GriSta23} and \cite{IrvOma25}.} We have
+already done most of the hard work when we proved Theorem \ref{thm.hamp.Dbar},
+which will come in useful in the proof; but we will need one more lemma:
 
 \begin{lemma}
 \label{lem.tourn.reverse}Let $D=\left(  V,A\right)  $ be a tournament, and let
@@ -2658,12 +2658,12 @@ and $w$ to appear twice}. Thus, any path of $D_{2}$ that uses the arc $wv$
 cannot use the arc $vw$. Hence, in particular, any hamp of $D_{2}$ that uses
 the arc $wv$ cannot use the arc $vw$, and thus must be a hamp of $D^{\prime}$
 (since the hamps of $D^{\prime}$ are exactly the hamps of $D_{2}$ that do not
-use the arc $vw$). Thus, any hamp of $D_{2}$ that uses the arc of $wv$ is a
-hamp of $D^{\prime}$ that uses the arc $wv$. Conversely, as we have already
-shown, any hamp of $D^{\prime}$ that uses the arc $wv$ is a hamp of $D_{2}$
-that uses the arc $wv$. Combining the results of the previous two sentences,
-we see that the hamps of $D_{2}$ that use the arc $wv$ are precisely the hamps
-of $D^{\prime}$ that use the arc $wv$. Hence,%
+use the arc $vw$). Thus, any hamp of $D_{2}$ that uses the arc $wv$ is a hamp
+of $D^{\prime}$ that uses the arc $wv$. Conversely, as we have already shown,
+any hamp of $D^{\prime}$ that uses the arc $wv$ is a hamp of $D_{2}$ that uses
+the arc $wv$. Combining the results of the previous two sentences, we see that
+the hamps of $D_{2}$ that use the arc $wv$ are precisely the hamps of
+$D^{\prime}$ that use the arc $wv$. Hence,%
 \begin{align}
 &  \left(  \#\text{ of hamps of }D_{2}\text{ that use the arc }wv\right)
 \nonumber\\
@@ -2751,13 +2751,25 @@ of theoretical reasoning and computer-assisted brute force, it has been proved
 that a tournament cannot have exactly $7$ hamps, nor can it have exactly $21$
 hamps. Each other odd number between $1$ and $80555$ has been verified to
 appear as $\#$ of hamps of some tournament, but the question for higher
-numebrs is still open. See \cite{MO232751} for more about this peculiar question.
+numbers is still open. See \cite{MO232751} for more about this peculiar question.
+
+For refinements and generalization of Theorems \ref{thm.hamp.Dbar} and Theorem
+\ref{thm.tourn.redei}, see \cite{GriSta23} and \cite{IrvOma25}.
 
 \begin{thebibliography}{99999999}                                                                                         %
 
 
 \bibitem[Berge91]{Berge91}Claude Berge, \textit{Graphs}, North-Holland
 Mathematical Library \textbf{6.1}, 3rd edition, North-Holland 1991.
+
+\bibitem[GriSta23]{GriSta23}\href{https://arxiv.org/abs/2307.05569}{Darij
+Grinberg, Richard P. Stanley, \textit{The Redei--Berge symmetric function of a
+directed graph} arXiv:2307.05569}.
+
+\bibitem[IrvOma25]{IrvOma25}\href{https://doi.org/10.37236/13841}{John Irving,
+Mohamed Omar, \textit{Revisiting the R\'{e}dei-Berge Symmetric Functions via
+Matrix Algebra}, The Electronic Journal of Combinatorics \textbf{32} (2025),
+issue 4, \#P4.43.}
 
 \bibitem[Lass02]{Lass02}%
 \href{https://doi.org/10.1016/S0196-8858(02)00010-6}{Bodo Lass,

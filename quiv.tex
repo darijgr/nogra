@@ -15,7 +15,7 @@
 \usepackage{tabls}
 %TCIDATA{OutputFilter=latex2.dll}
 %TCIDATA{Version=5.50.0.2960}
-%TCIDATA{LastRevised=Tuesday, November 27, 2018 19:05:24}
+%TCIDATA{LastRevised=Friday, April 24, 2026 16:16:43}
 %TCIDATA{SuppressPackageManagement}
 %TCIDATA{<META NAME="GraphicsSave" CONTENT="32">}
 %TCIDATA{<META NAME="SaveForMode" CONTENT="1">}
@@ -143,9 +143,9 @@ arrows, and which distinguishes between them -- i.e., the quiver stores not
 just the information of how many arrows there are from a vertex to another,
 but it actually has them all as distinguishable objects in $Q_{1}$. Lampe
 himself seems to later tacitly switch to a different notion of quivers, where
-edges from a given to vertex to another are indistinguishable and only exist
-as a number. This does not matter for the next exercise, which works just as
-well with either notion of a quiver; but I just wanted to have it mentioned.)
+edges from a given vertex to another are indistinguishable and only exist as a
+number. This does not matter for the next exercise, which works just as well
+with either notion of a quiver; but the difference can be significant in other situations.)
 
 \item The \textit{underlying undirected graph} of a quiver $Q=\left(
 Q_{0},Q_{1},s,t\right)  $ is defined as the undirected multigraph with vertex
@@ -263,11 +263,11 @@ every $i\in\left\{  1,2,\ldots,\ell\right\}  $, the quiver $Q^{\left(
 i\right)  }$ is obtained from $Q^{\left(  i-1\right)  }$ by mutation at a sink
 of $Q^{\left(  i-1\right)  }$.)
 
-[In our above example, we can mutate at $4$ first and then at $2$.]
+[In our above example, we can mutate at $4$ first and then at $2$.] \medskip
 
 \textbf{(b)} If $i\in Q_{0}$ is a \textbf{source} of $Q$, then show that the
 mutation $\mu_{i}\left(  Q\right)  $ can be obtained from $Q$ by a sequence of
-mutations at sinks.
+mutations at sinks. \medskip
 
 \textbf{(c)} Assume now that the underlying \textbf{undirected} graph of $Q$
 is a tree. (In particular, $Q$ cannot have more than one edge between two
@@ -294,14 +294,15 @@ induction over $\left\vert B\right\vert $.
 
 \textit{Induction base:} Assume that $\left\vert B\right\vert =0$. Thus,
 $B=\varnothing$, and thus there are no arrows of $Q$ which start at a vertex
-in $A$ and at a vertex in $B$. Hence, $\operatorname*{mut}\nolimits_{A,B}Q=Q$,
-and this can clearly be obtained from $Q$ by a sequence of mutations at sinks
-(namely, by the empty sequence). Thus, Exercise \ref{exe.ps1.1.1} \textbf{(a)}
-holds if $\left\vert B\right\vert =0$. This completes the induction
-base.\footnote{Yes, this was a completely honest induction base. You don't
-need to start at $\left\vert B\right\vert =1$ unless you want to use something
-like $\left\vert B\right\vert >1$ in the induction step (but even then, you
-should also handle the case $\left\vert B\right\vert =0$ separately).}
+in $A$ and end at a vertex in $B$. Hence, $\operatorname*{mut}\nolimits_{A,B}%
+Q=Q$, and this can clearly be obtained from $Q$ by a sequence of mutations at
+sinks (namely, by the empty sequence). Thus, Exercise \ref{exe.ps1.1.1}
+\textbf{(a)} holds if $\left\vert B\right\vert =0$. This completes the
+induction base.\footnote{Yes, this was a completely honest induction base. You
+don't need to start at $\left\vert B\right\vert =1$ unless you want to use
+something like $\left\vert B\right\vert >1$ in the induction step (but even
+then, you should also handle the case $\left\vert B\right\vert =0$
+separately).}
 
 \textit{Induction step:}\footnote{The letter $\mathbb{N}$ denotes the set
 $\left\{  0,1,2,\ldots\right\}  $ here.} Let $N\in\mathbb{N}$. Assume that
@@ -330,12 +331,13 @@ is an $e\in Q_{1}$ satisfying $t\left(  e\right)  =b$ and $s\left(  e\right)
 Thus, for every $b\in B$, we have $e_{b}\in Q_{1}$ and $t\left(  e_{b}\right)
 =b$ and $s\left(  e_{b}\right)  \in B$. We can thus define a sequence $\left(
 b_{0},b_{1},b_{2},\ldots\right)  $ of vertices in $B$ recursively as follows:
-Set $b_{0}=b$, and set $b_{i+1}=s\left(  e_{b_{i}}\right)  $ for every
-$i\in\mathbb{N}$. Thus, $\left(  b_{0},b_{1},b_{2},\ldots\right)  $ is an
-infinite sequence of elements of $B$. Since $B$ is a finite set, this sequence
-must thus pass through an element twice (to say the least). In other words,
-there are two positive integers $u$ and $v$ such that $u<v$ and $b_{u}=b_{v}$.
-Consider these $u$ and $v$.
+Set $b_{0}=b$ for an arbitrarily chosen $b\in B$ (such a $b$ exists because
+$\left\vert B\right\vert =N+1\geq1>0)$, and set $b_{i+1}=s\left(  e_{b_{i}%
+}\right)  $ for every $i\in\mathbb{N}$. Thus, $\left(  b_{0},b_{1}%
+,b_{2},\ldots\right)  $ is an infinite sequence of elements of $B$. Since $B$
+is a finite set, this sequence must thus pass through an element twice (to say
+the least). In other words, there are two positive integers $u$ and $v$ such
+that $u<v$ and $b_{u}=b_{v}$. Consider these $u$ and $v$.
 \par
 Now, for every $i\in\mathbb{N}$, we have $t\left(  e_{b_{i}}\right)  =b_{i}$
 (by the definition of $e_{b_{i}}$) and $s\left(  e_{b_{i}}\right)  =b_{i+1}$.
@@ -375,7 +377,7 @@ This is the desired contradiction, and so we are done.}. Hence,
 $\operatorname*{mut}\nolimits_{A\cup\left\{  b\right\}  ,B\setminus\left\{
 b\right\}  }Q$ is a well-defined acyclic quiver. Moreover, since $b\in B$, we
 have $\left\vert B\setminus\left\{  b\right\}  \right\vert
-=\underbrace{\left\vert B\right\vert }_{=N+1}-1=N+1-1=N$. Thus, Exercise
+=\underbrace{\left\vert B\right\vert }_{=N+1}-\,1=N+1-1=N$. Thus, Exercise
 \ref{exe.ps1.1.1} \textbf{(a)} can be applied to $A\cup\left\{  b\right\}  $
 and $B\setminus\left\{  b\right\}  $ instead of $A$ and $B$ (by the induction
 hypothesis). As a consequence, we conclude that $\operatorname*{mut}%
@@ -587,7 +589,7 @@ to mutate at the sinks that give us $\operatorname*{mut}\nolimits_{A\cup
 \left\{  b\right\}  ,B\setminus\left\{  b\right\}  }Q$, and then we have to
 mutate at $b$). This proves that Exercise \ref{exe.ps1.1.1} \textbf{(a)} holds
 whenever $\left\vert B\right\vert =N+1$. The induction step is complete, and
-thus Exercise \ref{exe.ps1.1.1} \textbf{(a)} is solved.
+thus Exercise \ref{exe.ps1.1.1} \textbf{(a)} is solved. \medskip
 
 \textbf{(b)} Let $i\in Q_{0}$ be a source in $Q$. Let $A=\left\{  i\right\}  $
 and $B=Q_{0}\setminus A$. Then, $A$ and $B$ are two subsets of $Q_{0}$ such
@@ -625,7 +627,7 @@ $\operatorname*{mut}\nolimits_{A,B}Q=\mu_{i}\left(  Q\right)  $. Now, Exercise
 Q$ can be obtained from $Q$ by a sequence of mutations at sinks. Hence,
 $\mu_{i}\left(  Q\right)  $ can be obtained from $Q$ by a sequence of
 mutations at sinks (since $\operatorname*{mut}\nolimits_{A,B}Q=\mu_{i}\left(
-Q\right)  $). Exercise \ref{exe.ps1.1.1} \textbf{(b)} is proven.
+Q\right)  $). Exercise \ref{exe.ps1.1.1} \textbf{(b)} is proven. \medskip
 
 \textbf{(c)} Let $Q^{\prime}$ be any acyclic quiver which can be obtained from
 $Q$ by turning some of its arrows. We need to prove that $Q^{\prime}$ can also
@@ -645,7 +647,8 @@ from $Q$ by a sequence of mutations at sinks. This solves Exercise
 \#3}, with solutions by Nicholas Rancourt and Jacob Ogden.\newline\url{http://www.cip.ifi.lmu.de/~grinberg/t/17s/}
 
 \bibitem[Lampe]{Lampe}Philipp Lampe, \textit{Cluster algebras},\newline%
-\url{http://www.math.uni-bielefeld.de/~lampe/teaching/cluster/cluster.pdf} .
+\url{https://web.archive.org/web/20210525094546/https://www.math.uni-bielefeld.de/~lampe/teaching/cluster/cluster.pdf}
+.
 
 \begin{verlong}
 A version with my corrections:\newline%
@@ -653,8 +656,9 @@ A version with my corrections:\newline%
 .
 \end{verlong}
 
-\bibitem[Pretzel]{Pretzel}Oliver Pretzel, \textit{On reorienting graphs by
-pushing down maximal vertices}, Order, 1986, Volume 3, Issue 2, pp. 135--153.
+\bibitem[Pretzel]{Pretzel}\href{https://doi.org/10.1007/BF00390104}{Oliver
+Pretzel, \textit{On reorienting graphs by pushing down maximal vertices},
+Order, 1986, Volume 3, Issue 2, pp. 135--153}.
 \end{thebibliography}
 
 

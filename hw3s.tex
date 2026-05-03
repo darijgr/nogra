@@ -661,7 +661,7 @@ definition and two simple lemmas:
 \begin{definition} \label{def.hw3.conn.G-e}
 Let $G = \tup{V, E, \phi}$ be a multigraph.
 Let $e$ be an edge of $G$.
-Then, $G - e$ will denote the multigraph obained from $G$ by
+Then, $G - e$ will denote the multigraph obtained from $G$ by
 removing the edge $e$.
 (Formally speaking, $G - e$ is the multigraph
 $\tup{V, E \setminus \set{e}, \phi\mid_{E \setminus \set{e}}}$.)
@@ -3077,8 +3077,8 @@ Let us treat these cases separately:
         \qquad \left(\text{by \eqref{pf.thm.hw3.uv-pc.c2.2}}\right)
         \\
         &\leq
-        \underbrace{\abs{\leaves{T'}}}_{= \abs{\leaves{T}} - 1} - 2
-        \qquad \left(\text{by \eqref{pf.thm.hw3.uv-pc.c1.1}}\right) \\
+        \underbrace{\abs{\leaves{T'}}}_{= \abs{\leaves{T}} - 1} -\, 2
+        \qquad \left(\text{by \eqref{pf.thm.hw3.uv-pc.c2.1}}\right) \\
         &= \tup{\abs{\leaves{T}} - 1} - 2 = \abs{\leaves{T}} - 3.
         \end{align*}
         Adding $1$ to both sides of this inequality, we obtain
@@ -3542,9 +3542,9 @@ Thus,
 \begin{align*}
 d \tup{c, b}
 &= \tup{\text{the minimum length of a path from } c \text{ to } b } \\
-&= \tup{\text{the length of the path } \set{x_0, x_1, \ldots, x_{i-1}}
+&= \tup{\text{the length of the path } \tup{x_0, x_1, \ldots, x_{i-1}}
        } \\
-&\qquad \left(\text{since } \set{x_0, x_1, \ldots, x_{i-1}}
+&\qquad \left(\text{since } \tup{x_0, x_1, \ldots, x_{i-1}}
                 \text{ is a path from } c \text{ to } b
                 \text{ having minimum length}\right) \\
 &= i .

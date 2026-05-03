@@ -16,6 +16,7 @@
 \usepackage{tikz}
 \usepackage{needspace}
 \usepackage{tabls}
+\usepackage[type={CC}, modifier={zero}, version={1.0},]{doclicense}
 %TCIDATA{OutputFilter=latex2.dll}
 %TCIDATA{Version=5.50.0.2960}
 %TCIDATA{LastRevised=Tuesday, December 13, 2016 21:43:59}
@@ -34,62 +35,50 @@
 \newenvironment{theorem}[1][]
 {\begin{theo}[#1]\begin{leftbar}}
 {\end{leftbar}\end{theo}}
-\providecommand*\theoremautorefname{Theorem}
 \newtheorem{lem}[theo]{Lemma}
 \newenvironment{lemma}[1][]
 {\begin{lem}[#1]\begin{leftbar}}
 {\end{leftbar}\end{lem}}
-\providecommand*\lemmaautorefname{Lemma}
 \newtheorem{prop}[theo]{Proposition}
 \newenvironment{proposition}[1][]
 {\begin{prop}[#1]\begin{leftbar}}
 {\end{leftbar}\end{prop}}
-\providecommand*\propositionautorefname{Proposition}
 \newtheorem{defi}[theo]{Definition}
 \newenvironment{definition}[1][]
 {\begin{defi}[#1]\begin{leftbar}}
 {\end{leftbar}\end{defi}}
-\providecommand*\definitionautorefname{Definition}
 \newtheorem{remk}[theo]{Remark}
 \newenvironment{remark}[1][]
 {\begin{remk}[#1]\begin{leftbar}}
 {\end{leftbar}\end{remk}}
-\providecommand*\remarkautorefname{Remark}
 \newtheorem{coro}[theo]{Corollary}
 \newenvironment{corollary}[1][]
 {\begin{coro}[#1]\begin{leftbar}}
 {\end{leftbar}\end{coro}}
-\providecommand*\corollaryautorefname{Corollary}
 \newtheorem{conv}[theo]{Convention}
-\newenvironment{condition}[1][]
+\newenvironment{convention}[1][]
 {\begin{conv}[#1]\begin{leftbar}}
 {\end{leftbar}\end{conv}}
-\providecommand*\conditionautorefname{Convention}
 \newtheorem{alg}[theo]{Algorithm}
 \newenvironment{algorithm}[1][]
 {\begin{alg}[#1]\begin{leftbar}}
 {\end{leftbar}\end{alg}}
-\providecommand*\algorithmautorefname{Algorithm}
 \newtheorem{warn}[theo]{Warning}
-\newenvironment{conclusion}[1][]
+\newenvironment{warning}[1][]
 {\begin{warn}[#1]\begin{leftbar}}
 {\end{leftbar}\end{warn}}
-\providecommand*\conclusionautorefname{Warning}
 \newtheorem{conj}[theo]{Conjecture}
 \newenvironment{conjecture}[1][]
 {\begin{conj}[#1]\begin{leftbar}}
 {\end{leftbar}\end{conj}}
-\providecommand*\conjectureautorefname{Conjecture}
 \newtheorem{exam}[theo]{Example}
 \newenvironment{example}[1][]
 {\begin{exam}[#1]\begin{leftbar}}
 {\end{leftbar}\end{exam}}
-\providecommand*\exampleautorefname{Example}
 \newtheorem{exmp}[theo]{Exercise}
 \newenvironment{exercise}[1][]
 {\begin{exmp}[#1]\begin{leftbar}}
 {\end{leftbar}\end{exmp}}
-\providecommand*\exerciseautorefname{Exercise}
 \newenvironment{statement}{\begin{quote}}{\end{quote}}
 \newtheorem{quest}[theo]{TODO}
 \newenvironment{todo}[1][]
@@ -97,6 +86,8 @@
 {\end{leftbar}\end{quest}}
 \iffalse
 \newenvironment{proof}[1][Proof]{\noindent\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+\newenvironment{warning}[1][Warning]{\noindent\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+\newenvironment{convention}[1][Convention]{\noindent\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
 \fi
 \let\sumnonlimits\sum
 \let\prodnonlimits\prod
@@ -169,12 +160,19 @@
 \today\ 
 %EndExpansion
 at \DTMcurrenttime\ 
-(unfinished draft!)\\
-These notes are \textbf{frozen} in a (very) unfinished state. Currently, only
-two chapters (beyond the preface) exist, and they too are incomplete
-(although hopefully readable).}
+(unfinished draft!)\\\vspace{1pc}
+These notes are \textbf{frozen} in a (very) unfinished state.
+Currently, only two chapters (beyond the preface) exist, and
+they too are incomplete (although hopefully readable).
+The chapter on dominating sets is perhaps the only real
+finished content here.
+See \cite{22s} for a complete set of notes on graph theory
+(though with a somewhat different focus).
+}
 \maketitle
 \tableofcontents
+
+\doclicenseThis
 
 \section{Preface}
 
@@ -385,7 +383,7 @@ $\left(\set{1,2,3}, \set{\set{1,3}, \set{3,2}} \right)$ and
 $\left(\set{2,5}, \set{\set{2,5}}\right)$ and
 $\left(\varnothing, \varnothing\right)$ are three simple graphs.
 
-\begin{conclusion}
+\begin{convention}
 \textbf{(a)}
 Our Definition~\ref{def.intro.simple.sg} differs from the definition
 of a ``simple graph'' in many sources, in that we are requiring $V$ to
@@ -403,7 +401,7 @@ the word ``graph'' for ``simple graph'', whereas Bondy and Murty
 When reading literature, always check the
 definitions (and, if these are missing, try to take an educated guess,
 ruling out options that make some of the claims false).
-\end{conclusion}
+\end{convention}
 
 So far, we have not explained how we should intuitively think of
 simple graphs, and why they are interesting. We will spend a
@@ -519,7 +517,7 @@ condition $u - v \geq 3$ instead of $u + v \geq 5$, then the set $E$
 would not be well-defined, because it would not be clear whether
 $\set{1, 5}$ should be inside it or not -- indeed, if we write
 $\set{1, 5}$ as $\set{u, v}$ with $u = 5$ and $v = 1$, then
-$u - v \geq 3$ is satisfied, but if we write $\set{1, 5}$ as
+$u - v \geq 3$ is satisfied, whereas if we write $\set{1, 5}$ as
 $\set{u, v}$ with $u = 1$ and $v = 5$, then $u - v \geq 3$ is not
 satisfied.)
 
@@ -571,7 +569,7 @@ and then, for each edge $uv$ of $G$, we draw a
 curve that connects the point representing $u$ with the point
 representing $v$. The positions of the points and the shapes of the
 curves can be chosen freely, as long as they allow the reader to
-unambigously reconstruct the graph $G$ from the picture.
+unambiguously reconstruct the graph $G$ from the picture.
 (Thus, for example:
 \begin{itemize}
 \item the points should be distinct and spaced
@@ -688,7 +686,7 @@ for certain purposes while others are less so.
 
 Let us now show a \textbf{bad} drawing of the graph $G$ (that is, a
 drawing that fails the ``allow the reader to
-unambigously reconstruct the graph $G$ from the picture'' criterion):
+unambiguously reconstruct the graph $G$ from the picture'' criterion):
 \begin{align*}
 \xymatrix{
 2 \are[rr] \are@/^3pc/[dd] & & 3 \are@/_3pc/[dd] \are[lldd] \\
@@ -1155,7 +1153,7 @@ is $18$ rather than $\dbinom{4+4-2}{4-1}=20$.)
 The smallest possible value that could stand in place of
 $\dbinom{r+s-2}{r-1}$ in Proposition~\ref{prop.simple.Rrs}
 is called the \textit{Ramsey number}
-$R\tup{r,s}$; thus, we have just showed that $R\tup{3,3} = 6$.
+$R\tup{r,s}$; thus, we have just shown that $R\tup{3,3} = 6$.
 Finding $R\tup{r,s}$ for higher values of $r$ and $s$ is a
 hard computational challenge; here are some values that have been
 found with the help of computers:
@@ -2285,7 +2283,7 @@ graphs. These will serve as examples in the first place, but some of
 them will also reveal themselves to be useful later.
 
 The simplest kinds of simple graphs are the \textit{complete graphs}
-and the \textit{simple graphs}:
+and the \textit{empty graphs}:
 
 \begin{definition} \label{def.intro.complete-graph}
 The \textit{complete graph} on a finite set $V$ means
@@ -2863,9 +2861,9 @@ for $k = 2$.
 \begin{example}
 Let $G_1$, $G_2$ and $G_3$ be the simple graphs
 \begin{align*}
-G_1 &= \set{ \set{1, 2}, \set{12} }, \\
-G_2 &= \set{ \set{1, 2}, \set{12} }, \\
-G_3 &= \set{ \set{1, 2, 3, 4}, \set{12, 23, 34, 13, 14} }.
+G_1 &= \tup{ \set{1, 2}, \set{12} }, \\
+G_2 &= \tup{ \set{1, 2}, \set{12} }, \\
+G_3 &= \tup{ \set{1, 2, 3, 4}, \set{12, 23, 34, 13, 14} }.
 \end{align*}
 (Yes, $G_1$ is equal to $G_2$, but this does not matter.)
 Here are their drawings:
@@ -2901,7 +2899,7 @@ Here are some further examples of simple graphs, mostly to illustrate
 certain ideas.
 
 \begin{example}
-Recall the graph $G$ from Exercise~\ref{exa.intro.discon-graph},
+Recall the graph $G$ from Example~\ref{exa.intro.discon-graph},
 where $n = 8$. As we recall, $G$ looks as follows:
 \begin{align*}
 \xymatrix{
@@ -3201,7 +3199,7 @@ $a_k b_1, b_1 b_2, \ldots, b_{\ell-1} b_\ell$ are edges of $G$.
 Combining this with the fact that all of
 $a_0 a_1, a_1 a_2, \ldots, a_{k-1} a_k$ are edges of $G$,
 we obtain the following: All of
-$a_0 a_1, a_1, a_2, \ldots, a_{k-1} a_k,
+$a_0 a_1, a_1 a_2, \ldots, a_{k-1} a_k,
 a_k b_1, b_1 b_2, \ldots, b_{\ell-1} b_\ell$ are edges of $G$. Hence,
 the list
 $\tup{a_0, a_1, \ldots, a_k, b_1, b_2, \ldots, b_\ell}$ is a walk
@@ -3271,7 +3269,7 @@ This completes the proof.}. In other words, all of
 $a_k a_{k-1}, a_{k-1} a_{k-2}, \ldots, a_1 a_0$ are edges of $G$.
 In other words, the list $\tup{a_k, a_{k-1}, \ldots, a_0}$ is a walk.
 This list is furthermore a walk from $v$ to $u$ (since $a_k = v$ and
-$a_0 = v$). This proves Proposition~\ref{prop.walks.rev} \textbf{(a)}.
+$a_0 = u$). This proves Proposition~\ref{prop.walks.rev} \textbf{(a)}.
 
 \textbf{(b)} The vertices of the walk $\mathbf{a}$ are
 $a_0, a_1, \ldots, a_k$
@@ -3393,7 +3391,7 @@ $5$, having length $8$. Corollary~\ref{cor.walk.path} predicts that
 there exists a path from $4$ to $5$ of length $\leq 8$. This is, of
 course, obvious (the path $\tup{4, 5}$ works), but let us try to
 construct such a path from $\mathbf{a}$ by removing ``digressions''
-as we did in Exercise~\ref{exa.walk.decrease}:
+as we did in Example~\ref{exa.walk.decrease}:
 
 \begin{itemize}
 \item One way to start is by noticing that the vertex $3$ appears
@@ -3845,7 +3843,7 @@ holds. We must show that $\mathcal{S}_4$ holds.
 
 There exists a walk from $u$ to $v$ (since $\mathcal{S}_1$ holds).
 Fix such a walk, and denote it by $\mathbf{a}$. Let $k$ be the length
-of this walk $\mathbf{a}$. Then, exists a walk from $u$ to $v$ of
+of this walk $\mathbf{a}$. Then, there exists a walk from $u$ to $v$ of
 length $k$ (namely, $\mathbf{a}$). Corollary~\ref{cor.walk.path}
 therefore shows that there exists a path from $u$ to $v$ of length
 $\leq k$. In particular, there exists a path from $u$ to $v$. In other
@@ -3965,7 +3963,7 @@ $\tup{1, 2, 3, 2, 1}$ for $n \geq 3$).
 
 \item[\textbf{(b)}]
 The cycle graph $C_n$ introduced in
-Definition~{def.intro.cycle-graph} has $2n$ cycles
+Definition~\ref{def.intro.cycle-graph} has $2n$ cycles
 (for $n \geq 3$):
 Namely, for each vertex $i \in \set{1, 2, \ldots, n}$ of $C_n$,
 we can either move forward along the circle (obtaining the
@@ -4242,7 +4240,8 @@ A $2$-element subset can be either dominating or not.
 \end{example}
 
 \begin{exercise}
-Let $n \in \NN$. What is the smallest possible size of a dominating
+Let $n$ be a positive integer.
+What is the smallest possible size of a dominating
 set of the cycle graph $C_{3n}$ ?
 \end{exercise}
 
@@ -4297,8 +4296,8 @@ each person has a friend in the opposite team.
 
 \textit{Restatement of
 Proposition~\ref{prop.dominating.|V|/2} \textbf{(b)}:} Given a group
-of (finitely many) people each of whom has at least one friend (among
-the others),
+$V$ of (finitely many) people each of whom has at least one friend
+(among the others),
 it is always possible to choose at most $\abs{V}/{2}$ people from this
 group such that everyone who is not chosen has at least one of the
 chosen ones among his friends.
@@ -5723,7 +5722,7 @@ Let us now attack the second sum. We have
 \eqref{pf.thm.dominating.heinrich.4a1}, except that we must replace
 every word ``even'' by ``odd'', and every appearance of $2$ by $-2$.)
 
-But if $\tup{A, B}$ is a detached pair, then the condition
+However, if $\tup{A, B}$ is a detached pair, then the condition
 ``both numbers $\abs{A}$ and $\abs{B}$ are odd and positive'' is
 equivalent to the simpler condition
 ``both numbers $\abs{A}$ and $\abs{B}$ are
@@ -5869,7 +5868,7 @@ explain that independent sets are induced subgraphs isomorphic
 to the empty graph.
 \end{todo}
 
-The following property of independent set is almost trivial:
+The following property of independent sets is almost trivial:
 
 \begin{lemma} \label{lem.dominating.indset.addv}
 Let $G = \tup{V, E}$ be a simple graph. Let $S$ be an independent set
@@ -5996,7 +5995,7 @@ are completely different:
        $G = \tup{V, E}$. Indeed, this problem is NP-hard. There
        are better algorithms than checking all subsets of $V$,
        but no algorithm of polynomial time in $\abs{V}$ is
-       possible (unless $P = NP$).
+       known (and none is possible, unless $P = NP$).
  \item Finding a \textbf{maximal} independent set of a simple
        graph $G = \tup{V, E}$ is easy: Start with the empty
        set (which is clearly independent), and keep adding new
@@ -6543,18 +6542,30 @@ version 1.4.3 (9 Dec 2017),
 \newline\url{http://www.personal.psu.edu/cxg286/Math485.pdf} .
 
 \bibitem[Grinbe16]{detnotes}Darij Grinberg, \textit{Notes on the combinatorial
-fundamentals of algebra}, 10 January 2019.
+fundamentals of algebra}, 15 September 2022.
 \newline\url{http://www.cip.ifi.lmu.de/~grinberg/primes2015/sols.pdf}
+\newline
+See also \href{https://arxiv.org/abs/2008.09862v3}{arXiv:2008.09862v3}
+for an older version.
+
+\bibitem[Grinbe25]{22s}Darij Grinberg, \textit{An introduction to graph theory
+(Text for Math 530 in Spring 2022 at Drexel University)}, 12 April 2026.
+\newline\url{http://www.cip.ifi.lmu.de/~grinberg/t/22s/graphs.pdf} .
+\newline
+See also \href{https://arxiv.org/abs/2308.04512v3}{arXiv:2308.04512v3}
+for an older version.
 
 \bibitem[Guicha16]{Guicha16}David Guichard,
 \textit{An Introduction to Combinatorics and Graph Theory},
+4 January 2025.
 \newline\url{https://www.whitman.edu/mathematics/cgt_online/cgt.pdf} .
 
 \bibitem[Hammac15]{Hammac15}
 Richard Hammack,
 \textit{Book of Proof},
 3rd edition, Ingram 2018.
-\newline\url{http://www.people.vcu.edu/~rhammack/BookOfProof/}
+%\newline\url{http://www.people.vcu.edu/~rhammack/BookOfProof/}
+\newline\url{https://richardhammack.github.io/BookOfProof/}
 
 \bibitem[Harary69]{Harary69}
 Frank Harary,
@@ -6628,15 +6639,15 @@ Also available as arXiv preprint \arxiv{math/9503234v1}.
 Schilling, \textit{Linear Algebra As an Introduction to Abstract Mathematics},
 2016.\newline\url{https://www.math.ucdavis.edu/~anne/linear_algebra/mat67_course_notes.pdf}
 
-\bibitem[LeLeMe16]{LeLeMe16}
+\bibitem[LeLeMe18]{LeLeMe16}
 Eric Lehman, F. Thomson Leighton, Albert R. Meyer,
 \textit{Mathematics for Computer Science},
-revised  Wednesday 25th May, 2017,
-\newline\url{https://courses.csail.mit.edu/6.042/spring17/mcs.pdf} .
+revised Wednesday 6th June 2018,
+\newline\url{https://courses.csail.mit.edu/6.042/spring18/mcs.pdf} .
 
 \bibitem[LoPeVe03]{LoPeVe03}L\'aszl\'o Lov\'asz, J\'ozsef Pelik\'an,
 Katalin Vesztergombi,
-\textit{Discrete Mathematics: Elementary and Beyound},
+\textit{Discrete Mathematics: Elementary and Beyond},
 Springer 2003.
 
 \bibitem[Martin16]{Martin16}
@@ -6723,7 +6734,8 @@ and a downloadable draft of the book.
 \bibitem[Strick13]{Strick13}
 Neil P. Strickland,
 \textit{MAS201 Linear Mathematics for Applications}.
-\newline \url{https://neil-strickland.staff.shef.ac.uk/courses/MAS201/}
+%\newline \url{https://neil-strickland.staff.shef.ac.uk/courses/MAS201/}
+\newline \url{https://neilstrickland.github.io/linear_maths/}
 
 \bibitem[ThuSwa92]{ThuSwa92}
 K. Thulasiraman, M. N. S. Swamy,

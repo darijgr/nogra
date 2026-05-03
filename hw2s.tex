@@ -587,7 +587,7 @@ Then, the walk
 is a walk from $u$ to $v$ in $D$. Hence, such a walk exists.}.
 Moreover, each vertex $v \in K^{n-1}$ satisfies
 $\deg^- v = \deg^+ v$ (where both indegree and outdegree are taken
-respective to the multidigraph $D$)\ \ \ \ \footnote{\textit{Proof.}
+with respect to the multidigraph $D$)\ \ \ \ \footnote{\textit{Proof.}
 Let $v \in K^{n-1}$. Write the $\tup{n-1}$-tuple $v$ in the form
 $v = \tup{v_1, v_2, \ldots, v_{n-1}}$.
 Now, $\deg^- v$ is the number of arcs of $D$
@@ -677,7 +677,7 @@ Now, recall that $p_0, p_1, \ldots, p_{k^n-1}$ are the arcs
 of an Eulerian circuit of $D$. Hence, each arc of $D$ appears
 exactly once in the list $\tup{p_0, p_1, \ldots, p_{k^n-1}}$.
 In other words, for each arc $a$ of $D$, there exists a unique
-$r \in \set{0, 1, \ldots, k^n-1}$ such that $a = p_i$.
+$r \in \set{0, 1, \ldots, k^n-1}$ such that $a = p_r$.
 Since the arcs of $D$ are the $n$-tuples in $K^n$, we can
 rewrite this as follows: For each $n$-tuple $a \in K^n$,
 there exists a unique
@@ -1472,30 +1472,30 @@ words, we have $k \geq 3$ (since $k$ is the length of $\mathbf{c}$).
 
 We want to prove that $D''$ can be obtained from $D$ by a sequence of
 $3$-cycle reversal operations.
-% If $k = 3$, then this is
-% easy\footnote{\textit{Proof.} Assume that $k = 3$. Hence, the cycle
-% $\mathbf{c}$ has the form $\tup{u, v, w, u}$ for some three distinct
-% vertices $u$, $v$ and $w$ of $D$ (since the length of $\mathbf{c}$ is
-% $k = 3$). Consider these $u$, $v$ and $w$. Since
-% $\tup{u, v, w, u} = \mathbf{c}$ is a cycle, we conclude that
-% $\tup{u, v}$, $\tup{v, w}$ and $\tup{w, u}$ are arcs of $D$. Hence,
-% $\tup{u, v, w}$ is a $3$-cycle of $D$.
+If $k = 3$, then this is
+easy\footnote{\textit{Proof.} Assume that $k = 3$. Hence, the cycle
+$\mathbf{c}$ has the form $\tup{u, v, w, u}$ for some three distinct
+vertices $u$, $v$ and $w$ of $D$ (since the length of $\mathbf{c}$ is
+$k = 3$). Consider these $u$, $v$ and $w$. Since
+$\tup{u, v, w, u} = \mathbf{c}$ is a cycle, we conclude that
+$\tup{u, v}$, $\tup{v, w}$ and $\tup{w, u}$ are arcs of $D$. Hence,
+$\tup{u, v, w}$ is a $3$-cycle of $D$.
 
-% Thus, the tournament $D'_{u, v, w}$ defined in
-% Exercise~\ref{exe.tourn.3-cyc-rev} is obtained from $D$ by reversing
-% the arcs $\tup{u, v}$, $\tup{v, w}$ and $\tup{w, u}$. Meanwhile, the
-% tournament $D''$ is also obtained from $D$ by reversing
-% the arcs $\tup{u, v}$, $\tup{v, w}$ and $\tup{w, u}$ (because $D''$
-% is obtained from $D$ by reversing the cycle $\mathbf{c}$, but this
-% cycle is $\tup{u, v, w, u}$). Hence, the two tournaments
-% $D'_{u, v, w}$ and $D''$ are obtained from $D$ by reversing the same
-% arcs. Therefore, these two tournaments are equal. In other words,
-% $D'' = D'_{u, v, w}$. Hence, $D''$ can be obtained from $D$ by a
-% $3$-cycle reversal (since $D'_{u, v, w}$ can be obtained from $D$ by a
-% $3$-cycle reversal). Therefore, $D''$ can also be obtained
-% from $D$ by a sequence of $3$-cycle reversals (namely, by the sequence
-% consisting only of this one $3$-cycle reversal). Qed.}. Hence, we
-% WLOG assume that $k \neq 3$. Thus, $k > 3$ (since $k \geq 3$).
+Thus, the tournament $D'_{u, v, w}$ defined in
+Exercise~\ref{exe.tourn.3-cyc-rev} is obtained from $D$ by reversing
+the arcs $\tup{u, v}$, $\tup{v, w}$ and $\tup{w, u}$. Meanwhile, the
+tournament $D''$ is also obtained from $D$ by reversing
+the arcs $\tup{u, v}$, $\tup{v, w}$ and $\tup{w, u}$ (because $D''$
+is obtained from $D$ by reversing the cycle $\mathbf{c}$, but this
+cycle is $\tup{u, v, w, u}$). Hence, the two tournaments
+$D'_{u, v, w}$ and $D''$ are obtained from $D$ by reversing the same
+arcs. Therefore, these two tournaments are equal. In other words,
+$D'' = D'_{u, v, w}$. Hence, $D''$ can be obtained from $D$ by a
+$3$-cycle reversal (since $D'_{u, v, w}$ can be obtained from $D$ by a
+$3$-cycle reversal). Therefore, $D''$ can also be obtained
+from $D$ by a sequence of $3$-cycle reversals (namely, by the sequence
+consisting only of this one $3$-cycle reversal). Qed.}. Hence, we
+WLOG assume that $k \neq 3$. Thus, $k > 3$ (since $k \geq 3$).
 
 Recall that $v_0, v_1, \ldots, v_{k-1}$ are distinct. Since
 $k \geq 3$, this shows that $v_0$ and $v_2$ are distinct. Hence,
@@ -2104,7 +2104,7 @@ F \text{ can be obtained from } E
 
 Now, we need to prove Observation 7 in the case when
 $\abs{\arcs{E} \setminus \arcs{F}} = N$.
-So let $E$ and $F$ be two tournaments wirth vertex set $V$, and
+So let $E$ and $F$ be two tournaments with vertex set $V$, and
 assume that each $v \in V$ satisfies
 $\deg^-_E \tup{v} = \deg^-_F \tup{v}$. Assume furthermore that
 $\abs{\arcs{E} \setminus \arcs{F}} = N$.

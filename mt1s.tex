@@ -615,7 +615,7 @@ a path, and denote it by
 $\mathbf{q} = \tup{q_0, q_1, \ldots, q_h}$. Hence,
 $\tup{\text{the length of the path } \mathbf{q}} = h$. Therefore,
 $h = \tup{\text{the length of the path } \mathbf{q}} = d \tup{v, w}$
-(since $\mathbf{h}$ has length $d \tup{v, w}$).
+(since $\mathbf{q}$ has length $d \tup{v, w}$).
 
 Now, $\tup{p_0, p_1, \ldots, p_g}$ is a path from $u$ to $v$. Hence,
 $p_0 = u$ and $p_g = v$.
@@ -974,13 +974,13 @@ The same reasoning (but applied to $b$, $c$, $a$, $\mathbf{y}$,
 $\mathbf{z}$, $\mathbf{x}$, $q$ and $p$ instead of $a$, $b$, $c$,
 $\mathbf{x}$, $\mathbf{y}$, $\mathbf{z}$, $p$ and $q$) now shows that
 the vertex $p$ appears before $q$ on the path $\mathbf{z}$ (because
-the vertex $q$ appears before $p$ on the path $\mathbf{y}$). The same
-reasoning (but applied to $b$, $c$, $a$, $\mathbf{y}$,
+the vertex $q$ appears before $p$ on the path $\mathbf{y}$).
+The same reasoning (but applied to $b$, $c$, $a$, $\mathbf{y}$,
 $\mathbf{z}$ and $\mathbf{x}$ instead of $a$, $b$, $c$,
-$\mathbf{x}$, $\mathbf{y}$ and $\mathbf{z}$) therefore shows
-that the vertex $p$ appears before $q$ on the path $\mathbf{y}$. But
-this contradicts the fact that the vertex $q$ appears before $p$ on
-the path $\mathbf{y}$.
+$\mathbf{x}$, $\mathbf{y}$ and $\mathbf{z}$) therefore shows that
+the vertex $p$ appears before $q$ on the path $\mathbf{y}$.
+But this contradicts the fact that the vertex $q$ appears before
+$p$ on the path $\mathbf{y}$.
 
 This contradiction shows that our assumption was wrong. Hence,
 $\abs{X \cap Y \cap Z} \leq 1$ is proven. From this, we can easily
@@ -1002,7 +1002,7 @@ d \tup{b, c} + d \tup{c, a} + d \tup{a, b}
 &= \tup{\abs{X} - 1} + \tup{\abs{Y} - 1} + \tup{\abs{Z} - 1}
 = \underbrace{\abs{X} + \abs{Y} + \abs{Z}}
              _{\leq 2 \abs{X \cup Y \cup Z} + 1}
-  - 3 \\
+  -\, 3 \\
 &\leq 2 \abs{\underbrace{X \cup Y \cup Z}_{\subseteq V}} + 1 - 3
 \leq 2 \abs{V} + 1 - 3 = 2 \abs{V} - 2.
 \end{align*}
@@ -1316,7 +1316,7 @@ of $a_i$ and $a_{i+1}$ equals $v$.
 
 Now, let us assume that $a_1 = v$. Then, Claim 1 (applied to $i=1$)
 shows that exactly one of $a_1$ and $a_2$ equals $v$. Hence, $a_2 \neq
-v$ (since $a_1 = v$). But Claim 2 (applied to $i=2$) shows that
+v$ (since $a_1 = v$). But Claim 1 (applied to $i=2$) shows that
 exactly one of $a_2$ and $a_3$ equals $v$. Hence, $a_3 = v$ (since
 $a_2 \neq v$). We can continue this line of reasoning, thus showing
 that $a_i = v$ for each odd $i \in \set{1, 2, \ldots, k+1}$ and that
